@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('path');
             $table->unsignedBigInteger('passenger_car_id');
-            $table->foreign('passenger_car_id')->references('id')->on('passenger_cars');
+//            $table->foreign('passenger_car_id')->references('id')->on('passenger_cars');
         });
     }
 

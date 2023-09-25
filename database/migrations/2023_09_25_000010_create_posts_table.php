@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('subtitle');
             $table->string('slug')->unique();
             $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('posts_categories');
+//            $table->foreign('category_id')->references('id')->on('posts_categories');
             $table->unsignedBigInteger('author_id');
-            $table->foreign('author_id')->references('id')->on('users');
+//            $table->foreign('author_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

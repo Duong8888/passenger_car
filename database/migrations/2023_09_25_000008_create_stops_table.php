@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('stop_name');
             $table->integer('stop_type');
             $table->unsignedBigInteger('route_id');
-            $table->foreign('route_id')->references('id')->on('routes');
+//            $table->foreign('route_id')->references('id')->on('routes');
             $table->timestamps();
         });
     }

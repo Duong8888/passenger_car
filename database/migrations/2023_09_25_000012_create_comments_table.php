@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('passenger_car_id');
-            $table->foreign('passenger_car_id')->references('id')->on('passenger_cars');
+//            $table->foreign('passenger_car_id')->references('id')->on('passenger_cars');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+//            $table->foreign('user_id')->references('id')->on('users');
             $table->integer('star');
             $table->string('content');
             $table->timestamps();
