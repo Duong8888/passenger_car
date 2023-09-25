@@ -23,4 +23,10 @@ Route::get('/dashboard', function () {
 Route::get('/layout', function () {
     return view('admin.layouts.master');
 });
+Route::get('/tuan_anh', function () {
+    return view('admin.layouts.master');
+});
 
+Route::get('/layout', function () {
+    return view('admin.layouts.master');
+});
