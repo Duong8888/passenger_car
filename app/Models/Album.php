@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Album extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'path',
+        'passenger_car_id',
+    ];
+
+    public function passengerCar() {
+        return $this->belongsTo(PassengerCar::class);
+    }
 }

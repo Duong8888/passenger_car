@@ -16,8 +16,6 @@ return new class extends Migration
             $table->string('license_plate');
             $table->integer('capacity');
             $table->longText('description');
-            $table->dateTime('departure_time');
-            $table->dateTime('arrival_time');
             $table->unsignedBigInteger('user_id');
 //            $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('route_id');
