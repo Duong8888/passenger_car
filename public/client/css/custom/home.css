@@ -1,0 +1,17 @@
+.search-item{
+    max-height: 400px;
+}
+
+.search-item::-webkit-scrollbar{
+    width: 8px;
+}
+
+.search-item::-webkit-scrollbar-thumb{
+    background: #ccccdd;
+    border-radius: 10px;
+
+}
+
+.search-item::-webkit-scrollbar-track{
+    width: 10px;
+}
