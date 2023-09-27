@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Routing\Route;
+use Laravel\Scout\Searchable;
 
 class PassengerCar extends Model
 {
     use HasFactory;
+    use Searchable;
     protected $fillable = [
         'license_plate',
         'capacity',
@@ -27,10 +29,10 @@ class PassengerCar extends Model
         return $this->belongsTo(Route::class);
     }
     public function workingTime() {
-        return $this->belongsToMany(WorkingTime::class);
+        return $this->belongsToMany(WorkingTime::class,'passenger_car_working_times');
     }
     public function services(){
-        return $this->belongsToMany(Service::class);
+        return $this->belongsToMany(Service::class,'passenger_car_services');
     }
     public function tickets(){
         return $this->hasMany(Ticket::class);
