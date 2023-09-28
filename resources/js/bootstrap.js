@@ -7,6 +7,12 @@
 import axios from 'axios';
 window.axios = axios;
 
+import $ from 'jquery';
+
+// Khai báo sử dụng jQuery trong toàn bộ ứng dụng
+window.$ = window.jQuery = $;
+
+
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**

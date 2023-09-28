@@ -14,7 +14,7 @@
                             <div class="col-span-12 xl:col-span-9">
                                 <div class="mt-3 rounded-l filter-search-form filter-border mt-md-0">
                                     <i class="uil uil-briefcase-alt"></i>
-                                    <input autocomplete="off" name="query" type="search" id="job-title" class="w-full filter-input-box placeholder:text-gray-100 placeholder:text-13 dark:text-gray-100" placeholder="Job, Company name...">
+                                    <input autocomplete="off" name="query" type="search" id="search" class="w-full filter-input-box placeholder:text-gray-100 placeholder:text-13 dark:text-gray-100" placeholder="Job, Company name...">
                                 </div>
                             </div><!--end col-->
 
