@@ -5,19 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Routing\Route;
-use Laravel\Scout\Searchable;
 
 class PassengerCar extends Model
 {
     use HasFactory;
-    use Searchable;
+    protected $table = "passenger_cars";
     protected $fillable = [
         'license_plate',
         'capacity',
         'description',
-        'user_id',
+        'transport_unit_id',
         'route_id',
     ];
+    public $timestamps = false;
 
     public function albums(){
         return $this->hasMany(Album::class);
@@ -29,10 +29,10 @@ class PassengerCar extends Model
         return $this->belongsTo(Route::class);
     }
     public function workingTime() {
-        return $this->belongsToMany(WorkingTime::class,'passenger_car_working_times');
+        return $this->belongsToMany(WorkingTime::class);
     }
     public function services(){
-        return $this->belongsToMany(Service::class,'passenger_car_services');
+        return $this->belongsToMany(Service::class);
     }
     public function tickets(){
         return $this->hasMany(Ticket::class);
