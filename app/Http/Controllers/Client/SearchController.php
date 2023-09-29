@@ -20,5 +20,7 @@ class SearchController extends Controller
         $stops = Stops::search($query)->get();
 
         return response()->json(['route' => $routes, 'stops' => $stops]);
+
+
     }
 }
