@@ -17,13 +17,13 @@
         <meta content="" name="Themesbrand" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-        <!-- App favicon -->
-        <link rel="shortcut icon" href="{{}}assets/images/favicon.ico" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{asset('')}}client/images/favicon.ico" />
 
 
 
-        <link rel="stylesheet" href="assets/css/icons.css" />
-        <link rel="stylesheet" href="assets/css/tailwind.css" />
+    <link rel="stylesheet" href="{{asset('')}}client/css/icons.css" />
+    <link rel="stylesheet" href="{{asset('')}}client/css/tailwind.css" />
 
 
 
@@ -100,11 +100,11 @@
                                         <div class="col-span-12 lg:col-span-6 ltr:rounded-l-lg rtl:rounded-r-lg">
                                             <div class="p-10">
                                                 <a href="index.html">
-                                                    <img src="assets/images/logo-light.png" alt="" class="hidden mx-auto dark:block">
-                                                    <img src="assets/images/logo-dark.png" alt="" class="block mx-auto dark:hidden">
+                                                    <img src="{{asset('')}}client/images/logo-light.png" alt="" class="hidden mx-auto dark:block">
+                                                    <img src="{{asset('')}}client/images/logo-dark.png" alt="" class="block mx-auto dark:hidden">
                                                 </a>
                                                 <div class="mt-5">
-                                                    <img src="assets/images/auth/sign-in.png" alt="">
+                                                    <img src="{{asset('')}}client/images/auth/sign-in.png" alt="">
                                                 </div>
                                             </div>
                                         </div>
@@ -114,14 +114,15 @@
                                                     <h5 class="text-[18.5px] text-white">Welcome Back !</h5>
                                                     <p class="mt-3 text-white/80">Sign in to continue to Jobcy.</p>
                                                 </div>
-                                                <form action="https://themesdesign.in/jobcy-tailwind/layout/index.html" class="mt-8">
+                                                <form action="{{route('login')}}" method="post" class="mt-8">
+                                                    @csrf
                                                     <div class="mb-5">
-                                                        <label for="usernameInput" class="text-white">Username</label>
-                                                        <input type="text" class="w-full mt-1 group-data-[theme-color=violet]:bg-violet-400/40 group-data-[theme-color=sky]:bg-sky-400/40 group-data-[theme-color=red]:bg-red-400/40 group-data-[theme-color=green]:bg-green-400/40 group-data-[theme-color=pink]:bg-pink-400/40 group-data-[theme-color=blue]:bg-blue-400/40 py-2.5 rounded border-transparent placeholder:text-sm placeholder:text-gray-50 text-white" required="" id="usernameInput" placeholder="Enter your username">
+                                                        <label for="EmailInput" class="text-white">Email</label>
+                                                        <input name="email" type="email" class="w-full mt-1 group-data-[theme-color=violet]:bg-violet-400/40 group-data-[theme-color=sky]:bg-sky-400/40 group-data-[theme-color=red]:bg-red-400/40 group-data-[theme-color=green]:bg-green-400/40 group-data-[theme-color=pink]:bg-pink-400/40 group-data-[theme-color=blue]:bg-blue-400/40 py-2.5 rounded border-transparent placeholder:text-sm placeholder:text-gray-50 text-white" required="" id="usernameInput" placeholder="Enter your email">
                                                     </div>
                                                     <div class="mb-5">
                                                         <label for="emailInput" class="text-white">Password</label>
-                                                        <input type="password" class="w-full mt-1 group-data-[theme-color=violet]:bg-violet-400/40 group-data-[theme-color=sky]:bg-sky-400/40 group-data-[theme-color=red]:bg-red-400/40 group-data-[theme-color=green]:bg-green-400/40 group-data-[theme-color=pink]:bg-pink-400/40 group-data-[theme-color=blue]:bg-blue-400/40 py-2.5 rounded border-transparent placeholder:text-sm placeholder:text-gray-50 text-white" id="passwordInput" placeholder="Enter your password">
+                                                        <input name="password" type="password" class="w-full mt-1 group-data-[theme-color=violet]:bg-violet-400/40 group-data-[theme-color=sky]:bg-sky-400/40 group-data-[theme-color=red]:bg-red-400/40 group-data-[theme-color=green]:bg-green-400/40 group-data-[theme-color=pink]:bg-pink-400/40 group-data-[theme-color=blue]:bg-blue-400/40 py-2.5 rounded border-transparent placeholder:text-sm placeholder:text-gray-50 text-white" id="passwordInput" placeholder="Enter your password">
                                                     </div>
                                                     <div ><input class="align-middle border-transparent rounded focus:ring-0 focus:ring-offset-0 group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500" type="checkbox" id="flexCheckDefault">
                                                         <a href="reset-password.html" class="text-white ltr:float-right rtl:float-left">Forgot Password?</a>
@@ -147,14 +148,14 @@
         </div>
 
 
-     <script src="../../../unicons.iconscout.com/release/v4.0.0/script/monochrome/bundle.js"></script>
-     <script src="assets/libs/%40popperjs/core/umd/popper.min.js"></script>
-     <script src="assets/libs/simplebar/simplebar.min.js"></script>
+     <script src="{{asset('')}}client/unicons.iconscout.com/release/v4.0.0/script/monochrome/bundle.js"></script>
+     <script src="{{asset('')}}client/libs/%40popperjs/core/umd/popper.min.js"></script>
+     <script src="{{asset('')}}client/libs/simplebar/simplebar.min.js"></script>
 
 
-    <script src="assets/js/pages/switcher.js"></script>
+    <script src="{{asset('')}}client/js/pages/switcher.js"></script>
 
-    <script src="assets/js/app.js"></script>
+    <script src="{{asset('')}}client/js/app.js"></script>
 
 </body>
 
