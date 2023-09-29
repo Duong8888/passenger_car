@@ -92,7 +92,7 @@
 <nav class="navbar fixed right-0 left-0 top-0 lg:top-[44.5px] px-5 lg:px-24 transition-all duration-500 ease shadow-lg shadow-gray-200/20 bg-white border-gray-200 dark:bg-neutral-800 z-40 dark:shadow-neutral-900" id="navbar">
     <div class="mx-auto container-fluid">
         <div class="flex flex-wrap items-center justify-between mx-auto">
-            <a href="index.html" class="flex items-center">
+            <a href="http://passenger_car.test/home" class="flex items-center">
                 <img src="client/images/logo-dark.png" alt="" class="logo-dark h-[22px] block dark:hidden">
                 <img src="client/images/logo-light.png" alt="" class="logo-dark h-[22px] hidden dark:block">
             </a>

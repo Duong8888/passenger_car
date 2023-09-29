@@ -19,6 +19,6 @@ class Comment extends Model
         return $this->belongsTo(User::class);
     }
     public function PassengerCar(){
-        return $this->belongsTo(PassengerCar::class);
+        return $this->belongsTo(PassengerCar::class,'comments');
     }
 }

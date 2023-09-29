@@ -13,7 +13,8 @@ class WorkingTime extends Model
         'departure_time',
         'arrival_time',
     ];
+    
     public function passengerCars(){
-        return $this->belongsToMany(PassengerCar::class);
+        return $this->belongsToMany(PassengerCar::class,'passenger_car_working_times');
     }
 }

@@ -21,13 +21,13 @@ class PassengerCar extends Model
         return $this->hasMany(Album::class);
     }
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'comments');
     }
     public function route(){
-        return $this->belongsTo(Route::class);
+        return $this->belongsTo(Routes::class,'route_id');
     }
     public function workingTime() {
-        return $this->belongsToMany(WorkingTime::class);
+        return $this->belongsToMany(WorkingTime::class, 'passenger_car_working_times');
     }
     public function services(){
         return $this->belongsToMany(Service::class);

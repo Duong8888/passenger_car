@@ -17,6 +17,7 @@
 <script src="{{asset('client/libs/swiper/swiper-bundle.min.js')}}"></script>
 <script src="{{asset('client/js/pages/swiper.init.js')}}"></script>
 
-<script src="{{asset('')}}client/js/pages/nav%26tabs.js"></script>
+<script src="{{asset('client/js/pages/nav%26tabs.js')}}"></script>
 
-<script src="{{asset('')}}client/js/app.js"></script>
+<script src="{{asset('client/js/app.js')}}"></script>
+
