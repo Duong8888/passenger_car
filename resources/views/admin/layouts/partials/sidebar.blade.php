@@ -122,12 +122,11 @@
                 </li>
 
                 <li>
-                    <a href="apps-projects.html">
+                    <a href="{{ url('/datxe') }}">
                         <i class="mdi mdi-briefcase-variant-outline"></i>
-                        <span> Projects </span>
+                        <span> Quản lý đặt xe </span>
                     </a>
                 </li>
-
                 <li>
                     <a href="#contacts" data-bs-toggle="collapse">
                         <i class="mdi mdi-book-open-page-variant-outline"></i>
