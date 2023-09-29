@@ -7,8 +7,7 @@
                     <h1 class="mb-3 text-5xl leading-tight text-white fw-semibold">Deposit money to donate to me<br> At least <span class="text-yellow-500 fw-bold">5+ </span> eggs.</h1>
                     <p class="text-white text-17">Find jobs, create trackable resumes and enrich your applications.</p>
                 </div>
-                <form action="{{route('search')}}" method="POST">
-                    @csrf
+                <form action="{{route('search')}}" method="GET">
                     <div class="registration-form">
                         <div class="grid grid-cols-12">
                             <div class="col-span-12 xl:col-span-4">

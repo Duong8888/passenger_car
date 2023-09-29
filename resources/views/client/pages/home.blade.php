@@ -2393,5 +2393,4 @@
 
     <script src="{{asset('client/js/pages/dropdown%26modal.init.js')}}"></script>
 
-    <script type="module" src="{{asset('client/js/custom/search-algolia.js')}}"></script>
 @endsection

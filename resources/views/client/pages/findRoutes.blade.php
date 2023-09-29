@@ -22,10 +22,7 @@
                                     <div class="block accordion-body">
                                         <div class="pt-5">
                                             <div class="mb-3">
-                                                <form class="relative">
-                                                    <input class="border w-full rounded-md border-gray-100/50 placeholder:text-13 placeholder:text-gray-300 dark:bg-neutral-700 dark:border-gray-100/20 dark:text-gray-300" type="search" placeholder="Search...">
-                                                    <button class="absolute bg-transparent border-0 top-3 ltr:right-0 rtl:left-0 ltr:mr-2 rtl:ml-2" type="submit"><span class="text-gray-500 mdi mdi-magnify"></span></button>
-                                                </form>
+
                                             </div>
 {{--                                            <div class="area-range">--}}
 {{--                                                <div class="mb-3 form-label dark:text-gray-300">Gía vé: <span class="mt-2 example-val" id="slider1-span">1.00</span> miles</div>--}}
@@ -159,17 +156,27 @@
                         <div class="col-span-12 xl:col-span-9">
                             <div class="job-list-header">
                                 <form action="#">
+
                                     <div class="grid grid-cols-12 gap-3">
+
+
+{{--                                        <div class="col-span-12 xl:col-span-4">--}}
+{{--                                            <div class="relative filler-job-form">--}}
+{{--                                                <i class="uil uil-briefcase-alt"></i>--}}
+{{--                                                <input type="search" name="stop" class="w-full filter-job-input-box dark:text-gray-100" id="exampleFormControlInput1" placeholder="Điểm đón, trả ... ">--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+                                        <!--end col-->
 
                                         <div class="col-span-12 xl:col-span-4">
                                             <div class="relative filler-job-form">
                                                 <i class="uil uil-map-marker">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(96, 165, 250, 1);transform: ;msFilter:;"><path d="M12 5c-3.859 0-7 3.141-7 7s3.141 7 7 7 7-3.141 7-7-3.141-7-7-7zm0 12c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"></path><path d="M12 9c-1.627 0-3 1.373-3 3s1.373 3 3 3 3-1.373 3-3-1.373-3-3-3z"></path></svg>
                                                 </i>
-                                                <select class="form-select" data-trigger name="choices-single-location" id="choices-single-location" aria-label="Default select example">
-                                                    <option value="AF">Afghanistan</option>
-                                                    <option value="ZM">Zambia</option>
-                                                    <option value="ZW">Zimbabwe</option>
+                                                <select class="form-select" data-trigger name="departure" id="choices-single-location" aria-label="Default select example">
+                                                    @foreach($departure as $value)
+                                                        <option @if($dataRoute->departure == $value) selected @endif value="{{$value}}">{{$value}}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -179,17 +186,12 @@
                                                 <i class="uil uil-clipboard-notes">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(235, 87, 87, 1);transform: ;msFilter:;"><circle cx="12" cy="12" r="4"></circle><path d="M13 4.069V2h-2v2.069A8.01 8.01 0 0 0 4.069 11H2v2h2.069A8.008 8.008 0 0 0 11 19.931V22h2v-2.069A8.007 8.007 0 0 0 19.931 13H22v-2h-2.069A8.008 8.008 0 0 0 13 4.069zM12 18c-3.309 0-6-2.691-6-6s2.691-6 6-6 6 2.691 6 6-2.691 6-6 6z"></path></svg>
                                                 </i>
-                                                <select class="form-select " data-trigger name="choices-single-categories" id="choices-single-categories" aria-label="Default select example">
-                                                    <option value="4">Accounting</option>
-                                                    <option value="1">IT & Software</option>
-                                                    <option value="3">Marketing</option>
-                                                    <option value="5">Banking</option>
+                                                <select class="form-select " data-trigger name="arrival" id="choices-single-categories" aria-label="Default select example">
+                                                    @foreach($arrival as $value)
+                                                        <option @if($dataRoute->arrival == $value) selected @endif  value="{{$value}}">{{$value}}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
-                                        </div>
-                                        <!--end col-->
-                                        <div class="col-span-12 xl:col-span-4">
-                                            <a href="javascript:void(0)" class="w-full text-white border-transparent btn group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 focus:ring focus:ring-custom-500/30"><i class="uil uil-filter"></i> Fliter</a>
                                         </div>
                                         <!--end col-->
                                     </div>
@@ -198,7 +200,7 @@
                             </div>
 
 
-                            <div class="space-y-8 mt-14">
+                            <div class="space-y-8 mt-14 list-route">
                                 @foreach($data as $key => $value)
                                     <div class="relative overflow-hidden transition-all duration-500 ease-in-out bg-white border rounded-md border-gray-100/50 group/jobs group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:-translate-y-2 dark:bg-neutral-900 dark:border-neutral-600">
                                         <div class="p-6">
@@ -220,17 +222,14 @@
                                                         <li>
                                                             <p class="mb-0 text-sm text-gray-500 dark:text-gray-300">Gế ngồi {{$value->capacity}}</p>
                                                         </li>
-                                                        <li>
-                                                            <p class="mb-0 text-sm text-gray-500 dark:text-gray-300"><i class="uil uil-wallet"></i> $250 - $800 / month</p>
-                                                        </li>
                                                     </ul>
-                                                    <div class="mt-4">
-                                                        <div class="flex flex-wrap gap-1.5">
-                                                            <span class="bg-green-500/20 text-green-500 text-11 px-2 py-0.5 font-medium rounded">Full Time</span>
-                                                            <span class="bg-yellow-500/20 text-yellow-500 text-11 px-2 py-0.5 font-medium rounded">Urgent</span>
-                                                            <span class="bg-sky-500/20 text-sky-500 text-11 px-2 py-0.5 font-medium rounded">Private</span>
-                                                        </div>
-                                                    </div>
+{{--                                                    <div class="mt-4">--}}
+{{--                                                        <div class="flex flex-wrap gap-1.5">--}}
+{{--                                                            <span class="bg-green-500/20 text-green-500 text-11 px-2 py-0.5 font-medium rounded">Full Time</span>--}}
+{{--                                                            <span class="bg-yellow-500/20 text-yellow-500 text-11 px-2 py-0.5 font-medium rounded">Urgent</span>--}}
+{{--                                                            <span class="bg-sky-500/20 text-sky-500 text-11 px-2 py-0.5 font-medium rounded">Private</span>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
                                                 </div>
                                             </div>
                                             <!--end row-->
@@ -240,7 +239,7 @@
                                                 <div class="col-span-12 lg:col-span-6">
                                                     <ul class="flex flex-wrap gap-2 text-gray-700 dark:text-gray-50">
                                                         <li><i class="uil uil-tag"></i> Giá Vé :</li>
-                                                        <li>{{str_replace(',', '.', number_format($value->relatedRoute->price))}}đ</li>
+                                                        <li>{{number_format($value->relatedRoute->price)}}đ</li>
                                                     </ul>
                                                 </div>
                                                 <!--end col-->
@@ -287,6 +286,7 @@
 {{--                                </div>--}}
 {{--                                <!--end col-->--}}
 {{--                            </div>--}}
+
                         </div>
                         <!-- end right -->
                     </div>
@@ -299,6 +299,7 @@
 @endsection
 
 @section('page-style')
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('client/libs/choices.js/public/assets/styles/choices.min.css')}}">
     <!-- Nouislider Css -->
     <link rel="stylesheet" href="{{asset('client/libs/nouislider/nouislider.min.css')}}">
@@ -312,11 +313,14 @@
     <script src="{{asset('client/js/pages/dropdown%26modal.init.js')}}"></script>
 
     <!-- Nouislider Js -->
-    <script src="{{asset('client/libs/nouislider/nouislider.min.js')}}"></script>
+{{--    <script src="{{asset('client/libs/nouislider/nouislider.min.js')}}"></script>--}}
 
-    <script src="{{asset('client/js/pages/area-filter-range.init.js')}}"></script>
+{{--    <script src="{{asset('client/js/pages/area-filter-range.init.js')}}"></script>--}}
 
     <script src="{{asset('client/js/pages/nav%26tabs.js')}}"></script>
 
     <script src="{{asset('client/js/app.js')}}"></script>
+
+    <script type="module" src="{{asset('client/js/custom/search-algolia.js')}}"></script>
+
 @endsection
