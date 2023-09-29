@@ -9,16 +9,47 @@ use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
-    public function search(Request $request)
+    public $pathview = 'client.pages';
+
+    public function __construct(
+        public Routes $routes,
+    )
     {
-        $query = $request->input('query');
-
-        // Tìm kiếm tuyến đường theo điểm đến hoặc điểm trả
-        $routes = Routes::search($query)->get();
-
-        // Tìm kiếm điểm dừng theo điểm đến hoặc điểm trả
-        $stops = Stops::search($query)->get();
-
-        return response()->json(['route' => $routes, 'stops' => $stops]);
     }
+
+    public function dataRouter()
+    {
+        $data = $this->routes->all();
+        $departure = [];
+        $arrival = [];
+        foreach ($data as $key => $value) {
+            $departure[] = $value->departure;
+            $arrival[] = $value->arrival;
+        }
+        $uniqueDeparture = array_unique($departure);
+        $uniqueArrival = array_unique($arrival);
+        return ["departure" => $uniqueDeparture, "arrival" => $uniqueArrival];
+    }
+
+    public function home()
+    {
+        $data = $this->dataRouter();
+        return view($this->pathview . '.home', ['arrival' => $data['arrival'], 'departure' => $data['departure']]);
+    }
+
+    public function searchRequest(Request $request)
+    {
+        $query = $request->departure . " " . $request->arrival;
+        $routes = Routes::search($query)->get();
+        $passengerCar = $routes[0]->passengerCars()->get();
+        $dataRoutes = $this->dataRouter();
+        if ($request->ajax()) {
+            return response()->json(['data' => $passengerCar,'dataRoute' => $routes[0]]);
+        } else {
+            return view($this->pathview . '.findRoutes', ['data' => $passengerCar,'dataRoute' => $routes[0], 'arrival' => $dataRoutes['arrival'], 'departure' => $dataRoutes['departure']]);
+        }
+    }
+
+
+
 }
