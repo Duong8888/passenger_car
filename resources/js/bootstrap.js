@@ -12,6 +12,14 @@ import $ from 'jquery';
 // Khai báo sử dụng jQuery trong toàn bộ ứng dụng
 window.$ = window.jQuery = $;
 
+import algoliasearch from 'algoliasearch/lite';
+
+// Khởi tạo kết nối Algolia với Application ID và API Key của bạn
+window.searchClient = algoliasearch('QYDD2EEDFB', '03cf14bcf17172b81593cb330bcfaec8');
+
+// Chọn một index (bảng dữ liệu) để tìm kiếm
+window.routes = window.searchClient.initIndex('routes');
+window.stops = window.searchClient.initIndex('stops');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 

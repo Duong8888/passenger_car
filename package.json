@@ -11,6 +11,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "algoliasearch": "^4.20.0",
         "alpinejs": "^3.13.0",
         "autoprefixer": "^10.4.16",
         "jquery": "^3.7.1",

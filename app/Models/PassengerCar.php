@@ -25,8 +25,9 @@ class PassengerCar extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
-    public function route(){
-        return $this->belongsTo(Route::class);
+    public function relatedRoute()
+    {
+        return $this->belongsTo(Routes::class, 'route_id', 'id');
     }
     public function workingTime() {
         return $this->belongsToMany(WorkingTime::class,'passenger_car_working_times');
