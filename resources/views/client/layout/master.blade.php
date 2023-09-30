@@ -21,10 +21,12 @@
     @yield('page-style')
 </head>
 
+
 <body class="bg-white dark:bg-neutral-800">
 @include('client.layout.partials.header')
 
 @yield('content')
+
 
 <!-- Footer Start -->
 @include('client.layout.partials.footer')
