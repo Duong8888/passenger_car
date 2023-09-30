@@ -92,9 +92,11 @@
 <nav class="navbar fixed right-0 left-0 top-0 lg:top-[44.5px] px-5 lg:px-24 transition-all duration-500 ease shadow-lg shadow-gray-200/20 bg-white border-gray-200 z-40" id="navbar">
     <div class="mx-auto container-fluid">
         <div class="flex flex-wrap items-center justify-between mx-auto">
-            <a href="index.html" class="flex items-center">
-                <img src="client/images/logo-dark.png" alt="" class="logo-dark h-[22px] block">
-                <img src="client/images/logo-light.png" alt="" class="logo-dark h-[22px] hidden">
+
+            <a href="{{route('home')}}" class="flex items-center">
+                <img src="client/images/logo-dark.png" alt="" class="logo-dark h-[22px] block dark:hidden">
+                <img src="client/images/logo-light.png" alt="" class="logo-dark h-[22px] hidden dark:block">
+
             </a>
             <button data-collapse-toggle="navbar-collapse" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg navbar-toggler group lg:hidden hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-100" aria-controls="navbar-sticky" aria-expanded="false">
                 <span class="sr-only">Open main menu</span>
