@@ -41,12 +41,19 @@ class SearchController extends Controller
     {
         $query = $request->departure . " " . $request->arrival;
         $routes = Routes::search($query)->get();
-        $passengerCar = $routes[0]->passengerCars()->get();
         $dataRoutes = $this->dataRouter();
+        $passengerCar = null;
+        $message = null;
+        if(count($routes) > 0){
+            $passengerCar = $routes[0]->passengerCars()->get();
+        }else{
+            $routes = [];
+            $message ="Tuyến đường chưa có xe hoạt động .";
+        }
         if ($request->ajax()) {
             return response()->json(['data' => $passengerCar,'dataRoute' => $routes[0]]);
         } else {
-            return view($this->pathview . '.findRoutes', ['data' => $passengerCar,'dataRoute' => $routes[0], 'arrival' => $dataRoutes['arrival'], 'departure' => $dataRoutes['departure']]);
+            return view($this->pathview . '.findRoutes', ['data' => $passengerCar,'dataRoute' => $routes[0], 'arrival' => $dataRoutes['arrival'], 'departure' => $dataRoutes['departure'],'message'=>$message]);
         }
     }
 

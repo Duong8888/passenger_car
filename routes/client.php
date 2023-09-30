@@ -3,7 +3,7 @@
 use App\Http\Controllers\Client\SearchController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [SearchController::class,'home']);
+Route::get('/', [SearchController::class,'home'])->name('home');
 
 Route::get('/search',[SearchController::class,'searchRequest'])->name('search');
 
