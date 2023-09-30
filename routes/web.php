@@ -1,8 +1,12 @@
 <?php
 
+
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PhoneAuthController;
+use App\Http\Controllers\Admin\TicketController;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -42,3 +46,7 @@ Route::get('/dashboard', function () {
 Route::get('/layout', function () {
     return view('admin.layouts.master');
 });
+
+Route::resource('ticket', TicketController::class);
+
+
