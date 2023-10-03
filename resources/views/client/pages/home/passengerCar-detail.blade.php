@@ -3,7 +3,6 @@
 
 <div class="main-content">
     <div class="page-content">
-
         <section class="pt-44 pb-28 group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 dark:bg-neutral-900 bg-[url('../images/home/page-title.html')] bg-center bg-cover relative" >
             <div class="container mx-auto">
                 <div class="grid">
@@ -268,103 +267,42 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="pt-3 mt-4">
-                                   
+                                
+                                <div>
                                     @foreach($comments as $cmt)
-                                    {{-- {{dd($cmt->comments[0])}} --}}
-                                        <div class="sm:flex">
-                                            <div class="shrink-0">
-                                                <img class="w-16 h-16 p-1 border-2 rounded-full border-gray-100/50" src="assets/images/user/img-04.jpg" alt="img">
-                                            </div>
-                                            <div class="grow ltr:ml-3 rtl:mr-3">
-                                                <div>
-                                                    <p class="mb-2 text-sm text-gray-500 ltr:float-right rtl:float-left dark:text-gray-300">{{ \Carbon\Carbon::parse($cmt->comments[0]->created_at)->format('d/m/Y') }}</p>
-                                                    {{-- {{ \Carbon\Carbon::parse($car)->format('H:i') }} --}}
-                                                    <h6 class="text-gray-900 dark:text-gray-50"></h6>
-                                                    <div class="text-yellow-500 text-17">
-                                                        <i class="mdi mdi-star"></i>
-                                                        <i class="mdi mdi-star"></i>
-                                                        <i class="mdi mdi-star"></i>
-                                                        <i class="mdi mdi-star"></i>  
-                                                        <i class="mdi mdi-star-half-full"></i>
+                                    {{-- {{dd($cmt->star)}} --}}
+                                        @foreach($users as $data)
+                                            @if($data->id == $cmt->user_id)
+                   
+                                                <div class="sm:flex" style="border-bottom: 1px solid rgb(224, 224, 224);padding: 10px">
+                                                    <div class="shrink-0">
+                                                        <img class="w-10 h-10 p-1 border-2 rounded-full border-gray-100/50" src="assets/images/user/img-04.jpg" alt="img">
                                                     </div>
-                                                    <p class="mt-3 italic text-gray-500 dark:text-gray-300">{{$cmt->comments[0]->content}}</p>
+                                                    <div class="grow ltr:ml-3 rtl:mr-3">
+                                                        <div>
+                                                            <p class="mb-2 text-sm text-gray-500 ltr:float-right rtl:float-left dark:text-gray-300">{{ \Carbon\Carbon::parse($cmt->created_at)->format('d/m/Y') }}</p>
+                                                            {{-- {{ \Carbon\Carbon::parse($car)->format('H:i') }} --}}
+                                                            <h6 class="text-gray-900 dark:text-gray-50">{{$data->name}}</h6>
+                                                            <div class="text-yellow-500 text-17">
+                                                                @for ($i = 0; $i < $cmt->star ; $i++) 
+                                                                   <i class="mdi mdi-star"></i>
+                                                                @endfor
+                                                                {{-- <i class="mdi mdi-star"></i>
+                                                                <i class="mdi mdi-star"></i>
+                                                                <i class="mdi mdi-star"></i>
+                                                                <i class="mdi mdi-star"></i>  
+                                                                <i class="mdi mdi-star-half-full"></i> --}}
+                                                            </div>
+                                                            <p class="mt-3 italic text-gray-500 dark:text-gray-300">{{$cmt->content}}</p>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
+                                                @endif
+                                            @endforeach
                                      @endforeach
-                                  
-                                    <div class="mt-6 sm:flex">
-                                        <div class="flex-shrink-0">
-                                            <img class="w-16 h-16 p-1 border-2 rounded-full border-gray-100/50" src="assets/images/user/img-02.jpg" alt="img">
-                                        </div>
-                                        <div class="grow ltr:ml-3 rtl:mr-3">
-                                            <div>
-                                                <p class="mb-2 text-sm text-gray-500 ltr:float-right rtl:float-left dark:text-gray-300">Jun 25, 2021</p>
-                                                <h6 class="text-gray-900 dark:text-gray-50">Jeffrey Montgomery</h6>
-                                                <div class="text-yellow-500 text-17">
-                                                    <i class="mdi mdi-star"></i>
-                                                    <i class="mdi mdi-star"></i>
-                                                    <i class="mdi mdi-star"></i>
-                                                    <i class="mdi mdi-star-half-full"></i>
-                                                    <i class="mdi mdi-star-outline"></i>
-                                                </div>
-                                                <p class="mt-3 italic text-gray-500 dark:text-gray-300">" There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour "</p>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </div>
 
-                                {{-- <div class="mt-5">
-                                    <form action="#">
-                                        <h6 class="font-semibold text-gray-900 text-17 dark:text-gray-50">Add a review</h6>
-                                        <p class="mb-5 text-gray-500 dark:text-gray-300">Your Rating for this listing</p>
-                                        <div class="grid grid-cols-12 gap-4">
-                                            <div class="col-span-12">
-                                                <div class="mb-3">
-                                                    <label for="inputname" class="text-sm text-gray-900 dark:text-gray-50">Your Name</label>
-                                                    <input type="text" class="w-full mt-1 rounded border-gray-100/50 placeholder:text-13 placeholder:text-gray-200 dark:bg-transparent dark:border-neutral-600 dark:text-gray-300 focus:ring-0 focus:ring-offset-0" id="inputname" placeholder="Enter your name">
-                                                </div>
-                                            </div><!--end col-->
-                                            <div class="col-span-12 lg:col-span-6">
-                                                <div class="mb-3">
-                                                    <label for="inputemail" class="text-sm text-gray-900 dark:text-gray-50">Email</label>
-                                                    <input type="email" class="w-full mt-1 rounded border-gray-100/50 placeholder:text-13 placeholder:text-gray-200 dark:bg-transparent dark:border-neutral-600 dark:text-gray-300 focus:ring-0 focus:ring-offset-0" id="inputemail" placeholder="Enter your email">
-                                                </div>
-                                            </div><!--end col-->
-                                            <div class="col-span-12 lg:col-span-6">
-                                                <div class="mb-3">
-                                                    <label for="inputsubject" class="text-sm text-gray-900 dark:text-gray-50">Subject</label>
-                                                    <input type="text" class="w-full mt-1 rounded border-gray-100/50 placeholder:text-13 placeholder:text-gray-200 dark:bg-transparent dark:border-neutral-600 dark:text-gray-300 focus:ring-0 focus:ring-offset-0" id="inputsubject" placeholder="Subject">
-                                                </div>
-                                            </div><!--end col-->
-                                            <div class="col-span-12">
-                                                <div class="mb-3">
-                                                    <label for="inputcoment" class="text-sm text-gray-900 dark:text-gray-50">Review</label>
-                                                    <textarea class="w-full mt-1 rounded border-gray-100/50 placeholder:text-13 placeholder:text-gray-200 dark:bg-transparent dark:border-neutral-600 dark:text-gray-300 focus:ring-0 focus:ring-offset-0" id="inputcoment" rows="3" placeholder="Add your review"></textarea>
-                                                </div>
-                                            </div><!--end col-->
-                                        </div><!--end row-->
-                                        <div class="text-end">
-                                            <button type="submit" class="text-white transition-all duration-500 ease-in-out border-transparent btn group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 hover:-translate-y-2">Submit Review <i class="uil uil-angle-right-b"></i></button>
-                                        </div>
-                                    </form>
-                                </div> --}}
-                                {{-- {{$passengerCar->users}} --}}
-                                {{-- {{$passengerCars->user}} --}}
-                                {{-- @foreach ($routes as $car)
-                                    <li>{{$car->id}}</li>
-                                    <li>{{$car->license_plate}}</li>
-                                    <li>{{$car->capacity}}</li>
-                                    <li>{{$car->description}}</li>
-                                    <li>{{$car->route->departure}}</li>
-                                    <li>{{$car->route->arrival}}</li>
-                                    <li>{{$car->route->price}}</li>
-                                @endforeach --}}
-                                {{--  --}}
-                      
-                               
                             </div>
                         </div>
                     </div>
@@ -381,41 +319,49 @@
                     </div>
                 </div>
                 <div class="grid grid-cols-12 gap-5">
-                    @foreach ($routes as $car)
-                    {{-- {{$car}} --}}
-                    <div class="col-span-12 md:col-span-6 lg:col-span-4">
-                        <div class="p-2 mt-3 transition-all duration-500 bg-white rounded shadow-lg shadow-gray-100/50 card dark:bg-neutral-800 dark:shadow-neutral-600/20 group/blog">
-                            <div class="relative overflow-hidden">
-                                <img style="min-width: 100%;height: 300px;" src="{{asset($car->albums[0]->path)}}" alt="car" class="rounded">
-                                <div class="absolute inset-0 hidden transition-all duration-500 rounded-md bg-black/30 group-hover/blog:block"></div>
-                                <div class="hidden text-white transition-all duration-500 top-2 left-2 group-hover/blog:block author group-hover/blog:absolute">
-                                    <p class="mb-0 "><i class="fa-solid fa-map-location-dot"></i> <a href="javascript:void(0)" class="text-light user">{{$car->route->departure}} -> {{$car->route->arrival}}</a></p>
-                                    {{-- <p class="mb-0 text-light date"></i> {{$car->route->arrival}}</p> --}}
-                                    <p class="mb-0 text-light date"><i class="fa-solid fa-money-check-dollar"></i> {{ number_format( $routes[0]->route->price , 0, ',', ',') }}đ</p>
+                    @foreach ($routes as $route)
+                        @if(!($passengerCars->id == $route->id))
+                                <div class="col-span-12 md:col-span-6 lg:col-span-4">
+                                    <div class="p-2 mt-3 transition-all duration-500 bg-white rounded shadow-lg shadow-gray-100/50 card dark:bg-neutral-800 dark:shadow-neutral-600/20 group/blog">
+                                        <div class="relative overflow-hidden">
+                                            <img style="min-width: 100%;height: 300px;" src="{{asset($route->albums[0]->path)}}" alt="car" class="rounded">
+                                            <div class="absolute inset-0 hidden transition-all duration-500 rounded-md bg-black/30 group-hover/blog:block"></div>
+                                            <div class="hidden text-white transition-all duration-500 top-2 left-2 group-hover/blog:block author group-hover/blog:absolute">
+                                                <p class="mb-0 "><i class="fa-solid fa-map-location-dot"></i> <a href="javascript:void(0)" class="text-light user">{{$route->route->departure}} -> {{$route->route->arrival}}</a></p>
+                                                {{-- <p class="mb-0 text-light date"></i> {{$route->route->arrival}}</p> --}}
+                                                <p class="mb-0 text-light date"><i class="fa-solid fa-money-check-dollar"></i> {{ number_format( $routes[0]->route->price , 0, ',', ',') }}đ</p>
+                                            </div>
+                                            <div class="hidden bottom-2 right-2 group-hover/blog:block author group-hover/blog:absolute">
+                                                <ul class="mb-0 list-unstyled">
+                                                    <li class="list-inline-item"><a href="javascript:void(0)" class="text-white"><i class="mdi mdi-heart-outline me-1"></i> 999</a></li>
+                                                    <li class="list-inline-item"><a href="javascript:void(0)" class="text-white"><i class="mdi mdi-comment-outline me-1"></i> 99</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="p-5">
+                                            <a href="" class="primary-link">
+                                                <h5 class="mb-1 text-gray-900 fs-17 dark:text-gray-50">Tên nhà xe</h5>
+                                            </a>
+                                            <p class="mb-6 text-gray-500 dark:text-gray-300" style="min-height: 50px;max-height: 50px"> {{ Str::limit($route->description, 100, '...') }}</p>
+                                             <!--end col-->
+                                         <div class="col-span-3 lg:col-span-2">
+                                            <div class="text-start text-md-end dark:text-gray-50">
+                                                <form action="{{ URL::to('passengerCar-detail') }}" method="POST">
+                                                    @csrf
+                                                    <input type="text" hidden name='passenger_id' value="{{$route->id}}">
+                                                    <input type="text" hidden name='image_id' value="{{$route->album_id}}">
+                                                    <input type="text" hidden name='route_id' value="{{$route->route_id}}">
+                                                    <button class="text-blue-500" style="font-size: 16px;font-weight: bold;coler:rgb(68, 155, 254)"><i class="mdi mdi-chevron-double-right"></i>Đặt vé ngay</button>
+                                                    <style>.{color: rgb(88, 50, 255);font-weight: bold}</style>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                        <!--end col-->
+                                        </div>
+                                    </div>
                                 </div>
-                                {{-- <div class="hidden bottom-2 right-2 group-hover/blog:block author group-hover/blog:absolute">
-                                    <ul class="mb-0 list-unstyled">
-                                        <li class="list-inline-item"><a href="javascript:void(0)" class="text-white"><i class="mdi mdi-heart-outline me-1"></i> 33</a></li>
-                                        <li class="list-inline-item"><a href="javascript:void(0)" class="text-white"><i class="mdi mdi-comment-outline me-1"></i> 08</a></li>
-                                    </ul>
-                                </div> --}}
-                            </div>
-                            <div class="p-5">
-                                <a href="#" class="primary-link">
-                                    <h5 class="mb-1 text-gray-900 fs-17 dark:text-gray-50">Tên nhà xe</h5>
-                                </a>
-                                <p class="mb-6 text-gray-500 dark:text-gray-300" style="min-height: 50px;max-height: 50px"> {{ Str::limit($car->description, 100, '...') }}</p>
-                                <form action="{{ URL::to('passengerCar-detail') }}" method="POST">
-                                    @csrf
-                                    <input type="text" hidden name='passenger_id' value="{{$car->id}}">
-                                    <input type="text" hidden name='image_id' value="{{$car->album_id}}">
-                                    <input type="text" hidden name='route_id' value="{{$car->route_id}}">
-                                    <button style="color: #1890ff;font-weight: bold"><i class="mdi mdi-chevron-double-right"></i>Xem chi tiết</button>
-                                </form>
-                                {{-- <a href="{{ URL::to('passengerCar-detail') }}" class="font-medium group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500">Xem chi tiết <i class="align-middle mdi mdi-chevron-right"></i></a> --}}
-                            </div>
-                        </div>
-                    </div>
+                        @endif
                     @endforeach
                 </div>
             </div>
