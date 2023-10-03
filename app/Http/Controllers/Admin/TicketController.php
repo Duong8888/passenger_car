@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\AdminBaseController;
 use App\Models\PassengerCar;
+use App\Models\Routes;
 use Illuminate\Http\Request;
+
 use App\Models\Ticket;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class TicketController extends AdminBaseController
@@ -14,7 +17,8 @@ class TicketController extends AdminBaseController
     public $model = Ticket::class;
     public $pathView = 'admin.pages.ticket.';
     public $urlbase = 'admin.tickets.';
-    public $fieldImage = 'image';
+    public $fieldImage = 'ticket';
+    public $urlIndex = 'ticket.index';
     public $folderImage = 'categories/image';
     public $titleIndex = 'Danh sách Danh mục';
     public $titleCreate = 'Thêm mới Danh mục';
@@ -40,10 +44,15 @@ class TicketController extends AdminBaseController
     public function create()
     {
         $user = User::all();
-        
-        $passengerCar = PassengerCar::all();
-       
-        return view($this->pathView . __FUNCTION__, ['user' => $user, 'passengerCar' => $passengerCar])
+        $route = Routes::all();
+        $passengerCar = PassengerCar::with('relatedRoute')->where('route_id',)->get();
+
+
+        return view($this->pathView . __FUNCTION__, [
+            'user' => $user,
+            'passengerCar' => $passengerCar,
+            'route' => $route,
+        ])
             ->with('title', $this->titleCreate)
             ->with('colums', $this->colums)
             ->with('urlbase', $this->urlbase);
@@ -55,12 +64,33 @@ class TicketController extends AdminBaseController
         $user_relationship = User::find($model->user_id);
         $passengerCar_relationship = PassengerCar::find($model->passenger_car_id);
         $user = User::all();
-        
+
         $passengerCar = PassengerCar::all();
-       
-        return view($this->pathView . __FUNCTION__, compact('model','user','user_relationship','passengerCar_relationship','passengerCar'))
+
+        return view($this->pathView . __FUNCTION__, compact('model', 'user', 'user_relationship', 'passengerCar_relationship', 'passengerCar'))
             ->with('title', $this->titleEdit)
             ->with('colums', $this->colums)
             ->with('urlbase', $this->urlbase);
+    }
+
+    public function Trip(Request $request)
+    {
+
+        $departure = $request->input('departure');
+        $arrival = $request->input('arrival');
+
+        $tripList = Routes::where('departure', $departure)
+            ->orWhere('arrival', $arrival)
+            ->get();
+
+        return response()->json($tripList);
+    }
+
+    public function PassengerCar($id)
+    {
+        $PassengerCar = PassengerCar::where('route_id', $id)
+            ->get();
+
+        return response()->json($PassengerCar);
     }
 }

@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     @include('admin.layouts.partials.style')
     @yield('page-style')
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <!-- body start -->

@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\Admin\RouteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PhoneAuthController;
 use App\Http\Controllers\Admin\TicketController;
@@ -48,5 +49,9 @@ Route::get('/layout', function () {
 });
 
 Route::resource('ticket', TicketController::class);
+Route::post('/trip', [TicketController::class, 'Trip']);
+Route::post('/passgenerCar/{id}' , [TicketController::class, 'PassengerCar']);
+
+Route::resource('/route', RouteController::class);
 
 
