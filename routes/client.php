@@ -19,3 +19,9 @@ Route::post('/sign_in', [PhoneAuthController::class,'login'])->name('login');
 Route::get('/register', [PhoneAuthController::class,'showregister'])->name('showregister');
 Route::post('/register', [PhoneAuthController::class,'register'])->name('register');
 Route::get('/logout', [PhoneAuthController::class,'logout'])->name('logout');
+
+
+
+Route::get('/notification',function (){
+    return view('client.pages.notification');
+});

@@ -15,3 +15,4 @@
 <script src="{{asset('client/js/pages/nav%26tabs.js')}}"></script>
 
 <script src="{{asset('client/js/app.js')}}"></script>
+@vite('resources/js/notification.js')

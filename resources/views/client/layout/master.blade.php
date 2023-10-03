@@ -31,6 +31,9 @@
 <!-- Footer Start -->
 @include('client.layout.partials.footer')
 <!-- end Footer -->
+<script>
+    var infoUser = @json(auth()->user());
+</script>
 @include('client.layout.partials.script')
 @yield('page-script')
 </body>
