@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="{{asset('client/css/icons.css')}}" />
 <link rel="stylesheet" href="{{asset('client/css/tailwind.css')}}" />
 
+
 <link rel="stylesheet" href="{{asset('client/css/custom/home.css')}}" />
 <style>
 
@@ -27,3 +28,4 @@
         width: 10px;
     }
 </style>
+
