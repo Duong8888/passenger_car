@@ -21,7 +21,7 @@ class PassengerCar extends Model
         return $this->hasMany(Album::class);
     }
     public function user(){
-        return $this->belongsTo(User::class,'comments');
+        return $this->belongsTo(User::class,'user_id','id');
     }
     public function route(){
         return $this->belongsTo(Routes::class,'route_id');

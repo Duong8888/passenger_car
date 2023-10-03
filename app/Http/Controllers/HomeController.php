@@ -18,13 +18,14 @@ class HomeController extends Controller
 
         // Lấy thông tin từ các bảng
         $albums = PassengerCar::with('albums')->get();  // Lấy thông tin từ bảng Album
-        //  return response()->json($albums);
+        // return response()->json($albums);
         // dd($albums[0]->path);
         $routes = Routes::all();  // Lấy thông tin từ bảng Route
         // return response()->json($routes);
-        $passengerCars = PassengerCar::with('workingTime')->take(3)->get();  // Lấy thông tin từ bảng PassengerCar
+        $passengerCars = PassengerCar::with('workingTime')->get();  // Lấy thông tin từ bảng PassengerCar
         // dd($passengerCars);
         $workingTime = WorkingTime::all();  // Lấy thông tin từ bảng WorkingTime
+        // return response()->json($passengerCars[0]->workingTime[0]->departure_time);
 
         return view('client.pages.home.index', compact('albums', 'routes', 'passengerCars','workingTime'));
 
@@ -44,14 +45,11 @@ class HomeController extends Controller
         // $workingTime = WorkingTime::find($request->passenger_id);  // Lấy thông tin từ bảng WorkingTime
         //  return response()->json($passengerCars);
         $users = PassengerCar::with('user')->where('user_id',$request->user_id)->get();
-        // $comments = PassengerCar::with('comments')->get();
-        //  return response()->json($passengerCars);
+        $comments = PassengerCar::with('comments')->find($request);
+        return response()->json($users, 200, [], JSON_PRETTY_PRINT);
+        // dd($comments);
 
-
-        
-
-
-        return view('client.pages.home.passengerCar-detail', compact('albums', 'routes', 'passengerCars','users'));
+        return view('client.pages.home.passengerCar-detail', compact('albums', 'routes', 'passengerCars','users','comments'));
 
     }
 

@@ -271,20 +271,17 @@
 
                                 <div class="pt-3 mt-4">
                                    
-                                    @foreach($passengerCars as $passengerCar)
-                                    {{-- {{$passengerCar}} --}}
-                                    {{-- @foreach($passengerCar->comments as $comment)
-                                        <li>{{ $comment->content }}</li>
-                                    @endforeach --}}
-                                    {{-- {{$comments}} --}}
-                                        {{-- <div class="sm:flex">
+                                    @foreach($comments as $cmt)
+                                    {{-- {{dd($cmt->comments[0])}} --}}
+                                        <div class="sm:flex">
                                             <div class="shrink-0">
                                                 <img class="w-16 h-16 p-1 border-2 rounded-full border-gray-100/50" src="assets/images/user/img-04.jpg" alt="img">
                                             </div>
                                             <div class="grow ltr:ml-3 rtl:mr-3">
                                                 <div>
-                                                    <p class="mb-2 text-sm text-gray-500 ltr:float-right rtl:float-left dark:text-gray-300">{{ \Carbon\Carbon::parse($workingTime->arrival_time)->format('H:i') }}</p>
-                                                    <h6 class="text-gray-900 dark:text-gray-50">{{$car}}</h6>
+                                                    <p class="mb-2 text-sm text-gray-500 ltr:float-right rtl:float-left dark:text-gray-300">{{ \Carbon\Carbon::parse($cmt->comments[0]->created_at)->format('d/m/Y') }}</p>
+                                                    {{-- {{ \Carbon\Carbon::parse($car)->format('H:i') }} --}}
+                                                    <h6 class="text-gray-900 dark:text-gray-50"></h6>
                                                     <div class="text-yellow-500 text-17">
                                                         <i class="mdi mdi-star"></i>
                                                         <i class="mdi mdi-star"></i>
@@ -292,13 +289,13 @@
                                                         <i class="mdi mdi-star"></i>  
                                                         <i class="mdi mdi-star-half-full"></i>
                                                     </div>
-                                                    <p class="mt-3 italic text-gray-500 dark:text-gray-300">" There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour "</p>
+                                                    <p class="mt-3 italic text-gray-500 dark:text-gray-300">{{$cmt->comments[0]->content}}</p>
                                                 </div>
                                             </div>
-                                        </div> --}}
+                                        </div>
                                      @endforeach
                                   
-                                    {{-- <div class="mt-6 sm:flex">
+                                    <div class="mt-6 sm:flex">
                                         <div class="flex-shrink-0">
                                             <img class="w-16 h-16 p-1 border-2 rounded-full border-gray-100/50" src="assets/images/user/img-02.jpg" alt="img">
                                         </div>
@@ -316,7 +313,7 @@
                                                 <p class="mt-3 italic text-gray-500 dark:text-gray-300">" There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour "</p>
                                             </div>
                                         </div>
-                                    </div> --}}
+                                    </div>
                                 </div>
 
                                 {{-- <div class="mt-5">

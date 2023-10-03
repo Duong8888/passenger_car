@@ -1,6 +1,6 @@
 @extends('client.layout.master')
 
-@section('content') 
+@section('content')
 
     <!-- Tìm kiếm -->
     @include('client.layout.partials.search')
@@ -73,7 +73,7 @@
                                                         <i style="font-size: 11px;padding-left: 2px" class="mr-1 group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500 fa-solid fa-circle-dot"></i>
                                                         {{-- <i class="mr-1 group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500 mdi mdi-map-marker"></i> --}}
                                                     </div>
-                                                    <p class="mb-0 text-gray-500 dark:text-gray-300"><span style="font-weight: bold;">{{ \Carbon\Carbon::parse($car->workingTime[0]->departure_time)->format('H:i') }}</span> -- {{ $car->route->departure }}</p>
+                                                    <p class="mb-0 text-gray-500 dark:text-gray-300"><span style="font-weight: bold;"> {{ \Carbon\Carbon::parse($car->workingTime[0]->departure_time)->format('H:i') }}</span> -- {{ $car->route->departure }}</p>
                                                     {{-- Điểm đón: {{ $car->route->departure }} --}}
                                                 </div>
                                                 <div class="mb-2 lg:flex">
@@ -85,11 +85,11 @@
                                                 </div>
 
                                             </div>
-                                        
+
                                             <!--end col-->
                                             <div class="col-span-12 lg:col-span-2">
                                                 <div>
-                                                    <p style=" font-weight: bold;" class="mb-2 text-gray-500 dark:text-gray-300"><span style="color: #1890ff;">{{ number_format( $car->route->price, 0, ',', ',') }}đ</span></p> 
+                                                    <p style=" font-weight: bold;" class="mb-2 text-gray-500 dark:text-gray-300"><span style="color: #1890ff;">{{ number_format( $car->route->price, 0, ',', ',') }}đ</span></p>
                                                      {{-- Giá: {{ $car->route->price }} <br> --}}
                                                 </div>
                                             </div>
@@ -128,7 +128,7 @@
                                                         <input type="text" hidden name='route_id' value="{{$car->route_id}}">
                                                         <button><i class="mdi mdi-chevron-double-right"></i>Đặt vé ngay</button>
                                                     </form>
-                                                  
+
                                                 </div>
                                             </div>
                                             <!--end col-->
@@ -136,20 +136,21 @@
                                         <!--end row-->
                                     </div>
                                 </div>
-                               
+
                                 @endforeach
 
-                                    <p>
+                                    {{-- <p>
                                         Ảnh: <img src="{{ $car->albums[0]->path }}" alt="Ảnh xe">
                                         Giá: {{ $car->route->price }} <br>
                                         Điểm đón: {{ $car->route->departure }}
                                         Điểm trả: {{ $car->route->arrival }}
                                         note:{{$car->description}}
                                         bienso: {{$car->license_plate}}
-                                        thoi gian: {{$car->workingTime[0]->departure_time}}
-                                        {{-- {{dd($car->workingTime[0])}} --}}
-                                    </p>
-                
+                                        thoi gian đi: {{ \Carbon\Carbon::parse($car->workingTime[0]->departure_time)->format('H:i') }}
+                                        thoi gian đến: {{ \Carbon\Carbon::parse($car->workingTime[0]->arrival_time)->format('H:i') }}
+                                        {{dd($car->workingTime[0])}}
+                                    </p> --}}
+
                             </div>
                         </div>
                     </div>
