@@ -93,7 +93,9 @@
     <div class="mx-auto container-fluid">
         <div class="flex flex-wrap items-center justify-between mx-auto">
 
+
             <a href="{{route('home')}}" class="flex items-center">
+
                 <img src="client/images/logo-dark.png" alt="" class="logo-dark h-[22px] block dark:hidden">
                 <img src="client/images/logo-light.png" alt="" class="logo-dark h-[22px] hidden dark:block">
 

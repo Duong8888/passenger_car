@@ -2,6 +2,11 @@
 
 use App\Http\Controllers\Client\SearchController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+
+
+Route::get('/home',[HomeController::class,'index']);
+Route::post('/passengerCar-detail',[HomeController::class,'passengerCarDetail']);
 
 use App\Http\Controllers\PhoneAuthController;
 
@@ -19,3 +24,4 @@ Route::post('/sign_in', [PhoneAuthController::class,'login'])->name('login');
 Route::get('/register', [PhoneAuthController::class,'showregister'])->name('showregister');
 Route::post('/register', [PhoneAuthController::class,'register'])->name('register');
 Route::get('/logout', [PhoneAuthController::class,'logout'])->name('logout');
+
