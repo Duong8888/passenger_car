@@ -10,29 +10,27 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class NewNotification
+class UserOnline
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
      * Create a new event instance.
      */
-    public $userId;
-    public $message;
-
-    public function __construct(
-        $userId,
-        $message
-    )
+    public $user;
+    public function __construct($user)
     {
-        $this->message = $message;
-        $this->userId = $userId;
+        $this->user = $user;
     }
-
-
-    public function broadcastOn(): PrivateChannel
+    /**
+     * Get the channels the event should broadcast on.
+     *
+     * @return array<int, \Illuminate\Broadcasting\Channel>
+     */
+    public function broadcastOn(): array
     {
-        return new PrivateChannel('private-user.12');
+        return [
+            new PrivateChannel('channel-name'),
+        ];
     }
-
 }

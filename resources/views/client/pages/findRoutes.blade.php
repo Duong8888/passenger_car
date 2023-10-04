@@ -217,7 +217,7 @@
                                                     </h5>
                                                     <ul class="mb-0 lg:gap-3 gap-y-3">
                                                         <li>
-                                                            <p class="mb-0 mt-4 text-sm text-gray-500 dark:text-gray-300"> {{$value->relatedRoute->departure}} - {{$value->relatedRoute->arrival}}</p>
+                                                            <p class="mb-0 mt-4 text-sm text-gray-500 dark:text-gray-300"> {{$value->route->departure}} - {{$value->route->arrival}}</p>
                                                         </li>
                                                         <li>
                                                             <p class="mb-0 text-sm text-gray-500 dark:text-gray-300">Gế ngồi {{$value->capacity}}</p>
@@ -239,7 +239,7 @@
                                                 <div class="col-span-12 lg:col-span-6">
                                                     <ul class="flex flex-wrap gap-2 text-gray-700 dark:text-gray-50">
                                                         <li><i class="uil uil-tag"></i> Giá Vé :</li>
-                                                        <li>{{number_format($value->relatedRoute->price)}}đ</li>
+                                                        <li>{{number_format($value->route->price)}}đ</li>
                                                     </ul>
                                                 </div>
                                                 <!--end col-->

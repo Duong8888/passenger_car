@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewNotification;
 use App\Models\Notifications;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class NotificationController extends Controller
 {
-    public function store(Request $request)
+    public function sendMessage()
     {
-        $data = [
-            'user_id' => '1',
-            'user_send' => Auth::user()->id,
-            'content' => $request->input('content'),
-            'is_read' => '1',
-            'url' => 'facebook.com',
-        ];
+        event(new NewNotification("13",'Hello bạn nhỏ lâu rồi mình không gặp nhău'));
     }
+
 }

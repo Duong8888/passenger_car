@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id'); // ID của người nhận thông báo
-            $table->string('title');
             $table->text('content');
             $table->boolean('is_read')->default(false); // Trạng thái đã đọc
             $table->string('url')->nullable(); // Trường lưu đường dẫn

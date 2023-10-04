@@ -2,8 +2,13 @@
 
 use App\Http\Controllers\Client\SearchController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PhoneAuthController;
+
+Route::get('/home',[HomeController::class,'index']);
+Route::post('/passengerCar-detail',[HomeController::class,'passengerCarDetail']);
+
+
 
 
 Route::get('/', [SearchController::class,'home'])->name('home');
@@ -25,3 +30,4 @@ Route::get('/logout', [PhoneAuthController::class,'logout'])->name('logout');
 Route::get('/notification',function (){
     return view('client.pages.notification');
 });
+Route::post('/notification',[\App\Http\Controllers\NotificationController::class,'sendMessage'])->name('sendMessage');
