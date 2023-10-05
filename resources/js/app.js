@@ -1,5 +1,5 @@
 import './bootstrap';
-
+import './notification';
 import Alpine from 'alpinejs';
 
 window.Alpine = Alpine;
