@@ -159,22 +159,24 @@
                 <!--notification-->
                 <div>
                     <div class="relative dropdown">
+                        <!--notification btn-->
                         <div class="relative">
                             <button type="button" class="btn border-0 h-[70px] dropdown-toggle px-4 text-gray-500"
                                     aria-expanded="false" data-dropdown-toggle="notification">
                                 <i class="text-2xl mdi mdi-bell"></i>
                             </button>
                             <span
-                                class="absolute text-xs px-1.5 bg-red-500 text-white font-medium rounded-full left-6 top-3 ring-2 ring-white">3</span>
+                                class="absolute text-xs px-1.5 bg-red-500 text-white font-medium rounded-full left-6 top-3 ring-2 ring-white count-btn"></span>
                         </div>
+                        <!--end notification btn-->
                         <div
                             class="absolute right-0 top-auto left-auto z-50 hidden list-none bg-white rounded shadow dropdown-menu w-72"
                             id="notification">
                             <div class="border rounded border-gray-50" aria-labelledby="notification">
                                 <div class="grid grid-cols-1 ">
                                     <div class="p-4 bg-gray-50">
-                                        <h6 class="mb-1 text-gray-800"> Notification </h6>
-                                        <p class="mb-0 text-gray-500 text-13">You have 4 unread Notification</p>
+                                        <h6 class="mb-1 text-gray-800"> Thông báo </h6>
+                                        <p class="mb-0 text-gray-500 text-13 count-notification"></p>
                                     </div>
                                 </div>
                                 <div class="h-60" data-simplebar="init">
@@ -187,103 +189,8 @@
                                                 <div class="simplebar-content-wrapper"
                                                      style="height: auto; overflow: hidden;">
                                                     <div class="simplebar-content" style="padding: 0px;">
-                                                        <div>
-                                                            <a href="#!">
-                                                                <div class="flex p-4 hover:bg-gray-50/30">
-                                                                    <div class="flex-shrink-0 ltr:mr-3 rtl:ml-3">
-                                                                        <div
-                                                                            class="h-10 w-10 bg-violet-500/20 rounded-full text-center leading-[2.8]">
-                                                                            <i class="text-lg text-violet-500 uil uil-user-check"></i>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="flex-grow">
-                                                                        <h6 class="mb-1 text-sm text-gray-700">22
-                                                                            verified registrations</h6>
-                                                                        <div class="text-gray-600 text-13">
-                                                                            <p class="mb-0"><i
-                                                                                    class="mdi mdi-clock-outline"></i>
-                                                                                <span>3 hour ago</span></p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-
-                                                            <a href="#!">
-                                                                <div class="flex items-center p-4 hover:bg-gray-50/30">
-                                                                    <div class="flex-shrink-0 ltr:mr-3 rtl:ml-3">
-                                                                        <img src="client/images/user/img-01.jpg"
-                                                                             class="w-10 h-10 rounded-full"
-                                                                             alt="user-pic">
-                                                                    </div>
-                                                                    <div class="flex-grow">
-                                                                        <h6 class="mb-1 text-sm text-gray-700">Kevin
-                                                                            Stewart</h6>
-                                                                        <div class="text-gray-600 text-13">
-                                                                            <p class="mb-0"><i
-                                                                                    class="mdi mdi-clock-outline"></i>
-                                                                                <span>1 hour ago</span></p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-
-                                                            <a href="#!">
-                                                                <div class="flex items-center p-4 hover:bg-gray-50/30">
-                                                                    <div class="flex-shrink-0 ltr:mr-3 rtl:ml-3">
-                                                                        <img src="client/images/featured-job/img-04.png"
-                                                                             class="w-10 h-10 rounded-full"
-                                                                             alt="user-pic">
-                                                                    </div>
-                                                                    <div class="flex-grow">
-                                                                        <h6 class="mb-1 text-sm text-gray-700">
-                                                                            Applications has been approved</h6>
-                                                                        <div class="text-gray-600 text-13">
-                                                                            <p class="mb-0"><i
-                                                                                    class="mdi mdi-clock-outline"></i>
-                                                                                <span>45 min ago</span></p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-
-                                                            <a href="#!">
-                                                                <div class="flex items-center p-4 hover:bg-gray-50/30">
-                                                                    <div class="flex-shrink-0 ltr:mr-3 rtl:ml-3">
-                                                                        <img src="client/images/user/img-02.jpg"
-                                                                             class="w-10 h-10 rounded-full"
-                                                                             alt="user-pic">
-                                                                    </div>
-                                                                    <div class="flex-grow">
-                                                                        <h6 class="mb-1 text-sm text-gray-700">Salena
-                                                                            Layfield</h6>
-                                                                        <div class="text-gray-600 text-13">
-                                                                            <p class="mb-0"><i
-                                                                                    class="mdi mdi-clock-outline"></i>
-                                                                                <span>15 min ago</span></p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-
-                                                            <a href="#!">
-                                                                <div class="flex items-center p-4 hover:bg-gray-50/30">
-                                                                    <div class="flex-shrink-0 ltr:mr-3 rtl:ml-3">
-                                                                        <img src="client/images/featured-job/img-01.png"
-                                                                             class="w-10 h-10 rounded-full"
-                                                                             alt="user-pic">
-                                                                    </div>
-                                                                    <div class="flex-grow">
-                                                                        <h6 class="mb-1 text-sm text-gray-700">Creative
-                                                                            Agency</h6>
-                                                                        <div class="text-gray-600 text-13">
-                                                                            <p class="mb-0"><i
-                                                                                    class="mdi mdi-clock-outline"></i>
-                                                                                <span>15 min ago</span></p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-
+                                                        <div class="main-notification">
+                                                            {{--  content   --}}
                                                         </div>
                                                     </div>
                                                 </div>

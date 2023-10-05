@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\UserOnline;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +20,6 @@ class PhoneAuthController extends Controller
             if (Auth::attempt($credentials)) {
                 return redirect()->route('home'); // Điều hướng đến trang chính sau khi đăng nhập
             }
-            event(new UserOnline(Auth::user()));
 
             return redirect()->route('login')->with('error', 'Invalid login credentials.');
         }

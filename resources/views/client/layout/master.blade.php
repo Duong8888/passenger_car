@@ -28,7 +28,8 @@
 @include('client.layout.partials.footer')
 <!-- end Footer -->
 <script>
-    var infoUser = @json(auth()->user());
+    const infoUser = @json(auth()->user());
+    const urlNotification = '{{route('notifications.loadMessage')}}';
 </script>
 @include('client.layout.partials.script')
 @yield('page-script')

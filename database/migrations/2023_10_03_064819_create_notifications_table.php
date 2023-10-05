@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id'); // ID của người nhận thông báo
             $table->text('content');
+            $table->unsignedBigInteger('user_send');
             $table->boolean('is_read')->default(false); // Trạng thái đã đọc
             $table->string('url')->nullable(); // Trường lưu đường dẫn
             $table->timestamps(); // Thời gian tạo thông báo

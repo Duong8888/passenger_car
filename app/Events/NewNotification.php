@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class NewNotification
+class NewNotification implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -30,9 +30,18 @@ class NewNotification
     }
 
 
-    public function broadcastOn(): PrivateChannel
+    public function broadcastOn(): array
     {
-        return new PrivateChannel('private-user.12');
+        return [
+            new PrivateChannel('private-user.'.$this->userId),
+        ];
     }
 
+    public function broadcastWith(): array
+    {
+        return [
+            'id' =>  $this->userId,
+            'message' =>  $this->message
+        ];
+    }
 }
