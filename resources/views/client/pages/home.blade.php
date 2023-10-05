@@ -2386,3 +2386,11 @@
         </div>
     </div>
 @endsection
+@section('page-script')
+    <script src="{{asset('client/libs/choices.js/public/assets/scripts/choices.min.js')}}"></script>
+
+    <script src="{{asset('client/js/pages/job-list.init.js')}}"></script>
+
+    <script src="{{asset('client/js/pages/dropdown%26modal.init.js')}}"></script>
+
+@endsection

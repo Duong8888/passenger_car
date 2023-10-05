@@ -16,10 +16,11 @@ class Routes extends Model
         'departure',
         'arrival',
         'price',
+        'description'
     ];
-
+    public $timestamps = false;
     public function passengerCars(){
-        return $this->hasMany(PassengerCar::class,'');
+        return $this->hasMany(PassengerCar::class,'route_id','id');
     }
     public function stops(){
         return $this->hasMany(Stops::class);

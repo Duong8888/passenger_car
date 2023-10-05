@@ -372,66 +372,17 @@
                 </li>
 
                 <li>
-                    <a href="#sidebarForms" data-bs-toggle="collapse">
+                    <a href="{{ route('ticket.index') }}" >
                         <i class="mdi mdi-texture"></i>
-                        <span> Forms </span>
-                        <span class="menu-arrow"></span>
+                        <span>Tickets</span>  
                     </a>
-                    <div class="collapse" id="sidebarForms">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="forms-elements.html">General Elements</a>
-                            </li>
-                            <li>
-                                <a href="forms-advanced.html">Advanced</a>
-                            </li>
-                            <li>
-                                <a href="forms-validation.html">Validation</a>
-                            </li>
-                            <li>
-                                <a href="forms-wizard.html">Wizard</a>
-                            </li>
-                            <li>
-                                <a href="forms-quilljs.html">Quilljs Editor</a>
-                            </li>
-                            <li>
-                                <a href="forms-pickers.html">Picker</a>
-                            </li>
-                            <li>
-                                <a href="forms-file-uploads.html">File Uploads</a>
-                            </li>
-                            <li>
-                                <a href="forms-x-editable.html">X Editable</a>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
 
                 <li>
-                    <a href="#sidebarTables" data-bs-toggle="collapse">
+                    <a href="{{ route('route.index') }}">
                         <i class="mdi mdi-table"></i>
-                        <span> Tables </span>
-                        <span class="menu-arrow"></span>
+                        <span> Route </span>
                     </a>
-                    <div class="collapse" id="sidebarTables">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="tables-basic.html">Basic Tables</a>
-                            </li>
-                            <li>
-                                <a href="tables-datatables.html">Data Tables</a>
-                            </li>
-                            <li>
-                                <a href="tables-editable.html">Editable Tables</a>
-                            </li>
-                            <li>
-                                <a href="tables-responsive.html">Responsive Tables</a>
-                            </li>
-                            <li>
-                                <a href="tables-tablesaw.html">Tablesaw Tables</a>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
 
                 <li>
