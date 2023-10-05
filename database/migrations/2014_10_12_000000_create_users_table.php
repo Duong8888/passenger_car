@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('password');
             $table->integer('rule')->default(1);
+            $table->string('user_type')->default('user');
             $table->rememberToken();
             $table->timestamps();
         });

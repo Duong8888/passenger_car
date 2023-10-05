@@ -11,7 +11,7 @@ use App\Models\Comment;
 use App\Models\User;
 // use App\Models\PassengerCarWorkingTime;
 
-class HomeController extends Controller
+class HomeController  extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -80,7 +80,7 @@ class HomeController extends Controller
      */
     public function show()
     {
-        echo'aaaaaaaaaaaaaaa';
+        //
     }
 
     /**

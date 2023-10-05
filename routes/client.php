@@ -3,10 +3,13 @@
 use App\Http\Controllers\Client\SearchController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Client\ProfileController;
 
-
+//Nam
 Route::get('/home',[HomeController::class,'index']);
 Route::post('/passengerCar-detail',[HomeController::class,'passengerCarDetail']);
+Route::resource('/profile',ProfileController::class);
+
 
 use App\Http\Controllers\PhoneAuthController;
 

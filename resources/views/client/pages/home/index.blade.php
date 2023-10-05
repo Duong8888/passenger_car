@@ -54,7 +54,7 @@
                                         <div class="grid items-center grid-cols-12">
                                             <div class="col-span-12 lg:col-span-2">
                                                 <div class="mb-4 text-center mb-md-0">
-                                                    <a href="company-details.html"><img style=" width: 55%;" src="{{ $car->albums[0]->path }}" alt="" class="mx-auto img-fluid rounded-3"></a>
+                                                    <a href="company-details.html"><img style=" width: 55%;" src="{{ asset($car->albums[0]->path) }}" alt="anh0001" class="mx-auto img-fluid rounded-3"></a>
                                                     {{-- Ảnh: <img src="{{ $car->albums->first()->path }}" alt="Ảnh xe"> --}}
                                                 </div>
                                             </div>
