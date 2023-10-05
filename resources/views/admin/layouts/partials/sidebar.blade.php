@@ -72,9 +72,9 @@
                 <li class="menu-title mt-2">Apps</li>
 
                 <li>
-                    <a href="apps-calendar.html">
+                    <a href="{{ route('postsing') }}">
                         <i class="mdi mdi-calendar-blank-outline"></i>
-                        <span> Calendar </span>
+                        <span> Quản lý tin tức </span>
                     </a>
                 </li>
 
