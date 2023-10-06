@@ -4,7 +4,8 @@ use App\Http\Controllers\Client\SearchController;
 use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\PhoneAuthController;
+use App\Http\Controllers\Client\BlogController;
+
 
 Route::get('/home', [HomeController::class, 'index']);
 Route::post('/passengerCar-detail', [HomeController::class, 'passengerCarDetail']);
@@ -30,4 +31,9 @@ Route::group(['prefix' => 'notifications', 'as' => 'notifications.'], function (
     Route::post('send', [NotificationController::class, 'sendNotification'])->name('sendMessage');
     Route::post('load', [NotificationController::class, 'getNotification'])->name('loadMessage');
 });
+
+
+Route::get('/search',[SearchController::class,'search'])->name('search');
+Route::get('/blog/{id}',[BlogController::class,'blog'])->name('blog');
+Route::get('/blogs', [BlogController::class, 'show'])->name('blog.show');
 
