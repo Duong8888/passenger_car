@@ -16,9 +16,9 @@ class Comment extends Model
         'content',
     ];
     public function user(){
-        return $this->belongsTo(User::class,'user_id','id');
+        return $this->belongsTo(User::class);
     }
     public function PassengerCar(){
-        return $this->belongsTo(PassengerCar::class,'comments',);
+        return $this->belongsTo(PassengerCar::class);
     }
 }

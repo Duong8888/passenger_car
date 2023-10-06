@@ -12,6 +12,6 @@ class Service extends Model
         'service_name',
     ];
     public function passengerCars(){
-        return $this->belongsToMany(PassengerCar::class,'passenger_car_services');
+        return $this->belongsToMany(PassengerCar::class);
     }
 }

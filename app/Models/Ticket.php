@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Ticket extends Model
 {
@@ -21,10 +20,10 @@ class Ticket extends Model
         'payment_method',
         'status',
     ];
-    public function user():BelongsTo{ 
+    public function user(){
         return $this->belongsTo(User::class);
     }
-    public function passengerCar():BelongsTo{
+    public function passengerCar(){
         return $this->belongsTo(PassengerCar::class);
     }
 

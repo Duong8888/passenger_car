@@ -48,5 +48,17 @@ Route::get('/layout', function () {
 });
 
 Route::resource('ticket', TicketController::class);
+Route::get('/user/index',[App\Http\Controllers\UserController::class,'index'])->name('route_user_index');
+Route::match(['GET','POST'],'/user/add',[App\Http\Controllers\UserController::class,'add'])->name('route_user_add');
+Route::match(['GET','POST'],'/user/edit/{id}',[App\Http\Controllers\UserController::class,'edit'])->name('route_user_edit');
+Route::match(['GET','POST'],'/user/delete/{id}',[App\Http\Controllers\UserController::class,'delete'])->name('route_user_delete');
+Route::get('/passengerCar/index',[App\Http\Controllers\PassengerCarController::class,'index'])->name('route_passengerCar_index');
+Route::match(['GET','POST'],'/passengerCar/add',[App\Http\Controllers\PassengerCarController::class,'add'])->name('route_passengerCar_add');
+Route::match(['GET','POST'],'/passengerCar/edit/{id}',[App\Http\Controllers\PassengerCarController::class,'edit'])->name('route_passengerCar_edit');
+Route::match(['GET','POST'],'/passengerCar/delete/{id}',[App\Http\Controllers\UserController::class,'delete'])->name('route_passengerCar_delete');
+
+
+
+
 
 

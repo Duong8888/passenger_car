@@ -25,3 +25,8 @@ Route::get('/register', [PhoneAuthController::class,'showregister'])->name('show
 Route::post('/register', [PhoneAuthController::class,'register'])->name('register');
 Route::get('/logout', [PhoneAuthController::class,'logout'])->name('logout');
 
+
+Route::get('/clientindex/index',[App\Http\Controllers\TicketIndexController::class,'index'])->name('route_clientindex_index');
+Route::get('/clientindex/search',[App\Http\Controllers\TicketIndexController::class,'getSearch'])->name('route_clientindex_search');
+
+

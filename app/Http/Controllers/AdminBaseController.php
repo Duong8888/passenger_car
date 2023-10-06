@@ -60,15 +60,14 @@ class AdminBaseController extends Controller
      */
     public function store(Request $request)
     {
-        
         $validator = $this->validateStore($request);
 
-        // if ($validator->fails()) {
-        //     return back()->withErrors($validator)->withInput();
-        // }
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
 
         $model = new $this->model;
-       
+
         $model->fill($request->except([$this->fieldImage]));
 
         if ($request->hasFile($this->fieldImage)) {
@@ -79,7 +78,7 @@ class AdminBaseController extends Controller
 
         $model->save();
 
-        return to_route('ticket.index')->with('success', 'Created Successfully');
+        return back()->with('success', 'Thao tac thanh cong');
     }
 
     /**
@@ -113,11 +112,11 @@ class AdminBaseController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // $validator = $this->validateUpdate($request);
+        $validator = $this->validateUpdate($request);
 
-        // if ($validator->fails()) {
-        //     return back()->withErrors($validator)->withInput();
-        // }
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
 
         $model = $this->model->findOrFail($id);
 
@@ -138,7 +137,7 @@ class AdminBaseController extends Controller
             Storage::delete($oldImage);
         }
 
-        return to_route('ticket.index')->with('success', 'Edited Successfully!');
+        return back()->with('success', 'Thao tac thanh cong');
     }
 
     /**

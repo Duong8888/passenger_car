@@ -19,9 +19,10 @@
 <body class="bg-white dark:bg-neutral-800">
 @include('client.layout.partials.header')
 
-
+<div class="content-page">
 @yield('content')
 
+</div>
 
 
 <!-- Footer Start -->
