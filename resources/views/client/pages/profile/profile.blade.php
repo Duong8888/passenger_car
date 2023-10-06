@@ -35,7 +35,7 @@
                             <div class="border rounded border-gray-100/50 dark:border-neutral-600">
                                 <div class="p-5 border-b border-gray-100/50 dark:border-neutral-600">
                                     <div class="text-center">
-                                        <img src="{{asset( $user->image)}}" alt="" class="w-20 h-20 p-1 mx-auto border-2 rounded-full border-gray-200/20">
+                                        <img src="https://i.imgur.com/1O4pwwE.jpg" alt="" class="w-20 h-20 p-1 mx-auto border-2 rounded-full border-gray-200/20">
                                         <h6 class="mt-4 mb-2 text-lg text-gray-900 dark:text-gray-50">{{ $user->name }}</h6>
                                         {{-- <p class="mb-4 text-gray-500 dark:text-gray-300">Developer</p> --}}
                                         <ul class="flex flex-wrap justify-center gap-2 mb-0">

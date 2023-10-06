@@ -37,12 +37,13 @@ class TicketController extends AdminBaseController
             return $validator;
         }
     }
+
     public function create()
     {
         $user = User::all();
-        
+
         $passengerCar = PassengerCar::all();
-       
+
         return view($this->pathView . __FUNCTION__, ['user' => $user, 'passengerCar' => $passengerCar])
             ->with('title', $this->titleCreate)
             ->with('colums', $this->colums)
@@ -55,9 +56,9 @@ class TicketController extends AdminBaseController
         $user_relationship = User::find($model->user_id);
         $passengerCar_relationship = PassengerCar::find($model->passenger_car_id);
         $user = User::all();
-        
+
         $passengerCar = PassengerCar::all();
-       
+
         return view($this->pathView . __FUNCTION__, compact('model','user','user_relationship','passengerCar_relationship','passengerCar'))
             ->with('title', $this->titleEdit)
             ->with('colums', $this->colums)
