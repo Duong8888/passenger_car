@@ -1,6 +1,7 @@
 <?php
 
 
+<<<<<<< Updated upstream
 use App\Http\Controllers\Admin\RouteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PhoneAuthController;
@@ -10,6 +11,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\PostController;
 
+=======
+>>>>>>> Stashed changes
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -58,10 +61,13 @@ Route::put('/posts/{id}',  [PostController::class,'update'])->name('posts.update
 // Đường dẫn route để xóa bài viết
 Route::delete('/posts/{id}', [PostController::class,'destroy'])->name('posts.destroy');
 
+<<<<<<< Updated upstream
 Route::resource('ticket', TicketController::class);
 Route::post('/trip', [TicketController::class, 'Trip']);
 Route::post('/passgenerCar/{id}' , [TicketController::class, 'PassengerCar']);
 
 Route::resource('/route', RouteController::class);
 
+=======
+>>>>>>> Stashed changes
 

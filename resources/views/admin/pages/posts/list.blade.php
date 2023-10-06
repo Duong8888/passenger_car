@@ -33,7 +33,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Title</th>
-                                        <th>Subtitle</th>
+                                        <th>Content</th>
                                         <th>Slug</th>
                                         <th>Category_id</th>
                                         <th>Author_id</th>
@@ -45,13 +45,24 @@
                                         <tr>
                                             <td>{{ $posts->id }}</td>
                                             <td>{{ $posts->title }}</td>
-                                            <td class="toggle-content">{!! $posts->subtitle !!} </td>
+                                            <td class="chill">{!! $posts->subtitle !!} </td>
+                                            <style>
+                                                .chill{
+                                                    width: 500px;
+                                                    overflow: hidden;
+                                                    text-overflow: ellipsis;
+                                                    line-height: 25px;
+                                                    -webkit-line-clamp: 3;
+                                                    height: 75px;
+                                                    display: -webkit-box;
+                                                    -webkit-box-orient: vertical;
+                                                }
+                                            </style>
                                             <td>{{ $posts->slug }}</td>
                                             <td>{{ $posts->category_id }}</td>
                                             <td>{{ $posts->author_id }}</td>
                                             <td style="display: flex;">
                                                 <a class="btn btn-primary" href="{{ route('posts.edit', ['id' => $posts->id]) }}">Edit</a>
-                                                <button class="toggle-button btn btn-secondary">Toggle Content</button>
 
                                                 <form action="{{ route('posts.destroy', $posts->id) }}" method="POST">
                                                     @csrf
@@ -72,23 +83,5 @@
         </div> <!-- container -->
     </div> <!-- content -->
 
-    <style>
-        .toggle-content.hidden {
-            display: none;
-        }
-    </style>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const toggleButtons = document.querySelectorAll('.toggle-button');
-            toggleButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const contentCell = button.parentElement.querySelector('.toggle-content');
-                    if (contentCell) {
-                        contentCell.classList.toggle('hidden');
-                    }
-                });
-            });
-        });
-    </script>
 @endsection

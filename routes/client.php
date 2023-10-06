@@ -4,6 +4,7 @@ use App\Http\Controllers\Client\SearchController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
+<<<<<<< Updated upstream
 
 Route::get('/home',[HomeController::class,'index']);
 Route::post('/passengerCar-detail',[HomeController::class,'passengerCarDetail']);
@@ -25,3 +26,12 @@ Route::get('/register', [PhoneAuthController::class,'showregister'])->name('show
 Route::post('/register', [PhoneAuthController::class,'register'])->name('register');
 Route::get('/logout', [PhoneAuthController::class,'logout'])->name('logout');
 
+=======
+use App\Http\Controllers\Client\BlogController;
+Route::get('/', function () {
+    return view('client.pages.home');
+});
+Route::get('/search',[SearchController::class,'search'])->name('search');
+Route::get('/blog/{id}',[BlogController::class,'blog'])->name('blog');
+Route::get('/blogs', [BlogController::class, 'show'])->name('blog.show');
+>>>>>>> Stashed changes
