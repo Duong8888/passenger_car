@@ -1,7 +1,7 @@
 <?php
 
 
-
+use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\RouteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PhoneAuthController;
@@ -67,5 +67,10 @@ Route::post('/passgenerCar/{id}' , [TicketController::class, 'PassengerCar']);
 
 Route::resource('/route', RouteController::class);
 
+
+
+//Phan'z Nam'z
+Route::resource('service', ServicesController::class);
+//End Phan'z Nam'z
 
 

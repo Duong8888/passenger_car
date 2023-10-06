@@ -374,8 +374,26 @@
                 <li>
                     <a href="{{ route('ticket.index') }}" >
                         <i class="mdi mdi-texture"></i>
-                        <span>Tickets</span>  
+                        <span>Tickets</span>
                     </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('service.index') }}" data-bs-toggle="collapse">
+                        <i class="mdi mdi-clipboard-outline"></i>
+                        <span> Services </span>
+                        {{-- <span class="menu-arrow"></span> --}}
+                    </a>
+                    {{-- <div class="collapse" id="sidebarTasks">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="task-kanban-board.html">Kanban Board</a>
+                            </li>
+                            <li>
+                                <a href="task-details.html">Details</a>
+                            </li>
+                        </ul>
+                    </div> --}}
                 </li>
 
                 <li>
