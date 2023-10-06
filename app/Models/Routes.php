@@ -22,6 +22,6 @@ class Routes extends Model
         return $this->hasMany(PassengerCar::class,'route_id','id');
     }
     public function stops(){
-        return $this->hasMany(Stops::class);
+        return $this->hasMany(Stops::class,'route_id','id');
     }
 }

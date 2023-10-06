@@ -8,7 +8,11 @@ use App\Models\Routes;
 use App\Models\PassengerCar;
 use App\Models\WorkingTime;
 use App\Models\Comment;
+use App\Models\Service;
+use App\Models\Stops;
 use App\Models\User;
+use Illuminate\Routing\Route;
+
 // use App\Models\PassengerCarWorkingTime;
 
 class HomeController  extends Controller
@@ -18,44 +22,26 @@ class HomeController  extends Controller
      */
     public function index(){
 
-        // Lấy thông tin từ các bảng
-        $albums = PassengerCar::with('albums')->get();  // Lấy thông tin từ bảng Album
-        // return response()->json($albums);
-        // dd($albums[0]->path);
-        $routes = Routes::all();  // Lấy thông tin từ bảng Route
-        // return response()->json($routes);
-        $passengerCars = PassengerCar::with('workingTime')->get();  // Lấy thông tin từ bảng PassengerCar
-        // dd($passengerCars);
-        $workingTime = WorkingTime::all();  // Lấy thông tin từ bảng WorkingTime
-        // return response()->json($passengerCars[0]->workingTime[0]->departure_time);
-
+        $albums = PassengerCar::with('albums')->get();
+        $routes = Routes::all();
+        $passengerCars = PassengerCar::with('workingTime')->get();
+        $workingTime = WorkingTime::all();
         return view('client.pages.home.index', compact('albums', 'routes', 'passengerCars','workingTime'));
 
     }
+
     public function passengerCarDetail(Request $request){
-        // dd($request);
-        // Lấy thông tin từ các bảng
-
-        $albums = PassengerCar::with('albums')->get();  // Lấy thông tin từ bảng Album
-        // return response()->json($albums);
-        $routes = PassengerCar::with('route')->where('route_id',$request->route_id)->take(4)->get(); // Lấy thông tin từ bảng Route
-        // return response()->json($routes[0]->id);
-
-        $passengerCars = PassengerCar::with('workingTime')->find($request->passenger_id);  // Lấy thông tin từ bảng PassengerCar
-        // return response()->json($passengerCars);
-
-        // $workingTime = WorkingTime::find($request->passenger_id);  // Lấy thông tin từ bảng WorkingTime
-        //  return response()->json($passengerCars);
-        // $users = PassengerCar::with('user')->where('user_id',$request->user_id)->get();
+        $albums = PassengerCar::with('albums')->get();
+        $routes = PassengerCar::with('route')->where('route_id',$request->route_id)->take(4)->get();
+        $passengerCars = PassengerCar::with('workingTime')->find($request->passenger_id);
+        $services = PassengerCar::with('services')->get();
         $users = User::all();
-        // $comments = PassengerCar::with('comments')->find($request);
         $comments = Comment::where('passenger_car_id',$request->passenger_id)->get();
 
-
-        // return response()->json($comments, 200, [], JSON_PRETTY_PRINT);
+        // return response()->json($passengerCars->services, 200, [], JSON_PRETTY_PRINT);
         // dd($comments);
 
-        return view('client.pages.home.passengerCar-detail', compact('albums', 'routes', 'passengerCars','users','comments'));
+        return view('client.pages.home.passengerCar-detail', compact('albums', 'routes', 'passengerCars','services','users','comments'));
 
     }
 

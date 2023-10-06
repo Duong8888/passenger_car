@@ -63,7 +63,7 @@
                                                 <div class="mb-2 mb-md-0">
                                                     <h5 class="mb-1 fs-18"><a href="job-details.html" class="text-gray-900 dark:text-gray-50">Tên nhà xe</a>
                                                     </h5>
-                                                    <p class="mb-0 text-gray-500 fs-14 dark:text-gray-300">Tên tài xế</p>
+                                                    <p class="mb-0 text-gray-500 fs-14 dark:text-gray-300">Ghế ngồi 45 chỗ</p>
                                                 </div>
                                             </div>
                                             <!--end col-->
@@ -96,8 +96,14 @@
                                             <!--end col-->
                                             <div class="col-span-12 lg:col-span-2">
                                                 <div class="flex flex-wrap gap-1.5">
-                                                    <span class="badge bg-green-500/20 text-green-500 text-13 px-2 py-0.5 font-medium rounded">A</span>
-                                                    <span class="badge bg-sky-500/20 text-sky-500 text-13 px-2 py-0.5 font-medium rounded">B</span>
+                                                    <span class="badge  text-green-500 text-13 px-2 py-0.5 font-medium rounded">Còn 5 chổ trống</span>
+                                                    <form action="{{ URL::to('passengerCar-detail') }}" method="POST">
+                                                        @csrf
+                                                        <input type="text" hidden name='passenger_id' value="{{$car->id}}">
+                                                        <input type="text" hidden name='image_id' value="{{$car->album_id}}">
+                                                        <input type="text" hidden name='route_id' value="{{$car->route_id}}">
+                                                        <button>  <span class="badge text-sky-500 text-13 px-2 py-0.5 font-medium rounded">Thông tin chi tiết >></span></button>
+                                                    </form>
                                                 </div>
                                             </div>
                                             <!--end col-->

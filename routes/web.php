@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PhoneAuthController;
 use App\Http\Controllers\Admin\TicketController;
@@ -48,5 +48,10 @@ Route::get('/layout', function () {
 });
 
 Route::resource('ticket', TicketController::class);
+
+
+//Phan'z Nam'z
+Route::resource('service', ServicesController::class);
+//End Phan'z Nam'z
 
 

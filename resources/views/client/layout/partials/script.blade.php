@@ -16,3 +16,5 @@
 
 <script src="{{asset('client/js/app.js')}}"></script>
 
+{{-- // Initialization for ES Users --}}
+

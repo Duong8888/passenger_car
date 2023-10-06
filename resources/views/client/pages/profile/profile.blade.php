@@ -111,14 +111,14 @@
                                                 </div>
                                             </div>
                                         </li>
-                                        <li class="pb-3">
+                                        {{-- <li class="pb-3">
                                             <div class="flex">
                                                 <label class="w-32 font-medium text-gray-900 dark:text-gray-50">Password</label>
                                                 <div>
                                                     <p class="mb-0 text-gray-500 dark:text-gray-300">{{$user->password}}</p>
                                                 </div>
                                             </div>
-                                        </li>
+                                        </li> --}}
                                         {{-- <li class="pb-3">
                                             <div class="flex">
                                                 <label class="w-32 font-medium text-gray-900 dark:text-gray-50">Location</label>
