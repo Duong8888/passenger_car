@@ -13,7 +13,9 @@ class PostsCategory extends Model
         'category_name',
         'parent_id',
     ];
-    public function posts(){
+    protected $table = 'posts_categories';
+    public function posts()
+    {
         return $this->hasMany(Posts::class);
     }
 }

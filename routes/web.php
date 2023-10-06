@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostCategoryController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard', function () {
@@ -36,4 +37,12 @@ Route::name('admin.')->group(function () {
     //         Route::post('/update/{booking}', 'update')->name('update');
     //         Route::get('/delete/{booking}', 'delete')->name('delete');
     //     });
+    Route::prefix('categories')->name('category.')->group(function () {
+        Route::get('/', [PostCategoryController::class, 'index'])->name('index');
+        Route::get('/add', [PostCategoryController::class, 'add'])->name('add');
+        Route::post('/add', [PostCategoryController::class, 'store'])->name('store');
+        Route::get('/edit/{category}', [PostCategoryController::class, 'edit'])->name('edit');
+        Route::put('/edit/{id}', [PostCategoryController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [PostCategoryController::class, 'delete'])->name('delete');
+    });
 });
