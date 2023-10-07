@@ -82,7 +82,7 @@
         <li class="dropdown notification-list topbar-dropdown">
             <a class="nav-link dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                 <i class="fe-bell noti-icon"></i>
-                <span class="badge bg-danger rounded-circle noti-icon-badge">9</span>
+                <span class="badge bg-danger rounded-circle noti-icon-badge count-btn">9</span>
             </a>
             <div class="dropdown-menu dropdown-menu-end dropdown-lg">
 
@@ -90,10 +90,8 @@
                 <div class="dropdown-item noti-title">
                     <h5 class="m-0">
                                         <span class="float-end">
-                                            <a href="" class="text-dark">
-                                                <small>Clear All</small>
-                                            </a>
-                                        </span>Notification
+
+                                        </span>Thông báo
                     </h5>
                 </div>
 
@@ -162,10 +160,7 @@
                 </div>
 
                 <!-- All-->
-                <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
-                    View all
-                    <i class="fe-arrow-right"></i>
-                </a>
+
 
             </div>
         </li>
