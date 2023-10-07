@@ -214,7 +214,6 @@
 
                         <button type="button" class="flex items-center px-4 py-5 dropdown-toggle" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             <img class="w-8 h-8 rounded-full ltr:xl:mr-2 rtl:xl:ml-2" src="https://i.imgur.com/1O4pwwE.jpg" alt="Header Avatar">
-                            <span class="hidden fw-medium xl:block">Shawn L.</span>
                             @if(auth()->check())
                                 <span class="hidden fw-medium xl:block">{{auth()->user()->name}}</span>
                             @else
