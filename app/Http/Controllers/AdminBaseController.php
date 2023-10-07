@@ -22,6 +22,7 @@ class AdminBaseController extends Controller
     public $titleCreate;
     public $titleShow;
     public $titleEdit;
+    public $urlIndex;
 
     /**
      * @throws BindingResolutionException
@@ -36,7 +37,7 @@ class AdminBaseController extends Controller
      */
     public function index()
     {
-        $data = $this->model->paginate(5);
+        $data = $this->model->paginate(10);
 
         return view($this->pathView . __FUNCTION__, compact('data'))
             ->with('title', $this->titleIndex)
@@ -79,7 +80,7 @@ class AdminBaseController extends Controller
 
         $model->save();
 
-        return to_route('ticket.index')->with('success', 'Created Successfully');
+        return to_route($this->urlIndex)->with('success', 'Created Successfully');
     }
 
     /**
@@ -138,7 +139,7 @@ class AdminBaseController extends Controller
             Storage::delete($oldImage);
         }
 
-        return to_route('ticket.index')->with('success', 'Edited Successfully!');
+        return to_route($this->urlIndex)->with('success', 'Edited Successfully!');
     }
 
     /**

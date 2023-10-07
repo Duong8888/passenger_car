@@ -73,8 +73,15 @@ $(document).ready(function () {
             success: function (response) {
                 console.log(response.dataRoute);
                 dataList.html('');
-                $.each(response.data,function (index,item){
+                if(response.data.length === 0){
                     dataList.append(`
+                    <div class="text-center">
+                       Tuyến đường chưa có xe hoạt động .
+                    </div>
+                    `);
+                }else {
+                    $.each(response.data, function (index, item) {
+                        dataList.append(`
                                     <div class="relative overflow-hidden transition-all duration-500 ease-in-out bg-white border rounded-md border-gray-100/50 group/jobs group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:-translate-y-2 dark:bg-neutral-900 dark:border-neutral-600">
                                         <div class="p-6">
                                             <div class="grid grid-cols-12 gap-5">
@@ -121,19 +128,13 @@ $(document).ready(function () {
 
                                     </div>
                     `);
-                })
+                    });
+                }
             },
             error: function (error) {
                 console.log(error);
-                dataList.html('');
-                dataList.append(`
-                    <div class="text-center">
-                       Tuyến đường chưa có xe hoạt động .
-                    </div>
-                `)
             }
         })
-
 
     }
 });

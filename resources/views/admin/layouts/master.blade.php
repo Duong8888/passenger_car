@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     @include('admin.layouts.partials.style')
     @yield('page-style')
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <!-- body start -->
@@ -197,7 +197,10 @@
 
 <!-- Right bar overlay-->
 <div class="rightbar-overlay"></div>
-
+<script>
+    const infoUser = @json(auth()->user());
+    const urlNotification = '{{route('notifications.loadMessage')}}';
+</script>
 @include('admin.layouts.partials.script')
 @yield('page-script')
 

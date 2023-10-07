@@ -18,7 +18,7 @@
         <div class="row">
 
 
-            <div class="col-xl-8">
+            <div class="col-xl-12">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title mt-0 mb-3">Tickets List</h4>
@@ -75,6 +75,7 @@
                                 </tbody>
                                 @endforeach
                             </table>
+                            {{ $data->links() }}
                         </div>
                     </div>
                 </div>

@@ -72,9 +72,9 @@
                 <li class="menu-title mt-2">Apps</li>
 
                 <li>
-                    <a href="apps-calendar.html">
+                    <a href="{{ route('postsing') }}">
                         <i class="mdi mdi-calendar-blank-outline"></i>
-                        <span> Calendar </span>
+                        <span> Quản lý tin tức </span>
                     </a>
                 </li>
 
@@ -397,30 +397,10 @@
                 </li>
 
                 <li>
-                    <a href="#sidebarTables" data-bs-toggle="collapse">
+                    <a href="{{ route('route.index') }}">
                         <i class="mdi mdi-table"></i>
-                        <span> Tables </span>
-                        <span class="menu-arrow"></span>
+                        <span> Route </span>
                     </a>
-                    <div class="collapse" id="sidebarTables">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="tables-basic.html">Basic Tables</a>
-                            </li>
-                            <li>
-                                <a href="tables-datatables.html">Data Tables</a>
-                            </li>
-                            <li>
-                                <a href="tables-editable.html">Editable Tables</a>
-                            </li>
-                            <li>
-                                <a href="tables-responsive.html">Responsive Tables</a>
-                            </li>
-                            <li>
-                                <a href="tables-tablesaw.html">Tablesaw Tables</a>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
 
                 <li>
