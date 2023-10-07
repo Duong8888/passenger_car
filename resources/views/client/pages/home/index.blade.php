@@ -74,7 +74,7 @@
                                                         {{-- <i class="mr-1 group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500 mdi mdi-map-marker"></i> --}}
                                                     </div>
                                                     <p class="mb-0 text-gray-500 dark:text-gray-300"><span style="font-weight: bold;"> {{ \Carbon\Carbon::parse($car->workingTime[0]->departure_time)->format('H:i') }}</span> -- {{ $car->route->departure }}</p>
-                                                    {{-- Điểm đón: {{ $car->route->departure }} --}}
+                                                    {{-- Điểm đón: {{dd($car->workingTime[0]->departure_time)}} --}}
                                                 </div>
                                                 <div class="mb-2 lg:flex">
                                                     <div class="flex-shrink-0">
