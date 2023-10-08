@@ -43,7 +43,6 @@ Route::group(['prefix' => 'notifications', 'as' => 'notifications.'], function (
 });
 
 
-Route::get('/search',[SearchController::class,'search'])->name('search');
 Route::get('/blog/{id}',[BlogController::class,'blog'])->name('blog');
 Route::get('/blogs', [BlogController::class, 'show'])->name('blog.show');
 
