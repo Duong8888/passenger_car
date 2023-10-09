@@ -139,184 +139,37 @@
                                     <ul class="items-center text-sm font-medium text-center text-gray-700 nav md:flex">
                                         <li class="active" role="presentation">
                                             <button class="inline-block w-full py-4 px-[18px] dark:text-gray-50 active"  data-tw-toggle="tab" type="button" data-tw-target="overview-tab">
-                                                Overview
+                                                KO CÓ GÌ
                                             </button>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                            <button class="inline-block w-full py-4 px-[18px] dark:text-gray-50" data-tw-toggle="tab" type="button" data-tw-target="settings-tab">
-                                                Chỉnh sửa
+                                            <button class="inline-block w-full py-4 px-[18px] dark:text-gray-50 " data-tw-toggle="tab" type="button" data-tw-target="thongtin-tab">
+                                               Thông tin cá nhân
+                                            </button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="inline-block w-full py-4 px-[18px] dark:text-gray-50" data-tw-toggle="tab" type="button" data-tw-target="password-tab">
+                                               Đổi mật khẩu
                                             </button>
                                         </li>
                                     </ul>
                                 </div>
 
                                     <div class="p-6 tab-content">
-                                        {{-- <div class="block w-full tab-pane" id="overview-tab">
-                                            <div class="mt-2 space-y-8">
-                                                <div>
-                                                    <h5 class="text-lg font-bold text-gray-900 dark:text-gray-50">About</h5>
-                                                    <p class="mt-4 text-gray-500 dark:text-gray-300">
-                                                        {{ $user->id }}  {{ $user->name }} <br>
-                                                        <b>International University</b>.
-                                                    </p>
-                                                    <p class="mt-3 text-gray-500 dark:text-gray-300">
-                                                        It describes the candidate's relevant experience,
-                                                        skills, and achievements. The purpose of this career
-                                                        summary is to explain your qualifications for the job in
-                                                        3-5 sentences and convince the manager to read the whole
-                                                        resume document.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="mt-6">
-                                                <h6 class="text-lg font-bold text-gray-900 dark:text-gray-50">Education</h6>
-                                                <div class="relative flex mt-5">
-                                                    <div class="after:content-[''] after:absolute after:hidden after:md:block after:border after:border-dashed after:h-24 after:left-5 after:top-10 after:border-violet-500/20"></div>
-                                                    <div class="w-10 h-10 text-xl leading-10 text-center rounded-full shrink-0 bg-violet-500/20 text-violet-500">
-                                                        B
-                                                    </div>
-                                                    <div class="ml-4">
-                                                        <h6 class="mb-1 text-gray-900 text-16 dark:text-gray-50">
-                                                            BCA - Bachelor of Computer Applications
-                                                        </h6>
-                                                        <p class="mb-2 text-gray-500 dark:text-gray-300">
-                                                            International University - (2004 - 2010)
-                                                        </p>
-                                                        <p class="text-gray-500 dark:text-gray-300">
-                                                            There are many variations of passages of available,
-                                                            but the majority alteration in some form. As a
-                                                            highly skilled and successfull product development
-                                                            and design specialist with more than 4 Years of My
-                                                            experience.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="relative flex mt-5">
-                                                    <div class="after:content-[''] after:absolute after:hidden after:md:block after:border after:border-dashed after:h-24 after:left-5 after:top-10 after:border-violet-500/20"></div>
 
-                                                    <div class="w-10 h-10 text-xl leading-10 text-center rounded-full shrink-0 bg-violet-500/20 text-violet-500">
-                                                        M
-                                                    </div>
-                                                    <div class="ml-4">
-                                                        <h6 class="mb-1 text-gray-900 text-16 dark:text-gray-50">
-                                                            MCA - Master of Computer Application
-                                                        </h6>
-                                                        <p class="mb-2 text-gray-500 dark:text-gray-300">
-                                                            International University - (2010 - 2012)
-                                                        </p>
-                                                        <p class="text-gray-500 dark:text-gray-300">
-                                                            There are many variations of passages of available,
-                                                            but the majority alteration in some form. As a
-                                                            highly skilled and successfull product development
-                                                            and design specialist with more than 4 Years of My
-                                                            experience.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="flex mt-5 re">
-                                                    <div class="w-10 h-10 text-xl leading-10 text-center rounded-full shrink-0 bg-violet-500/20 text-violet-500">
-                                                        D
-                                                    </div>
-                                                    <div class="ml-4">
-                                                        <h6 class="mb-1 text-gray-900 text-16 dark:text-gray-50">
-                                                            Design Communication Visual
-                                                        </h6>
-                                                        <p class="mb-2 text-gray-500 dark:text-gray-300">
-                                                            International University - (2012-2015)
-                                                        </p>
-                                                        <p class="text-gray-500 dark:text-gray-300">
-                                                            There are many variations of passages of available,
-                                                            but the majority alteration in some form. As a
-                                                            highly skilled and successfull product development
-                                                            and design specialist with more than 4 Years of My
-                                                            experience.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="mt-6">
-                                                <h6 class="text-lg font-bold text-gray-900 dark:text-gray-50">Experiences</h6>
-                                                <div class="relative flex mt-5">
-                                                    <div class="after:content-[''] after:absolute after:hidden after:md:block after:border after:border-dashed after:h-24 after:left-5 after:top-10 after:border-violet-500/20"></div>
-                                                    <div class="w-10 h-10 text-xl leading-10 text-center rounded-full shrink-0 bg-violet-500/20 text-violet-500">
-                                                        W
-                                                    </div>
-                                                    <div class="ml-4">
-                                                        <h6 class="mb-1 text-gray-900 text-16 dark:text-gray-50">
-                                                            Web Design & Development Team Leader
-                                                        </h6>
-                                                        <p class="mb-2 text-gray-500 dark:text-gray-300">
-                                                            Creative Agency - (2013 - 2016)
-                                                        </p>
-                                                        <p class="text-gray-500 dark:text-gray-300">
-                                                            There are many variations of passages of available,
-                                                            but the majority alteration in some form. As a
-                                                            highly skilled and successfull product development
-                                                            and design specialist with more than 4 Years of My
-                                                            experience.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="flex mt-5">
-                                                    <div class="w-10 h-10 text-xl leading-10 text-center rounded-full shrink-0 bg-violet-500/20 text-violet-500">
-                                                        P
-                                                    </div>
-                                                    <div class="ml-4">
-                                                        <h6 class="mb-1 text-gray-900 text-16 dark:text-gray-50">
-                                                            Project Manager
-                                                        </h6>
-                                                        <p class="mb-2 text-gray-500 dark:text-gray-300">
-                                                            Jobcy Technology Pvt.Ltd - (Pressent)
-                                                        </p>
-                                                        <p class="text-gray-500 dark:text-gray-300">
-                                                            There are many variations of passages of available,
-                                                            but the majority alteration in some form. As a
-                                                            highly skilled and successfull product development
-                                                            and design specialist with more than 4 Years of My
-                                                            experience.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="mt-6">
-                                                <h6 class="text-lg font-bold text-gray-900 dark:text-gray-50">Skills</h6>
-                                                <div class="flex flex-wrap gap-3 mt-3">
-                                                    <span class="mt-2 text-13 px-2 py-0.5 bg-violet-500/20 text-violet-500 rounded font-medium">Cloud Management</span>
-                                                    <span class="mt-2 text-13 px-2 py-0.5 bg-violet-500/20 text-violet-500 rounded font-medium">Responsive Design</span>
-                                                    <span class="mt-2 text-13 px-2 py-0.5 bg-violet-500/20 text-violet-500 rounded font-medium">Network Architecture</span>
-                                                    <span class="mt-2 text-13 px-2 py-0.5 bg-violet-500/20 text-violet-500 rounded font-medium">PHP</span>
-                                                    <span class="mt-2 text-13 px-2 py-0.5 bg-violet-500/20 text-violet-500 rounded font-medium">Bootstrap</span>
-                                                    <span class="mt-2 text-13 px-2 py-0.5 bg-violet-500/20 text-violet-500 rounded font-medium">UI &amp; UX Designer</span>
-                                                </div>
-                                            </div>
-                                            <div class="mt-6">
-                                                <h6 class="text-lg font-bold text-gray-900 dark:text-gray-50">Spoken languages</h6>
-                                                <div class="flex flex-wrap gap-3 mt-3">
-                                                    <span class="mt-2 text-13 px-2 py-0.5 bg-red-500/20 text-red-500 rounded font-medium">English</span>
-                                                    <span class="mt-2 text-13 px-2 py-0.5 bg-green-500/20 text-green-500 rounded font-medium">German</span>
-                                                    <span class="mt-2 text-13 px-2 py-0.5 bg-sky-500/20 text-sky-500 rounded font-medium">French</span>
-                                                </div>
-                                            </div>
-                                        </div> --}}
-
-                                        <div class="hidden w-full tab-pane" id="settings-tab">
+                                        <div class="hidden w-full tab-pane" id="thongtin-tab">
                                             <div class="pt-8 space-x-8">
                                                 <form action="{{ route('profile.update',$user->id) }}" method="POST" enctype="multipart/form-data">
                                                     @method('PUT')
                                                     @csrf
+                                                    <input type="hidden" name="action" value="updateInfo">
                                                     <div>
                                                         <h5 class="mb-3 text-gray-900 fs-17 fw-semibold dark:text-gray-50">Thông tin cá nhân</h5>
-                                                        {{-- <div class="text-center">
-                                                            <div class="relative mb-4">
-                                                                <img src="{{asset( $user->image)}}" class="w-40 h-40 p-1 mx-auto border-2 rounded-full border-gray-100/50 dark:border-neutral-600" id="profile-img" alt="">
-                                                                <div class="absolute w-8 h-8 leading-8 text-center rounded-full shadow-md bottom-2 right-[42%] z-40 bg-gray-50 dark:bg-neutral-700 dark:text-white">
-                                                                    <input id="profile-img-file-input" type="file" class="hidden" onchange="previewImg()">
-                                                                    <label for="profile-img-file-input" class="">
-                                                                        <i class="uil uil-edit"></i>
-                                                                    </label>
-                                                                </div>
+                                                        @if ($message = Session::get('successInfo'))
+                                                            <div>
+                                                                    <p style="color: blue;">{{ $message }}</p>
                                                             </div>
-                                                        </div> --}}
+                                                        @endif
                                                         <div class="mt-5">
                                                             <div class="grid grid-cols-12 gap-5">
                                                                 <div class="col-span-12 lg:col-span-6">
@@ -328,31 +181,7 @@
                                                                         @enderror
                                                                     </div>
                                                                 </div>
-                                                                {{-- <!--end col-->
-                                                                <div class="col-span-12 lg:col-span-6">
-                                                                    <div class="mb-3">
-                                                                        <label for="lastName" class="text-sm text-gray-900 dark:text-gray-50">Last Name</label>
-                                                                        <input type="text" class="w-full mt-1 text-gray-500 border rounded border-gray-100/50 text-13 dark:bg-transparent dark:border-neutral-600" id="lastName" value="Dickens">
-                                                                    </div>
-                                                                </div> --}}
-                                                                <!--end col-->
-                                                                {{-- <div class="col-span-12 lg:col-span-6">
-                                                                    <div class="mb-3">
-                                                                        <label for="choices-single-categories" class="text-sm text-gray-900 dark:text-gray-50">Account Type</label>
-                                                                        <div class="mt-1">
-                                                                            <select class="form-select" data-trigger
-                                                                                name="choices-single-categories"
-                                                                                id="choices-single-categories"
-                                                                                aria-label="Default select example">
-                                                                                <option value="4">Accounting</option>
-                                                                                <option value="1">IT & Software</option>
-                                                                                <option value="3">Marketing</option>
-                                                                                <option value="5">Banking</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div> --}}
-                                                                <!--end col-->
+
                                                                 <div class="col-span-12 lg:col-span-6">
                                                                     <div class="mb-3">
                                                                         <label for="email" class="text-sm text-gray-900 dark:text-gray-50">Email của bạn</label>
@@ -374,106 +203,90 @@
                                                                         @enderror
                                                                     </div>
                                                                 </div>
+                                                                <div class="col-span-12">
+                                                                    <div class="form-check">
+                                                                        <button class="mt-8 text-right" style="float: right"><p class="text-white btn group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 border-transparent focus:ring group-data-[theme-color=violet]:focus:ring-violet-500/20 group-data-[theme-color=sky]:focus:ring-sky-500/20 group-data-[theme-color=red]:focus:ring-red-500/20 group-data-[theme-color=green]:focus:ring-green-500/20 group-data-[theme-color=pink]:focus:ring-pink-500/20 group-data-[theme-color=blue]:focus:ring-blue-500/20">Sủa thông tin</p></button>
+                                                                        {{-- <style>.{float: left; display: flex;align-items: center;align-content: center}</style> --}}
+                                                                    </div>
+                                                                </div>
+
                                                                 <!--end col-->
                                                             </div>
                                                         </div>
                                                         <!--end row-->
                                                     </div>
-                                                    <button class="mt-8 text-right" style="float: right"><p class="text-white btn group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 border-transparent focus:ring group-data-[theme-color=violet]:focus:ring-violet-500/20 group-data-[theme-color=sky]:focus:ring-sky-500/20 group-data-[theme-color=red]:focus:ring-red-500/20 group-data-[theme-color=green]:focus:ring-green-500/20 group-data-[theme-color=pink]:focus:ring-pink-500/20 group-data-[theme-color=blue]:focus:ring-blue-500/20">Update</p></button>
-
-                                                    <!--end account-->
-                                                    {{-- <div class="mt-4">
-                                                        <h5 class="mb-3 font-semibold text-gray-900 text-17 dark:text-gray-50">Profile</h5>
-                                                        <div class="grid grid-cols-12 gap-5">
-                                                            <div class="col-span-12">
-                                                                <div class="mb-3">
-                                                                    <label for="exampleFormControlTextarea1" class="form-label dark:text-gray-300">Introduce Yourself</label>
-                                                                    <textarea class="w-full mt-1 text-sm rounded border-gray-100/50 dark:bg-transparent dark:border-neutral-600 dark:text-gray-300" id="exampleFormControlTextarea1" rows="5">Developer with over 5 years' experience working in both the public and private sectors. Diplomatic, personable, and adept at managing sensitive situations. Highly organized, self-motivated, and proficient with computers. Looking to boost students’ satisfactions scores for International University. Bachelor's degree in communications.</textarea>
-                                                                </div>
-                                                            </div>
-                                                            <!--end col-->
-                                                            <div class="col-span-12 lg:col-span-6">
-                                                                <div class="mb-3">
-                                                                    <label for="languages" class="text-sm text-gray-900 dark:text-gray-50">Languages</label>
-                                                                    <input type="text" class="w-full mt-1 text-gray-500 border rounded border-gray-100/50 text-13 dark:bg-transparent dark:border-neutral-600" id="languages" value="English, German, French">
-                                                                </div>
-                                                            </div>
-                                                            <!--end col-->
-                                                            <div class="col-span-12 lg:col-span-6">
-                                                                <div class="mb-3">
-                                                                    <label for="choices-single-location" class="text-sm text-gray-900 dark:text-gray-50">Location</label>
-                                                                    <div class="mt-1">
-                                                                        <select class="form-select" data-trigger
-                                                                            name="choices-single-location" id="choices-single-location"
-                                                                            aria-label="Default select exam
-                                                                            ple">
-                                                                            <option value="ME">Montenegro</option>
-                                                                            <option value="MS">Montserrat</option>
-                                                                            <option value="MA">Morocco</option>
-                                                                            <option value="MZ">Mozambique</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!--end col-->
-                                                            <div class="col-span-12">
-                                                                <div class="mb-3 ">
-                                                                    <div class="mb-3">
-                                                                        <label for="formFileLg" class="inline-block mb-2 text-neutral-700 dark:text-neutral-200">Large file input example</label >
-                                                                        <input class="relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-gray-100/50 bg-clip-padding pr-3 py-[0.32rem] font-normal leading-[2.15] text-neutral-700 transition duration-300 ease-in-out file:mr-2 file:-my-[0.32rem] file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-gray-100/30 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:file:bg-neutral-700 dark:file:text-neutral-100 dark:focus:border-primary"
-                                                                            id="formFileLg" type="file" />
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!--end col-->
-                                                        </div>
-                                                        <!--end row-->
-                                                    </div> --}}
-                                                    <!--end profile-->
-                                                    {{-- <div class="mt-4">
-                                                        <h5 class="mb-3 font-semibold text-gray-900 text-17 dark:text-gray-50">Social Media</h5>
-                                                        <div class="grid grid-cols-12 gap-5">
-                                                            <div class="col-span-12 lg:col-span-6">
-                                                                <div class="mb-3">
-                                                                    <label for="facebook" class="text-sm text-gray-900 dark:text-gray-50">Facebook</label>
-                                                                    <input type="text" class="w-full mt-1 text-gray-500 border rounded border-gray-100/50 text-13 dark:bg-transparent dark:border-neutral-600" id="facebook" value="https://www.facebook.com/">
-                                                                </div>
-                                                            </div>
-                                                            <!--end col-->
-                                                            <div class="col-span-12 lg:col-span-6">
-                                                                <div class="mb-3">
-                                                                    <label for="twitter" class="text-sm text-gray-900 dark:text-gray-50">Twitter</label>
-                                                                    <input type="text" class="w-full mt-1 text-gray-500 border rounded border-gray-100/50 text-13 dark:bg-transparent dark:border-neutral-600" id="twitter" value="https://www.twitter.com/">
-                                                                </div>
-                                                            </div>
-                                                            <!--end col-->
-                                                            <div class="col-span-12 lg:col-span-6">
-                                                                <div class="mb-3">
-                                                                    <label for="linkedin" class="text-sm text-gray-900 dark:text-gray-50">Linkedin</label>
-                                                                    <input type="text" class="w-full mt-1 text-gray-500 border rounded border-gray-100/50 text-13 dark:bg-transparent dark:border-neutral-600" id="linkedin" value="https://www.linkedin.com/">
-                                                                </div>
-                                                            </div>
-                                                            <!--end col-->
-                                                            <div class="col-span-12 lg:col-span-6">
-                                                                <div class="mb-3">
-                                                                    <label for="whatsapp" class="text-sm text-gray-900 dark:text-gray-50">Whatsapp</label>
-                                                                    <input type="text" class="w-full mt-1 text-gray-500 border rounded border-gray-100/50 text-13 dark:bg-transparent dark:border-neutral-600" id="whatsapp" value="https://www.whatsapp.com/">
-                                                                </div>
-                                                            </div>
-                                                            <!--end col-->
-                                                        </div>
-                                                        <!--end row-->
-                                                    </div> --}}
-                                                    <!--end socia-media-->
-
-                                                    <!--end Change-password-->
-                                                    {{-- <div class="mt-8 text-right">
-                                                        <a href="javascript:void(0)" class="text-white btn group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 border-transparent focus:ring group-data-[theme-color=violet]:focus:ring-violet-500/20 group-data-[theme-color=sky]:focus:ring-sky-500/20 group-data-[theme-color=red]:focus:ring-red-500/20 group-data-[theme-color=green]:focus:ring-green-500/20 group-data-[theme-color=pink]:focus:ring-pink-500/20 group-data-[theme-color=blue]:focus:ring-blue-500/20">Update</a>
-                                                    </div> --}}
                                                 </form>
                                             </div>
-                                            @include('client.pages.profile.UpdatePassword')
 
+                                        </div>
+                                        <div class="hidden w-full tab-pane" id="password-tab">
+                                            <div class="pt-8 space-x-8">
+                                                <form action="{{ route('profile.update',$user->id) }}" method="POST" enctype="multipart/form-data">
+                                                    @method('PUT')
+                                                    @csrf
+                                                    <input type="hidden" name="action" value="updatePassword">
+                                                    <div class="mt-4">
+                                                        <h5 class="mb-3 font-semibold text-17 dark:text-gray-50">
+                                                          Đổi mật khẩu
+                                                        </h5>
+                                                        @if ($message = Session::get('successPassword'))
+                                                            <div>
+                                                                    <p style="color: blue;">{{ $message }}</p>
+                                                            </div>
+                                                        @endif
+                                                        <div class="grid grid-cols-12 gap-5">
+                                                            <div class="col-span-12">
+                                                                <div class="mb-3">
+                                                                    <label for="current-password-input" class="text-sm text-gray-900 dark:text-gray-50">Mật khẩu hiện tại</label>
+                                                                    <input type="password" class="w-full mt-1 text-gray-500 border rounded border-gray-100/50 text-13 dark:bg-transparent dark:border-neutral-600" placeholder="Mật khẩu hiện tại" id="current-password-input" name="current_password">
+                                                                    @if ($message = Session::get('errorPassword'))
+                                                                        <div>
+                                                                                <p style="color: red;">{{ $message }}</p>
+                                                                        </div>
+                                                                    @endif
+                                                                    @error('current_password')
+                                                                    <div class="alert alert-danger mt-1 mb-1" style="color: red;font-size: 12px;">{{ $message }}</div>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                            <div class="col-span-12 lg:col-span-6">
+                                                                <div class="mb-3">
+                                                                    <label for="new-password-input" class="text-sm text-gray-900 dark:text-gray-50">Mật khẩu mới</label>
+                                                                    <input type="password" class="w-full mt-1 text-gray-500 border rounded border-gray-100/50 text-13 dark:bg-transparent dark:border-neutral-600" placeholder="Mật khẩu mới" id="new-password-input" name="new_password">
+                                                                    @error('new_password')
+                                                                    <div class="alert alert-danger mt-1 mb-1" style="color: red;font-size: 12px;">{{ $message }}</div>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                            <div class="col-span-12 lg:col-span-6">
+                                                                <div class="mb-3">
+                                                                    <label for="confirm-password-input" class="text-sm text-gray-900 dark:text-gray-50">Xác nhận lại mật khẩu</label>
+                                                                    <input type="password" class="w-full mt-1 text-gray-500 border rounded border-gray-100/50 text-13 dark:bg-transparent dark:border-neutral-600" placeholder="Xác nhận lại mật khẩu" id="confirm-password-input" name="new_password_confirmation">
+                                                                    @error('new_password_confirmation')
+                                                                    <div class="alert alert-danger mt-1 mb-1" style="color: red;font-size: 12px;">{{ $message }}</div>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                            <div class="col-span-12">
+                                                                <div class="form-check">
+                                                                    <input class="align-middle rounded cursor-pointer focus:ring-0 focus:ring-offset-0 bg-gray-50 border-gray-100/50 checked:bg-violet-500 checked:border-transparent dark:bg-transparent dark:border-neutral-600 dark:checked:bg-violet-500 dark:checked:border-transparent" type="checkbox" value="" id="verification">
+                                                                    <label class="ml-2 align-middle dark:text-gray-300" for="verification">
+                                                                      kích hoạt xác minh qua số điện thoại
+                                                                    </label>
+                                                                    <button class="mt-8 text-right" style="float: right"><p class="text-white btn group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 border-transparent focus:ring group-data-[theme-color=violet]:focus:ring-violet-500/20 group-data-[theme-color=sky]:focus:ring-sky-500/20 group-data-[theme-color=red]:focus:ring-red-500/20 group-data-[theme-color=green]:focus:ring-green-500/20 group-data-[theme-color=pink]:focus:ring-pink-500/20 group-data-[theme-color=blue]:focus:ring-blue-500/20">Xác nhận đổi</p></button>
+                                                                    {{-- <style>.{float: left; display: flex;align-items: center;align-content: center}</style> --}}
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                        </div>
+                                                        <!--end row-->
+                                                    </div>
+
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                             </div>

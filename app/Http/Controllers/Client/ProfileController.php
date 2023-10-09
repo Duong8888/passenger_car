@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-class ProfileUserController extends Controller
+class ProfileController extends Controller
 {
       /**
      * Display the user's profile form.
