@@ -43,20 +43,19 @@ $(document).ready(function () {
         <span class="sr-only">Loading...</span>
     </div>
     `;
-
+    let loading = $('.loading');
+    let btn = $('.btn-find');
+    loading.hide();
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
 
-    departure.on('change', function (e) {
-        departure.val(e.target.value);
-        search();
-    });
-
-    arrival.on('change', function (e) {
-        arrival.val(e.target.value);
+    btn.on('click', function () {
+        loading.show();
+        arrival.val();
+        departure.val();
         search();
     });
     console.log(arrival.val());
@@ -71,6 +70,7 @@ $(document).ready(function () {
                 arrival: arrival.val()
             },
             success: function (response) {
+                loading.hide();
                 console.log(response.dataRoute);
                 dataList.html('');
                 if(response.data.length === 0){
@@ -80,6 +80,7 @@ $(document).ready(function () {
                     </div>
                     `);
                 }else {
+                    loading.hide();
                     $.each(response.data, function (index, item) {
                         dataList.append(`
                                     <div class="relative overflow-hidden transition-all duration-500 ease-in-out bg-white border rounded-md border-gray-100/50 group/jobs group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:-translate-y-2 dark:bg-neutral-900 dark:border-neutral-600">
@@ -132,6 +133,13 @@ $(document).ready(function () {
                 }
             },
             error: function (error) {
+                loading.hide();
+                dataList.html('');
+                dataList.append(`
+                    <div class="text-center">
+                       Tuyến đường chưa có xe hoạt động .
+                    </div>
+                    `);
                 console.log(error);
             }
         })
