@@ -14,8 +14,7 @@ class ProfileController extends Controller
      * Display the user's profile form.
      */
     public function index(){
-        $user = User::find(4);  // Lấy thông tin từ bảng Album
-        //  return response()->json($user, 200, [], JSON_PRETTY_PRINT);
+       $user = auth()->user();
         return view('client.pages.profile.profile',compact('user'));
     }
     /**
@@ -55,7 +54,7 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
+        $user = auth()->user();
         if ($request->input('action') === 'updateInfo') {
             $this->updateInfo($request, $user);
             return redirect()->route('profile.index')->with('successInfo', 'Thông tin đã được cập nhật thành công.');
@@ -70,26 +69,26 @@ class ProfileController extends Controller
         $request->validate([
             'name' => 'required|max:15',
             'email' => 'required|email|unique:users,email,'.$user->id,
-            'phone' => 'required|numeric|digits:10|unique:users,phone,'.$user->id,
+            // 'phone' => 'required|numeric|digits:10|unique:users,phone,'.$user->id,
         ], [
             'name.required' => 'Tên là trường bắt buộc.',
             'name.max' => 'Tên không được vượt quá 15 ký tự.',
             'email.required' => 'Email là trường bắt buộc.',
             'email.email' => 'Email phải là địa chỉ email hợp lệ.',
             'email.unique' => 'Email đã được sử dụng bởi người dùng khác.',
-            'phone.required' => 'Số điện thoại là trường bắt buộc.',
-            'phone.numeric' => 'Số điện thoại chỉ được chứa số.',
-            'phone.digits' => 'Số điện thoại phải có 10 chữ số.',
-            'phone.unique' => 'Số điện thoại đã được sử dụng bởi người dùng khác.',
+            // 'phone.required' => 'Số điện thoại là trường bắt buộc.',
+            // 'phone.numeric' => 'Số điện thoại chỉ được chứa số.',
+            // 'phone.digits' => 'Số điện thoại phải có 10 chữ số.',
+            // 'phone.unique' => 'Số điện thoại đã được sử dụng bởi người dùng khác.',
         ]);
-        $name = $request->input('name');
+            $name = $request->input('name');
             $email = $request->input('email');
-            $phone = $request->input('phone');
+            // $phone = $request->input('phone');
 
             $user->fill([
                 'name' => $name,
                 'email' => $email,
-                'phone' => $phone,
+                // 'phone' => $phone,
             ])->save();
     }
 
