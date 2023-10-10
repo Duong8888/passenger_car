@@ -5,12 +5,14 @@ use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Client\BlogController;
+use App\Http\Controllers\Client\CategoryController;
 use App\Http\Controllers\Client\ProfileController;
+use App\Http\Controllers\PhoneAuthController;
 
 //Nam
-Route::get('/home',[HomeController::class,'index']);
-Route::post('/passengerCar-detail',[HomeController::class,'passengerCarDetail']);
-Route::resource('/profile',ProfileController::class);
+Route::get('/home', [HomeController::class, 'index']);
+Route::post('/passengerCar-detail', [HomeController::class, 'passengerCarDetail']);
+Route::resource('/profile', ProfileController::class);
 
 
 
@@ -43,6 +45,6 @@ Route::group(['prefix' => 'notifications', 'as' => 'notifications.'], function (
 });
 
 
-Route::get('/blog/{id}',[BlogController::class,'blog'])->name('blog');
+Route::get('/blog/{id}', [BlogController::class, 'blog'])->name('blog');
 Route::get('/blogs', [BlogController::class, 'show'])->name('blog.show');
-
+Route::get('/categories/{id}', [CategoryController::class, 'detail'])->name('category-detail');
