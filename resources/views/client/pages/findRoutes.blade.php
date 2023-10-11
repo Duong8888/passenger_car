@@ -9,74 +9,33 @@
                     <div class="grid grid-cols-12 xl:gap-10 gap-y-12">
 
                         <!-- left -->
-                        <div class="col-span-12 space-y-5 lg:col-span-3">
+                        <form id="uploadForm" class="form-main col-span-12 space-y-5 lg:col-span-3">
                             <div data-tw-accordion="collapse">
                                 <div class="text-gray-700 accordion-item">
                                     <h6>
                                         <button type="button"
                                                 class="flex items-center justify-between w-full px-4 py-2 font-medium text-left accordion-header group-data-[theme-color=violet]:bg-violet-500/20 group-data-[theme-color=sky]:bg-sky-500/20 group-data-[theme-color=red]:bg-red-500/20 group group-data-[theme-color=green]:bg-green-500/20 group-data-[theme-color=pink]:bg-pink-500/20 group-data-[theme-color=blue]:bg-blue-500/20 active">
-                                            <span class="text-gray-900 dark:text-gray-50">Location</span>
-                                            <i class="mdi mdi-chevron-down text-xl group-[.active]:rotate-180 text-gray-900 dark:text-gray-50"></i>
+                                            <span class="text-gray-900 dark:text-gray-50">Sắp xếp</span>
                                         </button>
                                     </h6>
 
-                                    <div class="block accordion-body">
-                                        <div class="pt-5">
-                                            <div class="mb-3">
-
-                                            </div>
-                                            {{--                                            <div class="area-range">--}}
-                                            {{--                                                <div class="mb-3 form-label dark:text-gray-300">Gía vé: <span class="mt-2 example-val" id="slider1-span">1.00</span> miles</div>--}}
-                                            {{--                                                <div id="slider1" class="noUi-target noUi-ltr noUi-horizontal noUi-txt-dir-ltr">--}}
-                                            {{--                                                </div>--}}
-                                            {{--                                            </div>--}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div data-tw-accordion="collapse">
-                                <div class="text-gray-700 accordion-item dark:text-gray-300">
-                                    <h6>
-                                        <button type="button"
-                                                class="flex items-center justify-between w-full px-4 py-2 font-medium text-left accordion-header group-data-[theme-color=violet]:bg-violet-500/20 group-data-[theme-color=sky]:bg-sky-500/20 group-data-[theme-color=red]:bg-red-500/20 group group-data-[theme-color=green]:bg-green-500/20 group-data-[theme-color=pink]:bg-pink-500/20 group-data-[theme-color=blue]:bg-blue-500/20 group active">
-                                            <span
-                                                class="text-gray-900 text-15 dark:text-gray-50"> Work experience</span>
-                                            <i class="mdi mdi-chevron-down text-xl group-[.active]:rotate-180 text-gray-900 dark:text-gray-50"></i>
-                                        </button>
-                                    </h6>
                                     <div class="block accordion-body">
                                         <div class="p-5">
                                             <div class="mt-2">
                                                 <input
-                                                    class="rounded cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-neutral-600 dark:checked:bg-violet-500/20"
-                                                    type="checkbox" value="" id="flexCheckChecked1">
-                                                <label
-                                                    class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">No
-                                                    experience</label>
+                                                    class="sortBy cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-neutral-600 dark:checked:bg-violet-500/20"
+                                                    type="radio" name="type" value="desc" id="desc">
+                                                <label for="desc"
+                                                       class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">Giá
+                                                    giảm dần</label>
                                             </div>
                                             <div class="mt-2">
                                                 <input
-                                                    class="rounded cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-neutral-600 dark:checked:bg-violet-500/20"
-                                                    checked type="checkbox" value="" id="flexCheckChecked1">
-                                                <label
-                                                    class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">0-3
-                                                    years</label>
-                                            </div>
-                                            <div class="mt-2">
-                                                <input
-                                                    class="rounded cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-neutral-600 dark:checked:bg-violet-500/20"
-                                                    type="checkbox" value="" id="flexCheckChecked1">
-                                                <label
-                                                    class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">3-6
-                                                    years</label>
-                                            </div>
-                                            <div class="mt-2">
-                                                <input
-                                                    class="rounded cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-neutral-600 dark:checked:bg-violet-500/20"
-                                                    type="checkbox" value="" id="flexCheckChecked1">
-                                                <label
-                                                    class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">More
-                                                    than 6 years</label>
+                                                    class="sortBy cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-neutral-600 dark:checked:bg-violet-500/20"
+                                                    type="radio" name="type" value="asc" id="asc">
+                                                <label for="asc"
+                                                       class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">Giá
+                                                    tăng dần</label>
                                             </div>
                                         </div>
                                     </div>
@@ -88,43 +47,46 @@
                                         <button type="button"
                                                 class="flex items-center justify-between w-full px-4 py-2 font-medium text-left accordion-header group-data-[theme-color=violet]:bg-violet-500/20 group-data-[theme-color=sky]:bg-sky-500/20 group-data-[theme-color=red]:bg-red-500/20 group group-data-[theme-color=green]:bg-green-500/20 group-data-[theme-color=pink]:bg-pink-500/20 group-data-[theme-color=blue]:bg-blue-500/20 group active">
                                             <span
-                                                class="text-gray-900 text-15 dark:text-gray-50">Type of employment</span>
-                                            <i class="mdi mdi-chevron-down text-xl group-[.active]:rotate-180 text-gray-900 dark:text-gray-50"></i>
+                                                class="text-gray-900 text-15 dark:text-gray-50">Giờ đi</span>
                                         </button>
                                     </h6>
                                     <div class="block accordion-body">
                                         <div class="p-5">
                                             <div class="mt-2">
                                                 <input
-                                                    class="cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-neutral-600 dark:checked:bg-violet-500/20"
-                                                    type="radio" checked value="" id="flexCheckChecked1">
-                                                <label
-                                                    class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">No
-                                                    experience</label>
+                                                    class="find-time rounded cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-neutral-600 dark:checked:bg-violet-500/20"
+                                                    type="checkbox" name="early-morning" data-type="early-morning" value=""
+                                                    id="flexCheckChecked1">
+                                                <label for="flexCheckChecked1"
+                                                       class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">Sáng
+                                                    sớm (00:00 - 06:00)</label>
                                             </div>
                                             <div class="mt-2">
                                                 <input
-                                                    class="cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-neutral-600 dark:checked:bg-violet-500/20"
-                                                    type="radio" value="" id="flexCheckChecked1">
-                                                <label
-                                                    class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">0-3
-                                                    years</label>
+                                                    class="find-time rounded cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-neutral-600 dark:checked:bg-violet-500/20"
+                                                    type="checkbox" name="morning" data-type="morning" value=""
+                                                    id="flexCheckChecked2">
+                                                <label for="flexCheckChecked2"
+                                                       class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">Sáng
+                                                    (06:01 - 12:00)</label>
                                             </div>
                                             <div class="mt-2">
                                                 <input
-                                                    class="cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-neutral-600 dark:checked:bg-violet-500/20"
-                                                    type="radio" value="" id="flexCheckChecked1">
-                                                <label
-                                                    class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">3-6
-                                                    years</label>
+                                                    class="find-time rounded cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-neutral-600 dark:checked:bg-violet-500/20"
+                                                    type="checkbox" name="afternoon" data-type="afternoon" value=""
+                                                    id="flexCheckChecked3">
+                                                <label for="flexCheckChecked3"
+                                                       class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">Chiều
+                                                    (12:01 - 18:00)</label>
                                             </div>
                                             <div class="mt-2">
                                                 <input
-                                                    class="cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-neutral-600 dark:checked:bg-violet-500/20"
-                                                    type="radio" value="" id="flexCheckChecked1">
-                                                <label
-                                                    class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">More
-                                                    than 6 years</label>
+                                                    class="find-time rounded cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-neutral-600 dark:checked:bg-violet-500/20"
+                                                    type="checkbox" name="evening" data-type="evening" value=""
+                                                    id="flexCheckChecked4">
+                                                <label for="flexCheckChecked4"
+                                                       class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">Tối
+                                                    (18:01 - 23:59)</label>
                                             </div>
                                         </div>
                                     </div>
@@ -135,8 +97,39 @@
                                     <h6>
                                         <button type="button"
                                                 class="flex items-center justify-between w-full px-4 py-2 font-medium text-left accordion-header group-data-[theme-color=violet]:bg-violet-500/20 group-data-[theme-color=sky]:bg-sky-500/20 group-data-[theme-color=red]:bg-red-500/20 group group-data-[theme-color=green]:bg-green-500/20 group-data-[theme-color=pink]:bg-pink-500/20 group-data-[theme-color=blue]:bg-blue-500/20 group active">
-                                            <span class="text-gray-900 text-15 dark:text-gray-50">Date Posted</span>
-                                            <i class="mdi mdi-chevron-down text-xl group-[.active]:rotate-180 text-gray-900 dark:text-gray-50"></i>
+                                            <span
+                                                class="text-gray-900 text-15 dark:text-gray-50">Giá</span>
+                                        </button>
+                                    </h6>
+                                    <div class="block accordion-body">
+                                        <div class="middle">
+                                            <div class="multi-range-slider">
+                                                <input type="range" id="input-left" class="range2" min="0"
+                                                       max="2000000" value="0">
+                                                <input type="range" id="input-right" class="range2" min="0"
+                                                       max="2000000" value="2000000">
+
+                                                <div class="slider">
+                                                    <div class="track"></div>
+                                                    <div class="range"></div>
+                                                    <div class="thumb left"></div>
+                                                    <div class="thumb right"></div>
+                                                </div>
+                                            </div>
+                                            <div id="multi_range">
+                                                <div id="range2LeftValue">0 đ</div>
+                                                <div id="range2RightValue">2,000,000 đ</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-tw-accordion="collapse">
+                                <div class="text-gray-700 accordion-item dark:text-gray-300">
+                                    <h6>
+                                        <button type="button"
+                                                class="flex items-center justify-between w-full px-4 py-2 font-medium text-left accordion-header group-data-[theme-color=violet]:bg-violet-500/20 group-data-[theme-color=sky]:bg-sky-500/20 group-data-[theme-color=red]:bg-red-500/20 group group-data-[theme-color=green]:bg-green-500/20 group-data-[theme-color=pink]:bg-pink-500/20 group-data-[theme-color=blue]:bg-blue-500/20 group active">
+                                            <span class="text-gray-900 text-15 dark:text-gray-50">Nhà xe</span>
                                         </button>
                                     </h6>
                                     <div class="block accordion-body">
@@ -215,7 +208,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                         <!-- end left -->
 
                         <!-- right -->
@@ -224,7 +217,6 @@
                                 <form action="#">
 
                                     <div class="grid grid-cols-12 gap-3">
-
 
                                         {{--                                        <div class="col-span-12 xl:col-span-4">--}}
                                         {{--                                            <div class="relative filler-job-form">--}}
@@ -281,16 +273,20 @@
                                         </div>
                                         <!--end col-->
                                         <div class="col-span-12 xl:col-span-4">
-                                            <a href="javascript:void(0)"
-                                               class="btn-find w-full text-white border-transparent flex justify-center items-center btn group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 focus:ring focus:ring-custom-500/30">
-                                                <svg class="mr-2 loading" xmlns="http://www.w3.org/2000/svg" width="17"
-                                                     height="17" viewBox="0 0 24 24"
-                                                     style="fill: rgba(255, 255, 255, 1);transform-origin: center;animation: spin 2s linear infinite;">
-                                                    <path
-                                                        d="M12 22c5.421 0 10-4.579 10-10h-2c0 4.337-3.663 8-8 8s-8-3.663-8-8c0-4.336 3.663-8 8-8V2C6.579 2 2 6.58 2 12c0 5.421 4.579 10 10 10z"></path>
-                                                </svg>
-                                                <span>Fliter</span></a>
+                                            <div class="relative">
+                                                <a href="javascript:void(0)"
+                                                   class="btn-find w-full text-white border-transparent flex justify-center items-center btn group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500">
+                                                    <svg class="mr-2 loading" xmlns="http://www.w3.org/2000/svg"
+                                                         width="17" height="17" viewBox="0 0 24 24"
+                                                         style="fill: rgba(255, 255, 255, 1);transform-origin: center;animation: spin 2s linear infinite;">
+                                                        <path
+                                                            d="M12 22c5.421 0 10-4.579 10-10h-2c0 4.337-3.663 8-8 8s-8-3.663-8-8c0-4.336 3.663-8 8-8V2C6.579 2 2 6.58 2 12c0 5.421 4.579 10 10 10z"></path>
+                                                    </svg>
+                                                    <span>Tìm kiếm</span>
+                                                </a>
+                                            </div>
                                         </div>
+
 
                                     </div>
                                     <!--end grid-->
@@ -300,69 +296,79 @@
 
                             <div class="space-y-8 mt-14 list-route">
                                 @if(!empty($routes) || count($data) != 0)
-                                @foreach($data as $key => $value)
-                                        <div
-                                            class="relative overflow-hidden transition-all duration-500 ease-in-out bg-white border rounded-md border-gray-100/50 group/jobs group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:-translate-y-2 dark:bg-neutral-900 dark:border-neutral-600">
-                                            <div class="p-6">
-                                                <div class="grid grid-cols-12 gap-5">
-                                                    <div class="col-span-12 lg:col-span-1">
-                                                        <div class="px-2 mb-4 text-center mb-md-0">
-                                                            <a href="company-details.html"><img
-                                                                    src="assets/images/featured-job/img-01.png" alt=""
-                                                                    class="mx-auto img-fluid rounded-3"></a>
+                                    @foreach($data as $key => $value)
+                                        {{--                                        {{ substr($time, 0, 5) }}--}}
+                                        @foreach( $value->workingTime as $keyWorking => $valueWorking)
+                                            <div
+                                                class="relative overflow-hidden transition-all duration-500 ease-in-out bg-white border rounded-md border-gray-100/50 group/jobs group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:-translate-y-2 dark:bg-neutral-900 dark:border-neutral-600">
+                                                <div class="p-6">
+                                                    <div class="grid grid-cols-12 gap-5">
+                                                        <div class="col-span-12 lg:col-span-1">
+                                                            <div class="px-2 mb-4 text-center mb-md-0">
+                                                                <a href="company-details.html"><img
+                                                                        src="assets/images/featured-job/img-01.png"
+                                                                        alt=""
+                                                                        class="mx-auto img-fluid rounded-3"></a>
+                                                            </div>
+                                                        </div>
+                                                        <!--end col-->
+                                                        <div class="col-span-10">
+                                                            <h5 class="mb-1 fs-17"><a href="job-details.html"
+                                                                                      class="dark:text-gray-50">Dương
+                                                                    Đẹp
+                                                                    Trai 102</a>
+                                                                <small
+                                                                    class="font-normal text-gray-500 dark:text-gray-300"></small>
+                                                            </h5>
+                                                            <ul class="mb-0 lg:gap-3 gap-y-3">
+                                                                <li>
+                                                                    <p class="mb-0 mt-4 text-sm text-gray-500 dark:text-gray-300"> {{$value->route->departure}}
+                                                                        ({{ substr($valueWorking->departure_time, 0, 5) }}
+                                                                        )
+                                                                        - {{$value->route->arrival}}
+                                                                        ({{ substr($valueWorking->arrival_time, 0, 5) }}
+                                                                        )</p>
+                                                                </li>
+                                                                <li>
+                                                                    <p class="mb-0 text-sm text-gray-500 dark:text-gray-300">
+                                                                        Gế ngồi {{$value->capacity}}</p>
+                                                                </li>
+                                                            </ul>
+                                                            <div class="mt-4">
+                                                                <div class="flex flex-wrap gap-1.5">
+                                                                    @foreach( $value->services as $valueService)
+                                                                        <span
+                                                                            class="bg-sky-500/20 text-sky-500 text-11 px-2 py-0.5 font-medium rounded">{{$valueService->service_name}}</span>
+                                                                    @endforeach
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <!--end col-->
-                                                    <div class="col-span-10">
-                                                        <h5 class="mb-1 fs-17"><a href="job-details.html"
-                                                                                  class="dark:text-gray-50">Dương Đẹp
-                                                                Trai 102</a>
-                                                            <small
-                                                                class="font-normal text-gray-500 dark:text-gray-300"></small>
-                                                        </h5>
-                                                        <ul class="mb-0 lg:gap-3 gap-y-3">
-                                                            <li>
-                                                                <p class="mb-0 mt-4 text-sm text-gray-500 dark:text-gray-300"> {{$value->route->departure}}
-                                                                    - {{$value->route->arrival}}</p>
-                                                            </li>
-                                                            <li>
-                                                                <p class="mb-0 text-sm text-gray-500 dark:text-gray-300">
-                                                                    Gế ngồi {{$value->capacity}}</p>
-                                                            </li>
-                                                        </ul>
-                                                        {{--                                                    <div class="mt-4">--}}
-                                                        {{--                                                        <div class="flex flex-wrap gap-1.5">--}}
-                                                        {{--                                                            <span class="bg-green-500/20 text-green-500 text-11 px-2 py-0.5 font-medium rounded">Full Time</span>--}}
-                                                        {{--                                                            <span class="bg-yellow-500/20 text-yellow-500 text-11 px-2 py-0.5 font-medium rounded">Urgent</span>--}}
-                                                        {{--                                                            <span class="bg-sky-500/20 text-sky-500 text-11 px-2 py-0.5 font-medium rounded">Private</span>--}}
-                                                        {{--                                                        </div>--}}
-                                                        {{--                                                    </div>--}}
-                                                    </div>
+                                                    <!--end row-->
                                                 </div>
-                                                <!--end row-->
-                                            </div>
-                                            <div class="px-4 py-3 bg-gray-50 dark:bg-neutral-700">
-                                                <div class="grid grid-cols-12">
-                                                    <div class="col-span-12 lg:col-span-6">
-                                                        <ul class="flex flex-wrap gap-2 text-gray-700 dark:text-gray-50">
-                                                            <li><i class="uil uil-tag"></i> Giá Vé :</li>
-                                                            <li>{{number_format($value->route->price)}}đ</li>
-                                                        </ul>
-                                                    </div>
-                                                    <!--end col-->
-                                                    <div class="col-span-12 mt-2 lg:col-span-6 lg:mt-0">
-                                                        <div
-                                                            class="ltr:lg:text-right rtl:lg:text-left dark:text-gray-50">
-                                                            <a href="#applyNow" data-bs-toggle="modal">Chi tiết <i
-                                                                    class="mdi mdi-chevron-double-right"></i></a>
+                                                <div class="px-4 py-3 bg-gray-50 dark:bg-neutral-700">
+                                                    <div class="grid grid-cols-12">
+                                                        <div class="col-span-12 lg:col-span-6">
+                                                            <ul class="flex flex-wrap gap-2 text-gray-700 dark:text-gray-50">
+                                                                <li><i class="uil uil-tag"></i> Giá Vé :</li>
+                                                                <li>{{number_format($value->price)}}đ</li>
+                                                            </ul>
                                                         </div>
+                                                        <!--end col-->
+                                                        <div class="col-span-12 mt-2 lg:col-span-6 lg:mt-0">
+                                                            <div
+                                                                class="ltr:lg:text-right rtl:lg:text-left dark:text-gray-50">
+                                                                <a href="#applyNow" data-bs-toggle="modal">Chi tiết <i
+                                                                        class="mdi mdi-chevron-double-right"></i></a>
+                                                            </div>
+                                                        </div>
+                                                        <!--end col-->
                                                     </div>
-                                                    <!--end col-->
+                                                    <!--end row-->
                                                 </div>
-                                                <!--end row-->
-                                            </div>
 
-                                        </div>
+                                            </div>
+                                        @endforeach
                                     @endforeach
                                 @endif
                                 <div class="space-y-8 mt-14 list-route">
@@ -372,36 +378,6 @@
                                 </div>
 
                             </div>
-                            {{--                            <div class="grid grid-cols-12">--}}
-                            {{--                                <div class="col-span-12">--}}
-                            {{--                                    <ul class="flex justify-center gap-2 mt-8">--}}
-                            {{--                                        <li class="w-12 h-12 text-center border rounded-full cursor-default border-gray-100/50 dark:border-gray-100/20">--}}
-                            {{--                                            <a class="cursor-auto" href="javascript:void(0)" tabindex="-1">--}}
-                            {{--                                                <i class="mdi mdi-chevron-double-left text-16 leading-[2.8] dark:text-white"></i>--}}
-                            {{--                                            </a>--}}
-                            {{--                                        </li>--}}
-                            {{--                                        <li class="w-12 h-12 text-center text-white border border-transparent rounded-full cursor-pointer group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500">--}}
-                            {{--                                            <a class="text-16 leading-[2.8]" href="javascript:void(0)">1</a>--}}
-                            {{--                                        </li>--}}
-                            {{--                                        <li class="w-12 h-12 text-center text-gray-900 transition-all duration-300 border rounded-full cursor-pointer border-gray-100/50 hover:bg-gray-100/30 focus:bg-gray-100/30 dark:border-gray-100/20 dark:text-gray-50 dark:hover:bg-gray-500/20">--}}
-                            {{--                                            <a class="text-16 leading-[2.8]" href="javascript:void(0)">2</a>--}}
-                            {{--                                        </li>--}}
-                            {{--                                        <li class="w-12 h-12 text-center text-gray-900 transition-all duration-300 border rounded-full cursor-pointer border-gray-100/50 hover:bg-gray-100/30 focus:bg-gray-100/30 dark:border-gray-100/20 dark:text-gray-50 dark:hover:bg-gray-500/20">--}}
-                            {{--                                            <a class="text-16 leading-[2.8]" href="javascript:void(0)">3</a>--}}
-                            {{--                                        </li>--}}
-                            {{--                                        <li class="w-12 h-12 text-center text-gray-900 transition-all duration-300 border rounded-full cursor-pointer border-gray-100/50 hover:bg-gray-100/30 focus:bg-gray-100/30 dark:border-gray-100/20 dark:text-gray-50 dark:hover:bg-gray-500/20">--}}
-                            {{--                                            <a class="text-16 leading-[2.8]" href="javascript:void(0)">4</a>--}}
-                            {{--                                        </li>--}}
-                            {{--                                        <li class="w-12 h-12 text-center text-gray-900 transition-all duration-300 border rounded-full cursor-pointer border-gray-100/50 hover:bg-gray-100/30 focus:bg-gray-100/30 dark:border-gray-100/20 dark:text-gray-50 dark:hover:bg-gray-500/20">--}}
-                            {{--                                            <a href="javascript:void(0)" tabindex="-1">--}}
-                            {{--                                                <i class="mdi mdi-chevron-double-right text-16 leading-[2.8]"></i>--}}
-                            {{--                                            </a>--}}
-                            {{--                                        </li>--}}
-                            {{--                                    </ul>--}}
-                            {{--                                </div>--}}
-                            {{--                                <!--end col-->--}}
-                            {{--                            </div>--}}
-
                         </div>
                         <!-- end right -->
                     </div>
@@ -418,6 +394,7 @@
     <link rel="stylesheet" href="{{asset('client/libs/choices.js/public/assets/styles/choices.min.css')}}">
     <!-- Nouislider Css -->
     <link rel="stylesheet" href="{{asset('client/libs/nouislider/nouislider.min.css')}}">
+    <link rel="stylesheet" href="{{asset('client/css/custom/finder.css')}}">
 @endsection
 @section('page-script')
 

@@ -14,10 +14,23 @@ class PassengerCar extends Model
     protected $fillable = [
         'license_plate',
         'capacity',
+        'price',
         'description',
         'user_id',
         'route_id',
     ];
+
+    public function toSearchableArray()
+    {
+        return [
+            'license_plate' => $this->license_plate,
+            'capacity'=> $this->capacity,
+            'price'=> $this->price,
+            'description'=> $this->description,
+            'user_id'=> $this->user_id,
+            'route_id'=> $this->route_id,
+        ];
+    }
 
     public function albums(){
         return $this->hasMany(Album::class);

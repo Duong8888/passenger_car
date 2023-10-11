@@ -1,4 +1,10 @@
 $(document).ready(function () {
+    const $inputLeft = $("#input-left");
+    const $inputRight = $("#input-right");
+    const $thumbLeft = $(".slider > .thumb.left");
+    const $thumbRight = $(".slider > .thumb.right");
+    const $range = $(".slider > .range");
+
     const departure = $('select[name="departure"]');
     const arrival = $('select[name="arrival"]');
     const baseUrl = 'search';
@@ -40,6 +46,21 @@ $(document).ready(function () {
             </div>
             <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
         </div>
+        <div class="flex items-center justify-between pt-4">
+            <div>
+                <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            </div>
+            <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+        </div>
+        <div class="flex items-center justify-between pt-4">
+            <div>
+                <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            </div>
+            <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+        </div>
+
         <span class="sr-only">Loading...</span>
     </div>
     `;
@@ -59,7 +80,8 @@ $(document).ready(function () {
         search();
     });
     console.log(arrival.val());
-    function search(){
+
+    function search() {
         dataList.html('');
         dataList.append(skeleton);
         $.ajax({
@@ -73,16 +95,47 @@ $(document).ready(function () {
                 loading.hide();
                 console.log(response.dataRoute);
                 dataList.html('');
-                if(response.data.length === 0){
+                if (response.data.length === 0) {
                     dataList.append(`
                     <div class="text-center">
                        Tuyến đường chưa có xe hoạt động .
                     </div>
                     `);
-                }else {
-                    loading.hide();
-                    $.each(response.data, function (index, item) {
-                        dataList.append(`
+                } else {
+                    loadItem(response.data, response.dataRoute);
+                }
+            },
+            error: function (error) {
+                loadFail(error,'Tuyến đường chưa có xe hoạt động .');
+            }
+        })
+
+    }
+
+    function loadFail(error,message) {
+        loading.hide();
+        dataList.html('');
+        dataList.append(`
+                    <div class="text-center">
+                       ${message}
+                    </div>
+                    `);
+        console.log(error)
+    }
+
+    function loadItem(data, dataRoute) {
+        dataList.html('');
+        loading.hide();
+        console.log(data);
+        console.log(data);
+        var service = '';
+        $.each(data, function (index, item) {
+            $.each(item.working_time, function (indexWorking, itemWorking) {
+                service = '';
+                $.each(item.services, function (indexServices, itemServices) {
+                    service += `<span class="bg-sky-500/20 text-sky-500 text-11 px-2 py-0.5 font-medium rounded">${itemServices.service_name}</span>`;
+                })
+                dataList.append(`
                                     <div class="relative overflow-hidden transition-all duration-500 ease-in-out bg-white border rounded-md border-gray-100/50 group/jobs group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:-translate-y-2 dark:bg-neutral-900 dark:border-neutral-600">
                                         <div class="p-6">
                                             <div class="grid grid-cols-12 gap-5">
@@ -98,12 +151,17 @@ $(document).ready(function () {
                                                     </h5>
                                                     <ul class="mb-0 lg:gap-3 gap-y-3">
                                                         <li>
-                                                            <p class="mb-0 mt-4 text-sm text-gray-500 dark:text-gray-300">${response.dataRoute.departure} - ${response.dataRoute.arrival}</p>
+                                                            <p class="mb-0 mt-4 text-sm text-gray-500 dark:text-gray-300">${dataRoute.departure} (${(itemWorking.departure_time).slice(0, -3)}) - ${dataRoute.arrival} (${(itemWorking.arrival_time).slice(0, -3)})</p>
                                                         </li>
                                                         <li>
                                                             <p class="mb-0 text-sm text-gray-500 dark:text-gray-300">Gế ngồi ${item.capacity}</p>
                                                         </li>
                                                     </ul>
+                                                     <div class="mt-4">
+                                                            <div class="service flex flex-wrap gap-1.5">
+                                                                ${service}
+                                                            </div>
+                                                     </div>
                                                 </div>
                                             </div>
                                             <!--end row-->
@@ -113,7 +171,7 @@ $(document).ready(function () {
                                                 <div class="col-span-12 lg:col-span-6">
                                                     <ul class="flex flex-wrap gap-2 text-gray-700 dark:text-gray-50">
                                                         <li><i class="uil uil-tag"></i> Giá Vé :</li>
-                                                        <li>${response.dataRoute.price.toLocaleString('en-US')}đ</li>
+                                                        <li>${item.price.toLocaleString('en-US')}đ</li>
                                                     </ul>
                                                 </div>
                                                 <!--end col-->
@@ -129,20 +187,104 @@ $(document).ready(function () {
 
                                     </div>
                     `);
-                    });
-                }
+            });
+        });
+    }
+
+    function setLeftValue() {
+        const min = parseInt($inputLeft.attr("min"));
+        const max = parseInt($inputLeft.attr("max"));
+
+        const value = Math.min(parseInt($inputLeft.val()), parseInt($inputRight.val()) - 1);
+
+        const percent = ((value - min) / (max - min)) * 100;
+        $thumbLeft.css("left", percent + "%");
+        $range.css("left", percent + "%");
+
+        rangeLeftSlider(value);
+    }
+
+    function setRightValue() {
+        const min = parseInt($inputRight.attr("min"));
+        const max = parseInt($inputRight.attr("max"));
+
+        const value = Math.max(parseInt($inputRight.val()), parseInt($inputLeft.val()) + 1);
+
+        const percent = ((value - min) / (max - min)) * 100;
+        $thumbRight.css("right", 100 - percent + "%");
+        $range.css("right", 100 - percent + "%");
+
+        rangeRightSlider(value);
+    }
+
+    function rangeLeftSlider(value) {
+        $("#range2LeftValue").html(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " đ");
+    }
+
+    function rangeRightSlider(value) {
+        $("#range2RightValue").html(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " đ");
+    }
+
+    // loch theo khoảng giá tiền
+    $inputLeft.on("input", setLeftValue);
+    $inputRight.on("input", setRightValue);
+    $inputLeft.add($inputRight).on("mouseup", function () {
+        $.ajax({
+            url: baseUrl,
+            method: "POST",
+            data: {},
+            success: function (response) {
+                console.log(response)
             },
             error: function (error) {
-                loading.hide();
-                dataList.html('');
-                dataList.append(`
-                    <div class="text-center">
-                       Tuyến đường chưa có xe hoạt động .
-                    </div>
-                    `);
-                console.log(error);
+                console.log(error)
             }
-        })
+        });
+    });
 
+    // ajax request
+    function ajaxRequest(url,data){
+        dataList.html('');
+        dataList.append(skeleton);
+        $.ajax({
+            url: url,
+            method: "POST",
+            processData: false, // Set false để ngăn jQuery xử lý dữ liệu FormData
+            contentType: false, // Set false để không thiết lập Header 'Content-Type'
+            data: data,
+            success: function (response) {
+                loadItem(response.data, response.dataRoute);
+            },
+            error: function (error) {
+                loadFail(error,'Không có kết quả phù phợp .');
+            }
+        });
     }
+
+    //sắp xếp theo thứ tự tăng dần
+    $(document).on('change', '.sortBy', function (e) {
+        var formData = new FormData($('#uploadForm')[0]);
+        formData.append('departure',$('select[name="departure"]').val());
+        formData.append('arrival',$('select[name="arrival"]').val());
+        ajaxRequest(
+            'sortBy',
+            formData
+        );
+    });
+
+    // lọc theo giờ
+    $(document).on('change', '.find-time', function () {
+        var formData = new FormData($('#uploadForm')[0]);
+        formData.append('departure',$('select[name="departure"]').val());
+        formData.append('arrival',$('select[name="arrival"]').val());
+        if ($(this).is(':checked')) {
+            var dataType = $(this).data('type');
+            ajaxRequest('sortBy',formData);
+        } else {
+            ajaxRequest('sortBy',formData);
+            console.log($(this));
+        }
+    });
+
+
 });
