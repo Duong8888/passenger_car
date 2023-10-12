@@ -106,13 +106,13 @@ $(document).ready(function () {
                 }
             },
             error: function (error) {
-                loadFail(error,'Tuyến đường chưa có xe hoạt động .');
+                loadFail(error, 'Tuyến đường chưa có xe hoạt động .');
             }
         })
 
     }
 
-    function loadFail(error,message) {
+    function loadFail(error, message) {
         loading.hide();
         dataList.html('');
         dataList.append(`
@@ -126,8 +126,6 @@ $(document).ready(function () {
     function loadItem(data, dataRoute) {
         dataList.html('');
         loading.hide();
-        console.log(data);
-        console.log(data);
         var service = '';
         $.each(data, function (index, item) {
             $.each(item.working_time, function (indexWorking, itemWorking) {
@@ -191,6 +189,74 @@ $(document).ready(function () {
         });
     }
 
+    function loadItem2(response) {
+        dataList.html('');
+        loading.hide();
+        var serviceHtml = '';
+        $.each(response.data, function (index, item) {
+            serviceHtml = '';
+            $.each(response.passengerCarsService, function (indexpassengerCarsService, itempassengerCarsService) {
+                $.each(response.service, function (indexServices, itemServices) {
+                    if(itemServices.id === itempassengerCarsService.service_id && item.id === itempassengerCarsService.passenger_car_id){
+                        serviceHtml += `<span class="bg-sky-500/20 text-sky-500 text-11 px-2 py-0.5 font-medium rounded">${itemServices.service_name}</span>`;
+                    }
+                });
+            })
+            dataList.append(`
+                                    <div class="relative overflow-hidden transition-all duration-500 ease-in-out bg-white border rounded-md border-gray-100/50 group/jobs group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:-translate-y-2 dark:bg-neutral-900 dark:border-neutral-600">
+                                        <div class="p-6">
+                                            <div class="grid grid-cols-12 gap-5">
+                                                <div class="col-span-12 lg:col-span-1">
+                                                    <div class="px-2 mb-4 text-center mb-md-0">
+                                                        <a href="company-details.html"><img src="assets/images/featured-job/img-01.png" alt="" class="mx-auto img-fluid rounded-3"></a>
+                                                    </div>
+                                                </div>
+                                                <!--end col-->
+                                                <div class="col-span-10">
+                                                    <h5 class="mb-1 fs-17"><a href="job-details.html" class="dark:text-gray-50">Dương Đẹp Trai 102</a>
+                                                        <small class="font-normal text-gray-500 dark:text-gray-300"></small>
+                                                    </h5>
+                                                    <ul class="mb-0 lg:gap-3 gap-y-3">
+                                                        <li>
+                                                            <p class="mb-0 mt-4 text-sm text-gray-500 dark:text-gray-300">${item.departure} (${(item.departure_time).slice(0, -3)}) - ${item.arrival} (${(item.arrival_time).slice(0, -3)})</p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="mb-0 text-sm text-gray-500 dark:text-gray-300">Gế ngồi ${item.capacity}</p>
+                                                        </li>
+                                                    </ul>
+                                                     <div class="mt-4">
+                                                            <div class="service flex flex-wrap gap-1.5">
+                                                                ${serviceHtml}
+                                                            </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                            <!--end row-->
+                                        </div>
+                                        <div class="px-4 py-3 bg-gray-50 dark:bg-neutral-700">
+                                            <div class="grid grid-cols-12">
+                                                <div class="col-span-12 lg:col-span-6">
+                                                    <ul class="flex flex-wrap gap-2 text-gray-700 dark:text-gray-50">
+                                                        <li><i class="uil uil-tag"></i> Giá Vé :</li>
+                                                        <li>${item.price.toLocaleString('en-US')}đ</li>
+                                                    </ul>
+                                                </div>
+                                                <!--end col-->
+                                                <div class="col-span-12 mt-2 lg:col-span-6 lg:mt-0">
+                                                    <div class="ltr:lg:text-right rtl:lg:text-left dark:text-gray-50">
+                                                        <a href="#applyNow" data-bs-toggle="modal">Chi tiết <i class="mdi mdi-chevron-double-right"></i></a>
+                                                    </div>
+                                                </div>
+                                                <!--end col-->
+                                            </div>
+                                            <!--end row-->
+                                        </div>
+
+                                    </div>
+                    `);
+        });
+    }
+
     function setLeftValue() {
         const min = parseInt($inputLeft.attr("min"));
         const max = parseInt($inputLeft.attr("max"));
@@ -207,7 +273,6 @@ $(document).ready(function () {
     function setRightValue() {
         const min = parseInt($inputRight.attr("min"));
         const max = parseInt($inputRight.attr("max"));
-
         const value = Math.max(parseInt($inputRight.val()), parseInt($inputLeft.val()) + 1);
 
         const percent = ((value - min) / (max - min)) * 100;
@@ -225,25 +290,9 @@ $(document).ready(function () {
         $("#range2RightValue").html(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " đ");
     }
 
-    // loch theo khoảng giá tiền
-    $inputLeft.on("input", setLeftValue);
-    $inputRight.on("input", setRightValue);
-    $inputLeft.add($inputRight).on("mouseup", function () {
-        $.ajax({
-            url: baseUrl,
-            method: "POST",
-            data: {},
-            success: function (response) {
-                console.log(response)
-            },
-            error: function (error) {
-                console.log(error)
-            }
-        });
-    });
 
     // ajax request
-    function ajaxRequest(url,data){
+    function ajaxRequest(url, data, type = false) {
         dataList.html('');
         dataList.append(skeleton);
         $.ajax({
@@ -253,37 +302,67 @@ $(document).ready(function () {
             contentType: false, // Set false để không thiết lập Header 'Content-Type'
             data: data,
             success: function (response) {
-                loadItem(response.data, response.dataRoute);
+                if (type) {
+                    console.log(response)
+                    loadItem2(response)
+                    if (response.data.length === 0){
+                        loadFail('fails', 'Không có kết quả phù phợp .');
+                    }
+                } else {
+                    loadItem(response.data, response.dataRoute);
+                }
+                console.log(response);
             },
             error: function (error) {
-                loadFail(error,'Không có kết quả phù phợp .');
+                loadFail(error, 'Không có kết quả phù phợp .');
             }
         });
     }
 
     //sắp xếp theo thứ tự tăng dần
+    var formData = new FormData($('#uploadForm')[0]);
     $(document).on('change', '.sortBy', function (e) {
-        var formData = new FormData($('#uploadForm')[0]);
-        formData.append('departure',$('select[name="departure"]').val());
-        formData.append('arrival',$('select[name="arrival"]').val());
+        formData.append('departure', $('select[name="departure"]').val());
+        formData.append('arrival', $('select[name="arrival"]').val());
+        formData.append('type', $(this).val());
         ajaxRequest(
             'sortBy',
-            formData
+            formData,
+            true
         );
     });
 
     // lọc theo giờ
-    $(document).on('change', '.find-time', function () {
-        var formData = new FormData($('#uploadForm')[0]);
-        formData.append('departure',$('select[name="departure"]').val());
-        formData.append('arrival',$('select[name="arrival"]').val());
+    $(document).on('change', '.find-time', function (e) {
+        formData.append('departure', $('select[name="departure"]').val());
+        formData.append('arrival', $('select[name="arrival"]').val());
         if ($(this).is(':checked')) {
-            var dataType = $(this).data('type');
-            ajaxRequest('sortBy',formData);
+            var min = $(this).data('min');
+            var max = $(this).data('max');
+            formData.append('min[' + e.target.id + ']', min);
+            formData.append('max[' + e.target.id + ']', max);
+            ajaxRequest('sortBy', formData,true);
         } else {
-            ajaxRequest('sortBy',formData);
-            console.log($(this));
+            formData.delete('min[' + e.target.id + ']');
+            formData.delete('max[' + e.target.id + ']');
+            ajaxRequest('sortBy', formData,true);
         }
+    });
+
+
+    // loch theo khoảng giá tiền
+    $inputLeft.on("input", setLeftValue);
+    $inputRight.on("input", setRightValue);
+    $inputLeft.add($inputRight).on("mouseup", function () {
+        formData.append('departure', $('select[name="departure"]').val());
+        formData.append('arrival', $('select[name="arrival"]').val());
+        formData.append('price-start', $inputLeft.val());
+        formData.append('price-end', $inputRight.val());
+        ajaxRequest(
+            'sortBy',
+            formData,
+            true
+        );
     });
 
 

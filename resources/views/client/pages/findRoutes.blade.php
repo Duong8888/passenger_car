@@ -55,36 +55,36 @@
                                             <div class="mt-2">
                                                 <input
                                                     class="find-time rounded cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-neutral-600 dark:checked:bg-violet-500/20"
-                                                    type="checkbox" name="early-morning" data-type="early-morning" value=""
-                                                    id="flexCheckChecked1">
-                                                <label for="flexCheckChecked1"
+                                                    type="checkbox" name="early-morning" data-min="00:00" data-max="06:00" value="early-morning"
+                                                    id="early-morning">
+                                                <label for="early-morning"
                                                        class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">Sáng
                                                     sớm (00:00 - 06:00)</label>
                                             </div>
                                             <div class="mt-2">
                                                 <input
                                                     class="find-time rounded cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-neutral-600 dark:checked:bg-violet-500/20"
-                                                    type="checkbox" name="morning" data-type="morning" value=""
-                                                    id="flexCheckChecked2">
-                                                <label for="flexCheckChecked2"
+                                                    type="checkbox" name="morning" data-min="06:01" data-max="12:00" value="morning"
+                                                    id="morning">
+                                                <label for="morning"
                                                        class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">Sáng
                                                     (06:01 - 12:00)</label>
                                             </div>
                                             <div class="mt-2">
                                                 <input
                                                     class="find-time rounded cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-neutral-600 dark:checked:bg-violet-500/20"
-                                                    type="checkbox" name="afternoon" data-type="afternoon" value=""
-                                                    id="flexCheckChecked3">
-                                                <label for="flexCheckChecked3"
+                                                    type="checkbox" name="afternoon" data-min="12:01" data-max="18:00" value="afternoon"
+                                                    id="afternoon">
+                                                <label for="afternoon"
                                                        class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">Chiều
                                                     (12:01 - 18:00)</label>
                                             </div>
                                             <div class="mt-2">
                                                 <input
                                                     class="find-time rounded cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-neutral-600 dark:checked:bg-violet-500/20"
-                                                    type="checkbox" name="evening" data-type="evening" value=""
-                                                    id="flexCheckChecked4">
-                                                <label for="flexCheckChecked4"
+                                                    type="checkbox" name="evening" data-min="18:01" data-max="23:59" value="evening"
+                                                    id="evening">
+                                                <label for="evening"
                                                        class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">Tối
                                                     (18:01 - 23:59)</label>
                                             </div>
@@ -185,29 +185,29 @@
                                     </div>
                                 </div>
                             </div>
-                            <div data-tw-accordion="collapse">
-                                <div class="text-gray-700 accordion-item dark:text-gray-300">
-                                    <h6>
-                                        <button type="button"
-                                                class="flex items-center justify-between w-full px-4 py-2 font-medium text-left accordion-header group-data-[theme-color=violet]:bg-violet-500/20 group-data-[theme-color=sky]:bg-sky-500/20 group-data-[theme-color=red]:bg-red-500/20 group group-data-[theme-color=green]:bg-green-500/20 group-data-[theme-color=pink]:bg-pink-500/20 group-data-[theme-color=blue]:bg-blue-500/20 group active">
-                                            <span class="text-gray-900 text-15 dark:text-gray-50">Tags Cloud</span>
-                                            <i class="mdi mdi-chevron-down text-xl group-[.active]:rotate-180 text-gray-900 dark:text-gray-50"></i>
-                                        </button>
-                                    </h6>
-                                    <div class="block accordion-body">
-                                        <div class="flex flex-wrap gap-2 p-5">
-                                            <a href="javascript:void(0)"
-                                               class="bg-gray-50 text-13 rounded px-2 py-0.5 font-medium text-gray-500 group-data-[theme-color=violet]:hover:bg-violet-500 group-data-[theme-color=sky]:hover:bg-sky-500 group-data-[theme-color=red]:hover:bg-red-500 group-data-[theme-color=green]:hover:bg-green-500 group-data-[theme-color=pink]:hover:bg-pink-500 group-data-[theme-color=blue]:hover:bg-blue-500 hover:text-white transition-all duration-300 ease-in-out dark:text-gray-50 dark:bg-neutral-600/40">design</a>
-                                            <a href="javascript:void(0)"
-                                               class="bg-gray-50 text-13 rounded px-2 py-0.5 font-medium text-gray-500 group-data-[theme-color=violet]:hover:bg-violet-500 group-data-[theme-color=sky]:hover:bg-sky-500 group-data-[theme-color=red]:hover:bg-red-500 group-data-[theme-color=green]:hover:bg-green-500 group-data-[theme-color=pink]:hover:bg-pink-500 group-data-[theme-color=blue]:hover:bg-blue-500 hover:text-white transition-all duration-300 ease-in-out dark:text-gray-50 dark:bg-neutral-600/40">marketing</a>
-                                            <a href="javascript:void(0)"
-                                               class="bg-gray-50 text-13 rounded px-2 py-0.5 font-medium text-gray-500 group-data-[theme-color=violet]:hover:bg-violet-500 group-data-[theme-color=sky]:hover:bg-sky-500 group-data-[theme-color=red]:hover:bg-red-500 group-data-[theme-color=green]:hover:bg-green-500 group-data-[theme-color=pink]:hover:bg-pink-500 group-data-[theme-color=blue]:hover:bg-blue-500 hover:text-white transition-all duration-300 ease-in-out dark:text-gray-50 dark:bg-neutral-600/40">business</a>
-                                            <a href="javascript:void(0)"
-                                               class="bg-gray-50 text-13 rounded px-2 py-0.5 font-medium text-gray-500 group-data-[theme-color=violet]:hover:bg-violet-500 group-data-[theme-color=sky]:hover:bg-sky-500 group-data-[theme-color=red]:hover:bg-red-500 group-data-[theme-color=green]:hover:bg-green-500 group-data-[theme-color=pink]:hover:bg-pink-500 group-data-[theme-color=blue]:hover:bg-blue-500 hover:text-white transition-all duration-300 ease-in-out dark:text-gray-50 dark:bg-neutral-600/40">developer</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+{{--                            <div data-tw-accordion="collapse">--}}
+{{--                                <div class="text-gray-700 accordion-item dark:text-gray-300">--}}
+{{--                                    <h6>--}}
+{{--                                        <button type="button"--}}
+{{--                                                class="flex items-center justify-between w-full px-4 py-2 font-medium text-left accordion-header group-data-[theme-color=violet]:bg-violet-500/20 group-data-[theme-color=sky]:bg-sky-500/20 group-data-[theme-color=red]:bg-red-500/20 group group-data-[theme-color=green]:bg-green-500/20 group-data-[theme-color=pink]:bg-pink-500/20 group-data-[theme-color=blue]:bg-blue-500/20 group active">--}}
+{{--                                            <span class="text-gray-900 text-15 dark:text-gray-50">Tags Cloud</span>--}}
+{{--                                            <i class="mdi mdi-chevron-down text-xl group-[.active]:rotate-180 text-gray-900 dark:text-gray-50"></i>--}}
+{{--                                        </button>--}}
+{{--                                    </h6>--}}
+{{--                                    <div class="block accordion-body">--}}
+{{--                                        <div class="flex flex-wrap gap-2 p-5">--}}
+{{--                                            <a href="javascript:void(0)"--}}
+{{--                                               class="bg-gray-50 text-13 rounded px-2 py-0.5 font-medium text-gray-500 group-data-[theme-color=violet]:hover:bg-violet-500 group-data-[theme-color=sky]:hover:bg-sky-500 group-data-[theme-color=red]:hover:bg-red-500 group-data-[theme-color=green]:hover:bg-green-500 group-data-[theme-color=pink]:hover:bg-pink-500 group-data-[theme-color=blue]:hover:bg-blue-500 hover:text-white transition-all duration-300 ease-in-out dark:text-gray-50 dark:bg-neutral-600/40">design</a>--}}
+{{--                                            <a href="javascript:void(0)"--}}
+{{--                                               class="bg-gray-50 text-13 rounded px-2 py-0.5 font-medium text-gray-500 group-data-[theme-color=violet]:hover:bg-violet-500 group-data-[theme-color=sky]:hover:bg-sky-500 group-data-[theme-color=red]:hover:bg-red-500 group-data-[theme-color=green]:hover:bg-green-500 group-data-[theme-color=pink]:hover:bg-pink-500 group-data-[theme-color=blue]:hover:bg-blue-500 hover:text-white transition-all duration-300 ease-in-out dark:text-gray-50 dark:bg-neutral-600/40">marketing</a>--}}
+{{--                                            <a href="javascript:void(0)"--}}
+{{--                                               class="bg-gray-50 text-13 rounded px-2 py-0.5 font-medium text-gray-500 group-data-[theme-color=violet]:hover:bg-violet-500 group-data-[theme-color=sky]:hover:bg-sky-500 group-data-[theme-color=red]:hover:bg-red-500 group-data-[theme-color=green]:hover:bg-green-500 group-data-[theme-color=pink]:hover:bg-pink-500 group-data-[theme-color=blue]:hover:bg-blue-500 hover:text-white transition-all duration-300 ease-in-out dark:text-gray-50 dark:bg-neutral-600/40">business</a>--}}
+{{--                                            <a href="javascript:void(0)"--}}
+{{--                                               class="bg-gray-50 text-13 rounded px-2 py-0.5 font-medium text-gray-500 group-data-[theme-color=violet]:hover:bg-violet-500 group-data-[theme-color=sky]:hover:bg-sky-500 group-data-[theme-color=red]:hover:bg-red-500 group-data-[theme-color=green]:hover:bg-green-500 group-data-[theme-color=pink]:hover:bg-pink-500 group-data-[theme-color=blue]:hover:bg-blue-500 hover:text-white transition-all duration-300 ease-in-out dark:text-gray-50 dark:bg-neutral-600/40">developer</a>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                         </form>
                         <!-- end left -->
 
@@ -217,14 +217,6 @@
                                 <form action="#">
 
                                     <div class="grid grid-cols-12 gap-3">
-
-                                        {{--                                        <div class="col-span-12 xl:col-span-4">--}}
-                                        {{--                                            <div class="relative filler-job-form">--}}
-                                        {{--                                                <i class="uil uil-briefcase-alt"></i>--}}
-                                        {{--                                                <input type="search" name="stop" class="w-full filter-job-input-box dark:text-gray-100" id="exampleFormControlInput1" placeholder="Điểm đón, trả ... ">--}}
-                                        {{--                                            </div>--}}
-                                        {{--                                        </div>--}}
-                                        <!--end col-->
                                         <div class="col-span-12 xl:col-span-4">
                                             <div class="relative filler-job-form">
                                                 <i class="uil uil-map-marker">
@@ -242,7 +234,7 @@
                                                         aria-label="Default select example">
                                                     @foreach($stops as $value)
                                                         <option
-                                                            @if($_GET['departure'] == $value) selected
+                                                            @if(trim($_GET['departure']) == trim($value)) selected
                                                             @endif value="{{$value}}">{{$value}}</option>
                                                     @endforeach
                                                 </select>
@@ -263,9 +255,9 @@
                                                 <select class="form-select " data-trigger name="arrival"
                                                         id="choices-single-categories"
                                                         aria-label="Default select example">
-                                                    @foreach($stops as $value)
+                                                @foreach($stops as $value)
                                                         <option
-                                                            @if($_GET['arrival'] == $value) selected
+                                                            @if(trim($_GET['arrival']) == trim($value)) selected
                                                             @endif  value="{{$value}}">{{$value}}</option>
                                                     @endforeach
                                                 </select>
