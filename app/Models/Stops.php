@@ -16,8 +16,21 @@ class Stops extends Model
         'stop_name',
         'stop_type',
         'route_id',
+        'order',
+        'user_id',
     ];
-    public function route(){
+
+    public function toSearchableArray()
+    {
+        return [
+            'stop_name' => $this->stop_name,
+            'stop_type' => $this->stop_type,
+            'route_id' => $this->route_id,
+        ];
+    }
+
+    public function route()
+    {
         return $this->belongsTo(Route::class);
     }
 }
