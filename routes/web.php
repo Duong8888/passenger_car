@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\RouteController;
 use App\Http\Controllers\ProfileController;
@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\PostCategoryController;
+use App\Http\Controllers\Admin\RevenueController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,7 +74,6 @@ Route::resource('/route', RouteController::class);
 Route::resource('service', ServicesController::class);
 //End Phan'z Nam'z
 
-
 Route::name('admin.')->group(function () {
     Route::prefix('categories')->name('category.')->group(function () {
         Route::get('/', [PostCategoryController::class, 'index'])->name('index');
@@ -82,5 +82,21 @@ Route::name('admin.')->group(function () {
         Route::get('/edit/{category}', [PostCategoryController::class, 'edit'])->name('edit');
         Route::put('/edit/{id}', [PostCategoryController::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [PostCategoryController::class, 'delete'])->name('delete');
+    });
+    Route::prefix('customers')->name('customer.')->group(function () {
+        Route::get('/', [CustomerController::class, 'index'])->name('index');
+        Route::get('/add', [CustomerController::class, 'add'])->name('add');
+        Route::post('/add', [CustomerController::class, 'store'])->name('store');
+        Route::get('/edit/{customer}', [CustomerController::class, 'edit'])->name('edit');
+        Route::put('/edit/{id}', [CustomerController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [CustomerController::class, 'delete'])->name('delete');
+    });
+    Route::prefix('revenue')->name('revenue.')->group(function () {
+        Route::get('/', [RevenueController::class, 'index'])->name('index');
+        Route::get('/add', [RevenueController::class, 'add'])->name('add');
+        Route::post('/add', [RevenueController::class, 'store'])->name('store');
+        Route::get('/edit/{revenue}', [RevenueController::class, 'edit'])->name('edit');
+        Route::put('/edit/{id}', [RevenueController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [RevenueController::class, 'delete'])->name('delete');
     });
 });

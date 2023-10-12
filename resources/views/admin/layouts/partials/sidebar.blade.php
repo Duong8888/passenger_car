@@ -71,9 +71,22 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('admin.revenue.index') }}">
+                        <i class="mdi mdi-view-dashboard-outline"></i>
+                        <span> Thống kê doanh thu </span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('admin.category.index') }}">
                         <i class="mdi mdi-view-dashboard-outline"></i>
                         <span> Quản lý danh mục </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('admin.customer.index') }}">
+                        <i class="mdi mdi-view-dashboard-outline"></i>
+                        <span> Quản lý khách hàng </span>
                     </a>
                 </li>
                 <li class="menu-title mt-2">Apps</li>
