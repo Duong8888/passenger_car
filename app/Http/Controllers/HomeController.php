@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\VietnameseProvinces;
 use Illuminate\Http\Request;
 use App\Models\Album;
 use App\Models\Routes;
@@ -20,13 +21,26 @@ class HomeController  extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function __construct(
+        public VietnameseProvinces $vietnameseProvinces
+    )
+    {
+    }
+
     public function index(){
+
+        $data = $this->vietnameseProvinces->get('name');
+        $stops = [];
+        foreach ($data as $key => $value) {
+            $stops[] = $value->name;
+        }
 
         $albums = PassengerCar::with('albums')->get();
         $routes = Routes::all();
         $passengerCars = PassengerCar::with('workingTime')->get();
         $workingTime = WorkingTime::all();
-        return view('client.pages.home.index', compact('albums', 'routes', 'passengerCars','workingTime'));
+        return view('client.pages.home.index', compact('albums', 'routes', 'passengerCars','workingTime','stops'));
 
     }
 

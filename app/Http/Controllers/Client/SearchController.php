@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Log;
 
 class SearchController extends Controller
 {
-    public $pathview = 'client.pages';
+    public $pathview = 'client.pages.filter';
 
     public function __construct(
         public Routes              $routes,
@@ -108,7 +108,6 @@ class SearchController extends Controller
 
     public function sortBy(Request $request)
     {
-        Log::info($request->all());
         $query = $request->departure . " " . $request->arrival;
         $routes = $this->routes::search($query)->get();
         $departure = $request->departure;
@@ -123,7 +122,6 @@ class SearchController extends Controller
         $idPassengerCars = $this->filterPassengerCars($departure, $arrival, $type, $min, $max, $priceStart, $priceEnd);
         $service = $this->service::all();
         $PassengerCarsService = $this->passengerCarService::all();
-        Log::info($idPassengerCars);
         return response()->json(['data' => $idPassengerCars, 'dataRoute' => $routes[0],'service' => $service,'passengerCarsService'=>$PassengerCarsService]);
     }
 
