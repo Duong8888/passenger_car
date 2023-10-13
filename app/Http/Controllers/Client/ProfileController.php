@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileUser\ProfileUpdateUserRequest;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 use App\Models\User;
+// use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
@@ -13,11 +15,19 @@ class ProfileController extends Controller
       /**
      * Display the user's profile form.
      */
-    public function index(){
-        $user = User::find(4);  // Lấy thông tin từ bảng Album
+    public function index(Request $request){
+        $user = auth()->user(); // Lấy thông tin từ bảng Album
+        // dd($user->id);
+        // $user = User::all();
+        // $tickets = Ticket::where('user_id',$user->id )->get();
+        $tickets = Ticket::where('user_id', $user->id) // Lọc theo user_id của người dùng đăng nhập
+                  ->where('phone', 'like', '%' . $request->key . '%') // Lọc theo số điện thoại
+                  ->get();
+        // ->where('phone','like','%'.$request->key.'%')
         //  return response()->json($user, 200, [], JSON_PRETTY_PRINT);
-        return view('client.pages.profile.profile',compact('user'));
+        return view('client.pages.profile.profile',compact('user','tickets'));
     }
+   
     /**
      * Show the form for creating a new resource.
      */
@@ -53,42 +63,42 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ProfileUpdateUserRequest $request, $id) //Request $request,
-    {
-        $user = User::find($id);
+    // public function update(ProfileUpdateUserRequest $request, $id) //Request $request,
+    // {
+    //     $user = User::find($id);
         
-        $name = $request->input('name');
-        $email = $request->input('email');
-        $phone = $request->input('phone');
-         // Kiểm tra mật khẩu hiện tại
+    //     $name = $request->input('name');
+    //     $email = $request->input('email');
+    //     $phone = $request->input('phone');
+    //      // Kiểm tra mật khẩu hiện tại
 
-        $user->fill([
-            'name' => $name,
-            'email' => $email,
-            'phone' => $phone,
-        ])->save();
+    //     $user->fill([
+    //         'name' => $name,
+    //         'email' => $email,
+    //         'phone' => $phone,
+    //     ])->save();
 
-        if (!Hash::check($request->current_password, $user->password)) {
-            return redirect()->back()->with('error', 'Mật khẩu hiện tại không chính xác.');
-        }
+    //     if (!Hash::check($request->current_password, $user->password)) {
+    //         return redirect()->back()->with('error', 'Mật khẩu hiện tại không chính xác.');
+    //     }
 
-        // Cập nhật mật khẩu mới
-        $user->password = Hash::make($request->new_password);
-        $user->save();
+    //     // Cập nhật mật khẩu mới
+    //     $user->password = Hash::make($request->new_password);
+    //     $user->save();
 
-        // return redirect()->route('profile.index')->with('success', 'Mật khẩu đã được cập nhật.');
-        // if ($request->file('image') !== null) {
-        //     $image = $request->file('image')->getClientOriginalName();
-        //     $request->file('image')->storeAs('public/images/categories/', $image);
-        //     $oldImage = $category->image;
-        //     Storage::delete('public/images/categories/' . $oldImage);
-        //     $category->fill([
-        //         'image' => $image,
-        //     ])->save();
-        // }
-        return redirect()->route('profile.index')->with('success', 'Đã sửa thành công');
+    //     // return redirect()->route('profile.index')->with('success', 'Mật khẩu đã được cập nhật.');
+    //     // if ($request->file('image') !== null) {
+    //     //     $image = $request->file('image')->getClientOriginalName();
+    //     //     $request->file('image')->storeAs('public/images/categories/', $image);
+    //     //     $oldImage = $category->image;
+    //     //     Storage::delete('public/images/categories/' . $oldImage);
+    //     //     $category->fill([
+    //     //         'image' => $image,
+    //     //     ])->save();
+    //     // }
+    //     return redirect()->route('profile.index')->with('success', 'Đã sửa thành công');
 
-    }
+    // }
 
     /**
      * Remove the specified resource from storage.
@@ -97,4 +107,10 @@ class ProfileController extends Controller
     {
         //
     }
+    // đây là hiện thị vé tikets
+    // public function indexTK(){
+    //     $tickets = DB::table('tickets')->select('id','username','phone','email','user_id','passenger_car_id','quantity','total_price','payment_method','status','created_at')->get();
+    //     // return response()->json($tickets->passengerCars, 200, [], JSON_PRETTY_PRINT);
+    //     return view('client.pages.profile.profile',compact('tickets'));
+    // }
 }

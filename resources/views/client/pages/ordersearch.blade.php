@@ -114,7 +114,7 @@
                                         <li class="pb-3">
                                             <div class="flex">
                                                 <form role="search" method="GET" id="searchform"
-                                                    action="{{ route('profile.index') }}">
+                                                    action="{{ route('route_clientindex_search') }}">
                                                     <input type="text" name="key" id="s"
                                                         placeholder="Nhập từ khóa...">
                                                     <button  class="fa-solid fa-magnifying-glass" type="submit" id="searchsubmit">Tìm
