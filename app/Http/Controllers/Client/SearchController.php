@@ -21,7 +21,7 @@ class SearchController extends Controller
         public Routes              $routes,
         public PassengerCar        $passengerCar,
         public VietnameseProvinces $vietnameseProvinces,
-        public Service $service,
+        public Service             $service,
         public PassengerCarService $passengerCarService
     )
     {
@@ -122,7 +122,7 @@ class SearchController extends Controller
         $idPassengerCars = $this->filterPassengerCars($departure, $arrival, $type, $min, $max, $priceStart, $priceEnd);
         $service = $this->service::all();
         $PassengerCarsService = $this->passengerCarService::all();
-        return response()->json(['data' => $idPassengerCars, 'dataRoute' => $routes[0],'service' => $service,'passengerCarsService'=>$PassengerCarsService]);
+        return response()->json(['data' => $idPassengerCars, 'dataRoute' => $routes[0], 'service' => $service, 'passengerCarsService' => $PassengerCarsService]);
     }
 
 }

@@ -79,9 +79,9 @@
                 </li>
 
                 <li>
-                    <a href="apps-chat.html">
+                    <a href="{{route('car.index')}}">
                         <i class="mdi mdi-forum-outline"></i>
-                        <span> Chat </span>
+                        <span> Quản lý xe </span>
                     </a>
                 </li>
 

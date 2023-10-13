@@ -42,7 +42,8 @@ class AdminBaseController extends Controller
         return view($this->pathView . __FUNCTION__, compact('data'))
             ->with('title', $this->titleIndex)
             ->with('colums', $this->colums)
-            ->with('urlbase', $this->urlbase);
+            ->with('urlbase', $this->urlbase)
+            ->with('titleCreate', $this->titleCreate);
     }
 
     /**
@@ -61,7 +62,7 @@ class AdminBaseController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $validator = $this->validateStore($request);
 
         // if ($validator->fails()) {
@@ -69,7 +70,7 @@ class AdminBaseController extends Controller
         // }
 
         $model = new $this->model;
-       
+
         $model->fill($request->except([$this->fieldImage]));
 
         if ($request->hasFile($this->fieldImage)) {

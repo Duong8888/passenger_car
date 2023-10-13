@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\Admin\PassengerCarController;
 use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\RouteController;
 use App\Http\Controllers\ProfileController;
@@ -72,5 +73,13 @@ Route::resource('/route', RouteController::class);
 //Phan'z Nam'z
 Route::resource('service', ServicesController::class);
 //End Phan'z Nam'z
+
+Route::group(["prefix"=>"car","as"=>"car."],function(){
+    Route::get('/',[PassengerCarController::class,'index'])->name('index');
+    Route::post('store',[PassengerCarController::class,'store'])->name('store');
+    Route::post('show',[PassengerCarController::class,'show'])->name('show');
+    Route::post('update/{id}',[PassengerCarController::class,'update'])->name('update');
+    Route::delete('delete/{id}',[PassengerCarController::class,'delete'])->name('delete');
+});
 
 
