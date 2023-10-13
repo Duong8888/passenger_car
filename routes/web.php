@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\RouteController;
 use App\Http\Controllers\ProfileController;
@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\PostController;
-
+use App\Http\Controllers\admin\StopsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +34,12 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Route::get('/dashboard', function () {
+//     return view('admin.pages.dashboard.index');
+// });
+Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard');
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -44,9 +50,6 @@ require __DIR__.'/auth.php';
 
 Route::get('/sign_in', [PhoneAuthController::class,'sign_in'])->name('sign_in');
 
-Route::get('/dashboard', function () {
-    return view('admin.pages.dashboard.index');
-});
 Route::get('/layout', function () {
     return view('admin.layouts.master');
 });
@@ -70,7 +73,8 @@ Route::resource('/route', RouteController::class);
 
 
 //Phan'z Nam'z
-Route::resource('service', ServicesController::class);
+Route::resource('/service', ServicesController::class);
+Route::resource('/stop', StopsController::class);
 //End Phan'z Nam'z
 
 
