@@ -8,6 +8,7 @@ use App\Models\Routes;
 use App\Models\PassengerCar;
 use App\Models\WorkingTime;
 use App\Models\Comment;
+use App\Models\Stops;
 use App\Models\User;
 // use App\Models\PassengerCarWorkingTime;
 
@@ -40,7 +41,7 @@ class HomeController extends Controller
         // return response()->json($albums);
         $routes = PassengerCar::with('route')->where('route_id',$request->route_id)->take(4)->get(); // Lấy thông tin từ bảng Route
         // return response()->json($routes[0]->id);
-
+        $stops = Stops::all();
         $passengerCars = PassengerCar::with('workingTime')->find($request->passenger_id);  // Lấy thông tin từ bảng PassengerCar
         // return response()->json($passengerCars);
 
@@ -55,7 +56,7 @@ class HomeController extends Controller
         // return response()->json($comments, 200, [], JSON_PRETTY_PRINT);
         // dd($comments);
 
-        return view('client.pages.home.passengerCar-detail', compact('albums', 'routes', 'passengerCars','users','comments'));
+        return view('client.pages.home.passengerCar-detail', compact('albums', 'routes', 'passengerCars','users','comments', 'stops'));
 
     }
 
@@ -80,7 +81,7 @@ class HomeController extends Controller
      */
     public function show()
     {
-        echo'aaaaaaaaaaaaaaa';
+        //
     }
 
     /**

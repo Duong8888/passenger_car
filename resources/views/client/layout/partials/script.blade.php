@@ -2,8 +2,8 @@
 
 <script src="{{asset('client/libs/%40popperjs/core/umd/popper.min.js')}}"></script>
 <script src="{{asset('client/libs/simplebar/simplebar.min.js')}}"></script>
-
-
+<script src="{{asset('admin/libs/jquery/jquery.min.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{asset('client/js/pages/switcher.js')}}"></script>
 
 <script src="{{asset('client/js/pages/dropdown%26modal.init.js')}}"></script>
