@@ -8,7 +8,6 @@ use App\Http\Controllers\PhoneAuthController;
 use App\Http\Controllers\Admin\TicketController;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\Admin\PostController;
 
 
@@ -59,6 +58,7 @@ Route::get('/posts/{id}/edit',  [PostController::class,'edit'])->name('posts.edi
 Route::put('/posts/{id}',  [PostController::class,'update'])->name('posts.update');
 // Đường dẫn route để xóa bài viết
 Route::delete('/posts/{id}', [PostController::class,'destroy'])->name('posts.destroy');
+Route::get('/posting/{slug}', [PostController::class,'createSlug'])->name('post.show');
 
 
 Route::resource('ticket', TicketController::class);
@@ -73,4 +73,4 @@ Route::resource('/route', RouteController::class);
 Route::resource('service', ServicesController::class);
 //End Phan'z Nam'z
 
-
+// setting

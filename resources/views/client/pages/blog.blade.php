@@ -68,9 +68,7 @@
                 <div class="grid items-center grid-cols-12 gap-5 mt-8">
                     @foreach ($posts as $post)
                     <div class="col-span-12">
-                        <div>
-                            <h4 class="text-[22.5px] text-gray-900 dark:text-gray-50">{{ $post->slug }}</h4>
-                        </div>
+
                     </div><!--end col-->
                     <div class="col-span-12 lg:col-span-6">
                         <div class="relative mb-3 overflow-hidden rounded">
@@ -81,23 +79,12 @@
                         <div class="text-gray-900 dark:text-gray-50 blogshow" >
                             {!!$post->subtitle!!}
                         </div>
-                        <style>
-                            .blogshow{
-                                width: 500px;
-                                overflow: hidden;
-                                text-overflow: ellipsis;
-                                line-height: 25px;
-                                -webkit-line-clamp: 3;
-                                height: 75px;
-                                display: -webkit-box;
-                                -webkit-box-orient: vertical;
-                            }
-                        </style>
+
                     </div><!--end col-->
 
                     <div class="col-span-12 lg:col-span-6">
                         <div class="relative mb-3 overflow-hidden rounded">
-                            <a href="{{route('blog',$post->id)}}"><img src="assets/images/blog/img-05.jpg" alt="Blog" class="w-full duration-500 ease-in-out scale-110 rounded hover:-translate-x-2 hover:transition-all">{{ $post->slug }}</a>
+                            <a href="{{route('blog',$post->id)}}"><img src="assets/images/blog/img-05.jpg" alt="Blog" class="w-full duration-500 ease-in-out scale-110 rounded hover:-translate-x-2 hover:transition-all"></a>
                         </div>
                         <p class="mb-2 text-gray-500 dark:text-gray-300"><b>Business </b> - July 25, 2021</p>
                         <h5 class="mb-3 text-gray-900 dark:text-gray-50"><a href="{{route('blog',$post->id)}}">{{ $post->title }}</a></h5>

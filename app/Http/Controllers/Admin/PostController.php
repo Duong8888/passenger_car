@@ -117,5 +117,15 @@ class PostController extends AdminBaseController
         $post->delete();
         return redirect()->route('postsing')->with('success', 'Bài viết đã được xóa thành công');
     }
+    public function createSlug($slug)
+    {
+        $post = Posts::where('slug','=',$slug)->first();
+
+        if (!$post) {
+            return redirect()->route('postsing')->with('error', 'Bài viết không tồn tại');
+        }
+
+        return view('admin.pages.posts.edit', compact('post'));
+    }
 
 }

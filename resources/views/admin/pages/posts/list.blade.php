@@ -45,19 +45,7 @@
                                         <tr>
                                             <td>{{ $posts->id }}</td>
                                             <td>{{ $posts->title }}</td>
-                                            <td class="chill">{!! $posts->subtitle !!} </td>
-                                            <style>
-                                                .chill{
-                                                    width: 500px;
-                                                    overflow: hidden;
-                                                    text-overflow: ellipsis;
-                                                    line-height: 25px;
-                                                    -webkit-line-clamp: 3;
-                                                    height: 75px;
-                                                    display: -webkit-box;
-                                                    -webkit-box-orient: vertical;
-                                                }
-                                            </style>
+                                            <td > <a href="{{ route('posts.edit', ['id' => $posts->id]) }}">Xem chi tiết</a> </td>
                                             <td>{{ $posts->slug }}</td>
                                             <td>{{ $posts->category_id }}</td>
                                             <td>{{ $posts->author_id }}</td>
