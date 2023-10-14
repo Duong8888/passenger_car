@@ -242,66 +242,18 @@
                 <li class="menu-title mt-2">Components</li>
 
                 <li>
-                    <a href="#sidebarBaseui" data-bs-toggle="collapse">
+                    <a href="#sidebarReport" data-bs-toggle="collapse">
                         <i class="mdi mdi-briefcase-outline"></i>
-                        <span> Base UI </span>
+                        <span>Report </span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="sidebarBaseui">
+                    <div class="collapse" id="sidebarReport">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="ui-buttons.html">Buttons</a>
+                                <a href="{{ route('admin.user-report') }}">User Report</a>
                             </li>
                             <li>
-                                <a href="ui-cards.html">Cards</a>
-                            </li>
-                            <li>
-                                <a href="ui-avatars.html">Avatars</a>
-                            </li>
-                            <li>
-                                <a href="ui-tabs-accordions.html">Tabs & Accordions</a>
-                            </li>
-                            <li>
-                                <a href="ui-modals.html">Modals</a>
-                            </li>
-                            <li>
-                                <a href="ui-progress.html">Progress</a>
-                            </li>
-                            <li>
-                                <a href="ui-notifications.html">Notifications</a>
-                            </li>
-                            <li>
-                                <a href="ui-offcanvas.html">Offcanvas</a>
-                            </li>
-                            <li>
-                                <a href="ui-placeholders.html">Placeholders</a>
-                            </li>
-                            <li>
-                                <a href="ui-spinners.html">Spinners</a>
-                            </li>
-                            <li>
-                                <a href="ui-images.html">Images</a>
-                            </li>
-                            <li>
-                                <a href="ui-carousel.html">Carousel</a>
-                            </li>
-                            <li>
-                                <a href="ui-video.html">Embed Video</a>
-                            </li>
-                            <li>
-                                <a href="ui-dropdowns.html">Dropdowns</a>
-                            </li>
-                            <li>
-                                <a href="ui-tooltips-popovers.html">Tooltips & Popovers</a>
-                            </li>
-                            <li>
-                                <a href="ui-general.html">General UI</a>
-                            </li>
-                            <li>
-                                <a href="ui-typography.html">Typography</a>
-                            </li>
-                            <li>
-                                <a href="ui-grid.html">Grid</a>
+                                <a href="">Ticket Report</a>
                             </li>
                         </ul>
                     </div>
