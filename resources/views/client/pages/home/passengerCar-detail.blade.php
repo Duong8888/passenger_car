@@ -84,11 +84,13 @@
                                                 <label class="text-gray-900 w-[118px] font-medium dark:text-gray-50">Khởi
                                                     hành</label>
                                                 <div>
-                                                    <p class="mb-0 text-gray-500 dark:text-gray-300">
-                                                        {{ \Carbon\Carbon::parse($passengerCars->workingTime[0]->departure_time)->format('H:i') }}h
-                                                        -
-                                                        {{ \Carbon\Carbon::parse($passengerCars->workingTime[0]->arrival_time)->format('H:i') }}h
-                                                    </p>
+                                                    @foreach ($passengerCars->workingTime as $workingTime)
+                                                        <p class="mb-0 text-gray-500 dark:text-gray-300">
+                                                            {{ \Carbon\Carbon::parse($workingTime->departure_time)->format('H:i') }}h
+                                                            -
+                                                            {{ \Carbon\Carbon::parse($workingTime->arrival_time)->format('H:i') }}h
+                                                        </p>
+                                                    @endforeach
                                                 </div>
                                             </div>
                                         </li>

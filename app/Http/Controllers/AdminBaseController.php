@@ -61,7 +61,7 @@ class AdminBaseController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $validator = $this->validateStore($request);
 
         // if ($validator->fails()) {
@@ -69,7 +69,7 @@ class AdminBaseController extends Controller
         // }
 
         $model = new $this->model;
-       
+
         $model->fill($request->except([$this->fieldImage]));
 
         if ($request->hasFile($this->fieldImage)) {

@@ -15,6 +15,7 @@ class ServicesController extends AdminBaseController
     public $model = Service::class;
     public $pathView = 'admin.pages.services.';
     public $urlbase = 'admin.services.';
+    public $urlIndex = 'service.index';
     public $titleIndex = 'Danh sách dịch vụ';
     public $titleCreate = 'Thêm mới dịch vụ';
     public $titleEdit = 'Cập nhật dịch vụ';
