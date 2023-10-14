@@ -16,7 +16,7 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(96, 165, 250, 1);transform: ;msFilter:;"><path d="M12 5c-3.859 0-7 3.141-7 7s3.141 7 7 7 7-3.141 7-7-3.141-7-7-7zm0 12c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"></path><path d="M12 9c-1.627 0-3 1.373-3 3s1.373 3 3 3 3-1.373 3-3-1.373-3-3-3z"></path></svg>
                                     </i>
                                     <select class="form-select rounded-l"  data-trigger name="departure" id="choices-single-location" aria-label="Default select example">
-                                        @foreach($departure as $value)
+                                        @foreach($stops as $value)
                                             <option value="{{$value}}">{{$value}}</option>
                                         @endforeach
                                     </select>
@@ -29,7 +29,7 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(235, 87, 87, 1);transform: ;msFilter:;"><circle cx="12" cy="12" r="4"></circle><path d="M13 4.069V2h-2v2.069A8.01 8.01 0 0 0 4.069 11H2v2h2.069A8.008 8.008 0 0 0 11 19.931V22h2v-2.069A8.007 8.007 0 0 0 19.931 13H22v-2h-2.069A8.008 8.008 0 0 0 13 4.069zM12 18c-3.309 0-6-2.691-6-6s2.691-6 6-6 6 2.691 6 6-2.691 6-6 6z"></path></svg>
                                     </i>
                                     <select class="form-select" data-trigger name="arrival" id="choices-single-categories" aria-label="Default select example">
-                                        @foreach($arrival as $value)
+                                        @foreach($stops as $value)
                                             <option value="{{$value}}">{{$value}}</option>
                                         @endforeach
                                     </select>

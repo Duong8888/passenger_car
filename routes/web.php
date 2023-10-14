@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\RouteController;
 use App\Http\Controllers\ProfileController;
@@ -8,9 +8,8 @@ use App\Http\Controllers\PhoneAuthController;
 use App\Http\Controllers\Admin\TicketController;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\Admin\PostController;
-
+use App\Http\Controllers\admin\StopsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +33,12 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Route::get('/dashboard', function () {
+//     return view('admin.pages.dashboard.index');
+// });
+Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard');
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -43,10 +48,12 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::get('/sign_in', [PhoneAuthController::class,'sign_in'])->name('sign_in');
+
 // Route::middleware(['auth','check.role'])->group(function(){
 Route::get('/dashboard', function () {
     return view('admin.pages.dashboard.index');
 });
+
 Route::get('/layout', function () {
     return view('admin.layouts.master');
 });
@@ -59,6 +66,7 @@ Route::get('/posts/{id}/edit',  [PostController::class,'edit'])->name('posts.edi
 Route::put('/posts/{id}',  [PostController::class,'update'])->name('posts.update');
 // Đường dẫn route để xóa bài viết
 Route::delete('/posts/{id}', [PostController::class,'destroy'])->name('posts.destroy');
+Route::get('/posting/{slug}', [PostController::class,'createSlug'])->name('post.show');
 
 
 Route::resource('ticket', TicketController::class);
@@ -70,8 +78,10 @@ Route::resource('/route', RouteController::class);
 
 
 //Phan'z Nam'z
-Route::resource('service', ServicesController::class);
+Route::resource('/service', ServicesController::class);
+Route::resource('/stop', StopsController::class);
 //End Phan'z Nam'z
+
 
 
 
@@ -88,4 +98,4 @@ Route::match(['GET','POST'],'/management/delete/{id}',[App\Http\Controllers\Admi
 
 
 
-//  });
+
