@@ -79,7 +79,7 @@ Route::group(["prefix"=>"car","as"=>"car."],function(){
     Route::post('store',[PassengerCarController::class,'store'])->name('store');
     Route::post('show',[PassengerCarController::class,'show'])->name('show');
     Route::post('update/{id}',[PassengerCarController::class,'update'])->name('update');
-    Route::delete('delete/{id}',[PassengerCarController::class,'delete'])->name('delete');
+    Route::delete('delete/{id}',[PassengerCarController::class,'destroy'])->name('delete');
 });
 
 

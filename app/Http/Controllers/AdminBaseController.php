@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Routes;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Database\Eloquent\Builder;
@@ -35,9 +36,13 @@ class AdminBaseController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $data = $this->model->paginate(10);
+        if($request->ajax()){
+            $routes = Routes::all();
+            return \response()->json(['data' => $data,'routes'=>$routes]);
+        }
 
         return view($this->pathView . __FUNCTION__, compact('data'))
             ->with('title', $this->titleIndex)
