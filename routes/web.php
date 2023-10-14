@@ -49,6 +49,11 @@ require __DIR__.'/auth.php';
 
 Route::get('/sign_in', [PhoneAuthController::class,'sign_in'])->name('sign_in');
 
+// Route::middleware(['auth','check.role'])->group(function(){
+Route::get('/dashboard', function () {
+    return view('admin.pages.dashboard.index');
+});
+
 Route::get('/layout', function () {
     return view('admin.layouts.master');
 });
@@ -77,4 +82,20 @@ Route::resource('/service', ServicesController::class);
 Route::resource('/stop', StopsController::class);
 //End Phan'z Nam'z
 
-// setting
+
+
+
+Route::get('/staff/index',[App\Http\Controllers\UserController::class,'index'])->name('route_staff_index');
+Route::match(['GET','POST'],'/staff/add',[App\Http\Controllers\UserController::class,'add'])->name('route_staff_add');
+Route::match(['GET','POST'],'/staff/edit/{id}',[App\Http\Controllers\UserController::class,'edit'])->name('route_staff_edit');
+Route::match(['GET','POST'],'/staff/delete/{id}',[App\Http\Controllers\UserController::class,'delete'])->name('route_staff_delete');
+
+
+Route::get('/management/index',[App\Http\Controllers\AdminManagementController::class,'index'])->name('route_adminmanagement_index');
+Route::match(['GET','POST'],'/management/edit/{id}',[App\Http\Controllers\AdminManagementController::class,'edit'])->name('route_adminmanagement_edit');
+Route::match(['GET','POST'],'/management/add',[App\Http\Controllers\AdminManagementController::class,'add'])->name('route_adminmanagement_add');
+Route::match(['GET','POST'],'/management/delete/{id}',[App\Http\Controllers\AdminManagementController::class,'delete'])->name('route_adminmanagement_delete');
+
+
+
+

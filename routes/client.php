@@ -9,12 +9,25 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Client\BlogController;
 use App\Http\Controllers\Client\ProfileController;
+use App\Http\Controllers\PhoneAuthController;
 
 //Nam
 Route::get('/',[HomeController::class,'index'])->name('home');;
 Route::post('/passengerCar-detail',[HomeController::class,'passengerCarDetail']);
 Route::resource('/profile',ProfileController::class);
 
+
+
+
+
+
+
+Route::get('/home', [HomeController::class, 'index']);
+Route::post('/passengerCar-detail', [HomeController::class, 'passengerCarDetail']);
+
+
+
+Route::get('/', [SearchController::class, 'home'])->name('home');
 
 
 Route::get('/search', [SearchController::class, 'searchRequest'])->name('search');
