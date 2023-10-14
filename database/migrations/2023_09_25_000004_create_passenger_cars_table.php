@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('license_plate');
             $table->integer('capacity');
+            $table->bigInteger('price');
             $table->longText('description');
             $table->unsignedBigInteger('user_id');
 //            $table->foreign('user_id')->references('id')->on('users');

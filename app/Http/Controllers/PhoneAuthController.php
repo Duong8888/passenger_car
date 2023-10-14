@@ -18,7 +18,7 @@ class PhoneAuthController extends Controller
             $credentials = $request->only('email', 'password');
 
             if (Auth::attempt($credentials)) {
-                return redirect()->intended('register'); // Điều hướng đến trang chính sau khi đăng nhập
+                return redirect()->route('home'); // Điều hướng đến trang chính sau khi đăng nhập
             }
 
             return redirect()->route('login')->with('error', 'Invalid login credentials.');

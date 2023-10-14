@@ -55,7 +55,14 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => false,
         ],
-
+        'ftp' => [
+            'driver' => 'ftp',
+            'host' =>  env('FTP_HOST'),
+            'port' => 21,
+            'username' =>  env('FTP_USERNAME'),
+            'password' =>  env('FTP_PASSWORD'),
+            'root' => env('ROOT'), // Đường dẫn đến thư mục gốc trên máy chủ FTP
+        ],
     ],
 
     /*

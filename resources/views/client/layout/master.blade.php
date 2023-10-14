@@ -12,7 +12,7 @@
     <meta name="csrf-token" content="{{csrf_token()}}">
 
     @include('client.layout.partials.style')
-    {{-- @yield('page-style') --}}
+     @yield('page-style')
 </head>
 
 
@@ -27,6 +27,10 @@
 <!-- Footer Start -->
 @include('client.layout.partials.footer')
 <!-- end Footer -->
+<script>
+    const infoUser = @json(auth()->user());
+    const urlNotification = '{{route('notifications.loadMessage')}}';
+</script>
 @include('client.layout.partials.script')
 @yield('page-script')
 </body>
