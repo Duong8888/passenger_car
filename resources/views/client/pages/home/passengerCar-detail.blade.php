@@ -1,5 +1,6 @@
 @extends('client.layout.master')
 @section('content')
+
     <div class="main-content">
         <div class="page-content">
             <section
@@ -20,6 +21,7 @@
                                         </ol>
                                     </nav>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -29,6 +31,7 @@
                 <img src="assets/images/about/shape-dark.png" alt=""
                     class="absolute hidden bg-cover -bottom-0 dark:block">
             </section>
+
 
             <!-- Thông tin chi tiết xe -->
             <section class="py-20">
@@ -170,8 +173,31 @@
                                         </div>
                                         <div class="swiper-pagination"></div>
                                     </div>
+                                </ul>
+
+                            </div>
+                            {{-- <div class="p-5 border-b border-gray-100/50 dark:border-neutral-600">
+                                <h6 class="mb-3 font-semibold text-gray-900 text-17 dark:text-gray-50">Professional
+                                    Skills</h6>
+                                <div class="flex flex-wrap gap-2">
+                                    <span
+                                        class="px-2 py-1 font-medium text-green-500 rounded bg-green-400/20 text-13">User
+                                        Interface Design</span>
+                                    <span
+                                        class="px-2 py-1 font-medium text-green-500 rounded bg-green-400/20 text-13">Web
+                                        Design</span>
+                                    <span
+                                        class="px-2 py-1 font-medium text-green-500 rounded bg-green-400/20 text-13">Responsive
+                                        Design</span>
+                                    <span
+                                        class="px-2 py-1 font-medium text-green-500 rounded bg-green-400/20 text-13">Mobile
+                                        App Design</span>
+                                    <span
+                                        class="px-2 py-1 font-medium text-green-500 rounded bg-green-400/20 text-13">UI
+                                        Design</span>
                                 </div>
                             </div>
+
                             {{--end  Ảnh nhiều của xe   --}}
                             <div
                                 class="border rounded border-gray-100/50 dark:border-neutral-600 nav-tabs bottom-border-tab">
@@ -376,12 +402,47 @@
                                         </div>
                                     </div>
 
+                            <div>
+                                @foreach($comments as $cmt)
+                                {{-- {{dd($cmt->star)}} --}}
+                                @foreach($users as $data)
+                                @if($data->id == $cmt->user_id)
 
+                                <div class="sm:flex" style="border-bottom: 1px solid rgb(224, 224, 224);padding: 10px">
+                                    <div class="shrink-0">
+                                        <img class="w-10 h-10 p-1 border-2 rounded-full border-gray-100/50"
+                                            src="assets/images/user/img-04.jpg" alt="img">
+                                    </div>
+                                    <div class="grow ltr:ml-3 rtl:mr-3">
+                                        <div>
+                                            <p
+                                                class="mb-2 text-sm text-gray-500 ltr:float-right rtl:float-left dark:text-gray-300">
+                                                {{ \Carbon\Carbon::parse($cmt->created_at)->format('d/m/Y') }}</p>
+                                            {{-- {{ \Carbon\Carbon::parse($car)->format('H:i') }} --}}
+                                            <h6 class="text-gray-900 dark:text-gray-50">{{$data->name}}</h6>
+                                            <div class="text-yellow-500 text-17">
+                                                @for ($i = 0; $i < $cmt->star ; $i++)
+                                                    <i class="mdi mdi-star"></i>
+                                                    @endfor
+                                                    {{-- <i class="mdi mdi-star"></i>
+                                                    <i class="mdi mdi-star"></i>
+                                                    <i class="mdi mdi-star"></i>
+                                                    <i class="mdi mdi-star"></i>
+                                                    <i class="mdi mdi-star-half-full"></i> --}}
+                                            </div>
+                                            <p class="mt-3 italic text-gray-500 dark:text-gray-300">{{$cmt->content}}
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
+                                @endif
+                                @endforeach
+                                @endforeach
 
 
 
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -475,7 +536,24 @@
                 </div>
             </section>
 
+        <div class="flex items-center gap-x-3">
+            <div class="rounded border w-1/2 mx-auto mt-4">
+                <!-- Tabs -->
+                <ul id="tabs" class="inline-flex pt-2 px-1 w-full border-b">
+                    <li
+                        class="bg-white px-4 text-gray-800 font-semibold py-2 rounded-t border-t border-r border-l -mb-px">
+                        <a id="default-tab" href="#first">Chỗ mong muốn</a>
+                    </li>
+                    <li class="px-4 text-gray-800 font-semibold py-2 rounded-t"><a href="#second">Điểm đón trả</a>
+                    </li>
+                    <li class="px-4 text-gray-800 font-semibold py-2 rounded-t"><a href="#third">Nhập thông tin</a>
+                    </li>
+                </ul>
 
         </div>
     </div>
+@endsection
+@section('page-script')
+<script type="module" src="{{ asset('client/js/custom/passengeCar-detail.js') }}">
+</script>
 @endsection

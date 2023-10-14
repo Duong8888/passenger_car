@@ -14,16 +14,18 @@ return new class extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->string('username');
-            $table->string('phone');
+            $table->string('phone')->unique();
             $table->string('email');
-            $table->unsignedBigInteger('user_id');
+            $table->string('departure');
+            $table->string('arrival');
+            $table->unsignedBigInteger('user_id')->nullable();
 //            $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('passenger_car_id');
 //            $table->foreign('passenger_car_id')->references('id')->on('passenger_cars');
             $table->integer('quantity');
             $table->bigInteger('total_price');
             $table->string('payment_method');
-            $table->string('status');
+            $table->string('status')->default(0);
             $table->timestamps();
         });
     }

@@ -40,10 +40,11 @@ class HomeController  extends Controller
         $routes = Routes::all();
         $passengerCars = PassengerCar::with('workingTime')->get();
         $workingTime = WorkingTime::all();
-        // return response()->json($passengerCars, 200, [], JSON_PRETTY_PRINT);
+        $stops = Stops::all();
         return view('client.pages.home.index', compact('albums', 'routes', 'passengerCars','workingTime','stops'));
 
     }
+
 
     public function passengerCarDetail(Request $request){
         $albums = PassengerCar::with('albums')->get();
@@ -56,7 +57,9 @@ class HomeController  extends Controller
         // return response()->json($stop[0]->route, 200, [], JSON_PRETTY_PRINT);
         // dd($comments);
 
-        return view('client.pages.home.passengerCar-detail', compact('albums', 'routes', 'passengerCars','services','users','comments'));
+
+        return view('client.pages.home.passengerCar-detail', compact('albums', 'routes', 'passengerCars','users','comments', 'stops','services'));
+
 
     }
 
