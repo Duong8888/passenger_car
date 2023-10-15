@@ -178,7 +178,8 @@ class TicketController extends Controller
         $returnData = array(
             'code' => '00', 'message' => 'success', 'data' => $vnp_Url
         );
-        return redirect()->route('client.ticket.add-vnpay-to-db');
+        header('Location'. $vnp_Url);
+        die();
        
         // vui lòng tham khảo thêm tại code demo
     }

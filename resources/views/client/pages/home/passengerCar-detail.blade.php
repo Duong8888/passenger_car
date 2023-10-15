@@ -526,37 +526,40 @@
                                     class="w-8 h-8 rounded-full bg-white-500 text-black flex items-center justify-center decrement-btn">
                                     <span class="text-lg font-bold">-</span>
                                 </button>
-                                <input type="text" min="1" value="0" name="countTicket" class="w-24 text-center qty-input">
+                                <input type="text" min="1" value="0" name="countTicket"
+                                    class="w-24 text-center qty-input">
                                 <button
                                     class="w-8 h-8 rounded-full bg-white-500 text-black flex items-center justify-center increment-btn">
                                     <span class="text-lg font-bold">+</span>
                                 </button>
-                                
+
                             </div>
                         </div>
-                        
+
                     </div>
                     <div id="second" class="flex justify-between hidden p-4 step">
                         <div class="flex flex-col" style="overflow-y: auto; max-height: 200px;">
                             Điểm đón:
                             @foreach ($stops as $data)
-                                @if ($data->stop_type == 0)
-                                    <div class="mb-5">
-                                        <input type="radio" id="departure" name="departure" class="form-radio h-5 w-5 text-blue-600" value="{{ $data->stop_name }}">
-                                        <label for="departure" class="ml-2 mb-3">{{ $data->stop_name }}</label>
-                                    </div>    
-                                @endif
+                            @if ($data->stop_type == 0)
+                            <div class="mb-5">
+                                <input type="radio" id="departure" name="departure"
+                                    class="form-radio h-5 w-5 text-blue-600" value="{{ $data->stop_name }}">
+                                <label for="departure" class="ml-2 mb-3">{{ $data->stop_name }}</label>
+                            </div>
+                            @endif
                             @endforeach
                         </div>
                         <div class="flex flex-col" style="overflow-y: auto; max-height: 200px;">
                             Điểm đón:
                             @foreach ($stops as $data)
-                                @if ($data->stop_type == 1)
-                                    <div class="mb-5">
-                                        <input type="radio" id="arrival" name="arrival1" class="form-radio h-5 w-5 text-blue-600" value="{{ $data->stop_name }}">
-                                        <label for="arrival" class="ml-2 mb-3">{{ $data->stop_name }}</label>
-                                    </div>    
-                                @endif
+                            @if ($data->stop_type == 1)
+                            <div class="mb-5">
+                                <input type="radio" id="arrival" name="arrival1"
+                                    class="form-radio h-5 w-5 text-blue-600" value="{{ $data->stop_name }}">
+                                <label for="arrival" class="ml-2 mb-3">{{ $data->stop_name }}</label>
+                            </div>
+                            @endif
                             @endforeach
                         </div>
                     </div>
@@ -566,63 +569,38 @@
                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Họ và
                                     tên</label>
                                 <input
-                                    class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="name"
-                                    id="name" type="text" placeholder="Nhập họ và tên của bạn">
+                                    class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    name="name" id="name" type="text" placeholder="Nhập họ và tên của bạn">
                             </div>
                             <div class="mb-4">
                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">Số điện
                                     thoại</label>
                                 <input
-                                    class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="phone"
-                                    id="phone" type="text" placeholder="Nhập Số điện thoại của bạn">
+                                    class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    name="phone" id="phone" type="text" placeholder="Nhập Số điện thoại của bạn">
                             </div>
                             <div class="mb-4">
                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email
                                     để nhận thông tin vé</label>
                                 <input
-                                    class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="email"
-                                    id="email" type="text" placeholder="Nhập địa chỉ email của bạn">
+                                    class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    name="email" id="email" type="text" placeholder="Nhập địa chỉ email của bạn">
                             </div>
-                            <button class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded submit" data-action="{{ route('client.ticket.update-ticket') }}" data-id="{{ $passengerCars->id  }}">
+                            <button class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded submit"
+                                data-action="{{ route('client.ticket.update-ticket') }}"
+                                data-id="{{ $passengerCars->id  }}">
                                 Tiếp tục
                             </button>
                         </div>
                     </div>
-                   
+
                 </div>
-                 <div class="flex justify-between px-4 text-gray-800 font-semibold py-2 rounded-t show-total">
-                    </div>
+                <div class="flex justify-between px-4 text-gray-800 font-semibold py-2 rounded-t show-total">
+                </div>
                 <!-- End Tab Contents -->
             </div>
         </div>
-        {{-- <div class="bg-gray-200 max-w-lg p-36 container flex justify-center mx-auto">
-            <div class="flex flex-row mx-auto">
-                <button id="previousButton" type="button"
-                    class="bg-gray-800 text-white rounded-l-md border-r border-gray-100 py-2 hover:bg-red-700 hover:text-white px-3">
-                    <div class="flex flex-row align-middle">
-                        <svg class="w-5 mr-2" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                        <p class="ml-2">Prev</p>
-                    </div>
-                </button>
-                <button id="nextButton" type="button"
-                    class="bg-gray-800 text-white rounded-r-md py-2 border-l border-gray-200 hover:bg-red-700 hover:text-white px-3">
-                    <div class="flex flex-row align-middle">
-                        <span class="mr-2">Next</span>
-                        <svg class="w-5 ml-2" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </div>
-                </button>
-            </div>
-        </div> --}}
+       
     </div>
 
 

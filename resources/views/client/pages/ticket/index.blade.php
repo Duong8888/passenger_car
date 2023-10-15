@@ -63,6 +63,7 @@
     <form action="{{ route('client.ticket.vnpay-method') }}" method="POST" class="fixed bottom-0 left-0 right-0 p-4 bg-white shadow-md flex justify-center vnpay-ticket hidden">
         @csrf
         <button name="redirect" style="background: yellow ; width: 50%; padding: 10px;margin:5px" id="payment-vnp" type="submit" >Thanh toán VNPay</button>
+        
         <input type="hidden" value="{{ json_encode(session('value')) }}" name="session">
         {{-- <button data-session="{{ json_encode(session('value')) }}" style="background: yellow ; width: 50%; padding: 10px;margin:5px" class="finish-ticket-vnpay">Booking VNPAY</button> --}}
         <h6 class="mb-3 text-lg text-gray-900 dark:text-gray-50">Click Book to finish payment</h6>
