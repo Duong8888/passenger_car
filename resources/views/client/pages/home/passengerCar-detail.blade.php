@@ -491,8 +491,10 @@
         </section>
     </div>
 </div>
-<div id="popup" class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 hidden w-80 h-96">
-    <div class="bg-white p-6 rounded relative">
+
+
+    <div id="popup" class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 hidden w-80 h-96">
+        <div class="bg-white p-6 rounded relative">
         <!-- Nút "x" -->
         <button onclick="hidePopup()" class="absolute top-0 right-0 mt-4 mr-4 text-gray-500 hover:text-gray-700 exit">
             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -600,7 +602,7 @@
                 <!-- End Tab Contents -->
             </div>
         </div>
-       
+
     </div>
 
 
