@@ -35,7 +35,7 @@ class HomeController  extends Controller
         foreach ($data as $key => $value) {
             $stops[] = $value->name;
         }
-
+        $users = User::all();
         $albums = PassengerCar::with('albums')->get();
         $routes = Routes::all();
         $passengerCars = PassengerCar::with('workingTime')->get();
@@ -53,7 +53,7 @@ class HomeController  extends Controller
         $users = User::all();
         $comments = Comment::where('passenger_car_id',$request->passenger_id)->get();
 
-        // return response()->json($stop[0]->route, 200, [], JSON_PRETTY_PRINT);
+        // return response()->json($passengerCars->route, 200, [], JSON_PRETTY_PRINT);
         // dd($comments);
 
         return view('client.pages.home.passengerCar-detail', compact('albums', 'routes', 'passengerCars','services','users','comments'));
