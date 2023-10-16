@@ -220,7 +220,7 @@
     <!-- end danh sách xe -->
 
     <!-- danh mục nhà xe -->
-    @include('client.layout.partials.dmnhaxe')
+{{--    @include('client.layout.partials.dmnhaxe')--}}
     <!-- end danh mục nhà xe -->
 
     {{--  <!-- start process -->
@@ -387,7 +387,7 @@
     <!-- end testimonial --> --}}
 
     <!-- danh sách tin tức -->
-    @include('client.layout.partials.danhsachtintuc')
+{{--    @include('client.layout.partials.danhsachtintuc')--}}
     <!--  end danh sách tin tức-->
 
     {{-- <!-- start client -->
