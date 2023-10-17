@@ -23,7 +23,7 @@ class HomeController  extends Controller
      */
 
     public function __construct(
-        public VietnameseProvinces $vietnameseProvinces
+        public VietnameseProvinces $vietnameseProvinces,
     )
     {
     }
@@ -52,11 +52,12 @@ class HomeController  extends Controller
         $services = PassengerCar::with('services')->get();
         $users = User::all();
         $comments = Comment::where('passenger_car_id',$request->passenger_id)->get();
+        $stops = Stops::all();
 
         // return response()->json($passengerCars->route, 200, [], JSON_PRETTY_PRINT);
         // dd($comments);
 
-        return view('client.pages.home.passengerCar-detail', compact('albums', 'routes', 'passengerCars','services','users','comments'));
+        return view('client.pages.home.passengerCar-detail', compact('albums', 'routes', 'passengerCars','services','users','comments','stops'));
 
     }
 

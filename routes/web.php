@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\admin\StopsController;
+use App\Http\Controllers\admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,6 +76,7 @@ Route::resource('/route', RouteController::class);
 //Phan'z Nam'z
 Route::resource('/service', ServicesController::class);
 Route::resource('/stop', StopsController::class);
+Route::resource('/userpermission', UserController::class);
 //End Phan'z Nam'z
 
 

@@ -91,7 +91,7 @@
 
                                                 <!--end col-->
                                                 <div class="col-span-12 lg:col-span-2">
-                                                    <div>
+                                                    {{-- <div>
                                                         <div class="mb-2 lg:flex" style="margin-left: -35px">
                                                             <div class="flex-shrink-0">
                                                                 <i class="mr-1 group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500 mdi mdi-map-marker"></i>
@@ -104,8 +104,7 @@
                                                            class="mb-2 text-gray-500 dark:text-gray-300"><span
                                                                 style="color: #1890ff;">{{ number_format( $car->route->price, 0, ',', ',') }}đ</span>
                                                         </p>
-                                                        {{-- Giá: {{ $car->route->price }} <br> --}}
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                                 <!--end col-->
                                                 <div class="col-span-12 lg:col-span-2">

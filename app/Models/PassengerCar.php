@@ -40,7 +40,7 @@ class PassengerCar extends Model
     }
 
     public function route(){
-        return $this->belongsTo(Routes::class,'route_id');
+        return $this->belongsTo(Routes::class,'route_id','id');
     }
     public function workingTime() {
         return $this->belongsToMany(WorkingTime::class, 'passenger_car_working_times');

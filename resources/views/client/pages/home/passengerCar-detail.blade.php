@@ -477,5 +477,117 @@
 
 
         </div>
+        {{--  --}}
+        <div id="popup" class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 hidden w-80 h-96">
+            <div class="bg-white p-6 rounded relative">
+                <!-- Nút "x" -->
+                <button onclick="hidePopup()" class="absolute top-0 right-0 mt-4 mr-4 text-gray-500 hover:text-gray-700 exit">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+
+
+                <div class="flex items-center gap-x-3">
+                    <div class="rounded border w-1/2 mx-auto mt-4">
+                        <!-- Tabs -->
+                        <ul id="tabs" class="inline-flex pt-2 px-1 w-full border-b">
+                            <li
+                                class="bg-white px-4 text-gray-800 font-semibold py-2 rounded-t border-t border-r border-l -mb-px">
+                                <a id="default-tab" href="#first">Chỗ mong muốn</a>
+                            </li>
+                            <li class="px-4 text-gray-800 font-semibold py-2 rounded-t"><a href="#second">Điểm đón trả</a>
+                            </li>
+                            <li class="px-4 text-gray-800 font-semibold py-2 rounded-t"><a href="#third">Nhập thông tin</a>
+                            </li>
+                        </ul>
+
+                        <!-- Tab Contents -->
+                        <div id="tab-contents" class="h-full w-full">
+                            <div id="first" class="p-4 step">
+                                <label for="">Số lượng khách</label>
+                                <div class="flex justify-between">
+                                    <p>Ghế thường - <span class="price">{{ $routes[0]->route->price }}</span>đ</p>
+                                    <div class="flex items-center">
+                                        <button
+                                            class="w-8 h-8 rounded-full bg-white-500 text-black flex items-center justify-center decrement-btn">
+                                            <span class="text-lg font-bold">-</span>
+                                        </button>
+                                        <input type="text" min="1" value="0" name="countTicket" class="w-24 text-center qty-input">
+                                        <button
+                                            class="w-8 h-8 rounded-full bg-white-500 text-black flex items-center justify-center increment-btn">
+                                            <span class="text-lg font-bold">+</span>
+                                        </button>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="second" class="flex justify-between hidden p-4 step">
+                                <div class="flex flex-col" style="overflow-y: auto; max-height: 200px;">
+                                    Điểm đón:
+                                    @foreach ($stops as $data)
+        @if ($data->stop_type == 0)
+                                            <div class="mb-5">
+                                                <input type="radio" id="departure" name="departure" class="form-radio h-5 w-5 text-blue-600" value="{{ $data->stop_name }}">
+                                                <label for="departure" class="ml-2 mb-3">{{ $data->stop_name }}</label>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                                <div class="flex flex-col" style="overflow-y: auto; max-height: 200px;">
+                                    Điểm đón:
+                                    @foreach ($stops as $data)
+                                        @if ($data->stop_type == 1)
+                                            <div class="mb-5">
+                                                <input type="radio" id="arrival" name="arrival1" class="form-radio h-5 w-5 text-blue-600" value="{{ $data->stop_name }}">
+                                                <label for="arrival" class="ml-2 mb-3">{{ $data->stop_name }}</label>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div id="third" class="hidden p-4 step">
+                                <div class="max-w-md mx-auto bg-white rounded p-8 shadow-md">
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Họ và
+                                            tên</label>
+                                        <input
+                                            class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="name"
+                                            id="name" type="text" placeholder="Nhập họ và tên của bạn">
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">Số điện
+                                            thoại</label>
+                                        <input
+                                            class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="phone"
+                                            id="phone" type="text" placeholder="Nhập Số điện thoại của bạn">
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email
+                                            để nhận thông tin vé</label>
+                                        <input
+        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="email"
+                                            id="email" type="text" placeholder="Nhập địa chỉ email của bạn">
+                                    </div>
+                                    <button class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded submit" data-action="{{ route('client.ticket.update-ticket') }}" data-id="{{ $passengerCars->id  }}">
+                                        Tiếp tục
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                         <div class="flex justify-between px-4 text-gray-800 font-semibold py-2 rounded-t show-total">
+                            </div>
+                        <!-- End Tab Contents -->
+                    </div>
+                </div>
+        {{--  --}}
     </div>
+
+@endsection
+
+@section('page-script')
+<script type="module" src="{{ asset('client/js/custom/passengeCar-detail.js') }}">
+</script>
 @endsection

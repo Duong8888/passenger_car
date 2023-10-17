@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\TicketController;
 use App\Http\Controllers\Client\SearchController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PhoneAuthController;
@@ -34,4 +35,12 @@ Route::group(['prefix' => 'notifications', 'as' => 'notifications.'], function (
 
 Route::get('/blog/{id}',[BlogController::class,'blog'])->name('blog');
 Route::get('/blogs', [BlogController::class, 'show'])->name('blog.show');
+
+// Trường
+Route::post('/update-ticket' , [TicketController::class, 'CountTicket'])->name('client.ticket.update-ticket');
+Route::get('/payment-method', [TicketController::class, 'PaymentView'])->name('client.ticket.payment-method');
+Route::post('/send-ticket', [TicketController::class, 'endPayment'])->name('client.ticket.end-payment-ticket');
+Route::post('/vnpay-method', [TicketController::class, 'vnpay_payment'])->name('client.ticket.vnpay-method');
+Route::post('/momo-method', [TicketController::class, 'momo_payment'])->name('client.ticket.momo-method');
+Route::get('/vnpay-todb', [TicketController::class, 'checkoutPayment'])->name('client.ticket.add-vnpay-to-db');
 

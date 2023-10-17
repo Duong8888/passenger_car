@@ -15,3 +15,5 @@
 <script src="{{asset('client/js/pages/nav%26tabs.js')}}"></script>
 
 <script src="{{asset('client/js/app.js')}}"></script>
+
+<script src="{{asset('admin/libs/jquery/jquery.min.js')}}"></script>
