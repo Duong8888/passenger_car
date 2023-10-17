@@ -12,6 +12,7 @@ class PostController extends AdminBaseController
 {
     public $model = Posts::class;
     public $urlbase = 'admin.posts';
+    public $pathView = 'admin.pages.posts.';
     public $fieldImage = 'posts'; // Điều này phụ thuộc vào cấu hình của bạn
     public $urlIndex = 'posts.index';
     public $folderImage = 'posts/image'; // Điều này phụ thuộc vào cấu hình của bạn
