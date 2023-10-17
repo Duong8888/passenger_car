@@ -111,7 +111,7 @@
                                                 <div class="col-span-12 lg:col-span-2">
                                                     <div class="flex flex-wrap gap-1.5">
                                                         <span
-                                                            class="badge  text-green-500 text-13 px-2 py-0.5 font-medium rounded">Còn 5 chổ trống</span>
+{{--                                                            class="badge  text-green-500 text-13 px-2 py-0.5 font-medium rounded">Còn 5 chổ trống</span>--}}
                                                         <form action="{{ URL::to('passengerCar-detail') }}"
                                                               method="POST">
                                                             @csrf
@@ -142,11 +142,7 @@
                                                 </div>
                                                 <!--end col-->
                                                 <div class="col-span-12 lg:col-span-6">
-                                                    <div>
-                                                        <p class="mb-0 text-gray-500 dark:text-gray-300"><span
-                                                                class="text-gray-900 dark:text-gray-50">Mô tả ngắn :</span>
-                                                            {{ Str::limit($car->description, 10, '...') }}</p>
-                                                    </div>
+
                                                 </div>
                                                 <!--end col-->
                                                 <div class="col-span-3 lg:col-span-2">

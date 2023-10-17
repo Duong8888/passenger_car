@@ -13,18 +13,28 @@ class PostController extends AdminBaseController
     public $model = Posts::class;
     public $urlbase = 'admin.posts';
     public $fieldImage = 'posts'; // Điều này phụ thuộc vào cấu hình của bạn
-    public $urlIndex = 'posts.list';
+    public $urlIndex = 'posts.index';
     public $folderImage = 'posts/image'; // Điều này phụ thuộc vào cấu hình của bạn
     public $titleIndex = 'Danh sách Bài viết';
     public $titleCreate = 'Thêm mới Bài viết';
     public $titleShow = 'Xem chi tiết bài viết';
     public $titleEdit = 'Cập nhật Bài viết';
+    public $colums = [
+        'title' => 'Tiêu đề',
+        'content' => 'Nội dung',
+        'image' => 'Ảnh',
+        'slug' => 'Slug',
+        'category_id' => 'Danh mục',
+        'author_id' => 'Tác giả',
+        'action' => 'Action',
+    ];
 
     public function validateStore($request)
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required',
-            'subtitle' => 'required',
+            'content' => 'required',
+            'image' => 'required',
             'slug' => 'required',
             'category_id' => 'required', // Ví dụ kiểm tra category_id là một số nguyên
             'author_id' => 'required', // Ví dụ kiểm tra author_id là một số nguyên
@@ -35,13 +45,6 @@ class PostController extends AdminBaseController
 
     }
 
-    // Đặc biệt, bạn có thể thêm logic xử lý riêng cho PostController tại đây nếu cần.
-    public function index()
-    {
-        $data = Posts::all();
-
-        return view('admin.pages.posts.list', ['data' => $data]);
-    }
     public function create()
     {
         return view('admin.pages.posts.create');
@@ -59,7 +62,7 @@ class PostController extends AdminBaseController
         // Tạo một model Post mới và lưu vào cơ sở dữ liệu
         $post = new Posts(); // Sửa thành Post::class để đảm bảo tên model đúng
         $post->title = $request->input('title');
-        $post->subtitle = $request->input('subtitle');
+        $post->content = $request->input('content');
         $post->slug = $request->input('slug');
         $post->category_id = $request->input('category_id'); // Đặt category_id
         $post->author_id = $request->input('author_id'); // Đặt author_id

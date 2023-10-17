@@ -31,8 +31,8 @@
                                         <input class="form-control" type="text" name="title" id="title" value="" size="50" onkeyup="ChangeToSlug();" >
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label">Subtitle</label>
-                                        <textarea name="subtitle" id="editor1" rows="10" cols="80"></textarea>
+                                        <label class="form-label">Content</label>
+                                        <textarea name="content" id="editor1" rows="10" cols="80"></textarea>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Slug</label>
