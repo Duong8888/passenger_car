@@ -26,16 +26,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('login', function (){
-    echo 123;
-});
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
-// Route::get('/dashboard', function () {
-//     return view('admin.pages.dashboard.index');
-// });
 Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard');
 
 
@@ -49,10 +40,6 @@ require __DIR__.'/auth.php';
 
 Route::get('/sign_in', [PhoneAuthController::class,'sign_in'])->name('sign_in');
 
-// Route::middleware(['auth','check.role'])->group(function(){
-Route::get('/dashboard', function () {
-    return view('admin.pages.dashboard.index');
-});
 
 Route::get('/layout', function () {
     return view('admin.layouts.master');
