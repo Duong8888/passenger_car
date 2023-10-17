@@ -80,7 +80,7 @@ $(document).ready(function () {
                 });
 
                 if (response.success) {
-                    window.location.href = '/home';
+                    window.location.href = '/';
                 }
             }
         })
