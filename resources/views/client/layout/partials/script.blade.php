@@ -1,5 +1,7 @@
 @vite('resources/js/app.js')
 
+<script src="{{asset('admin/libs/jquery/jquery.min.js')}}"></script>
+
 <script src="{{asset('client/libs/%40popperjs/core/umd/popper.min.js')}}"></script>
 <script src="{{asset('client/libs/simplebar/simplebar.min.js')}}"></script>
 
@@ -16,4 +18,3 @@
 
 <script src="{{asset('client/js/app.js')}}"></script>
 
-<script src="{{asset('admin/libs/jquery/jquery.min.js')}}"></script>
