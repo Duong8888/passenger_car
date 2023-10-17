@@ -34,6 +34,19 @@ class PassengerCarController extends AdminBaseController
         'action' => 'Thao tác',
     ];
 
+
+    public function index(Request $request)
+    {
+        if($request->ajax()){
+            $routes = Routes::all();
+            $passengerCar = PassengerCar::query()->with(['route' => function($query){
+                $query->get('departure','arrival');
+            }])->orderBy('id','desc')->paginate(10);
+            return \response()->json(['data' => $passengerCar,'routes'=>$routes]);
+        }
+        return parent::index($request);
+    }
+
     public function store(Request $request)
     {
         $car = new $this->model;

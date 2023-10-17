@@ -38,11 +38,7 @@ class AdminBaseController extends Controller
      */
     public function index(Request $request)
     {
-        $data = $this->model->paginate(10);
-        if($request->ajax()){
-            $routes = Routes::all();
-            return \response()->json(['data' => $data,'routes'=>$routes]);
-        }
+        $data = $this->model->orderBy('id','desc')->paginate(10);
 
         return view($this->pathView . __FUNCTION__, compact('data'))
             ->with('title', $this->titleIndex)

@@ -36,7 +36,7 @@ class PostController extends AdminBaseController
     }
 
     // Đặc biệt, bạn có thể thêm logic xử lý riêng cho PostController tại đây nếu cần.
-    public function index()
+    public function index(Request $request)
     {
         $data = Posts::all();
 

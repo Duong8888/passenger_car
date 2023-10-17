@@ -67,49 +67,72 @@ $(document).ready(function () {
     }
 
     function loadData() {
-        // $.ajax({
-        //     url: baseUrl,
-        //     method: "GET",
-        //     success: function (data) {
-        //         console.log(data)
-        //         tabelMain.html('');
-        //         $.each(data.data.data, function (index, item) {
-        //             $.each(data.routes, function (index2, item2) {
-        //                 if (item2.id === item.id) {
-        //                     var departure = item2.departure + ' - ';
-        //                     var arrival = item2.arrival;
-        //                     tabelMain.append(`
-        //                 <tr>
-        //                     <td>${item.license_plate}</td>
-        //                     <td>${item.capacity}</td>
-        //                     <td>${item.price}</td>
-        //                     <td>${departure}${arrival}</td>
-        //                     <td>
-        //                         <div class="btn-group">
-        //                             <button type="button" class="btn btn-primary dropdown-toggle"
-        //                                     data-bs-toggle="dropdown" aria-haspopup="true"
-        //                                     aria-expanded="false">
-        //                                 Action <i class="mdi mdi-chevron-down"></i>
-        //                             </button>
-        //                             <div class="dropdown-menu" style="">
-        //                                 <a class="dropdown-item" href="#">Sửa</a>
-        //                                 <a class="dropdown-item delete" data-action="{{route('car.delete',[$value->id])}}" href="#">Xóa</a>
-        //                             </div>
-        //                         </div>
-        //                     </td>
-        //                 </tr>
-        //             `);
-        //                 }else {
-        //                     var departure = 'Chưa hoạt động.';
-        //                     var arrival = '.';
-        //                 }
-        //             });
-        //         })
-        //     },
-        //     error: function (error) {
-        //         console.log(error);
-        //     }
-        // });
+        $.ajax({
+            url: baseUrl,
+            method: "GET",
+            success: function (data) {
+                console.log(data)
+                tabelMain.html('');
+                $.each(data.data.data, function (index, item) {
+                    $.each(data.routes, function (index2, item2) {
+                        if (item2.id === item.route_id) {
+                            var departure = item2.departure + ' - ';
+                            var arrival = item2.arrival;
+                            tabelMain.append(`
+                        <tr>
+                            <td>${item.license_plate}</td>
+                            <td>${item.capacity}</td>
+                            <td>${item.price}</td>
+                            <td>${departure}${arrival}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary dropdown-toggle"
+                                            data-bs-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                        Action <i class="mdi mdi-chevron-down"></i>
+                                    </button>
+                                    <div class="dropdown-menu" style="">
+                                        <a class="dropdown-item" href="#">Sửa</a>
+                                        <a class="dropdown-item delete" data-action="{{route('car.delete',[$value->id])}}" href="#">Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    `);
+                        }
+                    });
+                    if(item.route_id === null){
+                        var departure = 'Chưa hoạt động.';
+                        var arrival = '.';
+
+                        tabelMain.append(`
+                        <tr>
+                            <td>${item.license_plate}</td>
+                            <td>${item.capacity}</td>
+                            <td>${item.price}</td>
+                            <td>${departure}${arrival}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary dropdown-toggle"
+                                            data-bs-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                        Action <i class="mdi mdi-chevron-down"></i>
+                                    </button>
+                                    <div class="dropdown-menu" style="">
+                                        <a class="dropdown-item" href="#">Sửa</a>
+                                        <a class="dropdown-item delete" data-action="{{route('car.delete',[$value->id])}}" href="#">Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    `);
+                    }
+                })
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
     }
 
 });

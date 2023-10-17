@@ -32,7 +32,7 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="mb-3">
-                                                    <label for="field-1" class="form-label">Biển số</label>
+                                                    <label for="field-1" class="form-label">Biển số *</label>
                                                     <input type="text" name="license_plate" class="form-control"
                                                            id="field-1"
                                                            placeholder="B52-198">
@@ -40,7 +40,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="mb-3">
-                                                    <label for="field-2" class="form-label">Giá vé</label>
+                                                    <label for="field-2" class="form-label">Giá vé *</label>
                                                     <input type="number" name="price" class="form-control"
                                                            id="example-number"
                                                            placeholder="350.000">
@@ -48,7 +48,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="mb-3">
-                                                    <label for="field-2" class="form-label">Số chỗ ngồi</label>
+                                                    <label for="field-2" class="form-label">Số chỗ ngồi *</label>
                                                     <input type="number" name="capacity" class="form-control"
                                                            id="example-number"
                                                            placeholder="35">
@@ -59,24 +59,24 @@
                                         <div class="row">
                                             <div class="col-md-5">
                                                 <div>
-                                                    <label class="form-label">Giờ Khởi hành</label>
+                                                    <label class="form-label">Giờ Khởi hành *</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-5">
                                                 <div>
-                                                    <label class="form-label">Giờ đến</label>
+                                                    <label class="form-label">Giờ đến *</label>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="show-item">
                                             <div class="row add-item mb-2">
                                                 <div class="col-md-5">
-                                                    <input class="form-control" name="departure[]" id="example-time"
-                                                           type="time" name="time">
+                                                    <input class="form-control" name="departure[]" id=""
+                                                           type="time" name="time" value="01:00">
                                                 </div>
                                                 <div class="col-md-5">
-                                                    <input class="form-control" name="arrival[]" id="example-time"
-                                                           type="time" name="time">
+                                                    <input class="form-control" name="arrival[]" id=""
+                                                           type="time" name="time" value="05:00">
                                                 </div>
                                                 <div class="col-md-2 d-flex justify-content-between">
                                                     <button type="button"
@@ -93,10 +93,12 @@
 
 
                                         <div class="row mb-4">
+                                            <label for="field-1" class="form-label">Ảnh xe *</label>
                                             <div id="uppy"></div>
                                         </div>
 
                                         <div class="row mt-4">
+                                            <label for="field-1" class="form-label">Mô tả</label>
                                             <div class="col-md-12">
                                                 <div id="snow-editor" style="height: 300px;"
                                                      class="ql-container ql-snow">
