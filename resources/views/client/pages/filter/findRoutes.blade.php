@@ -185,6 +185,101 @@
                                     </div>
                                 </div>
                             </div>
+                            <div data-tw-accordion="collapse">
+                                <div class="text-gray-700 accordion-item dark:text-gray-300">
+                                    <h6>
+                                        <button type="button"
+                                                class="flex items-center justify-between w-full px-4 py-2 font-medium text-left accordion-header group-data-[theme-color=violet]:bg-violet-500/20 group-data-[theme-color=sky]:bg-sky-500/20 group-data-[theme-color=red]:bg-red-500/20 group group-data-[theme-color=green]:bg-green-500/20 group-data-[theme-color=pink]:bg-pink-500/20 group-data-[theme-color=blue]:bg-blue-500/20 group active">
+                                            <span
+                                                class="text-gray-900 text-15 dark:text-gray-50">Điểm đón</span>
+                                        </button>
+                                    </h6>
+                                    <div class="block accordion-body">
+                                        <div class="p-5">
+                                            <div class="mt-2">
+                                                <div class="col-span-12 xl:col-span-4">
+                                                    <select class="form-select " data-trigger name="filterStopsDeparture"
+                                                            id="filter-stops-departure"
+                                                            aria-label="filterStopsDeparture">
+                                                        @foreach($filterStops as $value)
+                                                            <option value="{{$value->id}}">{{$value->stop_name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="mt-2">
+                                                <input
+                                                    class="find-time rounded cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-neutral-600 dark:checked:bg-violet-500/20"
+                                                    type="checkbox" name="morning" data-min="06:01" data-max="12:00" value="morning"
+                                                    id="morning">
+                                                <label for="morning"
+                                                       class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">Sáng
+                                                    (06:01 - 12:00)</label>
+                                            </div>
+                                            <div class="mt-2">
+                                                <input
+                                                    class="find-time rounded cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-neutral-600 dark:checked:bg-violet-500/20"
+                                                    type="checkbox" name="afternoon" data-min="12:01" data-max="18:00" value="afternoon"
+                                                    id="afternoon">
+                                                <label for="afternoon"
+                                                       class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">Chiều
+                                                    (12:01 - 18:00)</label>
+                                            </div>
+                                            <div class="mt-2">
+                                                <input
+                                                    class="find-time rounded cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-neutral-600 dark:checked:bg-violet-500/20"
+                                                    type="checkbox" name="evening" data-min="18:01" data-max="23:59" value="evening"
+                                                    id="evening">
+                                                <label for="evening"
+                                                       class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">Tối
+                                                    (18:01 - 23:59)</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-tw-accordion="collapse">
+                                <div class="text-gray-700 accordion-item dark:text-gray-300">
+                                    <h6>
+                                        <button type="button"
+                                                class="flex items-center justify-between w-full px-4 py-2 font-medium text-left accordion-header group-data-[theme-color=violet]:bg-violet-500/20 group-data-[theme-color=sky]:bg-sky-500/20 group-data-[theme-color=red]:bg-red-500/20 group group-data-[theme-color=green]:bg-green-500/20 group-data-[theme-color=pink]:bg-pink-500/20 group-data-[theme-color=blue]:bg-blue-500/20 group active">
+                                            <span
+                                                class="text-gray-900 text-15 dark:text-gray-50" >Điểm trả</span>
+                                        </button>
+                                    </h6>
+                                    <div class="block accordion-body">
+                                        <div class="p-5">
+                                            <div class="mt-2">
+                                                <div class="col-span-12 xl:col-span-4">
+                                                    <select class="form-select " data-trigger name="filterStopsDeparture"
+                                                            id="filter-stops-departure"
+                                                            aria-label="filterStopsDeparture">
+                                                        @foreach($filterStops as $value)
+                                                            <option value="{{$value->id}}">{{$value->stop_name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="mt-2">
+                                                <select class="custom-select">
+                                                    <option value="morning">Sáng (06:01 - 12:00)</option>
+                                                    <option value="afternoon">Chiều (12:01 - 18:00)</option>
+                                                    <!-- Thêm các tùy chọn khác ở đây -->
+                                                </select>
+                                            </div>
+                                            <div class="mt-2">
+                                                <input
+                                                    class="find-time rounded cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-neutral-600 dark:checked:bg-violet-500/20"
+                                                    type="checkbox" name="evening" data-min="18:01" data-max="23:59" value="evening"
+                                                    id="evening">
+                                                <label for="evening"
+                                                       class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">Tối
+                                                    (18:01 - 23:59)</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 {{--                            <div data-tw-accordion="collapse">--}}
 {{--                                <div class="text-gray-700 accordion-item dark:text-gray-300">--}}
 {{--                                    <h6>--}}
@@ -395,7 +490,33 @@
     <script src="{{asset('client/js/pages/job-list.init.js')}}"></script>
 
     <script src="{{asset('client/js/pages/dropdown%26modal.init.js')}}"></script>
+    <style>
+        div.mt-2 input.your-custom-class-hoa {
+            width: 230px; /* Điều chỉnh chiều rộng theo ý muốn */
+            padding: 3px; /* Thêm khoảng cách xung quanh ô input */
+            border: 1px solid #ccc; /* Đường viền màu xám */
+            border-radius: 5px; /* Bo tròn góc */
+            background-color: #f5f5f5; /* Màu nền xám nhạt */
+            color: #333; /* Màu chữ đậm */
+        }
+        /* Ẩn danh sách ul */
+        .custom-dropdown ul {
+            display: none;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border: 1px solid #ccc;
+            max-height: 150px;
+            overflow-y: auto;
+        }
 
+        select.custom-select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
     <!-- Nouislider Js -->
     {{--    <script src="{{asset('client/libs/nouislider/nouislider.min.js')}}"></script>--}}
 

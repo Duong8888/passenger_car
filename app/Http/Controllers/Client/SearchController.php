@@ -50,6 +50,8 @@ class SearchController extends Controller
         $dataRoutes = $this->dataRouter();
         $passengerCar = [];
         $message = null;
+
+        $filterStops = $this->filterStops($request->departure, $request->arrival);
         if (count($routes) > 0) {
             $passengerCar = $routes[0]->passengerCars()->orderBy('price', 'desc')->with(['workingTime', 'services'])->get();
         } else {
@@ -64,7 +66,7 @@ class SearchController extends Controller
             if (empty($routes)) {
                 $routes[0] = [];
             }
-            return view($this->pathview . '.findRoutes', ['data' => $passengerCar, 'dataRoute' => $routes[0], 'stops' => $dataRoutes['stops'], 'message' => $message]);
+            return view($this->pathview . '.findRoutes', ['data' => $passengerCar, 'dataRoute' => $routes[0], 'stops' => $dataRoutes['stops'], 'filterStops' => $filterStops['data'], 'message' => $message]);
         }
     }
 
@@ -123,6 +125,22 @@ class SearchController extends Controller
         $service = $this->service::all();
         $PassengerCarsService = $this->passengerCarService::all();
         return response()->json(['data' => $idPassengerCars, 'dataRoute' => $routes[0],'service' => $service,'passengerCarsService'=>$PassengerCarsService]);
+    }
+
+    public function filterStops($departure, $arrival)
+    {
+        $query = DB::table('stops')
+            ->select(
+                'stops.id',
+                'stops.stop_name',
+                'stops.stop_type'
+            )
+            ->join('routes', 'stops.route_id', '=', 'routes.id')
+            ->where('routes.departure', $departure)
+            ->where('routes.arrival', $arrival);
+        log::info($query->toSql());
+        $filterStops = $query->get();
+        return ['data' => $filterStops];
     }
 
 }
