@@ -20,6 +20,7 @@
                                         </ol>
                                     </nav>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -29,6 +30,7 @@
                 <img src="assets/images/about/shape-dark.png" alt=""
                     class="absolute hidden bg-cover -bottom-0 dark:block">
             </section>
+
 
             <!-- Thông tin chi tiết xe -->
             <section class="py-20">
@@ -171,11 +173,9 @@
                                         </div>
                                         <div class="swiper-pagination"></div>
                                     </div>
-
                                     </ul>
 
                                 </div>
-
                                 <div class="border rounded border-gray-100/50 dark:border-neutral-600 nav-tabs bottom-border-tab col-span-12 lg:col-span-12 lg:col-start-12">
                                     <div class="px-6 py-0 border-b border-gray-100/50 dark:border-neutral-600">
 
@@ -205,6 +205,7 @@
 
                                         {{-- Mô tả --}}
                                         <div class="block w-full tab-pane" id="mota-tab">
+
                                             <div class="p-6 border rounded border-gray-100/50 dark:border-neutral-600">
                                                 <div>
                                                     <h6 class="mb-3 text-gray-900 text-17 dark:text-gray-50">Mô tả về chúng
@@ -347,12 +348,12 @@
                                                     @endforeach
                                                 </div>
                                             </div>
-
                                         </div>
                                         {{-- Đánh giá --}}
                                         <div class="hidden w-full tab-pane" id="danhgia-tab">
                                             <div>
                                                 @foreach ($comments as $cmt)
+                                                    {{-- {{dd($cmt->star)}} --}}
                                                     @foreach ($users as $data)
                                                         @if ($data->id == $cmt->user_id)
                                                             <div class="sm:flex"
@@ -368,16 +369,23 @@
                                                                             class="mb-2 text-sm text-gray-500 ltr:float-right rtl:float-left dark:text-gray-300">
                                                                             {{ \Carbon\Carbon::parse($cmt->created_at)->format('d/m/Y') }}
                                                                         </p>
+                                                                        {{-- {{ \Carbon\Carbon::parse($car)->format('H:i') }} --}}
                                                                         <h6 class="text-gray-900 dark:text-gray-50">
                                                                             {{ $data->name }}</h6>
                                                                         <div class="text-yellow-500 text-17">
                                                                             @for ($i = 0; $i < $cmt->star; $i++)
                                                                                 <i class="mdi mdi-star"></i>
                                                                             @endfor
+                                                                            {{-- <i class="mdi mdi-star"></i>
+                                                            <i class="mdi mdi-star"></i>
+                                                            <i class="mdi mdi-star"></i>
+                                                            <i class="mdi mdi-star"></i>
+                                                            <i class="mdi mdi-star-half-full"></i> --}}
                                                                         </div>
                                                                         <p
                                                                             class="mt-3 italic text-gray-500 dark:text-gray-300">
-                                                                            {{ $cmt->content }}</p>
+                                                                            {{ $cmt->content }}
+                                                                        </p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -385,23 +393,19 @@
                                                     @endforeach
                                                 @endforeach
 
+
+
                                             </div>
+
                                         </div>
-
                                     </div>
-
                                 </div>
-
                             </div>
                         </div>
-
                     </div>
                 </div>
             </section>
             <!-- Thông tin chi tiết xe -->
-
-
-
 
             {{-- Xe tương tự --}}
             <section class="py-20 bg-gray-50 dark:bg-neutral-700">
@@ -609,6 +613,7 @@
                                         </button>
                                     </div>
                                 </div>
+
                             </div>
                             <div class="flex justify-between px-4 text-gray-800 font-semibold py-2 rounded-t show-total">
                             </div>
@@ -621,7 +626,6 @@
         </div>
     </div>
 @endsection
-
 @section('page-script')
     <script type="module" src="{{ asset('client/js/custom/passengeCar-detail.js') }}"></script>
 @endsection

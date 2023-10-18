@@ -8,7 +8,6 @@ use App\Http\Controllers\PhoneAuthController;
 use App\Http\Controllers\Admin\TicketController;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\admin\StopsController;
 use App\Http\Controllers\admin\UserController;
@@ -42,6 +41,7 @@ require __DIR__.'/auth.php';
 
 Route::get('/sign_in', [PhoneAuthController::class,'sign_in'])->name('sign_in');
 
+
 Route::get('/layout', function () {
     return view('admin.layouts.master');
 });
@@ -54,6 +54,7 @@ Route::get('/posts/{id}/edit',  [PostController::class,'edit'])->name('posts.edi
 Route::put('/posts/{id}',  [PostController::class,'update'])->name('posts.update');
 // Đường dẫn route để xóa bài viết
 Route::delete('/posts/{id}', [PostController::class,'destroy'])->name('posts.destroy');
+Route::get('/posting/{slug}', [PostController::class,'createSlug'])->name('post.show');
 
 
 Route::resource('ticket', TicketController::class);
@@ -69,5 +70,21 @@ Route::resource('/service', ServicesController::class);
 Route::resource('/stop', StopsController::class);
 Route::resource('/userpermission', UserController::class);
 //End Phan'z Nam'z
+
+
+
+
+Route::get('/staff/index',[App\Http\Controllers\UserController::class,'index'])->name('route_staff_index');
+Route::match(['GET','POST'],'/staff/add',[App\Http\Controllers\UserController::class,'add'])->name('route_staff_add');
+Route::match(['GET','POST'],'/staff/edit/{id}',[App\Http\Controllers\UserController::class,'edit'])->name('route_staff_edit');
+Route::match(['GET','POST'],'/staff/delete/{id}',[App\Http\Controllers\UserController::class,'delete'])->name('route_staff_delete');
+
+
+Route::get('/management/index',[App\Http\Controllers\AdminManagementController::class,'index'])->name('route_adminmanagement_index');
+Route::match(['GET','POST'],'/management/edit/{id}',[App\Http\Controllers\AdminManagementController::class,'edit'])->name('route_adminmanagement_edit');
+Route::match(['GET','POST'],'/management/add',[App\Http\Controllers\AdminManagementController::class,'add'])->name('route_adminmanagement_add');
+Route::match(['GET','POST'],'/management/delete/{id}',[App\Http\Controllers\AdminManagementController::class,'delete'])->name('route_adminmanagement_delete');
+
+
 
 

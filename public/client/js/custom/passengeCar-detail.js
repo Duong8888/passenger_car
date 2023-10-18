@@ -85,7 +85,6 @@ $(document).ready(function () {
         totalTicket = `
             <div>Ghế: ${CountTicket} </div>
             <div>Tổng cộng: ${formattedMoney}</div>
-
         `
 
         $('.show-total').html(totalTicket);
@@ -101,7 +100,6 @@ $(document).ready(function () {
         var quantity = CountTicket;
         var departure = $('input[name="departure"]:checked').val();
         var arrival = $('input[name="arrival1"]:checked').val();
-
         let passenger_car_id = $(this).data("id");
         var totalArray = {
             username: username,
