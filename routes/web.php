@@ -30,7 +30,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard');
 
 
 Route::middleware('auth')->group(function () {
@@ -43,7 +43,7 @@ require __DIR__ . '/auth.php';
 
 Route::get('/sign_in', [PhoneAuthController::class, 'sign_in'])->name('sign_in');
 
-
+Route::get('/sign_in', [PhoneAuthController::class,'sign_in'])->name('sign_in');
 Route::get('/layout', function () {
     return view('admin.layouts.master');
 });

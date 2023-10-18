@@ -173,11 +173,35 @@
                                         </div>
                                         <div class="swiper-pagination"></div>
                                     </div>
-                                    </ul>
+                                </ul>
 
+                            </div>
+                            {{-- <div class="p-5 border-b border-gray-100/50 dark:border-neutral-600">
+                                <h6 class="mb-3 font-semibold text-gray-900 text-17 dark:text-gray-50">Professional
+                                    Skills</h6>
+                                <div class="flex flex-wrap gap-2">
+                                    <span
+                                        class="px-2 py-1 font-medium text-green-500 rounded bg-green-400/20 text-13">User
+                                        Interface Design</span>
+                                    <span
+                                        class="px-2 py-1 font-medium text-green-500 rounded bg-green-400/20 text-13">Web
+                                        Design</span>
+                                    <span
+                                        class="px-2 py-1 font-medium text-green-500 rounded bg-green-400/20 text-13">Responsive
+                                        Design</span>
+                                    <span
+                                        class="px-2 py-1 font-medium text-green-500 rounded bg-green-400/20 text-13">Mobile
+                                        App Design</span>
+                                    <span
+                                        class="px-2 py-1 font-medium text-green-500 rounded bg-green-400/20 text-13">UI
+                                        Design</span>
                                 </div>
-                                <div class="border rounded border-gray-100/50 dark:border-neutral-600 nav-tabs bottom-border-tab col-span-12 lg:col-span-12 lg:col-start-12">
-                                    <div class="px-6 py-0 border-b border-gray-100/50 dark:border-neutral-600">
+                            </div>
+
+                            {{--end  Ảnh nhiều của xe   --}}
+                            <div
+                                class="border rounded border-gray-100/50 dark:border-neutral-600 nav-tabs bottom-border-tab">
+                                <div class="px-6 py-0 border-b border-gray-100/50 dark:border-neutral-600">
 
                                         <ul class="items-center text-sm font-medium text-center text-gray-700 nav md:flex">
                                             <li class="active" role="presentation">
@@ -353,7 +377,6 @@
                                         <div class="hidden w-full tab-pane" id="danhgia-tab">
                                             <div>
                                                 @foreach ($comments as $cmt)
-                                                    {{-- {{dd($cmt->star)}} --}}
                                                     @foreach ($users as $data)
                                                         @if ($data->id == $cmt->user_id)
                                                             <div class="sm:flex"
@@ -369,23 +392,16 @@
                                                                             class="mb-2 text-sm text-gray-500 ltr:float-right rtl:float-left dark:text-gray-300">
                                                                             {{ \Carbon\Carbon::parse($cmt->created_at)->format('d/m/Y') }}
                                                                         </p>
-                                                                        {{-- {{ \Carbon\Carbon::parse($car)->format('H:i') }} --}}
                                                                         <h6 class="text-gray-900 dark:text-gray-50">
                                                                             {{ $data->name }}</h6>
                                                                         <div class="text-yellow-500 text-17">
                                                                             @for ($i = 0; $i < $cmt->star; $i++)
                                                                                 <i class="mdi mdi-star"></i>
                                                                             @endfor
-                                                                            {{-- <i class="mdi mdi-star"></i>
-                                                            <i class="mdi mdi-star"></i>
-                                                            <i class="mdi mdi-star"></i>
-                                                            <i class="mdi mdi-star"></i>
-                                                            <i class="mdi mdi-star-half-full"></i> --}}
                                                                         </div>
                                                                         <p
                                                                             class="mt-3 italic text-gray-500 dark:text-gray-300">
-                                                                            {{ $cmt->content }}
-                                                                        </p>
+                                                                            {{ $cmt->content }}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -393,19 +409,17 @@
                                                     @endforeach
                                                 @endforeach
 
-
-
-                                            </div>
-
                                         </div>
                                     </div>
-                                </div>
-                            </div>
                         </div>
+
                     </div>
                 </div>
             </section>
             <!-- Thông tin chi tiết xe -->
+
+
+
 
             {{-- Xe tương tự --}}
             <section class="py-20 bg-gray-50 dark:bg-neutral-700">
@@ -495,135 +509,22 @@
                 </div>
             </section>
 
-
-            <div id="popup"
-                class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 hidden w-80 h-96">
-                <div class="bg-white p-6 rounded relative">
-                    <!-- Nút "x" -->
-                    <button onclick="hidePopup()"
-                        class="absolute top-0 right-0 mt-4 mr-4 text-gray-500 hover:text-gray-700 exit">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M6 18L18 6M6 6l12 12">
-                            </path>
-                        </svg>
-                    </button>
-
-
-                    <div class="flex items-center gap-x-3">
-                        <div class="rounded border w-1/2 mx-auto mt-4">
-                            <!-- Tabs -->
-                            <ul id="tabs" class="inline-flex pt-2 px-1 w-full border-b">
-                                <li
-                                    class="bg-white px-4 text-gray-800 font-semibold py-2 rounded-t border-t border-r border-l -mb-px">
-                                    <a id="default-tab" href="#first">Chỗ mong muốn</a>
-                                </li>
-                                <li class="px-4 text-gray-800 font-semibold py-2 rounded-t"><a href="#second">Điểm đón
-                                        trả</a>
-                                </li>
-                                <li class="px-4 text-gray-800 font-semibold py-2 rounded-t"><a href="#third">Nhập thông
-                                        tin</a>
-                                </li>
-                            </ul>
-
-                            <!-- Tab Contents -->
-                            <div id="tab-contents" class="h-full w-full">
-                                <div id="first" class="p-4 step">
-                                    <label for="">Số lượng khách</label>
-                                    <div class="flex justify-between">
-                                        <p>Ghế thường - <span class="price">{{ $routes[0]->route->price }}</span>đ</p>
-                                        <div class="flex items-center">
-                                            <button
-                                                class="w-8 h-8 rounded-full bg-white-500 text-black flex items-center justify-center decrement-btn">
-                                                <span class="text-lg font-bold">-</span>
-                                            </button>
-                                            <input type="text" min="1" value="0" name="countTicket"
-                                                class="w-24 text-center qty-input">
-                                            <button
-                                                class="w-8 h-8 rounded-full bg-white-500 text-black flex items-center justify-center increment-btn">
-                                                <span class="text-lg font-bold">+</span>
-                                            </button>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div id="second" class="flex justify-between hidden p-4 step">
-                                    <div class="flex flex-col" style="overflow-y: auto; max-height: 200px;">
-                                        Điểm đón:
-                                        @foreach ($stops as $data)
-                                            @if ($data->stop_type == 0)
-                                                <div class="mb-5">
-                                                    <input type="radio" id="departure" name="departure"
-                                                        class="form-radio h-5 w-5 text-blue-600"
-                                                        value="{{ $data->stop_name }}">
-                                                    <label for="departure"
-                                                        class="ml-2 mb-3">{{ $data->stop_name }}</label>
-                                                </div>
-                                            @endif
-                                        @endforeach
-                                    </div>
-                                    <div class="flex flex-col" style="overflow-y: auto; max-height: 200px;">
-                                        Điểm đón:
-                                        @foreach ($stops as $data)
-                                            @if ($data->stop_type == 1)
-                                                <div class="mb-5">
-                                                    <input type="radio" id="arrival" name="arrival1"
-                                                        class="form-radio h-5 w-5 text-blue-600"
-                                                        value="{{ $data->stop_name }}">
-                                                    <label for="arrival"
-                                                        class="ml-2 mb-3">{{ $data->stop_name }}</label>
-                                                </div>
-                                            @endif
-                                        @endforeach
-                                    </div>
-                                </div>
-                                <div id="third" class="hidden p-4 step">
-                                    <div class="max-w-md mx-auto bg-white rounded p-8 shadow-md">
-                                        <div class="mb-4">
-                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Họ và
-                                                tên</label>
-                                            <input
-                                                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                                name="name" id="name" type="text"
-                                                placeholder="Nhập họ và tên của bạn">
-                                        </div>
-                                        <div class="mb-4">
-                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">Số
-                                                điện
-                                                thoại</label>
-                                            <input
-                                                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                                name="phone" id="phone" type="text"
-                                                placeholder="Nhập Số điện thoại của bạn">
-                                        </div>
-                                        <div class="mb-4">
-                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email
-                                                để nhận thông tin vé</label>
-                                            <input
-                                                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                                name="email" id="email" type="text"
-                                                placeholder="Nhập địa chỉ email của bạn">
-                                        </div>
-                                        <button
-                                            class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded submit"
-                                            data-action="{{ route('client.ticket.update-ticket') }}"
-                                            data-id="{{ $passengerCars->id }}">
-                                            Tiếp tục
-                                        </button>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="flex justify-between px-4 text-gray-800 font-semibold py-2 rounded-t show-total">
-                            </div>
-                            <!-- End Tab Contents -->
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="flex items-center gap-x-3">
+            <div class="rounded border w-1/2 mx-auto mt-4">
+                <!-- Tabs -->
+                <ul id="tabs" class="inline-flex pt-2 px-1 w-full border-b">
+                    <li
+                        class="bg-white px-4 text-gray-800 font-semibold py-2 rounded-t border-t border-r border-l -mb-px">
+                        <a id="default-tab" href="#first">Chỗ mong muốn</a>
+                    </li>
+                    <li class="px-4 text-gray-800 font-semibold py-2 rounded-t"><a href="#second">Điểm đón trả</a>
+                    </li>
+                    <li class="px-4 text-gray-800 font-semibold py-2 rounded-t"><a href="#third">Nhập thông tin</a>
+                    </li>
+                </ul>
 
         </div>
+
     </div>
 @endsection
 @section('page-script')

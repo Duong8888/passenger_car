@@ -25,7 +25,6 @@ class TicketController extends Controller
     {
         return view('client.pages.ticket.index');
     }
-
     public function endPayment(Request $request)
     {
         $ticket = new Ticket();
@@ -81,8 +80,8 @@ class TicketController extends Controller
             $orderId = $orderId; // Mã đơn hàng
             $orderInfo = $orderInfo;
             $amount = $amount;
-            $ipnUrl = $ipnUrl;
-            $redirectUrl =  $redirectUrl;
+            $ipnUrl =$ipnUrl;
+            $redirectUrl =  $redirectUrl ;
             $extraData = $extraData;
 
             $requestId = time() . "";
@@ -118,7 +117,7 @@ class TicketController extends Controller
     {
         $a = json_decode($request->session);
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = route('client.ticket.add-vnpay-to-db');
+        $vnp_Returnurl = "http://localhost:8000/";
         $vnp_TmnCode = "AUOGLFUH"; //Mã website tại VNPAY
         $vnp_HashSecret = "GVTYEMYJEHIQHBAUVYJAPQSDYIIKZEIK"; //Chuỗi bí mật
         $vnp_TxnRef = time(); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
@@ -168,36 +167,37 @@ class TicketController extends Controller
 
         $vnp_Url = $vnp_Url . "?" . $query;
         if (isset($vnp_HashSecret)) {
-            $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret); //  
+            $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret); //
             $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
         }
         $returnData = array(
             'code' => '00', 'message' => 'success', 'data' => $vnp_Url
         );
-        // return redirect()->route('client.ticket.add-vnpay-to-db');
-        header('Location: ' . $vnp_Url);
-        die();
+        return redirect()->route('client.ticket.add-vnpay-to-db');
 
+        // vui lòng tham khảo thêm tại code demo
     }
-    public function checkoutPayment()
-    {
-        $data = (session()->get('value'));
-        foreach ($data as $a) {
-            Ticket::query()->create([
-                'username' => $a['username'],
-                'status' => 1,
-                'payment_method' => 'Đã Thanh toán VNPAY',
-                'user_id' => 1,
-                'total_price' => $a['total_price'],
-                'email' => $a['email'],
-                'phone' => $a['phone'],
-                'quantity' => $a['quantity'],
-                'passenger_car_id' => $a['passenger_car_id'],
-                'departure' => $a['departure'],
-                'arrival' => $a['arrival'],
-            ]);
-        }
-        session()->forget('cart');
-        return to_route('home')->with('success', 'Đặt hàng thành công');
+
+    public function checkoutPayment() {
+
+                $data = (session()->get('value'));
+                foreach($data as $a){
+                    Ticket::query()->create([
+                    'username' => $a['username'],
+                    'status' => 1,
+                    'payment_method' => 'Đã Thanh toán VNPAY',
+                    'user_id' => 1,
+                    'total_price' => $a['total_price'],
+                    'email' => $a['email'],
+                    'phone' => $a['phone'],
+                    'quantity' => $a['quantity'],
+                    'passenger_car_id' => $a['passenger_car_id'],
+                    'departure' => $a['departure'],
+                    'arrival' => $a['arrival'],
+                ]);
+                }
+                session()->forget('cart');
+                return to_route('home')->with('success', 'Đặt hàng thành công');
+
     }
 }

@@ -3,7 +3,6 @@
 // use App\Http\Controllers\Admin\TicketController;
 use App\Http\Controllers\Client\SearchController;
 //use App\Http\Controllers\Client\Ticket\PaymentController;
-use App\Http\Controllers\Client\Ticket\TicketController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PhoneAuthController;
 use Illuminate\Support\Facades\Route;

@@ -23,12 +23,12 @@ class HomeController  extends Controller
      */
 
     public function __construct(
-        public VietnameseProvinces $vietnameseProvinces,
-    )
-    {
+        public VietnameseProvinces $vietnameseProvinces
+    ) {
     }
 
-    public function index(){
+    public function index()
+    {
 
         $data = $this->vietnameseProvinces->get('name');
         $stops = [];
@@ -40,18 +40,18 @@ class HomeController  extends Controller
         $routes = Routes::all();
         $passengerCars = PassengerCar::with('workingTime')->get();
         $workingTime = WorkingTime::all();
-        // return response()->json($passengerCars, 200, [], JSON_PRETTY_PRINT);
-        return view('client.pages.home.index', compact('albums', 'routes', 'passengerCars','workingTime','stops'));
-
+        $stops = Stops::all();
+        return view('client.pages.home.index', compact('albums', 'routes', 'passengerCars', 'workingTime', 'stops'));
     }
 
-    public function passengerCarDetail(Request $request){
+    public function passengerCarDetail(Request $request)
+    {
         $albums = PassengerCar::with('albums')->get();
-        $routes = PassengerCar::with('route')->where('route_id',$request->route_id)->take(4)->get();
+        $routes = PassengerCar::with('route')->where('route_id', $request->route_id)->take(4)->get();
         $passengerCars = PassengerCar::with('workingTime')->find($request->passenger_id);
         $services = PassengerCar::with('services')->get();
         $users = User::all();
-        $comments = Comment::where('passenger_car_id',$request->passenger_id)->get();
+        $comments = Comment::where('passenger_car_id', $request->passenger_id)->get();
         $stops = Stops::all();
         return view('client.pages.home.passengerCar-detail', compact('albums', 'routes', 'passengerCars','services','users','comments','stops'));
 
