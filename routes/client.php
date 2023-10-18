@@ -38,6 +38,7 @@ Route::group(['prefix' => 'notifications', 'as' => 'notifications.'], function (
 Route::get('/blog/{id}',[BlogController::class,'blog'])->name('blog');
 Route::get('/blogs', [BlogController::class, 'show'])->name('blog.show');
 
+
 Route::post('/update-ticket' , [TicketController::class, 'CountTicket'])->name('client.ticket.update-ticket');
 Route::get('/payment-method', [TicketController::class, 'PaymentView'])->name('client.ticket.payment-method');
 Route::post('/send-ticket', [TicketController::class, 'endPayment'])->name('client.ticket.end-payment-ticket');
