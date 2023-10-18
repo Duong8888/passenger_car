@@ -6,6 +6,7 @@
 
 <!-- icons -->
 <link href="{{asset('admin/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="{{ asset('admin/libs/chartist/chartist.min.css') }}">
 
 <link href="{{ asset('admin/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('admin/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
