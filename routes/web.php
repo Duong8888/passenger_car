@@ -44,6 +44,7 @@ require __DIR__ . '/auth.php';
 Route::get('/sign_in', [PhoneAuthController::class, 'sign_in'])->name('sign_in');
 
 Route::get('/sign_in', [PhoneAuthController::class,'sign_in'])->name('sign_in');
+
 Route::get('/layout', function () {
     return view('admin.layouts.master');
 });
