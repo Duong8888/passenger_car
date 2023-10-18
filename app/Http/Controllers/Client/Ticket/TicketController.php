@@ -18,8 +18,6 @@ class TicketController extends Controller
         session()->push('value', $request->all());
 
         Log::info(session()->get('value'));
-        // $ticket->fill($request->all());
-        // $ticket->save();
         return response()->json(['success' => 'Done'], Response::HTTP_OK);
     }
 
@@ -119,10 +117,8 @@ class TicketController extends Controller
     public function vnpay_payment(Request $request)
     {
         $a = json_decode($request->session);
-     
-     
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = "http://localhost:8000/home";
+        $vnp_Returnurl = "http://localhost:8000/";
         $vnp_TmnCode = "AUOGLFUH"; //Mã website tại VNPAY
         $vnp_HashSecret = "GVTYEMYJEHIQHBAUVYJAPQSDYIIKZEIK"; //Chuỗi bí mật
         $vnp_TxnRef = time(); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
