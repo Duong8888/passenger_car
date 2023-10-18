@@ -15,15 +15,15 @@ class UserController extends Controller
      */
     public function index()
     {
-        // $role = Role::create(['name' => 'admin']);
-        // $permission = Permission::create(['name' => 'add post']); tạo các quyền chay
-        // $permission = Permission::create(['name' => 'edit post']);
-        // $permission = Permission::create(['name' => 'delete post']);
+        // $role = Role::create(['name' => 'staff']);
+        // $permission = Permission::create(['name' => 'add passengerCar']); //tạo các quyền chay
+        // $permission = Permission::create(['name' => 'edit passengerCar']);
+        // $permission = Permission::create(['name' => 'delete passengerCar']);
 
 
-        $role = Role::find(2);
-        $permission = Permission::find(4);
-       $role->givePermissionTo($permission); //Thằng admin có quyền ?
+        // $role = Role::find(2);
+        // $permission = Permission::find(4);
+        // $role->givePermissionTo($permission); //Thằng admin có quyền ?
 //       $permission->assignRole($role); //Ngược lại cái vai trò được thêm vào thằng ?
 //        $role->syncPermissions($permissions);//có rồi thì ko ko thêm nữa mà đè luôn, dùng thêm nhiều
         // $permission->syncRoles($roles); //có rồi thì ko ko thêm nữa mà đè luôn,thêm nhiều
@@ -32,7 +32,7 @@ class UserController extends Controller
          // $permission->removeRole($role);
         //
         // dd(auth()->user());
-        auth()->user()->syncRoles(['admin']);
+        // auth()->user()->syncRoles(['admin']);
 
         // user có id là bn có thể sửa all
         // $user = User::find(1);
@@ -40,7 +40,7 @@ class UserController extends Controller
 
 
 
-        return view('admin.pages.userpermission.index');
+        return view('admin.pages.userpermission.create');
     }
 
     /**

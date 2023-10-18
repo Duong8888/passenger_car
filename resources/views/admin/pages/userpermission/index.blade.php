@@ -21,55 +21,40 @@
                     {{-- <a href="{{ route('stop.create') }}" style="margin:200px;">Thêm mới</a> --}}
                     <table id="datatable" class="table table-bordered dt-responsive table-responsive nowrap">
                         <thead>
-                        <tr>
-                            <th>Tên điểm</th>
-                            <th>Thuộc loại</th>
-                            <th>Đoạn đường</th>
-                            {{-- <th>Age</th> --}}
-                            <th>Ngày tạo</th>
-                            <th>Chức năng</th>
+                        <tr style="color: red">
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Role</th>
+                            <th>Permission</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
 
                         <tbody>
-                            {{-- @foreach ($stops as $stop)
                             <tr>
-                                <td>{{ $stop->stop_name }}</td>
+                                <td>Phan'z Nam'z</td>
+                                <td>a@gmail.com</td>
+                                <td>0123456789</td>
+                                <td>User</td>
+                                <td>Null</td>
                                 <td>
-                                    @if ($stop->stop_type  == 0)
-                                        <div style="color: blue;">Điểm đón</div>
-                                    @elseif ($stop->stop_type  == 1)
-                                        <div style="color: red;">Điểm trả</div>
-                                    @endif
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <div class="btn-group">
+                                            <i class="fe-settings dropdown-toggle font-18"
+                                               data-bs-toggle="dropdown" aria-haspopup="true"
+                                               aria-expanded="false"></i>
+                                            <div class="dropdown-menu" style="">
+                                                <a class="dropdown-item" href="">Cập nhật</a>
+                                                <form action="" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="dropdown-item" type="submit">Xóa</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
-                                <td>
-                                        {{ $stop->route->departure }} -- {{ $stop->route->arrival }}
-                                </td>
-                                <td>
-                                    @if ( $stop->created_at  == "")
-                                        <div style="color: red;">Quên mất rồi</div>
-                                    @else
-                                        <div>{{ $stop->created_at }}</div>
-                                    @endif
-                                </td>
-                                <td style="display: flex;display: flex;justify-content: center;align-items: center;width:50px">
-                                    <a class="btn btn-primary"
-                                    href="{{ route('stop.edit', $stop->id) }}">Edit</a>
-                                    <form action="{{ route('stop.destroy', $stop->id) }}" method="post">
-                                        @csrf
-                                        @method('delete')
-                                        <button onclick="return confirm('Bạn muốn xóa thật chứ ?')" class="btn btn-warning">Delete</button>
-                                    </form>
-                                </td>
-                            </tr>
-                            @endforeach --}}
-                            <tr>
-                                <td>Tên điểm</td>
-                                <td>tduộc loại</td>
-                                <td>Đoạn đường</td>
-                                {{-- <td>Age</td> --}}
-                                <td>Ngày tạo</td>
-                                <td>Chức năng</td>
                             </tr>
 
 
