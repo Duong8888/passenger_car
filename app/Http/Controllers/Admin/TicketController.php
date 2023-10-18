@@ -19,7 +19,6 @@ class TicketController extends AdminBaseController
     public $urlbase = 'admin.tickets.';
     public $fieldImage = 'ticket';
     public $urlIndex = 'ticket.index';
-    public $folderImage = 'categories/image';
     public $titleIndex = 'Danh sách Danh mục';
     public $titleCreate = 'Thêm mới Danh mục';
     public $titleShow = 'Xem chi tiết danh mục';
@@ -34,7 +33,6 @@ class TicketController extends AdminBaseController
     {
         $validator = Validator::make($request->all(), [
             'username' => 'required',
-
         ]);
 
         if ($validator->fails()) {
@@ -98,5 +96,13 @@ class TicketController extends AdminBaseController
             ->get();
 
         return response()->json($PassengerCar);
+    }
+    public function destroy(string $id)
+    {
+        $model = $this->model->findOrFail($id);
+
+        $model->delete();
+
+        return to_route($this->urlIndex)->with('success', 'Delete Successfully!');
     }
 }
