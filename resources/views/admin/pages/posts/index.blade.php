@@ -30,19 +30,17 @@
                                 <table class="table table-hover mb-0">
                                     <thead>
                                     <tr>
-                                        <th>#</th>
                                         <th>Title</th>
                                         <th>Content</th>
                                         <th>Slug</th>
-                                        <th>Category_id</th>
-                                        <th>Author_id</th>
+                                        <th>Category</th>
+                                        <th>Author</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach ($data as $posts)
                                         <tr>
-                                            <td>{{ $posts->id }}</td>
                                             <td>{{ $posts->title }}</td>
                                             <td><a href="{{ route('posts.edit', ['id' => $posts->id]) }}">Xem chi
                                                     tiết</a></td>
@@ -56,8 +54,12 @@
                                                            data-bs-toggle="dropdown" aria-haspopup="true"
                                                            aria-expanded="false"></i>
                                                         <div class="dropdown-menu" style="">
-                                                            <a class="dropdown-item" href="#">Action</a>
-                                                            <a class="dropdown-item" href="#">Another action</a>
+                                                            <a class="dropdown-item" href="{{route('posts.edit',$posts->id)}}">Cập nhật</a>
+                                                            <form action="{{route('posts.destroy',$posts->id)}}" method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button class="dropdown-item" type="submit">Xóa</button>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
