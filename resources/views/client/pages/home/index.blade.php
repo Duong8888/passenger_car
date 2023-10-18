@@ -91,7 +91,7 @@
 
                                                 <!--end col-->
                                                 <div class="col-span-12 lg:col-span-2">
-                                                    {{-- <div>
+                                                    <div>
                                                         <div class="mb-2 lg:flex" style="margin-left: -35px">
                                                             <div class="flex-shrink-0">
                                                                 <i class="mr-1 group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500 mdi mdi-map-marker"></i>
@@ -104,7 +104,7 @@
                                                            class="mb-2 text-gray-500 dark:text-gray-300"><span
                                                                 style="color: #1890ff;">{{ number_format( $car->route->price, 0, ',', ',') }}đ</span>
                                                         </p>
-                                                    </div> --}}
+                                                    </div>
                                                 </div>
                                                 <!--end col-->
                                                 <div class="col-span-12 lg:col-span-2">
@@ -234,7 +234,7 @@
                         </div>
                     </div>
                 @endforeach --}}
-                {{-- <div class="col-span-12 md:col-span-6 lg:col-span-3">
+                <div class="col-span-12 md:col-span-6 lg:col-span-3">
                     <div class="mt-4">
                         <div class="px-6 py-5 transition-all duration-500 ease-in-out cursor-pointer lg:py-10 hover:-translate-y-2">
                             <div class="job-categorie h-16 w-16 group-data-[theme-color=violet]:bg-violet-500/20 group-data-[theme-color=sky]:bg-sky-500/20 group-data-[theme-color=red]:bg-red-500/20 group-data-[theme-color=green]:bg-green-500/20 group-data-[theme-color=pink]:bg-pink-500/20 group-data-[theme-color=blue]:bg-blue-500/20 rounded-lg text-center leading-[4.4] mx-auto dark:bg-violet-900">
@@ -353,7 +353,7 @@
                             </div>
                         </div>
                     </div>
-                </div> --}}
+                </div>
             </div>
             <div class="grid grid-cols-1">
                 <div class="mt-5 text-center">
