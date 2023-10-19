@@ -77,32 +77,29 @@
                                                 </div>
                                                 <!--end col-->
                                                 <div class="col-span-12 lg:col-span-3">
-                                                    <div class="mb-2 lg:flex">
-                                                        <div class="flex-shrink-0">
-                                                            <i style="font-size: 11px;padding-left: 2px"
-                                                               class="mr-1 group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500 fa-solid fa-circle-dot"></i>
-                                                            {{-- <i class="mr-1 group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500 mdi mdi-map-marker"></i> --}}
+                                                    @foreach ($car->workingTime as $workingTime)
+                                                        <div class="mb-2 lg:flex">
+                                                            <div class="flex-shrink-0">
+                                                                <i style="font-size: 11px;padding-left: 2px"
+                                                                class="mr-1 group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500 fa-solid fa-circle-dot"></i>
+                                                            </div>
+                                                            <p class="mb-0 text-gray-500 dark:text-gray-300"><span
+                                                                    style="font-weight: bold;"> {{ \Carbon\Carbon::parse($workingTime->departure_time)->format('H:i') }} -- {{ \Carbon\Carbon::parse($workingTime->arrival_time)->format('H:i') }}</span></p>
                                                         </div>
-                                                        <p class="mb-0 text-gray-500 dark:text-gray-300"><span
-                                                                style="font-weight: bold;"> {{ \Carbon\Carbon::parse($car->workingTime[0]->departure_time)->format('H:i') }}</span>
-                                                            -- {{ $car->route->departure }}</p>
-                                                        {{-- Điểm đón: {{dd($car->workingTime[0]->departure_time)}} --}}
-                                                    </div>
-                                                    <div class="mb-2 lg:flex">
-                                                        <div class="flex-shrink-0">
-                                                            <i class="mr-1 group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500 mdi mdi-map-marker"></i>
-                                                        </div>
-                                                        <p class="mb-0 text-gray-500 dark:text-gray-300"><span
-                                                                style="font-weight: bold;">{{ \Carbon\Carbon::parse($car->workingTime[0]->arrival_time)->format('H:i') }}</span>
-                                                            -- {{ $car->route->arrival }}</p>
-                                                        {{-- Điểm trả: {{ $car->route->arrival }} --}}
-                                                    </div>
-
+                                                    @endforeach
                                                 </div>
 
                                                 <!--end col-->
                                                 <div class="col-span-12 lg:col-span-2">
                                                     <div>
+                                                        <div class="mb-2 lg:flex" style="margin-left: -35px">
+                                                            <div class="flex-shrink-0">
+                                                                <i class="mr-1 group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500 mdi mdi-map-marker"></i>
+                                                            </div>
+                                                            <p class="mb-0 text-gray-500 dark:text-gray-300" style="font-weight: bold;"><span
+                                                                    style="font-weight: bold;">{{ $car->route->departure }}</span>
+                                                            --> {{ $car->route->arrival }}</p>
+                                                        </div>
                                                         <p style=" font-weight: bold;"
                                                            class="mb-2 text-gray-500 dark:text-gray-300"><span
                                                                 style="color: #1890ff;">{{ number_format( $car->route->price, 0, ',', ',') }}đ</span>
@@ -114,7 +111,7 @@
                                                 <div class="col-span-12 lg:col-span-2">
                                                     <div class="flex flex-wrap gap-1.5">
                                                         <span
-                                                            class="badge  text-green-500 text-13 px-2 py-0.5 font-medium rounded">Còn 5 chổ trống</span>
+{{--                                                            class="badge  text-green-500 text-13 px-2 py-0.5 font-medium rounded">Còn 5 chổ trống</span>--}}
                                                         <form action="{{ URL::to('passengerCar-detail') }}"
                                                               method="POST">
                                                             @csrf
@@ -145,11 +142,7 @@
                                                 </div>
                                                 <!--end col-->
                                                 <div class="col-span-12 lg:col-span-6">
-                                                    <div>
-                                                        <p class="mb-0 text-gray-500 dark:text-gray-300"><span
-                                                                class="text-gray-900 dark:text-gray-50">Mô tả ngắn :</span>
-                                                            {{ Str::limit($car->description, 10, '...') }}</p>
-                                                    </div>
+
                                                 </div>
                                                 <!--end col-->
                                                 <div class="col-span-3 lg:col-span-2">

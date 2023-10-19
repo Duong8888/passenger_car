@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\RouteController;
 use App\Http\Controllers\ProfileController;
@@ -8,9 +8,10 @@ use App\Http\Controllers\PhoneAuthController;
 use App\Http\Controllers\Admin\TicketController;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\Admin\PostController;
-use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\Report\TicketReportController;
+use App\Http\Controllers\Admin\Report\UserReportController;
+use App\Http\Controllers\admin\StopsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,12 +28,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('login', function () {
-    echo 123;
-});
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -44,9 +42,7 @@ require __DIR__ . '/auth.php';
 
 Route::get('/sign_in', [PhoneAuthController::class, 'sign_in'])->name('sign_in');
 
-Route::get('/dashboard', function () {
-    return view('admin.pages.dashboard.index');
-});
+
 Route::get('/layout', function () {
     return view('admin.layouts.master');
 });
@@ -59,29 +55,33 @@ Route::get('/posts/{id}/edit',  [PostController::class, 'edit'])->name('posts.ed
 Route::put('/posts/{id}',  [PostController::class, 'update'])->name('posts.update');
 // Đường dẫn route để xóa bài viết
 Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
+Route::get('/posting/{slug}', [PostController::class, 'createSlug'])->name('post.show');
 
-//Truong
-Route::prefix('/ticket')->controller(TicketController::class)->name('ticket.')->group(function () {
-    Route::get('/', 'index')->name('index');
-    Route::get('/create', 'create')->name('create');
-    Route::post('/', 'store')->name('store');
-    Route::put('/{ticket}', 'update')->name('update');
-    Route::get('/{ticket}/edit', 'edit')->name('edit');
-    Route::delete('/{ticket}', 'destroy')->name('destroy');
-});
+
+Route::resource('ticket', TicketController::class);
+
 Route::post('/trip', [TicketController::class, 'Trip']);
 Route::post('/passgenerCar/{id}', [TicketController::class, 'PassengerCar']);
-Route::get('/user-report', [ReportController::class, 'UserReport'])->name('admin.user-report');
-Route::prefix('/route')->controller(RouteController::class)->name('route.')->group(function () {
-    Route::get('/', 'index')->name('index');
-    Route::get('/create', 'create')->name('create');
-    Route::post('/', 'store')->name('store');
-    Route::put('/{route}', 'update')->name('update');
-    Route::get('/{route}/edit', 'edit')->name('edit');
-    Route::delete('/{route}', 'destroy')->name('destroy');
-});
-//Truong
+
+Route::resource('/route', RouteController::class);
+Route::get('/userReport', [UserReportController::class, 'index'])->name('admin.user.report');
+
 
 //Phan'z Nam'z
-Route::resource('service', ServicesController::class);
+Route::resource('/service', ServicesController::class);
+Route::resource('/stop', StopsController::class);
 //End Phan'z Nam'z
+
+
+
+
+Route::get('/staff/index', [App\Http\Controllers\UserController::class, 'index'])->name('route_staff_index');
+Route::match(['GET', 'POST'], '/staff/add', [App\Http\Controllers\UserController::class, 'add'])->name('route_staff_add');
+Route::match(['GET', 'POST'], '/staff/edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('route_staff_edit');
+Route::match(['GET', 'POST'], '/staff/delete/{id}', [App\Http\Controllers\UserController::class, 'delete'])->name('route_staff_delete');
+
+
+Route::get('/management/index', [App\Http\Controllers\AdminManagementController::class, 'index'])->name('route_adminmanagement_index');
+Route::match(['GET', 'POST'], '/management/edit/{id}', [App\Http\Controllers\AdminManagementController::class, 'edit'])->name('route_adminmanagement_edit');
+Route::match(['GET', 'POST'], '/management/add', [App\Http\Controllers\AdminManagementController::class, 'add'])->name('route_adminmanagement_add');
+Route::match(['GET', 'POST'], '/management/delete/{id}', [App\Http\Controllers\AdminManagementController::class, 'delete'])->name('route_adminmanagement_delete');

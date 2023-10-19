@@ -39,6 +39,6 @@ class Routes extends Model
 
     public function stops()
     {
-        return $this->hasMany(Stops::class, 'route_id', 'id');
+        return $this->hasMany(Stops::class,'route_id');
     }
 }

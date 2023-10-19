@@ -31,6 +31,7 @@ class Stops extends Model
 
     public function route()
     {
-        return $this->belongsTo(Route::class);
+        return $this->belongsTo(Routes::class,'route_id');
     }
+
 }
