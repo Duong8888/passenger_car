@@ -129,15 +129,15 @@
                 </li>
 
                 <li>
-                    <a href="#contacts" data-bs-toggle="collapse">
+                    <a href="#report" data-bs-toggle="collapse">
                         <i class="mdi mdi-book-open-page-variant-outline"></i>
-                        <span> Contacts </span>
+                        <span>Report </span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="contacts">
+                    <div class="collapse" id="report">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="contacts-list.html">Members List</a>
+                                <a href="{{ route('admin.user.report') }}">Users Report</a>
                             </li>
                             <li>
                                 <a href="contacts-profile.html">Profile</a>
