@@ -1,7 +1,6 @@
 <!-- App favicon -->
 <link rel="shortcut icon" href="{{asset('client/images/favicon.ico')}}" />
 
-
 <link rel="stylesheet" href="{{asset('client/libs/choices.js/public/assets/styles/choices.min.css')}}">
 
 <!-- Swiper Css -->
@@ -27,5 +26,6 @@
     body::-webkit-scrollbar-track{
         width: 10px;
     }
+
 </style>
 

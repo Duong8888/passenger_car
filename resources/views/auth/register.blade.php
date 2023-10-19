@@ -17,12 +17,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{asset('')}}client/images/favicon.ico" />
+    <link rel="shortcut icon" href="{{asset('client/images/favicon.ico')}}" />
 
 
 
-    <link rel="stylesheet" href="{{asset('')}}client/css/icons.css" />
-    <link rel="stylesheet" href="{{asset('')}}client/css/tailwind.css" />
+    <link rel="stylesheet" href="{{asset('client/css/icons.css')}}" />
+    <link rel="stylesheet" href="{{asset('client/css/tailwind.css')}}" />
 
 
 

@@ -197,7 +197,10 @@
 
 <!-- Right bar overlay-->
 <div class="rightbar-overlay"></div>
-
+<script>
+    const infoUser = @json(auth()->user());
+    const urlNotification = '{{route('notifications.loadMessage')}}';
+</script>
 @include('admin.layouts.partials.script')
 @yield('page-script')
 

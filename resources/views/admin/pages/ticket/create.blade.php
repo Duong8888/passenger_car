@@ -132,6 +132,9 @@ $uniqueArrival =[];
   </div> <!-- container -->
 
 </div> <!-- content -->
+
+@endsection
+
 @section('page-script')
 <script>
   $(document).ready(function(){
