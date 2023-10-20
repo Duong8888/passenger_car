@@ -198,41 +198,21 @@
                                         <div class="p-5">
                                             <div class="mt-2">
                                                 <div class="col-span-12 xl:col-span-4">
-                                                    <select class="form-select " data-trigger name="filterStopsDeparture"
-                                                            id="filter-stops-departure"
+                                                    <select class="custom-select"
+                                                            data-trigger name="filterStopsDeparture"
+                                                            id="filterStopsDeparture"
                                                             aria-label="filterStopsDeparture">
-                                                        @foreach($filterStops as $value)
-                                                            <option value="{{$value->id}}">{{$value->stop_name}}</option>
-                                                        @endforeach
+                                                        @if(!empty($filterStops) || count($filterStops) != 0)
+                                                            <option value="">Chọn điểm đón</option>
+                                                            @foreach($filterStops as $value)
+                                                                <option value="{{$value->id}}">{{$value->stop_name}}</option>
+                                                            @endforeach
+                                                        @endif
+                                                        @if(empty($filterStops)  || count($filterStops) == 0)
+                                                            <option  value="">Không có điểm đón</option>
+                                                        @endif
                                                     </select>
                                                 </div>
-                                            </div>
-                                            <div class="mt-2">
-                                                <input
-                                                    class="find-time rounded cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-neutral-600 dark:checked:bg-violet-500/20"
-                                                    type="checkbox" name="morning" data-min="06:01" data-max="12:00" value="morning"
-                                                    id="morning">
-                                                <label for="morning"
-                                                       class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">Sáng
-                                                    (06:01 - 12:00)</label>
-                                            </div>
-                                            <div class="mt-2">
-                                                <input
-                                                    class="find-time rounded cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-neutral-600 dark:checked:bg-violet-500/20"
-                                                    type="checkbox" name="afternoon" data-min="12:01" data-max="18:00" value="afternoon"
-                                                    id="afternoon">
-                                                <label for="afternoon"
-                                                       class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">Chiều
-                                                    (12:01 - 18:00)</label>
-                                            </div>
-                                            <div class="mt-2">
-                                                <input
-                                                    class="find-time rounded cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-neutral-600 dark:checked:bg-violet-500/20"
-                                                    type="checkbox" name="evening" data-min="18:01" data-max="23:59" value="evening"
-                                                    id="evening">
-                                                <label for="evening"
-                                                       class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">Tối
-                                                    (18:01 - 23:59)</label>
                                             </div>
                                         </div>
                                     </div>
@@ -251,31 +231,22 @@
                                         <div class="p-5">
                                             <div class="mt-2">
                                                 <div class="col-span-12 xl:col-span-4">
-                                                    <select class="form-select " data-trigger name="filterStopsDeparture"
-                                                            id="filter-stops-departure"
-                                                            aria-label="filterStopsDeparture">
-                                                        @foreach($filterStops as $value)
-                                                            <option value="{{$value->id}}">{{$value->stop_name}}</option>
-                                                        @endforeach
+                                                    <select class="custom-select" data-trigger name="filterStopsArrival"
+                                                            id="filterStopsArrival"
+                                                            aria-label="filterStopsArrival">
+                                                        @if(!empty($filterStops) || count($filterStops) != 0)
+                                                            <option value="">Chọn điểm trả</option>
+                                                            @foreach($filterStops as $value)
+                                                                <option value="{{$value->id}}">{{$value->stop_name}}</option>
+                                                            @endforeach
+                                                        @endif
+                                                        @if(empty($filterStops)  || count($filterStops) == 0)
+                                                            <option  value="">Không có điểm trả</option>
+                                                        @endif
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="mt-2">
-                                                <select class="custom-select">
-                                                    <option value="morning">Sáng (06:01 - 12:00)</option>
-                                                    <option value="afternoon">Chiều (12:01 - 18:00)</option>
-                                                    <!-- Thêm các tùy chọn khác ở đây -->
-                                                </select>
-                                            </div>
-                                            <div class="mt-2">
-                                                <input
-                                                    class="find-time rounded cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-neutral-600 dark:checked:bg-violet-500/20"
-                                                    type="checkbox" name="evening" data-min="18:01" data-max="23:59" value="evening"
-                                                    id="evening">
-                                                <label for="evening"
-                                                       class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">Tối
-                                                    (18:01 - 23:59)</label>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -350,7 +321,7 @@
                                                 <select class="form-select " data-trigger name="arrival"
                                                         id="choices-single-categories"
                                                         aria-label="Default select example">
-                                                @foreach($stops as $value)
+                                                    @foreach($stops as $value)
                                                         <option
                                                             @if(trim($_GET['arrival']) == trim($value)) selected
                                                             @endif  value="{{$value}}">{{$value}}</option>
