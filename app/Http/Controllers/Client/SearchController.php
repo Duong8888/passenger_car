@@ -22,7 +22,8 @@ class SearchController extends Controller
         public PassengerCar        $passengerCar,
         public VietnameseProvinces $vietnameseProvinces,
         public Service $service,
-        public PassengerCarService $passengerCarService
+        public PassengerCarService $passengerCarService,
+        public Stops $stops
     )
     {
     }
@@ -40,7 +41,7 @@ class SearchController extends Controller
     public function home()
     {
         $data = $this->dataRouter();
-        return view($this->pathview . '.home', ['stops' => $data['stops']]);
+        return view($this->pathview . '.findRoutes', ['stops' => $data['stops']]);
     }
 
     public function searchRequest(Request $request)

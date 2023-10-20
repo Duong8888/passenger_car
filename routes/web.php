@@ -29,6 +29,7 @@ Route::get('/', function () {
 Route::get('login', function (){
     echo 123;
 });
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -85,16 +86,22 @@ Route::resource('/stop', StopsController::class);
 
 
 
-Route::get('/staff/index',[App\Http\Controllers\UserController::class,'index'])->name('route_staff_index');
-Route::match(['GET','POST'],'/staff/add',[App\Http\Controllers\UserController::class,'add'])->name('route_staff_add');
-Route::match(['GET','POST'],'/staff/edit/{id}',[App\Http\Controllers\UserController::class,'edit'])->name('route_staff_edit');
-Route::match(['GET','POST'],'/staff/delete/{id}',[App\Http\Controllers\UserController::class,'delete'])->name('route_staff_delete');
+Route::get('/staff/index',[App\Http\Controllers\Admin\UserController::class,'index'])->name('route_staff_index');
+Route::match(['GET','POST'],'/staff/add',[App\Http\Controllers\Admin\UserController::class,'add'])->name('route_staff_add');
+Route::match(['GET','POST'],'/staff/edit/{id}',[App\Http\Controllers\Admin\UserController::class,'edit'])->name('route_staff_edit');
+Route::match(['GET','POST'],'/staff/delete/{id}',[App\Http\Controllers\Admin\UserController::class,'delete'])->name('route_staff_delete');
 
 
-Route::get('/management/index',[App\Http\Controllers\AdminManagementController::class,'index'])->name('route_adminmanagement_index');
-Route::match(['GET','POST'],'/management/edit/{id}',[App\Http\Controllers\AdminManagementController::class,'edit'])->name('route_adminmanagement_edit');
-Route::match(['GET','POST'],'/management/add',[App\Http\Controllers\AdminManagementController::class,'add'])->name('route_adminmanagement_add');
-Route::match(['GET','POST'],'/management/delete/{id}',[App\Http\Controllers\AdminManagementController::class,'delete'])->name('route_adminmanagement_delete');
+Route::get('/management/index',[App\Http\Controllers\Admin\AdminManagementController::class,'index'])->name('route_adminmanagement_index');
+Route::match(['GET','POST'],'/management/edit/{id}',[App\Http\Controllers\Admin\AdminManagementController::class,'edit'])->name('route_adminmanagement_edit');
+Route::match(['GET','POST'],'/management/add',[App\Http\Controllers\Admin\AdminManagementController::class,'add'])->name('route_adminmanagement_add');
+Route::match(['GET','POST'],'/management/delete/{id}',[App\Http\Controllers\Admin\AdminManagementController::class,'delete'])->name('route_adminmanagement_delete');
+
+
+Route::get('/loginadmin', [App\Http\Controllers\LoginAdminController::class, 'showLoginAdmin'])->name('login_admin');
+Route::post('/loginadmin', [App\Http\Controllers\LoginAdminController::class, 'loginAdmin']);
+Route::get('/logoutadmin', [App\Http\Controllers\LoginAdminController::class, 'logoutAdmin'])->name('logoutAdmin');
+
 
 
 
