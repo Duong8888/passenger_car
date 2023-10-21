@@ -23,6 +23,7 @@
         "algoliasearch": "^4.20.0",
         "alpinejs": "^3.13.0",
         "autoprefixer": "^10.4.16",
+        "chart.js": "^4.4.0",
         "jquery": "^3.7.1",
         "laravel-echo": "^1.15.3",
         "pusher-js": "^8.3.0",
