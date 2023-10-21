@@ -122,31 +122,18 @@
                 </li>
 
                 <li>
-                    <a href="apps-projects.html">
+                    <a href="{{ route('permission.index') }}">
                         <i class="mdi mdi-briefcase-variant-outline"></i>
-                        <span> Projects </span>
+                        <span> Phân quyền user </span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#report" data-bs-toggle="collapse">
+                    <a href="{{ route('rolePermission.index') }}">
                         <i class="mdi mdi-book-open-page-variant-outline"></i>
-                        <span>Report </span>
-                        <span class="menu-arrow"></span>
+                        <span> Cài đặt quyền/vai trò </span>
                     </a>
-                    <div class="collapse" id="report">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('admin.user.report') }}">Users Report</a>
-                            </li>
-                            <li>
-                                <a href="contacts-profile.html">Profile</a>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
-
-                <li class="menu-title mt-2">Custom</li>
 
                 <li>
                     <a href="#sidebarAuth" data-bs-toggle="collapse">
