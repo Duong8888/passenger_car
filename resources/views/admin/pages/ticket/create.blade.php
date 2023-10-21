@@ -28,7 +28,8 @@ $uniqueArrival =[];
             </a>
             <div class="table-responsive">
 
-              <form action="{{ route('ticket.store') }}" method="post" enctype="multipart/form-data" id="create_ticket" class="row">
+              <form action="{{ route('ticket.store') }}" method="post" enctype="multipart/form-data" id="create_ticket"
+                class="row">
                 @csrf
                 <div class="col-6">
                   <div class="mb-3">
@@ -70,13 +71,13 @@ $uniqueArrival =[];
                   <div class="mb-3">
                     <label class="form-label">User</label>
                     <select name="user_id" class="form-control">
-  
+
                       @foreach ($user as $key => $data)
                       <option value="{{ $key + 1 }}">{{ $data->name }}</option>
                       @endforeach
                     </select>
                   </div>
-                  
+
                   <div class="mb-3">
                     <label class="form-label">Departure</label>
                     <select name="departure" class="form-control departure">
@@ -86,7 +87,7 @@ $uniqueArrival =[];
                       <option value="{{ $data->departure }}">{{ $data->departure }}</option>
                       <?php $uniqueDepartures[] = $data->departure; ?>
                       @endif
-  
+
                       @endforeach
                     </select>
                   </div>
@@ -99,24 +100,24 @@ $uniqueArrival =[];
                       <option value="{{ $data->arrival }}">{{ $data->arrival }}</option>
                       <?php $uniqueArrival[] = $data->arrival; ?>
                       @endif
-  
+
                       @endforeach
                     </select>
                   </div>
                   <div class="mb-3">
                     <label class="form-label">Route</label>
-                      <select name="" class="form-control route">
+                    <select name="" class="form-control route">
 
-                      </select>
+                    </select>
                   </div>
                   <div class="mb-3">
                     <label class="form-label">PassengerCar</label>
                     <select name="passenger_car_id" class="form-control PassengerCar">
-                        
+
                     </select>
                   </div>
                 </div>
-          
+
                 <button type="submit" class="btn btn-primary">Create</button>
               </form>
             </div>
@@ -131,6 +132,9 @@ $uniqueArrival =[];
   </div> <!-- container -->
 
 </div> <!-- content -->
+
+@endsection
+
 @section('page-script')
 <script>
   $(document).ready(function(){

@@ -19,7 +19,6 @@ class TicketController extends AdminBaseController
     public $urlbase = 'admin.tickets.';
     public $fieldImage = 'ticket';
     public $urlIndex = 'ticket.index';
-    public $folderImage = 'categories/image';
     public $titleIndex = 'Danh sách Danh mục';
     public $titleCreate = 'Thêm mới Danh mục';
     public $titleShow = 'Xem chi tiết danh mục';
@@ -34,16 +33,17 @@ class TicketController extends AdminBaseController
     {
         $validator = Validator::make($request->all(), [
             'username' => 'required',
-
         ]);
 
         if ($validator->fails()) {
             return $validator;
         }
     }
+
     public function create()
     {
         $user = User::all();
+
         $route = Routes::all();
         $passengerCar = PassengerCar::with('relatedRoute')->where('route_id',)->get();
 
@@ -53,6 +53,7 @@ class TicketController extends AdminBaseController
             'passengerCar' => $passengerCar,
             'route' => $route,
         ])
+
             ->with('title', $this->titleCreate)
             ->with('colums', $this->colums)
             ->with('urlbase', $this->urlbase);
@@ -67,7 +68,9 @@ class TicketController extends AdminBaseController
 
         $passengerCar = PassengerCar::all();
 
+
         return view($this->pathView . __FUNCTION__, compact('model', 'user', 'user_relationship', 'passengerCar_relationship', 'passengerCar'))
+
             ->with('title', $this->titleEdit)
             ->with('colums', $this->colums)
             ->with('urlbase', $this->urlbase);
@@ -81,7 +84,8 @@ class TicketController extends AdminBaseController
 
         $tripList = Routes::where('departure', $departure)
             ->orWhere('arrival', $arrival)
-            ->get();
+            ->get();    
+       
 
         return response()->json($tripList);
     }
@@ -92,5 +96,13 @@ class TicketController extends AdminBaseController
             ->get();
 
         return response()->json($PassengerCar);
+    }
+    public function destroy(string $id)
+    {
+        $model = $this->model->findOrFail($id);
+
+        $model->delete();
+
+        return to_route($this->urlIndex)->with('success', 'Delete Successfully!');
     }
 }

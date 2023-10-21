@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('stop_name');
             $table->integer('stop_type');
             $table->unsignedBigInteger('route_id');
+            $table->integer('order')->comment('xác định thứ tự điểm dừng trên tuyến');
+            $table->unsignedBigInteger('user_id')->comment('giúp quản lý điểm dừng theo nhà xe');
 //            $table->foreign('route_id')->references('id')->on('routes');
             $table->timestamps();
         });

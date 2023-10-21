@@ -62,7 +62,7 @@
                 <li class="menu-title">Navigation</li>
 
                 <li>
-                    <a href="index.html">
+                    <a href="{{ route('dashboard') }}">
                         <i class="mdi mdi-view-dashboard-outline"></i>
                         <span class="badge bg-success rounded-pill float-end">9+</span>
                         <span> Dashboard </span>
@@ -72,16 +72,16 @@
                 <li class="menu-title mt-2">Apps</li>
 
                 <li>
-                    <a href="apps-calendar.html">
+                    <a href="{{ route('postsing') }}">
                         <i class="mdi mdi-calendar-blank-outline"></i>
-                        <span> Calendar </span>
+                        <span> Quản lý tin tức </span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="apps-chat.html">
+                    <a href="{{route('car.index')}}">
                         <i class="mdi mdi-forum-outline"></i>
-                        <span> Chat </span>
+                        <span> Quản lý xe </span>
                     </a>
                 </li>
 
@@ -104,12 +104,12 @@
                 </li>
 
                 <li>
-                    <a href="#sidebarTasks" data-bs-toggle="collapse">
+                    <a href="{{ route('stop.index') }}">
                         <i class="mdi mdi-clipboard-outline"></i>
-                        <span> Tasks </span>
-                        <span class="menu-arrow"></span>
+                        <span> Quản lý các điểm dừng </span>
+                        {{-- <span class="menu-arrow"></span> --}}
                     </a>
-                    <div class="collapse" id="sidebarTasks">
+                    {{-- <div class="collapse" id="sidebarTasks">
                         <ul class="nav-second-level">
                             <li>
                                 <a href="task-kanban-board.html">Kanban Board</a>
@@ -118,7 +118,7 @@
                                 <a href="task-details.html">Details</a>
                             </li>
                         </ul>
-                    </div>
+                    </div> --}}
                 </li>
 
                 <li>
@@ -129,15 +129,15 @@
                 </li>
 
                 <li>
-                    <a href="#contacts" data-bs-toggle="collapse">
+                    <a href="#report" data-bs-toggle="collapse">
                         <i class="mdi mdi-book-open-page-variant-outline"></i>
-                        <span> Contacts </span>
+                        <span>Report </span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="contacts">
+                    <div class="collapse" id="report">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="contacts-list.html">Members List</a>
+                                <a href="{{ route('admin.user.report') }}">Users Report</a>
                             </li>
                             <li>
                                 <a href="contacts-profile.html">Profile</a>
@@ -374,8 +374,26 @@
                 <li>
                     <a href="{{ route('ticket.index') }}" >
                         <i class="mdi mdi-texture"></i>
-                        <span>Tickets</span>  
+                        <span>Tickets</span>
                     </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('service.index') }}">
+                        <i class="mdi mdi-clipboard-outline"></i>
+                        <span> Services </span>
+                        {{-- <span class="menu-arrow"></span> --}}
+                    </a>
+                    {{-- <div class="collapse" id="sidebarTasks">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="task-kanban-board.html">Kanban Board</a>
+                            </li>
+                            <li>
+                                <a href="task-details.html">Details</a>
+                            </li>
+                        </ul>
+                    </div> --}}
                 </li>
 
                 <li>
