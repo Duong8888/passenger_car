@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\PassengerCarController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\RouteController;
@@ -71,6 +72,14 @@ Route::get('/userReport', [UserReportController::class, 'index'])->name('admin.u
 Route::resource('/service', ServicesController::class);
 Route::resource('/stop', StopsController::class);
 //End Phan'z Nam'z
+
+Route::group(["prefix"=>"car","as"=>"car."],function(){
+    Route::get('/',[PassengerCarController::class,'index'])->name('index');
+    Route::post('store',[PassengerCarController::class,'store'])->name('store');
+    Route::post('show',[PassengerCarController::class,'show'])->name('show');
+    Route::post('update/{id}',[PassengerCarController::class,'update'])->name('update');
+    Route::delete('delete/{id}',[PassengerCarController::class,'destroy'])->name('delete');
+});
 
 
 
