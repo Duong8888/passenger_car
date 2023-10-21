@@ -178,8 +178,7 @@
                                 </ul>
 
                             </div>
-                            <div
-                                class="border rounded border-gray-100/50 dark:border-neutral-600 nav-tabs bottom-border-tab">
+                            <div class="border rounded border-gray-100/50 dark:border-neutral-600 nav-tabs bottom-border-tab col-span-12 lg:col-span-12 lg:col-start-12">
                                 <div class="px-6 py-0 border-b border-gray-100/50 dark:border-neutral-600">
 
                                     <ul class="items-center text-sm font-medium text-center text-gray-700 nav md:flex">
@@ -207,7 +206,7 @@
                                 <div class="p-6 tab-content">
 
                                     {{-- Mô tả --}}
-                                    <div class="block w-full tab-pane" id="mota-tab">
+                                    <div class="block w-full tab-pane" id="mota-tab" style="min-height: 463px">
 
                                         <div class="p-6 border rounded border-gray-100/50 dark:border-neutral-600">
                                             <div>
@@ -293,8 +292,9 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     {{-- Điểm dừng --}}
-                                    <div class="hidden w-full tab-pane" id="diemdung-tab">
+                                    <div class="hidden w-full tab-pane" id="diemdung-tab" style="min-height: 463px">
                                         <div class="mb-10">
                                             <p
                                                 style="color: red; font-size: 14px;margin-top: 10px;display: block;clear: both;">
@@ -349,7 +349,7 @@
                                         </div>
                                     </div>
                                     {{-- Đánh giá --}}
-                                    <div class="hidden w-full tab-pane" id="danhgia-tab">
+                                    <div class="hidden w-full tab-pane" id="danhgia-tab" style="min-height: 463px">
                                         <div>
                                             @foreach ($comments as $cmt)
                                             @foreach ($users as $data)
@@ -385,54 +385,12 @@
 
                                         </div>
                                     </div>
-
-                                    <div>
-                                        @foreach($comments as $cmt)
-                                        {{-- {{dd($cmt->star)}} --}}
-                                        @foreach($users as $data)
-                                        @if($data->id == $cmt->user_id)
-
-                                        <div class="sm:flex"
-                                            style="border-bottom: 1px solid rgb(224, 224, 224);padding: 10px">
-                                            <div class="shrink-0">
-                                                <img class="w-10 h-10 p-1 border-2 rounded-full border-gray-100/50"
-                                                    src="assets/images/user/img-04.jpg" alt="img">
-                                            </div>
-                                            <div class="grow ltr:ml-3 rtl:mr-3">
-                                                <div>
-                                                    <p
-                                                        class="mb-2 text-sm text-gray-500 ltr:float-right rtl:float-left dark:text-gray-300">
-                                                        {{ \Carbon\Carbon::parse($cmt->created_at)->format('d/m/Y') }}
-                                                    </p>
-                                                    {{-- {{ \Carbon\Carbon::parse($car)->format('H:i') }} --}}
-                                                    <h6 class="text-gray-900 dark:text-gray-50">{{$data->name}}</h6>
-                                                    <div class="text-yellow-500 text-17">
-                                                        @for ($i = 0; $i < $cmt->star ; $i++)
-                                                            <i class="mdi mdi-star"></i>
-                                                            @endfor
-                                                            {{-- <i class="mdi mdi-star"></i>
-                                                            <i class="mdi mdi-star"></i>
-                                                            <i class="mdi mdi-star"></i>
-                                                            <i class="mdi mdi-star"></i>
-                                                            <i class="mdi mdi-star-half-full"></i> --}}
-                                                    </div>
-                                                    <p class="mt-3 italic text-gray-500 dark:text-gray-300">
-                                                        {{$cmt->content}}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @endif
-                                        @endforeach
-                                        @endforeach
-
-
-
-                                    </div>
-
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
         </section>
         <!-- Thông tin chi tiết xe -->
 

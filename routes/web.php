@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\admin\permission\RolePermissionController;
+use App\Http\Controllers\admin\permission\UserPermissionController;
 use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\RouteController;
 use App\Http\Controllers\ProfileController;
@@ -70,6 +72,13 @@ Route::get('/userReport', [UserReportController::class, 'index'])->name('admin.u
 //Phan'z Nam'z
 Route::resource('/service', ServicesController::class);
 Route::resource('/stop', StopsController::class);
+// Route::get('/userlist',[UserPermissionController::class,'index'])->name('admin.user.list');
+// Route::get('/permission/{id}',[UserPermissionController::class,'permission'])->name('admin.user.permission');
+Route::resource('/permission', UserPermissionController::class);
+Route::resource('/rolePermission', RolePermissionController::class);
+Route::delete('/rolePermission/create/{id}',[RolePermissionController::class,'delete'])->name('admin.rolePermission.delete');
+
+// Route::get('/rolelist',[RolePermissionController::class,'index'])->name('admin.role.list');
 //End Phan'z Nam'z
 
 
