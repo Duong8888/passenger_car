@@ -298,11 +298,11 @@
                                                 <select class="form-select" data-trigger name="departure"
                                                         id="choices-single-location"
                                                         aria-label="Default select example">
-                                                    {{-- @foreach($stops as $value)
+                                                    @foreach($stops as $value)
                                                         <option
                                                             @if(trim($_GET['departure']) == trim($value)) selected
                                                             @endif value="{{$value}}">{{$value}}</option>
-                                                    @endforeach --}}
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
