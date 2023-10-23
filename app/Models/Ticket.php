@@ -23,6 +23,9 @@ class Ticket extends Model
         'departure',
         'arrival'
     ];
+    protected $attributes =[
+        'email' => NULL,
+    ];
     public function user():BelongsTo{ 
         return $this->belongsTo(User::class);
     }

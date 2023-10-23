@@ -568,16 +568,16 @@
                                             thoại</label>
                                         <input
                                             class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            name="phone" id="phone" type="text"
-                                            placeholder="Nhập Số điện thoại của bạn">
+                                            name="phone" id="phone" type="text" value="{{ Auth::user()->phone }}"
+                                            placeholder="Nhập Số điện thoại của bạn" readonly>
                                     </div>
                                     <div class="mb-4">
                                         <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email
                                             để nhận thông tin vé</label>
                                         <input
                                             class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            name="email" id="email" type="text"
-                                            placeholder="Nhập địa chỉ email của bạn">
+                                            name="email" id="email" type="text" value="{{ Auth::user()->email }}"
+                                            placeholder="Nhập địa chỉ email của bạn" readonly>
                                     </div>
                                     <button
                                         class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded submit"

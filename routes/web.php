@@ -60,15 +60,29 @@ Route::put('/posts/{id}',  [PostController::class, 'update'])->name('posts.updat
 Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
 Route::get('/posting/{slug}', [PostController::class, 'createSlug'])->name('post.show');
 
-
-Route::resource('ticket', TicketController::class);
-
+//Truong
+Route::prefix('ticket')->controller(TicketController::class)->name('ticket.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::post('/', 'store')->name('store');
+    Route::get('/create', 'create')->name('create');
+    Route::put('/{ticket}', 'update')->name('update');
+    Route::delete('/{ticket}', 'destroy')->name('destroy');
+    Route::get('/{ticket}/edit', 'edit')->name('edit');
+});
 Route::post('/trip', [TicketController::class, 'Trip']);
 Route::post('/passgenerCar/{id}', [TicketController::class, 'PassengerCar']);
 
-Route::resource('/route', RouteController::class);
+Route::prefix('route')->controller(RouteController::class)->name('route.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::post('/', 'store')->name('store');
+    Route::get('/create', 'create')->name('create');
+    Route::put('/{route}', 'update')->name('update');
+    Route::delete('/{route}', 'destroy')->name('destroy');
+    Route::get('/{route}/edit', 'edit')->name('edit');
+});
+//Truong
 Route::get('/userReport', [UserReportController::class, 'index'])->name('admin.user.report');
-
+Route::get('/ticketReport', [TicketReportController::class, 'index'])->name('admin.ticket.report');
 
 //Phan'z Nam'z
 Route::resource('/service', ServicesController::class);
