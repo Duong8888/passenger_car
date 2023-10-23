@@ -29,7 +29,8 @@
                             <div class="table-responsive">
 
                                 <form action="{{ route('ticket.store') }}" method="post" enctype="multipart/form-data"
-                                    id="create_ticket" class="row">
+                                    id="create_ticket"
+                class="row">
                                     @csrf
                                     <div class="col-6">
                                         <div class="mb-3">
@@ -63,65 +64,66 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Payment Method</label>
-                                            <input type="text" class="form-control" name="payment_method">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">User</label>
-                                            <select name="user_id" class="form-control">
+                <div class="col-6">
+                  <div class="mb-3">
+                    <label class="form-label">Payment Method</label>
+                    <input type="text" class="form-control" name="payment_method">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">User</label>
+                    <select name="user_id" class="form-control">
 
-                                                @foreach ($user as $key => $data)
-                                                    <option value="{{ $key + 1 }}">{{ $data->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                      @foreach ($user as $key => $data)
+                      <option value="{{ $key + 1 }}">{{ $data->name }}</option>
+                      @endforeach
+                    </select>
+                  </div>
 
-                                        <div class="mb-3">
-                                            <label class="form-label">Departure</label>
-                                            <select name="departure" class="form-control departure">
-                                                <option>Choosen Departure</option>
-                                                @foreach ($route as $data)
-                                                    @if (!in_array($data->departure, $uniqueDepartures))
-                                                        <option value="{{ $data->departure }}">{{ $data->departure }}
-                                                        </option>
-                                                        <?php $uniqueDepartures[] = $data->departure; ?>
-                                                    @endif
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Arrival</label>
-                                            <select name="arrival" class="form-control arrival">
-                                                <option>Choosen Arrival</option>
-                                                @foreach ($route as $data)
-                                                    @if (!in_array($data->arrival, $uniqueArrival))
-                                                        <option value="{{ $data->arrival }}">{{ $data->arrival }}</option>
-                                                        <?php $uniqueArrival[] = $data->arrival; ?>
-                                                    @endif
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Route</label>
-                                            <select name="" class="form-control route">
+                  <div class="mb-3">
+                    <label class="form-label">Departure</label>
+                    <select name="departure" class="form-control departure">
+                      <option>Choosen Departure</option>
+                      @foreach ($route as $data)
+                      @if (!in_array($data->departure, $uniqueDepartures))
+                      <option value="{{ $data->departure }}">{{ $data->departure }}</option>
+                      <?php $uniqueDepartures[] = $data->departure; ?>
+                      @endif
 
-                                            </select>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">PassengerCar</label>
-                                            <select name="passenger_car_id" class="form-control PassengerCar">
+                      @endforeach
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Arrival</label>
+                    <select name="arrival" class="form-control arrival">
+                      <option>Choosen Arrival</option>
+                      @foreach ($route as $data)
+                      @if (!in_array($data->arrival, $uniqueArrival))
+                      <option value="{{ $data->arrival }}">{{ $data->arrival }}</option>
+                      <?php $uniqueArrival[] = $data->arrival; ?>
+                      @endif
 
-                                            </select>
-                                        </div>
-                                    </div>
+                      @endforeach
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Route</label>
+                      <select name="" class="form-control route">
 
-                                    <button type="submit" class="btn btn-primary">Create</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                      </select>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">PassengerCar</label>
+                    <select name="passenger_car_id" class="form-control PassengerCar">
+
+                    </select>
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Create</button>
+              </form>
+            </div>
+          </div>
+        </div>
 
                 </div><!-- end col -->
 

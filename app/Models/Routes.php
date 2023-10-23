@@ -18,11 +18,27 @@ class Routes extends Model
         'price',
         'description'
     ];
-    public $timestamps = false;
-    public function passengerCars(){
-        return $this->hasMany(PassengerCar::class,'route_id','id');
+
+    public function toSearchableArray()
+    {
+        return [
+            'slug' => $this->slug,
+            'departure'=> $this->departure,
+            'arrival'=> $this->arrival,
+            'price'=> $this->price,
+            'description'=> $this->description,
+        ];
     }
-    public function stops(){
-        return $this->hasMany(Stops::class,'route_id','id');
+
+    public $timestamps = false;
+
+    public function passengerCars()
+    {
+        return $this->hasMany(PassengerCar::class, 'route_id', 'id');
+    }
+
+    public function stops()
+    {
+        return $this->hasMany(Stops::class,'route_id');
     }
 }

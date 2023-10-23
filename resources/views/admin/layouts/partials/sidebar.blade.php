@@ -8,8 +8,15 @@
             <img src="admin/images/users/user-1.jpg" alt="user-img" title="Mat Helme"
                 class="rounded-circle img-thumbnail avatar-md">
             <div class="dropdown">
-                <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-bs-toggle="dropdown"
-                    aria-expanded="false">Nguyễn Ánh Dương</a>
+                <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-bs-toggle="dropdown"  aria-expanded="false">
+
+                    @if(auth()->check())
+                    <span class="hidden fw-medium xl:block">{{auth()->user()->name}}</span>
+                @else
+                    <span class="hidden fw-medium xl:block">Shawn L.</span>
+                @endif
+
+                </a>
                 <div class="dropdown-menu user-pro-dropdown">
 
                     <!-- item-->
@@ -64,11 +71,11 @@
                 <li class="menu-title">Navigation</li>
 
                 <li>
-                    <a href="index.html">
+                    {{-- <a href="{{ route('dashboard') }}">
                         <i class="mdi mdi-view-dashboard-outline"></i>
                         <span class="badge bg-success rounded-pill float-end">9+</span>
                         <span> Dashboard </span>
-                    </a>
+                    </a> --}}
                 </li>
                 <li>
                     <a href="{{ route('admin.revenue.index') }}">
@@ -99,9 +106,9 @@
                 </li>
 
                 <li>
-                    <a href="apps-chat.html">
+                    <a href="{{route('car.index')}}">
                         <i class="mdi mdi-forum-outline"></i>
-                        <span> Chat </span>
+                        <span> Quản lý xe </span>
                     </a>
                 </li>
 
@@ -124,12 +131,12 @@
                 </li>
 
                 <li>
-                    <a href="#sidebarTasks" data-bs-toggle="collapse">
+                    <a href="{{ route('stop.index') }}">
                         <i class="mdi mdi-clipboard-outline"></i>
-                        <span> Tasks </span>
-                        <span class="menu-arrow"></span>
+                        <span> Quản lý các điểm dừng </span>
+                        {{-- <span class="menu-arrow"></span> --}}
                     </a>
-                    <div class="collapse" id="sidebarTasks">
+                    {{-- <div class="collapse" id="sidebarTasks">
                         <ul class="nav-second-level">
                             <li>
                                 <a href="task-kanban-board.html">Kanban Board</a>
@@ -138,35 +145,34 @@
                                 <a href="task-details.html">Details</a>
                             </li>
                         </ul>
-                    </div>
+                    </div> --}}
                 </li>
 
                 <li>
-                    <a href="apps-projects.html">
+                    <a href="{{ route('permission.index') }}">
                         <i class="mdi mdi-briefcase-variant-outline"></i>
-                        <span> Projects </span>
+                        <span> Phân quyền user </span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#contacts" data-bs-toggle="collapse">
+                    <a href="{{ route('rolePermission.index') }}">
                         <i class="mdi mdi-book-open-page-variant-outline"></i>
-                        <span> Contacts </span>
-                        <span class="menu-arrow"></span>
+                        <span> Cài đặt quyền/vai trò </span>
                     </a>
-                    <div class="collapse" id="contacts">
+
+                    <div class="collapse" id="report">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="contacts-list.html">Members List</a>
+                                <a href="{{ route('admin.user.report') }}">Users Report</a>
                             </li>
                             <li>
-                                <a href="contacts-profile.html">Profile</a>
+                                <a href="{{ route('admin.ticket.report') }}">Tickets Report</a>
                             </li>
                         </ul>
                     </div>
-                </li>
 
-                <li class="menu-title mt-2">Custom</li>
+                </li>
 
                 <li>
                     <a href="#sidebarAuth" data-bs-toggle="collapse">
@@ -399,7 +405,7 @@
                 </li>
 
                 <li>
-                    <a href="{{ route('service.index') }}" data-bs-toggle="collapse">
+                    <a href="{{ route('service.index') }}">
                         <i class="mdi mdi-clipboard-outline"></i>
                         <span> Services </span>
                         {{-- <span class="menu-arrow"></span> --}}

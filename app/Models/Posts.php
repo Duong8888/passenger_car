@@ -11,15 +11,20 @@ class Posts extends Model
 
     protected $fillable = [
         'title',
-        'subtitle',
+        'content',
+        'image',
         'slug',
         'category_id',
         'author_id',
     ];
-    public function user(){
-        return $this->belongsTo(User::class);
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'author_id','id');
     }
-    public function category(){
-        return $this->belongsTo(PostsCategory::class);
+
+    public function category()
+    {
+        return $this->belongsTo(PostsCategory::class,'category_id','id');
     }
 }
