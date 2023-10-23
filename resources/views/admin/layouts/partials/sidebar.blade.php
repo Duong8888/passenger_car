@@ -140,7 +140,7 @@
                                 <a href="{{ route('admin.user.report') }}">Users Report</a>
                             </li>
                             <li>
-                                <a href="contacts-profile.html">Profile</a>
+                                <a href="{{ route('admin.ticket.report') }}">Tickets Report</a>
                             </li>
                         </ul>
                     </div>

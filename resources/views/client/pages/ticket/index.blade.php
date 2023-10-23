@@ -25,12 +25,7 @@
                     <div class="mb-5 show-infomation2"></div>
                 </div>
 
-                <div class=" w-full mb-5">
-                    <input type="radio" id="option3" name="options" class="form-radio h-5 w-5 text-blue-600">
-                    <label for="option3" class="ml-2 mb-3">Momo wallet</label>
-                    <p class="mb-5">Your phone must have the MoMo application installed </p>
-                    <div class="mb-5 show-infomation3"></div>
-                </div>
+               
             </div>
             <div class="w-1/3">
                 <div class="mb-5 border p-4">
@@ -68,12 +63,7 @@
         <h6 class="mb-3 text-lg text-gray-900 dark:text-gray-50">Click Book to finish payment</h6>
     </form>
 
-    <form method="Post" action="{{ route('client.ticket.momo-method') }}" class="fixed bottom-0 left-0 right-0 p-4 bg-white shadow-md flex justify-center momo-ticket hidden">
-        @csrf
-        <button type="submit" name="redirect" style="background: yellow ; width: 50%; padding: 10px;margin:5px">Momo Payment</button>
-        <input type="hidden" value="{{ json_encode(session('value')) }}">
-        <h6 class="mb-3 text-lg text-gray-900 dark:text-gray-50">Click to finish payment</h6>
-    </form>
+    
 </section>
 
 @endsection
