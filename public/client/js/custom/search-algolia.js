@@ -9,6 +9,24 @@ $(document).ready(function () {
     const arrival = $('select[name="arrival"]');
     const baseUrl = 'search';
     const dataList = $('.list-route');
+
+    const filterStopsArrival = $('#filterStopsArrival');
+    const filterStopsDeparture = $('#filterStopsDeparture');
+
+    let filterStopsArrivalValue = ''
+    let filterStopsDepartureValue = '';
+
+    filterStopsArrival.on("change", function (event) {
+        filterStopsArrivalValue = filterStopsArrival.val()
+        search()
+    });
+
+
+    filterStopsDeparture.on("change", function (event) {
+        filterStopsDepartureValue = filterStopsDeparture.val()
+        search()
+    });
+
     let skeleton = `
     <div role="status" class="w-full p-4 space-y-4 border border-gray-200 divide-y divide-gray-200 rounded shadow animate-pulse dark:divide-gray-700 md:p-6 dark:border-gray-700">
         <div class="flex items-center justify-between">
@@ -77,6 +95,8 @@ $(document).ready(function () {
         loading.show();
         arrival.val();
         departure.val();
+        filterStopsArrival.val('');
+        filterStopsDeparture.val('');
         search();
     });
     console.log(arrival.val());
@@ -89,12 +109,15 @@ $(document).ready(function () {
             method: 'GET',
             data: {
                 departure: departure.val(),
-                arrival: arrival.val()
+                arrival: arrival.val(),
+                filterArrival: filterStopsArrival.val(),
+                filterDeparture: filterStopsDeparture.val()
             },
             success: function (response) {
                 loading.hide();
                 console.log(response.dataRoute);
                 dataList.html('');
+                loadStopRoute(response.filterStops)
                 if (response.data.length === 0) {
                     dataList.append(`
                     <div class="text-center">
@@ -121,6 +144,48 @@ $(document).ready(function () {
                     </div>
                     `);
         console.log(error)
+    }
+
+    function loadStopRoute(filterStops){
+
+        filterStopsDeparture.empty();
+        filterStopsArrival.empty();
+
+        let offDeparture = true;
+        let offArrival = true;
+
+
+        if (!filterStops || filterStops.length > 0) {
+            filterStopsArrival.append('<option value="">Chọn điểm trả</option>')
+            filterStopsDeparture.append('<option value="">Chọn điểm đón</option>')
+            $.each(filterStops, function (index, item) {
+                if (item.stop_type === 0) {
+                    offDeparture = false;
+                    let isSelect  = filterStopsDepartureValue == item.id ? 'selected' : '';
+                    filterStopsDeparture.append('<option value="' + item.id + '" ' + isSelect + ' >' + item.stop_name + '</option>');
+                } else if (item.stop_type === 1) {
+                    offArrival = false;
+                    let isSelect  = filterStopsArrivalValue == item.id ? 'selected' : '';
+                    filterStopsArrival.append('<option value="' + item.id + '" ' + isSelect + ' >' + item.stop_name + '</option>');
+                }
+            });
+        }
+
+        if (offDeparture) {
+            filterStopsDeparture.attr('disabled', 'disabled');
+            filterStopsDeparture.append('<option  value="">không có điểm đi</option>');
+        } else {
+            filterStopsDeparture.removeAttr('disabled');
+        }
+
+        if (offArrival) {
+            filterStopsArrival.attr('disabled', 'disabled');
+            filterStopsArrival.append('<option  value="">không có điểm đến</option>');
+        } else {
+            filterStopsArrival.removeAttr('disabled');
+        }
+
+
     }
 
     function loadItem(data, dataRoute) {
@@ -187,6 +252,7 @@ $(document).ready(function () {
                     `);
             });
         });
+
     }
 
     function loadItem2(response) {
@@ -197,7 +263,7 @@ $(document).ready(function () {
             serviceHtml = '';
             $.each(response.passengerCarsService, function (indexpassengerCarsService, itempassengerCarsService) {
                 $.each(response.service, function (indexServices, itemServices) {
-                    if(itemServices.id === itempassengerCarsService.service_id && item.id === itempassengerCarsService.passenger_car_id){
+                    if (itemServices.id === itempassengerCarsService.service_id && item.id === itempassengerCarsService.passenger_car_id) {
                         serviceHtml += `<span class="bg-sky-500/20 text-sky-500 text-11 px-2 py-0.5 font-medium rounded">${itemServices.service_name}</span>`;
                     }
                 });
@@ -305,7 +371,7 @@ $(document).ready(function () {
                 if (type) {
                     console.log(response)
                     loadItem2(response)
-                    if (response.data.length === 0){
+                    if (response.data.length === 0) {
                         loadFail('fails', 'Không có kết quả phù phợp .');
                     }
                 } else {
@@ -341,11 +407,11 @@ $(document).ready(function () {
             var max = $(this).data('max');
             formData.append('min[' + e.target.id + ']', min);
             formData.append('max[' + e.target.id + ']', max);
-            ajaxRequest('sortBy', formData,true);
+            ajaxRequest('sortBy', formData, true);
         } else {
             formData.delete('min[' + e.target.id + ']');
             formData.delete('max[' + e.target.id + ']');
-            ajaxRequest('sortBy', formData,true);
+            ajaxRequest('sortBy', formData, true);
         }
     });
 

@@ -185,6 +185,72 @@
                                     </div>
                                 </div>
                             </div>
+                            <div data-tw-accordion="collapse">
+                                <div class="text-gray-700 accordion-item dark:text-gray-300">
+                                    <h6>
+                                        <button type="button"
+                                                class="flex items-center justify-between w-full px-4 py-2 font-medium text-left accordion-header group-data-[theme-color=violet]:bg-violet-500/20 group-data-[theme-color=sky]:bg-sky-500/20 group-data-[theme-color=red]:bg-red-500/20 group group-data-[theme-color=green]:bg-green-500/20 group-data-[theme-color=pink]:bg-pink-500/20 group-data-[theme-color=blue]:bg-blue-500/20 group active">
+                                            <span
+                                                class="text-gray-900 text-15 dark:text-gray-50">Điểm đón</span>
+                                        </button>
+                                    </h6>
+                                    <div class="block accordion-body">
+                                        <div class="p-5">
+                                            <div class="mt-2">
+                                                <div class="col-span-12 xl:col-span-4">
+                                                    <select class="custom-select"
+                                                            data-trigger name="filterStopsDeparture"
+                                                            id="filterStopsDeparture"
+                                                            aria-label="filterStopsDeparture">
+                                                        @if(!empty($filterStops) || count($filterStops) != 0)
+                                                            <option value="">Chọn điểm đón</option>
+                                                            @foreach($filterStops as $value)
+                                                                <option value="{{$value->id}}">{{$value->stop_name}}</option>
+                                                            @endforeach
+                                                        @endif
+                                                        @if(empty($filterStops)  || count($filterStops) == 0)
+                                                            <option  value="">Không có điểm đón</option>
+                                                        @endif
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-tw-accordion="collapse">
+                                <div class="text-gray-700 accordion-item dark:text-gray-300">
+                                    <h6>
+                                        <button type="button"
+                                                class="flex items-center justify-between w-full px-4 py-2 font-medium text-left accordion-header group-data-[theme-color=violet]:bg-violet-500/20 group-data-[theme-color=sky]:bg-sky-500/20 group-data-[theme-color=red]:bg-red-500/20 group group-data-[theme-color=green]:bg-green-500/20 group-data-[theme-color=pink]:bg-pink-500/20 group-data-[theme-color=blue]:bg-blue-500/20 group active">
+                                            <span
+                                                class="text-gray-900 text-15 dark:text-gray-50" >Điểm trả</span>
+                                        </button>
+                                    </h6>
+                                    <div class="block accordion-body">
+                                        <div class="p-5">
+                                            <div class="mt-2">
+                                                <div class="col-span-12 xl:col-span-4">
+                                                    <select class="custom-select" data-trigger name="filterStopsArrival"
+                                                            id="filterStopsArrival"
+                                                            aria-label="filterStopsArrival">
+                                                        @if(!empty($filterStops) || count($filterStops) != 0)
+                                                            <option value="">Chọn điểm trả</option>
+                                                            @foreach($filterStops as $value)
+                                                                <option value="{{$value->id}}">{{$value->stop_name}}</option>
+                                                            @endforeach
+                                                        @endif
+                                                        @if(empty($filterStops)  || count($filterStops) == 0)
+                                                            <option  value="">Không có điểm trả</option>
+                                                        @endif
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 {{--                            <div data-tw-accordion="collapse">--}}
 {{--                                <div class="text-gray-700 accordion-item dark:text-gray-300">--}}
 {{--                                    <h6>--}}
@@ -255,11 +321,12 @@
                                                 <select class="form-select " data-trigger name="arrival"
                                                         id="choices-single-categories"
                                                         aria-label="Default select example">
-                                                    {{-- @foreach($stops as $value)
+
+                                                    @foreach($stops as $value)
                                                         <option
                                                             @if(trim($_GET['arrival']) == trim($value)) selected
                                                             @endif  value="{{$value}}">{{$value}}</option>
-                                                    @endforeach --}}
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -394,7 +461,33 @@
     <script src="{{asset('client/js/pages/job-list.init.js')}}"></script>
 
     <script src="{{asset('client/js/pages/dropdown%26modal.init.js')}}"></script>
+    <style>
+        div.mt-2 input.your-custom-class-hoa {
+            width: 230px; /* Điều chỉnh chiều rộng theo ý muốn */
+            padding: 3px; /* Thêm khoảng cách xung quanh ô input */
+            border: 1px solid #ccc; /* Đường viền màu xám */
+            border-radius: 5px; /* Bo tròn góc */
+            background-color: #f5f5f5; /* Màu nền xám nhạt */
+            color: #333; /* Màu chữ đậm */
+        }
+        /* Ẩn danh sách ul */
+        .custom-dropdown ul {
+            display: none;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border: 1px solid #ccc;
+            max-height: 150px;
+            overflow-y: auto;
+        }
 
+        select.custom-select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
     <!-- Nouislider Js -->
     {{--    <script src="{{asset('client/libs/nouislider/nouislider.min.js')}}"></script>--}}
 

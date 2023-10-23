@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\PassengerCarController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\admin\permission\RolePermissionController;
+use App\Http\Controllers\admin\permission\UserPermissionController;
 use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\RouteController;
 use App\Http\Controllers\ProfileController;
@@ -9,6 +12,8 @@ use App\Http\Controllers\Admin\TicketController;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\Report\TicketReportController;
+use App\Http\Controllers\Admin\Report\UserReportController;
 use App\Http\Controllers\admin\StopsController;
 
 /*
@@ -26,18 +31,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('login', function (){
-    echo 123;
-});
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-// Route::get('/dashboard', function () {
-//     return view('admin.pages.dashboard.index');
-// });
-Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard');
+Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 
 Route::middleware('auth')->group(function () {
@@ -46,44 +41,46 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
-Route::get('/sign_in', [PhoneAuthController::class,'sign_in'])->name('sign_in');
+Route::get('/sign_in', [PhoneAuthController::class, 'sign_in'])->name('sign_in');
 
-// Route::middleware(['auth','check.role'])->group(function(){
-Route::get('/dashboard', function () {
-    return view('admin.pages.dashboard.index');
-});
 
 Route::get('/layout', function () {
     return view('admin.layouts.master');
 });
-Route::match(['GET','POST'],'posts', [PostController::class,'index'])->name('postsing');
+Route::match(['GET', 'POST'], 'posts', [PostController::class, 'index'])->name('postsing');
 Route::get('postadd', [PostController::class, 'create'])->name('posts.create');
 Route::post('postadd', [PostController::class, 'store'])->name('posts.store');
 
 Route::post('ckeditor/image_upload', [App\Http\Controllers\Admin\EditorController::class, 'upload'])->name('upload');
-Route::get('/posts/{id}/edit',  [PostController::class,'edit'])->name('posts.edit');
-Route::put('/posts/{id}',  [PostController::class,'update'])->name('posts.update');
+Route::get('/posts/{id}/edit',  [PostController::class, 'edit'])->name('posts.edit');
+Route::put('/posts/{id}',  [PostController::class, 'update'])->name('posts.update');
 // Đường dẫn route để xóa bài viết
-Route::delete('/posts/{id}', [PostController::class,'destroy'])->name('posts.destroy');
-Route::get('/posting/{slug}', [PostController::class,'createSlug'])->name('post.show');
+Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
+Route::get('/posting/{slug}', [PostController::class, 'createSlug'])->name('post.show');
 
 
 Route::resource('ticket', TicketController::class);
+
 Route::post('/trip', [TicketController::class, 'Trip']);
-Route::post('/passgenerCar/{id}' , [TicketController::class, 'PassengerCar']);
+Route::post('/passgenerCar/{id}', [TicketController::class, 'PassengerCar']);
 
 Route::resource('/route', RouteController::class);
-
+Route::get('/userReport', [UserReportController::class, 'index'])->name('admin.user.report');
 
 
 //Phan'z Nam'z
 Route::resource('/service', ServicesController::class);
 Route::resource('/stop', StopsController::class);
+// Route::get('/userlist',[UserPermissionController::class,'index'])->name('admin.user.list');
+// Route::get('/permission/{id}',[UserPermissionController::class,'permission'])->name('admin.user.permission');
+Route::resource('/permission', UserPermissionController::class);
+Route::resource('/rolePermission', RolePermissionController::class);
+Route::delete('/rolePermission/create/{id}',[RolePermissionController::class,'delete'])->name('admin.rolePermission.delete');
+
+// Route::get('/rolelist',[RolePermissionController::class,'index'])->name('admin.role.list');
 //End Phan'z Nam'z
-
-
 
 
 Route::get('/staff/index',[App\Http\Controllers\Admin\UserController::class,'index'])->name('route_staff_index');
@@ -98,11 +95,28 @@ Route::match(['GET','POST'],'/management/add',[App\Http\Controllers\Admin\AdminM
 Route::match(['GET','POST'],'/management/delete/{id}',[App\Http\Controllers\Admin\AdminManagementController::class,'delete'])->name('route_adminmanagement_delete');
 
 
+Route::group(["prefix"=>"car","as"=>"car."],function(){
+    Route::get('/',[PassengerCarController::class,'index'])->name('index');
+    Route::post('store',[PassengerCarController::class,'store'])->name('store');
+    Route::post('show',[PassengerCarController::class,'show'])->name('show');
+    Route::post('update/{id}',[PassengerCarController::class,'update'])->name('update');
+    Route::delete('delete/{id}',[PassengerCarController::class,'destroy'])->name('delete');
+});
+
+
 Route::get('/loginadmin', [App\Http\Controllers\LoginAdminController::class, 'showLoginAdmin'])->name('login_admin');
 Route::post('/loginadmin', [App\Http\Controllers\LoginAdminController::class, 'loginAdmin']);
 Route::get('/logoutadmin', [App\Http\Controllers\LoginAdminController::class, 'logoutAdmin'])->name('logoutAdmin');
 
 
 
+Route::get('/staff/index', [App\Http\Controllers\UserController::class, 'index'])->name('route_staff_index');
+Route::match(['GET', 'POST'], '/staff/add', [App\Http\Controllers\UserController::class, 'add'])->name('route_staff_add');
+Route::match(['GET', 'POST'], '/staff/edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('route_staff_edit');
+Route::match(['GET', 'POST'], '/staff/delete/{id}', [App\Http\Controllers\UserController::class, 'delete'])->name('route_staff_delete');
 
 
+Route::get('/management/index', [App\Http\Controllers\AdminManagementController::class, 'index'])->name('route_adminmanagement_index');
+Route::match(['GET', 'POST'], '/management/edit/{id}', [App\Http\Controllers\AdminManagementController::class, 'edit'])->name('route_adminmanagement_edit');
+Route::match(['GET', 'POST'], '/management/add', [App\Http\Controllers\AdminManagementController::class, 'add'])->name('route_adminmanagement_add');
+Route::match(['GET', 'POST'], '/management/delete/{id}', [App\Http\Controllers\AdminManagementController::class, 'delete'])->name('route_adminmanagement_delete');

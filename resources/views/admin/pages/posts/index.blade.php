@@ -1,4 +1,3 @@
-
 @extends('admin.layouts.master')
 
 @section('page-script')
@@ -31,32 +30,39 @@
                                 <table class="table table-hover mb-0">
                                     <thead>
                                     <tr>
-                                        <th>#</th>
                                         <th>Title</th>
                                         <th>Content</th>
                                         <th>Slug</th>
-                                        <th>Category_id</th>
-                                        <th>Author_id</th>
+                                        <th>Category</th>
+                                        <th>Author</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach ($data as $posts)
                                         <tr>
-                                            <td>{{ $posts->id }}</td>
                                             <td>{{ $posts->title }}</td>
-                                            <td > <a href="{{ route('posts.edit', ['id' => $posts->id]) }}">Xem chi tiết</a> </td>
+                                            <td><a href="{{ route('posts.edit', ['id' => $posts->id]) }}">Xem chi
+                                                    tiết</a></td>
                                             <td>{{ $posts->slug }}</td>
-                                            <td>{{ $posts->category_id }}</td>
-                                            <td>{{ $posts->author_id }}</td>
-                                            <td style="display: flex;">
-                                                <a class="btn btn-primary" href="{{ route('posts.edit', ['id' => $posts->id]) }}">Edit</a>
-
-                                                <form action="{{ route('posts.destroy', $posts->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button onclick="return confirm('Are you sure ?')" class="btn btn-warning">Delete</button>
-                                                </form>
+                                            <td>{{ $posts->category->category_name}}</td>
+                                            <td>{{ $posts->user->name}}</td>
+                                            <td>
+                                                <div class="d-flex align-items-center justify-content-center">
+                                                    <div class="btn-group">
+                                                        <i class="fe-settings dropdown-toggle font-18"
+                                                           data-bs-toggle="dropdown" aria-haspopup="true"
+                                                           aria-expanded="false"></i>
+                                                        <div class="dropdown-menu" style="">
+                                                            <a class="dropdown-item" href="{{route('posts.edit',$posts->id)}}">Cập nhật</a>
+                                                            <form action="{{route('posts.destroy',$posts->id)}}" method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button class="dropdown-item" type="submit">Xóa</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -70,6 +76,5 @@
             <!-- end row -->
         </div> <!-- container -->
     </div> <!-- content -->
-
 
 @endsection

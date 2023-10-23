@@ -10,11 +10,11 @@ class BlogController extends Controller
     public function blog($id)
     {
         $post = Posts::findOrFail($id);
-        return view('client.pages.blog_details', compact('post'));
+        return view('client.pages.blogs.blog_details', compact('post'));
     }
     public function show()
     {
-        $posts = Posts::all();
-        return view('client.pages.blog', compact('posts'));
+        $posts = Posts::query()->paginate(8);
+        return view('client.pages.blogs.blog', compact('posts'));
     }
 }

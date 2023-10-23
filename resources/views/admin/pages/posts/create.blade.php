@@ -18,47 +18,56 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                      class="bi bi-arrow-left" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd"
-                                          d="M11.354 4.646a.5.5 0 0 1 0 .708L7.707 8l3.647 3.646a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 0 1 .708 0z" />
+                                          d="M11.354 4.646a.5.5 0 0 1 0 .708L7.707 8l3.647 3.646a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 0 1 .708 0z"/>
                                 </svg>
                                 Back
                             </a>
-                            <div class="table-responsive">
 
-                                <form action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data" class="row">
-                                    @csrf
+                            <form action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data"
+                                  class="row">
+                                @csrf
+                                <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Title</label>
-                                        <input class="form-control" type="text" name="title" id="title" value="" size="50" onkeyup="ChangeToSlug();" >
+                                        <input class="form-control" type="text" name="title" id="title" value=""
+                                               size="50" onkeyup="ChangeToSlug();">
                                     </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Subtitle</label>
-                                        <textarea name="subtitle" id="editor1" rows="10" cols="80"></textarea>
-                                    </div>
+
+
                                     <div class="mb-3">
                                         <label class="form-label">Slug</label>
-                                        <input class="form-control" type="text" name="slug" id="slug" value="" size="50" >
+                                        <input class="form-control" type="text" name="slug" id="slug" value=""
+                                               size="50">
                                     </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Category</label>
-                                        <select class="form-select" name="category_id">
-                                            <option value="1">New 1</option>
-                                            <option value="2">New 2</option>
-                                            <option value="3">New 3</option>
+                                </div>
 
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Author</label>
-                                        <select class="form-select" name="author_id">
-                                            <option value="1">Hoa 1</option>
-                                            <option value="2">Hoa 2</option>
-                                            <option value="3">Hoa 3</option>
+                                <div class="col-md-6 d-flex  justify-content-center align-items-center">
+                                    <input type="file" hidden name="image" id="image">
+                                    <label for="image" id="fileContent"
+                                           class="rounded-1 w-100 h-100 d-flex  justify-content-center align-items-center">
+                                        <i class="fe-image font-28 icon-img" style="transform: scale(2);"></i>
+                                    </label>
+                                </div>
+                                <input hidden name="author_id" value="{{auth()->user()->id}}">
 
-                                        </select>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Create</button>
-                                </form>
-                            </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Category</label>
+                                    <select class="form-select" name="category_id">
+                                        @foreach($category as $key => $value)
+                                            <option value="{{$value->id}}">{{$value->category_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Content</label>
+                                    <textarea name="content" id="editor1" rows="10" cols="80"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <button type="submit" class="btn btn-primary float-end">Create</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
 
@@ -73,15 +82,14 @@
     <script src="{{url('ckeditor/ckeditor.js') }}"></script>
 
     <script type="text/javascript">
-        CKEDITOR.replace( 'editor1', {
+        CKEDITOR.replace('editor1', {
             filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
             filebrowserWindowWidth: '640',
             filebrowserWindowHeight: '480'
-        } );
+        });
     </script>
     <script>
-        function ChangeToSlug()
-        {
+        function ChangeToSlug() {
             var title, slug;
 
             //Lấy text từ thẻ input title
@@ -101,7 +109,7 @@
             //Xóa các ký tự đặt biệt
             slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
             //Đổi khoảng trắng thành ký tự gạch ngang
-            slug = slug.replace(/ /gi, " - ");
+            slug = slug.replace(/ /gi, "-");
             //Đổi nhiều ký tự gạch ngang liên tiếp thành 1 ký tự gạch ngang
             //Phòng trường hợp người nhập vào quá nhiều ký tự trắng
             slug = slug.replace(/\-\-\-\-\-/gi, '-');
@@ -114,20 +122,29 @@
             //In slug ra textbox có id “slug”
             document.getElementById('slug').value = slug;
         }
+
+        const inputImg = document.querySelector('#image');
+
+        inputImg.addEventListener('change', (e) => {
+            let file = e.target.files[0]
+
+            if (!file) return
+            let srcIamge = URL.createObjectURL(file)
+            document.querySelector('#fileContent').innerHTML = `<img class="rounded" height="100%" width="100%" src="${srcIamge}">`;
+        })
+
+
     </script>
-    @section('page-script')
 
-        <!--Morris Chart-->
-        <script src="admin/libs/morris.js06/morris.min.js"></script>
-        <script src="admin/libs/raphael/raphael.min.js"></script>
+@endsection
 
-        <!-- Dashboar init js-->
-        <script src="admin/js/pages/dashboard.init.js"></script>
+@section('page-script')
 
+    <!--Morris Chart-->
+    <script src="{{asset('admin/libs/morris.js06/morris.min.js')}}"></script>
+    <script src="{{asset('admin/libs/raphael/raphael.min.js')}}"></script>
 
-    @endsection
-
-
-
+    <!-- Dashboar init js-->
+    <script src="{{asset('admin/js/pages/dashboard.init.js')}}"></script>
 
 @endsection

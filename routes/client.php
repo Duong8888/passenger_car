@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Client\SearchController;
-use App\Http\Controllers\Client\Ticket\PaymentController;
+//use App\Http\Controllers\Client\Ticket\PaymentController;
 use App\Http\Controllers\Client\Ticket\TicketController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PhoneAuthController;
@@ -14,19 +14,6 @@ use App\Http\Controllers\Client\ProfileController;
 Route::get('/',[HomeController::class,'index'])->name('home');;
 Route::post('/passengerCar-detail',[HomeController::class,'passengerCarDetail']);
 Route::resource('/profile',ProfileController::class);
-
-
-
-
-
-
-
-Route::get('/home', [HomeController::class, 'index']);
-Route::post('/passengerCar-detail', [HomeController::class, 'passengerCarDetail']);
-
-
-
-Route::get('/', [SearchController::class, 'home'])->name('home');
 
 
 Route::get('/search', [SearchController::class, 'searchRequest'])->name('search');
@@ -50,6 +37,7 @@ Route::group(['prefix' => 'notifications', 'as' => 'notifications.'], function (
 
 Route::get('/blog/{id}',[BlogController::class,'blog'])->name('blog');
 Route::get('/blogs', [BlogController::class, 'show'])->name('blog.show');
+
 
 Route::post('/update-ticket' , [TicketController::class, 'CountTicket'])->name('client.ticket.update-ticket');
 Route::get('/payment-method', [TicketController::class, 'PaymentView'])->name('client.ticket.payment-method');

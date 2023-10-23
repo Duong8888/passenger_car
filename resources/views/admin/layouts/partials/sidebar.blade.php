@@ -87,9 +87,9 @@
                 </li>
 
                 <li>
-                    <a href="apps-chat.html">
+                    <a href="{{route('car.index')}}">
                         <i class="mdi mdi-forum-outline"></i>
-                        <span> Chat </span>
+                        <span> Quản lý xe </span>
                     </a>
                 </li>
 
@@ -130,31 +130,18 @@
                 </li>
 
                 <li>
-                    <a href="apps-projects.html">
+                    <a href="{{ route('permission.index') }}">
                         <i class="mdi mdi-briefcase-variant-outline"></i>
-                        <span> Projects </span>
+                        <span> Phân quyền user </span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#contacts" data-bs-toggle="collapse">
+                    <a href="{{ route('rolePermission.index') }}">
                         <i class="mdi mdi-book-open-page-variant-outline"></i>
-                        <span> Contacts </span>
-                        <span class="menu-arrow"></span>
+                        <span> Cài đặt quyền/vai trò </span>
                     </a>
-                    <div class="collapse" id="contacts">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="contacts-list.html">Members List</a>
-                            </li>
-                            <li>
-                                <a href="contacts-profile.html">Profile</a>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
-
-                <li class="menu-title mt-2">Custom</li>
 
                 <li>
                     <a href="#sidebarAuth" data-bs-toggle="collapse">
