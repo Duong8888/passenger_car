@@ -40,3 +40,5 @@ Route::post('/send-ticket', [TicketController::class, 'endPayment'])->name('clie
 Route::post('/vnpay-method', [TicketController::class, 'vnpay_payment'])->name('client.ticket.vnpay-method');
 Route::post('/momo-method', [TicketController::class, 'momo_payment'])->name('client.ticket.momo-method');
 Route::get('/vnpay-todb', [TicketController::class, 'checkoutPayment'])->name('client.ticket.add-vnpay-to-db');
+
+
