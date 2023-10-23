@@ -5,9 +5,11 @@
         <!-- User box -->
         <div class="user-box text-center">
 
-            <img src="admin/images/users/user-1.jpg" alt="user-img" title="Mat Helme" class="rounded-circle img-thumbnail avatar-md">
+            <img src="admin/images/users/user-1.jpg" alt="user-img" title="Mat Helme"
+                class="rounded-circle img-thumbnail avatar-md">
             <div class="dropdown">
-                <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-bs-toggle="dropdown"  aria-expanded="false">Nguyễn Ánh Dương</a>
+                <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-bs-toggle="dropdown"
+                    aria-expanded="false">Nguyễn Ánh Dương</a>
                 <div class="dropdown-menu user-pro-dropdown">
 
                     <!-- item-->
@@ -68,7 +70,25 @@
                         <span> Dashboard </span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('admin.revenue.index') }}">
+                        <i class="mdi mdi-view-dashboard-outline"></i>
+                        <span> Thống kê doanh thu </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.category.index') }}">
+                        <i class="mdi mdi-view-dashboard-outline"></i>
+                        <span> Quản lý danh mục </span>
+                    </a>
+                </li>
 
+                <li>
+                    <a href="{{ route('admin.customer.index') }}">
+                        <i class="mdi mdi-view-dashboard-outline"></i>
+                        <span> Quản lý khách hàng </span>
+                    </a>
+                </li>
                 <li class="menu-title mt-2">Apps</li>
 
                 <li>
@@ -372,7 +392,7 @@
                 </li>
 
                 <li>
-                    <a href="{{ route('ticket.index') }}" >
+                    <a href="{{ route('ticket.index') }}">
                         <i class="mdi mdi-texture"></i>
                         <span>Tickets</span>
                     </a>
