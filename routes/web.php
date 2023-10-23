@@ -82,6 +82,19 @@ Route::delete('/rolePermission/create/{id}',[RolePermissionController::class,'de
 // Route::get('/rolelist',[RolePermissionController::class,'index'])->name('admin.role.list');
 //End Phan'z Nam'z
 
+
+Route::get('/staff/index',[App\Http\Controllers\Admin\UserController::class,'index'])->name('route_staff_index');
+Route::match(['GET','POST'],'/staff/add',[App\Http\Controllers\Admin\UserController::class,'add'])->name('route_staff_add');
+Route::match(['GET','POST'],'/staff/edit/{id}',[App\Http\Controllers\Admin\UserController::class,'edit'])->name('route_staff_edit');
+Route::match(['GET','POST'],'/staff/delete/{id}',[App\Http\Controllers\Admin\UserController::class,'delete'])->name('route_staff_delete');
+
+
+Route::get('/management/index',[App\Http\Controllers\Admin\AdminManagementController::class,'index'])->name('route_adminmanagement_index');
+Route::match(['GET','POST'],'/management/edit/{id}',[App\Http\Controllers\Admin\AdminManagementController::class,'edit'])->name('route_adminmanagement_edit');
+Route::match(['GET','POST'],'/management/add',[App\Http\Controllers\Admin\AdminManagementController::class,'add'])->name('route_adminmanagement_add');
+Route::match(['GET','POST'],'/management/delete/{id}',[App\Http\Controllers\Admin\AdminManagementController::class,'delete'])->name('route_adminmanagement_delete');
+
+
 Route::group(["prefix"=>"car","as"=>"car."],function(){
     Route::get('/',[PassengerCarController::class,'index'])->name('index');
     Route::post('store',[PassengerCarController::class,'store'])->name('store');
@@ -90,6 +103,10 @@ Route::group(["prefix"=>"car","as"=>"car."],function(){
     Route::delete('delete/{id}',[PassengerCarController::class,'destroy'])->name('delete');
 });
 
+
+Route::get('/loginadmin', [App\Http\Controllers\LoginAdminController::class, 'showLoginAdmin'])->name('login_admin');
+Route::post('/loginadmin', [App\Http\Controllers\LoginAdminController::class, 'loginAdmin']);
+Route::get('/logoutadmin', [App\Http\Controllers\LoginAdminController::class, 'logoutAdmin'])->name('logoutAdmin');
 
 
 

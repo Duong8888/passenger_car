@@ -298,11 +298,11 @@
                                                 <select class="form-select" data-trigger name="departure"
                                                         id="choices-single-location"
                                                         aria-label="Default select example">
-                                                    @foreach($stops as $value)
+                                                    {{-- @foreach($stops as $value)
                                                         <option
                                                             @if(trim($_GET['departure']) == trim($value)) selected
                                                             @endif value="{{$value}}">{{$value}}</option>
-                                                    @endforeach
+                                                    @endforeach --}}
                                                 </select>
                                             </div>
                                         </div>
@@ -321,6 +321,7 @@
                                                 <select class="form-select " data-trigger name="arrival"
                                                         id="choices-single-categories"
                                                         aria-label="Default select example">
+
                                                     @foreach($stops as $value)
                                                         <option
                                                             @if(trim($_GET['arrival']) == trim($value)) selected
@@ -352,10 +353,9 @@
                             </div>
 
 
-                            <div class="space-y-8 mt-14 list-route">
+                            {{-- <div class="space-y-8 mt-14 list-route">
                                 @if(!empty($routes) || count($data) != 0)
                                     @foreach($data as $key => $value)
-                                        {{--                                        {{ substr($time, 0, 5) }}--}}
                                         @foreach( $value->workingTime as $keyWorking => $valueWorking)
                                             <div
                                                 class="relative overflow-hidden transition-all duration-500 ease-in-out bg-white border rounded-md border-gray-100/50 group/jobs group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:-translate-y-2 dark:bg-neutral-900 dark:border-neutral-600">
@@ -435,7 +435,7 @@
                                     </div>
                                 </div>
 
-                            </div>
+                            </div> --}}
                         </div>
                         <!-- end right -->
                     </div>

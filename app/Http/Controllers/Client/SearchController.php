@@ -40,7 +40,7 @@ class SearchController extends Controller
     public function home()
     {
         $data = $this->dataRouter();
-        return view($this->pathview . '.home', ['stops' => $data['stops']]);
+        return view($this->pathview . '.findRoutes', ['stops' => $data['stops']]);
     }
 
     public function searchRequest(Request $request)

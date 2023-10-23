@@ -41,14 +41,14 @@
                             <div class="widget-chart-1">
                                 <div class="widget-chart-box-1 float-start" dir="ltr">
                                     <input data-plugin="knob" data-width="70" data-height="70" data-fgColor="#f05050 "
-                                           data-bgColor="#F9B9B9" value="{{ $percentage = ($totalUsers->count() > 0) ? round(($userCountToday / ($totalUsers->count())) * 100, 2) : 0; }}"
+                                           {{-- data-bgColor="#F9B9B9" value="{{ $percentage = ($totalUsers->count() > 0) ? round(($userCountToday / ($totalUsers->count())) * 100, 2) : 0; }}" --}}
                                            data-skin="tron" data-angleOffset="180" data-readOnly=true
                                            data-thickness=".15"/>
                                 </div>
 
                                 <div class="widget-detail-1 text-end">
-                                    <h2 class="fw-normal pt-2 mb-1">{{ $totalUsers->count() }}</h2>
-                                    <p class="text-muted mb-1">Người dùng mới: {{ $userCountToday }}</p>
+                                    {{-- <h2 class="fw-normal pt-2 mb-1">{{ $totalUsers->count() }}</h2> --}}
+                                    {{-- <p class="text-muted mb-1">Người dùng mới: {{ $userCountToday }}</p> --}}
                                 </div>
                             </div>
                         </div>
@@ -78,16 +78,15 @@
 
                             <div class="widget-box-2">
                                 <div class="widget-detail-2 text-end">
-                                    <span class="badge bg-success rounded-pill float-start mt-3">{{ $percentage = ($totalPassengerCars > 0) ? round(($passengerCarsCountToday / $totalPassengerCars) * 100, 2) : 0; }}% <i class="mdi mdi-trending-up"></i> </span>
+                                    {{-- <span class="badge bg-success rounded-pill float-start mt-3">{{ $percentage = ($totalPassengerCars > 0) ? round(($passengerCarsCountToday / $totalPassengerCars) * 100, 2) : 0; }}% <i class="mdi mdi-trending-up"></i> </span>
                                     <h2 class="fw-normal mb-1">{{ $totalPassengerCars }} </h2>
-                                    <p class="text-muted mb-3">Xe được thêm: {{ $passengerCarsCountToday }}</p>
+                                    <p class="text-muted mb-3">Xe được thêm: {{ $passengerCarsCountToday }}</p> --}}
                                 </div>
                                 <div class="progress progress-bar-alt-success progress-sm">
-                                    <div class="progress-bar bg-success" role="progressbar"
+                                    {{-- <div class="progress-bar bg-success" role="progressbar"
                                          aria-valuenow="77" aria-valuemin="0" aria-valuemax="100"
                                          style="width: {{ $percentage = $passengerCarsCountToday / $totalPassengerCars * 100 }}%;">
-                                        {{-- <span class="visually-hidden">77% Complete</span> --}}
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -116,7 +115,7 @@
                             <h4 class="header-title mt-0 mb-4">Số bài viết</h4>
 
                             <div class="widget-chart-1">
-                                <div class="widget-chart-box-1 float-start" dir="ltr">
+                                {{-- <div class="widget-chart-box-1 float-start" dir="ltr">
                                     <input data-plugin="knob" data-width="70" data-height="70" data-fgColor="#ffbd4a"
                                            data-bgColor="#FFE6BA" value="{{ $percentage = ($totalPosts > 0) ? round(($postCountToday / $totalPosts) * 100, 2) : 0; }}"
                                            data-skin="tron" data-angleOffset="180" data-readOnly=true
@@ -125,7 +124,7 @@
                                 <div class="widget-detail-1 text-end">
                                     <h2 class="fw-normal pt-2 mb-1">{{ $totalPosts }}</h2>
                                     <p class="text-muted mb-1">Bài viết hôm nay: {{ $postCountToday }}</p>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -153,7 +152,7 @@
                             <h4 class="header-title mt-0 mb-3">Số bình luận</h4>
 
                             <div class="widget-box-2">
-                                <div class="widget-detail-2 text-end">
+                                {{-- <div class="widget-detail-2 text-end">
                                     <span class="badge bg-pink rounded-pill float-start mt-3">{{ $percentage = ($comments->count() > 0) ? round(($commentsCountToday / ($comments->count())) * 100, 2) : 0; }}% <i class="mdi mdi-trending-up"></i> </span>
                                     <h2 class="fw-normal mb-1"> {{ $comments->count() }}</h2>
                                     <p class="text-muted mb-3">Bình luận hôm nay: {{ $commentsCountToday }}</p>
@@ -162,8 +161,7 @@
                                     <div class="progress-bar bg-pink" role="progressbar"
                                          aria-valuenow="77" aria-valuemin="0" aria-valuemax="100"
                                          style="width: {{ $percentage = ($comments->count() > 0) ? round(($commentsCountToday / ($comments->count())) * 100, 2) : 0; }}%;">
-                                        {{-- <span class="visually-hidden">77% Complete</span> --}}
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -359,7 +357,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($users as $data)
+                                        {{-- @foreach ($users as $data)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $data->name }}</td>
@@ -374,7 +372,7 @@
                                             @endif</td>
                                             <td>{{ $data->latest_ticket->payment_method }}</td>
                                         </tr>
-                                        @endforeach
+                                        @endforeach --}}
                                     </tbody>
                                 </table>
                             </div>

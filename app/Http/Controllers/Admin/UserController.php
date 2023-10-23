@@ -1,28 +1,26 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\UserRequest;
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+
 
 class UserController extends Controller
 {
-    public function index(Request $request){
-        
+    public function index(){
         $users = User::all();
         return view('admin.pages.Staff.index',compact('users'));
-
-    }   
+    }
     public function add(Request $request){
         if($request->post()){
             $params = $request->except('_token');
             $users = User::create($params);
          
          if($users->id){
-            Session::flash('success','thêm mới thành công');
+            Session::flash('success','User added successfully');
             return redirect()->route('route_staff_add');
          }
       }
@@ -45,5 +43,4 @@ class UserController extends Controller
         Session::flash('success','xóa thành công'.$id);
         return redirect()->route('route_staff_index');
     }
-    
 }
