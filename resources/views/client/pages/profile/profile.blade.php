@@ -183,8 +183,8 @@
                                             @if ($item->status == 1)
                                                 <div
                                                     class="mb-5 p-5 border border-gray-100/50 rounded-md relative hover:-translate-y-1.5 transition-all duration-500 ease-in-out group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:shadow-md hover:shadow-gray-100/30 dark:border-neutral-600 dark:hover:shadow-neutral-900">
-    
-    
+
+
                                                     <div class="grid grid-cols-12">
                                                         <div class="col-span-12 lg:col-span-1">
                                                             <a href="company-details.html"><img
@@ -247,11 +247,11 @@
                                                             </ul>
                                                         </div><!--end col-->
                                                     </div><!--end row-->
-    
+
                                                 </div>
                                             @endif
                                         @endforeach
-    
+
                                         </div>
 
                                         <div class="block w-full tab-pane" id="overview-tab">
@@ -259,8 +259,8 @@
                                                 @if ($item->status == 0)
                                                     <div
                                                         class="mb-5 p-5 border border-gray-100/50 rounded-md relative hover:-translate-y-1.5 transition-all duration-500 ease-in-out group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:shadow-md hover:shadow-gray-100/30 dark:border-neutral-600 dark:hover:shadow-neutral-900">
-    
-    
+
+
                                                         <div class="grid grid-cols-12">
                                                             <div class="col-span-12 lg:col-span-1">
                                                                 <a href="company-details.html"><img
@@ -323,11 +323,11 @@
                                                                 </ul>
                                                             </div><!--end col-->
                                                         </div><!--end row-->
-    
+
                                                     </div>
                                                 @endif
                                             @endforeach
-    
+
                                         </div>
 
                                         <div class="hidden w-full tab-pane" id="past-tab">
@@ -336,8 +336,8 @@
                                                     @if ($item->status == 2)
                                                         <div
                                                             class="mb-5 p-5 border border-gray-100/50 rounded-md relative hover:-translate-y-1.5 transition-all duration-500 ease-in-out group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:shadow-md hover:shadow-gray-100/30 dark:border-neutral-600 dark:hover:shadow-neutral-900">
-    
-    
+
+
                                                             <div class="grid grid-cols-12">
                                                                 <div class="col-span-12 lg:col-span-1">
                                                                     <a href="company-details.html"><img
@@ -402,11 +402,11 @@
                                                                     </ul>
                                                                 </div><!--end col-->
                                                             </div><!--end row-->
-    
+
                                                         </div>
                                                     @endif
                                                 @endforeach
-    
+
                                             </div>
                                         </div>
 
