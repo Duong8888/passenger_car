@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Routing\Route;
-use Laravel\Scout\Searchable;
 
 class PassengerCar extends Model
 {
@@ -17,9 +16,10 @@ class PassengerCar extends Model
         'capacity',
         'price',
         'description',
-        'user_id',
+        'transport_unit_id',
         'route_id',
     ];
+    // public $timestamps = false;
 
 //    public function toSearchableArray()
 //    {
@@ -48,7 +48,7 @@ class PassengerCar extends Model
 
     }
     public function services(){
-        return $this->belongsToMany(Service::class,'passenger_car_services');
+        return $this->belongsToMany(Service::class);
     }
     public function tickets(){
         return $this->hasMany(Ticket::class);

@@ -14,6 +14,8 @@ use App\Http\Controllers\Client\ProfileController;
 Route::get('/',[HomeController::class,'index'])->name('home');;
 Route::post('/passengerCar-detail',[HomeController::class,'passengerCarDetail']);
 Route::resource('/profile',ProfileController::class);
+Route::get('/ticketdetails',[App\Http\Controllers\Client\TicketDetailsController::class,'index']);
+
 
 
 Route::get('/search', [SearchController::class, 'searchRequest'])->name('search');
