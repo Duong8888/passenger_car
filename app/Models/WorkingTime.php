@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class WorkingTime extends Model
 {
     use HasFactory;
-
+    public $timestamps = false;
     protected $fillable = [
         'departure_time',
         'arrival_time',

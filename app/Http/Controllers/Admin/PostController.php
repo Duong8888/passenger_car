@@ -47,6 +47,7 @@ class PostController extends AdminBaseController
 
     }
 
+
     public function create()
     {
         $category = PostsCategory::all();

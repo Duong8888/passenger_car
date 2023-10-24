@@ -38,7 +38,6 @@ class DashboardController extends Controller
                 return $user;
             });
 
-        // return response()->json($admins, 200, [], JSON_PRETTY_PRINT);
         return view('admin.pages.dashboard.index',compact('totalUsers','totalPosts',
         'totalPassengerCars','comments','users','admins','commentsCountToday',
         'userCountToday','postCountToday','passengerCarsCountToday'

@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -25,6 +26,12 @@ class User extends Authenticatable
         'password',
         'phone',
         'user_type',
+    ];
+    protected $attributes = [
+        'name' => 'Unknown',
+        'email' => NULL,
+        'password' => 'unknown',
+        'user_type' => 'user'
     ];
 
     /**
@@ -47,10 +54,12 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function comments(){
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
     }
-    public function tickets(){
+    public function tickets()
+    {
         return $this->hasMany(Ticket::class);
     }
 }
