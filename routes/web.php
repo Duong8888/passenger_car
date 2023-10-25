@@ -45,8 +45,8 @@ Route::get('/loginadmin', [App\Http\Controllers\LoginAdminController::class, 'sh
 Route::post('/loginadmin', [App\Http\Controllers\LoginAdminController::class, 'loginAdmin']);
 Route::get('/logoutadmin', [App\Http\Controllers\LoginAdminController::class, 'logoutAdmin'])->name('logoutAdmin');
 
-// SupperAdmin-AdminPost
-Route::group(['middleware' => ['role:SupperAdmin,AdminPost']], function () {
+// SupperAdmin-Admin-AdminPost
+Route::group(['middleware' => 'checkRoles:SupperAdmin,Admin,AdminPost'], function () {
     Route::match(['GET', 'POST'], 'posts', [PostController::class, 'index'])->name('postsing');
     Route::get('postadd', [PostController::class, 'create'])->name('posts.create');
     Route::post('postadd', [PostController::class, 'store'])->name('posts.store');
@@ -57,8 +57,8 @@ Route::group(['middleware' => ['role:SupperAdmin,AdminPost']], function () {
     Route::get('/posting/{slug}', [PostController::class, 'createSlug'])->name('post.show');
 });
 
-//SupperAdmin-AdminTicket
-Route::group(['middleware' => ['role:SupperAdmin,AdminTicket']], function () {
+//SupperAdmin-Admin-AdminTicket
+Route::group(['middleware' => 'checkRoles:SupperAdmin,Admin,AdminTicket'], function () {
     Route::prefix('ticket')->controller(TicketController::class)->name('ticket.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/', 'store')->name('store');
@@ -75,7 +75,7 @@ Route::group(['middleware' => ['role:SupperAdmin,AdminTicket']], function () {
 
 
 // tuyến đường SupperAdmin-Admin
-Route::group(['middleware' => ['role:SupperAdmin,Admin']], function () {
+Route::group(['middleware' => 'checkRoles:SupperAdmin,Admin'], function () {
     Route::prefix('route')->controller(RouteController::class)->name('route.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/', 'store')->name('store');
@@ -95,7 +95,7 @@ Route::group(['middleware' => ['role:SupperAdmin,Admin']], function () {
 });
 
 //Phân quyền SupperAdmin
-Route::group(['middleware' => ['role:SupperAdmin']], function () {
+Route::group(['middleware' => 'checkRoles:SupperAdmin'], function () {
     Route::resource('/permission', UserPermissionController::class);
     Route::resource('/rolePermission', RolePermissionController::class);
     Route::delete('/rolePermission/create/{id}',[RolePermissionController::class,'delete'])->name('admin.rolePermission.delete');
@@ -104,7 +104,7 @@ Route::group(['middleware' => ['role:SupperAdmin']], function () {
 
 
 //Xe SupperAdmin-Admin-Nhà xe
-Route::group(['middleware' => ['role:SupperAdmin,Admin,Nhà xe']], function () {
+Route::group(['middleware' => 'checkRoles:SupperAdmin,Admin,Nhà xe'], function () {
     Route::group(["prefix"=>"car","as"=>"car."],function(){
         Route::get('/',[PassengerCarController::class,'index'])->name('index');
         Route::post('store',[PassengerCarController::class,'store'])->name('store');
