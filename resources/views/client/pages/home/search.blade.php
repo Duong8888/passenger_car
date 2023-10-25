@@ -25,6 +25,7 @@
                                             </path>
                                         </svg>
                                     </i>
+<<<<<<< HEAD:resources/views/client/pages/search.blade.php
                                     <select class="form-select rounded-l" data-trigger name="departure"
                                         id="choices-single-location" aria-label="Default select example">
                                         @if ($departure)
@@ -32,6 +33,12 @@
                                                 <option value="{{ $value }}">{{ $value }}</option>
                                             @endforeach
                                         @endif
+=======
+                                    <select class="form-select rounded-l"  data-trigger name="departure" id="choices-single-location" aria-label="Default select example">
+                                        @foreach($stops as $value)
+                                            <option value="{{$value}}">{{$value}}</option>
+                                        @endforeach
+>>>>>>> develop:resources/views/client/pages/home/search.blade.php
                                     </select>
                                 </div>
                             </div><!--end col-->
@@ -48,10 +55,16 @@
                                             </path>
                                         </svg>
                                     </i>
+<<<<<<< HEAD:resources/views/client/pages/search.blade.php
                                     <select class="form-select" data-trigger name="arrival"
                                         id="choices-single-categories" aria-label="Default select example">
                                         @foreach ($arrival as $value)
                                             <option value="{{ $value }}">{{ $value }}</option>
+=======
+                                    <select class="form-select" data-trigger name="arrival" id="choices-single-categories" aria-label="Default select example">
+                                        @foreach($stops as $value)
+                                            <option value="{{$value}}">{{$value}}</option>
+>>>>>>> develop:resources/views/client/pages/home/search.blade.php
                                         @endforeach
                                     </select>
                                 </div>

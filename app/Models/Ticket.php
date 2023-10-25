@@ -20,6 +20,11 @@ class Ticket extends Model
         'total_price',
         'payment_method',
         'status',
+        'departure',
+        'arrival'
+    ];
+    protected $attributes =[
+        'email' => NULL,
     ];
     public function user():BelongsTo{ 
         return $this->belongsTo(User::class);
