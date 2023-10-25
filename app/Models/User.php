@@ -28,9 +28,9 @@ class User extends Authenticatable
         'user_type',
     ];
     protected $attributes = [
-        'name' => 'Unknown',
+        'name' => '',
         'email' => NULL,
-        'password' => 'unknown',
+        'password' => NULL,
         'user_type' => 'user'
     ];
 

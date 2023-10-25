@@ -22,6 +22,7 @@ Route::post('/sortBy', [SearchController::class, 'sortBy'])->name('sortBy');
 Route::get('/login', [PhoneAuthController::class, 'login'])->name('client.phone.login');
 Route::get('/verify-otp', [PhoneAuthController::class, 'otp'])->name('client.phone.verify-otp');
 Route::post('/process', [PhoneAuthController::class, 'store'])->name('client.phone.process');
+Route::get('/log-out', [PhoneAuthController::class, 'logout'])->name('client.phone.logout');
 
 Route::group(['prefix' => 'notifications', 'as' => 'notifications.'], function () {
     Route::get('/', [NotificationController::class, 'showList']);
