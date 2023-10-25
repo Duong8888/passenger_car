@@ -18,6 +18,7 @@ class ProfileController extends Controller
 
     public function index(Request $request){
         $user = auth()->user(); 
+        // $user = User::query()->first();
         $tickets = Ticket::where('user_id', $user->id) 
                   ->where('phone', 'like', '%' . $request->key . '%') // Lọc 
                   ->get();

@@ -215,7 +215,7 @@
                                                     tôi
                                                 </h6>
                                                 <p class="mb-2 text-gray-500 dark:text-gray-300">
-                                                    {{ $passengerCars->description }}</p>
+                                                {!! $passengerCars->description !!} </p>
                                             </div>
                                             <div class="pt-4">
                                                 <h6 class="mb-0 text-gray-900 text-17 fw-bold dark:text-gray-50">Dịch vụ
@@ -408,7 +408,7 @@
                 <div class="grid grid-cols-12 gap-5">
                     @foreach ($routes as $route)
                     @if (!($passengerCars->id == $route->id))
-                    <div class="col-span-12 md:col-span-6 lg:col-span-4">
+                    <div class="col-span-12 md:col-span-6 lg:col-span-4" style="max-height:440px; overflow:hidden">
                         <div
                             class="p-2 mt-3 transition-all duration-500 bg-white rounded shadow-lg shadow-gray-100/50 card dark:bg-neutral-800 dark:shadow-neutral-600/20 group/blog">
                             <div class="relative overflow-hidden">
@@ -444,7 +444,10 @@
                                 </a>
                                 <p class="mb-6 text-gray-500 dark:text-gray-300"
                                     style="min-height: 50px;max-height: 50px">
-                                    {{ Str::limit($route->description, 100, '...') }}</p>
+                                   
+                                    <!-- {{  Str::limit($route->description, 100, '...') }} -->
+                                    {!! $route->description !!}
+                                </p>
                                 <!--end col-->
                                 <div class="col-span-3 lg:col-span-2">
                                     <div class="text-start text-md-end dark:text-gray-50">

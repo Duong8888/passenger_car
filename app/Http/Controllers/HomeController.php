@@ -51,7 +51,6 @@ class HomeController  extends Controller
         $users = User::all();
         $comments = Comment::where('passenger_car_id', $request->passenger_id)->get();
         $stops = Stops::where('route_id', $request->route_id)->get();
-      
         return view('client.pages.home.passengerCar-detail', compact('albums', 'routes', 'passengerCars', 'users', 'comments', 'stops', 'services'));
     }
 }

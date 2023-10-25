@@ -13,7 +13,7 @@ use App\Http\Controllers\Client\ProfileController;
 //Nam
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/passengerCar-detail', [HomeController::class, 'passengerCarDetail']);
-Route::resource('/profile', ProfileController::class);
+Route::get('/profile',[ProfileController::class, 'index'])->name('profile.index');
 
 
 Route::get('/search', [SearchController::class, 'searchRequest'])->name('search');
