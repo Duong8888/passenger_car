@@ -29,11 +29,18 @@ class PhoneAuthController extends Controller
             $user = new User();
             $user->phone = $request->phone;
             $user->save();
+            $request->session()->regenerate();
             Auth::login($user);
-            return redirect(RouteServiceProvider::HOME);
+           
         } else {
             Auth::login($existingUser);
-            return redirect(RouteServiceProvider::HOME);
+          
         }
+    }
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        return redirect('/');
     }
 }

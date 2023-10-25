@@ -178,7 +178,8 @@
                                 </ul>
 
                             </div>
-                            <div class="border rounded border-gray-100/50 dark:border-neutral-600 nav-tabs bottom-border-tab col-span-12 lg:col-span-12 lg:col-start-12">
+                            <div
+                                class="border rounded border-gray-100/50 dark:border-neutral-600 nav-tabs bottom-border-tab col-span-12 lg:col-span-12 lg:col-start-12">
                                 <div class="px-6 py-0 border-b border-gray-100/50 dark:border-neutral-600">
 
                                     <ul class="items-center text-sm font-medium text-center text-gray-700 nav md:flex">
@@ -478,7 +479,7 @@
 
 
         <div id="popup"
-            class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 hidden w-80 h-96">
+            class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 hidden w-80 h-96 z-50">
             <div class="bg-white p-6 rounded relative">
                 <!-- Nút "x" -->
                 <button onclick="hidePopup()"
@@ -523,35 +524,46 @@
                                             class="w-8 h-8 rounded-full bg-white-500 text-black flex items-center justify-center increment-btn">
                                             <span class="text-lg font-bold">+</span>
                                         </button>
-
                                     </div>
                                 </div>
-
+                                <div class="p-4">
+                                    <button
+                                        class="text-black border border-black bg-white font-bold py-2 px-4 rounded float-right"
+                                        id="first-next">Next</button>
+                                </div>
                             </div>
-                            <div id="second" class="flex justify-between hidden p-4 step">
-                                <div class="flex flex-col" style="overflow-y: auto; max-height: 200px;">
-                                    Điểm đón:
-                                    @foreach ($stops as $data)
-                                    @if ($data->stop_type == 0)
-                                    <div class="mb-5">
-                                        <input type="radio" id="departure" name="departure"
-                                            class="form-radio h-5 w-5 text-blue-600" value="{{ $data->stop_name }}">
-                                        <label for="departure" class="ml-2 mb-3">{{ $data->stop_name }}</label>
+                            <div id="second" class="hidden p-4 step">
+                                <div class="flex justify-between">
+                                    <div class="flex flex-col w-1/2" style="overflow-y: auto; max-height: 200px;">
+                                        Điểm đón:
+                                        @foreach ($stops as $data)
+                                        @if ($data->stop_type == 0)
+                                        <div class="mb-5">
+                                            <input type="radio" id="departure" name="departure"
+                                                class="form-radio h-5 w-5 text-blue-600" value="{{ $data->stop_name }}">
+                                            <label for="departure" class="ml-2 mb-3">{{ $data->stop_name }}</label>
+                                        </div>
+                                        @endif
+                                        @endforeach
                                     </div>
-                                    @endif
-                                    @endforeach
+                                    <div class="flex flex-col w-1/2" style="overflow-y: auto; max-height: 200px;">
+                                        Điểm đón:
+                                        @foreach ($stops as $data)
+                                        @if ($data->stop_type == 1)
+                                        <div class="mb-5">
+                                            <input type="radio" id="arrival" name="arrival1"
+                                                class="form-radio h-5 w-5 text-blue-600" value="{{ $data->stop_name }}">
+                                            <label for="arrival" class="ml-2 mb-3">{{ $data->stop_name }}</label>
+                                        </div>
+                                        @endif
+                                        @endforeach
+                                    </div>
                                 </div>
-                                <div class="flex flex-col" style="overflow-y: auto; max-height: 200px;">
-                                    Điểm đón:
-                                    @foreach ($stops as $data)
-                                    @if ($data->stop_type == 1)
-                                    <div class="mb-5">
-                                        <input type="radio" id="arrival" name="arrival1"
-                                            class="form-radio h-5 w-5 text-blue-600" value="{{ $data->stop_name }}">
-                                        <label for="arrival" class="ml-2 mb-3">{{ $data->stop_name }}</label>
-                                    </div>
-                                    @endif
-                                    @endforeach
+                                <div class="p-4 flex justify-between">
+                                    <button id="second-back"
+                                        class="text-black border border-black bg-white font-bold py-2 px-4 rounded">Back</button>
+                                    <button id="second-next"
+                                        class="text-black border border-black bg-white font-bold py-2 px-4 rounded">Next</button>
                                 </div>
                             </div>
                             <div id="third" class="hidden p-4 step">
@@ -568,21 +580,30 @@
                                             thoại</label>
                                         <input
                                             class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            name="phone" id="phone" type="text" value="{{ Auth::user()->phone }}"
-                                            placeholder="Nhập Số điện thoại của bạn" readonly>
+                                            name="phone" id="phone" type="text"
+                                            value="{{ isset(Auth::user()->phone) ? Auth::user()->phone : '' }}"
+                                            placeholder="Nhập Số điện thoại của bạn" @if(isset(Auth::user()->phone))
+                                        readonly @endif>
                                     </div>
                                     <div class="mb-4">
                                         <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email
                                             để nhận thông tin vé</label>
                                         <input
                                             class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            name="email" id="email" type="text" value="{{ Auth::user()->email }}"
-                                            placeholder="Nhập địa chỉ email của bạn" readonly>
+                                            name="email" id="email" type="text"
+                                            value="{{ isset(Auth::user()->email) ? Auth::user()->email : '' }}"
+                                            placeholder="Nhập địa chỉ email của bạn" @if(isset(Auth::user()->email))
+                                        readonly @endif>
                                     </div>
+                                </div>
+                                <div class="p-4 flex justify-between">
+                                    <button id="third-back"
+                                        class="text-black border border-black bg-white font-bold py-2 px-4 rounded">Back
+                                    </button>
                                     <button
                                         class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded submit"
                                         data-action="{{ route('client.ticket.update-ticket') }}"
-                                        data-id="{{ $passengerCars->id  }}">
+                                        data-id="{{ $passengerCars->id }}">
                                         Tiếp tục
                                     </button>
                                 </div>
