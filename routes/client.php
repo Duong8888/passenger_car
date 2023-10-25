@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Client\BlogController;
 use App\Http\Controllers\Client\ProfileController;
+use App\Http\Controllers\MapController;
 
 //Nam
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -43,3 +44,4 @@ Route::post('/momo-method', [TicketController::class, 'momo_payment'])->name('cl
 Route::get('/vnpay-todb', [TicketController::class, 'checkoutPayment'])->name('client.ticket.add-vnpay-to-db');
 
 
+Route::get('/map', [MapController::class, 'index'])->name('map');
