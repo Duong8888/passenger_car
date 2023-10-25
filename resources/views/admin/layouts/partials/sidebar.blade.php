@@ -141,6 +141,18 @@
                         <i class="mdi mdi-book-open-page-variant-outline"></i>
                         <span> Cài đặt quyền/vai trò </span>
                     </a>
+
+                    <div class="collapse" id="report">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('admin.user.report') }}">Users Report</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.ticket.report') }}">Tickets Report</a>
+                            </li>
+                        </ul>
+                    </div>
+
                 </li>
 
                 <li>

@@ -142,4 +142,12 @@ class ProfileController extends Controller
     //     // return response()->json($tickets->passengerCars, 200, [], JSON_PRETTY_PRINT);
     //     return view('client.pages.profile.profile',compact('tickets'));
     // }
+
+
+    public function ticketDetails(Request $request,$id){
+        $user = auth()->user();
+        $tickets = Ticket::find($id);
+        //  return response()->json($user->tickets, 200, [], JSON_PRETTY_PRINT);
+        return view('client.pages.ticketdetails.index',compact('user','tickets'));
+    }
 }

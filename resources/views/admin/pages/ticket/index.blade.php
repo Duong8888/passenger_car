@@ -60,16 +60,16 @@
                                             @endif
                                         </td>
                                         <td>{{ $ticket->total_price }}</td>
-                                       
+
                                         <td style="display: flex;">
-                                            <a class="btn btn-primary" 
+                                            <a class="btn btn-primary"
                                             href="{{ route('ticket.edit', $ticket->id) }}">Edit</a>
                                             <form action="{{ route('ticket.destroy', $ticket->id) }}" method="post">
                                                 @csrf
                                                 @method('delete')
                                                 <button onclick="return confirm('Are you sure ?')" class="btn btn-warning">Delete</button>
                                             </form>
-                                            
+
                                         </td>
                                     </tr>
                                 </tbody>

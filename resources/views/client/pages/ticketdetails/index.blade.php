@@ -490,7 +490,7 @@
         
                                             <div class="text-center">
                                                 <img src="assets/images/user/img-01.jpg" alt="" class="w-20 h-20 mx-auto rounded-full">
-                                                {{-- <h6 class="mt-4 mb-0 text-lg text-gray-900 dark:text-gray-50">{{Auth::User->email}}</h6> --}}
+                                                <h6 class="mt-4 mb-0 text-lg text-gray-900 dark:text-gray-50">{{$user->name}}</h6>
                                                 {{-- <p class="mb-4 text-gray-500 dark:text-gray-300">Creative Designer</p> --}}
                                                 {{-- <ul class="flex justify-center gap-4">
                                                     <li class="h-10 w-10 text-center leading-[2.2] bg-gray-50 rounded-full text-lg text-gray-500 group-data-[theme-color=violet]:hover:bg-violet-500 group-data-[theme-color=sky]:hover:bg-sky-500 group-data-[theme-color=red]:hover:bg-red-500 group-data-[theme-color=green]:hover:bg-green-500 group-data-[theme-color=pink]:hover:bg-pink-500 group-data-[theme-color=blue]:hover:bg-blue-500 hover:text-white cursor-pointer transition-all duration-300 ease-in dark:bg-neutral-700 dark:text-white dark:hover:bg-violet-500/20">
@@ -508,9 +508,8 @@
                                       
                                         
                                         <div class="p-5">
-                                            {{-- @foreach($tickets as $it)
-                                            @if($it->status == 1) --}}
-                                            <h6 class="mb-3 font-semibold text-gray-900 text-17 dark:text-gray-50">Contact Details</h6>
+                                           
+                                            <h6 class="mb-3 font-semibold text-gray-900 text-17 dark:text-gray-50">Thông tin người đặt</h6>
                                             <ul>
                                                 <li>
                                                     <div class="flex items-center mt-4">
@@ -519,7 +518,7 @@
                                                         </div>
                                                         <div class="ltr:ml-3 rtl:mr-3">
                                                             <h6 class="mb-1 text-gray-900 text-14 dark:text-gray-50">Email</h6>
-                                                            <p class="text-gray-500 dark:text-gray-300">{{$user->name}}</p> 
+                                                            <p class="text-gray-500 dark:text-gray-300">{{$user->email}}</p> 
                                                         </div>
                                                     </div>
                                                 </li>
@@ -530,7 +529,7 @@
                                                         </div>
                                                         <div class="ltr:ml-3 rtl:mr-3">
                                                             <h6 class="mb-1 text-gray-900 text-14 dark:text-gray-50">Phone</h6>
-                                                            {{-- <p class="text-gray-500 dark:text-gray-300">{{Auth::User->phone}}</p>  --}}
+                                                            <p class="text-gray-500 dark:text-gray-300">{{$user->phone}}</p> 
                                                         </div>
                                                     </div>
                                                 </li>
@@ -541,17 +540,43 @@
                                     </div>
                                 </div>
                                 <div class="col-span-12 lg:col-span-8">
-                                    <div class="p-6 border rounded border-gray-100/50 dark:border-neutral-600">
-                                        <h3 class="" style="text-align: center">Thông tin vé xe</h3><br><br>
-                                       <form action="">
-                                        <h6 class="mb-1 text-gray-900 text-14 dark:text-gray-50">Phone</h6>
-                                        {{-- <p class="text-gray-500 dark:text-gray-300">{{$it->phone}}</p>  --}}
-                                          <br>                  
-                                        <h6 class="mb-1 text-gray-900 text-14 dark:text-gray-50">Phone</h6>
-                                        {{-- <p class="text-gray-500 dark:text-gray-300">{{$it->phone}}</p>  --}}
-                                       </form>
+                                    <div class="p-6 border rounded border-gray-100/50 info:border-neutral-600">
+                                        <h3 class="" style="text-align: center">Thông tin đơn hàng</h3><br><br>
                                        
+                                                        <div class="grid grid-cols-12">
+                                                            <div class="col-span-12 lg:col-span-1">
+                                                                <a href="company-details.html"><img
+                                                                        src="assets/images/featured-job/img-03.png"
+                                                                        alt="" class="img-fluid rounded-3"></a>
+                                                            </div>
+                                                            <div class="col-span-12 lg:col-span-7">
+                                                                <div class="mt-5 lg:mt-0">
+                                                                    <label class="text-sm text-gray-500 dark:text-gray-50"><h6>Tên nhà xe: <span>{{$tickets->username}}</h6></span></label> <br>
+                                                                    <label class="text-sm text-gray-500 dark:text-gray-50"><h6>Số điện thoại: <span>{{$tickets->phone}}</h6></span></label> <br>
+                                                                    <label class="text-sm text-gray-500 dark:text-gray-50"><h6>Điểm đi: <span>{{$tickets->departure}}</h6></span></label> <br>
+                                                                    <label class="text-sm text-gray-500 dark:text-gray-50"><h6>Điểm đến: <span>{{$tickets->arrival}}</h6></span></label> <br>
+
+                                                                    <label class="text-sm text-gray-500 dark:text-gray-50"><h6>Tổng tiền: <span>{{$tickets->total_price}}</h6></span></label> <br>
+
+                                                                    
+
+                                                                   
+                                                                </div>
+                                                            </div>
+                                                            <div class="items-center col-span-12 lg:col-span-4">
+                                                                <ul class="flex flex-wrap gap-3 mt-4 lg:mt-0">
+                                                                    <label class="text-sm text-gray-500 dark:text-gray-50"><h6>Hình thức thanh toán: <span>{{$tickets->payment_method}}</h6></span></label> <br>
+                                                                    <label class="text-sm text-gray-500 dark:text-gray-50"><h6>Ngày tạo vé: <span>{{$tickets->created_at}}</h6></span></label> <br>
+                                                                   
+                                                                </ul>
+                                                            </div>
+                                                           
+                                                        </div>
+                                                  
+                                                   
+                                              
                                     </div>
+                                    
                                 </div>
                             </div>
                         </div>

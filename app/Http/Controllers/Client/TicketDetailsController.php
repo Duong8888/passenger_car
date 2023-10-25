@@ -11,6 +11,7 @@ class TicketDetailsController extends Controller
     public function index(Request $request){
          $user = auth()->user();
          $tickets = Ticket::all();
-        return view('client.pages.ticketdetails.index',compact('tickets','user'));
+        //  return response()->json($user->tickets, 200, [], JSON_PRETTY_PRINT);
+        return view('client.pages.ticketdetails.index',compact('user','tickets'));
     }
 }

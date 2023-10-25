@@ -38,20 +38,17 @@
                                         class="col-span-12 rounded-b-md lg:col-span-6 group-data-[theme-color=violet]:bg-violet-700 group-data-[theme-color=sky]:bg-sky-700 group-data-[theme-color=red]:bg-red-700 group-data-[theme-color=green]:bg-green-700 group-data-[theme-color=pink]:bg-pink-700 group-data-[theme-color=blue]:bg-blue-700 lg:rounded-b-none lg:ltr:rounded-r-lg rtl:rounded-l-lg">
                                         <div class="flex flex-col justify-center h-full p-12">
                                             <div class="text-center">
-                                                <h5 class="text-[18.5px] text-white">Welcome Back !</h5>
-                                                <p class="mt-3 text-white/80">Sign in to continue to Jobcy.</p>
+                                                <h5 class="text-[18.5px] text-white">Now You Have To Verify Your Code.</h5>
+                                                <p class="mt-3 text-white/80">We’ve sent a verification code to <span>Your Number</span></p>
                                             </div>
-                                            <form onsubmit="return false;" class="mt-8">
+                                            <form onsubmit="return false;" method="post" class="mt-8">
+                                                @csrf
                                                 <div class="mb-5">
-                                                    <label for="number" class="text-white">Enter Your Phone Number</label>
-                                                    <input type="text" id="number" class="w-full mt-1 group-data-[theme-color=violet]:bg-violet-400/40 group-data-[theme-color=sky]:bg-sky-400/40 group-data-[theme-color=red]:bg-red-400/40 group-data-[theme-color=green]:bg-green-400/40 group-data-[theme-color=pink]:bg-pink-400/40 group-data-[theme-color=blue]:bg-blue-400/40 py-2.5 rounded border-transparent placeholder:text-sm placeholder:text-gray-50 text-white" name="number" placeholder="Phone..." >
-                                                    <div id="recaptcha-container"></div>
+                                                        <input type="text" class="w-full mt-1 group-data-[theme-color=violet]:bg-violet-400/40 group-data-[theme-color=sky]:bg-sky-400/40 group-data-[theme-color=red]:bg-red-400/40 group-data-[theme-color=green]:bg-green-400/40 group-data-[theme-color=pink]:bg-pink-400/40 group-data-[theme-color=blue]:bg-blue-400/40 py-2.5 rounded border-transparent placeholder:text-sm placeholder:text-gray-50 text-white" id="verificationId" required="required" onkeyup="checkEnter(event)">
                                                 </div>
                                                 <div class="mb-5">
                                                     <div class="fxt-transformY-50 fxt-transition-delay-4">
-                                                        <button type="button" class="fxt-btn-fill"
-                                                            onclick="sendOTP();">Send Code To My Phone
-                                                        </button>
+                                                        <button type="button" class="fxt-btn-fill" onclick="verify()">Verify</button>
                                                     </div>
                                                 </div>
                                             </form>
