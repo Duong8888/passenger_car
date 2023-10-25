@@ -26,6 +26,6 @@
     body::-webkit-scrollbar-track{
         width: 10px;
     }
-
+    
 </style>
 
