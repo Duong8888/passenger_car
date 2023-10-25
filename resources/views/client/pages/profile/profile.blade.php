@@ -38,20 +38,6 @@
                                         <img src="https://i.imgur.com/1O4pwwE.jpg" alt="" class="w-20 h-20 p-1 mx-auto border-2 rounded-full border-gray-200/20">
                                         <h6 class="mt-4 mb-2 text-lg text-gray-900 dark:text-gray-50">{{ $user->name }}</h6>
                                         {{-- <p class="mb-4 text-gray-500 dark:text-gray-300">Developer</p> --}}
-                                        <ul class="flex flex-wrap justify-center gap-2 mb-0">
-                                            <li class="w-10 h-10 text-lg leading-10 transition-all duration-300 ease-in-out rounded bg-violet-500/20 text-violet-500 hover:bg-violet-500 hover:text-white">
-                                                <a href="javascript:void(0)" class="social-link rounded-3 "><i class="uil uil-facebook-f"></i></a>
-                                            </li>
-                                            <li class="w-10 h-10 text-lg leading-10 transition-all duration-300 ease-in-out rounded bg-sky-500/20 text-sky-500 hover:bg-sky-500 hover:text-white">
-                                                <a href="javascript:void(0)" class="social-link rounded-3 btn-soft-info"><i class="uil uil-twitter-alt"></i></a>
-                                            </li>
-                                            <li class="w-10 h-10 text-lg leading-10 text-green-500 transition-all duration-300 ease-in-out rounded bg-green-500/20 hover:bg-green-500 hover:text-white">
-                                                <a href="javascript:void(0)" class="social-link rounded-3 btn-soft-success"><i class="uil uil-whatsapp"></i></a>
-                                            </li>
-                                            <li class="w-10 h-10 text-lg leading-10 text-red-500 transition-all duration-300 ease-in-out rounded bg-red-500/20 hover:bg-red-500 hover:text-white">
-                                                <a href="javascript:void(0)" class="social-link rounded-3 btn-soft-danger"><i class="uil uil-phone-alt"></i></a>
-                                            </li>
-                                        </ul>
                                     </div>
                                 </div>
                                 {{-- <div class="p-5">
@@ -439,7 +425,7 @@
                                                                 <div class="col-span-12 lg:col-span-6">
                                                                     <div class="mb-3">
                                                                         <label for="email" class="text-sm text-gray-900 dark:text-gray-50">Email của bạn</label>
-                                                                        <input type="text" class="w-full mt-1 text-gray-500 border rounded border-gray-100/50 text-13 dark:bg-transparent dark:border-neutral-600" name="email" value="{{ old($user->email)??$user->email }}">
+                                                                        <input type="text" class="w-full mt-1 text-gray-500 border rounded border-gray-100/50 text-13 dark:bg-transparent dark:border-neutral-600" name="email" value="{{ old('email') ?? $user->email }}">
                                                                         {{-- <input type="text" name="username" value="{{ old('username') }}"> --}}
                                                                         @error('email')
                                                                         <div class="alert alert-danger mt-1 mb-1" style="color: red;font-size: 12px;">{{ $message }}</div>

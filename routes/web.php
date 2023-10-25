@@ -49,6 +49,8 @@ Route::get('/sign_in', [PhoneAuthController::class, 'sign_in'])->name('sign_in')
 Route::get('/layout', function () {
     return view('admin.layouts.master');
 });
+
+
 Route::match(['GET', 'POST'], 'posts', [PostController::class, 'index'])->name('postsing');
 Route::get('postadd', [PostController::class, 'create'])->name('posts.create');
 Route::post('postadd', [PostController::class, 'store'])->name('posts.store');
@@ -84,14 +86,19 @@ Route::prefix('route')->controller(RouteController::class)->name('route.')->grou
 Route::get('/userReport', [UserReportController::class, 'index'])->name('admin.user.report');
 Route::get('/ticketReport', [TicketReportController::class, 'index'])->name('admin.ticket.report');
 
-//Phan'z Nam'z
+// Route::group(['middleware' => ['permission:create-post']], function () {});
 Route::resource('/service', ServicesController::class);
+
+
 Route::resource('/stop', StopsController::class);
-// Route::get('/userlist',[UserPermissionController::class,'index'])->name('admin.user.list');
-// Route::get('/permission/{id}',[UserPermissionController::class,'permission'])->name('admin.user.permission');
-Route::resource('/permission', UserPermissionController::class);
-Route::resource('/rolePermission', RolePermissionController::class);
-Route::delete('/rolePermission/create/{id}',[RolePermissionController::class,'delete'])->name('admin.rolePermission.delete');
+
+Route::group(['middleware' => ['role:SupperAdmin']], function () {
+    //Phân quyền
+    Route::resource('/permission', UserPermissionController::class);
+    Route::resource('/rolePermission', RolePermissionController::class);
+    Route::delete('/rolePermission/create/{id}',[RolePermissionController::class,'delete'])->name('admin.rolePermission.delete');
+});
+
 
 // Route::get('/rolelist',[RolePermissionController::class,'index'])->name('admin.role.list');
 //End Phan'z Nam'z
@@ -109,13 +116,17 @@ Route::match(['GET','POST'],'/management/add',[App\Http\Controllers\Admin\AdminM
 Route::match(['GET','POST'],'/management/delete/{id}',[App\Http\Controllers\Admin\AdminManagementController::class,'delete'])->name('route_adminmanagement_delete');
 
 
-Route::group(["prefix"=>"car","as"=>"car."],function(){
-    Route::get('/',[PassengerCarController::class,'index'])->name('index');
-    Route::post('store',[PassengerCarController::class,'store'])->name('store');
-    Route::post('show',[PassengerCarController::class,'show'])->name('show');
-    Route::post('update/{id}',[PassengerCarController::class,'update'])->name('update');
-    Route::delete('delete/{id}',[PassengerCarController::class,'destroy'])->name('delete');
+Route::group(['middleware' => ['role:adminPost']], function () {
+    //bài viết
+    Route::group(["prefix"=>"car","as"=>"car."],function(){
+        Route::get('/',[PassengerCarController::class,'index'])->name('index');
+        Route::post('store',[PassengerCarController::class,'store'])->name('store');
+        Route::post('show',[PassengerCarController::class,'show'])->name('show');
+        Route::post('update/{id}',[PassengerCarController::class,'update'])->name('update');
+        Route::delete('delete/{id}',[PassengerCarController::class,'destroy'])->name('delete');
+    });
 });
+
 
 
 Route::get('/loginadmin', [App\Http\Controllers\LoginAdminController::class, 'showLoginAdmin'])->name('login_admin');

@@ -12,7 +12,7 @@ use App\Http\Controllers\Client\ProfileController;
 
 //Nam
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::post('/passengerCar-detail', [HomeController::class, 'passengerCarDetail']);
+Route::post('/passengerCar-detail', [HomeController::class, 'passengerCarDetail'])->name('passengerCar-detail');
 Route::resource('/profile', ProfileController::class);
 
 

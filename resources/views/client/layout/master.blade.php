@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-mode="light" class="scroll-smooths group" data-theme-color="violet">
-
-<!-- Mirrored from themesdesign.in/jobcy-tailwind/layout/index-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 18 Sep 2023 13:45:12 GMT -->
 <head>
     <meta charset="utf-8" />
     <title>index</title>
