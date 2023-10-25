@@ -57,6 +57,24 @@
                                         </div>
 
                                         <div class="row">
+                                            <div class="col-md-12">
+                                                <div>
+                                                    <label class="form-label">Dịch vụ</label>
+                                                </div>
+                                                <div class="mb-3 d-flex flex-wrap">
+                                                    @foreach($service as $value)
+                                                        <div class="form-check mb-2 form-check-success" style="margin-right: 25px">
+                                                            <input class="form-check-input" name="service[]" type="checkbox" value="{{$value->id}}" id="customckeck{{$value->id}}">
+                                                            <label class="form-check-label" for="customckeck{{$value->id}}">{{$value->service_name}}</label>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row">
                                             <div class="col-md-5">
                                                 <div>
                                                     <label class="form-label">Giờ Khởi hành *</label>
@@ -124,8 +142,7 @@
                                                 data-bs-dismiss="modal">Đóng
                                         </button>
                                         <button type="button" id="btn-main"
-                                                class="btn btn-info waves-effect waves-light">Lưu thay
-                                            đôi
+                                                class="btn btn-info waves-effect waves-light">Lưu
                                         </button>
                                     </div>
                                 </div>
@@ -154,7 +171,7 @@
                                                             Action <i class="mdi mdi-chevron-down"></i>
                                                         </button>
                                                         <div class="dropdown-menu" style="">
-                                                            <a class="dropdown-item" href="#">Sửa</a>
+                                                            <a class="dropdown-item btn-update" id="{{$value->id}}" href="#">Sửa</a>
                                                             <a class="dropdown-item delete" data-action="{{route('car.delete',[$value->id])}}" href="#">Xóa</a>
                                                         </div>
                                                     </div>

@@ -66,7 +66,7 @@ Route::resource('ticket', TicketController::class);
 Route::post('/trip', [TicketController::class, 'Trip']);
 Route::post('/passgenerCar/{id}' , [TicketController::class, 'PassengerCar']);
 
-Route::resource('/route', RouteController::class);
+//Route::resource('/route', RouteController::class);
 
 
 
@@ -77,9 +77,19 @@ Route::resource('service', ServicesController::class);
 Route::group(["prefix"=>"car","as"=>"car."],function(){
     Route::get('/',[PassengerCarController::class,'index'])->name('index');
     Route::post('store',[PassengerCarController::class,'store'])->name('store');
-    Route::post('show',[PassengerCarController::class,'show'])->name('show');
+    Route::get('edit/{id}',[PassengerCarController::class,'edit'])->name('edit');
     Route::post('update/{id}',[PassengerCarController::class,'update'])->name('update');
     Route::delete('delete/{id}',[PassengerCarController::class,'destroy'])->name('delete');
+});
+
+
+
+Route::group(["prefix"=>"route","as"=>"route."],function(){
+    Route::get('/',[RouteController::class,'index'])->name('index');
+    Route::post('store',[RouteController::class,'store'])->name('store');
+    Route::get('edit/{id}',[RouteController::class,'edit'])->name('edit');
+    Route::post('update/{id}',[RouteController::class,'update'])->name('update');
+    Route::delete('delete/{id}',[RouteController::class,'destroy'])->name('delete');
 });
 
 

@@ -38,7 +38,7 @@ class HomeController  extends Controller
 
         $albums = PassengerCar::with('albums')->get();
         $routes = Routes::all();
-        $passengerCars = PassengerCar::with('workingTime')->get();
+        $passengerCars = PassengerCar::with('workingTime')->whereNotNull('route_id')->get();
         $workingTime = WorkingTime::all();
         return view('client.pages.home.index', compact('albums', 'routes', 'passengerCars','workingTime','stops'));
 
