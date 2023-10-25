@@ -48,12 +48,12 @@
                                                 </div>
                                                 <div class="mb-5">
                                                     <div class="fxt-transformY-50 fxt-transition-delay-4">
-                                                        <button type="button" class="fxt-btn-fill" onclick="verify()">Verify</button>
+                                                        <button type="button" class="bg-white border border-gray-300 text-gray-800 py-2 px-4 rounded-md" onclick="verify()">Verify</button>
                                                     </div>
                                                 </div>
                                             </form>
                                             <div class="text-center">
-                                                <p class="text-white">Click here to <a href="{{ route('client.phone.login') }}" class="text-white underline fw-medium">Back</a> to website</p>
+                                                <p class="text-white">Click here to <a href="{{ route('home') }}" class="text-white underline fw-medium">Back</a> to website</p>
                                                 <div class="p-10">
                                                     <a href="index.html">
                                                         <img src="client/images/logo-light.png" alt=""
@@ -80,7 +80,7 @@
     <script src="client/libs/simplebar/simplebar.min.js"></script>
     <script src="client/js/pages/switcher.js"></script>
     <script src="client/js/app.js"></script>
-    <script src="{{ asset('client/js/custom/phone-login.js') }}"></script>
+   
     @extends('auth.phone.phoneLogin')
     
 </body>

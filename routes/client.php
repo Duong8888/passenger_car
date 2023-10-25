@@ -11,10 +11,12 @@ use App\Http\Controllers\Client\BlogController;
 use App\Http\Controllers\Client\ProfileController;
 
 //Nam
+
 Route::get('/',[HomeController::class,'index'])->name('home');;
-Route::post('/passengerCar-detail',[HomeController::class,'passengerCarDetail']);
+Route::post('/passengerCar-detail',[HomeController::class,'passengerCarDetail'])->name('passengerCar-detail');
 Route::resource('/profile',ProfileController::class);
 Route::get('/profile/ticketdetails/{id}',[ProfileController::class,'ticketDetails'])->name('ticketDetails_index');
+
 
 
 
@@ -24,6 +26,7 @@ Route::post('/sortBy', [SearchController::class, 'sortBy'])->name('sortBy');
 Route::get('/login', [PhoneAuthController::class, 'login'])->name('client.phone.login');
 Route::get('/verify-otp', [PhoneAuthController::class, 'otp'])->name('client.phone.verify-otp');
 Route::post('/process', [PhoneAuthController::class, 'store'])->name('client.phone.process');
+Route::get('/log-out', [PhoneAuthController::class, 'logout'])->name('client.phone.logout');
 
 Route::group(['prefix' => 'notifications', 'as' => 'notifications.'], function () {
     Route::get('/', [NotificationController::class, 'showList']);

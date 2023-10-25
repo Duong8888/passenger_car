@@ -17,15 +17,10 @@ class ProfileController extends Controller
      */
 
     public function index(Request $request){
-        $user = auth()->user(); // Lấy thông tin từ bảng Album
-        // dd($user->id);
-        // $user = User::all();
-        // $tickets = Ticket::where('user_id',$user->id )->get();
-        $tickets = Ticket::where('user_id', $user->id) // Lọc theo user_id của người dùng đăng nhập
-                  ->where('phone', 'like', '%' . $request->key . '%') // Lọc theo số điện thoại
+        $user = auth()->user(); 
+        $tickets = Ticket::where('user_id', $user->id) 
+                  ->where('phone', 'like', '%' . $request->key . '%') // Lọc 
                   ->get();
-        // ->where('phone','like','%'.$request->key.'%')
-        //  return response()->json($user, 200, [], JSON_PRETTY_PRINT);
         return view('client.pages.profile.profile',compact('user','tickets'));
 
     }

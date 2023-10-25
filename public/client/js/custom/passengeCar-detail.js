@@ -21,7 +21,7 @@ $(document).ready(function () {
     let tabsContainer = document.querySelector("#tabs");
 
     let tabTogglers = tabsContainer.querySelectorAll("#tabs a");
-
+ 
     console.log(tabTogglers);
 
     tabTogglers.forEach(function (toggler) {
@@ -101,7 +101,7 @@ $(document).ready(function () {
         var quantity = CountTicket;
         var departure = $('input[name="departure"]:checked').val();
         var arrival = $('input[name="arrival1"]:checked').val();
-        
+
         let passenger_car_id = $(this).data("id");
         var totalArray = {
             username: username,
@@ -131,6 +131,38 @@ $(document).ready(function () {
             }
         }, TIME_TO_UPDATE);
     })
+    const firstTab = document.getElementById('first');
+    const secondTab = document.getElementById('second');
+    const thirdTab = document.getElementById('third');
+
+    const firstNextButton = document.getElementById('first-next');
+    const secondBackButton = document.getElementById('second-back');
+    const secondNextButton = document.getElementById('second-next');
+    const thirdBackButton = document.getElementById('third-back');
+
+    // Sự kiện click cho nút Next ở thẻ First
+    firstNextButton.addEventListener('click', function() {
+        firstTab.classList.add('hidden');
+        secondTab.classList.remove('hidden');
+    });
+
+    // Sự kiện click cho nút Back ở thẻ Second
+    secondBackButton.addEventListener('click', function() {
+        secondTab.classList.add('hidden');
+        firstTab.classList.remove('hidden');
+    });
+
+    // Sự kiện click cho nút Next ở thẻ Second
+    secondNextButton.addEventListener('click', function() {
+        secondTab.classList.add('hidden');
+        thirdTab.classList.remove('hidden');
+    });
+
+    // Sự kiện click cho nút Back ở thẻ Third
+    thirdBackButton.addEventListener('click', function() {
+        thirdTab.classList.add('hidden');
+        secondTab.classList.remove('hidden');
+    });
 })
 
 
