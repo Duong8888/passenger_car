@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
         $users = User::all();
         return view('admin.pages.Staff.index',compact('users'));
     }

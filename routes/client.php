@@ -11,9 +11,13 @@ use App\Http\Controllers\Client\BlogController;
 use App\Http\Controllers\Client\ProfileController;
 
 //Nam
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::post('/passengerCar-detail', [HomeController::class, 'passengerCarDetail'])->name('passengerCar-detail');
-Route::resource('/profile', ProfileController::class);
+
+Route::get('/',[HomeController::class,'index'])->name('home');;
+Route::post('/passengerCar-detail',[HomeController::class,'passengerCarDetail'])->name('passengerCar-detail');
+Route::resource('/profile',ProfileController::class);
+Route::get('/profile/ticketdetails/{id}',[ProfileController::class,'ticketDetails'])->name('ticketDetails_index');
+
+
 
 
 Route::get('/search', [SearchController::class, 'searchRequest'])->name('search');

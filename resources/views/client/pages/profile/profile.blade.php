@@ -193,173 +193,91 @@
                                     </ul>
                                 </div>
 
-                                <div class="p-6 tab-content">
-                                    <div class="hidden w-full tab-pane" id="present-tab">
-                                        @foreach ($tickets as $item)
-                                            @if ($item->status == 1)
-                                                <div
-                                                    class="mb-5 p-5 border border-gray-100/50 rounded-md relative hover:-translate-y-1.5 transition-all duration-500 ease-in-out group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:shadow-md hover:shadow-gray-100/30 dark:border-neutral-600 dark:hover:shadow-neutral-900">
-
-
-                                                    <div class="grid grid-cols-12">
-                                                        <div class="col-span-12 lg:col-span-1">
-                                                            <a href="company-details.html"><img
-                                                                    src="assets/images/featured-job/img-03.png"
-                                                                    alt="" class="img-fluid rounded-3"></a>
-                                                        </div>
-                                                        <!--end col-->
-                                                        <div class="col-span-12 lg:col-span-9">
-                                                            <div class="mt-4 lg:mt-0">
-                                                                <h5 class="mb-1 text-17">Họ và tên: <a
-                                                                        href="job-details.html"
-                                                                        class="text-gray-900 dark:text-gray-50">{{ $item->username }}</a>
-                                                                </h5>
-                                                                <ul class="flex gap-3 mb-0">
-                                                                    <li class="">
-                                                                        <p
-                                                                            class="mb-0 text-sm text-gray-500 dark:text-gray-300">
-                                                                            Số điện thoại: <span>{{ $item->phone }}</span>
-                                                                        </p>
-                                                                    </li>
-                                                                    <li class="">
-                                                                        <p
-                                                                            class="mb-0 text-sm text-gray-500 dark:text-gray-300">
-                                                                            <i class="mdi mdi-map-marker"></i>
-                                                                        </p>
-                                                                    </li>
-                                                                    <li class="">
-                                                                        <p
-                                                                            class="mb-0 text-sm text-gray-500 dark:text-gray-300">
-                                                                            <i
-                                                                                class="uil uil-wallet"></i>{{ $item->total_price }}
-                                                                        </p>
-                                                                    </li>
-                                                                </ul>
-                                                                <div class="flex flex-wrap gap-2 mt-3">
-                                                                    <span
-                                                                        class="px-2 py-0.5 mt-1 font-medium text-violet-500 rounded bg-violet-500/20 text-13">{{ $item->payment_method }}</span>
-                                                                    <span
-                                                                        class="px-2 py-0.5 mt-1 font-medium text-violet-500 rounded bg-violet-500/20 text-13">{{ $item->created_at }}</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!--end col-->
-                                                        <div class="items-center col-span-12 lg:col-span-2">
-                                                            <ul class="flex flex-wrap gap-3 mt-4 lg:mt-0">
-                                                                <li class="w-10 h-10 text-lg leading-10 text-center text-green-500 rounded-full bg-green-500/20"
-                                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                    aria-label="Edit" data-bs-original-title="Edit">
-                                                                    <a href="manage-jobs-post.html"
-                                                                        class="text-center avatar-sm success-bg-subtle d-inline-block rounded-circle fs-18">
-                                                                        <i class="uil uil-edit"></i>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="w-10 h-10 text-lg leading-10 text-center text-red-500 rounded-full bg-red-500/20"
-                                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                    aria-label="Delete" data-bs-original-title="Delete">
-                                                                    <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                                        data-bs-target="#deleteModal"
-                                                                        class="text-center avatar-sm danger-bg-subtle d-inline-block rounded-circle fs-18">
-                                                                        <i class="uil uil-trash-alt"></i>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <!--end col-->
-                                                    </div>
-                                                    <!--end row-->
-
-                                                </div>
-                                            @endif
-                                        @endforeach
-
-                                    </div>
-
-                                    <div class="block w-full tab-pane" id="overview-tab">
-                                        @foreach ($tickets as $item)
-                                            @if ($item->status == 0)
-                                                <div
-                                                    class="mb-5 p-5 border border-gray-100/50 rounded-md relative hover:-translate-y-1.5 transition-all duration-500 ease-in-out group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:shadow-md hover:shadow-gray-100/30 dark:border-neutral-600 dark:hover:shadow-neutral-900">
-
-
-                                                    <div class="grid grid-cols-12">
-                                                        <div class="col-span-12 lg:col-span-1">
-                                                            <a href="company-details.html"><img
-                                                                    src="assets/images/featured-job/img-03.png"
-                                                                    alt="" class="img-fluid rounded-3"></a>
-                                                        </div>
-                                                        <!--end col-->
-                                                        <div class="col-span-12 lg:col-span-9">
-                                                            <div class="mt-4 lg:mt-0">
-                                                                <h5 class="mb-1 text-17">Họ và tên: <a
-                                                                        href="job-details.html"
-                                                                        class="text-gray-900 dark:text-gray-50">{{ $item->username }}</a>
-                                                                </h5>
-                                                                <ul class="flex gap-3 mb-0">
-                                                                    <li class="">
-                                                                        <p
-                                                                            class="mb-0 text-sm text-gray-500 dark:text-gray-300">
-                                                                            Số điện thoại: <span>{{ $item->phone }}</span>
-                                                                        </p>
-                                                                    </li>
-                                                                    <li class="">
-                                                                        <p
-                                                                            class="mb-0 text-sm text-gray-500 dark:text-gray-300">
-                                                                            <i class="mdi mdi-map-marker"></i>
-                                                                        </p>
-                                                                    </li>
-                                                                    <li class="">
-                                                                        <p
-                                                                            class="mb-0 text-sm text-gray-500 dark:text-gray-300">
-                                                                            <i
-                                                                                class="uil uil-wallet"></i>{{ $item->total_price }}
-                                                                        </p>
-                                                                    </li>
-                                                                </ul>
-                                                                <div class="flex flex-wrap gap-2 mt-3">
-                                                                    <span
-                                                                        class="px-2 py-0.5 mt-1 font-medium text-violet-500 rounded bg-violet-500/20 text-13">{{ $item->payment_method }}</span>
-                                                                    <span
-                                                                        class="px-2 py-0.5 mt-1 font-medium text-violet-500 rounded bg-violet-500/20 text-13">{{ $item->created_at }}</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!--end col-->
-                                                        <div class="items-center col-span-12 lg:col-span-2">
-                                                            <ul class="flex flex-wrap gap-3 mt-4 lg:mt-0">
-                                                                <li class="w-10 h-10 text-lg leading-10 text-center text-green-500 rounded-full bg-green-500/20"
-                                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                    aria-label="Edit" data-bs-original-title="Edit">
-                                                                    <a href="manage-jobs-post.html"
-                                                                        class="text-center avatar-sm success-bg-subtle d-inline-block rounded-circle fs-18">
-                                                                        <i class="uil uil-edit"></i>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="w-10 h-10 text-lg leading-10 text-center text-red-500 rounded-full bg-red-500/20"
-                                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                    aria-label="Delete" data-bs-original-title="Delete">
-                                                                    <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                                        data-bs-target="#deleteModal"
-                                                                        class="text-center avatar-sm danger-bg-subtle d-inline-block rounded-circle fs-18">
-                                                                        <i class="uil uil-trash-alt"></i>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <!--end col-->
-                                                    </div>
-                                                    <!--end row-->
-
-                                                </div>
-                                            @endif
-                                        @endforeach
-
-                                    </div>
-
-                                    <div class="hidden w-full tab-pane" id="past-tab">
-                                        <div class="pt-1 space-x-1">
+                                    <div class="p-6 tab-content">
+                                        <div class="hidden w-full tab-pane" id="present-tab">
+                                            {{-- <form action="{{ route('ticketDetails_index',$user->tickets->id) }}" method="POST" enctype="multipart/form-data"> --}}
                                             @foreach ($tickets as $item)
-                                                @if ($item->status == 2)
+                                            @if ($item->status == 1)
+                                           
+                                                <div
+                                                    class="mb-5 p-5 border border-gray-100/50 rounded-md relative hover:-translate-y-1.5 transition-all duration-500 ease-in-out group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:shadow-md hover:shadow-gray-100/30 dark:border-neutral-600 dark:hover:shadow-neutral-900">
+
+
+                                                    <div class="grid grid-cols-12">
+                                                        <div class="col-span-12 lg:col-span-1">
+                                                            <a href="company-details.html"><img
+                                                                    src="assets/images/featured-job/img-03.png"
+                                                                    alt="" class="img-fluid rounded-3"></a>
+                                                        </div>
+                                                        <!--end col-->
+                                                        <div class="col-span-12 lg:col-span-9">
+                                                            <div class="mt-4 lg:mt-0">
+                                                                <h5 class="mb-1 text-17">Tên nhà xe: <a
+                                                                        href="{{ route('ticketDetails_index',$item->id) }}"
+                                                                        class="text-gray-900 dark:text-gray-50">{{ $item->username }}</a>
+                                                                </h5>
+                                                                <ul class="flex gap-3 mb-0">
+                                                                    <li class="">
+                                                                        <p
+                                                                            class="mb-0 text-sm text-gray-500 dark:text-gray-300">
+                                                                            Số điện thoại: <span>{{ $item->phone }}</span>
+                                                                        </p>
+                                                                    </li>
+                                                                    <li class="">
+                                                                        <p
+                                                                            class="mb-0 text-sm text-gray-500 dark:text-gray-300">
+                                                                            <i class="mdi mdi-map-marker"></i>
+                                                                        </p>
+                                                                    </li>
+                                                                    <li class="">
+                                                                        <p
+                                                                            class="mb-0 text-sm text-gray-500 dark:text-gray-300">
+                                                                            <i
+                                                                                class="uil uil-wallet"></i>{{ $item->total_price }}
+                                                                        </p>
+                                                                    </li>
+                                                                </ul>
+                                                                <div class="flex flex-wrap gap-2 mt-3">
+                                                                    <span
+                                                                        class="px-2 py-0.5 mt-1 font-medium text-violet-500 rounded bg-violet-500/20 text-13">{{ $item->payment_method }}</span>
+                                                                    <span
+                                                                        class="px-2 py-0.5 mt-1 font-medium text-violet-500 rounded bg-violet-500/20 text-13">{{ $item->created_at }}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--end col-->
+                                                        <div class="items-center col-span-12 lg:col-span-2">
+                                                            <ul class="flex flex-wrap gap-3 mt-4 lg:mt-0">
+                                                                <li class="w-10 h-10 text-lg leading-10 text-center text-green-500 rounded-full bg-green-500/20"
+                                                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                    aria-label="Edit" data-bs-original-title="Edit">
+                                                                    <a href="manage-jobs-post.html"
+                                                                        class="text-center avatar-sm success-bg-subtle d-inline-block rounded-circle fs-18">
+                                                                        <i class="uil uil-edit"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="w-10 h-10 text-lg leading-10 text-center text-red-500 rounded-full bg-red-500/20"
+                                                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                    aria-label="Delete" data-bs-original-title="Delete">
+                                                                    <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                                        data-bs-target="#deleteModal"
+                                                                        class="text-center avatar-sm danger-bg-subtle d-inline-block rounded-circle fs-18">
+                                                                        <i class="uil uil-trash-alt"></i>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div><!--end col-->
+                                                    </div><!--end row-->
+                                                {{-- </form> --}}
+                                                </div>
+                                            @endif
+                                        @endforeach
+
+                                        <div class="block w-full tab-pane" id="overview-tab">
+                                            {{-- <form action="{{ route('ticketDetails_index',$item->id) }}" method="POST" enctype="multipart/form-data"> --}}
+                                            @foreach ($tickets as $item)
+                                                @if ($item->status == 0)
+                                                
                                                     <div
                                                         class="mb-5 p-5 border border-gray-100/50 rounded-md relative hover:-translate-y-1.5 transition-all duration-500 ease-in-out group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:shadow-md hover:shadow-gray-100/30 dark:border-neutral-600 dark:hover:shadow-neutral-900">
 
@@ -373,8 +291,8 @@
                                                             <!--end col-->
                                                             <div class="col-span-12 lg:col-span-9">
                                                                 <div class="mt-4 lg:mt-0">
-                                                                    <h5 class="mb-1 text-17">Họ và tên: <a
-                                                                            href="job-details.html"
+                                                                    <h5 class="mb-1 text-17">Tên nhà xe: <a
+                                                                            href="{{ route('ticketDetails_index',$item->id) }}"
                                                                             class="text-gray-900 dark:text-gray-50">{{ $item->username }}</a>
                                                                     </h5>
                                                                     <ul class="flex gap-3 mb-0">
@@ -430,17 +348,95 @@
                                                                         </a>
                                                                     </li>
                                                                 </ul>
-                                                            </div>
-                                                            <!--end col-->
-                                                        </div>
-                                                        <!--end row-->
-
+                                                            </div><!--end col-->
+                                                        </div><!--end row-->
+                                                    {{-- </form> --}}
                                                     </div>
                                                 @endif
                                             @endforeach
 
+                                        <div class="hidden w-full tab-pane" id="past-tab">
+                                            <div class="pt-1 space-x-1">
+                                                {{-- <form action="{{ route('ticketDetails_index',$item->id) }}" method="POST" enctype="multipart/form-data"> --}}
+                                                @foreach ($tickets as $item)
+                                                    @if ($item->status == 2)
+                                                        <div
+                                                            class="mb-5 p-5 border border-gray-100/50 rounded-md relative hover:-translate-y-1.5 transition-all duration-500 ease-in-out group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:shadow-md hover:shadow-gray-100/30 dark:border-neutral-600 dark:hover:shadow-neutral-900">
+    
+    
+                                                            <div class="grid grid-cols-12">
+                                                                <div class="col-span-12 lg:col-span-1">
+                                                                    <a href="company-details.html"><img
+                                                                            src="assets/images/featured-job/img-03.png"
+                                                                            alt="" class="img-fluid rounded-3"></a>
+                                                                </div><!--end col-->
+                                                                <div class="col-span-12 lg:col-span-9">
+                                                                    <div class="mt-4 lg:mt-0">
+                                                                        <h5 class="mb-1 text-17">Tên nhà xe: <a
+                                                                                href="{{ route('ticketDetails_index',$item->id) }}"
+                                                                                class="text-gray-900 dark:text-gray-50">{{ $item->username }}</a>
+                                                                        </h5>
+                                                                        <ul class="flex gap-3 mb-0">
+                                                                            <li class="">
+                                                                                <p
+                                                                                    class="mb-0 text-sm text-gray-500 dark:text-gray-300">
+                                                                                    Số điện thoại:
+                                                                                    <span>{{ $item->phone }}</span></p>
+                                                                            </li>
+                                                                            <li class="">
+                                                                                <p
+                                                                                    class="mb-0 text-sm text-gray-500 dark:text-gray-300">
+                                                                                    <i class="mdi mdi-map-marker"></i> </p>
+                                                                            </li>
+                                                                            <li class="">
+                                                                                <p
+                                                                                    class="mb-0 text-sm text-gray-500 dark:text-gray-300">
+                                                                                    <i
+                                                                                        class="uil uil-wallet"></i>{{ $item->total_price }}
+                                                                                </p>
+                                                                            </li>
+                                                                        </ul>
+                                                                        <div class="flex flex-wrap gap-2 mt-3">
+                                                                            <span
+                                                                                class="px-2 py-0.5 mt-1 font-medium text-violet-500 rounded bg-violet-500/20 text-13">{{ $item->payment_method }}</span>
+                                                                            <span
+                                                                                class="px-2 py-0.5 mt-1 font-medium text-violet-500 rounded bg-violet-500/20 text-13">{{ $item->created_at }}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div><!--end col-->
+                                                                <div class="items-center col-span-12 lg:col-span-2">
+                                                                    <ul class="flex flex-wrap gap-3 mt-4 lg:mt-0">
+                                                                        <li class="w-10 h-10 text-lg leading-10 text-center text-green-500 rounded-full bg-green-500/20"
+                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                            aria-label="Edit" data-bs-original-title="Edit">
+                                                                            <a href=""
+                                                                                class="text-center avatar-sm success-bg-subtle d-inline-block rounded-circle fs-18">
+                                                                                <i class="uil uil-edit"></i>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="w-10 h-10 text-lg leading-10 text-center text-red-500 rounded-full bg-red-500/20"
+                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                            aria-label="Delete"
+                                                                            data-bs-original-title="Delete">
+                                                                            <a href=""
+                                                                                data-bs-toggle="modal"
+                                                                                data-bs-target="#deleteModal"
+                                                                                class="text-center avatar-sm danger-bg-subtle d-inline-block rounded-circle fs-18">
+                                                                                <i class="uil uil-trash-alt"></i>
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div><!--end col-->
+                                                            </div><!--end row-->
+                                                            {{-- </form> --}}
+                                                        </div>
+                                                    @endif
+                                                @endforeach
+    
+                                            </div>
                                         </div>
                                     </div>
+
 
 
                                     <div class="hidden w-full tab-pane" id="thongtin-tab">
@@ -457,6 +453,7 @@
                                                     @if ($message = Session::get('successInfo'))
                                                         <div>
                                                             <p style="color: blue;">{{ $message }}</p>
+
                                                         </div>
                                                     @endif
                                                     <div class="mt-5">

@@ -24,10 +24,13 @@ class RouteController extends AdminBaseController
     {
         $validator = Validator::make($request->all(), [
             'slug' => 'required',
-
+            'departure' => 'required',
+            'arrival' => 'required',
+            'price' => 'required',
         ]);
 
         if ($validator->fails()) {
+            
             return $validator;
         }
     }
