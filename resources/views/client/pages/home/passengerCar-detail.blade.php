@@ -491,8 +491,8 @@
                 </button>
 
 
-                <div class="flex items-center gap-x-3">
-                    <div class="rounded border w-1/2 mx-auto mt-4">
+                <div class="flex items-center gap-x-3" style="height: 450px ; width: 470px">
+                    <div class="rounded border w-1/2 mx-auto mt-4" style="height: 100%">
                         <!-- Tabs -->
                         <ul id="tabs" class="inline-flex pt-2 px-1 w-full border-b">
                             <li
@@ -508,7 +508,7 @@
                         </ul>
 
                         <!-- Tab Contents -->
-                        <div id="tab-contents" class="h-full w-full">
+                        <div id="tab-contents" class=" w-full" style="height: 75%">
                             <div id="first" class="p-4 step">
                                 <label for="">Số lượng khách</label>
                                 <div class="flex justify-between">
@@ -526,35 +526,49 @@
                                         </button>
                                     </div>
                                 </div>
-                                <div class="p-4">
-                                    <button
-                                        class="text-black border border-black bg-white font-bold py-2 px-4 rounded float-right"
+                                <div class="p-4" style="position: fixed; bottom: 25%; right: 35%;">
+                                    <button class="text-black border border-black bg-white font-bold py-2 px-4 rounded "
                                         id="first-next">Next</button>
                                 </div>
                             </div>
                             <div id="second" class="hidden p-4 step">
                                 <div class="flex justify-between">
-                                    <div class="flex flex-col w-1/2" style="overflow-y: auto; max-height: 200px;">
+                                    <div class="flex flex-col"
+                                        style="overflow-y: auto; max-height: 200px; width: 49%; padding-right: 10px">
                                         Điểm đón:
+                                        @php
+                                        $firstDeparture = true;
+                                        @endphp
                                         @foreach ($stops as $data)
                                         @if ($data->stop_type == 0)
                                         <div class="mb-5">
                                             <input type="radio" id="departure" name="departure"
-                                                class="form-radio h-5 w-5 text-blue-600" value="{{ $data->stop_name }}">
+                                                class="form-radio h-5 w-5 text-blue-600" value="{{ $data->stop_name }}"
+                                                {{ $firstDeparture ? 'checked' : '' }}>
                                             <label for="departure" class="ml-2 mb-3">{{ $data->stop_name }}</label>
                                         </div>
+                                        @php
+                                        $firstDeparture = false;
+                                        @endphp
                                         @endif
                                         @endforeach
                                     </div>
-                                    <div class="flex flex-col w-1/2" style="overflow-y: auto; max-height: 200px;">
+                                    <div class="flex flex-col" style="overflow-y: auto; max-height: 200px; width: 49%">
                                         Điểm đón:
+                                        @php
+                                        $firstArrival = true;
+                                        @endphp
                                         @foreach ($stops as $data)
                                         @if ($data->stop_type == 1)
                                         <div class="mb-5">
                                             <input type="radio" id="arrival" name="arrival1"
-                                                class="form-radio h-5 w-5 text-blue-600" value="{{ $data->stop_name }}">
+                                                class="form-radio h-5 w-5 text-blue-600" value="{{ $data->stop_name }}"
+                                                {{ $firstArrival ? 'checked' : '' }}>
                                             <label for="arrival" class="ml-2 mb-3">{{ $data->stop_name }}</label>
                                         </div>
+                                        @php
+                                        $firstArrival = false;
+                                        @endphp
                                         @endif
                                         @endforeach
                                     </div>
@@ -573,7 +587,9 @@
                                             tên</label>
                                         <input
                                             class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            name="name" id="name" type="text" placeholder="Nhập họ và tên của bạn">
+                                            name="name" id="name" type="text"
+                                            value="{{ isset(Auth::user()->name) ? Auth::user()->name : '' }}"
+                                            placeholder="Nhập họ và tên của bạn">
                                     </div>
                                     <div class="mb-4">
                                         <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">Số điện
@@ -582,8 +598,7 @@
                                             class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                             name="phone" id="phone" type="text"
                                             value="{{ isset(Auth::user()->phone) ? Auth::user()->phone : '' }}"
-                                            placeholder="Nhập Số điện thoại của bạn" @if(isset(Auth::user()->phone))
-                                        readonly @endif>
+                                            placeholder="Nhập Số điện thoại của bạn">
                                     </div>
                                     <div class="mb-4">
                                         <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email
@@ -592,8 +607,7 @@
                                             class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                             name="email" id="email" type="text"
                                             value="{{ isset(Auth::user()->email) ? Auth::user()->email : '' }}"
-                                            placeholder="Nhập địa chỉ email của bạn" @if(isset(Auth::user()->email))
-                                        readonly @endif>
+                                            placeholder="Nhập địa chỉ email của bạn">
                                     </div>
                                 </div>
                                 <div class="p-4 flex justify-between">
@@ -610,7 +624,7 @@
                             </div>
 
                         </div>
-                        <div class="flex justify-between px-4 text-gray-800 font-semibold py-2 rounded-t show-total">
+                        <div class="flex justify-between px-4 text-gray-800 font-semibold show-total">
                         </div>
                         <!-- End Tab Contents -->
                     </div>
