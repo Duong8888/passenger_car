@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileUser\ProfileUpdateUserRequest;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 use App\Models\User;
+// use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
@@ -13,10 +15,16 @@ class ProfileController extends Controller
       /**
      * Display the user's profile form.
      */
-    public function index(){
-       $user = auth()->user();
-        return view('client.pages.profile.profile',compact('user'));
+
+    public function index(Request $request){
+        $user = auth()->user(); 
+        $tickets = Ticket::where('user_id', $user->id) 
+                  ->where('phone', 'like', '%' . $request->key . '%') // Lọc 
+                  ->get();
+        return view('client.pages.profile.profile',compact('user','tickets'));
+
     }
+   
     /**
      * Show the form for creating a new resource.
      */
@@ -52,6 +60,7 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      */
+
     public function update(Request $request, $id)
     {
         $user = auth()->user();
@@ -114,11 +123,26 @@ class ProfileController extends Controller
         }
     }
 
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
         //
+    }
+    // đây là hiện thị vé tikets
+    // public function indexTK(){
+    //     $tickets = DB::table('tickets')->select('id','username','phone','email','user_id','passenger_car_id','quantity','total_price','payment_method','status','created_at')->get();
+    //     // return response()->json($tickets->passengerCars, 200, [], JSON_PRETTY_PRINT);
+    //     return view('client.pages.profile.profile',compact('tickets'));
+    // }
+
+
+    public function ticketDetails(Request $request,$id){
+        $user = auth()->user();
+        $tickets = Ticket::find($id);
+        //  return response()->json($user->tickets, 200, [], JSON_PRETTY_PRINT);
+        return view('client.pages.ticketdetails.index',compact('user','tickets'));
     }
 }

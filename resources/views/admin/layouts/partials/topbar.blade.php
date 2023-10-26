@@ -43,7 +43,8 @@
                             <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <div class="d-flex align-items-start">
-                                    <img class="d-flex me-2 rounded-circle" src="admin/images/users/user-2.jpg" alt="Generic placeholder image" height="32">
+                                    <img class="d-flex me-2 rounded-circle" src="admin/images/users/user-2.jpg"
+                                        alt="Generic placeholder image" height="32">
                                     <div class="w-100">
                                         <h5 class="m-0 font-14">Erwin E. Brown</h5>
                                         <span class="font-12 mb-0">UI Designer</span>
@@ -54,7 +55,8 @@
                             <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <div class="d-flex align-items-start">
-                                    <img class="d-flex me-2 rounded-circle" src="admin/images/users/user-5.jpg" alt="Generic placeholder image" height="32">
+                                    <img class="d-flex me-2 rounded-circle" src="admin/images/users/user-5.jpg"
+                                        alt="Generic placeholder image" height="32">
                                     <div class="w-100">
                                         <h5 class="m-0 font-14">Jacob Deo</h5>
                                         <span class="font-12 mb-0">Developer</span>
@@ -69,18 +71,21 @@
         </li>
 
         <li class="dropdown d-inline-block d-lg-none">
-            <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+            <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-bs-toggle="dropdown"
+                href="#" role="button" aria-haspopup="false" aria-expanded="false">
                 <i class="fe-search noti-icon"></i>
             </a>
             <div class="dropdown-menu dropdown-lg dropdown-menu-end p-0">
                 <form class="p-3">
-                    <input type="text" class="form-control" placeholder="Search ..." aria-label="Recipient's username">
+                    <input type="text" class="form-control" placeholder="Search ..."
+                        aria-label="Recipient's username">
                 </form>
             </div>
         </li>
 
         <li class="dropdown notification-list topbar-dropdown">
-            <a class="nav-link dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+            <a class="nav-link dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown" href="#"
+                role="button" aria-haspopup="false" aria-expanded="false">
                 <i class="fe-bell noti-icon"></i>
                 <span class="badge bg-danger rounded-circle noti-icon-badge count-btn">9</span>
             </a>
@@ -89,9 +94,9 @@
                 <!-- item-->
                 <div class="dropdown-item noti-title">
                     <h5 class="m-0">
-                                        <span class="float-end">
+                        <span class="float-end">
 
-                                        </span>Thông báo
+                        </span>Thông báo
                     </h5>
                 </div>
 
@@ -100,7 +105,8 @@
                     <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item notify-item active">
                         <div class="notify-icon">
-                            <img src="admin/images/users/user-1.jpg" class="img-fluid rounded-circle" alt="" /> </div>
+                            <img src="admin/images/users/user-1.jpg" class="img-fluid rounded-circle" alt="" />
+                        </div>
                         <p class="notify-details">Cristina Pride</p>
                         <p class="text-muted mb-0 user-msg">
                             <small>Hi, How are you? What about our next meeting</small>
@@ -120,7 +126,8 @@
                     <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item notify-item">
                         <div class="notify-icon">
-                            <img src="admin/images/users/user-4.jpg" class="img-fluid rounded-circle" alt="" /> </div>
+                            <img src="admin/images/users/user-4.jpg" class="img-fluid rounded-circle" alt="" />
+                        </div>
                         <p class="notify-details">Karen Robinson</p>
                         <p class="text-muted mb-0 user-msg">
                             <small>Wow ! this admin looks good and awesome design</small>
@@ -166,11 +173,18 @@
         </li>
 
         <li class="dropdown notification-list topbar-dropdown">
-            <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                <img src="admin/images/users/user-1.jpg" alt="user-image" class="rounded-circle">
+            <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light" data-bs-toggle="dropdown"
+                href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                <img src="https://i.imgur.com/GNi3im6.png" alt="user" class="rounded-circle"
+                    style="width:30px;height:30px">
                 <span class="pro-user-name ms-1">
-                                    Ánh Dương <i class="mdi mdi-chevron-down"></i>
-                                </span>
+                    @if (auth()->check())
+                        <span class="hidden fw-medium xl:block">{{ auth()->user()->name }}</span>
+                    @else
+                        <span class="hidden fw-medium xl:block">Shawn L.</span>
+                    @endif
+                    <i class="mdi mdi-chevron-down"></i>
+                </span>
             </a>
             <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
                 <!-- item-->
@@ -193,7 +207,8 @@
                 <div class="dropdown-divider"></div>
 
                 <!-- item-->
-                <a href="auth-logout.html" class="dropdown-item notify-item">
+
+                <a href="{{ route('logoutAdmin') }}" class="dropdown-item notify-item">
                     <i class="fe-log-out"></i>
                     <span>Logout</span>
                 </a>
@@ -212,20 +227,20 @@
     <!-- LOGO -->
     <div class="logo-box">
         <a href="index.html" class="logo logo-light text-center">
-                            <span class="logo-sm">
-                                <img src="admin/images/logo-sm.png" alt="" height="22">
-                            </span>
+            <span class="logo-sm">
+                <img src="admin/images/logo-sm.png" alt="" height="22">
+            </span>
             <span class="logo-lg">
-                                <img src="admin/images/logo-light.png" alt="" height="16">
-                            </span>
+                <img src="admin/images/logo-light.png" alt="" height="16">
+            </span>
         </a>
         <a href="index.html" class="logo logo-dark text-center">
-                            <span class="logo-sm">
-                                <img src="admin/images/logo-sm.png" alt="" height="22">
-                            </span>
+            <span class="logo-sm">
+                <img src="admin/images/logo-sm.png" alt="" height="22">
+            </span>
             <span class="logo-lg">
-                                <img src="admin/images/logo-dark.png" alt="" height="16">
-                            </span>
+                <img src="admin/images/logo-dark.png" alt="" height="16">
+            </span>
         </a>
     </div>
 

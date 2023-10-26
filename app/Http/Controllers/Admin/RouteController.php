@@ -59,7 +59,7 @@ class RouteController extends AdminBaseController
             $route = Routes::create([
                 'slug' => $slug,
                 'departure' => $departure,
-                'arrival' => $departure,
+                'arrival' => $arrival,
                 'price' => '0',
             ]);
         }

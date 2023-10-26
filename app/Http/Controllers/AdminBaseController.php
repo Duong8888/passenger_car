@@ -157,6 +157,7 @@ class AdminBaseController extends Controller
             $image = str_replace('storage/', '', $model->{$this->fieldImage});
             Storage::delete($image);
         }
+        return to_route($this->urlIndex)->with('success', 'Delete Successfully!');
     }
 
 }
