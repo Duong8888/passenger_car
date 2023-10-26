@@ -101,6 +101,9 @@ $(document).ready(function () {
     });
     console.log(arrival.val());
 
+
+    $('.btn-find').click();
+
     function search() {
         dataList.html('');
         dataList.append(skeleton);
