@@ -166,10 +166,15 @@
 
                         </ul>
                     </li> --}}
-                    <li class="py-5 lg:px-4">
-                        <a href="contact.html" class="py-2.5 text-gray-800 font-medium leading-tight" id="contact"
-                           data-bs-toggle="dropdown">Liên hệ </a>
+                    <li class="relative dropdown lg:mt-0">
+                        <button href="#" class="py-5 text-gray-800 lg:px-4 dropdown-toggle lg:h-[70px]" id="pages"
+                                data-bs-toggle="dropdown"><a href="#">Liên hệ </a></button>
+                        {{-- <i class="align-middle bx bxs-chevron-down ltr:ml-1 rtl:mr-1"></i> --}}
                     </li>
+{{--                    <li class="py-5 lg:px-4">--}}
+{{--                        <a href="contact.html" class="py-2.5 text-gray-800 font-medium leading-tight" id="contact"--}}
+{{--                           data-bs-toggle="dropdown">Liên hệ </a>--}}
+{{--                    </li>--}}
                 </ul>
             </div>
         </div>
