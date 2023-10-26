@@ -91,14 +91,7 @@
                         </a>
                     </li>
                 @endif
-                @if(auth()->user()->hasAnyRole(['SupperAdmin', 'Admin']))
-                    <li>
-                        <a href="{{ route('stop.index') }}">
-                            <i class="mdi mdi-clipboard-outline"></i>
-                            <span> Quản lý các điểm dừng </span>
-                        </a>
-                    </li>
-                @endif
+
                 @if(auth()->user()->hasAnyRole(['SupperAdmin']))
                     <li>
                         <a href="{{ route('permission.index') }}">
@@ -129,7 +122,7 @@
                     <li>
                         <a href="{{ route('ticket.index') }}" >
                             <i class="mdi mdi-texture"></i>
-                            <span>Tickets</span>
+                            <span>Vé</span>
                         </a>
                     </li>
                 @endif
@@ -137,7 +130,7 @@
                     <li>
                         <a href="{{ route('service.index') }}">
                             <i class="mdi mdi-clipboard-outline"></i>
-                            <span> Services </span>
+                            <span> Dịch vụ </span>
                         </a>
                     </li>
                 @endif
@@ -167,6 +160,7 @@
                         </a>
                     </li>
                 @endif
+
             </ul>
 
         </div>
