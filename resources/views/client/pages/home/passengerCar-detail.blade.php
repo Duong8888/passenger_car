@@ -389,7 +389,7 @@
                                             </a>
                                             <p class="mb-6 text-gray-500 dark:text-gray-300"
                                                 style="min-height: 50px;max-height: 50px">
-                                                {{ Str::limit($route->description, 100, '...') }}</p>
+                                                {!!Str::limit($route->description, 100, '...')!!}</p>
                                             <!--end col-->
                                             <div class="col-span-3 lg:col-span-2">
                                                 <div class="text-start text-md-end dark:text-gray-50">
@@ -498,7 +498,7 @@
                                             @endforeach
                                         </div>
                                         <div class="flex flex-col w-1/2" style="overflow-y: auto; max-height: 200px;">
-                                            Điểm đón:
+                                            Điểm trả:
                                             @foreach ($stops as $data)
                                                 @if ($data->stop_type == 1)
                                                     <div class="mb-5">

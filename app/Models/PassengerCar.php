@@ -48,7 +48,7 @@ class PassengerCar extends Model
 
     }
     public function services(){
-        return $this->belongsToMany(Service::class);
+        return $this->belongsToMany(Service::class ,"passenger_car_services");
     }
     public function tickets(){
         return $this->hasMany(Ticket::class);
