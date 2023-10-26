@@ -198,6 +198,10 @@ class TicketController extends Controller
             ]);
         }
         session()->forget('cart');
-        return to_route('home')->with('success', 'Đặt hàng thành công');
+        return to_route('client.finish.ticket')->with('success', 'Đặt hàng thành công');
+    }
+
+    public function EndTicketPayment(){
+        return view('client.pages.ticket.finish');
     }
 }

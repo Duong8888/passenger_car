@@ -140,25 +140,25 @@ $(document).ready(function () {
     const secondNextButton = document.getElementById('second-next');
     const thirdBackButton = document.getElementById('third-back');
 
-    // Sự kiện click cho nút Next ở thẻ First
+
     firstNextButton.addEventListener('click', function() {
         firstTab.classList.add('hidden');
         secondTab.classList.remove('hidden');
     });
 
-    // Sự kiện click cho nút Back ở thẻ Second
+
     secondBackButton.addEventListener('click', function() {
         secondTab.classList.add('hidden');
         firstTab.classList.remove('hidden');
     });
 
-    // Sự kiện click cho nút Next ở thẻ Second
+
     secondNextButton.addEventListener('click', function() {
         secondTab.classList.add('hidden');
         thirdTab.classList.remove('hidden');
     });
 
-    // Sự kiện click cho nút Back ở thẻ Third
+
     thirdBackButton.addEventListener('click', function() {
         thirdTab.classList.add('hidden');
         secondTab.classList.remove('hidden');

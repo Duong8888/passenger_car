@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-mode="light" class="scroll-smooths group" data-theme-color="violet">
+
 <head>
     <meta charset="utf-8" />
     <title>index</title>
@@ -34,4 +35,6 @@
 </body>
 
 
+
 </html>
+

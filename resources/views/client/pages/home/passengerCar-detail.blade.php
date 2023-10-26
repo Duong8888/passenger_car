@@ -169,31 +169,12 @@
                                     class="border rounded border-gray-100/50 dark:border-neutral-600 nav-tabs bottom-border-tab col-span-12 lg:col-span-12 lg:col-start-12">
                                     <div class="px-6 py-0 border-b border-gray-100/50 dark:border-neutral-600">
 
-                                        <ul class="items-center text-sm font-medium text-center text-gray-700 nav md:flex">
-                                            <li class="active" role="presentation">
-                                                <button class="inline-block w-full py-4 px-[18px] dark:text-gray-50 active"
-                                                    data-tw-toggle="tab" type="button" data-tw-target="mota-tab">
-                                                    Mô tả
-                                                </button>
-                                            </li>
-                                            <li class="nav-item" role="presentation">
-                                                <button class="inline-block w-full py-4 px-[18px] dark:text-gray-50"
-                                                    data-tw-toggle="tab" type="button" data-tw-target="dichvu-tab">
-                                                    Dịch vụ
-                                                </button>
-                                            </li>
-                                            <li class="nav-item" role="presentation">
-                                                <button class="inline-block w-full py-4 px-[18px] dark:text-gray-50"
-                                                    data-tw-toggle="tab" type="button" data-tw-target="diemdung-tab">
-                                                    Điểm đón trả
-                                                </button>
-                                            </li>
-                                            <li class="nav-item" role="presentation">
-                                                <button class="inline-block w-full py-4 px-[18px] dark:text-gray-50"
-                                                    data-tw-toggle="tab" type="button" data-tw-target="danhgia-tab">
-                                                    Đánh giá
-                                                </button>
-                                            </li>
+
+                            </div>
+                            <div
+                                class="border rounded border-gray-100/50 dark:border-neutral-600 nav-tabs bottom-border-tab col-span-12 lg:col-span-12 lg:col-start-12">
+                                <div class="px-6 py-0 border-b border-gray-100/50 dark:border-neutral-600">
+
 
                                         </ul>
                                     </div>
@@ -426,142 +407,148 @@
             </section>
 
 
-            <div id="popup"
-                class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 hidden w-80 h-96 z-50">
-                <div class="bg-white p-6 rounded relative">
-                    <!-- Nút "x" -->
-                    <button onclick="hidePopup()"
-                        class="absolute top-0 right-0 mt-4 mr-4 text-gray-500 hover:text-gray-700 exit">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M6 18L18 6M6 6l12 12">
-                            </path>
-                        </svg>
-                    </button>
+        <div id="popup"
+            class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 hidden w-80 h-96 z-50">
+            <div class="bg-white p-6 rounded relative">
+                <!-- Nút "x" -->
+                <button onclick="hidePopup()"
+                    class="absolute top-0 right-0 mt-4 mr-4 text-gray-500 hover:text-gray-700 exit">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
 
 
-                    <div class="flex items-center gap-x-3">
-                        <div class="rounded border w-1/2 mx-auto mt-4">
-                            <!-- Tabs -->
-                            <ul id="tabs" class="inline-flex pt-2 px-1 w-full border-b">
-                                <li
-                                    class="bg-white px-4 text-gray-800 font-semibold py-2 rounded-t border-t border-r border-l -mb-px">
-                                    <a id="default-tab" href="#first">Chỗ mong muốn</a>
-                                </li>
-                                <li class="px-4 text-gray-800 font-semibold py-2 rounded-t"><a href="#second">Điểm đón
-                                        trả</a>
-                                </li>
-                                <li class="px-4 text-gray-800 font-semibold py-2 rounded-t"><a href="#third">Nhập thông
-                                        tin</a>
-                                </li>
-                            </ul>
+                <div class="flex items-center gap-x-3" style="height: 450px ; width: 470px">
+                    <div class="rounded border w-1/2 mx-auto mt-4" style="height: 100%">
+                        <!-- Tabs -->
+                        <ul id="tabs" class="inline-flex pt-2 px-1 w-full border-b">
+                            <li
+                                class="bg-white px-4 text-gray-800 font-semibold py-2 rounded-t border-t border-r border-l -mb-px">
+                                <a id="default-tab" href="#first">Chỗ mong muốn</a>
+                            </li>
+                            <li class="px-4 text-gray-800 font-semibold py-2 rounded-t"><a href="#second">Điểm đón
+                                    trả</a>
+                            </li>
+                            <li class="px-4 text-gray-800 font-semibold py-2 rounded-t"><a href="#third">Nhập thông
+                                    tin</a>
+                            </li>
+                        </ul>
 
-                            <!-- Tab Contents -->
-                            <div id="tab-contents" class="h-full w-full">
-                                <div id="first" class="p-4 step">
-                                    <label for="">Số lượng khách</label>
-                                    <div class="flex justify-between">
-                                        <p>Ghế thường - <span class="price">{{ $routes[0]->route->price }}</span>đ</p>
-                                        <div class="flex items-center">
-                                            <button
-                                                class="w-8 h-8 rounded-full bg-white-500 text-black flex items-center justify-center decrement-btn">
-                                                <span class="text-lg font-bold">-</span>
-                                            </button>
-                                            <input type="text" min="1" value="0" name="countTicket"
-                                                class="w-24 text-center qty-input">
-                                            <button
-                                                class="w-8 h-8 rounded-full bg-white-500 text-black flex items-center justify-center increment-btn">
-                                                <span class="text-lg font-bold">+</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="p-4">
+                        <!-- Tab Contents -->
+                        <div id="tab-contents" class=" w-full" style="height: 75%">
+                            <div id="first" class="p-4 step">
+                                <label for="">Số lượng khách</label>
+                                <div class="flex justify-between">
+                                    <p>Ghế thường - <span class="price">{{ $routes[0]->route->price }}</span>đ</p>
+                                    <div class="flex items-center">
                                         <button
-                                            class="text-black border border-black bg-white font-bold py-2 px-4 rounded float-right"
-                                            id="first-next">Next</button>
-                                    </div>
-                                </div>
-                                <div id="second" class="hidden p-4 step">
-                                    <div class="flex justify-between">
-                                        <div class="flex flex-col w-1/2" style="overflow-y: auto; max-height: 200px;">
-                                            Điểm đón:
-                                            @foreach ($stops as $data)
-                                                @if ($data->stop_type == 0)
-                                                    <div class="mb-5">
-                                                        <input type="radio" id="departure" name="departure"
-                                                            class="form-radio h-5 w-5 text-blue-600"
-                                                            value="{{ $data->stop_name }}">
-                                                        <label for="departure"
-                                                            class="ml-2 mb-3">{{ $data->stop_name }}</label>
-                                                    </div>
-                                                @endif
-                                            @endforeach
-                                        </div>
-                                        <div class="flex flex-col w-1/2" style="overflow-y: auto; max-height: 200px;">
-                                            Điểm trả:
-                                            @foreach ($stops as $data)
-                                                @if ($data->stop_type == 1)
-                                                    <div class="mb-5">
-                                                        <input type="radio" id="arrival" name="arrival1"
-                                                            class="form-radio h-5 w-5 text-blue-600"
-                                                            value="{{ $data->stop_name }}">
-                                                        <label for="arrival"
-                                                            class="ml-2 mb-3">{{ $data->stop_name }}</label>
-                                                    </div>
-                                                @endif
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                    <div class="p-4 flex justify-between">
-                                        <button id="second-back"
-                                            class="text-black border border-black bg-white font-bold py-2 px-4 rounded">Back</button>
-                                        <button id="second-next"
-                                            class="text-black border border-black bg-white font-bold py-2 px-4 rounded">Next</button>
-                                    </div>
-                                </div>
-                                <div id="third" class="hidden p-4 step">
-                                    <div class="max-w-md mx-auto bg-white rounded p-8 shadow-md">
-                                        <div class="mb-4">
-                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Họ và
-                                                tên</label>
-                                            <input
-                                                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                                name="name" id="name" type="text"
-                                                placeholder="Nhập họ và tên của bạn">
-                                        </div>
-                                        <div class="mb-4">
-                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">Số
-                                                điện
-                                                thoại</label>
-                                            <input
-                                                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                                name="phone" id="phone" type="text"
-                                                value="{{ isset(Auth::user()->phone) ? Auth::user()->phone : '' }}"
-                                                placeholder="Nhập Số điện thoại của bạn"
-                                                @if (isset(Auth::user()->phone)) readonly @endif>
-                                        </div>
-                                        <div class="mb-4">
-                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email
-                                                để nhận thông tin vé</label>
-                                            <input
-                                                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                                name="email" id="email" type="text"
-                                                value="{{ isset(Auth::user()->email) ? Auth::user()->email : '' }}"
-                                                placeholder="Nhập địa chỉ email của bạn"
-                                                @if (isset(Auth::user()->email)) readonly @endif>
-                                        </div>
-                                    </div>
-                                    <div class="p-4 flex justify-between">
-                                        <button id="third-back"
-                                            class="text-black border border-black bg-white font-bold py-2 px-4 rounded">Back
+                                            class="w-8 h-8 rounded-full bg-white-500 text-black flex items-center justify-center decrement-btn">
+                                            <span class="text-lg font-bold">-</span>
                                         </button>
+                                        <input type="text" min="1" value="0" name="countTicket"
+                                            class="w-24 text-center qty-input">
                                         <button
-                                            class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded submit"
-                                            data-action="{{ route('client.ticket.update-ticket') }}"
-                                            data-id="{{ $passengerCars->id }}">
-                                            Tiếp tục
+                                            class="w-8 h-8 rounded-full bg-white-500 text-black flex items-center justify-center increment-btn">
+                                            <span class="text-lg font-bold">+</span>
                                         </button>
                                     </div>
+                                </div>
+                                <div class="p-4" style="position: fixed; bottom: 25%; right: 35%;">
+                                    <button class="text-black border border-black bg-white font-bold py-2 px-4 rounded "
+                                        id="first-next">Next</button>
+                                </div>
+                            </div>
+                            <div id="second" class="hidden p-4 step">
+                                <div class="flex justify-between">
+                                    <div class="flex flex-col"
+                                        style="overflow-y: auto; max-height: 200px; width: 49%; padding-right: 10px">
+                                        Điểm đón:
+                                        @php
+                                        $firstDeparture = true;
+                                        @endphp
+                                        @foreach ($stops as $data)
+                                        @if ($data->stop_type == 0)
+                                        <div class="mb-5">
+                                            <input type="radio" id="departure" name="departure"
+                                                class="form-radio h-5 w-5 text-blue-600" value="{{ $data->stop_name }}"
+                                                {{ $firstDeparture ? 'checked' : '' }}>
+                                            <label for="departure" class="ml-2 mb-3">{{ $data->stop_name }}</label>
+                                        </div>
+                                        @php
+                                        $firstDeparture = false;
+                                        @endphp
+                                        @endif
+                                        @endforeach
+                                    </div>
+                                    <div class="flex flex-col" style="overflow-y: auto; max-height: 200px; width: 49%">
+                                        Điểm đón:
+                                        @php
+                                        $firstArrival = true;
+                                        @endphp
+                                        @foreach ($stops as $data)
+                                        @if ($data->stop_type == 1)
+                                        <div class="mb-5">
+                                            <input type="radio" id="arrival" name="arrival1"
+                                                class="form-radio h-5 w-5 text-blue-600" value="{{ $data->stop_name }}"
+                                                {{ $firstArrival ? 'checked' : '' }}>
+                                            <label for="arrival" class="ml-2 mb-3">{{ $data->stop_name }}</label>
+                                        </div>
+                                        @php
+                                        $firstArrival = false;
+                                        @endphp
+                                        @endif
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <div class="p-4 flex justify-between">
+                                    <button id="second-back"
+                                        class="text-black border border-black bg-white font-bold py-2 px-4 rounded">Back</button>
+                                    <button id="second-next"
+                                        class="text-black border border-black bg-white font-bold py-2 px-4 rounded">Next</button>
+                                </div>
+                            </div>
+                            <div id="third" class="hidden p-4 step">
+                                <div class="max-w-md mx-auto bg-white rounded p-8 shadow-md">
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Họ và
+                                            tên</label>
+                                        <input
+                                            class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                            name="name" id="name" type="text"
+                                            value="{{ isset(Auth::user()->name) ? Auth::user()->name : '' }}"
+                                            placeholder="Nhập họ và tên của bạn">
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">Số điện
+                                            thoại</label>
+                                        <input
+                                            class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                            name="phone" id="phone" type="text"
+                                            value="{{ isset(Auth::user()->phone) ? Auth::user()->phone : '' }}"
+                                            placeholder="Nhập Số điện thoại của bạn">
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email
+                                            để nhận thông tin vé</label>
+                                        <input
+                                            class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                            name="email" id="email" type="text"
+                                            value="{{ isset(Auth::user()->email) ? Auth::user()->email : '' }}"
+                                            placeholder="Nhập địa chỉ email của bạn">
+                                    </div>
+                                </div>
+                                <div class="p-4 flex justify-between">
+                                    <button id="third-back"
+                                        class="text-black border border-black bg-white font-bold py-2 px-4 rounded">Back
+                                    </button>
+                                    <button
+                                        class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded submit"
+                                        data-action="{{ route('client.ticket.update-ticket') }}"
+                                        data-id="{{ $passengerCars->id }}">
+                                        Tiếp tục
+                                    </button>
                                 </div>
 
                             </div>
@@ -569,6 +556,10 @@
                             </div>
                             <!-- End Tab Contents -->
                         </div>
+                        <div class="flex justify-between px-4 text-gray-800 font-semibold show-total">
+                        </div>
+                        <!-- End Tab Contents -->
+
                     </div>
                 </div>
             </div>
@@ -576,5 +567,8 @@
     </div>
 @endsection
 @section('page-script')
-    <script type="module" src="{{ asset('client/js/custom/passengeCar-detail.js') }}"></script>
+
+<script type="module" src="{{ asset('client/js/custom/passengeCar-detail.js') }}">
+</script>
 @endsection
+
