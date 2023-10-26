@@ -55,7 +55,7 @@ class RouteController extends AdminBaseController
             ->where('arrival', $arrival)
             ->first();
         if (!$route) {
-            $slug = Str::slug($departure . " đi " . $departure);
+            $slug = Str::slug($departure . " đi " . $arrival);
             $route = Routes::create([
                 'slug' => $slug,
                 'departure' => $departure,
@@ -80,7 +80,7 @@ class RouteController extends AdminBaseController
             $stops->order = $key;
             $stops->save();
         }
-        return response()->json($request->all());
+        return back();
     }
 
 }
