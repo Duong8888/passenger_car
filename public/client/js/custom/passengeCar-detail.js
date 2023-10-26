@@ -140,25 +140,25 @@ $(document).ready(function () {
     const secondNextButton = document.getElementById('second-next');
     const thirdBackButton = document.getElementById('third-back');
 
-    
+
     firstNextButton.addEventListener('click', function() {
         firstTab.classList.add('hidden');
         secondTab.classList.remove('hidden');
     });
 
-   
+
     secondBackButton.addEventListener('click', function() {
         secondTab.classList.add('hidden');
         firstTab.classList.remove('hidden');
     });
 
- 
+
     secondNextButton.addEventListener('click', function() {
         secondTab.classList.add('hidden');
         thirdTab.classList.remove('hidden');
     });
 
-    
+
     thirdBackButton.addEventListener('click', function() {
         thirdTab.classList.add('hidden');
         secondTab.classList.remove('hidden');

@@ -14,12 +14,17 @@ class CheckRole
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next)
+    public function handle($request, Closure $next, ...$roles)
     {
-        if(Auth::user()->role == 'admin'){
-           dd('khoong dduowjc quyeenf truy caapj');
+        $user = $request->user();
+
+        // Check if the user has at least one of the specified roles
+        if ($user && $user->hasAnyRole($roles)) {
+            return $next($request);
         }
-         return $next($request);
-        
-     }
+
+        // If the user doesn't have the required roles, you can redirect or return an error response here.
+        return abort(403, 'Unauthorized');
+    }
+
 }

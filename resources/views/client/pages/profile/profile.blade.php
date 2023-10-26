@@ -1,8 +1,8 @@
 @extends('client.layout.master')
 
 @section('content')
-<div class="main-content">
-    <div class="page-content">
+    <div class="main-content">
+        <div class="page-content">
 
         <section
             class="pt-28 lg:pt-44 pb-28 group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 dark:bg-neutral-900 bg-[url('../images/home/page-title.html')] bg-center bg-cover relative">
@@ -21,14 +21,17 @@
                                                 class="bx bxs-chevron-right align-middle px-2.5"></i>My Profile</li>
                                     </ol>
                                 </nav>
+
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <img src="assets/images/about/shape.png" alt="" class="absolute block bg-cover -bottom-0 dark:hidden">
-            <img src="assets/images/about/shape-dark.png" alt="" class="absolute hidden bg-cover -bottom-0 dark:block">
-        </section>
+                <img src="assets/images/about/shape.png" alt=""
+                    class="absolute block bg-cover -bottom-0 dark:hidden">
+                <img src="assets/images/about/shape-dark.png" alt=""
+                    class="absolute hidden bg-cover -bottom-0 dark:block">
+            </section>
+
 
         <!-- Start grid -->
         <section class="py-20">
@@ -69,6 +72,7 @@
                                 </div>
                             </div>
                             {{-- <div class="p-5">
+
                                 <div class="pb-5 border-b border-gray-100/50 dark:border-neutral-600">
                                     <h6 class="mb-5 font-semibold text-gray-900 text-17 dark:text-gray-50">Documents
                                     </h6>
@@ -86,6 +90,7 @@
                                                 <div class="ml-auto text-xl">
                                                     <a href="assets/images/dark-logo.html" download=""
                                                         class="text-gray-500 fs-20"><i class="uil uil-import"></i></a>
+
                                                 </div>
                                             </div>
                                         </li>
@@ -105,6 +110,7 @@
                                                 </div>
                                             </div>
                                         </li>
+
                                     </ul>
                                 </div>
 
@@ -148,6 +154,7 @@
                             </div>
 
                         </div>
+
                     </div>
                     <div class="col-span-12 lg:col-span-8">
                         <div
@@ -315,6 +322,7 @@
                                                             $item->created_at }}</span>
                                                     </div>
                                                 </div>
+
                                             </div>
                                             <!--end col-->
                                             <div class="items-center col-span-12 lg:col-span-2">
@@ -340,11 +348,14 @@
                                             </div>
                                             <!--end col-->
                                         </div>
+
                                         <!--end row-->
+
 
                                     </div>
                                     @endif
                                     @endforeach
+
 
                                 </div>
 
@@ -463,9 +474,11 @@
                                                                 @error('name')
                                                                 <div class="alert alert-danger mt-1 mb-1"
                                                                     style="color: red;font-size: 12px;">{{ $message }}
+
                                                                 </div>
                                                                 @enderror
                                                             </div>
+
                                                         </div>
 
                                                         <div class="col-span-12 lg:col-span-6">
@@ -480,9 +493,11 @@
                                                                 @error('email')
                                                                 <div class="alert alert-danger mt-1 mb-1"
                                                                     style="color: red;font-size: 12px;">{{ $message }}
+
                                                                 </div>
                                                                 @enderror
                                                             </div>
+
                                                         </div>
                                                         <!--end col-->
                                                         <!--end col-->
@@ -497,9 +512,11 @@
                                                                 @error('phone')
                                                                 <div class="alert alert-danger mt-1 mb-1"
                                                                     style="color: red;font-size: 12px;">{{ $message }}
+
                                                                 </div>
                                                                 @enderror
                                                             </div>
+
                                                         </div>
                                                         <div class="col-span-12">
                                                             <div class="form-check">
@@ -509,6 +526,7 @@
                                                                         Sủa thông tin</p>
                                                                 </button>
                                                                 {{-- <style>
+
                                                                     . {
                                                                         float: left;
                                                                         display: flex;
@@ -516,6 +534,7 @@
                                                                         align-content: center
                                                                     }
                                                                 </style> --}}
+
                                                             </div>
                                                         </div>
 
@@ -614,6 +633,7 @@
                                                                     Xác nhận đổi</p>
                                                             </button>
                                                             {{-- <style>
+
                                                                 . {
                                                                     float: left;
                                                                     display: flex;
@@ -621,6 +641,7 @@
                                                                     align-content: center
                                                                 }
                                                             </style> --}}
+
                                                         </div>
                                                     </div>
                                                     <!--end col-->
@@ -629,16 +650,19 @@
                                             </div>
 
                                         </form>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
         <!-- End grid -->
         {{-- <section class="relative py-16 overflow-hidden bg-zinc-700 dark:bg-neutral-900">
+
             <div class="container mx-auto">
                 <div class="grid items-center grid-cols-12 gap-5">
                     <div class="col-span-12 lg:col-span-7">
@@ -664,7 +688,10 @@
                 <img src="assets/images/subscribe.png" alt="" class="img-fluid">
             </div>
         </section> --}}
+        </div>
     </div>
+
 </div>
 
 @endsection
+
