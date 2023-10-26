@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Album;
 use App\Models\PassengerCar;
 use App\Models\Routes;
+use App\Models\Service;
 use App\Models\WorkingTime;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
@@ -37,14 +38,21 @@ class PassengerCarController extends AdminBaseController
 
     public function index(Request $request)
     {
+        $userId = Auth::user()->id;
         if($request->ajax()){
             $routes = Routes::all();
             $passengerCar = PassengerCar::query()->with(['route' => function($query){
                 $query->get('departure','arrival');
-            }])->orderBy('id','desc')->paginate(10);
+            }])->orderBy('id','desc')->where('user_id',$userId)->paginate(10);
             return \response()->json(['data' => $passengerCar,'routes'=>$routes]);
         }
-        return parent::index($request);
+        $data = $this->model->orderBy('id','desc')->where('user_id',$userId)->paginate(10);
+        $service = Service::all();
+        return view($this->pathView . __FUNCTION__, compact('data','service'))
+            ->with('title', $this->titleIndex)
+            ->with('colums', $this->colums)
+            ->with('urlbase', $this->urlbase)
+            ->with('titleCreate', $this->titleCreate);
     }
 
     public function store(Request $request)
@@ -55,10 +63,15 @@ class PassengerCarController extends AdminBaseController
         $departureTime = $request->departure;
         $arrivalTime = $request->arrival;
         $albumData = [];
+        $arrService = $request->service;
 
         $car->fill($request->except([$this->fieldImage, 'arrival', 'departure', '_token']));
         $car->user_id = Auth::user()->id;
         $car->save();
+
+        foreach ($arrService as $service) {
+            $car->services()->attach($service);
+        }
 
         foreach ($images as $image) {
             $tmpPath = Storage::put($this->folderImage, $image);
@@ -95,7 +108,9 @@ class PassengerCarController extends AdminBaseController
     }
 
 
-
+    public function edit(string $id){
+        return response()->json(PassengerCar::query()->findOrFail($id));
+    }
 
 }
 

@@ -10,12 +10,12 @@ $(document).ready(function () {
     const uppy = new Uppy()
     uppy.use(Dashboard, {
         inline: true,
-        target: "#uppy", // Chọn một phần tử HTML để thêm giao diện Dashboard
-        height: 200, // Điều chỉnh chiều cao của giao diện
-        proudlyDisplayPoweredByUppy: false, // Ẩn thông báo "Powered by Uppy"
-        showSelectedFiles: true, // Hiển thị danh sách các tệp đã chọn
-        disableStatusBar: true, // Tắt thanh trạng thái
-        hideProgressAfterFinish: false, // Giữ thanh tiến trình sau khi tải lên xong
+        target: "#uppy",
+        height: 200,
+        proudlyDisplayPoweredByUppy: false,
+        showSelectedFiles: true,
+        disableStatusBar: true,
+        hideProgressAfterFinish: false,
     });
 
     const baseUrl = 'car';
@@ -30,8 +30,8 @@ $(document).ready(function () {
     });
 
     $(document).on("click", ".btn-add-time", function () {
-        var newItem = $(".add-item:first").clone(); // Clone phần tử đầu tiên có lớp "add-item"
-        $(".show-item").append(newItem); // Thêm phần tử clone vào cuối phần tử chứa
+        var newItem = $(".add-item:first").clone();
+        $(".show-item").append(newItem);
     });
 
 
@@ -44,16 +44,15 @@ $(document).ready(function () {
             formData.append('path[' + index + ']', file.data);
         });
 
-        // Gửi dữ liệu đến máy chủ bằng AJAX
         $.ajax({
-            url: baseUrl + '/store', // Điểm cuối trên máy chủ của bạn
+            url: baseUrl + '/store',
             type: "POST",
             data: formData,
             processData: false, // Set false để ngăn jQuery xử lý dữ liệu FormData
             contentType: false, // Set false để không thiết lập Header 'Content-Type'
             success: function (data) {
                 console.log(data)
-                hideModal();
+                toogleModal();
                 loadData();
             },
             error: function (xhr, status, error) {
@@ -62,7 +61,7 @@ $(document).ready(function () {
         });
     });
 
-    function hideModal() {
+    function toogleModal() {
         modalBtn.trigger("click");
     }
 
@@ -134,6 +133,29 @@ $(document).ready(function () {
             }
         });
     }
+
+    // udate xe
+    let licensePlate = $('input[name="license_plate"]');
+    let price = $('input[name="price"]');
+    let capacity = $('input[name="capacity"]');
+    let departure = [];
+    let arrival = [];
+    let image;
+    let description = $('ql-editor');
+    $(document).on('click','.btn-update',function (e){
+        let id = e.target.id;
+        $.ajax({
+            url:baseUrl+'/edit/'+id,
+            method: 'GET',
+            success: function (response){
+                console.log(response)
+            },
+            error:function (error){
+                console.log(error)
+            }
+        });
+        toogleModal();
+    });
 
 });
 

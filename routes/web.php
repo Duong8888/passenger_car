@@ -70,20 +70,51 @@ Route::group(['middleware' => 'checkRoles:SupperAdmin,Admin,AdminTicket'], funct
     Route::post('/trip', [TicketController::class, 'Trip']);
     Route::post('/passgenerCar/{id}', [TicketController::class, 'PassengerCar']);
 
+
+Route::resource('ticket', TicketController::class);
+Route::post('/trip', [TicketController::class, 'Trip']);
+Route::post('/passgenerCar/{id}' , [TicketController::class, 'PassengerCar']);
+
+//Route::resource('/route', RouteController::class);
+
+
+
+//Phan'z Nam'z
+Route::resource('service', ServicesController::class);
+//End Phan'z Nam'z
+
+Route::group(["prefix"=>"car","as"=>"car."],function(){
+    Route::get('/',[PassengerCarController::class,'index'])->name('index');
+    Route::post('store',[PassengerCarController::class,'store'])->name('store');
+    Route::get('edit/{id}',[PassengerCarController::class,'edit'])->name('edit');
+    Route::post('update/{id}',[PassengerCarController::class,'update'])->name('update');
+    Route::delete('delete/{id}',[PassengerCarController::class,'destroy'])->name('delete');
+
+});
+
+
+
+
+Route::group(["prefix"=>"route","as"=>"route."],function(){
+    Route::get('/',[RouteController::class,'index'])->name('index');
+    Route::post('store',[RouteController::class,'store'])->name('store');
+    Route::get('edit/{id}',[RouteController::class,'edit'])->name('edit');
+    Route::post('update/{id}',[RouteController::class,'update'])->name('update');
+    Route::delete('delete/{id}',[RouteController::class,'destroy'])->name('delete');
 });
 
 
 
 // tuyến đường SupperAdmin-Admin
 Route::group(['middleware' => 'checkRoles:SupperAdmin,Admin'], function () {
-    Route::prefix('route')->controller(RouteController::class)->name('route.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::post('/', 'store')->name('store');
-        Route::get('/create', 'create')->name('create');
-        Route::put('/{route}', 'update')->name('update');
-        Route::delete('/{route}', 'destroy')->name('destroy');
-        Route::get('/{route}/edit', 'edit')->name('edit');
-    });
+//    Route::prefix('route')->controller(RouteController::class)->name('route.')->group(function () {
+//        Route::get('/', 'index')->name('index');
+//        Route::post('/', 'store')->name('store');
+//        Route::get('/create', 'create')->name('create');
+//        Route::put('/{route}', 'update')->name('update');
+//        Route::delete('/{route}', 'destroy')->name('destroy');
+//        Route::get('/{route}/edit', 'edit')->name('edit');
+//    });
     // thống kê
     Route::get('/userReport', [UserReportController::class, 'index'])->name('admin.user.report');
     Route::get('/ticketReport', [TicketReportController::class, 'index'])->name('admin.ticket.report');
@@ -116,7 +147,11 @@ Route::group(['middleware' => 'checkRoles:SupperAdmin,Admin,Nhà xe'], function 
     Route::resource('/stop', StopsController::class);
 });
 
+
+});
+
 // Route::get('/management/index',[App\Http\Controllers\Admin\AdminManagementController::class,'index'])->name('route_adminmanagement_index');
 // Route::match(['GET','POST'],'/management/edit/{id}',[App\Http\Controllers\Admin\AdminManagementController::class,'edit'])->name('route_adminmanagement_edit');
 // Route::match(['GET','POST'],'/management/add',[App\Http\Controllers\Admin\AdminManagementController::class,'add'])->name('route_adminmanagement_add');
 // Route::match(['GET','POST'],'/management/delete/{id}',[App\Http\Controllers\Admin\AdminManagementController::class,'delete'])->name('route_adminmanagement_delete');
+
