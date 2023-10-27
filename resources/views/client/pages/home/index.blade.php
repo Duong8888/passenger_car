@@ -65,16 +65,10 @@
                                                 <!--end col-->
                                                 <div class="col-span-12 lg:col-span-3">
                                                     <div class="mb-2 mb-md-0">
-<<<<<<< HEAD
+
 
                                                         <h5 class="mb-1 fs-18"><a href="job-details.html"
                                                                                   class="text-gray-900 dark:text-gray-50">{{$car->user->name}}</a>
-
-
-=======
-                                                        <h5 class="mb-1 fs-18"><a href="job-details.html" class="text-gray-900 dark:text-gray-50">{{ $car->user->name }}</a>
-                                                        </h5>
->>>>>>> 383255a518053bb83b6a357d8f16f4df5e4a248a
                                                         <p class="mb-0 text-gray-500 fs-14 dark:text-gray-300">Ghế ngồi {{ $car->capacity }} chỗ</p>
                                                     </div>
                                                 </div>
