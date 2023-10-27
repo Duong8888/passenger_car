@@ -102,7 +102,7 @@ return [
      */
 
     'register_permission_check_method' => true,
-
+   
     /*
      * When set to true the package implements teams using the 'team_foreign_key'. If you want
      * the migrations to register the 'team_foreign_key', you must set this to true
