@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Client\BlogController;
 use App\Http\Controllers\Client\ProfileController;
+use App\Http\Controllers\MapController;
 
 //Nam
 
@@ -48,3 +49,4 @@ Route::get('/vnpay-todb', [TicketController::class, 'checkoutPayment'])->name('c
 Route::get('/end-ticket-payment', [TicketController::class, 'EndTicketPayment'])->name('client.finish.ticket');
 
 
+Route::get('/map', [MapController::class, 'index'])->name('map');
