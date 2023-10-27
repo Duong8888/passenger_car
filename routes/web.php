@@ -118,12 +118,6 @@ Route::group(["prefix"=>"car","as"=>"car."],function(){
 });
 
 
-Route::get('/loginadmin', [App\Http\Controllers\LoginAdminController::class, 'showLoginAdmin'])->name('login_admin');
-Route::post('/loginadmin', [App\Http\Controllers\LoginAdminController::class, 'loginAdmin']);
-Route::get('/logoutadmin', [App\Http\Controllers\LoginAdminController::class, 'logoutAdmin'])->name('logoutAdmin');
-
-
-
 Route::get('/staff/index', [App\Http\Controllers\UserController::class, 'index'])->name('route_staff_index');
 Route::match(['GET', 'POST'], '/staff/add', [App\Http\Controllers\UserController::class, 'add'])->name('route_staff_add');
 Route::match(['GET', 'POST'], '/staff/edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('route_staff_edit');
