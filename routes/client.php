@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Client\BlogController;
 use App\Http\Controllers\Client\ProfileController;
+use App\Http\Controllers\MapController;
 
 //Nam
 
@@ -45,5 +46,13 @@ Route::post('/send-ticket', [TicketController::class, 'endPayment'])->name('clie
 Route::post('/vnpay-method', [TicketController::class, 'vnpay_payment'])->name('client.ticket.vnpay-method');
 Route::post('/momo-method', [TicketController::class, 'momo_payment'])->name('client.ticket.momo-method');
 Route::get('/vnpay-todb', [TicketController::class, 'checkoutPayment'])->name('client.ticket.add-vnpay-to-db');
+Route::get('/end-ticket-payment', [TicketController::class, 'EndTicketPayment'])->name('client.finish.ticket');
 
+
+Route::get('/loginadmin', [App\Http\Controllers\LoginAdminController::class, 'showLoginAdmin'])->name('login_admin');
+Route::post('/loginadmin', [App\Http\Controllers\LoginAdminController::class, 'loginAdmin']);
+Route::get('/logoutadmin', [App\Http\Controllers\LoginAdminController::class, 'logoutAdmin'])->name('logoutAdmin');
+
+
+Route::get('/map', [MapController::class, 'index'])->name('map');
 
