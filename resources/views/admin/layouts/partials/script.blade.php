@@ -11,7 +11,7 @@
 
 <!-- knob plugin -->
 <script src="{{asset('admin/libs/jquery-knob/jquery.knob.min.js')}}"></script>
-
+<script src="{{ asset('admin/js/custom/user-permission.js') }}"></script>
 <!-- App js-->
 <script src="{{asset('admin/js/app.min.js')}}"></script>
 
@@ -32,3 +32,8 @@
 
 <!-- Datatables init -->
 <script src="{{ asset('admin/js/pages/datatables.init.js') }}"></script>
+<!--Chartist Chart-->
+<script src="{{ asset('admin/libs/chartist/chartist.min.js') }}"></script>
+<script src="{{ asset('admin/libs/chartist-plugin-tooltips/chartist-plugin-tooltip.min.js') }}"></script>
+<!-- Init js -->
+<script src="{{ asset('admin/js/pages/chartist.init.js') }}"></script>

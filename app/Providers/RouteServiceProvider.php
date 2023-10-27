@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Middleware\CheckAdmin;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -17,8 +18,9 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/dashboard';
-
+    public const HOME = '/';
+    public const HOME_ADMIN = '/admin/dashboard';
+    public const HOME_STAFF = '/';
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
      */
@@ -35,6 +37,8 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->prefix('admin')
+                ->as('admin.')
+                ->middleware(['auth', CheckAdmin::class])
                 ->group(base_path('routes/web.php'));
 
             Route::middleware('web')

@@ -3,54 +3,36 @@ $(document).ready(function () {
 
     $('#option2').click(function () {
         showInformation = `
-        <h4 class="mb-3 text-lg text-gray-900 dark:text-gray-50">How to payment</h4>
+        <h4 class="mb-3 text-lg text-gray-900 dark:text-gray-50">Cách thanh toán</h4>
             <p class="mb-5">
-                1. The system will send a message/email confirming your successful booking<br>
-                2. Please be at the pick up location 30 minutes before departure time. Present the message/email confirming successful booking and pay the ticket to the ticket office staff/driver when boarding the bus.
+            1. Hệ thống sẽ gửi tin nhắn/email xác nhận việc đặt vé thành công<br>
+            2. Vui lòng có mặt tại điểm đón 30 phút trước giờ khởi hành. Xuất trình tin nhắn/email xác nhận đặt vé thành công và thanh toán vé cho nhân viên phòng vé/tài xế khi lên xe.
             </p>`;
         $('.show-infomation1').html('');
-        $('.show-infomation3').html('');
+
         $('.show-infomation2').html(showInformation);
 
         $('.offline-ticket').removeClass('hidden').show();
         $('.vnpay-ticket').addClass('hidden');
-        $('.momo-ticket').addClass('hidden');
+
     })
 
     $('#option1').click(function () {
         showInformation = `
-        <h4 class="mb-3 text-lg text-gray-900 dark:text-gray-50">How to payment</h4>
+        <h4 class="mb-3 text-lg text-gray-900 dark:text-gray-50">Cách thanh toán</h4>
         <p class="mb-5">
-            1. Log in to the Banking Application or VNPAY Wallet<br>
-            2. Scan the VNPAY-QR code to pay<br>
-            3. Enter payment amount & discount code (if any), verify transaction to book tickets
+        1. Điều hướng sang thanh toán bằng giao diện VNPAY<br>
+        2. Nhập STK, Thông tin đăng nhập<br>
+        3. Nhập số tiền thanh toán & mã giảm giá (nếu có), xác thực giao dịch để đặt vé
         </p>
         `;
-        $('.show-infomation3').html('');
+
         $('.show-infomation2').html('');
         $('.show-infomation1').html(showInformation);
 
         $('.vnpay-ticket').removeClass('hidden').show();
         $('.offline-ticket').addClass('hidden');
-        $('.momo-ticket').addClass('hidden');
-    })
 
-    $('#option3').click(function () {
-        showInformation = `
-        <h4 class="mb-3 text-lg text-gray-900 dark:text-gray-50">How to payment</h4>
-        <p class="mb-5">
-            1. You will be redirected to the Momo application <br>
-            2. Enter new payment card information or choose to pay via Momo wallet/card linked to Momo wallet<br>
-            3. Select "Pay" to proceed with ticket payment
-        </p>
-        `;
-        $('.show-infomation1').html('');
-        $('.show-infomation2').html('');
-        $('.show-infomation3').html(showInformation);
-
-        $('.momo-ticket').removeClass('hidden').show();
-        $('.offline-ticket').addClass('hidden');
-        $('.vnpay-ticket').addClass('hidden');
     })
 
     $('.finish-ticket-offline').click(function () {
@@ -80,7 +62,7 @@ $(document).ready(function () {
                 });
 
                 if (response.success) {
-                    window.location.href = '/home';
+                    window.location.href = '/end-ticket-payment';
                 }
             }
         })

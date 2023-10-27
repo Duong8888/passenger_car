@@ -18,33 +18,7 @@ $(document).ready(function () {
     window.onload = function () {
         hidePopup();
     };
-    let tabsContainer = document.querySelector("#tabs");
-
-    let tabTogglers = tabsContainer.querySelectorAll("#tabs a");
-
-    console.log(tabTogglers);
-
-    tabTogglers.forEach(function (toggler) {
-        toggler.addEventListener("click", function (e) {
-            e.preventDefault();
-
-            let tabName = this.getAttribute("href");
-
-            let tabContents = document.querySelector("#tab-contents");
-
-            for (let i = 0; i < tabContents.children.length; i++) {
-
-                tabTogglers[i].parentElement.classList.remove("border-t", "border-r", "border-l", "-mb-px", "bg-white"); tabContents.children[i].classList.remove("hidden");
-                if ("#" + tabContents.children[i].id === tabName) {
-                    continue;
-                }
-                tabContents.children[i].classList.add("hidden");
-
-            }
-            e.target.parentElement.classList.add("border-t", "border-r", "border-l", "-mb-px", "bg-white");
-        });
-    });
-
+  
 
     var CountTicket = $(".qty-input").val();
     var totalTicket = '';
@@ -101,7 +75,7 @@ $(document).ready(function () {
         var quantity = CountTicket;
         var departure = $('input[name="departure"]:checked').val();
         var arrival = $('input[name="arrival1"]:checked').val();
-        
+
         let passenger_car_id = $(this).data("id");
         var totalArray = {
             username: username,
@@ -131,6 +105,46 @@ $(document).ready(function () {
             }
         }, TIME_TO_UPDATE);
     })
+    const firstTab = document.getElementById('first');
+    const secondTab = document.getElementById('second');
+    const thirdTab = document.getElementById('third');
+
+   
+    const secondBackButton = document.getElementById('second-back');
+    const secondNextButton = document.getElementById('second-next');
+    const thirdBackButton = document.getElementById('third-back');
+
+    const firstNextButton = document.getElementById('first-next');
+    const inputTicket = document.querySelector('input[name="countTicket"]');
+   
+  
+        firstNextButton.addEventListener('click', function() {
+             const inputValue = inputTicket.value;
+        if(inputValue > 0 ){
+            firstTab.classList.add('hidden');
+            secondTab.classList.remove('hidden');
+        } else{
+            swal("Lỗi", "Vui lòng chọn ít nhất 1 chỗ ngồi", "error");
+        }
+    });
+
+
+    secondBackButton.addEventListener('click', function() {
+        secondTab.classList.add('hidden');
+        firstTab.classList.remove('hidden');
+    });
+
+
+    secondNextButton.addEventListener('click', function() {
+        secondTab.classList.add('hidden');
+        thirdTab.classList.remove('hidden');
+    });
+
+
+    thirdBackButton.addEventListener('click', function() {
+        thirdTab.classList.add('hidden');
+        secondTab.classList.remove('hidden');
+    });
 })
 
 
