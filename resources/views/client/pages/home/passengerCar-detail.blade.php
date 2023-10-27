@@ -550,10 +550,8 @@
                                         Tiếp tục
                                     </button>
                                 </div>
-
                             </div>
-                            <div class="flex justify-between px-4 text-gray-800 font-semibold py-2 rounded-t show-total">
-                            </div>
+                           
                             <!-- End Tab Contents -->
                         </div>
                         <div class="flex justify-between px-4 text-gray-800 font-semibold show-total">
