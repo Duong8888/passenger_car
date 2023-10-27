@@ -18,33 +18,7 @@ $(document).ready(function () {
     window.onload = function () {
         hidePopup();
     };
-    let tabsContainer = document.querySelector("#tabs");
-
-    let tabTogglers = tabsContainer.querySelectorAll("#tabs a");
- 
-    console.log(tabTogglers);
-
-    tabTogglers.forEach(function (toggler) {
-        toggler.addEventListener("click", function (e) {
-            e.preventDefault();
-
-            let tabName = this.getAttribute("href");
-
-            let tabContents = document.querySelector("#tab-contents");
-
-            for (let i = 0; i < tabContents.children.length; i++) {
-
-                tabTogglers[i].parentElement.classList.remove("border-t", "border-r", "border-l", "-mb-px", "bg-white"); tabContents.children[i].classList.remove("hidden");
-                if ("#" + tabContents.children[i].id === tabName) {
-                    continue;
-                }
-                tabContents.children[i].classList.add("hidden");
-
-            }
-            e.target.parentElement.classList.add("border-t", "border-r", "border-l", "-mb-px", "bg-white");
-        });
-    });
-
+  
 
     var CountTicket = $(".qty-input").val();
     var totalTicket = '';
@@ -135,15 +109,23 @@ $(document).ready(function () {
     const secondTab = document.getElementById('second');
     const thirdTab = document.getElementById('third');
 
-    const firstNextButton = document.getElementById('first-next');
+   
     const secondBackButton = document.getElementById('second-back');
     const secondNextButton = document.getElementById('second-next');
     const thirdBackButton = document.getElementById('third-back');
 
-
-    firstNextButton.addEventListener('click', function() {
-        firstTab.classList.add('hidden');
-        secondTab.classList.remove('hidden');
+    const firstNextButton = document.getElementById('first-next');
+    const inputTicket = document.querySelector('input[name="countTicket"]');
+   
+  
+        firstNextButton.addEventListener('click', function() {
+             const inputValue = inputTicket.value;
+        if(inputValue > 0 ){
+            firstTab.classList.add('hidden');
+            secondTab.classList.remove('hidden');
+        } else{
+            swal("Lỗi", "Vui lòng chọn ít nhất 1 chỗ ngồi", "error");
+        }
     });
 
 

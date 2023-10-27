@@ -26,9 +26,9 @@
                     </div>
                 </div>
                 <img src="assets/images/about/shape.png" alt=""
-                    class="absolute block bg-cover -bottom-0 dark:hidden">
+                     class="absolute block bg-cover -bottom-0 dark:hidden">
                 <img src="assets/images/about/shape-dark.png" alt=""
-                    class="absolute hidden bg-cover -bottom-0 dark:block">
+                     class="absolute hidden bg-cover -bottom-0 dark:block">
             </section>
 
 
@@ -42,7 +42,7 @@
                                 <div class="p-5 border-b border-gray-100/50 dark:border-neutral-600">
                                     <div class="text-center">
                                         <img src="{{ asset($passengerCars->albums[0]->path) }}" alt="anh"
-                                            style="min-width: 100%;height: 200px;">
+                                             style="min-width: 100%;height: 200px;">
                                         <h6 class="mt-4 mb-0 text-lg text-gray-900 dark:text-gray-50">{{ $passengerCars->user->name }}</h6>
                                     </div>
                                 </div>
@@ -116,7 +116,7 @@
                                         </li>
                                         <li>
                                             <div class="flex"
-                                                style="color: red; font-size: 14px;margin-top: 10px;display: block;clear: both;">
+                                                 style="color: red; font-size: 14px;margin-top: 10px;display: block;clear: both;">
                                                 <label
                                                     class="text-gray-900 w-[118px] font-medium dark:text-gray-50">Giá</label>
                                                 <div>
@@ -133,10 +133,10 @@
                                     </ul>
                                     <div class="mt-8 Ticket">
                                         <a href="javascript:void(0)"
-                                            class="btn w-full bg-red-600 border-transparent text-white hover:-translate-y-1.5"><i
+                                           class="btn w-full bg-red-600 border-transparent text-white hover:-translate-y-1.5"><i
                                                 class="uil uil-phone"></i>Liên hệ với chúng tôi</a>
                                         <a href="javascript:void(0)"
-                                            class="btn w-full mt-3 group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 border-transparent text-white hover:-translate-y-1.5 hover:ring group-data-[theme-color=violet]:hover:ring-violet-500/30 group-data-[theme-color=sky]:hover:ring-sky-500/30 group-data-[theme-color=red]:hover:ring-red-500/30 group-data-[theme-color=green]:hover:ring-green-500/30 group-data-[theme-color=pink]:hover:ring-pink-500/30 group-data-[theme-color=blue]:hover:ring-blue-500/30"><i
+                                           class="btn w-full mt-3 group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 border-transparent text-white hover:-translate-y-1.5 hover:ring group-data-[theme-color=violet]:hover:ring-violet-500/30 group-data-[theme-color=sky]:hover:ring-sky-500/30 group-data-[theme-color=red]:hover:ring-red-500/30 group-data-[theme-color=green]:hover:ring-green-500/30 group-data-[theme-color=pink]:hover:ring-pink-500/30 group-data-[theme-color=blue]:hover:ring-blue-500/30"><i
                                                 class="uil uil-import"></i>Đặt xe</a>
                                     </div>
                                 </div>
@@ -154,7 +154,7 @@
                                                     <div class="text-center">
                                                         <div class="">
                                                             <img src="{{ asset($album->path) }}" alt="anh"
-                                                                style="min-width: 100%;height: 250px;">
+                                                                 style="min-width: 100%;height: 250px;">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -163,18 +163,36 @@
                                         <div class="swiper-pagination"></div>
                                     </div>
                                     </ul>
-
                                 </div>
                                 <div
                                     class="border rounded border-gray-100/50 dark:border-neutral-600 nav-tabs bottom-border-tab col-span-12 lg:col-span-12 lg:col-start-12">
                                     <div class="px-6 py-0 border-b border-gray-100/50 dark:border-neutral-600">
 
-
-                            </div>
-                            <div
-                                class="border rounded border-gray-100/50 dark:border-neutral-600 nav-tabs bottom-border-tab col-span-12 lg:col-span-12 lg:col-start-12">
-                                <div class="px-6 py-0 border-b border-gray-100/50 dark:border-neutral-600">
-
+                                        <ul class="items-center text-sm font-medium text-center text-gray-700 nav md:flex">
+                                            <li class="active" role="presentation">
+                                                <button class="inline-block w-full py-4 px-[18px] dark:text-gray-50 active"
+                                                        data-tw-toggle="tab" type="button" data-tw-target="mota-tab">
+                                                    Mô tả
+                                                </button>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="inline-block w-full py-4 px-[18px] dark:text-gray-50"
+                                                        data-tw-toggle="tab" type="button" data-tw-target="dichvu-tab">
+                                                    Dịch vụ
+                                                </button>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="inline-block w-full py-4 px-[18px] dark:text-gray-50"
+                                                        data-tw-toggle="tab" type="button" data-tw-target="diemdung-tab">
+                                                    Điểm đón trả
+                                                </button>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="inline-block w-full py-4 px-[18px] dark:text-gray-50"
+                                                        data-tw-toggle="tab" type="button" data-tw-target="danhgia-tab">
+                                                    Đánh giá
+                                                </button>
+                                            </li>
 
                                         </ul>
                                     </div>
@@ -202,7 +220,7 @@
                                                     <h6 class="mb-3 text-gray-900 text-17 dark:text-gray-50">Dịch vụ của chúng
                                                         tôi
                                                     </h6>
-                                                        @foreach ($passengerCars->services as $service)
+                                                    @foreach ($passengerCars->services as $service)
                                                         <div class="sm:flex">
                                                             <div class="grow ltr:ml-3 rtl:mr-3">
                                                                 <div>
@@ -238,7 +256,7 @@
                                                                     <div
                                                                         style="display: flex;align-content: center;align-items: center;padding: 3px 0;margin-left: 30px">
                                                                         <i class="fa-solid fa-square"
-                                                                            style="margin-right: 15px"></i>
+                                                                           style="margin-right: 15px"></i>
                                                                         <h6 style="text-align: center; padding: 3px 0;"
                                                                             class="text-gray-900 dark:text-gray-50">
                                                                             {{ $stop->stop_name }}</h6>
@@ -259,7 +277,7 @@
                                                                     <div
                                                                         style="display: flex;align-content: center;align-items: center;padding: 0 0 10px 0;margin-left: 30px">
                                                                         <i class="fa-solid fa-square"
-                                                                            style="margin-right: 15px"></i>
+                                                                           style="margin-right: 15px"></i>
                                                                         <h6 style="text-align: center; padding: 3px 0;"
                                                                             class="text-gray-900 dark:text-gray-50">
                                                                             {{ $stop->stop_name }}</h6>
@@ -278,11 +296,11 @@
                                                     @foreach ($users as $data)
                                                         @if ($data->id == $cmt->user_id)
                                                             <div class="sm:flex"
-                                                                style="border-bottom: 1px solid rgb(224, 224, 224);padding: 10px">
+                                                                 style="border-bottom: 1px solid rgb(224, 224, 224);padding: 10px">
                                                                 <div class="shrink-0">
                                                                     <img class="w-10 h-10 p-1 border-2 rounded-full border-gray-100/50"
-                                                                        src="assets/images/user/img-04.jpg"
-                                                                        alt="img">
+                                                                         src="assets/images/user/img-04.jpg"
+                                                                         alt="img">
                                                                 </div>
                                                                 <div class="grow ltr:ml-3 rtl:mr-3">
                                                                     <div>
@@ -336,8 +354,8 @@
                                         class="p-2 mt-3 transition-all duration-500 bg-white rounded shadow-lg shadow-gray-100/50 card dark:bg-neutral-800 dark:shadow-neutral-600/20 group/blog">
                                         <div class="relative overflow-hidden">
                                             <img style="min-width: 100%;height: 300px;"
-                                                src="{{ asset($route->albums[0]->path) }}" alt="car"
-                                                class="rounded">
+                                                 src="{{ asset($route->albums[0]->path) }}" alt="car"
+                                                 class="rounded">
                                             <div
                                                 class="absolute inset-0 hidden transition-all duration-500 rounded-md bg-black/30 group-hover/blog:block">
                                             </div>
@@ -356,10 +374,10 @@
                                                 class="hidden bottom-2 right-2 group-hover/blog:block author group-hover/blog:absolute">
                                                 <ul class="mb-0 list-unstyled">
                                                     <li class="list-inline-item"><a href="javascript:void(0)"
-                                                            class="text-white"><i class="mdi mdi-heart-outline me-1"></i>
+                                                                                    class="text-white"><i class="mdi mdi-heart-outline me-1"></i>
                                                             999</a></li>
                                                     <li class="list-inline-item"><a href="javascript:void(0)"
-                                                            class="text-white"><i
+                                                                                    class="text-white"><i
                                                                 class="mdi mdi-comment-outline me-1"></i> 99</a></li>
                                                 </ul>
                                             </div>
@@ -369,21 +387,21 @@
                                                 <h5 class="mb-1 text-gray-900 fs-17 dark:text-gray-50">Tên nhà xe</h5>
                                             </a>
                                             <p class="mb-6 text-gray-500 dark:text-gray-300"
-                                                style="min-height: 50px;max-height: 50px">
-                                                {!!Str::limit($route->description, 100, '...')!!}</p>
+                                               style="min-height: 50px;max-height: 50px">
+                                                {{ Str::limit($route->description, 100, '...') }}</p>
                                             <!--end col-->
                                             <div class="col-span-3 lg:col-span-2">
                                                 <div class="text-start text-md-end dark:text-gray-50">
                                                     <form action="{{ URL::to('passengerCar-detail') }}" method="POST">
                                                         @csrf
                                                         <input type="text" hidden name='passenger_id'
-                                                            value="{{ $route->id }}">
+                                                               value="{{ $route->id }}">
                                                         <input type="text" hidden name='image_id'
-                                                            value="{{ $route->album_id }}">
+                                                               value="{{ $route->album_id }}">
                                                         <input type="text" hidden name='route_id'
-                                                            value="{{ $route->route_id }}">
+                                                               value="{{ $route->route_id }}">
                                                         <button class="text-blue-500"
-                                                            style="font-size: 16px;font-weight: bold;coler:rgb(68, 155, 254)"><i
+                                                                style="font-size: 16px;font-weight: bold;coler:rgb(68, 155, 254)"><i
                                                                 class="mdi mdi-chevron-double-right"></i>Đặt vé
                                                             ngay</button>
                                                         <style>
@@ -407,148 +425,142 @@
             </section>
 
 
-        <div id="popup"
-            class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 hidden w-80 h-96 z-50">
-            <div class="bg-white p-6 rounded relative">
-                <!-- Nút "x" -->
-                <button onclick="hidePopup()"
-                    class="absolute top-0 right-0 mt-4 mr-4 text-gray-500 hover:text-gray-700 exit">
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
-                        </path>
-                    </svg>
-                </button>
+            <div id="popup"
+                 class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 hidden w-80 h-96 z-50">
+                <div class="bg-white p-6 rounded relative">
+                    <!-- Nút "x" -->
+                    <button onclick="hidePopup()"
+                            class="absolute top-0 right-0 mt-4 mr-4 text-gray-500 hover:text-gray-700 exit">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M6 18L18 6M6 6l12 12">
+                            </path>
+                        </svg>
+                    </button>
 
 
-                <div class="flex items-center gap-x-3" style="height: 450px ; width: 470px">
-                    <div class="rounded border w-1/2 mx-auto mt-4" style="height: 100%">
-                        <!-- Tabs -->
-                        <ul id="tabs" class="inline-flex pt-2 px-1 w-full border-b">
-                            <li
-                                class="bg-white px-4 text-gray-800 font-semibold py-2 rounded-t border-t border-r border-l -mb-px">
-                                <a id="default-tab" href="#first">Chỗ mong muốn</a>
-                            </li>
-                            <li class="px-4 text-gray-800 font-semibold py-2 rounded-t"><a href="#second">Điểm đón
-                                    trả</a>
-                            </li>
-                            <li class="px-4 text-gray-800 font-semibold py-2 rounded-t"><a href="#third">Nhập thông
-                                    tin</a>
-                            </li>
-                        </ul>
+                    <div class="flex items-center gap-x-3">
+                        <div class="rounded border w-1/2 mx-auto mt-4">
+                            <!-- Tabs -->
+                            <ul id="tabs" class="inline-flex pt-2 px-1 w-full border-b">
+                                <li
+                                    class="bg-white px-4 text-gray-800 font-semibold py-2 rounded-t border-t border-r border-l -mb-px">
+                                    <a id="default-tab" href="#first">Chỗ mong muốn</a>
+                                </li>
+                                <li class="px-4 text-gray-800 font-semibold py-2 rounded-t"><a href="#second">Điểm đón
+                                        trả</a>
+                                </li>
+                                <li class="px-4 text-gray-800 font-semibold py-2 rounded-t"><a href="#third">Nhập thông
+                                        tin</a>
+                                </li>
+                            </ul>
 
-                        <!-- Tab Contents -->
-                        <div id="tab-contents" class=" w-full" style="height: 75%">
-                            <div id="first" class="p-4 step">
-                                <label for="">Số lượng khách</label>
-                                <div class="flex justify-between">
-                                    <p>Ghế thường - <span class="price">{{ $routes[0]->route->price }}</span>đ</p>
-                                    <div class="flex items-center">
-                                        <button
-                                            class="w-8 h-8 rounded-full bg-white-500 text-black flex items-center justify-center decrement-btn">
-                                            <span class="text-lg font-bold">-</span>
-                                        </button>
-                                        <input type="text" min="1" value="0" name="countTicket"
-                                            class="w-24 text-center qty-input">
-                                        <button
-                                            class="w-8 h-8 rounded-full bg-white-500 text-black flex items-center justify-center increment-btn">
-                                            <span class="text-lg font-bold">+</span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="p-4" style="position: fixed; bottom: 25%; right: 35%;">
-                                    <button class="text-black border border-black bg-white font-bold py-2 px-4 rounded "
-                                        id="first-next">Next</button>
-                                </div>
-                            </div>
-                            <div id="second" class="hidden p-4 step">
-                                <div class="flex justify-between">
-                                    <div class="flex flex-col"
-                                        style="overflow-y: auto; max-height: 200px; width: 49%; padding-right: 10px">
-                                        Điểm đón:
-                                        @php
-                                        $firstDeparture = true;
-                                        @endphp
-                                        @foreach ($stops as $data)
-                                        @if ($data->stop_type == 0)
-                                        <div class="mb-5">
-                                            <input type="radio" id="departure" name="departure"
-                                                class="form-radio h-5 w-5 text-blue-600" value="{{ $data->stop_name }}"
-                                                {{ $firstDeparture ? 'checked' : '' }}>
-                                            <label for="departure" class="ml-2 mb-3">{{ $data->stop_name }}</label>
+                            <!-- Tab Contents -->
+                            <div id="tab-contents" class="h-full w-full">
+                                <div id="first" class="p-4 step">
+                                    <label for="">Số lượng khách</label>
+                                    <div class="flex justify-between">
+                                        <p>Ghế thường - <span class="price">{{ $routes[0]->route->price }}</span>đ</p>
+                                        <div class="flex items-center">
+                                            <button
+                                                class="w-8 h-8 rounded-full bg-white-500 text-black flex items-center justify-center decrement-btn">
+                                                <span class="text-lg font-bold">-</span>
+                                            </button>
+                                            <input type="text" min="1" value="0" name="countTicket"
+                                                   class="w-24 text-center qty-input">
+                                            <button
+                                                class="w-8 h-8 rounded-full bg-white-500 text-black flex items-center justify-center increment-btn">
+                                                <span class="text-lg font-bold">+</span>
+                                            </button>
                                         </div>
-                                        @php
-                                        $firstDeparture = false;
-                                        @endphp
-                                        @endif
-                                        @endforeach
                                     </div>
-                                    <div class="flex flex-col" style="overflow-y: auto; max-height: 200px; width: 49%">
-                                        Điểm đón:
-                                        @php
-                                        $firstArrival = true;
-                                        @endphp
-                                        @foreach ($stops as $data)
-                                        @if ($data->stop_type == 1)
-                                        <div class="mb-5">
-                                            <input type="radio" id="arrival" name="arrival1"
-                                                class="form-radio h-5 w-5 text-blue-600" value="{{ $data->stop_name }}"
-                                                {{ $firstArrival ? 'checked' : '' }}>
-                                            <label for="arrival" class="ml-2 mb-3">{{ $data->stop_name }}</label>
+                                    <div class="p-4">
+                                        <button
+                                            class="text-black border border-black bg-white font-bold py-2 px-4 rounded float-right"
+                                            id="first-next">Next</button>
+                                    </div>
+                                </div>
+                                <div id="second" class="hidden p-4 step">
+                                    <div class="flex justify-between">
+                                        <div class="flex flex-col w-1/2" style="overflow-y: auto; max-height: 200px;">
+                                            Điểm đón:
+                                            @foreach ($stops as $data)
+                                                @if ($data->stop_type == 0)
+                                                    <div class="mb-5">
+                                                        <input type="radio" id="departure" name="departure"
+                                                               class="form-radio h-5 w-5 text-blue-600"
+                                                               value="{{ $data->stop_name }}">
+                                                        <label for="departure"
+                                                               class="ml-2 mb-3">{{ $data->stop_name }}</label>
+                                                    </div>
+                                                @endif
+                                            @endforeach
                                         </div>
-                                        @php
-                                        $firstArrival = false;
-                                        @endphp
-                                        @endif
-                                        @endforeach
+                                        <div class="flex flex-col w-1/2" style="overflow-y: auto; max-height: 200px;">
+                                            Điểm đón:
+                                            @foreach ($stops as $data)
+                                                @if ($data->stop_type == 1)
+                                                    <div class="mb-5">
+                                                        <input type="radio" id="arrival" name="arrival1"
+                                                               class="form-radio h-5 w-5 text-blue-600"
+                                                               value="{{ $data->stop_name }}">
+                                                        <label for="arrival"
+                                                               class="ml-2 mb-3">{{ $data->stop_name }}</label>
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    <div class="p-4 flex justify-between">
+                                        <button id="second-back"
+                                                class="text-black border border-black bg-white font-bold py-2 px-4 rounded">Back</button>
+                                        <button id="second-next"
+                                                class="text-black border border-black bg-white font-bold py-2 px-4 rounded">Next</button>
                                     </div>
                                 </div>
-                                <div class="p-4 flex justify-between">
-                                    <button id="second-back"
-                                        class="text-black border border-black bg-white font-bold py-2 px-4 rounded">Back</button>
-                                    <button id="second-next"
-                                        class="text-black border border-black bg-white font-bold py-2 px-4 rounded">Next</button>
-                                </div>
-                            </div>
-                            <div id="third" class="hidden p-4 step">
-                                <div class="max-w-md mx-auto bg-white rounded p-8 shadow-md">
-                                    <div class="mb-4">
-                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Họ và
-                                            tên</label>
-                                        <input
-                                            class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            name="name" id="name" type="text"
-                                            value="{{ isset(Auth::user()->name) ? Auth::user()->name : '' }}"
-                                            placeholder="Nhập họ và tên của bạn">
+                                <div id="third" class="hidden p-4 step">
+                                    <div class="max-w-md mx-auto bg-white rounded p-8 shadow-md">
+                                        <div class="mb-4">
+                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Họ và
+                                                tên</label>
+                                            <input
+                                                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                name="name" id="name" type="text"
+                                                placeholder="Nhập họ và tên của bạn">
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">Số
+                                                điện
+                                                thoại</label>
+                                            <input
+                                                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                name="phone" id="phone" type="text"
+                                                value="{{ isset(Auth::user()->phone) ? Auth::user()->phone : '' }}"
+                                                placeholder="Nhập Số điện thoại của bạn"
+                                                @if (isset(Auth::user()->phone)) readonly @endif>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email
+                                                để nhận thông tin vé</label>
+                                            <input
+                                                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                name="email" id="email" type="text"
+                                                value="{{ isset(Auth::user()->email) ? Auth::user()->email : '' }}"
+                                                placeholder="Nhập địa chỉ email của bạn"
+                                                @if (isset(Auth::user()->email)) readonly @endif>
+                                        </div>
                                     </div>
-                                    <div class="mb-4">
-                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">Số điện
-                                            thoại</label>
-                                        <input
-                                            class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            name="phone" id="phone" type="text"
-                                            value="{{ isset(Auth::user()->phone) ? Auth::user()->phone : '' }}"
-                                            placeholder="Nhập Số điện thoại của bạn">
+                                    <div class="p-4 flex justify-between">
+                                        <button id="third-back"
+                                                class="text-black border border-black bg-white font-bold py-2 px-4 rounded">Back
+                                        </button>
+                                        <button
+                                            class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded submit"
+                                            data-action="{{ route('client.ticket.update-ticket') }}"
+                                            data-id="{{ $passengerCars->id }}">
+                                            Tiếp tục
+                                        </button>
                                     </div>
-                                    <div class="mb-4">
-                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email
-                                            để nhận thông tin vé</label>
-                                        <input
-                                            class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            name="email" id="email" type="text"
-                                            value="{{ isset(Auth::user()->email) ? Auth::user()->email : '' }}"
-                                            placeholder="Nhập địa chỉ email của bạn">
-                                    </div>
-                                </div>
-                                <div class="p-4 flex justify-between">
-                                    <button id="third-back"
-                                        class="text-black border border-black bg-white font-bold py-2 px-4 rounded">Back
-                                    </button>
-                                    <button
-                                        class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded submit"
-                                        data-action="{{ route('client.ticket.update-ticket') }}"
-                                        data-id="{{ $passengerCars->id }}">
-                                        Tiếp tục
-                                    </button>
                                 </div>
 
                             </div>
@@ -556,10 +568,6 @@
                             </div>
                             <!-- End Tab Contents -->
                         </div>
-                        <div class="flex justify-between px-4 text-gray-800 font-semibold show-total">
-                        </div>
-                        <!-- End Tab Contents -->
-
                     </div>
                 </div>
             </div>
@@ -567,8 +575,5 @@
     </div>
 @endsection
 @section('page-script')
-
-<script type="module" src="{{ asset('client/js/custom/passengeCar-detail.js') }}">
-</script>
+    <script type="module" src="{{ asset('client/js/custom/passengeCar-detail.js') }}"></script>
 @endsection
-
