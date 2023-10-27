@@ -49,4 +49,10 @@ Route::get('/vnpay-todb', [TicketController::class, 'checkoutPayment'])->name('c
 Route::get('/end-ticket-payment', [TicketController::class, 'EndTicketPayment'])->name('client.finish.ticket');
 
 
+Route::get('/loginadmin', [App\Http\Controllers\LoginAdminController::class, 'showLoginAdmin'])->name('login_admin');
+Route::post('/loginadmin', [App\Http\Controllers\LoginAdminController::class, 'loginAdmin']);
+Route::get('/logoutadmin', [App\Http\Controllers\LoginAdminController::class, 'logoutAdmin'])->name('logoutAdmin');
+
+
 Route::get('/map', [MapController::class, 'index'])->name('map');
+

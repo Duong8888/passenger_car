@@ -426,13 +426,13 @@
                         <ul id="tabs" class="inline-flex pt-2 px-1 w-full border-b">
                             <li
                                 class="bg-white px-4 text-gray-800 font-semibold py-2 rounded-t border-t border-r border-l -mb-px">
-                                <a id="default-tab" href="#first">Chỗ mong muốn</a>
+                                Chỗ mong muốn
                             </li>
-                            <li class="px-4 text-gray-800 font-semibold py-2 rounded-t"><a href="#second">Điểm đón
-                                    trả</a>
+                            <li class="px-4 text-gray-800 font-semibold py-2 rounded-t">Điểm đón
+                                    trả
                             </li>
-                            <li class="px-4 text-gray-800 font-semibold py-2 rounded-t"><a href="#third">Nhập thông
-                                    tin</a>
+                            <li class="px-4 text-gray-800 font-semibold py-2 rounded-t">Nhập thông
+                                    tin
                             </li>
                         </ul>
 
@@ -550,10 +550,8 @@
                                         Tiếp tục
                                     </button>
                                 </div>
-
                             </div>
-                            <div class="flex justify-between px-4 text-gray-800 font-semibold py-2 rounded-t show-total">
-                            </div>
+                           
                             <!-- End Tab Contents -->
                         </div>
                         <div class="flex justify-between px-4 text-gray-800 font-semibold show-total">
@@ -565,6 +563,11 @@
             </div>
         </div>
     </div>
+
+    </div>
+
+
+</div>
 @endsection
 @section('page-script')
 
