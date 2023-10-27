@@ -128,19 +128,19 @@ $(document).ready(function () {
         }
     });
 
-   
+
     secondBackButton.addEventListener('click', function() {
         secondTab.classList.add('hidden');
         firstTab.classList.remove('hidden');
     });
 
- 
+
     secondNextButton.addEventListener('click', function() {
         secondTab.classList.add('hidden');
         thirdTab.classList.remove('hidden');
     });
 
-    
+
     thirdBackButton.addEventListener('click', function() {
         thirdTab.classList.add('hidden');
         secondTab.classList.remove('hidden');

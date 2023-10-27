@@ -16,7 +16,6 @@ class Routes extends Model
         'departure',
         'arrival',
         'price',
-        'description'
     ];
 
     public function toSearchableArray()
@@ -26,7 +25,6 @@ class Routes extends Model
             'departure'=> $this->departure,
             'arrival'=> $this->arrival,
             'price'=> $this->price,
-            'description'=> $this->description,
         ];
     }
 

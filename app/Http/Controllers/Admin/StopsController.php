@@ -30,7 +30,7 @@ class StopsController extends AdminBaseController
         'user_id' => 'người đi',
     ];
 
-    public function index()
+    public function index(Request $request)
     {
         $stops = $this->model->with('route')->paginate(1000);
         //  return response()->json($stops, 200, [], JSON_PRETTY_PRINT);

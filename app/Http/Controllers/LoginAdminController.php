@@ -17,7 +17,7 @@ class LoginAdminController extends Controller
             $credentials = $request->only('email', 'password');
 
             if (Auth::attempt($credentials)) {
-                return redirect()->route('admin/dashboard'); // Điều hướng đến trang chính sau khi đăng nhập
+                return redirect()->route('admin/dashboard'); 
             }
 
             return redirect()->route('loginAdmin')->with('error', 'Invalid login credentials.');

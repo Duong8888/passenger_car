@@ -27,7 +27,7 @@
 
     function checkEnter(event) {
         if (event.key === "Enter") {
-            verify(); 
+            verify();
         }
     }
 
@@ -46,7 +46,7 @@
             $("#successAuth").text("Message sent");
             $("#successAuth").show();
             localStorage.setItem("phoneNumber", number);
-            window.location.href = "/verify-otp?verificationId=" + confirmationResult.verificationId; 
+            window.location.href = "/verify-otp?verificationId=" + confirmationResult.verificationId;
         }).catch(function (error) {
             $("#error").text(error.message);
             $("#error").show();
@@ -56,14 +56,14 @@
     function verify() {
         var code = $("#verificationId").val();
         var phoneNumber = localStorage.getItem("phoneNumber");
-        
+
         const urlParams = new URLSearchParams(window.location.search);
         const verificationId = urlParams.get("verificationId");
 
         const confirmationResult = firebase.auth.PhoneAuthProvider.credential(verificationId, code);
 
         firebase.auth().signInWithCredential(confirmationResult).then(function (result) {
-          
+
                 $.ajax({
                     type: 'POST',
                     url: '/process',
