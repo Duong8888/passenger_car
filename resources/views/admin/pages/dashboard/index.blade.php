@@ -86,7 +86,6 @@
                                     <div class="progress-bar bg-success" role="progressbar"
                                          aria-valuenow="77" aria-valuemin="0" aria-valuemax="100"
                                          style="width: {{ $percentage = $passengerCarsCountToday / $totalPassengerCars * 100 }}%;">
-                                        {{-- <span class="visually-hidden">77% Complete</span> --}}
                                     </div>
                                 </div>
                             </div>
@@ -162,7 +161,6 @@
                                     <div class="progress-bar bg-pink" role="progressbar"
                                          aria-valuenow="77" aria-valuemin="0" aria-valuemax="100"
                                          style="width: {{ $percentage = ($comments->count() > 0) ? round(($commentsCountToday / ($comments->count())) * 100, 2) : 0; }}%;">
-                                        {{-- <span class="visually-hidden">77% Complete</span> --}}
                                     </div>
                                 </div>
                             </div>
@@ -232,7 +230,7 @@
                             <div id="morris-line-example" dir="ltr" style="height: 280px;" class="morris-chart"></div>
                         </div>
                     </div>
-                </div> --}}
+                </div>
             </div>
             <!-- end row -->
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Routes;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Database\Eloquent\Builder;
@@ -35,14 +36,15 @@ class AdminBaseController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = $this->model->paginate(10);
+        $data = $this->model->orderBy('id','desc')->paginate(10);
 
         return view($this->pathView . __FUNCTION__, compact('data'))
             ->with('title', $this->titleIndex)
             ->with('colums', $this->colums)
-            ->with('urlbase', $this->urlbase);
+            ->with('urlbase', $this->urlbase)
+            ->with('titleCreate', $this->titleCreate);
     }
 
     /**

@@ -10,40 +10,38 @@ use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
-    public function index(Request $request){
-        
-        $users = User::all();
-        return view('admin.pages.Staff.index',compact('users'));
-
+    public function index(UserRequest $request){
+        $users = DB::table('users')->select('id','name','email','phone')->get();
+        return view('admin.layouts.User.index',compact('users'));
     }   
-    public function add(Request $request){
+    public function add(UserRequest $request){
         if($request->post()){
             $params = $request->except('_token');
             $users = User::create($params);
          
          if($users->id){
             Session::flash('success','thêm mới thành công');
-            return redirect()->route('route_staff_add');
+            return redirect()->route('route_user_add');
          }
       }
-        return view('admin.pages.Staff.add');
+        return view('admin.layouts.User.add');
     }
-    public function edit(Request $request,$id){
+    public function edit(UserRequest $request,$id){
         $users = User::find($id);
         if($request -> isMethod('POST')){
           User::where('id',$id)
           ->update($request->except('_token'));
           if($request){
             Session::flash('success','Sửa thành công dữ liệu người dùng');
-            return redirect()->route('route_staff_edit',['id'=>$id]);
+            return redirect()->route('route_user_edit',['id'=>$id]);
         }
         }
-        return view('admin.pages.Staff.edit',compact('users'));
+        return view('admin.layouts.User.edit',compact('users'));
     }
-    public function delete(Request $request,$id){
+    public function delete(UserRequest $request,$id){
         User::where('id',$id)->delete();
         Session::flash('success','xóa thành công'.$id);
-        return redirect()->route('route_staff_index');
+        return redirect()->route('route_user_index');
     }
     
 }

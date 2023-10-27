@@ -21,7 +21,7 @@ class SearchController extends Controller
         public Routes              $routes,
         public PassengerCar        $passengerCar,
         public VietnameseProvinces $vietnameseProvinces,
-        public Service $service,
+        public Service             $service,
         public PassengerCarService $passengerCarService
     )
     {
@@ -40,7 +40,7 @@ class SearchController extends Controller
     public function home()
     {
         $data = $this->dataRouter();
-        return view($this->pathview . '.home', ['stops' => $data['stops']]);
+        return view($this->pathview . '.findRoutes', ['stops' => $data['stops']]);
     }
 
     public function searchRequest(Request $request)
@@ -50,6 +50,8 @@ class SearchController extends Controller
         $dataRoutes = $this->dataRouter();
         $passengerCar = [];
         $message = null;
+
+        $filterStops = $this->filterStops($request->departure, $request->arrival);
         if (count($routes) > 0) {
             $passengerCar = $routes[0]->passengerCars()->orderBy('price', 'desc')->with(['workingTime', 'services'])->get();
         } else {
@@ -59,22 +61,23 @@ class SearchController extends Controller
             $message = "Tuyến đường chưa có xe hoạt động .";
         }
         if ($request->ajax()) {
-            return response()->json(['data' => $passengerCar, 'dataRoute' => $routes[0]]);
+            return response()->json(['data' => $passengerCar, 'filterStops' => $filterStops['data'] , 'dataRoute' => $routes[0]]);
         } else {
             if (empty($routes)) {
                 $routes[0] = [];
             }
-            return view($this->pathview . '.findRoutes', ['data' => $passengerCar, 'dataRoute' => $routes[0], 'stops' => $dataRoutes['stops'], 'message' => $message]);
+            return view($this->pathview . '.findRoutes', ['data' => $passengerCar, 'dataRoute' => $routes[0], 'stops' => $dataRoutes['stops'], 'filterStops' => $filterStops['data'], 'message' => $message]);
         }
     }
 
 
-    public function filterPassengerCars($departure, $arrival, $type = null, $minTimes = [], $maxTimes = [], $priceStart = null, $priceEnd = null)
+    public function filterPassengerCars($departure, $arrival, $filterArrival, $filterDeparture, $type = null, $minTimes = [], $maxTimes = [], $priceStart = null, $priceEnd = null)
     {
         $query = DB::table('passenger_cars')
             ->join('routes', 'passenger_cars.route_id', '=', 'routes.id')
             ->join('passenger_car_working_times', 'passenger_cars.id', '=', 'passenger_car_working_times.passenger_car_id')
             ->join('working_times', 'passenger_car_working_times.working_time_id', '=', 'working_times.id')
+            ->join('stops', 'stops.route_id', '=', 'routes.id')
             ->select(
                 'passenger_cars.id',
                 'passenger_cars.price',
@@ -89,6 +92,13 @@ class SearchController extends Controller
 
         if (!empty($type)) {
             $query->orderBy('passenger_cars.price', $type);
+        }
+
+        if (!empty($filterArrival)) {
+            $query->where('stops.id', $filterArrival);
+        }
+        if (!empty($filterDeparture)) {
+            $query->where('stops.id', $filterDeparture);
         }
 
         if (!empty($minTimes) || !empty($maxTimes)) {
@@ -112,6 +122,8 @@ class SearchController extends Controller
         $routes = $this->routes::search($query)->get();
         $departure = $request->departure;
         $arrival = $request->arrival;
+        $filterArrival = $request->filterArrival;
+        $filterDeparture = $request->filterDeparture;
         $type = $request->input('type', 'desc');
         $max = $request->input('max', '');
         $min = $request->input('min', '');
@@ -119,10 +131,26 @@ class SearchController extends Controller
         $priceEnd = $request->input('price-end', '2000000');
 
 
-        $idPassengerCars = $this->filterPassengerCars($departure, $arrival, $type, $min, $max, $priceStart, $priceEnd);
+        $idPassengerCars = $this->filterPassengerCars($departure, $arrival, $filterArrival, $filterDeparture, $type, $min, $max, $priceStart, $priceEnd);
         $service = $this->service::all();
         $PassengerCarsService = $this->passengerCarService::all();
-        return response()->json(['data' => $idPassengerCars, 'dataRoute' => $routes[0],'service' => $service,'passengerCarsService'=>$PassengerCarsService]);
+        return response()->json(['data' => $idPassengerCars, 'dataRoute' => $routes[0], 'service' => $service, 'passengerCarsService' => $PassengerCarsService]);
+    }
+
+    public function filterStops($departure, $arrival)
+    {
+        $query = DB::table('stops')
+            ->select(
+                'stops.id',
+                'stops.stop_name',
+                'stops.stop_type'
+            )
+            ->join('routes', 'stops.route_id', '=', 'routes.id')
+            ->where('routes.departure', $departure)
+            ->where('routes.arrival', $arrival);
+        log::info($query->toSql());
+        $filterStops = $query->get();
+        return ['data' => $filterStops];
     }
 
 }

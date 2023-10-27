@@ -59,7 +59,7 @@
 
                                         <td style="display: flex;">
                                             <a class="btn btn-primary"
-                                                href="{{ route('ticket.edit', $ticket->id) }}">Edit</a>
+                                            href="{{ route('ticket.edit', $ticket->id) }}">Edit</a>
                                             <form action="{{ route('ticket.destroy', $ticket->id) }}" method="post">
                                                 @csrf
                                                 @method('delete')

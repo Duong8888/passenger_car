@@ -4,8 +4,8 @@
         <div class="grid items-center grid-cols-12 rtl:gap-10">
             <div class="col-span-12 col-start-2">
                 <div class="mb-3 text-center ltr:mr-14 rtl:ml-14">
-                    <h1 class="mb-3 text-5xl leading-tight text-white fw-semibold">Deposit money to donate to me<br> At least <span class="text-yellow-500 fw-bold">5+ </span> eggs.</h1>
-                    <p class="text-white text-17">Find jobs, create trackable resumes and enrich your applications.</p>
+                    <h1 class="mb-3 text-5xl leading-tight text-white fw-semibold">Khám phá thế giới bằng xe bus</h1>
+                    <p class="text-white text-17">"Hãy tìm xe và bắt đầu hành trình của bạn ngay hôm nay, để biết mọi cuộc hành trình đều đặc biệt!</p>
                 </div>
                 <form action="{{route('search')}}" method="GET">
                     <div class="registration-form">

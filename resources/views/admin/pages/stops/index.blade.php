@@ -55,7 +55,7 @@
                                 </td>
                                 <td style="display: flex;display: flex;justify-content: center;align-items: center;width:50px">
                                     <a class="btn btn-primary"
-                                    href="{{ route('stop.edit', $stop->id) }}">Edit</a>
+                                    href="{{ route('stop.edit',$stop->id) }}">Edit</a>
                                     <form action="{{ route('stop.destroy', $stop->id) }}" method="post">
                                         @csrf
                                         @method('delete')

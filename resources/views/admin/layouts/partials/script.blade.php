@@ -11,7 +11,7 @@
 
 <!-- knob plugin -->
 <script src="{{asset('admin/libs/jquery-knob/jquery.knob.min.js')}}"></script>
-
+<script src="{{ asset('admin/js/custom/user-permission.js') }}"></script>
 <!-- App js-->
 <script src="{{asset('admin/js/app.min.js')}}"></script>
 

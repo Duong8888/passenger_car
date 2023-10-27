@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('license_plate');
             $table->integer('capacity');
             $table->bigInteger('price');
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->unsignedBigInteger('user_id');
 //            $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('route_id');
+            $table->unsignedBigInteger('route_id')->nullable();
 //            $table->foreign('route_id')->references('id')->on('routes');
         });
     }

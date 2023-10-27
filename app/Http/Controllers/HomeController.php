@@ -38,8 +38,11 @@ class HomeController  extends Controller
 
         $albums = PassengerCar::with('albums')->get();
         $routes = Routes::all();
-        $passengerCars = PassengerCar::with('workingTime')->whereNotNull('route_id')->get();
-        return view('client.pages.home.index', compact('albums', 'routes', 'passengerCars','stops'));
+
+        $users = User::where('user_type', 'staff')->take(8)->get();
+        $passengerCars = PassengerCar::with('workingTime')->whereNotNull('route_id')->inRandomOrder()->get();
+        return view('client.pages.home.index', compact('albums', 'routes', 'passengerCars','stops','users'));
+
 
     }
     public function passengerCarDetail(Request $request)
@@ -50,10 +53,7 @@ class HomeController  extends Controller
         $services = PassengerCar::with('services')->get();
         $users = User::all();
         $comments = Comment::where('passenger_car_id', $request->passenger_id)->get();
-        $stops = Stops::all();
-        // return response()->json($stop[0]->route, 200, [], JSON_PRETTY_PRINT);
-        // dd($comments);
-
+        $stops = Stops::where('route_id', $request->route_id)->get();
 
         return view('client.pages.home.passengerCar-detail', compact('albums', 'routes', 'passengerCars', 'users', 'comments', 'stops', 'services'));
     }
