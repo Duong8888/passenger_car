@@ -16,29 +16,6 @@
                 </div>
             </div>
             <div class="nav-tabs chart-tabpill">
-                <!-- <div class="grid grid-cols-12">
-                    <div class="col-span-12 lg:col-span-8 lg:col-start-3">
-                        <div class="p-1.5 bg-white dark:bg-neutral-900 shadow-lg shadow-gray-100/30 rounded-lg dark:shadow-neutral-700">
-                            <ul class="items-center text-sm font-medium text-center text-gray-700 nav md:flex">
-                                <li class="w-full">
-                                    <a href="javascript:void(0);" data-tw-toggle="tab" data-tw-target="recent-job" class="inline-block w-full py-[12px] px-[18px] dark:text-gray-50 active" aria-current="page">Recent Jobs</a>
-                                </li>
-                                <li class="w-full">
-                                    <a href="javascript:void(0);" data-tw-toggle="tab" data-tw-target="featured-jobs-tab" class="inline-block w-full py-[12px] px-[18px] dark:text-gray-50">Featured Jobs</a>
-                                </li>
-                                <li class="w-full">
-                                    <a href="javascript:void(0);" data-tw-toggle="tab" data-tw-target="freelancer-tab" class="inline-block w-full py-[12px] px-[18px] dark:text-gray-50">Freelancer</a>
-                                </li>
-                                <li class="w-full">
-                                    <a href="javascript:void(0);" data-tw-toggle="tab" data-tw-target="part-time-tab" class="inline-block w-full py-[12px] px-[18px] dark:text-gray-50">Part Time</a>
-                                </li>
-                                <li class="w-full">
-                                    <a href="javascript:void(0);" data-tw-toggle="tab" data-tw-target="full-time-tab" class="inline-block w-full py-[12px] px-[18px] dark:text-gray-50">Full Time</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div> -->
                 <div class="tab-content">
                     <div class="block w-full tab-pane" id="recent-job">
                         <div class="pt-8 ">

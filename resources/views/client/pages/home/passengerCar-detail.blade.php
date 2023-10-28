@@ -537,7 +537,7 @@
                                                 name="phone" id="phone" type="text"
                                                 value="{{ isset(Auth::user()->phone) ? Auth::user()->phone : '' }}"
                                                 placeholder="Nhập Số điện thoại của bạn"
-                                                @if (isset(Auth::user()->phone)) readonly @endif>
+                                                >
                                         </div>
                                         <div class="mb-4">
                                             <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email
@@ -547,7 +547,7 @@
                                                 name="email" id="email" type="text"
                                                 value="{{ isset(Auth::user()->email) ? Auth::user()->email : '' }}"
                                                 placeholder="Nhập địa chỉ email của bạn"
-                                                @if (isset(Auth::user()->email)) readonly @endif>
+                                                >
                                         </div>
                                     </div>
                                     <div class="p-4 flex justify-between">
@@ -560,6 +560,7 @@
                                             data-id="{{ $passengerCars->id }}">
                                             Tiếp tục
                                         </button>
+                                        <input name="user_id" type="hidden" value="{{ isset(Auth::user()->id) ? Auth::user()->id : NULL }}">
                                     </div>
                                 </div>
 
