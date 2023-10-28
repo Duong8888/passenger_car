@@ -15,8 +15,11 @@ class LoginAdminController extends Controller
     }
     
     public function loginAdmin(Request $request)
+
     {
         $credentials = $request->only('email', 'password');
+
+
 
         if (Auth::attempt($credentials)) {
             return redirect()->route('admin.dashboard');

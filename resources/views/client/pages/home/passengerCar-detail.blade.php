@@ -210,7 +210,6 @@
                                                     <p class="mb-2 text-gray-500 dark:text-gray-300">
                                                         {{ $passengerCars->description }}</p>
                                                 </div>
-
                                             </div>
                                         </div>
                                         {{-- Dịch vụ --}}
@@ -536,8 +535,8 @@
                                                 class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                                 name="phone" id="phone" type="text"
                                                 value="{{ isset(Auth::user()->phone) ? Auth::user()->phone : '' }}"
-                                                placeholder="Nhập Số điện thoại của bạn"
-                                                >
+                                                placeholder="Nhập Số điện thoại của bạn">
+
                                         </div>
                                         <div class="mb-4">
                                             <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email
@@ -546,8 +545,8 @@
                                                 class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                                 name="email" id="email" type="text"
                                                 value="{{ isset(Auth::user()->email) ? Auth::user()->email : '' }}"
-                                                placeholder="Nhập địa chỉ email của bạn"
-                                                >
+                                                placeholder="Nhập địa chỉ email của bạn">
+
                                         </div>
                                     </div>
                                     <div class="p-4 flex justify-between">
@@ -560,7 +559,9 @@
                                             data-id="{{ $passengerCars->id }}">
                                             Tiếp tục
                                         </button>
+
                                         <input name="user_id" type="hidden" value="{{ isset(Auth::user()->id) ? Auth::user()->id : NULL }}">
+
                                     </div>
                                 </div>
 

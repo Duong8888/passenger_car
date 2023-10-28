@@ -44,6 +44,7 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+
     Route::get('/logoutadmin', [App\Http\Controllers\LoginAdminController::class, 'logoutAdmin'])->name('logoutAdmin');
 
     // SupperAdmin-Admin-AdminPost
@@ -57,7 +58,6 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
         Route::get('/posting/{slug}', [PostController::class, 'createSlug'])->name('post.show');
     });
-
     //SupperAdmin-Admin-AdminTicket
     Route::group(['middleware' => 'checkRoles:SupperAdmin,Admin,AdminTicket'], function () {
         Route::prefix('ticket')->controller(TicketController::class)->name('ticket.')->group(function (){
@@ -71,9 +71,6 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         Route::post('/trip', [TicketController::class, 'Trip']);
         Route::post('/passgenerCar/{id}', [TicketController::class, 'PassengerCar']);
     });
-
-
-
     // tuyến đường SupperAdmin-Admin
     Route::group(['middleware' => 'checkRoles:SupperAdmin,Admin'], function () {
         Route::prefix('route')->controller(RouteController::class)->name('route.')->group(function () {
@@ -89,12 +86,15 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         Route::get('/userReport', [UserReportController::class, 'index'])->name('user.report');
         Route::get('/ticketReport', [TicketReportController::class, 'index'])->name('ticket.report');
 
+
         // Quản lý nhà xe
         Route::get('/staff/index', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('route_staff_index');
         Route::match(['GET', 'POST'], '/staff/add', [App\Http\Controllers\Admin\UserController::class, 'add'])->name('route_staff_add');
         Route::match(['GET', 'POST'], '/staff/edit/{id}', [App\Http\Controllers\Admin\UserController::class, 'edit'])->name('route_staff_edit');
         Route::match(['GET', 'POST'], '/staff/delete/{id}', [App\Http\Controllers\Admin\UserController::class, 'delete'])->name('route_staff_delete');
+
     });
+
 
     //Phân quyền SupperAdmin
     Route::group(['middleware' => 'checkRoles:SupperAdmin'], function () {
@@ -116,6 +116,7 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         Route::resource('/stop', StopsController::class);
     });
 });
+
 
 // Route::get('/management/index',[App\Http\Controllers\Admin\AdminManagementController::class,'index'])->name('route_adminmanagement_index');
 // Route::match(['GET','POST'],'/management/edit/{id}',[App\Http\Controllers\Admin\AdminManagementController::class,'edit'])->name('route_adminmanagement_edit');

@@ -19,7 +19,6 @@ $(document).ready(function () {
         hidePopup();
     };
 
-
     var CountTicket = $(".qty-input").val();
     var totalTicket = '';
     var TicketPrice;
@@ -117,13 +116,13 @@ $(document).ready(function () {
     const firstNextButton = document.getElementById('first-next');
     const inputTicket = document.querySelector('input[name="countTicket"]');
 
-
-    firstNextButton.addEventListener('click', function () {
-        const inputValue = inputTicket.value;
-        if (inputValue > 0) {
+        firstNextButton.addEventListener('click', function() {
+             const inputValue = inputTicket.value;
+        if(inputValue > 0 ){
             firstTab.classList.add('hidden');
             secondTab.classList.remove('hidden');
-        } else {
+        } else{
+
             swal("Lỗi", "Vui lòng chọn ít nhất 1 chỗ ngồi", "error");
         }
     });
