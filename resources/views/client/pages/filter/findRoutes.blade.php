@@ -329,93 +329,12 @@
                                     <!--end grid-->
                                 </form>
                             </div>
+                            <div class="space-y-2 mt-4 filterOption">
+                                <span class="filterOptionValue" id="departureFilterShow"></span>
+                                <span class="filterOptionValue" id="arrivalFilterShow"></span>
+                            </div>
                             <div class="space-y-8 mt-14 list-route">
                             </div>
-
-
-                            {{-- <div class="space-y-8 mt-14 list-route">
-                                @if(!empty($routes) || count($data) != 0)
-                                    @foreach($data as $key => $value)
-                                        @foreach( $value->workingTime as $keyWorking => $valueWorking)
-                                            <div
-                                                class="relative overflow-hidden transition-all duration-500 ease-in-out bg-white border rounded-md border-gray-100/50 group/jobs group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:-translate-y-2 dark:bg-neutral-900 dark:border-neutral-600">
-                                                <div class="p-6">
-                                                    <div class="grid grid-cols-12 gap-5">
-                                                        <div class="col-span-12 lg:col-span-1">
-                                                            <div class="px-2 mb-4 text-center mb-md-0">
-                                                                <a href="company-details.html"><img
-                                                                        src="assets/images/featured-job/img-01.png"
-                                                                        alt=""
-                                                                        class="mx-auto img-fluid rounded-3"></a>
-                                                            </div>
-                                                        </div>
-                                                        <!--end col-->
-                                                        <div class="col-span-10">
-                                                            <h5 class="mb-1 fs-17"><a href="job-details.html"
-                                                                                      class="dark:text-gray-50">Dương
-                                                                    Đẹp
-                                                                    Trai 102</a>
-                                                                <small
-                                                                    class="font-normal text-gray-500 dark:text-gray-300"></small>
-                                                            </h5>
-                                                            <ul class="mb-0 lg:gap-3 gap-y-3">
-                                                                <li>
-                                                                    <p class="mb-0 mt-4 text-sm text-gray-500 dark:text-gray-300"> {{$value->route->departure}}
-                                                                        ({{ substr($valueWorking->departure_time, 0, 5) }}
-                                                                        )
-                                                                        - {{$value->route->arrival}}
-                                                                        ({{ substr($valueWorking->arrival_time, 0, 5) }}
-                                                                        )</p>
-                                                                </li>
-                                                                <li>
-                                                                    <p class="mb-0 text-sm text-gray-500 dark:text-gray-300">
-                                                                        Gế ngồi {{$value->capacity}}</p>
-                                                                </li>
-                                                            </ul>
-                                                            <div class="mt-4">
-                                                                <div class="flex flex-wrap gap-1.5">
-                                                                    @foreach( $value->services as $valueService)
-                                                                        <span
-                                                                            class="bg-sky-500/20 text-sky-500 text-11 px-2 py-0.5 font-medium rounded">{{$valueService->service_name}}</span>
-                                                                    @endforeach
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!--end row-->
-                                                </div>
-                                                <div class="px-4 py-3 bg-gray-50 dark:bg-neutral-700">
-                                                    <div class="grid grid-cols-12">
-                                                        <div class="col-span-12 lg:col-span-6">
-                                                            <ul class="flex flex-wrap gap-2 text-gray-700 dark:text-gray-50">
-                                                                <li><i class="uil uil-tag"></i> Giá Vé :</li>
-                                                                <li>{{number_format($value->price)}}đ</li>
-                                                            </ul>
-                                                        </div>
-                                                        <!--end col-->
-                                                        <div class="col-span-12 mt-2 lg:col-span-6 lg:mt-0">
-                                                            <div
-                                                                class="ltr:lg:text-right rtl:lg:text-left dark:text-gray-50">
-                                                                <a href="#applyNow" data-bs-toggle="modal">Chi tiết <i
-                                                                        class="mdi mdi-chevron-double-right"></i></a>
-                                                            </div>
-                                                        </div>
-                                                        <!--end col-->
-                                                    </div>
-                                                    <!--end row-->
-                                                </div>
-
-                                            </div>
-                                        @endforeach
-                                    @endforeach
-                                @endif
-                                <div class="space-y-8 mt-14 list-route">
-                                    <div class="text-center">
-                                        {{$message}}
-                                    </div>
-                                </div>
-
-                            </div> --}}
                         </div>
                         <!-- end right -->
                     </div>
@@ -471,6 +390,26 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
+
+
+        .filterOptionValue {
+            background: rgb(224, 224, 224);
+            color: rgb(71, 71, 71);
+            border-radius: 2px;
+            display: inline-flex;
+            font-weight: normal;
+        }
+
+        .filterOptionValue span {
+            padding: 8px 12px;
+            display: flex;
+        }
+
+        .filterOptionValue span svg {
+            margin-top: 12px;
+        }
+
+
     </style>
     <!-- Nouislider Js -->
     {{--    <script src="{{asset('client/libs/nouislider/nouislider.min.js')}}"></script>--}}

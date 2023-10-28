@@ -30,7 +30,10 @@
                                     </i>
                                     <select class="form-select" data-trigger name="arrival" id="choices-single-categories" aria-label="Default select example">
                                         @foreach($stops as $value)
-                                            <option value="{{$value}}">{{$value}}</option>
+                                            <option
+                                                @if(trim("Nghệ An") == trim($value)) selected
+                                                @endif
+                                                value="{{$value}}">{{$value}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -48,4 +51,11 @@
     </div>
     <img src="{{asset('client/images/bg-shape.png')}}" alt="" class="absolute block -bottom-5 dark:hidden">
     <img src="{{asset('client/images/bg-shape-dark.png')}}" alt="" class="absolute hidden -bottom-5 dark:block">
+    <script src="{{asset('admin/libs/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('admin/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            console.log('ready');
+        });
+    </script>
 </section>
