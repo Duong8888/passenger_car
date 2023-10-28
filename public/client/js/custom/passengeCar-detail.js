@@ -18,7 +18,6 @@ $(document).ready(function () {
     window.onload = function () {
         hidePopup();
     };
-  
 
     var CountTicket = $(".qty-input").val();
     var totalTicket = '';
@@ -67,9 +66,9 @@ $(document).ready(function () {
     const TIME_TO_UPDATE = 1000;
 
     $(document).on('click', '.submit', function () {
-        var user_id = 1;
+        var user_id = $('input[name="user_id"]').val();
         var username = $('input[name="name"]').val();
-        var phone = $('input[name="phone"]').val();
+        var phone = '+84' + $('input[name="phone"]').val();
         var email = $('input[name="email"]').val();
         var total_price = TicketPrice * CountTicket;
         var quantity = CountTicket;
@@ -109,39 +108,39 @@ $(document).ready(function () {
     const secondTab = document.getElementById('second');
     const thirdTab = document.getElementById('third');
 
-   
+
     const secondBackButton = document.getElementById('second-back');
     const secondNextButton = document.getElementById('second-next');
     const thirdBackButton = document.getElementById('third-back');
 
     const firstNextButton = document.getElementById('first-next');
     const inputTicket = document.querySelector('input[name="countTicket"]');
-   
-  
+
         firstNextButton.addEventListener('click', function() {
              const inputValue = inputTicket.value;
         if(inputValue > 0 ){
             firstTab.classList.add('hidden');
             secondTab.classList.remove('hidden');
         } else{
+
             swal("Lỗi", "Vui lòng chọn ít nhất 1 chỗ ngồi", "error");
         }
     });
 
 
-    secondBackButton.addEventListener('click', function() {
+    secondBackButton.addEventListener('click', function () {
         secondTab.classList.add('hidden');
         firstTab.classList.remove('hidden');
     });
 
 
-    secondNextButton.addEventListener('click', function() {
+    secondNextButton.addEventListener('click', function () {
         secondTab.classList.add('hidden');
         thirdTab.classList.remove('hidden');
     });
 
 
-    thirdBackButton.addEventListener('click', function() {
+    thirdBackButton.addEventListener('click', function () {
         thirdTab.classList.add('hidden');
         secondTab.classList.remove('hidden');
     });

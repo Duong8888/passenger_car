@@ -74,7 +74,7 @@
 
             <ul id="side-menu">
                 <li>
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('admin.dashboard') }}">
                         <i class="mdi mdi-view-dashboard-outline"></i>
                         <span> Dashboard </span>
 
@@ -117,7 +117,7 @@
                 </li>
                 @if(auth()->user()->hasAnyRole(['SupperAdmin', 'Admin', 'AdminPost']))
                     <li>
-                        <a href="{{ route('postsing') }}">
+                        <a href="{{ route('admin.postsing') }}">
                             <i class="mdi mdi-calendar-blank-outline"></i>
                             <span> Quản lý tin tức </span>
                         </a>
@@ -125,7 +125,7 @@
                 @endif
                 @if(auth()->user()->hasAnyRole(['SupperAdmin', 'Admin', 'Nhà xe']))
                     <li>
-                        <a href="{{route('car.index')}}">
+                        <a href="{{route('admin.car.index')}}">
                             <i class="mdi mdi-forum-outline"></i>
                             <span> Quản lý xe </span>
                         </a>
@@ -135,33 +135,21 @@
 
                 @if(auth()->user()->hasAnyRole(['SupperAdmin']))
                     <li>
-                        <a href="{{ route('permission.index') }}">
+                        <a href="{{ route('admin.permission.index') }}">
                             <i class="mdi mdi-briefcase-variant-outline"></i>
                             <span> Phân quyền user </span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('rolePermission.index') }}">
+                        <a href="{{ route('admin.rolePermission.index') }}">
                             <i class="mdi mdi-book-open-page-variant-outline"></i>
                             <span> Cài đặt quyền/vai trò </span>
                         </a>
-
-                        <div class="collapse" id="report">
-                            <ul class="nav-second-level">
-                                <li>
-                                    <a href="{{ route('admin.user.report') }}">Users Report</a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('admin.ticket.report') }}">Tickets Report</a>
-                                </li>
-                            </ul>
-                        </div>
-
                     </li>
                 @endif
                 @if(auth()->user()->hasAnyRole(['SupperAdmin', 'Admin','AdminTicket']))
                     <li>
-                        <a href="{{ route('ticket.index') }}" >
+                        <a href="{{ route('admin.ticket.index') }}" >
                             <i class="mdi mdi-texture"></i>
                             <span>Vé</span>
                         </a>
@@ -169,7 +157,7 @@
                 @endif
                 @if(auth()->user()->hasAnyRole(['SupperAdmin', 'Admin','Nhà xe']))
                     <li>
-                        <a href="{{ route('service.index') }}">
+                        <a href="{{ route('admin.service.index') }}">
                             <i class="mdi mdi-clipboard-outline"></i>
                             <span> Dịch vụ </span>
                         </a>
@@ -177,13 +165,13 @@
                 @endif
                 @if(auth()->user()->hasAnyRole(['SupperAdmin', 'Admin']))
                     <li>
-                        <a href="{{ route('route.index') }}">
+                        <a href="{{ route('admin.route.index') }}">
                             <i class="mdi mdi-table"></i>
                             <span> Route </span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('route_staff_index') }}">
+                        <a href="{{ route('admin.route_staff_index') }}">
                             <i class="mdi mdi-table"></i>
                             <span> Quản lý nhà xe </span>
                         </a>

@@ -54,7 +54,9 @@ Route::get('/end-ticket-payment', [TicketController::class, 'EndTicketPayment'])
 
 
 Route::get('/loginadmin', [App\Http\Controllers\LoginAdminController::class, 'showLoginAdmin'])->name('login_admin');
-Route::post('/loginadmin', [App\Http\Controllers\LoginAdminController::class, 'loginAdmin']);
+
+Route::post('/loginadmin', [App\Http\Controllers\LoginAdminController::class, 'loginAdmin'])->name('login_admin_success');
+
 Route::get('/logoutadmin', [App\Http\Controllers\LoginAdminController::class, 'logoutAdmin'])->name('logoutAdmin');
 
 

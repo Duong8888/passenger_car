@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Http\Middleware\CheckAdmin;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -37,8 +36,10 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->prefix('admin')
-//                ->as('admin.')
-//                ->middleware(['auth', CheckAdmin::class])
+
+               ->as('admin.')
+               ->middleware(['auth', CheckAdmin::class])
+
                 ->group(base_path('routes/web.php'));
 
             Route::middleware('web')
