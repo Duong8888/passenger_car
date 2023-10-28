@@ -5,6 +5,7 @@
 <script>
     var csrfToken = $('meta[name="csrf-token"]').attr('content');
     const firebaseConfig = {
+
         apiKey: "AIzaSyBVjPvLia-lQ3KTIlGyJtwkO6gnF4EhA6c",
         authDomain: "fir-2-73a65.firebaseapp.com",
         projectId: "fir-2-73a65",
@@ -12,6 +13,7 @@
         messagingSenderId: "793008679902",
         appId: "1:793008679902:web:01e40657ee99f0150dcb4f",
         measurementId: "G-CTLCZLM3R1"
+
     };
     firebase.initializeApp(firebaseConfig);
 </script>

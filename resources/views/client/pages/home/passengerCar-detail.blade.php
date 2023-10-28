@@ -210,7 +210,6 @@
                                                     <p class="mb-2 text-gray-500 dark:text-gray-300">
                                                         {{ $passengerCars->description }}</p>
                                                 </div>
-
                                             </div>
                                         </div>
                                         {{-- Dịch vụ --}}

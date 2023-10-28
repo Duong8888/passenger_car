@@ -17,4 +17,8 @@ class BlogController extends Controller
         $posts = Posts::query()->paginate(8);
         return view('client.pages.blogs.blog', compact('posts'));
     }
+//    public function getAllCategories(){
+////        $categories = Posts::all();
+////        return $categories;
+////    }
 }
