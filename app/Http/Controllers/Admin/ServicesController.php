@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\AdminBaseController;
+use App\Http\Requests\ServicesRequest;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -24,7 +25,7 @@ class ServicesController extends AdminBaseController
     ];
 
 
-    public function index()
+    public function index(Request $request)
     {
         // Lấy danh sách dịch vụ
         $services = $this->model->paginate(5);
@@ -40,6 +41,7 @@ class ServicesController extends AdminBaseController
      */
     public function create()
     {
+       
         return view($this->pathView . __FUNCTION__)
             ->with('title', $this->titleCreate)
             ->with('colums', $this->colums)

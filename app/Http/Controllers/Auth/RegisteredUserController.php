@@ -45,7 +45,9 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
-
-        return redirect(RouteServiceProvider::HOME);
+        if($request->user()->isStaff()){
+            return redirect()->intended(RouteServiceProvider::HOME_STAFF);
+        }
+        return redirect()->intended('/');
     }
 }

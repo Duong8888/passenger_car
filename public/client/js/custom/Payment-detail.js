@@ -62,7 +62,7 @@ $(document).ready(function () {
                 });
 
                 if (response.success) {
-                    window.location.href = '/';
+                    window.location.href = '/end-ticket-payment';
                 }
             }
         })
