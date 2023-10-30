@@ -16,7 +16,9 @@ use App\Http\Controllers\MapController;
 //Nam
 
 Route::get('/',[HomeController::class,'index'])->name('home');;
-Route::post('/passengerCar-detail',[HomeController::class,'passengerCarDetail'])->name('passengerCar-detail');
+Route::get('car/{id}',[HomeController::class,'passengerCarDetail'])->name('passengerCar.detail');
+
+//Route::post('/passengerCar-detail',[HomeController::class,'passengerCarDetail'])->name('passengerCar-detail');
 Route::resource('/profile',ProfileController::class);
 Route::get('/profile/ticketdetails/{id}',[ProfileController::class,'ticketDetails'])->name('ticketDetails_index');
 

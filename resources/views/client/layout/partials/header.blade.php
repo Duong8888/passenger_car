@@ -130,8 +130,8 @@
                     <li class="relative dropdown lg:mt-0">
                         <button href="#" class="py-5 text-gray-800 lg:px-4 dropdown-toggle lg:h-[70px]" id="pages"
                                 data-bs-toggle="dropdown"><a href="{{route('blog.show')}}">Tin tức</a></button>
-                        {{-- <i class="align-middle bx bxs-chevron-down ltr:ml-1 rtl:mr-1"></i> --}}
                     </li>
+
                     {{-- <li class="relative dropdown lg:mt-0">--}}
 {{-- <button href="#" class="py-5 text-gray-800 lg:px-4 dropdown-toggle lg:h-[70px]" id="blog"
                             data-bs-toggle="dropdown">Blog <i
@@ -187,6 +187,7 @@
 
                         </ul>
                     </li>
+
 
 
                     <li class="py-5 lg:px-4">
