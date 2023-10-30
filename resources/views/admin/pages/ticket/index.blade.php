@@ -18,7 +18,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title mt-0 mb-3">Tickets List</h4>
-                        <a href="{{ route('ticket.create') }}">Create New Ticket</a>
+                        <a href="{{ route('admin.ticket.create') }}">Create New Ticket</a>
                         @if ($message = Session::get('success'))
                         <div>
                             <ul>
@@ -59,8 +59,8 @@
 
                                         <td style="display: flex;">
                                             <a class="btn btn-primary"
-                                            href="{{ route('ticket.edit', $ticket->id) }}">Edit</a>
-                                            <form action="{{ route('ticket.destroy', $ticket->id) }}" method="post">
+                                            href="{{ route('admin.ticket.edit', $ticket->id) }}">Edit</a>
+                                            <form action="{{ route('admin.ticket.destroy', $ticket->id) }}" method="post">
                                                 @csrf
                                                 @method('delete')
                                                 <button onclick="return confirm('Are you sure ?')"

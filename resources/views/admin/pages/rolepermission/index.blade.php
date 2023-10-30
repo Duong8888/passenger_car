@@ -17,7 +17,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="mt-0 header-title">Phân quyền (Role)</h4>
-                    <a class="dropdown-item" href="{{ route('rolePermission.create') }}">Thêm quyền</a>
+                    <a class="dropdown-item" href="{{ route('admin.rolePermission.create') }}">Thêm quyền</a>
                     @if ($message = Session::get('success'))
                         <div>
                             <ul>
@@ -62,8 +62,8 @@
                                                    data-bs-toggle="dropdown" aria-haspopup="true"
                                                    aria-expanded="false"></i>
                                                 <div class="dropdown-menu" style="">
-                                                    <a class="dropdown-item" href="{{ route('rolePermission.edit',$role->id) }}">Cập nhật</a>
-                                                    <form action="{{ route('rolePermission.destroy',$role->id) }}" method="POST">
+                                                    <a class="dropdown-item" href="{{ route('admin.rolePermission.edit',$role->id) }}">Cập nhật</a>
+                                                    <form action="{{ route('admin.rolePermission.destroy',$role->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button onclick="return confirm('Bạn chắc chắn muốn xóa thật chứ ?')" class="dropdown-item" type="submit">Xóa</button>

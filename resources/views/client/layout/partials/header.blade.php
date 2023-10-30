@@ -132,10 +132,10 @@
                                 data-bs-toggle="dropdown"><a href="{{route('blog.show')}}">Tin tức</a></button>
                         {{-- <i class="align-middle bx bxs-chevron-down ltr:ml-1 rtl:mr-1"></i> --}}
                     </li>
-                    {{-- <li class="relative dropdown lg:mt-0">
-<button href="#" class="py-5 text-gray-800 lg:px-4 dropdown-toggle lg:h-[70px]" id="blog"
+                    {{-- <li class="relative dropdown lg:mt-0">--}}
+{{-- <button href="#" class="py-5 text-gray-800 lg:px-4 dropdown-toggle lg:h-[70px]" id="blog"
                             data-bs-toggle="dropdown">Blog <i
-                                class="align-middle bx bxs-chevron-down ltr:ml-1 rtl:mr-1"></i></button>
+                                class="align-middle bx bxs-chevron-down ltr:ml-1 rtl:mr-1"></i></button> --}}
 
                         <ul class="relative top-auto z-50 py-2 list-none bg-white border-0 rounded dropdown-menu lg:border border-gray-500/20 lg:absolute ltr:-left-3 rtl:-right-3 lg:w-48 lg:shadow-lg hidden"
                             aria-labelledby="blog">
@@ -178,11 +178,11 @@
 
                         <ul class="relative top-auto z-50 py-2 list-none bg-white border-0 rounded dropdown-menu lg:border border-gray-500/20 lg:absolute ltr:-left-3 rtl:-right-3 lg:w-48 lg:shadow-lg dark:bg-neutral-800 hidden"
                             aria-labelledby="blog">
-                            @foreach (getAllCategories() as $category)
+                            {{-- @foreach (getAllCategories() as $category)
                                 <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-700 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50"
                                         href="{{ route('category-detail', $category->id) }}">{{ $category->category_name }}</a>
                                 </li>
-                            @endforeach
+                            @endforeach --}}
 
 
                         </ul>

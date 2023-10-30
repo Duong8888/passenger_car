@@ -37,7 +37,7 @@
                                  aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                                 <form id="form-main" class="modal-dialog"
                                       method="POST"
-                                      action="{{route('route.store')}}" >
+                                      action="{{route('admin.route.store')}}" >
                                     @csrf
                                     <div class="modal-content">
                                         <div class="modal-header">
