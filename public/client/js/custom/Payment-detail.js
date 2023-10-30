@@ -41,7 +41,7 @@ $(document).ready(function () {
         let data = $(this).data("session");
 
         let payment_method = 'thanh toán tại nhà xe';
-        data[0]['status'] = 0;
+        data[0]['status'] = 1;
         data[0]['payment_method'] = payment_method;
         let res = data[0];
         $.ajax({
@@ -74,7 +74,7 @@ $(document).ready(function () {
         let data = $(this).data("session");
 
         let payment_method = 'vnpay';
-        data[0]['status'] = 0;
+        data[0]['status'] = 2;
         data[0]['payment_method'] = payment_method;
         let res = data[0];
         $.ajax({

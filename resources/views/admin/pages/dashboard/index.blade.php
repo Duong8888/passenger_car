@@ -342,7 +342,7 @@
                                 </div>
                             </div>
 
-                            <h4 class="header-title mt-0 mb-3">Các vé xe</h4>
+                            <h4 class="header-title mt-0 mb-3">Vé xe đã đặt trong ngày</h4>
 
                             <div class="table-responsive">
                                 <table class="table table-hover mb-0">

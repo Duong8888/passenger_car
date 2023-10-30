@@ -5,7 +5,7 @@
         <div class="flex flex-wrap items-center justify-between mx-auto">
 
             <a href="{{route('home')}}" class="flex items-center">
-                <img src="https://imgur.com/uTTUL5F" alt="" class="logo-dark block dark:hidden" style="width: 200px">
+                <img src="https://i.imgur.com/chCW0o6.png" alt="" class="logo-dark block dark:hidden" style="width: 200px">
                 {{-- <img src="client/images/logo-light.png" alt="" class="logo-dark h-[22px] hidden dark:block"> --}}
             </a>
             <button data-collapse-toggle="navbar-collapse" type="button"
@@ -87,7 +87,21 @@
                             @if(auth()->check())
                                 <span class="hidden fw-medium xl:block">{{auth()->user()->name}}</span>
                             @else
-                                <a class="hidden fw-medium xl:block" href="{{ route('client.phone.login') }}">Login</a>
+                                <ul class="absolute top-auto z-50 hidden w-48 p-3 list-none bg-white border rounded shadow-lg dropdown-menu border-gray-500/20 xl:ltr:-left-3 ltr:-left-32 rtl:-right-3"
+                                    id="profile/log" aria-labelledby="navNotifications" style="margin-top: 150px">
+                                    <li class="p-2 dropdown-item group/dropdown">
+                                        <a class="text-15 font-medium text-gray-800  transition-all duration-300 ease-in"
+                                        href="{{ route('client.phone.login') }}">Đăng nhập</a>
+
+                                    </li>
+                                    <li class="p-2 dropdown-item group/dropdown">
+                                        <a class="text-15 font-medium text-gray-800  transition-all duration-300 ease-in"
+                                        href="{{route('profile.index')}}">Lịch sử</a>
+
+                                    </li>
+
+                                </ul>
+                                <a class="hidden fw-medium xl:block" href="{{ route('client.phone.login') }}">Đăng nhập</a>
                             @endif
 
                         </button>
@@ -96,7 +110,7 @@
                                 id="profile/log" aria-labelledby="navNotifications">
                                 <li class="p-2 dropdown-item group/dropdown">
                                     <a class="text-15 font-medium text-gray-800  transition-all duration-300 ease-in"
-                                       href="{{route('profile.index')}}">My Profile</a>
+                                       href="{{route('profile.index')}}">Trang cá nhân</a>
 
                                 </li>
                                 <li class="p-2 dropdown-item group/dropdown">
@@ -104,7 +118,7 @@
                                     <form action="{{ route('client.phone.logout') }}">
                                         @csrf
                                         <button
-                                            class="text-15 font-medium text-gray-800  transition-all duration-300 ease-in">Logout</button>
+                                            class="text-15 font-medium text-gray-800  transition-all duration-300 ease-in">Đăng xuất</button>
                                     </form>
                                 </li>
                             </ul>
