@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    const icon = `<svg class="mr-2 icon-item" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: #5f6273;transform: ;msFilter:;"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M9.999 13.587 7.7 11.292l-1.412 1.416 3.713 3.705 6.706-6.706-1.414-1.414z"></path></svg>`;
+
     $(document).on("click", ".Ticket", function () {
         showPopup();
     })
@@ -18,7 +20,7 @@ $(document).ready(function () {
     window.onload = function () {
         hidePopup();
     };
-  
+
 
     var CountTicket = $(".qty-input").val();
     var totalTicket = '';
@@ -35,9 +37,7 @@ $(document).ready(function () {
 
         let formattedMoney = formatCurrency(y);
         totalTicket = `
-            <div>Ghế: ${CountTicket} </div>
-            <div>Tổng cộng: ${formattedMoney}</div>
-
+            <span>Tổng cộng: <span style="color: rgb(0, 96, 196);font-weight: bold;">${formattedMoney}</span></span>
         `
 
         $('.show-total').html(totalTicket);
@@ -57,9 +57,7 @@ $(document).ready(function () {
 
         var formattedMoney = formatCurrency(y);
         totalTicket = `
-            <div>Ghế: ${CountTicket} </div>
-            <div>Tổng cộng: ${formattedMoney}</div> 
-            
+            <span>Tổng cộng: <span style="color: rgb(0, 96, 196);font-weight: bold;">${formattedMoney}</span></span>
         `
 
         $('.show-total').html(totalTicket);
@@ -109,20 +107,28 @@ $(document).ready(function () {
     const secondTab = document.getElementById('second');
     const thirdTab = document.getElementById('third');
 
-   
+    const firstTabBtn = $('.first');
+    const secondTabBtn = $('.second');
+    const thirdTabBtn = $('.third');
+
+
     const secondBackButton = document.getElementById('second-back');
     const secondNextButton = document.getElementById('second-next');
     const thirdBackButton = document.getElementById('third-back');
 
     const firstNextButton = document.getElementById('first-next');
     const inputTicket = document.querySelector('input[name="countTicket"]');
-   
-  
+
+
         firstNextButton.addEventListener('click', function() {
              const inputValue = inputTicket.value;
         if(inputValue > 0 ){
             firstTab.classList.add('hidden');
             secondTab.classList.remove('hidden');
+            firstTabBtn.before(icon);
+            $('.first-li>button').removeClass('active');
+            $('.second-li>button').addClass('active');
+            $('.firstItem>.icon-item').attr('data-item','first')
         } else{
             swal("Lỗi", "Vui lòng chọn ít nhất 1 chỗ ngồi", "error");
         }
@@ -132,18 +138,28 @@ $(document).ready(function () {
     secondBackButton.addEventListener('click', function() {
         secondTab.classList.add('hidden');
         firstTab.classList.remove('hidden');
+        $('.first-li>button').addClass('active');
+        $('.second-li>button').removeClass('active');
+        $('.icon-item[data-item="first"]').hide();
     });
 
 
     secondNextButton.addEventListener('click', function() {
         secondTab.classList.add('hidden');
         thirdTab.classList.remove('hidden');
+        secondTabBtn.before(icon);
+        $('.second-li>button').removeClass('active');
+        $('.third-li>button').addClass('active');
+        $('.secondItem>.icon-item').attr('data-item','second')
     });
 
 
     thirdBackButton.addEventListener('click', function() {
         thirdTab.classList.add('hidden');
         secondTab.classList.remove('hidden');
+        $('.second-li>button').addClass('active');
+        $('.third-li>button').removeClass('active');
+        $('.icon-item[data-item="second"]').hide();
     });
 })
 
