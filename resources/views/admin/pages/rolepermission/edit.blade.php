@@ -41,7 +41,7 @@
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-body">
-                                <form action="{{ route('rolePermission.update',$role->id) }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('admin.rolePermission.update',$role->id) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     @method('put')
                                     <div id="basicwizard">

@@ -83,7 +83,7 @@
                                                data-bs-toggle="dropdown" aria-haspopup="true"
                                                aria-expanded="false"></i>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="{{ route('permission.edit',$user->id) }}">Phân Quyền</a>
+                                                <a class="dropdown-item" href="{{ route('admin.permission.edit',$user->id) }}">Phân Quyền</a>
                                             </div>
                                         </div>
                                     </div>

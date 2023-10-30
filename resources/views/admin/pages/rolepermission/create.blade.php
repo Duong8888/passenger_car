@@ -15,7 +15,7 @@
             <div class="col-xl-6">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ route('rolePermission.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.rolePermission.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="action" value="createRole">
                             <div id="basicwizard">
