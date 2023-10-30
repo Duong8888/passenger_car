@@ -167,7 +167,7 @@
                         </ul>
                     </li> --}}
                     <li class="py-5 lg:px-4">
-                        <a href="contact.html" class="py-2.5 text-gray-800 font-medium leading-tight" id="contact"
+                        <a href="{{route('contact.index')}}" class="py-2.5 text-gray-800 font-medium leading-tight" id="contact"
                            data-bs-toggle="dropdown">Liên hệ </a>
                     </li>
                 </ul>

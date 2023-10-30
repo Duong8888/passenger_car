@@ -56,3 +56,6 @@ Route::get('/logoutadmin', [App\Http\Controllers\LoginAdminController::class, 'l
 
 Route::get('/map', [MapController::class, 'index'])->name('map');
 
+Route::get('/contact', [App\Http\Controllers\Client\ContactController::class, 'index'])->name('contact.index');
+
+

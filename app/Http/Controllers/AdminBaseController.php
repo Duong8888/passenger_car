@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Storage;
 
+
 class AdminBaseController extends Controller
 {
     /**
@@ -63,12 +64,11 @@ class AdminBaseController extends Controller
      */
     public function store(Request $request)
     {
-
         $validator = $this->validateStore($request);
 
-        // if ($validator->fails()) {
-        //     return back()->withErrors($validator)->withInput();
-        // }
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
 
         $model = new $this->model;
 
@@ -82,8 +82,9 @@ class AdminBaseController extends Controller
 
         $model->save();
 
-        return to_route($this->urlIndex)->with('success', 'Created Successfully');
+        return redirect()->route($this->urlIndex)->with('success', 'Created Successfully');
     }
+
 
     /**
      * Display the specified resource.
