@@ -15,6 +15,6 @@ class Album extends Model
     ];
 
     public function passengerCar() {
-        return $this->belongsTo(PassengerCar::class);
+        return $this->belongsTo(PassengerCar::class,'passenger_car_id','id');
     }
 }
