@@ -16,7 +16,8 @@
                                             <li><i class="bx bxs-chevron-right align-middle px-2.5"></i><a
                                                     href="javascript:void(0)">Trang</a></li>
                                             <li class="active" aria-current="page"><i
-                                                    class="bx bxs-chevron-right align-middle px-2.5"></i>Chi tiết xe</li>
+                                                    class="bx bxs-chevron-right align-middle px-2.5"></i>Chi tiết xe
+                                            </li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -41,22 +42,24 @@
                             <div class="border rounded border-gray-100/50 dark:border-neutral-600">
                                 <div class="p-5 border-b border-gray-100/50 dark:border-neutral-600">
                                     <div class="text-center">
-                                        <img src="{{ asset($passengerCars->albums[0]->path) }}" alt="anh"
-                                             style="min-width: 100%;height: 200px;">
-                                        <h6 class="mt-4 mb-0 text-lg text-gray-900 dark:text-gray-50">{{ $passengerCars->user->name }}</h6>
+                                        <img src="{{asset($albums[0]->path)}}" alt="anh"
+                                             style="min-width: 100%;height: 200px; object-fit: cover">
+                                        <h6 class="mt-4 mb-0 text-lg text-gray-900 dark:text-gray-50">Duong</h6>
                                     </div>
                                 </div>
                                 <div class="p-5 border-b border-gray-100/50 dark:border-neutral-600">
-                                    <h6 class="mb-5 font-semibold text-gray-900 text-17 dark:text-gray-50">Thông tin cơ bản
+                                    <h6 class="mb-5 font-semibold text-gray-900 text-17 dark:text-gray-50">Thông tin cơ
+                                        bản
                                     </h6>
                                     <ul class="space-y-4">
                                         <li>
                                             <div class="flex">
-                                                <label class="text-gray-900 w-[118px] font-medium dark:text-gray-50">Số điện
+                                                <label class="text-gray-900 w-[118px] font-medium dark:text-gray-50">Số
+                                                    điện
                                                     thoại</label>
                                                 <div>
                                                     <p class="mb-0 text-gray-500 dark:text-gray-300">
-                                                        {{ $passengerCars->user->phone }}</p>
+                                                        {{$passengerCars[0]->license_plate}}</p>
                                                 </div>
                                             </div>
                                         </li>
@@ -66,8 +69,8 @@
                                                     đường</label>
                                                 <div>
                                                     <p class="mb-0 text-gray-500 dark:text-gray-300">
-                                                        {{ $routes[0]->route->departure }} -
-                                                        {{ $routes[0]->route->arrival }}</p>
+                                                        {{$routes->departure}} -
+                                                        {{$routes->arrival}}</p>
                                                 </div>
                                             </div>
                                         </li>
@@ -76,38 +79,39 @@
                                                 <label class="text-gray-900 w-[118px] font-medium dark:text-gray-50">Khởi
                                                     hành</label>
                                                 <div>
-                                                    @foreach ($passengerCars->workingTime as $workingTime)
-                                                        <p class="mb-0 text-gray-500 dark:text-gray-300">
-                                                            {{ \Carbon\Carbon::parse($workingTime->departure_time)->format('H:i') }}h
-                                                            -
-                                                            {{ \Carbon\Carbon::parse($workingTime->arrival_time)->format('H:i') }}h
-                                                        </p>
-                                                    @endforeach
+                                                    <p class="mb-0 text-gray-500 dark:text-gray-300">
+                                                        {{date("H:i", strtotime($workingTime[0]->departure_time))}}h
+                                                        -
+                                                        {{date("H:i", strtotime($workingTime[0]->arrival_time))}}h
+                                                    </p>
                                                 </div>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="flex">
-                                                <label class="text-gray-900 w-[118px] font-medium dark:text-gray-50">Biển số
+                                                <label class="text-gray-900 w-[118px] font-medium dark:text-gray-50">Biển
+                                                    số
                                                     xe</label>
                                                 <div>
                                                     <p class="mb-0 text-gray-500 dark:text-gray-300">
-                                                        {{ $passengerCars->license_plate }}</p>
+                                                        {{$passengerCars[0]->license_plate}}</p>
                                                 </div>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="flex">
-                                                <label class="text-gray-900 w-[118px] font-medium dark:text-gray-50">Tổng số ghế</label>
+                                                <label class="text-gray-900 w-[118px] font-medium dark:text-gray-50">Tổng
+                                                    số ghế</label>
                                                 <div>
                                                     <p class="mb-0 text-gray-500 dark:text-gray-300">
-                                                        {{ $passengerCars->capacity }}</p>
+                                                        {{$passengerCars[0]->capacity}}</p>
                                                 </div>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="flex">
-                                                <label class="text-gray-900 w-[118px] font-medium dark:text-gray-50">Số ghế
+                                                <label class="text-gray-900 w-[118px] font-medium dark:text-gray-50">Số
+                                                    ghế
                                                     trống</label>
                                                 <div>
                                                     <p class="mb-0 text-gray-500 dark:text-gray-300">5</p>
@@ -121,7 +125,7 @@
                                                     class="text-gray-900 w-[118px] font-medium dark:text-gray-50">Giá</label>
                                                 <div>
                                                     <p class="mb-0 " style="color: rgb(0, 96, 196);font-weight: bold;">
-                                                        {{ number_format( $passengerCars->price, 0, ',', ',') }}đ</p>
+                                                        {{ number_format( $passengerCars[0]->price, 0, ',', ',') }}đ</p>
                                                     <style>
                                                         h1 {
                                                             font-weight: bold
@@ -132,9 +136,6 @@
                                         </li>
                                     </ul>
                                     <div class="mt-8 Ticket">
-                                        <a href="javascript:void(0)"
-                                           class="btn w-full bg-red-600 border-transparent text-white hover:-translate-y-1.5"><i
-                                                class="uil uil-phone"></i>Liên hệ với chúng tôi</a>
                                         <a href="javascript:void(0)"
                                            class="btn w-full mt-3 group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 border-transparent text-white hover:-translate-y-1.5 hover:ring group-data-[theme-color=violet]:hover:ring-violet-500/30 group-data-[theme-color=sky]:hover:ring-sky-500/30 group-data-[theme-color=red]:hover:ring-red-500/30 group-data-[theme-color=green]:hover:ring-green-500/30 group-data-[theme-color=pink]:hover:ring-pink-500/30 group-data-[theme-color=blue]:hover:ring-blue-500/30"><i
                                                 class="uil uil-import"></i>Đặt xe</a>
@@ -149,12 +150,12 @@
                                 <div class="col-span-12 lg:col-span-12 lg:col-start-12">
                                     <div class="swiper testimonialSlider">
                                         <div class=" swiper-wrapper">
-                                            @foreach ($passengerCars->albums as $album)
+                                            @foreach ($albums as $album)
                                                 <div class="swiper-slide">
                                                     <div class="text-center">
                                                         <div class="">
-                                                            <img src="{{ asset($album->path) }}" alt="anh"
-                                                                 style="min-width: 100%;height: 250px;">
+                                                            <img src="{{asset($album->path)}}" alt="anh"
+                                                                 style="min-width: 100%;height: 250px; object-fit: cover">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -170,20 +171,16 @@
 
                                         <ul class="items-center text-sm font-medium text-center text-gray-700 nav md:flex">
                                             <li class="active" role="presentation">
-                                                <button class="inline-block w-full py-4 px-[18px] dark:text-gray-50 active"
-                                                        data-tw-toggle="tab" type="button" data-tw-target="mota-tab">
+                                                <button
+                                                    class="inline-block w-full py-4 px-[18px] dark:text-gray-50 active"
+                                                    data-tw-toggle="tab" type="button" data-tw-target="mota-tab">
                                                     Mô tả
                                                 </button>
                                             </li>
                                             <li class="nav-item" role="presentation">
                                                 <button class="inline-block w-full py-4 px-[18px] dark:text-gray-50"
-                                                        data-tw-toggle="tab" type="button" data-tw-target="dichvu-tab">
-                                                    Dịch vụ
-                                                </button>
-                                            </li>
-                                            <li class="nav-item" role="presentation">
-                                                <button class="inline-block w-full py-4 px-[18px] dark:text-gray-50"
-                                                        data-tw-toggle="tab" type="button" data-tw-target="diemdung-tab">
+                                                        data-tw-toggle="tab" type="button"
+                                                        data-tw-target="diemdung-tab">
                                                     Điểm đón trả
                                                 </button>
                                             </li>
@@ -200,130 +197,115 @@
                                     <div class="p-6 tab-content">
 
                                         {{-- Mô tả --}}
-                                        <div class="block w-full tab-pane" id="mota-tab" style="min-height: 463px">
+                                        <div class="block w-full tab-pane" id="mota-tab">
 
                                             <div class="p-6 rounded border-gray-100/50 dark:border-neutral-600">
-                                                <div>
-                                                    <h6 class="mb-3 text-gray-900 text-17 dark:text-gray-50">Mô tả về chúng
-                                                        tôi
-                                                    </h6>
-                                                    <p class="mb-2 text-gray-500 dark:text-gray-300">
-                                                        {{ $passengerCars->description }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {{-- Dịch vụ --}}
-                                        <div class="hidden w-full tab-pane" id="dichvu-tab" style="min-height: 463px">
-                                            <div class="p-6 rounded border-gray-100/50 dark:border-neutral-600">
-                                                <div>
-                                                    <h6 class="mb-3 text-gray-900 text-17 dark:text-gray-50">Dịch vụ của chúng
-                                                        tôi
-                                                    </h6>
-                                                    @foreach ($passengerCars->services as $service)
-                                                        <div class="sm:flex">
-                                                            <div class="grow ltr:ml-3 rtl:mr-3">
-                                                                <div>
-                                                                    <p class="text-gray-900 dark:text-gray-50">
-                                                                        {{ $service->service_name }}</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    @endforeach
+                                                <div class="mb-2 text-gray-500 dark:text-gray-300">
+                                                    <div class="mb-4">
+                                                        @if(count($services) > 0)
+                                                            <h6 class="mb-2">Dịch vụ</h6>
+                                                            @foreach($services as $service)
+                                                                <span
+                                                                    class="px-2 py-0.5 mt-1 font-medium text-sky-500 rounded bg-sky-500/20 text-13">{{$service->service_name}}</span>
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+
+                                                    {!! $passengerCars[0]->description !!}
                                                 </div>
 
                                             </div>
                                         </div>
+
+
                                         {{-- Điểm dừng --}}
-                                        <div class="hidden w-full tab-pane" id="diemdung-tab" style="min-height: 463px">
+                                        <div class="hidden w-full tab-pane" id="diemdung-tab">
                                             <div class="mb-10">
                                                 <p
                                                     style="color: red; font-size: 14px;margin-top: 10px;display: block;clear: both;">
-                                                    Lưu ý: Giờ xuất phát của xe có thể đã thay đổi mà nhà xe chưa kịp cập
+                                                    Lưu ý: Giờ xuất phát của xe có thể đã thay đổi mà nhà xe chưa kịp
+                                                    cập
                                                     nhật,
-                                                    vì vậy để chắc chắn cho chuyến đi bạn nên gọi điện để khẳng định lại giờ
+                                                    vì vậy để chắc chắn cho chuyến đi bạn nên gọi điện để khẳng định lại
+                                                    giờ
                                                     xuất phát</p>
                                             </div>
                                             <div class="grid grid-cols-12 gap-y-5 lg:gap-5" style="padding: 5px">
-                                                <div style="background-color: #f8f0f0;" class="col-span-12 lg:col-span-6">
-                                                    <h3
-                                                        style="padding: 20px;font-size: 15px;color:rgb(9, 9, 9)k;font-weight: bold">
-                                                        Điểm đón</h3>
-                                                    @foreach ($passengerCars->route->stops as $stop)
-                                                        <div class="sm:flex">
-                                                            <div class="grow ltr:ml-3 rtl:mr-3">
-                                                                @if ($stop->stop_type == 0)
-                                                                    <div
-                                                                        style="display: flex;align-content: center;align-items: center;padding: 3px 0;margin-left: 30px">
-                                                                        <i class="fa-solid fa-square"
-                                                                           style="margin-right: 15px"></i>
-                                                                        <h6 style="text-align: center; padding: 3px 0;"
-                                                                            class="text-gray-900 dark:text-gray-50">
-                                                                            {{ $stop->stop_name }}</h6>
-                                                                    </div>
+                                                <div class="col-span-12 lg:col-span-6" style="padding: 5px">
+                                                    <div class="p-6 p-6 rounded bg-gray-50 dark:bg-neutral-700">
+                                                        <h6 class="text-gray-500 dark:text-gray-300 mb-6">Điểm đón</h6>
+                                                        <ul class="space-y-4">
+                                                            @foreach($stops as $key => $stop)
+                                                                @if($stop->stop_type == 0)
+                                                                    <li class="px-4 py-2 bg-white rounded dark:bg-neutral-600">
+                                                                        <span
+                                                                            class="px-2 py-1 rounded bg-sky-500/20 text-11 text-sky-500 ltr:float-left rtl:float-right mr-2">{{$key+1}}</span>
+                                                                        <div
+                                                                            class="text-gray-900 dark:text-white">{{$stop->stop_name}}</div>
+                                                                    </li>
                                                                 @endif
-                                                            </div>
-                                                        </div>
-                                                    @endforeach
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
                                                 </div>
-                                                <div style="background-color: #f8f0f0;" class="col-span-12 lg:col-span-6">
-                                                    <h3
-                                                        style="padding: 20px;font-size: 15px;color:rgb(9, 9, 9)k;font-weight: bold">
-                                                        Điểm dừng</h3>
-                                                    @foreach ($passengerCars->route->stops as $stop)
-                                                        <div class="sm:flex">
-                                                            <div class="grow ltr:ml-3 rtl:mr-3">
-                                                                @if ($stop->stop_type == 1)
-                                                                    <div
-                                                                        style="display: flex;align-content: center;align-items: center;padding: 0 0 10px 0;margin-left: 30px">
-                                                                        <i class="fa-solid fa-square"
-                                                                           style="margin-right: 15px"></i>
-                                                                        <h6 style="text-align: center; padding: 3px 0;"
-                                                                            class="text-gray-900 dark:text-gray-50">
-                                                                            {{ $stop->stop_name }}</h6>
-                                                                    </div>
+                                                <div class="col-span-12 lg:col-span-6" style="padding: 5px">
+                                                    <div class="p-6 rounded bg-gray-50 dark:bg-neutral-700">
+                                                        <h6 class="text-gray-500 dark:text-gray-300 mb-6">Điểm trả</h6>
+                                                        <ul class="space-y-4">
+                                                            @foreach($stops as $key => $stop)
+                                                                @if($stop->stop_type == 1)
+                                                                    <li class="px-4 py-2 bg-white rounded dark:bg-neutral-600">
+                                                                        <span
+                                                                            class="px-2 py-1 rounded bg-sky-500/20 text-11 text-sky-500 ltr:float-left rtl:float-right mr-2">{{$key+1}}</span>
+                                                                        <p class="text-gray-900 dark:text-white">{{$stop->stop_name}}</p>
+                                                                    </li>
                                                                 @endif
-                                                            </div>
-                                                        </div>
-                                                    @endforeach
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                         {{-- Đánh giá --}}
-                                        <div class="hidden w-full tab-pane" id="danhgia-tab" style="min-height: 463px">
+                                        <div class="hidden w-full tab-pane" id="danhgia-tab">
                                             <div>
-                                                @foreach ($comments as $cmt)
-                                                    @foreach ($users as $data)
-                                                        @if ($data->id == $cmt->user_id)
-                                                            <div class="sm:flex"
-                                                                 style="border-bottom: 1px solid rgb(224, 224, 224);padding: 10px">
-                                                                <div class="shrink-0">
-                                                                    <img class="w-10 h-10 p-1 border-2 rounded-full border-gray-100/50"
-                                                                         src="assets/images/user/img-04.jpg"
-                                                                         alt="img">
-                                                                </div>
-                                                                <div class="grow ltr:ml-3 rtl:mr-3">
-                                                                    <div>
-                                                                        <p
-                                                                            class="mb-2 text-sm text-gray-500 ltr:float-right rtl:float-left dark:text-gray-300">
-                                                                            {{ \Carbon\Carbon::parse($cmt->created_at)->format('d/m/Y') }}
-                                                                        </p>
-                                                                        <h6 class="text-gray-900 dark:text-gray-50">
-                                                                            {{ $data->name }}</h6>
-                                                                        <div class="text-yellow-500 text-17">
-                                                                            @for ($i = 0; $i < $cmt->star; $i++)
-                                                                                <i class="mdi mdi-star"></i>
-                                                                            @endfor
-                                                                        </div>
-                                                                        <p
-                                                                            class="mt-3 italic text-gray-500 dark:text-gray-300">
-                                                                            {{ $cmt->content }}</p>
+                                                @if(count($comments) == 0)
+                                                    <p class="text-gray-900 text-center dark:text-gray-50">
+                                                        Chưa có đánh giá
+                                                    </p>
+                                                @else
+                                                    @foreach ($comments as $cmt)
+                                                        <div class="sm:flex"
+                                                             style="border-bottom: 1px solid rgb(224, 224, 224);padding: 10px">
+                                                            <div class="shrink-0">
+                                                                <img
+                                                                    class="w-10 h-10 p-1 border-2 rounded-full border-gray-100/50"
+                                                                    src="assets/images/user/img-04.jpg"
+                                                                    alt="img">
+                                                            </div>
+                                                            <div class="grow ltr:ml-3 rtl:mr-3">
+                                                                <div>
+                                                                    <p
+                                                                        class="mb-2 text-sm text-gray-500 ltr:float-right rtl:float-left dark:text-gray-300">
+                                                                        {{ \Carbon\Carbon::parse($cmt->created_at)->format('d/m/Y') }}
+                                                                    </p>
+                                                                    <h6 class="text-gray-900 dark:text-gray-50">
+                                                                        {{ $cmt->user->name }}
+                                                                    </h6>
+                                                                    <div class="text-yellow-500 text-17">
+                                                                        @for ($i = 0; $i < $cmt->star; $i++)
+                                                                            <i class="mdi mdi-star"></i>
+                                                                        @endfor
                                                                     </div>
+                                                                    <p
+                                                                        class="mt-3 italic text-gray-500 dark:text-gray-300">
+                                                                        {{ $cmt->content }}
+                                                                    </p>
                                                                 </div>
                                                             </div>
-                                                        @endif
+                                                        </div>
                                                     @endforeach
-                                                @endforeach
-
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -346,8 +328,8 @@
                         </div>
                     </div>
                     <div class="grid grid-cols-12 gap-5">
-                        @foreach ($routes as $route)
-                            @if (!($passengerCars->id == $route->id))
+                        @foreach ($passengerCars as $route)
+                            @if ($route != null && $route->id == $routes->id)
                                 <div class="col-span-12 md:col-span-6 lg:col-span-4">
                                     <div
                                         class="p-2 mt-3 transition-all duration-500 bg-white rounded shadow-lg shadow-gray-100/50 card dark:bg-neutral-800 dark:shadow-neutral-600/20 group/blog">
@@ -364,10 +346,10 @@
                                                         href="javascript:void(0)"
                                                         class="text-light user">{{ $route->route->departure }} ->
                                                         {{ $route->route->arrival }}</a></p>
-                                                {{-- <p class="mb-0 text-light date"></i> {{$route->route->arrival}}</p> --}}
+                                                <p class="mb-0 text-light date"></i> {{$route->route->arrival}}</p>
                                                 <p class="mb-0 text-light date"><i
                                                         class="fa-solid fa-money-check-dollar"></i>
-                                                    {{ number_format($routes[0]->route->price, 0, ',', ',') }}đ</p>
+                                                    {{ number_format($route->price, 0, ',', ',') }}đ</p>
                                             </div>
                                             <div
                                                 class="hidden bottom-2 right-2 group-hover/blog:block author group-hover/blog:absolute">
@@ -383,7 +365,7 @@
                                         </div>
                                         <div class="p-5">
                                             <a href="" class="primary-link">
-                                                <h5 class="mb-1 text-gray-900 fs-17 dark:text-gray-50">Tên nhà xe</h5>
+                                                <h5 class="mb-1 text-gray-900 fs-17 dark:text-gray-50">{{$route->user->name}}</h5>
                                             </a>
                                             <p class="mb-6 text-gray-500 dark:text-gray-300"
                                                style="min-height: 50px;max-height: 50px">
@@ -428,147 +410,183 @@
                  class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 hidden w-80 h-96 z-50">
                 <div class="bg-white p-6 rounded relative">
                     <!-- Nút "x" -->
-                    <button onclick="hidePopup()"
-                            class="absolute top-0 right-0 mt-4 mr-4 text-gray-500 hover:text-gray-700 exit">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M6 18L18 6M6 6l12 12">
-                            </path>
-                        </svg>
-                    </button>
-
+                    <div class="flex justify-between items-center">
+                        <p>Mua vé xe</p>
+                        <button class="top-0 right-0 text-gray-500 hover:text-gray-700 exit">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M6 18L18 6M6 6l12 12">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
 
                     <div class="flex items-center gap-x-3">
-                        <div class="rounded border w-1/2 mx-auto mt-4">
-                            <!-- Tabs -->
-                            <ul id="tabs" class="inline-flex pt-2 px-1 w-full border-b">
-                                <li
-                                    class="bg-white px-4 text-gray-800 font-semibold py-2 rounded-t border-t border-r border-l -mb-px">
-                                    <a id="default-tab" href="#first">Chỗ mong muốn</a>
-                                </li>
-                                <li class="px-4 text-gray-800 font-semibold py-2 rounded-t"><a href="#second">Điểm đón
-                                        trả</a>
-                                </li>
-                                <li class="px-4 text-gray-800 font-semibold py-2 rounded-t"><a href="#third">Nhập thông
-                                        tin</a>
-                                </li>
-                            </ul>
+                        <div class="rounded mx-auto mt-4">
 
-                            <!-- Tab Contents -->
-                            <div id="tab-contents" class="h-full w-full">
-                                <div id="first" class="p-4 step">
-                                    <label for="">Số lượng khách</label>
-                                    <div class="flex justify-between">
-                                        <p>Ghế thường - <span class="price">{{ $routes[0]->route->price }}</span>đ</p>
-                                        <div class="flex items-center">
-                                            <button
-                                                class="w-8 h-8 rounded-full bg-white-500 text-black flex items-center justify-center decrement-btn">
-                                                <span class="text-lg font-bold">-</span>
+
+                            <div class="rounded dark:border-neutral-600 nav-tabs bottom-border-tab col-span-12 lg:col-span-12 lg:col-start-12">
+                                <div class="py-0 pt-2 border-b border-gray-100/50 dark:border-neutral-600">
+
+                                    <ul class="items-center text-sm font-medium text-center text-gray-700 nav md:flex">
+                                        <li class="first-li flex items-center" role="presentation">
+                                            <button disabled class="m-0 firstItem flex items-center inline-block w-full py-4 px-[18px] dark:text-gray-50 active" data-tw-toggle="tab" type="button">
+                                                <span class="first">Chỗ mong muốn</span>
                                             </button>
-                                            <input type="text" min="1" value="0" name="countTicket"
-                                                   class="w-24 text-center qty-input">
+                                        </li>
+                                        <li class="second-li nav-item flex items-center" role="presentation">
+                                            <button disabled class="m-0 secondItem flex items-center w-full py-4 px-[18px] dark:text-gray-50" data-tw-toggle="tab" type="button">
+                                                <span class="second">Điểm đón trả</span>
+                                            </button>
+                                        </li>
+                                        <li class="third-li nav-item flex items-center" role="presentation">
+                                            <button disabled class="m-0 thirdItem inline-block w-full py-4 px-[18px] dark:text-gray-50" data-tw-toggle="tab" type="button">
+                                                <span class="third">Thông tin</span>
+                                            </button>
+                                        </li>
+
+                                    </ul>
+                                </div>
+
+                                <div class="p-4 tab-content">
+
+                                    <div id="first" class="block w-full tab-pane">
+
+                                        <p class="my-4">Số lượng khách</p>
+                                        <div class="flex justify-between mb-8 items-center">
+                                            <p>Ghế thường - <span class="price">
+                                                {{ $passengerCars[0]->price }}
+                                            </span>đ</p>
+                                            <div class="flex items-center">
+                                                <button
+                                                    class="w-8 h-8 w-8 h-8 border border-black rounded-full bg-white-500 text-black flex items-center justify-center decrement-btn">
+                                                    <span class="text-lg font-bold">-</span>
+                                                </button>
+                                                <input type="text" min="1" value="0" name="countTicket"
+                                                       class="w-12 border-0 rounded text-center qty-input">
+                                                <button
+                                                    class="w-8 h-8 border border-black rounded-full bg-white-500 text-black flex items-center justify-center increment-btn">
+                                                    <span class="text-lg font-bold">+</span>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="show-total text-sm my-4"></div>
+
+                                        <div class="flex justify-end">
                                             <button
-                                                class="w-8 h-8 rounded-full bg-white-500 text-black flex items-center justify-center increment-btn">
-                                                <span class="text-lg font-bold">+</span>
+                                                class="flex text-white border-transparent group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 py-2 px-4 rounded float-right"
+                                                id="first-next">Tiếp tục
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"></path></svg>
                                             </button>
                                         </div>
                                     </div>
-                                    <div class="p-4">
-                                        <button
-                                            class="text-black border border-black bg-white font-bold py-2 px-4 rounded float-right"
-                                            id="first-next">Next</button>
+
+
+
+                                    <div id="second" class="hidden w-full tab-pane">
+                                        <div class="flex justify-between">
+                                            <div class="flex flex-col w-1/2" style="overflow-y: auto; max-height: 200px; max-width: 50%;">
+                                                Điểm đón:
+                                                @foreach ($stops as $data)
+                                                    @if ($data->stop_type == 0)
+                                                        <div class="mb-5">
+                                                            <input type="radio" id="departure" name="departure"
+                                                                   class="form-radio h-5 w-5 text-blue-600 outline-none focus:ring-0"
+                                                                   value="duong">
+                                                            <label for="{{$data->id}}"
+                                                                   class="ml-2 mb-3" id="{{$data->id}}">{{$data->stop_name}}</label>
+                                                        </div>
+                                                    @endif
+                                                @endforeach
+                                            </div>
+                                            <div class="flex flex-col w-1/2" style="overflow-y: auto; max-height: 200px; max-width: 50%;">
+                                                Điểm đón:
+                                                @foreach ($stops as $data)
+                                                    @if ($data->stop_type == 1)
+                                                        <div class="mb-5">
+                                                            <input type="radio" id="arrival" name="arrival1"
+                                                                   class="form-radio h-5 w-5 text-blue-600 outline-none focus:ring-0"
+                                                                   value="duong">
+                                                            <label for="{{$data->id}}"
+                                                                   class="ml-2 mb-3" id="{{$data->id}}">{{$data->stop_name}}</label>
+                                                        </div>
+                                                    @endif
+                                                @endforeach
+                                            </div>
+                                        </div>
+
+
+                                        <div class="show-total text-sm my-4"></div>
+
+                                        <div class="flex justify-between">
+                                            <button id="second-back"
+                                                    class="text-black border border-black bg-white py-2 px-4 rounded">
+                                                Quay lại
+                                            </button>
+                                            <button id="second-next"
+                                                    class="flex text-white border-transparent group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 py-2 px-4 rounded float-right">
+                                                Tiếp tục
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"></path></svg>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div id="third" class="hidden w-full tab-pane">
+                                        <div class="max-w-md mx-auto bg-white rounded p-8 ">
+                                            <div class="mb-4">
+                                                <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Họ và
+                                                    tên</label>
+                                                <input
+                                                    class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                    name="name" id="name" type="text"
+                                                    placeholder="Nhập họ và tên của bạn">
+                                            </div>
+                                            <div class="mb-4">
+                                                <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">Số
+                                                    điện
+                                                    thoại</label>
+                                                <input
+                                                    class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                    name="phone" id="phone" type="text"
+                                                    value="{{ isset(Auth::user()->phone) ? Auth::user()->phone : '' }}"
+                                                    placeholder="Nhập Số điện thoại của bạn"
+                                                    @if (isset(Auth::user()->phone)) readonly @endif>
+                                            </div>
+                                            <div class="mb-4">
+                                                <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email
+                                                    để nhận thông tin vé</label>
+                                                <input
+                                                    class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                    name="email" id="email" type="text"
+                                                    value="{{ isset(Auth::user()->email) ? Auth::user()->email : '' }}"
+                                                    placeholder="Nhập địa chỉ email của bạn"
+                                                    @if (isset(Auth::user()->email)) readonly @endif>
+                                            </div>
+                                        </div>
+
+                                        <div class="show-total text-sm my-4"></div>
+
+                                        <div class="flex justify-between">
+                                            <button id="third-back"
+                                                    class="text-black border border-black bg-white py-2 px-4 rounded">
+                                                Quay lại
+                                            </button>
+                                            <button
+                                                class="flex submit text-white border-transparent group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 py-2 px-4 rounded float-right"
+                                                data-action="{{ route('client.ticket.update-ticket') }}"
+                                                data-id="
+                                            {{ $passengerCars[0]->id }}
+                                            ">
+                                                Tiếp tục
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"></path></svg>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                                <div id="second" class="hidden p-4 step">
-                                    <div class="flex justify-between">
-                                        <div class="flex flex-col w-1/2" style="overflow-y: auto; max-height: 200px;">
-                                            Điểm đón:
-                                            @foreach ($stops as $data)
-                                                @if ($data->stop_type == 0)
-                                                    <div class="mb-5">
-                                                        <input type="radio" id="departure" name="departure"
-                                                               class="form-radio h-5 w-5 text-blue-600"
-                                                               value="{{ $data->stop_name }}">
-                                                        <label for="departure"
-                                                               class="ml-2 mb-3">{{ $data->stop_name }}</label>
-                                                    </div>
-                                                @endif
-                                            @endforeach
-                                        </div>
-                                        <div class="flex flex-col w-1/2" style="overflow-y: auto; max-height: 200px;">
-                                            Điểm đón:
-                                            @foreach ($stops as $data)
-                                                @if ($data->stop_type == 1)
-                                                    <div class="mb-5">
-                                                        <input type="radio" id="arrival" name="arrival1"
-                                                               class="form-radio h-5 w-5 text-blue-600"
-                                                               value="{{ $data->stop_name }}">
-                                                        <label for="arrival"
-                                                               class="ml-2 mb-3">{{ $data->stop_name }}</label>
-                                                    </div>
-                                                @endif
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                    <div class="p-4 flex justify-between">
-                                        <button id="second-back"
-                                                class="text-black border border-black bg-white font-bold py-2 px-4 rounded">Back</button>
-                                        <button id="second-next"
-                                                class="text-black border border-black bg-white font-bold py-2 px-4 rounded">Next</button>
-                                    </div>
-                                </div>
-                                <div id="third" class="hidden p-4 step">
-                                    <div class="max-w-md mx-auto bg-white rounded p-8 shadow-md">
-                                        <div class="mb-4">
-                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Họ và
-                                                tên</label>
-                                            <input
-                                                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                                name="name" id="name" type="text"
-                                                placeholder="Nhập họ và tên của bạn">
-                                        </div>
-                                        <div class="mb-4">
-                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">Số
-                                                điện
-                                                thoại</label>
-                                            <input
-                                                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                                name="phone" id="phone" type="text"
-                                                value="{{ isset(Auth::user()->phone) ? Auth::user()->phone : '' }}"
-                                                placeholder="Nhập Số điện thoại của bạn">
-
-                                        </div>
-                                        <div class="mb-4">
-                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email
-                                                để nhận thông tin vé</label>
-                                            <input
-                                                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                                name="email" id="email" type="text"
-                                                value="{{ isset(Auth::user()->email) ? Auth::user()->email : '' }}"
-                                                placeholder="Nhập địa chỉ email của bạn">
-
-                                        </div>
-                                    </div>
-                                    <div class="p-4 flex justify-between">
-                                        <button id="third-back"
-                                                class="text-black border border-black bg-white font-bold py-2 px-4 rounded">Back
-                                        </button>
-                                        <button
-                                            class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded submit"
-                                            data-action="{{ route('client.ticket.update-ticket') }}"
-                                            data-id="{{ $passengerCars->id }}">
-                                            Tiếp tục
-                                        </button>
-
-                                        <input name="user_id" type="hidden" value="{{ isset(Auth::user()->id) ? Auth::user()->id : NULL }}">
-
-                                    </div>
-                                </div>
-
                             </div>
-                            <div class="flex justify-between px-4 text-gray-800 font-semibold py-2 rounded-t show-total">
-                            </div>
-                            <!-- End Tab Contents -->
+
+
                         </div>
                     </div>
                 </div>
