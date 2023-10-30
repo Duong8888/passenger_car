@@ -3,10 +3,10 @@
 
     <div class="mx-auto container-fluid">
         <div class="flex flex-wrap items-center justify-between mx-auto">
+
             <a href="{{route('home')}}" class="flex items-center">
                 <img src="https://imgur.com/uTTUL5F" alt="" class="logo-dark block dark:hidden" style="width: 200px">
                 {{-- <img src="client/images/logo-light.png" alt="" class="logo-dark h-[22px] hidden dark:block"> --}}
-
             </a>
             <button data-collapse-toggle="navbar-collapse" type="button"
                     class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg navbar-toggler group lg:hidden hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-100"
@@ -130,42 +130,7 @@
                     <li class="relative dropdown lg:mt-0">
                         <button href="#" class="py-5 text-gray-800 lg:px-4 dropdown-toggle lg:h-[70px]" id="pages"
                                 data-bs-toggle="dropdown"><a href="{{route('blog.show')}}">Tin tức</a></button>
-                        {{-- <i class="align-middle bx bxs-chevron-down ltr:ml-1 rtl:mr-1"></i> --}}
                     </li>
-                    {{-- <li class="relative dropdown lg:mt-0">
-<button href="#" class="py-5 text-gray-800 lg:px-4 dropdown-toggle lg:h-[70px]" id="blog"
-                            data-bs-toggle="dropdown">Blog <i
-                                class="align-middle bx bxs-chevron-down ltr:ml-1 rtl:mr-1"></i></button>
-
-                        <ul class="relative top-auto z-50 py-2 list-none bg-white border-0 rounded dropdown-menu lg:border border-gray-500/20 lg:absolute ltr:-left-3 rtl:-right-3 lg:w-48 lg:shadow-lg hidden"
-                            aria-labelledby="blog">
-
-                            <li>
-                                <a class="block w-full px-4 py-2 text-13 font-medium text-gray-700 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50"
-                                    href="blog.html">Blog</a>
-                            </li>
-
-                            <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-700 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="blog-grid.html">Blog Grid</a>
-
-                            </li>
-                            <li>
-                                <a class="block w-full px-4 py-2 text-13 font-medium text-gray-700 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50"
-                                   href="blog-modern.html">Blog Modern</a>
-                            </li>
-                            <li>
-<a class="block w-full px-4 py-2 text-13 font-medium text-gray-700 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50"
-                                   href="blog-masonry.html">Blog Masonry</a>
-                            </li>
-                            <li>
-                                <a class="block w-full px-4 py-2 text-13 font-medium text-gray-700 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50"
-                                   href="blog-details.html">Blog details</a>
-                            </li>
-
-                            <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-700 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="blog-author.html">Blog Author</a>
-                            </li>
-
-                        </ul>
-                    </li> --}}
                     <li class="py-5 lg:px-4">
                         <a href="contact.html" class="py-2.5 text-gray-800 font-medium leading-tight" id="contact"
                            data-bs-toggle="dropdown">Liên hệ </a>

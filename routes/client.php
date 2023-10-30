@@ -8,15 +8,20 @@ use App\Http\Controllers\PhoneAuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Client\BlogController;
+use App\Http\Controllers\Client\CategoryController;
 use App\Http\Controllers\Client\ProfileController;
+
 use App\Http\Controllers\MapController;
 
 //Nam
 
 Route::get('/',[HomeController::class,'index'])->name('home');;
-Route::post('/passengerCar-detail',[HomeController::class,'passengerCarDetail'])->name('passengerCar-detail');
+Route::get('car/{id}',[HomeController::class,'passengerCarDetail'])->name('passengerCar.detail');
+
+//Route::post('/passengerCar-detail',[HomeController::class,'passengerCarDetail'])->name('passengerCar-detail');
 Route::resource('/profile',ProfileController::class);
 Route::get('/profile/ticketdetails/{id}',[ProfileController::class,'ticketDetails'])->name('ticketDetails_index');
+
 
 
 
@@ -38,6 +43,7 @@ Route::group(['prefix' => 'notifications', 'as' => 'notifications.'], function (
 
 Route::get('/blog/{id}', [BlogController::class, 'blog'])->name('blog');
 Route::get('/blogs', [BlogController::class, 'show'])->name('blog.show');
+Route::get('/category-detail/{id}',[BlogController::class, 'show'])->name('category-detail');
 
 
 Route::post('/update-ticket', [TicketController::class, 'CountTicket'])->name('client.ticket.update-ticket');
@@ -50,7 +56,9 @@ Route::get('/end-ticket-payment', [TicketController::class, 'EndTicketPayment'])
 
 
 Route::get('/loginadmin', [App\Http\Controllers\LoginAdminController::class, 'showLoginAdmin'])->name('login_admin');
-Route::post('/loginadmin', [App\Http\Controllers\LoginAdminController::class, 'loginAdmin']);
+
+Route::post('/loginadmin', [App\Http\Controllers\LoginAdminController::class, 'loginAdmin'])->name('login_admin_success');
+
 Route::get('/logoutadmin', [App\Http\Controllers\LoginAdminController::class, 'logoutAdmin'])->name('logoutAdmin');
 
 

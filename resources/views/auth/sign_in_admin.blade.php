@@ -123,7 +123,7 @@
                                                 <h5 class="text-[18.5px] text-white">Welcome Back !</h5>
                                                 <p class="mt-3 text-white/80">Sign in to continue to Jobcy.</p>
                                             </div>
-                                            <form action="{{route('login_admin')}}" method="post" class="mt-8">
+                                            <form action="{{route('admin.login')}}" method="post" class="mt-8">
                                                 @csrf
                                                 <div class="mb-5">
                                                     <label for="EmailInput" class="text-white">Email</label>

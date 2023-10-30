@@ -16,35 +16,13 @@
                 </div>
             </div>
             <div class="nav-tabs chart-tabpill">
-                <!-- <div class="grid grid-cols-12">
-                    <div class="col-span-12 lg:col-span-8 lg:col-start-3">
-                        <div class="p-1.5 bg-white dark:bg-neutral-900 shadow-lg shadow-gray-100/30 rounded-lg dark:shadow-neutral-700">
-                            <ul class="items-center text-sm font-medium text-center text-gray-700 nav md:flex">
-                                <li class="w-full">
-                                    <a href="javascript:void(0);" data-tw-toggle="tab" data-tw-target="recent-job" class="inline-block w-full py-[12px] px-[18px] dark:text-gray-50 active" aria-current="page">Recent Jobs</a>
-                                </li>
-                                <li class="w-full">
-                                    <a href="javascript:void(0);" data-tw-toggle="tab" data-tw-target="featured-jobs-tab" class="inline-block w-full py-[12px] px-[18px] dark:text-gray-50">Featured Jobs</a>
-                                </li>
-                                <li class="w-full">
-                                    <a href="javascript:void(0);" data-tw-toggle="tab" data-tw-target="freelancer-tab" class="inline-block w-full py-[12px] px-[18px] dark:text-gray-50">Freelancer</a>
-                                </li>
-                                <li class="w-full">
-                                    <a href="javascript:void(0);" data-tw-toggle="tab" data-tw-target="part-time-tab" class="inline-block w-full py-[12px] px-[18px] dark:text-gray-50">Part Time</a>
-                                </li>
-                                <li class="w-full">
-                                    <a href="javascript:void(0);" data-tw-toggle="tab" data-tw-target="full-time-tab" class="inline-block w-full py-[12px] px-[18px] dark:text-gray-50">Full Time</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div> -->
                 <div class="tab-content">
                     <div class="block w-full tab-pane" id="recent-job">
                         <div class="pt-8 ">
                             <div class="space-y-8">
                                 <!--  -->
                                 @foreach ($passengerCars as $car)
+                                    @foreach ($car->workingTime as $workingTime)
                                     {{--  --}}
                                     <div
                                         class="relative mt-4 overflow-hidden transition-all duration-500 ease-in-out bg-white border rounded-md border-gray-100/50 group/jobs group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:-translate-y-2 dark:bg-neutral-900 dark:border-neutral-600 ">
@@ -58,7 +36,7 @@
                                                 <div class="col-span-12 lg:col-span-2">
                                                     <div class="mb-4 text-center mb-md-0">
                                                         <a href="company-details.html">
-                                                            <img style=" width: 55%;"src="{{ asset($car->albums[0]->path) }}".alt="anh0001" class="mx-auto img-fluid rounded-3"></a>
+                                                            <img style="width: 55%;" src="{{asset($car->albums[0]->path)}}" alt="anh0001" class="mx-auto img-fluid rounded-3"></a>
                                                         {{-- Ảnh: <img src="{{ $car->albums->first()->path }}" alt="Ảnh xe"> --}}
                                                     </div>
                                                 </div>
@@ -74,7 +52,7 @@
                                                 </div>
                                                 <!--end col-->
                                                 <div class="col-span-12 lg:col-span-3">
-                                                    @foreach ($car->workingTime as $workingTime)
+
                                                         <div class="mb-2 lg:flex">
                                                             <div class="flex-shrink-0">
                                                                 <i style="font-size: 11px;padding-left: 2px"
@@ -83,7 +61,7 @@
                                                             <p class="mb-0 text-gray-500 dark:text-gray-300"><span
                                                                     style="font-weight: bold;"> {{ \Carbon\Carbon::parse($workingTime->departure_time)->format('H:i') }} -- {{ \Carbon\Carbon::parse($workingTime->arrival_time)->format('H:i') }}</span></p>
                                                         </div>
-                                                    @endforeach
+
                                                 </div>
 
                                                 <!--end col-->
@@ -107,19 +85,7 @@
                                                 <!--end col-->
                                                 <div class="col-span-12 lg:col-span-2">
                                                     <div class="flex flex-wrap gap-1.5">
-                                                        <form action="{{ route('passengerCar-detail') }}"
-                                                              method="POST">
-                                                            @csrf
-                                                            <input type="text" hidden name='passenger_id'
-                                                                   value="{{$car->id}}">
-                                                            <input type="text" hidden name='image_id'
-                                                                   value="{{$car->album_id}}">
-                                                            <input type="text" hidden name='route_id'
-                                                                   value="{{$car->route_id}}">
-                                                            <button>
-                                                              <span class="badge text-sky-500 text-13 px-2 py-0.5 font-medium rounded">Thông tin chi tiết >></span>
-                                                            </button>
-                                                        </form>
+                                                        <a href="{{route('passengerCar.detail',['id'=>$car->id,'time'=>$workingTime->id])}}" class="badge text-sky-500 text-13 px-2 py-0.5 font-medium rounded">Thông tin chi tiết </a>
                                                     </div>
                                                 </div>
                                                 <!--end col-->
@@ -163,7 +129,7 @@
                                             <!--end row-->
                                         </div>
                                     </div>
-
+                                    @endforeach
                                 @endforeach
 
                             </div>
