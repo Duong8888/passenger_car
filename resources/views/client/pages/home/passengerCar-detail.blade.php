@@ -328,79 +328,79 @@
                         </div>
                     </div>
                     <div class="grid grid-cols-12 gap-5">
-                                                @foreach ($passengerCars as $route)
-                                                    @if ($route != null && $route->id == $routes->id)
-                                                        <div class="col-span-12 md:col-span-6 lg:col-span-4">
-                                                            <div
-                                                                class="p-2 mt-3 transition-all duration-500 bg-white rounded shadow-lg shadow-gray-100/50 card dark:bg-neutral-800 dark:shadow-neutral-600/20 group/blog">
-                                                                <div class="relative overflow-hidden">
-                                                                    <img style="min-width: 100%;height: 300px;"
-                                                                         src="{{ asset($route->albums[0]->path) }}" alt="car"
-                                                                         class="rounded">
-                                                                    <div
-                                                                        class="absolute inset-0 hidden transition-all duration-500 rounded-md bg-black/30 group-hover/blog:block">
-                                                                    </div>
-                                                                    <div
-                                                                        class="hidden text-white transition-all duration-500 top-2 left-2 group-hover/blog:block author group-hover/blog:absolute">
-                                                                        <p class="mb-0 "><i class="fa-solid fa-map-location-dot"></i> <a
-                                                                                href="javascript:void(0)"
-                                                                                class="text-light user">{{ $route->route->departure }} ->
-                                                                                {{ $route->route->arrival }}</a></p>
-                                                                         <p class="mb-0 text-light date"></i> {{$route->route->arrival}}</p>
-                                                                        <p class="mb-0 text-light date"><i
-                                                                                class="fa-solid fa-money-check-dollar"></i>
-                                                                            {{ number_format($route->price, 0, ',', ',') }}đ</p>
-                                                                    </div>
-                                                                    <div
-                                                                        class="hidden bottom-2 right-2 group-hover/blog:block author group-hover/blog:absolute">
-                                                                        <ul class="mb-0 list-unstyled">
-                                                                            <li class="list-inline-item"><a href="javascript:void(0)"
-                                                                                                            class="text-white"><i class="mdi mdi-heart-outline me-1"></i>
-                                                                                    999</a></li>
-                                                                            <li class="list-inline-item"><a href="javascript:void(0)"
-                                                                                                            class="text-white"><i
-                                                                                        class="mdi mdi-comment-outline me-1"></i> 99</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="p-5">
-                                                                    <a href="" class="primary-link">
-                                                                        <h5 class="mb-1 text-gray-900 fs-17 dark:text-gray-50">{{$route->user->name}}</h5>
-                                                                    </a>
-                                                                    <p class="mb-6 text-gray-500 dark:text-gray-300"
-                                                                       style="min-height: 50px;max-height: 50px">
-                                                                        {{ Str::limit($route->description, 100, '...') }}</p>
-                                                                    <!--end col-->
-                                                                    <div class="col-span-3 lg:col-span-2">
-                                                                        <div class="text-start text-md-end dark:text-gray-50">
-                                                                            <form action="{{ URL::to('passengerCar-detail') }}" method="POST">
-                                                                                @csrf
-                                                                                <input type="text" hidden name='passenger_id'
-                                                                                       value="{{ $route->id }}">
-                                                                                <input type="text" hidden name='image_id'
-                                                                                       value="{{ $route->album_id }}">
-                                                                                <input type="text" hidden name='route_id'
-                                                                                       value="{{ $route->route_id }}">
-                                                                                <button class="text-blue-500"
-                                                                                        style="font-size: 16px;font-weight: bold;coler:rgb(68, 155, 254)"><i
-                                                                                        class="mdi mdi-chevron-double-right"></i>Đặt vé
-                                                                                    ngay</button>
-                                                                                <style>
-                                                                                    . {
-                                                                                        color: rgb(88, 50, 255);
-                                                                                        font-weight: bold
-                                                                                    }
-                                                                                </style>
-                                                                            </form>
+                        @foreach ($passengerCars as $route)
+                            @if ($route != null && $route->id == $routes->id)
+                                <div class="col-span-12 md:col-span-6 lg:col-span-4">
+                                    <div
+                                        class="p-2 mt-3 transition-all duration-500 bg-white rounded shadow-lg shadow-gray-100/50 card dark:bg-neutral-800 dark:shadow-neutral-600/20 group/blog">
+                                        <div class="relative overflow-hidden">
+                                            <img style="min-width: 100%;height: 300px;"
+                                                 src="{{ asset($route->albums[0]->path) }}" alt="car"
+                                                 class="rounded">
+                                            <div
+                                                class="absolute inset-0 hidden transition-all duration-500 rounded-md bg-black/30 group-hover/blog:block">
+                                            </div>
+                                            <div
+                                                class="hidden text-white transition-all duration-500 top-2 left-2 group-hover/blog:block author group-hover/blog:absolute">
+                                                <p class="mb-0 "><i class="fa-solid fa-map-location-dot"></i> <a
+                                                        href="javascript:void(0)"
+                                                        class="text-light user">{{ $route->route->departure }} ->
+                                                        {{ $route->route->arrival }}</a></p>
+                                                <p class="mb-0 text-light date"></i> {{$route->route->arrival}}</p>
+                                                <p class="mb-0 text-light date"><i
+                                                        class="fa-solid fa-money-check-dollar"></i>
+                                                    {{ number_format($route->price, 0, ',', ',') }}đ</p>
+                                            </div>
+                                            <div
+                                                class="hidden bottom-2 right-2 group-hover/blog:block author group-hover/blog:absolute">
+                                                <ul class="mb-0 list-unstyled">
+                                                    <li class="list-inline-item"><a href="javascript:void(0)"
+                                                                                    class="text-white"><i class="mdi mdi-heart-outline me-1"></i>
+                                                            999</a></li>
+                                                    <li class="list-inline-item"><a href="javascript:void(0)"
+                                                                                    class="text-white"><i
+                                                                class="mdi mdi-comment-outline me-1"></i> 99</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="p-5">
+                                            <a href="" class="primary-link">
+                                                <h5 class="mb-1 text-gray-900 fs-17 dark:text-gray-50">{{$route->user->name}}</h5>
+                                            </a>
+                                            <p class="mb-6 text-gray-500 dark:text-gray-300"
+                                               style="min-height: 50px;max-height: 50px">
+                                                {{ Str::limit($route->description, 100, '...') }}</p>
+                                            <!--end col-->
+                                            <div class="col-span-3 lg:col-span-2">
+                                                <div class="text-start text-md-end dark:text-gray-50">
+                                                    <form action="{{ URL::to('passengerCar-detail') }}" method="POST">
+                                                        @csrf
+                                                        <input type="text" hidden name='passenger_id'
+                                                               value="{{ $route->id }}">
+                                                        <input type="text" hidden name='image_id'
+                                                               value="{{ $route->album_id }}">
+                                                        <input type="text" hidden name='route_id'
+                                                               value="{{ $route->route_id }}">
+                                                        <button class="text-blue-500"
+                                                                style="font-size: 16px;font-weight: bold;coler:rgb(68, 155, 254)"><i
+                                                                class="mdi mdi-chevron-double-right"></i>Đặt vé
+                                                            ngay</button>
+                                                        <style>
+                                                            . {
+                                                                color: rgb(88, 50, 255);
+                                                                font-weight: bold
+                                                            }
+                                                        </style>
+                                                    </form>
 
-                                                                        </div>
-                                                                    </div>
-                                                                    <!--end col-->
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    @endif
-                                                @endforeach
+                                                </div>
+                                            </div>
+                                            <!--end col-->
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
             </section>
@@ -436,7 +436,7 @@
                                         </li>
                                         <li class="second-li nav-item flex items-center" role="presentation">
                                             <button disabled class="m-0 secondItem flex items-center w-full py-4 px-[18px] dark:text-gray-50" data-tw-toggle="tab" type="button">
-                                               <span class="second">Điểm đón trả</span>
+                                                <span class="second">Điểm đón trả</span>
                                             </button>
                                         </li>
                                         <li class="third-li nav-item flex items-center" role="presentation">
@@ -509,7 +509,7 @@
                                                                    class="form-radio h-5 w-5 text-blue-600 outline-none focus:ring-0"
                                                                    value="duong">
                                                             <label for="{{$data->id}}"
-                                                            class="ml-2 mb-3" id="{{$data->id}}">{{$data->stop_name}}</label>
+                                                                   class="ml-2 mb-3" id="{{$data->id}}">{{$data->stop_name}}</label>
                                                         </div>
                                                     @endif
                                                 @endforeach

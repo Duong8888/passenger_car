@@ -94,7 +94,6 @@
                 data-session="{{ json_encode(session('value')) }}" class="bg-yellow-500 w-1/2 p-2 m-2 finish-ticket-offline"
                 >Thanh toán tại
                 nhà xe</button>
-
         </div>
         <form action="{{ route('client.ticket.vnpay-method') }}" method="POST"
             class="fixed bottom-0 left-0 right-0 p-4 bg-white shadow-md flex justify-center vnpay-ticket hidden">

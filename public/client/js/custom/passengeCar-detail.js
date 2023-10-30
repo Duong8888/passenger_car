@@ -65,9 +65,9 @@ $(document).ready(function () {
     const TIME_TO_UPDATE = 1000;
 
     $(document).on('click', '.submit', function () {
-        var user_id = 1;
+        var user_id = $('input[name="user_id"]').val();
         var username = $('input[name="name"]').val();
-        var phone = $('input[name="phone"]').val();
+        var phone = '+84' + $('input[name="phone"]').val();
         var email = $('input[name="email"]').val();
         var total_price = TicketPrice * CountTicket;
         var quantity = CountTicket;
@@ -107,6 +107,7 @@ $(document).ready(function () {
     const secondTab = document.getElementById('second');
     const thirdTab = document.getElementById('third');
 
+
     const firstTabBtn = $('.first');
     const secondTabBtn = $('.second');
     const thirdTabBtn = $('.third');
@@ -130,12 +131,13 @@ $(document).ready(function () {
             $('.second-li>button').addClass('active');
             $('.firstItem>.icon-item').attr('data-item','first')
         } else{
+
             swal("Lỗi", "Vui lòng chọn ít nhất 1 chỗ ngồi", "error");
         }
     });
 
 
-    secondBackButton.addEventListener('click', function() {
+    secondBackButton.addEventListener('click', function () {
         secondTab.classList.add('hidden');
         firstTab.classList.remove('hidden');
         $('.first-li>button').addClass('active');
@@ -144,7 +146,7 @@ $(document).ready(function () {
     });
 
 
-    secondNextButton.addEventListener('click', function() {
+    secondNextButton.addEventListener('click', function () {
         secondTab.classList.add('hidden');
         thirdTab.classList.remove('hidden');
         secondTabBtn.before(icon);
@@ -154,7 +156,7 @@ $(document).ready(function () {
     });
 
 
-    thirdBackButton.addEventListener('click', function() {
+    thirdBackButton.addEventListener('click', function () {
         thirdTab.classList.add('hidden');
         secondTab.classList.remove('hidden');
         $('.second-li>button').addClass('active');
