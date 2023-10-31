@@ -1,8 +1,8 @@
 @extends('client.layout.master')
 
 @section('content')
-<div class="main-content">
-    <div class="page-content">
+    <div class="main-content">
+        <div class="page-content">
 
             <section
                 class="pt-28 lg:pt-44 pb-28 group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 dark:bg-neutral-900 bg-[url('../images/home/page-title.html')] bg-center bg-cover relative">
@@ -22,16 +22,13 @@
                                         </ol>
                                     </nav>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
-
             </section>
 
-
-        <!-- Start grid -->
+            <!-- Start grid -->
             <section class="py-20">
                 <div class="container mx-auto">
                     <div class="grid grid-cols-12 gap-y-10 lg:gap-10">
@@ -47,7 +44,7 @@
 
                                     </div>
                                 </div>
-                                <div class="p-5 pt-5">
+<div class="p-5 pt-5">
                                     <h6 class="mb-3 font-semibold text-gray-900 text-17 dark:text-gray-50">Thông tin cá nhân
                                     </h6>
                                     <ul class="mb-0">
@@ -57,7 +54,7 @@
                                                     class="w-32 font-medium text-gray-900 dark:text-gray-50">Email</label>
                                                 <div>
                                                     <p class="mb-0 text-gray-500 text-break dark:text-gray-300">
-                                                       {{ $user->email }}
+                                                        {{ $user->email }}
                                                     </p>
                                                 </div>
                                             </div>
@@ -71,7 +68,6 @@
                                                 </div>
                                             </div>
                                         </li>
-
 
                                         {{-- <li class="pb-3">
                                             <div class="flex">
@@ -94,7 +90,7 @@
 
                             </div>
                         </div>
-                        <div class="col-span-12 lg:col-span-8">
+<div class="col-span-12 lg:col-span-8">
                             <div
                                 class="border rounded border-gray-100/50 dark:border-neutral-600 nav-tabs bottom-border-tab">
                                 <div class="px-6 py-0 border-b border-gray-100/50 dark:border-neutral-600">
@@ -129,21 +125,18 @@
                                             <button class="inline-block w-full py-4 px-[18px] dark:text-gray-50"
                                                 data-tw-toggle="tab" type="button" data-tw-target="password-tab">
                                                 Đổi mật khẩu
-
                                             </button>
                                         </li>
                                     </ul>
                                 </div>
 
-
                                 <div class="p-6 tab-content">
-                                    <div class="hidden w-full tab-pane" id="present-tab">
+<div class="hidden w-full tab-pane" id="present-tab">
                                         {{-- <form action="{{ route('ticketDetails_index',$user->tickets->id) }}" method="POST" enctype="multipart/form-data"> --}}
                                         @foreach ($tickets as $item)
                                             @if ($item->status == 2)
                                                 <div
                                                     class="mb-5 p-5 border border-gray-100/50 rounded-md relative hover:-translate-y-1.5 transition-all duration-500 ease-in-out group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:shadow-md hover:shadow-gray-100/30 dark:border-neutral-600 dark:hover:shadow-neutral-900">
-
 
                                                     <div class="grid grid-cols-12">
                                                         <a href="{{ route('ticketDetails_index', $item->id) }}">
@@ -166,7 +159,7 @@
                                                                 <ul class="flex gap-3 mb-0">
                                                                     <li class="">
                                                                         <p
-                                                                            class="mb-0 text-sm text-gray-500 dark:text-gray-300">
+class="mb-0 text-sm text-gray-500 dark:text-gray-300">
                                                                             Số điện thoại:
                                                                             <span>{{ $item->passengerCar->user->phone }}</span>
                                                                         </p>
@@ -197,25 +190,20 @@
                                                                     {{-- {{ $item->created_at }} --}}
                                                                 </div>
                                                             </div>
-                                                        </div><!--end col-->
+</div><!--end col-->
                                                         <div class="items-center col-span-12 lg:col-span-2">
-
                                                             <div class="flex flex-wrap gap-2 mt-3">
                                                                 <span
                                                                     class="px-2 py-0.5 mt-1 font-medium text-violet-500 rounded bg-green-500/20 text-13">{{ $item->payment_method }}</span>
                                                                 <span
                                                                     class="px-2 py-0.5 mt-1 font-medium text-violet-500 rounded bg-red-500/20 text-13">{{ $item->created_at }}</span>
                                                             </div>
-
                                                         </div><!--end col-->
                                                     </div><!--end row-->
-                                                {{-- </form> --}}
+                                                    {{-- </form> --}}
                                                 </div>
                                             @endif
                                         @endforeach
-    
-                                        </div>
-
 
                                     </div>
                                     <div class="block w-full tab-pane" id="overview-tab">
@@ -232,8 +220,7 @@
                                                                 <img src="{{ asset($item->passengerCar->albums[0]->path) }}"
                                                                     alt="anhxe" class="img-fluid rounded-10"
                                                                     style="max-width: 200%;">
-
-                                                            </div>
+</div>
                                                         </a>
                                                         <div class="col-span-12 lg:col-span-9">
                                                             <div class="mt-4 lg:mt-5" style="margin-left: 85px">
@@ -265,7 +252,7 @@
                                                                     </li>
                                                                 </ul>
                                                                 <div class="flex flex-wrap gap-2 mt-3">
-                                                                    <span
+<span
                                                                         class="px-2 py-0.5 mt-1 font-medium text-violet-500 rounded bg-violet-500/20 text-13"><i
                                                                             class="fa-solid fa-bullseye"></i>
                                                                         {{ $item->departure }}</span>
@@ -300,7 +287,7 @@
                                             @foreach ($tickets as $item)
                                                 @if ($item->status == 0)
                                                 <div
-                                                class="mb-5 p-5 border border-gray-100/50 rounded-md relative hover:-translate-y-1.5 transition-all duration-500 ease-in-out group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:shadow-md hover:shadow-gray-100/30 dark:border-neutral-600 dark:hover:shadow-neutral-900">
+class="mb-5 p-5 border border-gray-100/50 rounded-md relative hover:-translate-y-1.5 transition-all duration-500 ease-in-out group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:shadow-md hover:shadow-gray-100/30 dark:border-neutral-600 dark:hover:shadow-neutral-900">
 
                                                 <div class="grid grid-cols-12">
                                                     <a href="{{ route('ticketDetails_index', $item->id) }}">
@@ -329,7 +316,7 @@
                                                                     </p>
                                                                 </li>
                                                                 <li class="">
-                                                                    <p
+<p
                                                                         class="mb-0 text-sm text-gray-500 dark:text-gray-300">
                                                                         <label>Số lượng: </label>{{ $item->quantity }}
                                                                     </p>
@@ -360,18 +347,17 @@
                                                             <span
                                                                 class="px-2 py-0.5 mt-1 font-medium text-violet-500 rounded bg-green-500/20 text-13">{{ $item->payment_method }}</span>
                                                             <span
-                                                                class="px-2 py-0.5 mt-1 font-medium text-violet-500 rounded bg-red-500/20 text-13">{{ $item->created_at }}</span>
+class="px-2 py-0.5 mt-1 font-medium text-violet-500 rounded bg-red-500/20 text-13">{{ $item->created_at }}</span>
                                                         </div>
                                                     </div><!--end col-->
                                                 </div><!--end row-->
                                                 {{-- </form> --}}
                                             </div>
-
                                                 @endif
                                             @endforeach
-    
-                                        </div>
 
+                                        </div>
+                                    </div>
 
 
                                     <div class="hidden w-full tab-pane" id="thongtin-tab">
@@ -400,111 +386,15 @@
                                                                         class="w-full mt-1 text-gray-500 border rounded border-gray-100/50 text-13 dark:bg-transparent dark:border-neutral-600"
                                                                         name="name" value="{{ $user->name }}">
                                                                     @error('name')
-                                                                        <div class="alert alert-danger mt-1 mb-1"
+<div class="alert alert-danger mt-1 mb-1"
                                                                             style="color: red;font-size: 12px;">
                                                                             {{ $message }}</div>
                                                                     @enderror
                                                                 </div>
                                                             </div>
 
-
-
-                                        <div class="hidden w-full tab-pane" id="thongtin-tab">
-                                            <div class="pt-8 space-x-8">
-                                                <form action="{{ route('profile.update',$user->id) }}" method="POST" enctype="multipart/form-data">
-                                                    @method('PUT')
-                                                    @csrf
-                                                    <input type="hidden" name="action" value="updateInfo">
-                                                    <div>
-                                                        <h5 class="mb-3 text-gray-900 fs-17 fw-semibold dark:text-gray-50">Thông tin cá nhân</h5>
-                                                        @if ($message = Session::get('successInfo'))
-                                                            <div>
-                                                                    <p style="color: blue;">{{ $message }}</p>
-                                                            </div>
-                                                        @endif
-                                                        <div class="mt-5">
-                                                            <div class="grid grid-cols-12 gap-5">
-                                                                <div class="col-span-12 lg:col-span-6">
-                                                                    <div class="mb-3">
-                                                                        <label for="firstName" class="text-sm text-gray-900 dark:text-gray-50">Tên của bạn</label>
-                                                                        <input type="text" class="w-full mt-1 text-gray-500 border rounded border-gray-100/50 text-13 dark:bg-transparent dark:border-neutral-600" name="name" value="{{ $user->name }}">
-                                                                        @error('name')
-                                                                        <div class="alert alert-danger mt-1 mb-1" style="color: red;font-size: 12px;">{{ $message }}</div>
-                                                                        @enderror
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-span-12 lg:col-span-6">
-                                                                    <div class="mb-3">
-                                                                        <label for="email" class="text-sm text-gray-900 dark:text-gray-50">Email của bạn</label>
-                                                                        <input type="text" class="w-full mt-1 text-gray-500 border rounded border-gray-100/50 text-13 dark:bg-transparent dark:border-neutral-600" name="email" value="{{ old('email')??$user->email }}">
-                                                                        {{-- <input type="text" name="username" value="{{ old('username') }}"> --}}
-                                                                        @error('email')
-                                                                        <div class="alert alert-danger mt-1 mb-1" style="color: red;font-size: 12px;">{{ $message }}</div>
-                                                                        @enderror
-                                                                    </div>
-                                                                </div>
-                                                                <!--end col-->
-                                                                <!--end col-->
-                                                                <div hidden class="col-span-12 lg:col-span-6">
-                                                                    <div class="mb-3">
-                                                                        <label for="email" class="text-sm text-gray-900 dark:text-gray-50">Số điện thoại</label>
-                                                                        <input type="text" class="w-full mt-1 text-gray-500 border rounded border-gray-100/50 text-13 dark:bg-transparent dark:border-neutral-600" name="phone" value="{{ $user->phone }}">
-                                                                        @error('phone')
-                                                                        <div class="alert alert-danger mt-1 mb-1" style="color: red;font-size: 12px;">{{ $message }}</div>
-                                                                        @enderror
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-span-12">
-                                                                    <div class="form-check">
-                                                                        <button class="mt-8 text-right" style="float: right"><p class="text-white btn group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 border-transparent focus:ring group-data-[theme-color=violet]:focus:ring-violet-500/20 group-data-[theme-color=sky]:focus:ring-sky-500/20 group-data-[theme-color=red]:focus:ring-red-500/20 group-data-[theme-color=green]:focus:ring-green-500/20 group-data-[theme-color=pink]:focus:ring-pink-500/20 group-data-[theme-color=blue]:focus:ring-blue-500/20">Sủa thông tin</p></button>
-                                                                        {{-- <style>.{float: left; display: flex;align-items: center;align-content: center}</style> --}}
-                                                                    </div>
-                                                                </div>
-
-                                                                <!--end col-->
-                                                            </div>
-                                                        </div>
-                                                        <!--end row-->
-                                                    </div>
-                                                </form>
-                                            </div>
-
-                                        </div>
-                                        <div class="hidden w-full tab-pane" id="password-tab">
-                                            <div class="pt-8 space-x-8">
-                                                <form action="{{ route('profile.update',$user->id) }}" method="POST" enctype="multipart/form-data">
-                                                    @method('PUT')
-                                                    @csrf
-                                                    <input type="hidden" name="action" value="updatePassword">
-                                                    <div class="mt-4">
-                                                        <h5 class="mb-3 font-semibold text-17 dark:text-gray-50">
-                                                          Đổi mật khẩu
-                                                        </h5>
-                                                        @if ($message = Session::get('successPassword'))
-                                                            <div>
-                                                                    <p style="color: blue;">{{ $message }}</p>
-                                                            </div>
-                                                        @endif
-                                                        <div class="grid grid-cols-12 gap-5">
-                                                            <div class="col-span-12">
-                                                                <div class="mb-3">
-                                                                    <label for="current-password-input" class="text-sm text-gray-900 dark:text-gray-50">Mật khẩu hiện tại</label>
-                                                                    <input type="password" class="w-full mt-1 text-gray-500 border rounded border-gray-100/50 text-13 dark:bg-transparent dark:border-neutral-600" placeholder="Mật khẩu hiện tại" id="current-password-input" name="current_password">
-                                                                    @if ($message = Session::get('errorPassword'))
-                                                                        <div>
-                                                                                <p style="color: red;">{{ $message }}</p>
-                                                                        </div>
-                                                                    @endif
-                                                                    @error('current_password')
-                                                                    <div class="alert alert-danger mt-1 mb-1" style="color: red;font-size: 12px;">{{ $message }}</div>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-                                                            <!--end col-->
                                                             <div class="col-span-12 lg:col-span-6">
                                                                 <div class="mb-3">
-
                                                                     <label for="email"
                                                                         class="text-sm text-gray-900 dark:text-gray-50">Email
                                                                         của bạn</label>
@@ -517,28 +407,26 @@
                                                                         <div class="alert alert-danger mt-1 mb-1"
                                                                             style="color: red;font-size: 12px;">
                                                                             {{ $message }}</div>
-
                                                                     @enderror
                                                                 </div>
                                                             </div>
                                                             <!--end col-->
-                                                            <div class="col-span-12 lg:col-span-6">
+                                                            <!--end col-->
+                                                            <div hidden class="col-span-12 lg:col-span-6">
                                                                 <div class="mb-3">
                                                                     <label for="email"
                                                                         class="text-sm text-gray-900 dark:text-gray-50">Số
                                                                         điện thoại</label>
                                                                     <input type="text"
-                                                                        class="w-full mt-1 text-gray-500 border rounded border-gray-100/50 text-13 dark:bg-transparent dark:border-neutral-600"
+class="w-full mt-1 text-gray-500 border rounded border-gray-100/50 text-13 dark:bg-transparent dark:border-neutral-600"
                                                                         name="phone" value="{{ $user->phone }}">
                                                                     @error('phone')
                                                                         <div class="alert alert-danger mt-1 mb-1"
                                                                             style="color: red;font-size: 12px;">
                                                                             {{ $message }}</div>
-
                                                                     @enderror
                                                                 </div>
                                                             </div>
-                                                            <!--end col-->
                                                             <div class="col-span-12">
                                                                 <div class="form-check">
                                                                     <button class="mt-8 text-right" style="float: right">
@@ -546,19 +434,21 @@
                                                                             class="text-white btn group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 border-transparent focus:ring group-data-[theme-color=violet]:focus:ring-violet-500/20 group-data-[theme-color=sky]:focus:ring-sky-500/20 group-data-[theme-color=red]:focus:ring-red-500/20 group-data-[theme-color=green]:focus:ring-green-500/20 group-data-[theme-color=pink]:focus:ring-pink-500/20 group-data-[theme-color=blue]:focus:ring-blue-500/20">
                                                                             Sủa thông tin</p>
                                                                     </button>
-
                                                                     {{-- <style>.{float: left; display: flex;align-items: center;align-content: center}</style> --}}
                                                                 </div>
                                                             </div>
+
                                                             <!--end col-->
                                                         </div>
-                                                        <!--end row-->
                                                     </div>
-
+                                                    <!--end row-->
+                                                </div>
+                                            </form>
+                                        </div>
 
                                     </div>
                                     <div class="hidden w-full tab-pane" id="password-tab">
-                                        <div class="pt-8 space-x-8">
+<div class="pt-8 space-x-8">
                                             <form action="{{ route('profile.update', $user->id) }}" method="POST"
                                                 enctype="multipart/form-data">
                                                 @method('PUT')
@@ -591,7 +481,7 @@
                                                                 @error('current_password')
                                                                     <div class="alert alert-danger mt-1 mb-1"
                                                                         style="color: red;font-size: 12px;">
-                                                                        {{ $message }}</div>
+{{ $message }}</div>
                                                                 @enderror
                                                             </div>
                                                         </div>
@@ -622,7 +512,7 @@
                                                                     class="w-full mt-1 text-gray-500 border rounded border-gray-100/50 text-13 dark:bg-transparent dark:border-neutral-600"
                                                                     placeholder="Xác nhận lại mật khẩu"
                                                                     id="confirm-password-input"
-                                                                    name="new_password_confirmation">
+name="new_password_confirmation">
                                                                 @error('new_password_confirmation')
                                                                     <div class="alert alert-danger mt-1 mb-1"
                                                                         style="color: red;font-size: 12px;">
@@ -645,7 +535,7 @@
                                                                         class="text-white btn group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 border-transparent focus:ring group-data-[theme-color=violet]:focus:ring-violet-500/20 group-data-[theme-color=sky]:focus:ring-sky-500/20 group-data-[theme-color=red]:focus:ring-red-500/20 group-data-[theme-color=green]:focus:ring-green-500/20 group-data-[theme-color=pink]:focus:ring-pink-500/20 group-data-[theme-color=blue]:focus:ring-blue-500/20">
                                                                         Xác nhận đổi</p>
                                                                 </button>
-                                                                {{-- <style>.{float: left; display: flex;align-items: center;align-content: center}</style> --}}
+{{-- <style>.{float: left; display: flex;align-items: center;align-content: center}</style> --}}
                                                             </div>
                                                         </div>
                                                         <!--end col-->
@@ -654,15 +544,14 @@
                                                 </div>
 
                                             </form>
-
                                         </div>
                                     </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-
             <!-- End grid -->
         </div>
     </div>
