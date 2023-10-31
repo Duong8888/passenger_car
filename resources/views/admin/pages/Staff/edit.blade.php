@@ -11,7 +11,7 @@
     </div>
     <div class="mb-3 ml-5">  
         <label class="form-label">Email</label>
-        <input type="text" value="{{$users->email}}" class="form-control" name="email">
+        <input  type="text" value="{{$users->email}}" class="form-control" name="email">
     </div>
 
     <div class="mb-3 ml-5">  

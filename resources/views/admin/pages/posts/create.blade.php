@@ -28,7 +28,7 @@
                                 @csrf
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Title</label>
+                                        <label  class="form-label">Title</label>
                                         <input class="form-control" type="text" name="title" id="title" value=""
                                                size="50" onkeyup="ChangeToSlug();">
                                     </div>
