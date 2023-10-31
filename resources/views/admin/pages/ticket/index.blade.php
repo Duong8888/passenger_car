@@ -11,24 +11,20 @@
 
 @section('content')
 <div class="content">
-
     <!-- Start Content-->
     <div class="container-fluid">
-
         <div class="row">
-
-
             <div class="col-xl-12">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title mt-0 mb-3">Tickets List</h4>
-                        <a href="{{ route('ticket.create') }}">Create New Ticket</a>
+                        <a href="{{ route('admin.ticket.create') }}">Create New Ticket</a>
                         @if ($message = Session::get('success'))
-                            <div>
-                                <ul>
-                                    <li>{{ $message }}</li>
-                                </ul>
-                            </div>
+                        <div>
+                            <ul>
+                                <li>{{ $message }}</li>
+                            </ul>
+                        </div>
                         @endif
                         <div class="table-responsive">
                             <table class="table table-hover mb-0">
@@ -45,7 +41,7 @@
                                     </tr>
                                 </thead>
                                 @foreach ($data as $ticket)
-                                    <tbody>
+                                <tbody>
                                     <tr>
                                         <td>{{ $ticket->id }}</td>
                                         <td>{{ $ticket->username }}</td>
@@ -54,7 +50,7 @@
                                         <td>{{ $ticket->quantity }}</td>
                                         <td>
                                             @if ($ticket->status == 0 )
-                                                <span class="badge bg-danger">Pending</span>
+                                            <span class="badge bg-danger">Pending</span>
                                             @elseif($ticket->status == 1)
                                             <span class="badge bg-success">Success</span>
                                             @endif
@@ -63,11 +59,12 @@
 
                                         <td style="display: flex;">
                                             <a class="btn btn-primary"
-                                            href="{{ route('ticket.edit', $ticket->id) }}">Edit</a>
-                                            <form action="{{ route('ticket.destroy', $ticket->id) }}" method="post">
+                                            href="{{ route('admin.ticket.edit', $ticket->id) }}">Edit</a>
+                                            <form action="{{ route('admin.ticket.destroy', $ticket->id) }}" method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button onclick="return confirm('Are you sure ?')" class="btn btn-warning">Delete</button>
+                                                <button onclick="return confirm('Are you sure ?')"
+                                                    class="btn btn-warning">Delete</button>
                                             </form>
 
                                         </td>

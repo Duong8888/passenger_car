@@ -20,7 +20,7 @@
                              aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                             <form id="form-main" class="modal-dialog modal-dialog modal-lg modal-dialog-scrollable"
                                   method="POST"
-                                  action="{{route('car.store')}}" enctype="multipart/form-data">
+                                  action="{{route('admin.car.store')}}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -172,7 +172,7 @@
                                                         </button>
                                                         <div class="dropdown-menu" style="">
                                                             <a class="dropdown-item btn-update" id="{{$value->id}}" href="#">Sửa</a>
-                                                            <a class="dropdown-item delete" data-action="{{route('car.delete',[$value->id])}}" href="#">Xóa</a>
+                                                            <a class="dropdown-item delete" data-action="{{route('admin.car.delete',[$value->id])}}" href="#">Xóa</a>
                                                         </div>
                                                     </div>
                                                 </td>

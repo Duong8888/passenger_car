@@ -17,14 +17,13 @@ class ProfileController extends Controller
      */
 
     public function index(Request $request){
-        $user = auth()->user(); 
-        $tickets = Ticket::where('user_id', $user->id) 
-                  ->where('phone', 'like', '%' . $request->key . '%') // Lọc 
-                  ->get();
+        $user = auth()->user();
+        $tickets = Ticket::with('passengerCar')->where('user_id', $user->id)->get();
+        // return response()->json($tickets[0]->passengerCar->albums[0]->path, 200, [], JSON_PRETTY_PRINT);
         return view('client.pages.profile.profile',compact('user','tickets'));
 
     }
-   
+
     /**
      * Show the form for creating a new resource.
      */
@@ -142,7 +141,7 @@ class ProfileController extends Controller
     public function ticketDetails(Request $request,$id){
         $user = auth()->user();
         $tickets = Ticket::find($id);
-        //  return response()->json($user->tickets, 200, [], JSON_PRETTY_PRINT);
+        //  return response()->json($tickets->passengerCar, 200, [], JSON_PRETTY_PRINT);
         return view('client.pages.ticketdetails.index',compact('user','tickets'));
     }
 }

@@ -5,7 +5,7 @@
             <div class="grid grid-cols-12 lg:gap-10">
                 <div class="col-span-12 xl:col-span-4">
                     <div class="mr-12">
-                        <h4 class="text-white mb-6 text-[23px]">Jobcy</h4>
+                        <h4 class="text-white mb-6 text-[23px]"><img src="https://i.imgur.com/chCW0o6.png" alt="" style="width='40px"></h4>
                         <p class="text-white/50">
                             Hãy tìm xe và bắt đầu hành trình của bạn ngay hôm nay, để biết mọi cuộc hành trình đều đặc biệt!
                         </p>

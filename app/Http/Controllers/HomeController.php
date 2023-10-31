@@ -47,14 +47,25 @@ class HomeController  extends Controller
     }
     public function passengerCarDetail(Request $request)
     {
-        $albums = PassengerCar::with('albums')->get();
-        $routes = PassengerCar::with('route')->where('route_id', $request->route_id)->take(4)->get();
-        $passengerCars = PassengerCar::with('workingTime')->find($request->passenger_id);
-        $services = PassengerCar::with('services')->get();
-        $users = User::all();
-        $comments = Comment::where('passenger_car_id', $request->passenger_id)->get();
-        $stops = Stops::where('route_id', $request->route_id)->get();
+        $passengerCars = PassengerCar::query()
+            ->where('id',$request->id)
+            ->with([
+                'services',
+                'albums',
+                'user',
+                'route',
+                'comments',
+                'workingTime'
+            ])->get();
 
-        return view('client.pages.home.passengerCar-detail', compact('albums', 'routes', 'passengerCars', 'users', 'comments', 'stops', 'services'));
+        $albums = $passengerCars[0]->albums;
+        $routes = $passengerCars[0]->route;
+        $services = $passengerCars[0]->services;
+        $user = User::where('id', $passengerCars[0]->user->id)->get('id');
+        $comments = $passengerCars[0]->comments;
+        $workingTime = WorkingTime::query()->where('id',$request->time)->get();
+        $stops = Stops::where('route_id', $passengerCars[0]->route->id)->where('user_id',$user[0]->id)->get();
+
+        return view('client.pages.home.passengerCar-detail', compact('albums', 'routes', 'passengerCars', 'user', 'comments', 'stops', 'services','workingTime'));
     }
 }

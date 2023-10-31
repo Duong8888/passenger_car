@@ -3,32 +3,33 @@
 
 
 @section('content')
-<div class="content">
-  <?php 
-$uniqueDepartures = [];
-$uniqueArrival =[];
-?>
-  <!-- Start Content-->
-  <div class="container-fluid">
+    <div class="content">
+        <?php
+        $uniqueDepartures = [];
+        $uniqueArrival = [];
+        ?>
+        <!-- Start Content-->
+        <div class="container-fluid">
 
-    <div class="row">
+            <div class="row">
 
 
-      <div class="col-xl-12">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="header-title mt-0 mb-3">Tickets Create</h4>
-            <a href="{{ route('ticket.index') }}" class="btn btn-primary">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                class="bi bi-arrow-left" viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                  d="M11.354 4.646a.5.5 0 0 1 0 .708L7.707 8l3.647 3.646a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 0 1 .708 0z" />
-              </svg>
-              Back
-            </a>
-            <div class="table-responsive">
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title mt-0 mb-3">Tickets Create</h4>
+                            <a href="{{ route('ticket.index') }}" class="btn btn-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-left" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M11.354 4.646a.5.5 0 0 1 0 .708L7.707 8l3.647 3.646a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 0 1 .708 0z" />
+                                </svg>
+                                Back
+                            </a>
+                            <div class="table-responsive">
 
-              <form action="{{ route('ticket.store') }}" method="post" enctype="multipart/form-data" id="create_ticket"
+
+              <form action="{{ route('admin.ticket.store') }}" method="post" enctype="multipart/form-data" id="create_ticket"
                 class="row">
                 @csrf
                 <div class="col-6">
@@ -120,112 +121,110 @@ $uniqueArrival =[];
 
                 <button type="submit" class="btn btn-primary">Create</button>
               </form>
+
             </div>
-          </div>
-        </div>
+            <!-- end row -->
 
-      </div><!-- end col -->
+        </div> <!-- container -->
 
-    </div>
-    <!-- end row -->
-
-  </div> <!-- container -->
-
-</div> <!-- content -->
-
+    </div> <!-- content -->
 @endsection
 
 @section('page-script')
-<script>
-  $(document).ready(function(){
-  $('.departure').change(function() {
-    var departure = $(this).val();
-   
-    $.ajax({
-      url: '/admin/trip',
-      method: 'POST',
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      },
-      dataType: "json",
-      data: {departure:departure},
-      success: function(response){
-        var showTrip = '';
-        
-        response.forEach(function(trip){
-          showTrip += '<option class="trip" data-id="'+trip.id+'" value="'+ trip.id+ '">' + trip.slug + '</option>';
-        });
+    <script>
+        $(document).ready(function() {
+            $('.departure').change(function() {
+                var departure = $(this).val();
 
-        $('.route').html(showTrip);
-      },
-      error : function(error){
-        console.log(error);
-      }
-    })
-  })
+                $.ajax({
+                    url: '/admin/trip',
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    dataType: "json",
+                    data: {
+                        departure: departure
+                    },
+                    success: function(response) {
+                        var showTrip = '';
 
-  $(document).on('click', '.route', function(){
-    let id = $(this).val();
-    
-    $.ajax({
-      url: '/admin/passgenerCar/'+id,
-      method: 'POST',
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      },
-      dataType: "json",
-      data: {id: id},
-      success: function(response){
-          let passengerCar = '';
+                        response.forEach(function(trip) {
+                            showTrip += '<option class="trip" data-id="' + trip.id +
+                                '" value="' + trip.id + '">' + trip.slug + '</option>';
+                        });
 
-          response.forEach(function(Car){
-            passengerCar += '<option data-id="'+Car.id+'" value="'+ Car.id+ '">' + Car.license_plate + '</option>';
-        });
+                        $('.route').html(showTrip);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                })
+            })
 
-        $('.PassengerCar').html(passengerCar);
-      }
-    })
-  })
+            $(document).on('click', '.route', function() {
+                let id = $(this).val();
 
-  $('.arrival').change(function() {
-    var arrival = $(this).val();
+                $.ajax({
+                    url: '/admin/passgenerCar/' + id,
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    dataType: "json",
+                    data: {
+                        id: id
+                    },
+                    success: function(response) {
+                        let passengerCar = '';
 
-    $.ajax({
-      url: '/admin/trip',
-      method: 'POST',
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      },
-      dataType: "json",
-    
-      data: {arrival: arrival},
-      success: function(response){
-        var showTrip = '';
+                        response.forEach(function(Car) {
+                            passengerCar += '<option data-id="' + Car.id + '" value="' +
+                                Car.id + '">' + Car.license_plate + '</option>';
+                        });
 
-        response.forEach(function(trip){
-          showTrip += '<option class="trip" data-id="'+trip.id+'" value="'+ trip.id+ '">' + trip.slug + '</option>';
-        });
+                        $('.PassengerCar').html(passengerCar);
+                    }
+                })
+            })
 
-        $('.route').html(showTrip);
-      },
-      error : function(error){
-        console.log(error);
-      }
-    })
-  })
+            $('.arrival').change(function() {
+                var arrival = $(this).val();
 
-})
-</script>
+                $.ajax({
+                    url: '/admin/trip',
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    dataType: "json",
 
-<!--Morris Chart-->
-<script src="admin/libs/morris.js06/morris.min.js"></script>
-<script src="admin/libs/raphael/raphael.min.js"></script>
+                    data: {
+                        arrival: arrival
+                    },
+                    success: function(response) {
+                        var showTrip = '';
 
-<!-- Dashboar init js-->
-<script src="admin/js/pages/dashboard.init.js"></script>
-@endsection
+                        response.forEach(function(trip) {
+                            showTrip += '<option class="trip" data-id="' + trip.id +
+                                '" value="' + trip.id + '">' + trip.slug + '</option>';
+                        });
 
+                        $('.route').html(showTrip);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                })
+            })
 
+        })
+    </script>
 
+    <!--Morris Chart-->
+    <script src="admin/libs/morris.js06/morris.min.js"></script>
+    <script src="admin/libs/raphael/raphael.min.js"></script>
 
+    <!-- Dashboar init js-->
+    <script src="admin/js/pages/dashboard.init.js"></script>
 @endsection
