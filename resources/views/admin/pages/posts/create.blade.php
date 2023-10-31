@@ -14,7 +14,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="header-title mt-0 mb-3">Posts Create</h4>
-                            <a href="{{ route('postsing') }}" class="btn btn-primary">
+                            <a href="{{ route('admin.postsing') }}" class="btn btn-primary">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                      class="bi bi-arrow-left" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd"
@@ -23,12 +23,12 @@
                                 Back
                             </a>
 
-                            <form action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data"
+                            <form action="{{ route('admin.posts.store') }}" method="post" enctype="multipart/form-data"
                                   class="row">
                                 @csrf
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Title</label>
+                                        <label  class="form-label">Title</label>
                                         <input class="form-control" type="text" name="title" id="title" value=""
                                                size="50" onkeyup="ChangeToSlug();">
                                     </div>

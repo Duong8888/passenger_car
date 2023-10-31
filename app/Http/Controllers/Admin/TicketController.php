@@ -33,6 +33,8 @@ class TicketController extends AdminBaseController
     {
         $validator = Validator::make($request->all(), [
             'username' => 'required',
+        ],[
+            'username.required' => 'yêu cầu nhập tiêu đề',
         ]);
 
         if ($validator->fails()) {

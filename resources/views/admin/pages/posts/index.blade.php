@@ -18,7 +18,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="header-title mt-0 mb-3">Posts List</h4>
-                            <a href="{{ route('posts.store') }}">Thêm bài viết mới</a>
+                            <a href="{{ route('admin.posts.store') }}">Thêm bài viết mới</a>
                             @if ($message = Session::get('success'))
                                 <div>
                                     <ul>
@@ -42,7 +42,7 @@
                                     @foreach ($data as $posts)
                                         <tr>
                                             <td>{{ $posts->title }}</td>
-                                            <td><a href="{{ route('posts.edit', ['id' => $posts->id]) }}">Xem chi
+                                            <td><a href="{{ route('admin.posts.edit', ['id' => $posts->id]) }}">Xem chi
                                                     tiết</a></td>
                                             <td>{{ $posts->slug }}</td>
                                             <td>{{ $posts->category->category_name}}</td>
@@ -54,8 +54,8 @@
                                                            data-bs-toggle="dropdown" aria-haspopup="true"
                                                            aria-expanded="false"></i>
                                                         <div class="dropdown-menu" style="">
-                                                            <a class="dropdown-item" href="{{route('posts.edit',$posts->id)}}">Cập nhật</a>
-                                                            <form action="{{route('posts.destroy',$posts->id)}}" method="POST">
+                                                            <a class="dropdown-item" href="{{route('admin.posts.edit',$posts->id)}}">Cập nhật</a>
+                                                            <form action="{{route('admin.posts.destroy',$posts->id)}}" method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button class="dropdown-item" type="submit">Xóa</button>
