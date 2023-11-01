@@ -32,7 +32,7 @@ Route::get('/layout', function () {
     return view('admin.layouts.master');
 });
 
-Route::get('/sign_in', [PhoneAuthController::class, 'sign_in'])->name('sign_in'); 
+Route::get('/sign_in', [PhoneAuthController::class, 'sign_in'])->name('sign_in');
 
 Route::get('/login', [App\Http\Controllers\LoginAdminController::class, 'showLoginAdmin'])->name('login');
 Route::post('/login', [App\Http\Controllers\LoginAdminController::class, 'loginAdmin']);
@@ -109,6 +109,7 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
             Route::get('/', [PassengerCarController::class, 'index'])->name('index');
             Route::post('store', [PassengerCarController::class, 'store'])->name('store');
             Route::post('show', [PassengerCarController::class, 'show'])->name('show');
+            Route::post('edit/{id}', [PassengerCarController::class, 'edit'])->name('edit');
             Route::post('update/{id}', [PassengerCarController::class, 'update'])->name('update');
             Route::delete('delete/{id}', [PassengerCarController::class, 'destroy'])->name('delete');
         });

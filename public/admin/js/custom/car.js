@@ -2,7 +2,7 @@ import {Uppy, Dashboard} from "https://releases.transloadit.com/uppy/v3.17.0/upp
 // import Uppy from "@uppy/core";
 // import Dashboard from "@uppy/dashboard";
 $(document).ready(function () {
-
+    const base = window.location.origin
     const modal = $('#con-close-modal');
     const overlay = $('.modal-backdrop');
     const modalBtn = $('#modal-btn');
@@ -100,7 +100,7 @@ $(document).ready(function () {
                     `);
                         }
                     });
-                    if(item.route_id === null){
+                    if (item.route_id === null) {
                         var departure = 'Chưa hoạt động.';
                         var arrival = '.';
 
@@ -142,20 +142,46 @@ $(document).ready(function () {
     let arrival = [];
     let image;
     let description = $('ql-editor');
-    $(document).on('click','.btn-update',function (e){
+    $(document).on('click', '.btn-update', function (e) {
         let id = e.target.id;
         $.ajax({
-            url:baseUrl+'/edit/'+id,
-            method: 'GET',
-            success: function (response){
+            url: baseUrl + '/edit/' + id,
+            method: 'POST',
+            success: function (response) {
                 console.log(response)
+                console.log(response[0].albums)
+                showImage(response[0].albums);
             },
-            error:function (error){
+            error: function (error) {
                 console.log(error)
             }
         });
         toogleModal();
     });
+
+
+    function showImage(data) {
+        for (var i = 0; i < data.length; i++) {
+            const path = base + '/' + data[i].path
+            const pathParts = data[i].path.split('/');
+            const fileName = pathParts[pathParts.length - 1];
+            fetch(path)
+                .then(response => response.blob())
+                .then(blob => {
+                    const fakeFile = {
+                        source: 'local',
+                        name: fileName,
+                        type: 'image/jpeg',
+                        data: blob,
+                    };
+
+                    uppy.addFile(fakeFile);
+                })
+                .catch(error => {
+                    console.error('Lỗi khi tải hình ảnh: ' + image.path);
+                });
+        }
+    }
 
 });
 

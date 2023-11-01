@@ -39,16 +39,16 @@ class PassengerCarController extends AdminBaseController
     public function index(Request $request)
     {
         $userId = Auth::user()->id;
-        if($request->ajax()){
+        if ($request->ajax()) {
             $routes = Routes::all();
-            $passengerCar = PassengerCar::query()->with(['route' => function($query){
-                $query->get('departure','arrival');
-            }])->orderBy('id','desc')->where('user_id',$userId)->paginate(10);
-            return \response()->json(['data' => $passengerCar,'routes'=>$routes]);
+            $passengerCar = PassengerCar::query()->with(['route' => function ($query) {
+                $query->get('departure', 'arrival');
+            }])->orderBy('id', 'desc')->where('user_id', $userId)->paginate(10);
+            return \response()->json(['data' => $passengerCar, 'routes' => $routes]);
         }
-        $data = $this->model->orderBy('id','desc')->where('user_id',$userId)->paginate(10);
+        $data = $this->model->orderBy('id', 'desc')->where('user_id', $userId)->paginate(10);
         $service = Service::all();
-        return view($this->pathView . __FUNCTION__, compact('data','service'))
+        return view($this->pathView . __FUNCTION__, compact('data', 'service'))
             ->with('title', $this->titleIndex)
             ->with('colums', $this->colums)
             ->with('urlbase', $this->urlbase)
@@ -108,8 +108,9 @@ class PassengerCarController extends AdminBaseController
     }
 
 
-    public function edit(string $id){
-        return response()->json(PassengerCar::query()->findOrFail($id));
+    public function edit(string $id)
+    {
+        return response()->json(PassengerCar::query()->with(['workingTime','services','albums'])->where('id', $id)->get());
     }
 
 }
