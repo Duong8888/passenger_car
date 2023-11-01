@@ -19,7 +19,7 @@
                     <div class="d-flex justify-content-between align-items-center">
 
                         <h4 class="mt-0">Doanh số: {{ number_format($totalToday) }} VND</h4>
-                        <a href="{{ route('admin.revenue.add') }}" class="btn btn-primary">Thêm mới </a>
+                        <!-- <a href="{{ route('admin.revenue.add') }}" class="btn btn-primary">Thêm mới </a> -->
                     </div>
                     <form method="GET" class="mb-4 mt-4">
                         <div class="row align-items-end">
@@ -45,9 +45,10 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Product name</th>
+                                    <th>Customer name</th>
                                     <th>Quantity</th>
                                     <th>Price</th>
+                                    <th>Phương thức thanh toán</th>
                                     <th>Created_at</th>
                                     <th>Settings</th>
                                 </tr>
@@ -57,13 +58,14 @@
                                 @foreach ($revenue as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
-                                        <td>{{ $item->name }}</td>
-                                        <td>{{ $item->customer_name }}</td>
-                                        <td>{{ number_format($item->price) }} VND</td>
+                                        <td>{{ $item->username }}</td>
+                                        <td>{{ $item->quantity }}</td>
+                                        <td>{{ $item->total_price }}</td>
+                                        <td>{{ $item->payment_method }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td class="d-flex gap-2">
-                                            <a class="btn btn-danger"
-                                                href="{{ route('admin.revenue.edit', $item->id) }}">Sửa</a>
+                                            <!-- <a class="btn btn-danger"
+                                                href="{{ route('admin.revenue.edit', $item->id) }}">Sửa</a> -->
                                             <form action="{{ route('admin.revenue.delete', $item->id) }}" method="POST"
                                                 onsubmit="return confirm('Bạn chắc chắn muốn xóa vĩnh viễn?')">
                                                 @csrf

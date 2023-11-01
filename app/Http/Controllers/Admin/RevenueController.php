@@ -3,16 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\revenue;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 
 class RevenueController extends Controller
 {
     public function index(Request $request)
     {
+        $data = Ticket::query();
 
-        $result = revenue::query();
-        $price = revenue::query();
+        $result = Ticket::query();
+        $price = Ticket::query();
         if ($request->has('start_date') && $request->has('end_date')) {
             $result->orderBy('created_at', "desc")->whereBetween('created_at', [$request->start_date, $request->end_date]);
             $price->whereBetween('created_at', [$request->start_date, $request->end_date]);
@@ -22,7 +23,7 @@ class RevenueController extends Controller
         }
 
         $revenue = $result->get();
-        $totalToday = $price->sum('price');
+        $totalToday = $price->sum('total_price');
         return view('admin.pages.revenue.index', compact('revenue', 'totalToday'));
     }
     public function add()
@@ -43,13 +44,13 @@ class RevenueController extends Controller
 
         ]);
         $validate['created_at'] = $request->created_at;
-        $check = revenue::insert($validate);
+        $check = Ticket::insert($validate);
         if ($check) {
             return back()->with('msgSuccess', 'Thêm thành công');
         }
         return back()->with('msgError', 'Thêm thất bại!');
     }
-    public function edit(revenue $revenue)
+    public function edit(Ticket $revenue)
     {
         return view('admin.pages.revenue.edit', compact('revenue'));
     }
@@ -68,7 +69,7 @@ class RevenueController extends Controller
 
         ]);
         $validate['created_at'] = $request->created_at;
-        $check = revenue::where('id', $id)->update($validate);
+        $check = Ticket::where('id', $id)->update($validate);
         if ($check) {
             return back()->with('msgSuccess', 'Cập nhật thành công');
         }
@@ -76,8 +77,7 @@ class RevenueController extends Controller
     }
     public function delete($id)
     {
-        $check =
-            revenue::destroy($id);
+        $check = Ticket::destroy($id);
         if ($check) {
             return back()->with('msgSuccess', 'Xóa thành công');
         }
