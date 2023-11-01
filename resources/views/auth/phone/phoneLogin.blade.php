@@ -1,6 +1,4 @@
-<head>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-</head>
+
 @include('client.layout.partials.script')
 <script>
     var csrfToken = $('meta[name="csrf-token"]').attr('content');
@@ -30,13 +28,13 @@
         // measurementId: "G-CTLCZLM3R1"
 
         
-        apiKey: "AIzaSyCJ8pbe36jbzUmVQK_pFOZlPKXRW6JNoG8",
-        authDomain: "test2-5f15d.firebaseapp.com",
-        projectId: "test2-5f15d",
-        storageBucket: "test2-5f15d.appspot.com",
-        messagingSenderId: "660182456617",
-        appId: "1:660182456617:web:89d3c4ddf2b96307efff38",
-        measurementId: "G-31DTR2L4VF"
+        // apiKey: "AIzaSyCJ8pbe36jbzUmVQK_pFOZlPKXRW6JNoG8",
+        // authDomain: "test2-5f15d.firebaseapp.com",
+        // projectId: "test2-5f15d",
+        // storageBucket: "test2-5f15d.appspot.com",
+        // messagingSenderId: "660182456617",
+        // appId: "1:660182456617:web:89d3c4ddf2b96307efff38",
+        // measurementId: "G-31DTR2L4VF"
 
     };
     firebase.initializeApp(firebaseConfig);
@@ -72,7 +70,9 @@
             $("#successAuth").text("Message sent");
             $("#successAuth").show();
             localStorage.setItem("phoneNumber", number);
-            window.location.href = "/verify-otp?verificationId=" + confirmationResult.verificationId;
+            // window.location.href = "/verify-otp?verificationId=" + confirmationResult.verificationId;
+            localStorage.setItem("verificationId", confirmationResult.verificationId); // Lưu 
+            document.getElementById("popupContainer2").style.display = "block";
         }).catch(function (error) {
             $("#error").text(error.message);
             $("#error").show();

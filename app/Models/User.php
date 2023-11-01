@@ -52,7 +52,9 @@ class User extends Authenticatable
         return $this->user_type === "staff";
     }
 
-    
+    public function isUser(){
+        return $this->user_type === "user";
+    }
     /**
      * The attributes that should be cast.
      *

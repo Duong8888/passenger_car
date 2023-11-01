@@ -433,7 +433,7 @@
                                                                     <button class="mt-8 text-right" style="float: right">
                                                                         <p
                                                                             class="text-white btn group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 border-transparent focus:ring group-data-[theme-color=violet]:focus:ring-violet-500/20 group-data-[theme-color=sky]:focus:ring-sky-500/20 group-data-[theme-color=red]:focus:ring-red-500/20 group-data-[theme-color=green]:focus:ring-green-500/20 group-data-[theme-color=pink]:focus:ring-pink-500/20 group-data-[theme-color=blue]:focus:ring-blue-500/20">
-                                                                            Sủa thông tin</p>
+                                                                            Sửa thông tin</p>
                                                                     </button>
                                                                     {{-- <style>.{float: left; display: flex;align-items: center;align-content: center}</style> --}}
                                                                 </div>

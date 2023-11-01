@@ -17,7 +17,7 @@
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title mt-0 mb-3">Posts List</h4>
+                            <h4 class="header-title mt-0 mb-3">Danh sách bài viết</h4>
                             <a href="{{ route('admin.posts.store') }}">Thêm bài viết mới</a>
                             @if ($message = Session::get('success'))
                                 <div>

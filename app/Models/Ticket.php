@@ -25,7 +25,7 @@ class Ticket extends Model
     ];
     protected $attributes =[
         'email' => NULL,
-        'user_id' => NULL
+        'user_id' => 0
     ];
     public function user():BelongsTo{
         return $this->belongsTo(User::class);

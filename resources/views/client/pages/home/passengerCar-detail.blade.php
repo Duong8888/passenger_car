@@ -488,29 +488,41 @@
                                         <div class="flex justify-between">
                                             <div class="flex flex-col w-1/2" style="overflow-y: auto; max-height: 200px; max-width: 50%;">
                                                 Điểm đón:
+                                                @php
+                                                $firstDeparture = true;
+                                                @endphp
                                                 @foreach ($stops as $data)
                                                     @if ($data->stop_type == 0)
                                                         <div class="mb-5">
-                                                            <input type="radio" id="departure" name="departure"
+                                                            <input type="radio" id="departure{{$data->id}}" name="departure"
                                                                    class="form-radio h-5 w-5 text-blue-600 outline-none focus:ring-0"
-                                                                   value="duong">
-                                                            <label for="{{$data->id}}"
+                                                                   value="{{$data->stop_name}}" {{ $firstDeparture ? 'checked' : '' }}>
+                                                            <label for="departure{{$data->id}}"
                                                                    class="ml-2 mb-3" id="{{$data->id}}">{{$data->stop_name}}</label>
                                                         </div>
+                                                        @php
+                                                        $firstDeparture = false;
+                                                        @endphp
                                                     @endif
                                                 @endforeach
                                             </div>
                                             <div class="flex flex-col w-1/2" style="overflow-y: auto; max-height: 200px; max-width: 50%;">
                                                 Điểm đón:
+                                                @php
+                                                $firstArrival = true;
+                                                @endphp
                                                 @foreach ($stops as $data)
                                                     @if ($data->stop_type == 1)
                                                         <div class="mb-5">
-                                                            <input type="radio" id="arrival" name="arrival1"
+                                                            <input type="radio" id="arrival{{$data->id}}" name="arrival1"
                                                                    class="form-radio h-5 w-5 text-blue-600 outline-none focus:ring-0"
-                                                                   value="duong">
-                                                            <label for="{{$data->id}}"
+                                                                   value="{{$data->stop_name}}" {{ $firstArrival ? 'checked' : '' }}>
+                                                            <label for="arrival{{$data->id}}"
                                                                    class="ml-2 mb-3" id="{{$data->id}}">{{$data->stop_name}}</label>
                                                         </div>
+                                                        @php
+                                                        $firstArrival = false;
+                                                        @endphp
                                                     @endif
                                                 @endforeach
                                             </div>
@@ -551,7 +563,7 @@
                                                     name="phone" id="phone" type="text"
                                                     value="{{ isset(Auth::user()->phone) ? Auth::user()->phone : '' }}"
                                                     placeholder="Nhập Số điện thoại của bạn"
-                                                    @if (isset(Auth::user()->phone)) readonly @endif>
+                                                    >
                                             </div>
                                             <div class="mb-4">
                                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email
@@ -561,7 +573,7 @@
                                                     name="email" id="email" type="text"
                                                     value="{{ isset(Auth::user()->email) ? Auth::user()->email : '' }}"
                                                     placeholder="Nhập địa chỉ email của bạn"
-                                                    @if (isset(Auth::user()->email)) readonly @endif>
+                                                   >
                                             </div>
                                         </div>
 

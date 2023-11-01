@@ -83,7 +83,7 @@
 
     <script type="text/javascript">
         CKEDITOR.replace('editor1', {
-            filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
+            filebrowserUploadUrl: "{{route('admin.upload', ['_token' => csrf_token() ])}}",
             filebrowserWindowWidth: '640',
             filebrowserWindowHeight: '480'
         });
