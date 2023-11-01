@@ -48,7 +48,7 @@ Route::middleware(CheckUser::class)->group(function(){
     Route::post('/momo-method', [TicketController::class, 'momo_payment'])->name('client.ticket.momo-method');
     Route::get('/vnpay-todb', [TicketController::class, 'checkoutPayment'])->name('client.ticket.add-vnpay-to-db');
     Route::get('/end-ticket-payment', [TicketController::class, 'EndTicketPayment'])->name('client.finish.ticket');
-    
+    Route::get('/contact', [App\Http\Controllers\Client\ContactController::class, 'index'])->name('contact.index');
     Route::get('/map', [MapController::class, 'index'])->name('map');
 });
 
@@ -57,3 +57,10 @@ Route::middleware(CheckUser::class)->group(function(){
     Route::post('/loginadmin', [App\Http\Controllers\LoginAdminController::class, 'loginAdmin'])->name('login_admin_success');
     
     Route::get('/logoutadmin', [App\Http\Controllers\LoginAdminController::class, 'logoutAdmin'])->name('logoutAdmin');
+
+
+
+
+
+
+

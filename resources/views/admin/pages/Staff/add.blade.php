@@ -28,16 +28,16 @@
                     
                     <div class="mb-3 ml-5">  
                         <label class="form-label">Tên nhân viên</label>
-                        <input type="text" class="form-control" name="name">
+                        <input required type="text" class="form-control" name="name">
                     </div>
                     <div class="mb-3 ml-5">  
                         <label class="form-label">Email</label>
-                        <input type="text" class="form-control" name="email">
+                        <input required type="email" class="form-control" name="email">
                     </div>
                 
                     <div class="mb-3 ml-5">  
                         <label class="form-label">Số điện thoại</label>
-                        <input type="number" class="form-control" name="phone">
+                        <input required type="number" class="form-control" name="phone">
                     </div>
 
                     <div class="mb-3 ml-5">  
