@@ -10,12 +10,14 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Client\BlogController;
 use App\Http\Controllers\Client\CategoryController;
 use App\Http\Controllers\Client\ProfileController;
+use App\Http\Controllers\Client\CarRegisterController;
 
 use App\Http\Controllers\MapController;
 
 //Nam
 
-Route::get('/',[HomeController::class,'index'])->name('home');;
+Route::get('/',[HomeController::class,'index'])->name('home');
+Route::get('/listPassengerCar',[HomeController::class,'listPassengerCar'])->name('listPassengerCar');
 Route::get('car/{id}',[HomeController::class,'passengerCarDetail'])->name('passengerCar.detail');
 
 //Route::post('/passengerCar-detail',[HomeController::class,'passengerCarDetail'])->name('passengerCar-detail');
@@ -66,4 +68,5 @@ Route::get('/map', [MapController::class, 'index'])->name('map');
 
 Route::get('/contact', [App\Http\Controllers\Client\ContactController::class, 'index'])->name('contact.index');
 
-
+#Dang ky xe
+Route::get('/car-register', [CarRegisterController::class, 'index'])->name('car-register.index');
