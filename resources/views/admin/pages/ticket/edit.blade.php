@@ -32,7 +32,7 @@
             </a>
             <div class="table-responsive">
 
-              <form action="{{ route('ticket.update', $model->id) }}" method="post" enctype="multipart/form-data">
+              <form action="{{ route('admin.ticket.update', $model->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('put')
                 <div class="mb-3">

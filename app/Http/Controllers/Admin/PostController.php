@@ -17,7 +17,7 @@ class PostController extends AdminBaseController
     public $urlbase = 'admin.posts';
     public $pathView = 'admin.pages.posts.';
     public $fieldImage = 'image'; // Điều này phụ thuộc vào cấu hình của bạn
-    public $urlIndex = 'postsing';
+    public $urlIndex = 'admin.postsing';
     public $folderImage = 'posts/image'; // Điều này phụ thuộc vào cấu hình của bạn
     public $titleIndex = 'Danh sách Bài viết';
     public $titleCreate = 'Thêm mới Bài viết';
