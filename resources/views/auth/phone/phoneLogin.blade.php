@@ -71,7 +71,7 @@
             $("#successAuth").show();
             localStorage.setItem("phoneNumber", number);
             // window.location.href = "/verify-otp?verificationId=" + confirmationResult.verificationId;
-            localStorage.setItem("verificationId", confirmationResult.verificationId); // Lưu 
+            localStorage.setItem("verificationId", confirmationResult.verificationId); // Lưu
             document.getElementById("popupContainer2").style.display = "block";
         }).catch(function (error) {
             $("#error").text(error.message);
