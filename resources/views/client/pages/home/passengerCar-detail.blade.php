@@ -551,7 +551,7 @@
                                                     tên</label>
                                                 <input
                                                     class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                                    name="name" id="name" type="text"
+                                                    name="name" id="name" type="text" value="{{ isset(Auth::user()->name) ?  Auth::user()->name : ''  }}"
                                                     placeholder="Nhập họ và tên của bạn">
                                             </div>
                                             <div class="mb-4">
