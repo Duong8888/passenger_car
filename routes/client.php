@@ -40,9 +40,8 @@ Route::group(['prefix' => 'notifications', 'as' => 'notifications.'], function (
     Route::get('/', [NotificationController::class, 'showList']);
     Route::post('send', [NotificationController::class, 'sendNotification'])->name('sendMessage');
     Route::post('load', [NotificationController::class, 'getNotification'])->name('loadMessage');
-
+});
 use App\Http\Middleware\CheckUser;
-
 
 
 Route::middleware(CheckUser::class)->group(function(){
