@@ -11,7 +11,7 @@
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title mt-0 mb-3">Edit Post</h4>
+                            <h4 class="header-title mt-0 mb-3">Sửa Bài viết</h4>
                             <a href="{{ route('admin.postsing') }}" class="btn btn-primary">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                      class="bi bi-arrow-left" viewBox="0 0 16 16">
@@ -79,7 +79,7 @@ x                                    </label>
 
     <script type="text/javascript">
         CKEDITOR.replace('editor1', {
-            filebrowserUploadUrl: "{{ route('upload', ['_token' => csrf_token()]) }}",
+            filebrowserUploadUrl: "{{ route('admin.upload', ['_token' => csrf_token()]) }}",
             filebrowserWindowWidth: '640',
             filebrowserWindowHeight: '480'
         });

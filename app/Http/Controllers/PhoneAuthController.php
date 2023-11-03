@@ -33,13 +33,13 @@ class PhoneAuthController extends Controller
     }
     public function store(Request $request)
     {
-        $existingUser = User::where('phone', $request->phone)->first();
+        if (Str::startsWith($request->phone, '+84')) {
+            $phoneNumber = Str::substr($request->phone, 3);
+        }
+        $existingUser = User::where('phone', $phoneNumber)->first();
 
         if (!$existingUser) {
-            $user = new User();
-            if (Str::startsWith($request->phone, '+84')) {
-                $phoneNumber = Str::substr($request->phone, 3);
-            }
+            $user = new User();   
             $user->phone = $phoneNumber;
             $user->save();
             $request->session()->regenerate();

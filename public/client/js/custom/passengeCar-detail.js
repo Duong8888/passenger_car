@@ -67,7 +67,7 @@ $(document).ready(function () {
     $(document).on('click', '.submit', function () {
         var user_id = $('input[name="user_id"]').val();
         var username = $('input[name="name"]').val();
-        var phone = '+84' + $('input[name="phone"]').val();
+        var phone = $('input[name="phone"]').val();
         var email = $('input[name="email"]').val();
         var total_price = TicketPrice * CountTicket;
         var quantity = CountTicket;

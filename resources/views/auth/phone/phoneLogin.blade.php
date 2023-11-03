@@ -1,6 +1,4 @@
-<head>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-</head>
+
 @include('client.layout.partials.script')
 <script>
     var csrfToken = $('meta[name="csrf-token"]').attr('content');
@@ -28,7 +26,6 @@
         // messagingSenderId: "793008679902",
         // appId: "1:793008679902:web:01e40657ee99f0150dcb4f",
         // measurementId: "G-CTLCZLM3R1"
-
 
         // apiKey: "AIzaSyCJ8pbe36jbzUmVQK_pFOZlPKXRW6JNoG8",
         // authDomain: "test2-5f15d.firebaseapp.com",
@@ -72,7 +69,9 @@
             $("#successAuth").text("Message sent");
             $("#successAuth").show();
             localStorage.setItem("phoneNumber", number);
-            window.location.href = "/verify-otp?verificationId=" + confirmationResult.verificationId;
+            // window.location.href = "/verify-otp?verificationId=" + confirmationResult.verificationId;
+            localStorage.setItem("verificationId", confirmationResult.verificationId); // Lưu
+            document.getElementById("popupContainer2").style.display = "block";
         }).catch(function (error) {
             $("#error").text(error.message);
             $("#error").show();
