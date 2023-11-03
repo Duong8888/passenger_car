@@ -76,29 +76,29 @@
                         <i class="mdi mdi-view-dashboard-outline"></i>
                         <span> Dashboard </span>
 
-                    </a> 
+                    </a>
                 </li>
-                {{-- <li>
+                 <li>
                     <a href="{{ route('admin.revenue.index') }}">
                         <i class="mdi mdi-view-dashboard-outline"></i>
                         <span> Thống kê doanh thu </span>
                     </a>
-                </li> --}}
-                {{-- <li>
+                </li>
+                <li>
                     <a href="{{ route('admin.category.index') }}">
                         <i class="mdi mdi-view-dashboard-outline"></i>
                         <span> Quản lý danh mục </span>
                     </a>
-                </li> --}}
+                </li>
 
-                {{-- <li>
+                 <li>
                     <a href="{{ route('admin.customer.index') }}">
                         <i class="mdi mdi-view-dashboard-outline"></i>
                         <span> Quản lý khách hàng </span>
                     </a>
-                </li> --}}
+                </li>
 
-                
+
                 @if(auth()->user()->hasAnyRole(['SupperAdmin', 'Admin', 'AdminPost']))
                     <li>
                         <a href="{{ route('admin.postsing') }}">
