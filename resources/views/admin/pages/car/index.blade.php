@@ -64,7 +64,7 @@
                                                 <div class="mb-3 d-flex flex-wrap">
                                                     @foreach($service as $value)
                                                         <div class="form-check mb-2 form-check-success" style="margin-right: 25px">
-                                                            <input class="form-check-input" name="service[]" type="checkbox" value="{{$value->id}}" id="customckeck{{$value->id}}">
+                                                            <input class="form-check-input service" name="service[]" type="checkbox" value="{{$value->id}}" id="customckeck{{$value->id}}">
                                                             <label class="form-check-label" for="customckeck{{$value->id}}">{{$value->service_name}}</label>
                                                         </div>
                                                     @endforeach
