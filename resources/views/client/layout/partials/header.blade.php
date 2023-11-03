@@ -125,15 +125,15 @@
                     id="navigation-menu">
                     <li class="relative dropdown">
                         <button class="py-5 text-gray-800 lg:px-4 dropdown-toggle lg:h-[70px] active" id="home"
-                            data-bs-toggle="dropdown"> <a href="{{route('home')}}">Trang chủ</a> </button>
+                           > <a href="{{route('home')}}">Trang chủ</a> </button>
                     </li>
                     <li class="relative dropdown lg:mt-0">
                         <button class="py-5 text-gray-800 lg:px-4 dropdown-toggle lg:h-[70px]" id="company"
-                            data-bs-toggle="dropdown"><a href="{{route('home')}}">Về chúng tôi</a></button>
+                           ><a href="{{route('home')}}">Về chúng tôi</a></button>
                     </li>
                     <li class="relative dropdown lg:mt-0">
                         <button href="#" class="py-5 text-gray-800 lg:px-4 dropdown-toggle lg:h-[70px]" id="pages"
-                            data-bs-toggle="dropdown"><a href="{{route('blog.show')}}">Tin tức</a></button>
+                            ><a href="{{route('blog.show')}}">Tin tức</a></button>
                     </li>
 
                     {{-- <li class="relative dropdown lg:mt-0">--}}
@@ -188,7 +188,7 @@
 
                     <li class="py-5 lg:px-4">
                         <a href="{{route('contact.index')}}" class="py-2.5 text-gray-800 font-medium leading-tight" id="contact"
-                           data-bs-toggle="dropdown">Liên hệ </a>
+                          >Liên hệ </a>
                     </li>
                 </ul>
             </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client\Ticket;
 
 use App\Http\Controllers\Controller;
 use App\Models\PassengerCar;
+use App\Models\Stops;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -17,13 +18,13 @@ class TicketController extends Controller
 
         session()->push('value', $request->all());
 
-        Log::info(session()->get('value'));
         return response()->json(['success' => 'Done'], Response::HTTP_OK);
     }
 
     public function PaymentView()
     {
-        return view('client.pages.ticket.index');
+        $stops = Stops::all();
+        return view('client.pages.ticket.index', ['stops' => $stops]);
     }
 
     public function endPayment(Request $request)
@@ -185,7 +186,7 @@ class TicketController extends Controller
         foreach ($data as $a) {
             Ticket::query()->create([
                 'username' => $a['username'],
-                'status' => 1,
+                'status' => 2,
                 'payment_method' => 'Đã Thanh toán VNPAY',
                 'user_id' => 1,
                 'total_price' => $a['total_price'],

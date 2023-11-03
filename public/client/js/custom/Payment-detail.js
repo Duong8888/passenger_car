@@ -96,6 +96,29 @@ $(document).ready(function () {
             }
         })
     })
+    function showPopup() {
+        var popup = document.getElementById("popup");
+        popup.classList.remove("hidden");
+    }
 
+    function hidePopup() {
+        var popup = document.getElementById("popup");
+        popup.classList.add("hidden");
+    }
+    
+    $(document).on("click", ".exit", function () {
+        hidePopup();
+    })
+    const secondTab = document.getElementById('second');
+    const thirdTab = document.getElementById('third');
+    const secondNextButton = document.getElementById('second-next');
+    secondNextButton.addEventListener('click', function () {
+        showPopup();
+        secondTab.classList.add('hidden');
+        thirdTab.classList.remove('hidden');
+        $('.second-li>button').removeClass('active');
+        $('.third-li>button').addClass('active');
+        $('.secondItem>.icon-item').attr('data-item','second');
+    });
 
 })
