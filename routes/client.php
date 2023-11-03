@@ -40,9 +40,8 @@ Route::group(['prefix' => 'notifications', 'as' => 'notifications.'], function (
     Route::get('/', [NotificationController::class, 'showList']);
     Route::post('send', [NotificationController::class, 'sendNotification'])->name('sendMessage');
     Route::post('load', [NotificationController::class, 'getNotification'])->name('loadMessage');
-
+});
 use App\Http\Middleware\CheckUser;
-
 
 
 Route::middleware(CheckUser::class)->group(function(){
@@ -52,25 +51,25 @@ Route::middleware(CheckUser::class)->group(function(){
     //Route::post('/passengerCar-detail',[HomeController::class,'passengerCarDetail'])->name('passengerCar-detail');
     Route::resource('/profile',ProfileController::class);
     Route::get('/profile/ticketdetails/{id}',[ProfileController::class,'ticketDetails'])->name('ticketDetails_index');
-    
+
     Route::get('/search', [SearchController::class, 'searchRequest'])->name('search');
     Route::post('/sortBy', [SearchController::class, 'sortBy'])->name('sortBy');
-    
+
     Route::post('/process', [PhoneAuthController::class, 'store'])->name('client.phone.process');
     Route::get('/log-out', [PhoneAuthController::class, 'logout'])->name('client.phone.logout');
-    
+
     Route::group(['prefix' => 'notifications', 'as' => 'notifications.'], function () {
         Route::get('/', [NotificationController::class, 'showList']);
         Route::post('send', [NotificationController::class, 'sendNotification'])->name('sendMessage');
         Route::post('load', [NotificationController::class, 'getNotification'])->name('loadMessage');
     });
-    
-    
+
+
     Route::get('/blog/{id}', [BlogController::class, 'blog'])->name('blog');
     Route::get('/blogs', [BlogController::class, 'show'])->name('blog.show');
     Route::get('/category-detail/{id}',[BlogController::class, 'show'])->name('category-detail');
-    
-    
+
+
     Route::post('/update-ticket', [TicketController::class, 'CountTicket'])->name('client.ticket.update-ticket');
     Route::get('/payment-method', [TicketController::class, 'PaymentView'])->name('client.ticket.payment-method');
     Route::post('/send-ticket', [TicketController::class, 'endPayment'])->name('client.ticket.end-payment-ticket');
@@ -83,10 +82,11 @@ Route::middleware(CheckUser::class)->group(function(){
 
 });
 
+
     Route::get('/loginadmin', [App\Http\Controllers\LoginAdminController::class, 'showLoginAdmin'])->name('login_admin');
-    
+
     Route::post('/loginadmin', [App\Http\Controllers\LoginAdminController::class, 'loginAdmin'])->name('login_admin_success');
-    
+
     Route::get('/logoutadmin', [App\Http\Controllers\LoginAdminController::class, 'logoutAdmin'])->name('logoutAdmin');
 
 
