@@ -21,7 +21,7 @@
                     <img src="client/images/logo-dark.png" alt="" class="logo-dark h-[22px] block dark:hidden">
                     <img src="client/images/logo-light.png" alt="" class="logo-dark h-[22px] hidden dark:block">
                 </a>
-                <h4 class="mb-3 text-lg text-gray-900 dark:text-gray-50">Hello</h4>
+                <h4 class="mb-3 text-lg text-gray-900 dark:text-gray-50">Hellozz</h4>
             </div>
             <div id="popup"
                 class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 hidden w-80 h-96 z-50">
@@ -37,7 +37,7 @@
                     </button>
 
 
-                  
+
                 </div>
             </div>
         </div>

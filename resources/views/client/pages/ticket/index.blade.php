@@ -103,7 +103,7 @@
             <input type="hidden" value="{{ json_encode(session('value')) }}" name="session">
 
         </form>
-       
+
     </section>
 </body>
 

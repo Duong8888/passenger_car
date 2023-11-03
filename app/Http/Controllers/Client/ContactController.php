@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 class ContactController extends Controller
 {
     public function index(Request $request){
-        $user = auth()->user(); 
+        $user = auth()->user();
         return view('client.pages.contact.contact',compact('user'));
     }
-    
+
 }
