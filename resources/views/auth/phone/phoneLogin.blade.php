@@ -1,6 +1,4 @@
-<head>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-</head>
+
 @include('client.layout.partials.script')
 <script>
     var csrfToken = $('meta[name="csrf-token"]').attr('content');
@@ -72,7 +70,9 @@
             $("#successAuth").text("Message sent");
             $("#successAuth").show();
             localStorage.setItem("phoneNumber", number);
-            window.location.href = "/verify-otp?verificationId=" + confirmationResult.verificationId;
+            // window.location.href = "/verify-otp?verificationId=" + confirmationResult.verificationId;
+            localStorage.setItem("verificationId", confirmationResult.verificationId); // Lưu 
+            document.getElementById("popupContainer2").style.display = "block";
         }).catch(function (error) {
             $("#error").text(error.message);
             $("#error").show();
