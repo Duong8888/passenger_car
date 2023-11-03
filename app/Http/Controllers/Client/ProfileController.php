@@ -18,7 +18,7 @@ class ProfileController extends Controller
 
     public function index(Request $request){
         $user = auth()->user();
-        $tickets = Ticket::with('passengerCar')->where('user_id', $user->id)->get();
+        $tickets = Ticket::with('passengerCar')->where('phone', $user->phone)->get();
         // return response()->json($tickets[0]->passengerCar->albums[0]->path, 200, [], JSON_PRETTY_PRINT);
         return view('client.pages.profile.profile',compact('user','tickets'));
 
