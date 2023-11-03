@@ -56,7 +56,7 @@
                     <div class="mb-5 border p-4">
                         <div class="flex justify-between">
                             <h5 class="mb-3 text-1 text-gray-900 dark:text-gray-50">Thông Tin Chi Tiết</h5>
-                            <button><i class="text-2xl mdi mdi-pencil"></i></button>
+                            <button id="second-next"><i class="text-2xl mdi mdi-pencil"></i></button>
                         </div>
 
 
@@ -91,8 +91,8 @@
         <div class="fixed bottom-0 left-0 right-0 p-4 bg-white shadow-md flex justify-center offline-ticket hidden">
 
             <button data-action="{{ route('client.ticket.end-payment-ticket') }}"
-                data-session="{{ json_encode(session('value')) }}" class="bg-yellow-500 w-1/2 p-2 m-2 finish-ticket-offline"
-                >Thanh toán tại
+                data-session="{{ json_encode(session('value')) }}"
+                class="bg-yellow-500 w-1/2 p-2 m-2 finish-ticket-offline">Thanh toán tại
                 nhà xe</button>
         </div>
         <form action="{{ route('client.ticket.vnpay-method') }}" method="POST"
@@ -103,7 +103,112 @@
             <input type="hidden" value="{{ json_encode(session('value')) }}" name="session">
 
         </form>
-       
+        <div id="popup"
+            class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 hidden w-80 h-96 z-50">
+            <div class="bg-white p-6 rounded relative">
+                <!-- Nút "x" -->
+                <div class="flex justify-between items-center">
+                    <button class="top-0 right-0 text-gray-500 hover:text-gray-700 exit">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="flex items-center gap-x-3">
+                    <div class="rounded mx-auto mt-4">
+                        <div
+                            class="rounded dark:border-neutral-600 nav-tabs bottom-border-tab col-span-12 lg:col-span-12 lg:col-start-12">
+                            <div class="p-4 tab-content">
+                                <div id="second" class="hidden w-full tab-pane">
+                                    <div class="flex justify-between">
+                                        <div class="flex flex-col w-1/2"
+                                            style="overflow-y: auto; max-height: 200px; max-width: 50%;">
+                                            Điểm đón:
+                                            @php
+                                            $firstDeparture = true;
+                                            @endphp
+                                            @foreach ($stops as $data)
+                                            @if ($data->stop_type == 0)
+                                            <div class="mb-5">
+                                                <input type="radio" id="departure{{$data->id}}" name="departure"
+                                                    class="form-radio h-5 w-5 text-blue-600 outline-none focus:ring-0"
+                                                    value="{{$data->stop_name}}" {{ $firstDeparture ? 'checked' : '' }}>
+                                                <label for="departure{{$data->id}}" class="ml-2 mb-3"
+                                                    id="{{$data->id}}">{{$data->stop_name}}</label>
+                                            </div>
+                                            @php
+                                            $firstDeparture = false;
+                                            @endphp
+                                            @endif
+                                            @endforeach
+                                        </div>
+                                        <div class="flex flex-col w-1/2"
+                                            style="overflow-y: auto; max-height: 200px; max-width: 50%;">
+                                            Điểm đón:
+                                            @php
+                                            $firstArrival = true;
+                                            @endphp
+                                            @foreach ($stops as $data)
+                                            @if ($data->stop_type == 1)
+                                            <div class="mb-5">
+                                                <input type="radio" id="arrival{{$data->id}}" name="arrival1"
+                                                    class="form-radio h-5 w-5 text-blue-600 outline-none focus:ring-0"
+                                                    value="{{$data->stop_name}}" {{ $firstArrival ? 'checked' : '' }}>
+                                                <label for="arrival{{$data->id}}" class="ml-2 mb-3"
+                                                    id="{{$data->id}}">{{$data->stop_name}}</label>
+                                            </div>
+                                            @php
+                                            $firstArrival = false;
+                                            @endphp
+                                            @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="third" class="hidden w-full tab-pane">
+                                    <div class="max-w-md mx-auto bg-white rounded p-8 ">
+                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Sửa Thông Tin Khách Hàng</label>
+                                        <div class="mb-4">
+                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Họ và
+                                                tên</label>
+                                            <input
+                                                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                name="name" id="name" type="text" value="{{ session('value')[0]['username'] }}"
+                                                placeholder="Nhập họ và tên của bạn">
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">Số
+                                                điện
+                                                thoại</label>
+                                            <input
+                                                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                name="phone" id="phone" type="text" value="{{ session('value')[0]['phone'] }}"
+                                                placeholder="Nhập Số điện thoại của bạn">
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email
+                                                để nhận thông tin vé</label>
+                                            <input
+                                                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                name="email" id="email" type="text" value="{{ session('value')[0]['email'] }}"
+                                                placeholder="Nhập địa chỉ email của bạn">
+                                        </div>
+                                        <div class="mb-4">
+                                            <button></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 </body>
 

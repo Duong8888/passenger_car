@@ -47,6 +47,8 @@ class PhoneAuthController extends Controller
         } else {
             Auth::login($existingUser);
         }
+        $user_type = Auth::user()->user_type;
+        return response()->json(['user_type' => $user_type]);
     }
     public function logout(Request $request)
     {

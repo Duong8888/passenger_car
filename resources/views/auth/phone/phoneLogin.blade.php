@@ -100,7 +100,13 @@
                         phone: phoneNumber,
                     },
                     success: function (data) {
-                        window.location.href ='/';
+                        var user_type = data.user_type
+                        if(user_type === 'user'){
+                            window.location.href ='/admin.dashboard';
+                        }else{
+                            window.location.href ='/';
+                        }
+                       
                     },
                     error: function (error) {
                         $("#error").text(error.message);

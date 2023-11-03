@@ -17,9 +17,9 @@
                                 <input type="hidden" name="message" value="Dương đẹp trai 123">
                                 <button class="btn btn-success btn-send" id="{{$value->id}}" type="submit">Send</button>
                             </form>
-
-{{--                            <button class="btn btn-success btn-send" id="{{$value->id}}" type="button">Send</button>--}}
-                        </td>
+{{-- 
+                           <button class="btn btn-success btn-send" id="{{$value->id}}" type="button">Send</button>
+                        </td> --}}
                 </tr>
             @endforeach
         </table>
@@ -27,30 +27,30 @@
 
 @endsection
 @section('page-script')
-{{--    <script type="module">--}}
-{{--        $(document).ready(function (){--}}
-{{--            $.ajaxSetup({--}}
-{{--                headers: {--}}
-{{--                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
-{{--                }--}}
-{{--            });--}}
-{{--           $(document).on('click', '.btn-send',function (e){--}}
-{{--               console.log(e.target.id);--}}
-{{--               $.ajax({--}}
-{{--                   url: '{{route('notifications.sendMessage')}}',--}}
-{{--                   method: "POST",--}}
-{{--                   data: {--}}
-{{--                       id: e.target.id,--}}
-{{--                       message:"Vé đặt của bạn đã được chúng tôi xác nhận.",--}}
-{{--                   },--}}
-{{--                   success: function (data) {--}}
-{{--                       console.log(data)--}}
-{{--                   },--}}
-{{--                   error: function (jqXHR) {--}}
-{{--                       console.log(jqXHR);--}}
-{{--                   }--}}
-{{--               })--}}
-{{--           });--}}
-{{--        });--}}
-{{--    </script>--}}
+   {{-- <script type="module">
+       $(document).ready(function (){
+           $.ajaxSetup({
+               headers: {
+                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+               }
+           });
+          $(document).on('click', '.btn-send',function (e){
+              console.log(e.target.id);
+              $.ajax({
+                  url: '{{route('notifications.sendMessage')}}',
+                  method: "POST",
+                  data: {
+                      id: e.target.id,
+                      message:"Vé đặt của bạn đã được chúng tôi xác nhận.",
+                  },
+                  success: function (data) {
+                      console.log(data)
+                  },
+                  error: function (jqXHR) {
+                      console.log(jqXHR);
+                  }
+              })
+          });
+       });
+   </script> --}}
 @endsection
