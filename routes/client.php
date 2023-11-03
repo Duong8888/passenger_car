@@ -70,3 +70,5 @@ Route::get('/contact', [App\Http\Controllers\Client\ContactController::class, 'i
 
 #Dang ky xe
 Route::get('/car-register', [CarRegisterController::class, 'index'])->name('car-register.index');
+Route::post('/car-register', [CarRegisterController::class, 'post'])->name('car-register.index');
+

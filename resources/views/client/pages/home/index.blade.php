@@ -462,89 +462,90 @@
                     if (result?.data && result?.data.length > 0) {
                         listPassengerCars.html('');
                         result?.data.forEach(function (item) {
-                            let carItem = ''
-                            carItem += '		<div class="relative mt-4 overflow-hidden transition-all duration-500 ease-in-out bg-white border rounded-md border-gray-100/50 group/jobs group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:-translate-y-2 dark:bg-neutral-900 dark:border-neutral-600 ">'
-                            carItem += '            <div class="w-48 absolute -top-[5px] -left-20 -rotate-45 group-data-[theme-color=violet]:bg-violet-500/20 group-data-[theme-color=sky]:bg-sky-500/20 group-data-[theme-color=red]:bg-red-500/20 group-data-[theme-color=green]:bg-green-500/20 group-data-[theme-color=pink]:bg-pink-500/20 group-data-[theme-color=blue]:bg-blue-500/20 group-data-[theme-color=violet]:group-hover/jobs:bg-violet-500 group-data-[theme-color=sky]:group-hover/jobs:bg-sky-500 group-data-[theme-color=red]:group-hover/jobs:bg-red-500 group-data-[theme-color=green]:group-hover/jobs:bg-green-500 group-data-[theme-color=pink]:group-hover/jobs:bg-pink-500 group-data-[theme-color=blue]:group-hover/jobs:bg-blue-500 transition-all duration-500 ease-in-out p-[6px] text-center dark:bg-violet-500/20">'
-                            carItem += '                <a href="javascript:void(0)" class="text-2xl text-white align-middle"><i class="mdi mdi-star"></i></a>'
-                            carItem += '            </div>'
-                            carItem += '            <div class="p-4">'
-                            carItem += '                <div class="grid items-center grid-cols-12">'
-                            carItem += '                    <div class="col-span-12 lg:col-span-2">'
-                            carItem += '                        <div class="mb-4 text-center mb-md-0">'
-                            carItem += '                            <a href="company-details.html">'
-                            carItem += '                                <img style="width: 55%;"'
-                            carItem += '                                     src=""'
-                            carItem += '                                     alt="anh0001" class="mx-auto img-fluid rounded-3"></a>'
-                            carItem += '                        </div>'
-                            carItem += '                    </div>'
-                            carItem += '                    <div class="col-span-12 lg:col-span-3">'
-                            carItem += '                        <div class="mb-2 mb-md-0">'
-                            carItem += '                            <h5 class="mb-1 fs-18">'
-                            carItem += '                                <a href="job-details.html" class="text-gray-900 dark:text-gray-50">' + item.name +  '</a>'
-                            carItem += '                                <p class="mb-0 text-gray-500 fs-14 dark:text-gray-300"> Ghế ngồi ' + item.capacity +  ' chỗ</p> </h5>'
-                            carItem += '                        </div>'
-                            carItem += '                    </div>'
-                            carItem += '                    <div class="col-span-12 lg:col-span-3">'
-                            carItem += '                        <div class="mb-2 lg:flex">'
-                            carItem += '                            <div class="flex-shrink-0">'
-                            carItem += '                                <i style="font-size: 11px;padding-left: 2px"'
-                            carItem += '                                   class="mr-1 group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500 fa-solid fa-circle-dot"></i>'
-                            carItem += '                            </div>'
-                            carItem += '                            <p class="mb-0 text-gray-500 dark:text-gray-300"><span'
-                            carItem += '                                style="font-weight: bold;"> ' + item?.departure_time +' -- ' + item?.arrival_time +  '</span>'
-                            carItem += '                            </p>'
-                            carItem += '                        </div>'
-                            carItem += '                    </div>'
-                            carItem += '                    <div class="col-span-12 lg:col-span-2">'
-                            carItem += '                        <div>'
-                            carItem += '                            <div class="mb-2 lg:flex" style="margin-left: -35px">'
-                            carItem += '                                <div class="flex-shrink-0">'
-                            carItem += '                                    <i class="mr-1 group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500 mdi mdi-map-marker"></i>'
-                            carItem += '                                </div>'
-                            carItem += '                                <p class="mb-0 text-gray-500 dark:text-gray-300"'
-                            carItem += '                                   style="font-weight: bold;"><span'
-                            carItem += '                                    style="font-weight: bold;"> ' +  item.departure +  ' </span>'
-                            carItem += '                                    --> ' + item.arrival + '</p>'
-                            carItem += '                            </div>'
-                            carItem += '                            <p style=" font-weight: bold;"'
-                            carItem += '                               class="mb-2 text-gray-500 dark:text-gray-300"><span'
-                            carItem += '                                style="color: #1890ff;">' + item.price + 'đ</span>'
-                            carItem += '                            </p>'
-                            carItem += '                        </div>'
-                            carItem += '                    </div>'
-                            carItem += '                    <div class="col-span-12 lg:col-span-2">'
-                            carItem += '                        <div class="flex flex-wrap gap-1.5">'
-                            carItem += '                            <a href="/car/'+ item.id +'?time="' + item.working_time_id
-                            carItem += '                               class="badge text-sky-500 text-13 px-2 py-0.5 font-medium rounded">Thông tin chi tiết </a>'
-                            carItem += '                        </div>'
-                            carItem += '                    </div>'
-                            carItem += '                </div>'
-                            carItem += '            </div>'
-                            carItem += '            <div class="p-3 bg-gray-50 dark:bg-neutral-700">'
-                            carItem += '                <div class="grid grid-cols-12">'
-                            carItem += '                    <div class="col-span-12 lg:col-span-4">'
-                            carItem += '                        <div>'
-                            carItem += '                            <p class="mb-0 text-gray-500 dark:text-gray-300">'
-                            carItem += '                               <span class="text-gray-900 dark:text-gray-50">Biển số xe :</span>' + item.license_plate
-                            carItem += '                            </p>'
-                            carItem += '                        </div>'
-                            carItem += '                    </div>'
-                            carItem += '                    <div class="col-span-12 lg:col-span-6"></div>'
-                            carItem += '                    <div class="col-span-3 lg:col-span-2">'
-                            carItem += '                        <div class="text-start text-md-end dark:text-gray-50">'
-                            carItem += '                            <form action="/passengerCar-detail"'
-                            carItem += '                                  method="POST">'
-                            carItem += '                                <input type="text" hidden name="passenger_id"'
-                            carItem += '                                       value="' + item.id +'">'
-                            carItem += '                                    <input type="text" hidden name="route_id"'
-                            carItem += '                                           value="' + item.route_id + '">'
-                            carItem += '                                        <button><i class="mdi mdi-chevron-double-right"></i>Đặt vé ngay </button>'
-                            carItem += '                            </form>'
-                            carItem += '                        </div>'
-                            carItem += '                    </div>'
-                            carItem += '                </div>'
-                            carItem += '            </div>'
-                            carItem += '        </div>'
+                            let carItem =`
+                            		<div class="relative mt-4 overflow-hidden transition-all duration-500 ease-in-out bg-white border rounded-md border-gray-100/50 group/jobs group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:-translate-y-2 dark:bg-neutral-900 dark:border-neutral-600 ">
+                                        <div class="w-48 absolute -top-[5px] -left-20 -rotate-45 group-data-[theme-color=violet]:bg-violet-500/20 group-data-[theme-color=sky]:bg-sky-500/20 group-data-[theme-color=red]:bg-red-500/20 group-data-[theme-color=green]:bg-green-500/20 group-data-[theme-color=pink]:bg-pink-500/20 group-data-[theme-color=blue]:bg-blue-500/20 group-data-[theme-color=violet]:group-hover/jobs:bg-violet-500 group-data-[theme-color=sky]:group-hover/jobs:bg-sky-500 group-data-[theme-color=red]:group-hover/jobs:bg-red-500 group-data-[theme-color=green]:group-hover/jobs:bg-green-500 group-data-[theme-color=pink]:group-hover/jobs:bg-pink-500 group-data-[theme-color=blue]:group-hover/jobs:bg-blue-500 transition-all duration-500 ease-in-out p-[6px] text-center dark:bg-violet-500/20">
+                                            <a href="javascript:void(0)" class="text-2xl text-white align-middle"><i class="mdi mdi-star"></i></a>
+                                        </div>
+                                        <div class="p-4">
+                                            <div class="grid items-center grid-cols-12">
+                                                <div class="col-span-12 lg:col-span-2">
+                                                    <div class="mb-4 text-center mb-md-0">
+                                                        <a href="company-details.html">
+                                                            <img style="width: 55%;"
+                                                                 src=""
+                                                                 alt="anh0001" class="mx-auto img-fluid rounded-3"></a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-span-12 lg:col-span-3">
+                                                    <div class="mb-2 mb-md-0">
+                                                        <h5 class="mb-1 fs-18">
+                                                            <a href="job-details.html" class="text-gray-900 dark:text-gray-50">${item.name}</a>
+                                                            <p class="mb-0 text-gray-500 fs-14 dark:text-gray-300"> Ghế ngồi ${item.capacity} chỗ</p> </h5>
+                                                    </div>
+                                                </div>
+                                                <div class="col-span-12 lg:col-span-3">
+                                                    <div class="mb-2 lg:flex">
+                                                        <div class="flex-shrink-0">
+                                                            <i style="font-size: 11px;padding-left: 2px"
+                                                               class="mr-1 group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500 fa-solid fa-circle-dot"></i>
+                                                        </div>
+                                                        <p class="mb-0 text-gray-500 dark:text-gray-300"><span
+                                                            style="font-weight: bold;"> ${item?.departure_time} -- ${item?.arrival_time}</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-span-12 lg:col-span-2">
+                                                    <div>
+                                                        <div class="mb-2 lg:flex" style="margin-left: -35px">
+                                                            <div class="flex-shrink-0">
+                                                                <i class="mr-1 group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500 mdi mdi-map-marker"></i>
+                                                            </div>
+                                                            <p class="mb-0 text-gray-500 dark:text-gray-300"
+                                                               style="font-weight: bold;"><span
+                                                                style="font-weight: bold;"> ${item.departure} </span>
+                                                                --> ${item.arrival}</p>
+                                                        </div>
+                                                        <p style=" font-weight: bold;"
+                                                           class="mb-2 text-gray-500 dark:text-gray-300"><span
+                                                            style="color: #1890ff;">${item.price}đ</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-span-12 lg:col-span-2">
+                                                    <div class="flex flex-wrap gap-1.5">
+                                                        <a href="/car/${item.id}?time="${item.working_time_id}"
+                                                           class="badge text-sky-500 text-13 px-2 py-0.5 font-medium rounded">Thông tin chi tiết </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="p-3 bg-gray-50 dark:bg-neutral-700">
+                                            <div class="grid grid-cols-12">
+                                                <div class="col-span-12 lg:col-span-4">
+                                                    <div>
+                                                        <p class="mb-0 text-gray-500 dark:text-gray-300">
+                                                           <span class="text-gray-900 dark:text-gray-50">Biển số xe :</span> ${item.license_plate}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-span-12 lg:col-span-6"></div>
+                                                <div class="col-span-3 lg:col-span-2">
+                                                    <div class="text-start text-md-end dark:text-gray-50">
+                                                        <form action="/passengerCar-detail"
+                                                              method="POST">
+                                                            <input type="text" hidden name="passenger_id"
+                                                                   value="${item.id}">
+                                                                <input type="text" hidden name="route_id"
+                                                                       value="${item.route_id}">
+                                                                    <button><i class="mdi mdi-chevron-double-right"></i>Đặt vé ngay </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            `
                             listPassengerCars.append(carItem);
                         });
                     }
