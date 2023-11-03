@@ -234,7 +234,7 @@ $(document).ready(function () {
                                                 </div>
                                                 <!--end col-->
                                                 <div class="col-span-10">
-                                                    <h5 class="mb-1 fs-17"><a href="job-details.html" class="dark:text-gray-50">Dương Đẹp Trai 102</a>
+                                                    <h5 class="mb-1 fs-17"><a href="#" class="dark:text-gray-50">Nhà xe</a>
                                                         <small class="font-normal text-gray-500 dark:text-gray-300"></small>
                                                     </h5>
                                                     <ul class="mb-0 lg:gap-3 gap-y-3">
@@ -265,7 +265,7 @@ $(document).ready(function () {
                                                 <!--end col-->
                                                 <div class="col-span-12 mt-2 lg:col-span-6 lg:mt-0">
                                                     <div class="ltr:lg:text-right rtl:lg:text-left dark:text-gray-50">
-                                                        <a id="pasengerCarUrl" href="/passengerCar-detail" data-bs-toggle="modal">Chi tiết <i class="mdi mdi-chevron-double-right"></i></a>
+                                                        <a id="pasengerCarUrl" href="/car/${item.id}?time=" data-bs-toggle="modal">Chi tiết <i class="mdi mdi-chevron-double-right"></i></a>
                                                     </div>
                                                 </div>
                                                 <!--end col-->
@@ -278,8 +278,7 @@ $(document).ready(function () {
             });
         });
 
-
-        $('#pasengerCarUrl').attr('href','/passengerCar-detail?filterArrival=' +filterStopsArrivalValue + '&filterDeparture=' + filterStopsDepartureValue);
+        // $('#pasengerCarUrl').attr('href','/passengerCar-detail?filterArrival=' +filterStopsArrivalValue + '&filterDeparture=' + filterStopsDepartureValue);
     }
 
     function loadItem2(response) {
