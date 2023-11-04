@@ -135,7 +135,7 @@
                     <li>
                         <a href="{{ route('admin.ticket.index') }}" >
                             <i class="mdi mdi-texture"></i>
-                            <span>Vé</span>
+                            <span>Quản lý Vé</span>
                         </a>
                     </li>
                 @endif
