@@ -108,7 +108,7 @@ $(document).ready(function () {
                                     </button>
                                     <div class="dropdown-menu" style="">
                                         <a class="dropdown-item  btn-update" id="${item.id}" href="#">Sửa</a>
-                                        <a class="dropdown-item delete" data-action="{{route('car.delete',[$value->id])}}" href="#">Xóa</a>
+                                        <a class="dropdown-item delete" data-id="${item.id}" href="#">Xóa</a>
                                     </div>
                                 </div>
                             </td>
@@ -135,7 +135,7 @@ $(document).ready(function () {
                                     </button>
                                     <div class="dropdown-menu" style="">
                                         <a class="dropdown-item  btn-update" id="${item.id}" href="#">Sửa</a>
-                                        <a class="dropdown-item delete" data-action="{{route('car.delete',[$value->id])}}" href="#">Xóa</a>
+                                        <a class="dropdown-item delete" data-id="${item.id}" href="#">Xóa</a>
                                     </div>
                                 </div>
                             </td>
@@ -144,6 +144,7 @@ $(document).ready(function () {
                     }
                 })
                 showUpdate();
+                deleteCar();
             },
             error: function (error) {
                 console.log(error);
@@ -191,7 +192,7 @@ $(document).ready(function () {
         });
 
         $.ajax({
-            url: baseUrl + '/update/'+idUpdate,
+            url: baseUrl + '/update/' + idUpdate,
             type: "POST",
             data: formData,
             processData: false, // Set false để ngăn jQuery xử lý dữ liệu FormData
@@ -284,6 +285,23 @@ $(document).ready(function () {
                 });
         }
     }
+
+    function deleteCar() {
+        $(document).on('click', '.delete', function () {
+            $.ajax({
+                url: baseUrl + '/delete/' + $(this).data('id'),
+                type: "DELETE",
+                success: function (data) {
+                    console.log('xóa thành công')
+                    loadData();
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error sending data:", error);
+                }
+            });
+        });
+    }
+    deleteCar();
 
 });
 

@@ -175,5 +175,21 @@ class PassengerCarController extends AdminBaseController
 
     }
 
+    public function destroy(string $id)
+    {
+        if (\request()->ajax()) {
+            $model = $this->model->with('albums')->findOrFail($id);
+            $model->delete();
+            foreach ($model->albums as $value) {
+                Log::info($value->{$this->fieldImage});
+                Storage::delete($value->{$this->fieldImage});
+            }
+            return response()->json("Xóa thành công");
+        }else{
+            return parent::destroy($id);
+        }
+    }
+
+
 }
 
