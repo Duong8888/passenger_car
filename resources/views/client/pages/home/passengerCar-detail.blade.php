@@ -448,9 +448,9 @@
                                     </ul>
                                 </div>
 
-                                <div class="p-4 tab-content">
+                                <div class="tab-content">
 
-                                    <div id="first" class="block w-full tab-pane">
+                                    <div id="first" class="block w-full tab-pane p-4">
 
                                         <p class="my-4">Số lượng khách</p>
                                         <div class="flex justify-between mb-8 items-center">
@@ -486,7 +486,7 @@
 
                                     <div id="second" class="hidden w-full tab-pane">
                                         <div class="flex justify-between">
-                                            <div class="flex flex-col w-1/2" style="overflow-y: auto; max-height: 200px; max-width: 50%;">
+                                            <div class="flex flex-col w-1/2 p-4" style="overflow-y: auto; max-height: 200px; max-width: 50%;">
                                                 Điểm đón:
                                                 @php
                                                 $firstDeparture = true;
@@ -506,7 +506,7 @@
                                                     @endif
                                                 @endforeach
                                             </div>
-                                            <div class="flex flex-col w-1/2" style="overflow-y: auto; max-height: 200px; max-width: 50%;">
+                                            <div class="flex flex-col w-1/2 p-4" style="overflow-y: auto; max-height: 200px; max-width: 50%;">
                                                 Điểm đón:
                                                 @php
                                                 $firstArrival = true;
@@ -544,7 +544,7 @@
                                         </div>
                                     </div>
 
-                                    <div id="third" class="hidden w-full tab-pane">
+                                    <div id="third" class="hidden w-full tab-pane p-4">
                                         <div class="max-w-md mx-auto bg-white rounded p-8 ">
                                             <div class="mb-4">
                                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Họ và
