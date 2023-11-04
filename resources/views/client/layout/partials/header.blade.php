@@ -128,7 +128,7 @@
                            > <a href="{{route('home')}}">Trang chủ</a> </button>
                     </li>
                     <li class="relative dropdown lg:mt-0">
-                        <button class="py-5 text-gray-800 lg:px-4 dropdown-toggle lg:h-[70px]" id="company"
+                        <button class="py-5 text-gray-800 lg:px-4 dropdown-toggle lg:h-[70px]"  id="company"
                            ><a href="{{route('home')}}">Về chúng tôi</a></button>
                     </li>
                     <li class="relative dropdown lg:mt-0">
