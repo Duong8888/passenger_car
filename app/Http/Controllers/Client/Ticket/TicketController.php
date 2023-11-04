@@ -31,7 +31,7 @@ class TicketController extends Controller
 
     public function endPayment(Request $request)
     {
-        dd(session()->get('value'));
+
         $ticket = new Ticket();
         $ticket->fill($request->all());
         $ticket->save();
