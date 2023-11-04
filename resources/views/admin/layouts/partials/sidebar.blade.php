@@ -155,6 +155,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ route('admin.route_contact_index') }}">
+                            <i class="mdi mdi-table"></i>
+                            <span> Quản lý liên hệ nhà xe </span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ route('admin.route_staff_index') }}">
                             <i class="mdi mdi-table"></i>
                             <span> Quản lý nhà xe </span>

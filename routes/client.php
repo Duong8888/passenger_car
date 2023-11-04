@@ -95,6 +95,6 @@ Route::middleware(CheckUser::class)->group(function(){
 
 
 #Dang ky xe
-Route::get('/car-register', [CarRegisterController::class, 'index'])->name('car-register.index');
-Route::post('/car-register', [CarRegisterController::class, 'post'])->name('car-register.index');
+// Route::get('/car-register', [CarRegisterController::class, 'index'])->name('car-register.index');
+// Route::post('/car-register', [CarRegisterController::class, 'post'])->name('car-register.index');
 
