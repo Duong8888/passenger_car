@@ -155,7 +155,7 @@
                                                     <div class="text-center">
                                                         <div class="">
                                                             <img src="{{asset($album->path)}}" alt="anh"
-                                                                 style="min-width: 100%;height: 250px; object-fit: cover">
+                                                                style="min-width: 100%;height: 250px; object-fit: cover">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -506,8 +506,10 @@
                                                     @endif
                                                 @endforeach
                                             </div>
-                                            <div class="flex flex-col w-1/2 p-4" style="overflow-y: auto; max-height: 200px; max-width: 50%;">
-                                                Điểm đón:
+
+                                            <div class="flex flex-col w-1/2" style="overflow-y: auto; max-height: 200px; max-width: 50%;">
+                                                Điểm trả:
+
                                                 @php
                                                 $firstArrival = true;
                                                 @endphp
@@ -562,8 +564,8 @@
                                                     class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                                     name="phone" id="phone" type="text"
                                                     value="{{ isset(Auth::user()->phone) ? Auth::user()->phone : '' }}"
-                                                    placeholder="Nhập Số điện thoại của bạn"
-                                                    >
+                                                    placeholder="Nhập Số điện thoại của bạn">
+                                                    
                                             </div>
                                             <div class="mb-4">
                                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email
@@ -572,8 +574,8 @@
                                                     class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                                     name="email" id="email" type="text"
                                                     value="{{ isset(Auth::user()->email) ? Auth::user()->email : '' }}"
-                                                    placeholder="Nhập địa chỉ email của bạn"
-                                                   >
+                                                    placeholder="Nhập địa chỉ email của bạn">
+                                                  
                                             </div>
                                         </div>
 
@@ -605,6 +607,10 @@
             </div>
         </div>
     </div>
+    <input name="departureTimeInput" type="hidden"value="{{date("H:i", strtotime($workingTime[0]->departure_time))}}h">
+    <input name="arrivalTimeInput" type="hidden" value="{{date("H:i", strtotime($workingTime[0]->arrival_time))}}h">
+    <input type="hidden" value="{{ $routes->departure }}" name="route-departure">
+    <input type="hidden" value="{{ $routes->arrival }}" name="route-arrival">
 @endsection
 @section('page-script')
     <script type="module" src="{{ asset('client/js/custom/passengeCar-detail.js') }}"></script>

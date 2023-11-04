@@ -43,6 +43,7 @@ $(document).ready(function () {
         let payment_method = 'thanh toán tại nhà xe';
         data[0]['status'] = 1;
         data[0]['payment_method'] = payment_method;
+      
         let res = data[0];
         $.ajax({
             url: url,

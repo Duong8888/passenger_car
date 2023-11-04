@@ -36,7 +36,6 @@ class TicketController extends Controller
         $ticket->fill($request->all());
         $ticket->save();
 
-
         $email = new TiketMail($ticket);
         Mail::to($request->email)->send($email);
 
@@ -45,7 +44,7 @@ class TicketController extends Controller
 
         $twilioSid = env('TWILIO_SID');
         $twilioToken = env('TWILIO_AUTH_TOKEN');
-        // dd($twilioSid,$twilioToken);
+       
         $twilio = new Client($twilioSid, $twilioToken);
         $mess = "Thông báo đặt vé! ".$ticket->name . "\n  Người đặt: ".$ticket->username . "\n Điểm đón: ".$ticket->departure .
         "\n Điểm trả:" . $ticket->arrival . "\n Số lượng vé: " . $ticket->quantity . "\n Tổng tiền: ".$ticket->total_price.
@@ -58,7 +57,6 @@ class TicketController extends Controller
             ]
         );
 
-        session()->forget('value');
         return response()->json(['success' => 'Done'], Response::HTTP_OK);
     }
 
@@ -85,61 +83,7 @@ class TicketController extends Controller
         return $result;
     }
 
-    public function momo_payment()
-    {
-        $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
-        $partnerCode = 'MOMOBKUN20180529';
-        $accessKey = 'klm05TvNBzhg7h7j';
-        $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
-
-        $orderInfo = "Thanh toán qua MoMo";
-        $amount = "10000";
-        $orderId = time() . "";
-        $redirectUrl = "http://127.0.0.1:8000/home";
-        $ipnUrl = "http://127.0.0.1:8000/home";
-        $extraData = "";
-
-
-        if (!empty($_POST)) {
-            $partnerCode = $partnerCode;
-            $accessKey = $accessKey;
-            $serectkey = $secretKey;
-            $orderId = $orderId; // Mã đơn hàng
-            $orderInfo = $orderInfo;
-            $amount = $amount;
-            $ipnUrl = $ipnUrl;
-            $redirectUrl =  $redirectUrl;
-            $extraData = $extraData;
-
-            $requestId = time() . "";
-            $requestType = "payWithATM";
-            //$extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
-            //before sign HMAC SHA256 signature
-            $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
-            $signature = hash_hmac("sha256", $rawHash, $serectkey);
-            $data = array(
-                'partnerCode' => $partnerCode,
-                'partnerName' => "Test",
-                "storeId" => "MomoTestStore",
-                'requestId' => $requestId,
-                'amount' => $amount,
-                'orderId' => $orderId,
-                'orderInfo' => $orderInfo,
-                'redirectUrl' => $redirectUrl,
-                'ipnUrl' => $ipnUrl,
-                'lang' => 'vi',
-                'extraData' => $extraData,
-                'requestType' => $requestType,
-                'signature' => $signature
-            );
-            $result = $this->execPostRequest($endpoint, json_encode($data));
-            $jsonResult = json_decode($result, true);  // decode json
-
-            //Just a example, please check more in there
-
-            header('Location: ' . $jsonResult['payUrl']);
-        }
-    }
+  
     public function vnpay_payment(Request $request)
     {
         $a = json_decode($request->session);
@@ -251,7 +195,11 @@ class TicketController extends Controller
         return to_route('client.finish.ticket')->with('success', 'Đặt hàng thành công');
     }
 
-    public function EndTicketPayment(){
-        return view('client.pages.ticket.finish');
+    public function EndTicketPayment(Request $request){
+        $passenger_car = PassengerCar::where('id', session('value')[0]['passenger_car_id'])->get();
+        
+        return view('client.pages.ticket.finish', [
+            'data' => $passenger_car,
+        ]);
     }
 }
