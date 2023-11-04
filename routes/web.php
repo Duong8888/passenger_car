@@ -104,7 +104,7 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
     Route::group(['middleware' => 'checkRoles:SupperAdmin'], function () {
         Route::resource('/permission', UserPermissionController::class);
         Route::resource('/rolePermission', RolePermissionController::class);
-        Route::delete('/rolePermission/create/{id}', [RolePermissionController::class, 'delete'])->name('admin.rolePermission.delete');
+        Route::delete('/rolePermission/create/{id}', [RolePermissionController::class, 'delete'])->name('rolePermission.delete');
     });
 
     //Xe SupperAdmin-Admin-Nhà xe

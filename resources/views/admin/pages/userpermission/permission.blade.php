@@ -6,7 +6,7 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ route('permission.update',$user->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.permission.update',$user->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('put')
                         <div id="basicwizard">
@@ -41,7 +41,7 @@
                                 </div>
                                 <ul class="list-inline wizard mb-0">
                                     <li class="next list-inline-item float-start">
-                                        <a href="{{ route('permission.index') }}" class="btn btn-secondary">Quay lại</a>
+                                        <a href="{{ route('admin.permission.index') }}" class="btn btn-secondary">Quay lại</a>
                                     </li>
                                     <li class="next list-inline-item float-end">
                                         <button class="btn btn-secondary">Cập nhật</button>
