@@ -39,16 +39,16 @@ class PassengerCarController extends AdminBaseController
     public function index(Request $request)
     {
         $userId = Auth::user()->id;
-        if($request->ajax()){
+        if ($request->ajax()) {
             $routes = Routes::all();
-            $passengerCar = PassengerCar::query()->with(['route' => function($query){
-                $query->get('departure','arrival');
-            }])->orderBy('id','desc')->where('user_id',$userId)->paginate(10);
-            return \response()->json(['data' => $passengerCar,'routes'=>$routes]);
+            $passengerCar = PassengerCar::query()->with(['route' => function ($query) {
+                $query->get('departure', 'arrival');
+            }])->orderBy('id', 'desc')->where('user_id', $userId)->paginate(10);
+            return \response()->json(['data' => $passengerCar, 'routes' => $routes]);
         }
-        $data = $this->model->orderBy('id','desc')->where('user_id',$userId)->paginate(10);
+        $data = $this->model->orderBy('id', 'desc')->where('user_id', $userId)->paginate(10);
         $service = Service::all();
-        return view($this->pathView . __FUNCTION__, compact('data','service'))
+        return view($this->pathView . __FUNCTION__, compact('data', 'service'))
             ->with('title', $this->titleIndex)
             ->with('colums', $this->colums)
             ->with('urlbase', $this->urlbase)
@@ -108,9 +108,88 @@ class PassengerCarController extends AdminBaseController
     }
 
 
-    public function edit(string $id){
-        return response()->json(PassengerCar::query()->findOrFail($id));
+    public function edit(string $id)
+    {
+        return response()->json(PassengerCar::query()->with(['workingTime', 'services', 'albums'])->where('id', $id)->get());
     }
+
+    public function update(Request $request, string $id)
+    {
+        try {
+            $car = PassengerCar::query()->findOrFail($id);
+            $car->workingTime()->detach();
+            $img = Album::where('passenger_car_id', $id)->get();
+            foreach ($img as $value) {
+                $image = str_replace('storage/', '', $value->{$this->fieldImage});
+                Storage::delete($image);
+            }
+            Album::where('passenger_car_id', $id)->delete();
+
+            $album = new Album();
+            $images = $request->file($this->fieldImage);
+            $departureTime = $request->departure;
+            $arrivalTime = $request->arrival;
+            $albumData = [];
+            $arrService = $request->service;
+
+            $car->fill($request->except([$this->fieldImage, 'arrival', 'departure', '_token']));
+            $car->user_id = Auth::user()->id;
+            $car->save();
+
+            $car->services()->sync($arrService);
+
+            foreach ($images as $image) {
+                $tmpPath = Storage::put($this->folderImage, $image);
+                $albumData[] = [
+                    'path' => 'storage/' . $tmpPath,
+                    'passenger_car_id' => $car->id
+                ];
+            }
+
+            $album->insert($albumData);
+            foreach ($departureTime as $key => $departureTimeValue) {
+                if (isset($arrivalTime[$key])) {
+                    $arrivalTimeValue = $arrivalTime[$key];
+                    $departureTimeValue = strval($departureTimeValue);
+                    $arrivalTimeValue = strval($arrivalTimeValue);
+
+                    $workingTime = WorkingTime::where('departure_time', $departureTimeValue . ':00')
+                        ->where('arrival_time', $arrivalTimeValue . ':00')
+                        ->first();
+
+                    if ($workingTime) {
+                        $workingTime->passengerCars()->attach($car->id);
+                    } else {
+                        $workingTime = WorkingTime::create([
+                            'departure_time' => $departureTimeValue . ':00',
+                            'arrival_time' => $arrivalTimeValue . ':00',
+                        ]);
+                        $workingTime->passengerCars()->attach($car->id);
+                    }
+                }
+            }
+            return \response()->json(['message' => 'Cập thành công']);
+        } catch (\Exception $e) {
+            return response()->json("Không tìm thấy bản ghi với ID $id");
+        }
+
+    }
+
+    public function destroy(string $id)
+    {
+        if (\request()->ajax()) {
+            $model = $this->model->with('albums')->findOrFail($id);
+            $model->delete();
+            foreach ($model->albums as $value) {
+                Log::info($value->{$this->fieldImage});
+                Storage::delete($value->{$this->fieldImage});
+            }
+            return response()->json("Xóa thành công");
+        }else{
+            return parent::destroy($id);
+        }
+    }
+
 
 }
 

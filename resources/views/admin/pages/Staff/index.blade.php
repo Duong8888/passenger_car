@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('content')
-  
+
     <div class="card">
         <div class="card-body">
             <div class="dropdown float-end">
@@ -18,7 +18,7 @@
                         <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
                     </div> --}}
             </div>
-          
+
 
             <div class="table-responsive">
                 <table class="table mb-0">
@@ -34,7 +34,7 @@
                     </thead>
                     <tbody>
                        @foreach ($users as $item)
-                       @if($item->user_type == 'staff') 
+                       @if($item->user_type == 'staff')
                         <tr>
                            <td>{{$item->id}}</td>
                            <td>{{$item->name}}</td>
@@ -42,19 +42,19 @@
                            <td>{{$item->phone}}</td>
                            <td>{{$item->user_type}}</td>
                            <td>
-                               <a class="btn btn-danger" href="{{route('route_staff_edit',['id'=>$item->id])}}">Sửa</a>
-                               <a class="btn btn-primary" href="{{route('route_staff_delete',['id'=>$item->id])}}">Xóa</a>
+                               <a class="btn btn-danger" href="{{route('admin.route_staff_edit',['id'=>$item->id])}}">Sửa</a>
+                               <a class="btn btn-primary" href="{{route('admin.route_staff_delete',['id'=>$item->id])}}">Xóa</a>
                            </td>
-                           </tr>  
+                           </tr>
                            @endif
              @endforeach
                     </tbody>
                 </table>
-                <button  class="btn btn-primary ml-5 "><a style="text-decoration: none; color: white;" href="{{route('route_staff_add')}}">New Product</a></button>
+                <button  class="btn btn-primary ml-5 "><a style="text-decoration: none; color: white;" href="{{route('admin.route_staff_add')}}">New Product</a></button>
             </div>
         </div>
 
     </div>
-   
+
 
 @endsection

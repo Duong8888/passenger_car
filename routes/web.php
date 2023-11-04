@@ -79,7 +79,7 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
     Route::group(['middleware' => 'checkRoles:SupperAdmin,Admin'], function () {
         Route::prefix('route')->controller(RouteController::class)->name('route.')->group(function () {
             Route::get('/', 'index')->name('index');
-            Route::post('/', 'store')->name('store');
+            Route::post('/store', 'store')->name('store');
             Route::get('/create', 'create')->name('create');
             Route::put('/{route}', 'update')->name('update');
             Route::delete('/{route}', 'destroy')->name('destroy');
@@ -90,6 +90,12 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         Route::get('/userReport', [UserReportController::class, 'index'])->name('user.report');
         Route::get('/ticketReport', [TicketReportController::class, 'index'])->name('ticket.report');
 
+
+
+        // Quản lý contact nhà xe
+        Route::get('/contact/index', [App\Http\Controllers\Admin\ContactController::class, 'index'])->name('route_contact_index');
+        Route::match(['GET', 'POST'], '/contact/add', [App\Http\Controllers\Admin\ContactController::class, 'add'])->name('route_contact_add');
+        Route::match(['GET', 'POST'], '/contact/update/{id}', [App\Http\Controllers\Admin\ContactController::class, 'edit'])->name('route_contact_edit');
 
         // Quản lý nhà xe
         Route::get('/staff/index', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('route_staff_index');
@@ -106,13 +112,13 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         Route::resource('/rolePermission', RolePermissionController::class);
         Route::delete('/rolePermission/create/{id}', [RolePermissionController::class, 'delete'])->name('admin.rolePermission.delete');
     });
-
     //Xe SupperAdmin-Admin-Nhà xe
     Route::group(['middleware' => 'checkRoles:SupperAdmin,Admin,Nhà xe'], function () {
         Route::group(["prefix" => "car", "as" => "car."], function () {
             Route::get('/', [PassengerCarController::class, 'index'])->name('index');
             Route::post('store', [PassengerCarController::class, 'store'])->name('store');
             Route::post('show', [PassengerCarController::class, 'show'])->name('show');
+            Route::post('edit/{id}', [PassengerCarController::class, 'edit'])->name('edit');
             Route::post('update/{id}', [PassengerCarController::class, 'update'])->name('update');
             Route::delete('delete/{id}', [PassengerCarController::class, 'destroy'])->name('delete');
         });

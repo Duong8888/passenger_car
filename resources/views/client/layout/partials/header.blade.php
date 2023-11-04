@@ -88,9 +88,9 @@
                             @if(auth()->check())
                             <span class="hidden fw-medium xl:block">{{auth()->user()->name}}</span>
                             @else
-                            
+
                             <a class="hidden fw-medium xl:block"   id="openPopupButton">Đăng nhập</a>
-                    
+
                             @endif
 
                         </button>

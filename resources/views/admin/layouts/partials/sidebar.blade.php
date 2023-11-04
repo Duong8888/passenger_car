@@ -12,9 +12,9 @@
 
                 <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-bs-toggle="dropdown"  aria-expanded="false">
 
-                @if(auth()->check())
-                    <span class="hidden fw-medium xl:block">{{auth()->user()->name}}</span>
-                @endif
+                    @if(auth()->check())
+                        <span class="hidden fw-medium xl:block">{{auth()->user()->name}}</span>
+                    @endif
 
                 </a>
 
@@ -48,9 +48,9 @@
             </div>
 
             <p class="text-muted left-user-info">
-            @foreach(auth()->user()->roles as $role)
-                {{ $role->name }}
-            @endforeach</p>
+                @foreach(auth()->user()->roles as $role)
+                    {{ $role->name }}
+                @endforeach</p>
 
             <ul class="list-inline">
                 <li class="list-inline-item">
@@ -78,7 +78,7 @@
 
                     </a>
                 </li>
-                 <li>
+                <li>
                     <a href="{{ route('admin.revenue.index') }}">
                         <i class="mdi mdi-view-dashboard-outline"></i>
                         <span> Thống kê doanh thu </span>
@@ -91,7 +91,7 @@
                     </a>
                 </li>
 
-                 <li>
+                <li>
                     <a href="{{ route('admin.customer.index') }}">
                         <i class="mdi mdi-view-dashboard-outline"></i>
                         <span> Quản lý khách hàng </span>
@@ -152,6 +152,12 @@
                         <a href="{{ route('admin.route.index') }}">
                             <i class="mdi mdi-table"></i>
                             <span> Quản lí tuyến đường </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.route_contact_index') }}">
+                            <i class="mdi mdi-table"></i>
+                            <span> Quản lý liên hệ nhà xe </span>
                         </a>
                     </li>
                     <li>

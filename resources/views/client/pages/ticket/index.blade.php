@@ -103,6 +103,7 @@
             <input type="hidden" value="{{ json_encode(session('value')) }}" name="session">
 
         </form>
+
         <div id="popup"
             class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 hidden w-80 h-96 z-50">
             <div class="bg-white p-6 rounded relative">
@@ -209,6 +210,7 @@
                 </div>
             </div>
         </div>
+
     </section>
 </body>
 

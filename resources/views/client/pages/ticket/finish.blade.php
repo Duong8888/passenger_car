@@ -82,6 +82,7 @@
                         <p style="margin: 0; font-size: 14px; font-size: 20px;font-weight: bold;">Tổng Tiền: {{ session('value')[0]['total_price'] }}</p>
                      
                     </div>
+
                 </div>
             </div>
         </div>
@@ -98,4 +99,6 @@
 
 <script src="{{asset('client/js/pages/dropdown%26modal.init.js')}}"></script>
 
+
 @endsection
+

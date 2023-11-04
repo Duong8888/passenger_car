@@ -8,6 +8,33 @@
     <!-- Dashboar init js-->
     <script src="admin/js/pages/dashboard.init.js"></script>
 
+
+
+    {{--    <script src="{{asset('admin/libs/jquery/jquery.min.js')}}"></script>--}}
+    {{--    <script src="{{asset('admin/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>--}}
+    {{--    <script src="{{asset('admin/libs/simplebar/simplebar.min.js')}}"></script>--}}
+    {{--    <script src="{{asset('admin/libs/node-waves/waves.min.js')}}"></script>--}}
+    {{--    <script src="{{asset('admin/libs/waypoints/lib/jquery.waypoints.min.js')}}"></script>--}}
+    {{--    <script src="{{asset('admin/libs/jquery.counterup/jquery.counterup.min.js')}}"></script>--}}
+    {{--    <script src="{{asset('admin/libs/feather-icons/feather.min.js')}}"></script>--}}
+
+
+    <script src="{{asset('admin/libs/selectize/js/standalone/selectize.min.js')}}"></script>
+    <script src="{{asset('admin/libs/mohithg-switchery/switchery.min.js')}}"></script>
+    <script src="{{asset('admin/libs/multiselect/js/jquery.multi-select.js')}}"></script>
+    <script src="{{asset('admin/libs/select2/js/select2.min.js')}}"></script>
+    <script src="{{asset('admin/libs/jquery-mockjax/jquery.mockjax.min.js')}}"></script>
+    <script src="{{asset('admin/libs/devbridge-autocomplete/jquery.autocomplete.min.js')}}"></script>
+    <script src="{{asset('admin/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js')}}"></script>
+    <script src="{{asset('admin/libs/bootstrap-maxlength/bootstrap-maxlength.min.js')}}"></script>
+
+
+    <!-- Init js-->
+    <script src="{{asset('admin/js/pages/form-advanced.init.js')}}"></script>
+
+
+
+
     <script src="{{asset('client/libs/choices.js/public/assets/scripts/choices.min.js')}}"></script>
 
     <script src="{{asset('client/js/pages/job-list.init.js')}}"></script>
@@ -16,6 +43,13 @@
 
 @section('page-style')
     <link rel="stylesheet" href="{{asset('client/libs/choices.js/public/assets/styles/choices.min.css')}}">
+    <!-- Plugins css -->
+    <link href="{{asset('admin/libs/mohithg-switchery/switchery.min.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('admin/libs/multiselect/css/multi-select.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('admin/libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('admin/libs/selectize/css/selectize.bootstrap3.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('admin/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css')}}" rel="stylesheet"
+          type="text/css"/>
 @endsection
 
 @section('content')
@@ -37,7 +71,7 @@
                                  aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                                 <form id="form-main" class="modal-dialog"
                                       method="POST"
-                                      action="{{route('admin.route.store')}}" >
+                                      action="{{route('admin.route.store')}}">
                                     @csrf
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -46,8 +80,27 @@
                                                     aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
+
+
+
+                                            <div class="mb-3">
+                                                <label class="form-label">Xe hoạt đông *</label>
+                                                <select id="selectize-optgroup"  name="car[]" multiple
+                                                        placeholder="Select gear...">
+                                                    @if(count($carData) == 0)
+                                                        <option value="">Select car...</option>
+                                                    @endif
+                                                    @foreach($carData as $value)
+                                                        <option value="{{$value->id}}">{{$value->license_plate}}
+                                                            | {{$value->capacity}} chỗ
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+
                                             <div class="row">
-                                                <label for="field-1" class="form-label">Tuyến đường</label>
+                                                <label for="field-1" class="form-label">Tuyến đường *</label>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -59,7 +112,8 @@
                                                                     id="choices-single-categories"
                                                                     aria-label="Default select example">
                                                                 @foreach($dataRoute as $key => $value)
-                                                                    <option value="{{$value->name}}">{{$value->name}}</option>
+                                                                    <option
+                                                                        value="{{$value->name}}">{{$value->name}}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -73,11 +127,16 @@
                                                                 id="choices-single-location"
                                                                 aria-label="Default select example">
                                                             @foreach($dataRoute as $key => $value)
-                                                                <option value="{{$value->name}}">{{$value->name}}</option>
+                                                                <option
+                                                                    value="{{$value->name}}">{{$value->name}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
+
+
+
+
                                             </div>
 
 
@@ -95,7 +154,9 @@
                                                         <input type="text" name="departure[]" class="form-control"
                                                                id="example-number"
                                                                placeholder="Đại học công nghệp ...">
-                                                        <button type="button" class="close btn btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i></button>
+                                                        <button type="button"
+                                                                class="close btn btn-danger waves-effect waves-light"><i
+                                                                class="mdi mdi-close"></i></button>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-arrival">
@@ -103,19 +164,23 @@
                                                         <input type="text" name="arrival[]" class="form-control"
                                                                id="example-number"
                                                                placeholder="Hà Đông ...">
-                                                        <button type="button" class="close btn btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i></button>
+                                                        <button type="button"
+                                                                class="close btn btn-danger waves-effect waves-light"><i
+                                                                class="mdi mdi-close"></i></button>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <button type="button"
-                                                            class=" btn btn-success btn-departure waves-effect waves-light w-100"><i
+                                                            class=" btn btn-success btn-departure waves-effect waves-light w-100">
+                                                        <i
                                                             class=" fas fa-plus-circle"></i></button>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <button type="button"
-                                                            class="btn btn-success btn-arrival waves-effect waves-light w-100"><i
+                                                            class="btn btn-success btn-arrival waves-effect waves-light w-100">
+                                                        <i
                                                             class=" fas fa-plus-circle"></i></button>
                                                 </div>
                                             </div>
@@ -124,7 +189,7 @@
                                             <button type="button" class="btn btn-secondary waves-effect"
                                                     data-bs-dismiss="modal">Đóng
                                             </button>
-                                            <button type="submit" id="btn-main"
+                                            <button type="submit" data-action="add" id="btn-main"
                                                     class="btn btn-info waves-effect waves-light">Lưu
                                             </button>
                                         </div>
@@ -142,9 +207,9 @@
                                         <th>Action</th>
                                     </tr>
                                     </thead>
-                                    @foreach ($data as $route)
-                                        <tbody>
-                                        <tr>
+                                        <tbody class="show-item-table">
+                                        @foreach ($data as $route)
+                                            <tr>
                                             <td>{{ $route->departure }}</td>
                                             <td>{{ $route->arrival }}</td>
                                             <td style="display: flex;">
@@ -159,18 +224,19 @@
                                                             tin</a>
                                                         <a class="dropdown-item btn-update" id="1" href="#">Sửa</a>
                                                         <a class="dropdown-item delete"
-                                                           data-action="http://127.0.0.1:8000/admin/car/delete/1"
+                                                           data-action="delete/{{$route->id}}"
                                                            href="#">Xóa</a>
                                                     </div>
                                                 </div>
 
                                             </td>
                                         </tr>
+                                        @endforeach
                                         </tbody>
-                                    @endforeach
+
                                 </table>
                                 <div class="float-end mt-4">
-                                    {{ $data->links() }}
+                                    {{--                                    {{ $data->links() }}--}}
                                 </div>
                             </div>
                         </div>

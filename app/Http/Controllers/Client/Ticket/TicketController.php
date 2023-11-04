@@ -9,7 +9,9 @@ use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TiketMail;
+use Twilio\Rest\Client;
 class TicketController extends Controller
 {
     public function CountTicket(Request $request)
@@ -29,9 +31,31 @@ class TicketController extends Controller
 
     public function endPayment(Request $request)
     {
+
         $ticket = new Ticket();
         $ticket->fill($request->all());
         $ticket->save();
+
+        $email = new TiketMail($ticket);
+        Mail::to($request->email)->send($email);
+
+
+        $phoneNumber = substr_replace($ticket->phone, "+84", 0, 0);
+
+        $twilioSid = env('TWILIO_SID');
+        $twilioToken = env('TWILIO_AUTH_TOKEN');
+       
+        $twilio = new Client($twilioSid, $twilioToken);
+        $mess = "Thông báo đặt vé! ".$ticket->name . "\n  Người đặt: ".$ticket->username . "\n Điểm đón: ".$ticket->departure .
+        "\n Điểm trả:" . $ticket->arrival . "\n Số lượng vé: " . $ticket->quantity . "\n Tổng tiền: ".$ticket->total_price.
+        "\n Hình thức thanh toán:". $ticket->payment_method;
+        $message = $twilio->messages->create(
+            $phoneNumber,
+            [
+                "from" => "+13342314820",
+                "body" =>  (string)$mess
+            ]
+        );
 
         return response()->json(['success' => 'Done'], Response::HTTP_OK);
     }
@@ -59,61 +83,7 @@ class TicketController extends Controller
         return $result;
     }
 
-    public function momo_payment()
-    {
-        $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
-        $partnerCode = 'MOMOBKUN20180529';
-        $accessKey = 'klm05TvNBzhg7h7j';
-        $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
-
-        $orderInfo = "Thanh toán qua MoMo";
-        $amount = "10000";
-        $orderId = time() . "";
-        $redirectUrl = "http://127.0.0.1:8000/home";
-        $ipnUrl = "http://127.0.0.1:8000/home";
-        $extraData = "";
-
-
-        if (!empty($_POST)) {
-            $partnerCode = $partnerCode;
-            $accessKey = $accessKey;
-            $serectkey = $secretKey;
-            $orderId = $orderId; // Mã đơn hàng
-            $orderInfo = $orderInfo;
-            $amount = $amount;
-            $ipnUrl = $ipnUrl;
-            $redirectUrl =  $redirectUrl;
-            $extraData = $extraData;
-
-            $requestId = time() . "";
-            $requestType = "payWithATM";
-            //$extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
-            //before sign HMAC SHA256 signature
-            $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
-            $signature = hash_hmac("sha256", $rawHash, $serectkey);
-            $data = array(
-                'partnerCode' => $partnerCode,
-                'partnerName' => "Test",
-                "storeId" => "MomoTestStore",
-                'requestId' => $requestId,
-                'amount' => $amount,
-                'orderId' => $orderId,
-                'orderInfo' => $orderInfo,
-                'redirectUrl' => $redirectUrl,
-                'ipnUrl' => $ipnUrl,
-                'lang' => 'vi',
-                'extraData' => $extraData,
-                'requestType' => $requestType,
-                'signature' => $signature
-            );
-            $result = $this->execPostRequest($endpoint, json_encode($data));
-            $jsonResult = json_decode($result, true);  // decode json
-
-            //Just a example, please check more in there
-
-            header('Location: ' . $jsonResult['payUrl']);
-        }
-    }
+  
     public function vnpay_payment(Request $request)
     {
         $a = json_decode($request->session);
@@ -168,7 +138,7 @@ class TicketController extends Controller
 
         $vnp_Url = $vnp_Url . "?" . $query;
         if (isset($vnp_HashSecret)) {
-            $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret); //  
+            $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret); //
             $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
         }
         $returnData = array(
@@ -196,7 +166,31 @@ class TicketController extends Controller
                 'departure' => $a['departure'],
                 'arrival' => $a['arrival'],
             ]);
+            $a['payment_method'] = 'Đã Thanh toán VNPAY';
+            $a = (object)$a;
+            $email = new TiketMail($a);
+            Mail::to($a->email)->send($email);
+
+
+            $phoneNumber = substr_replace($a->phone, "+84", 0, 0);
+
+            $twilioSid = env('TWILIO_SID');
+            $twilioToken = env('TWILIO_AUTH_TOKEN');
+            // dd($twilioSid,$twilioToken);
+            $twilio = new Client($twilioSid, $twilioToken);
+            $mess = "Thông báo đặt vé! ". "\n  Người đặt: ".$a->username . "\n Điểm đón: ".$a->departure .
+            "\n Điểm trả:" . $a->arrival . "\n Số lượng vé: " . $a->quantity . "\n Tổng tiền: ".$a->total_price.
+            "\n Hình thức thanh toán:". $a->payment_method;
+            $message = $twilio->messages->create(
+                $phoneNumber,
+                [
+                    "from" => "+13342314820",
+                    "body" =>  (string)$mess
+                ]
+            );
+
         }
+
         session()->forget('cart');
         return to_route('client.finish.ticket')->with('success', 'Đặt hàng thành công');
     }
