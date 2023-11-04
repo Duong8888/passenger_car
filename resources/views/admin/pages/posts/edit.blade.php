@@ -11,8 +11,8 @@
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title mt-0 mb-3">Edit Post</h4>
-                            <a href="{{ route('postsing') }}" class="btn btn-primary">
+                            <h4 class="header-title mt-0 mb-3">Sửa Bài viết</h4>
+                            <a href="{{ route('admin.postsing') }}" class="btn btn-primary">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                      class="bi bi-arrow-left" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd"
@@ -21,7 +21,7 @@
                                 Back
                             </a>
 
-                            <form action="{{ route('posts.update', $model->id) }}" method="post"
+                            <form action="{{ route('admin.posts.update', $model->id) }}" method="post"
                                   enctype="multipart/form-data" class="row">
                                 @csrf
                                 @method('put')
@@ -79,7 +79,7 @@ x                                    </label>
 
     <script type="text/javascript">
         CKEDITOR.replace('editor1', {
-            filebrowserUploadUrl: "{{ route('upload', ['_token' => csrf_token()]) }}",
+            filebrowserUploadUrl: "{{ route('admin.upload', ['_token' => csrf_token()]) }}",
             filebrowserWindowWidth: '640',
             filebrowserWindowHeight: '480'
         });

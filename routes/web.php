@@ -17,6 +17,10 @@ use App\Http\Controllers\Admin\Report\UserReportController;
 use App\Http\Controllers\admin\StopsController;
 use App\Http\Controllers\Admin\EditorController;
 
+use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\PostCategoryController;
+use App\Http\Controllers\Admin\RevenueController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -87,6 +91,12 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         Route::get('/ticketReport', [TicketReportController::class, 'index'])->name('ticket.report');
 
 
+
+        // Quản lý contact nhà xe
+        Route::get('/contact/index', [App\Http\Controllers\Admin\ContactController::class, 'index'])->name('route_contact_index');
+        Route::match(['GET', 'POST'], '/contact/add', [App\Http\Controllers\Admin\ContactController::class, 'add'])->name('route_contact_add');
+        Route::match(['GET', 'POST'], '/contact/update/{id}', [App\Http\Controllers\Admin\ContactController::class, 'edit'])->name('route_contact_edit');
+
         // Quản lý nhà xe
         Route::get('/staff/index', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('route_staff_index');
         Route::match(['GET', 'POST'], '/staff/add', [App\Http\Controllers\Admin\UserController::class, 'add'])->name('route_staff_add');
@@ -102,7 +112,6 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         Route::resource('/rolePermission', RolePermissionController::class);
         Route::delete('/rolePermission/create/{id}', [RolePermissionController::class, 'delete'])->name('admin.rolePermission.delete');
     });
-
     //Xe SupperAdmin-Admin-Nhà xe
     Route::group(['middleware' => 'checkRoles:SupperAdmin,Admin,Nhà xe'], function () {
         Route::group(["prefix" => "car", "as" => "car."], function () {
@@ -117,6 +126,29 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         Route::resource('/stop', StopsController::class);
     });
 });
+
+
+        Route::get('categories/', [PostCategoryController::class, 'index'])->name('category.index');
+        Route::get('categories/add', [PostCategoryController::class, 'add'])->name('category.add');
+        Route::post('categories/add', [PostCategoryController::class, 'store'])->name('category.store');
+        Route::get('categories/edit/{category}', [PostCategoryController::class, 'edit'])->name('category.edit');
+        Route::put('categories/edit/{id}', [PostCategoryController::class, 'update'])->name('category.update');
+        Route::delete('categories/delete/{id}', [PostCategoryController::class, 'delete'])->name('category.delete');
+
+        Route::get('customers/', [CustomerController::class, 'index'])->name('customer.index');
+        Route::get('customers/add', [CustomerController::class, 'add'])->name('customer.add');
+        Route::post('customers/add', [CustomerController::class, 'store'])->name('customer.store');
+        Route::get('customers/edit/{customer}', [CustomerController::class, 'edit'])->name('customer.edit');
+        Route::put('customers/edit/{id}', [CustomerController::class, 'update'])->name('customer.update');
+        Route::delete('customers/delete/{id}', [CustomerController::class, 'delete'])->name('customer.delete');
+
+        Route::get('revenue/', [RevenueController::class, 'index'])->name('revenue.index');
+        Route::get('revenue/add', [RevenueController::class, 'add'])->name('revenue.add');
+        Route::post('revenue/add', [RevenueController::class, 'store'])->name('revenue.store');
+        Route::get('revenue/edit/{revenue}', [RevenueController::class, 'edit'])->name('revenue.edit');
+        Route::put('revenue/edit/{id}', [RevenueController::class, 'update'])->name('revenue.update');
+        Route::delete('revenue/delete/{id}', [RevenueController::class, 'delete'])->name('revenue.delete');
+
 
 
 // Route::get('/management/index',[App\Http\Controllers\Admin\AdminManagementController::class,'index'])->name('route_adminmanagement_index');

@@ -41,7 +41,7 @@ $(document).ready(function () {
         let data = $(this).data("session");
 
         let payment_method = 'thanh toán tại nhà xe';
-        data[0]['status'] = 0;
+        data[0]['status'] = 1;
         data[0]['payment_method'] = payment_method;
         let res = data[0];
         $.ajax({
@@ -74,7 +74,7 @@ $(document).ready(function () {
         let data = $(this).data("session");
 
         let payment_method = 'vnpay';
-        data[0]['status'] = 0;
+        data[0]['status'] = 2;
         data[0]['payment_method'] = payment_method;
         let res = data[0];
         $.ajax({
@@ -96,6 +96,29 @@ $(document).ready(function () {
             }
         })
     })
+    function showPopup() {
+        var popup = document.getElementById("popup");
+        popup.classList.remove("hidden");
+    }
 
+    function hidePopup() {
+        var popup = document.getElementById("popup");
+        popup.classList.add("hidden");
+    }
+    
+    $(document).on("click", ".exit", function () {
+        hidePopup();
+    })
+    const secondTab = document.getElementById('second');
+    const thirdTab = document.getElementById('third');
+    const secondNextButton = document.getElementById('second-next');
+    secondNextButton.addEventListener('click', function () {
+        showPopup();
+        secondTab.classList.add('hidden');
+        thirdTab.classList.remove('hidden');
+        $('.second-li>button').removeClass('active');
+        $('.third-li>button').addClass('active');
+        $('.secondItem>.icon-item').attr('data-item','second');
+    });
 
 })

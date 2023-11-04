@@ -3,9 +3,9 @@
     <section class="py-12 bg-zinc-800">
         <div class="container mx-auto">
             <div class="grid grid-cols-12 lg:gap-10">
-                <div class="col-span-12 xl:col-span-4">
+                <div class="col-span-12 xl:col-span-12">
                     <div class="mr-12">
-                        <h4 class="text-white mb-6 text-[23px]">Jobcy</h4>
+                        <h4 class="text-white mb-6 text-[23px]"><img src="https://i.imgur.com/chCW0o6.png" alt="" style="width='40px"></h4>
                         <p class="text-white/50">
                             Hãy tìm xe và bắt đầu hành trình của bạn ngay hôm nay, để biết mọi cuộc hành trình đều đặc biệt!
                         </p>
@@ -30,46 +30,6 @@
                             </ul>
                         </div>
                     </div>
-                </div>
-                <div class="col-span-12 mt-8 md:col-span-6 xl:col-span-2 md:mt-0">
-                    <p class="mb-6 text-white text-16">Company</p>
-                    <ul class="space-y-4">
-                        <li class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base">
-                            <a href="about.html">
-                                <i class="mdi mdi-chevron-right"></i> About Us
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-span-12 mt-8 md:col-span-6 xl:col-span-2 md:mt-0">
-                    <p class="mb-6 text-white text-16">For Jobs</p>
-                    <ul class="space-y-4">
-                        <li class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base">
-                            <a href="job-categories.html">
-                                <i class="mdi mdi-chevron-right"></i> Browser Categories
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-span-12 mt-8 md:col-span-6 xl:col-span-2 md:mt-0">
-                    <p class="mb-6 text-white text-16">For Candidates</p>
-                    <ul class="space-y-4">
-                        <li class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base">
-                            <a href="candidate-list.html">
-                                <i class="mdi mdi-chevron-right"></i> Candidate List
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-span-12 mt-8 md:col-span-6 xl:col-span-2 md:mt-0">
-                    <p class="mb-6 text-white text-16">Support</p>
-                    <ul class="space-y-4">
-                        <li class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base">
-                            <a href="contact.html">
-                                <i class="mdi mdi-chevron-right"></i> Help Center
-                            </a>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>

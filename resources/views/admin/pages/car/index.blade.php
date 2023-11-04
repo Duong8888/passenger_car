@@ -172,7 +172,11 @@
                                                         </button>
                                                         <div class="dropdown-menu" style="">
                                                             <a class="dropdown-item btn-update" id="{{$value->id}}" href="#">Sửa</a>
+<<<<<<< HEAD
                                                             <a class="dropdown-item delete" data-id="{{$value->id}}" href="#">Xóa</a>
+=======
+                                                            <a class="dropdown-item delete" data-action="{{route('admin.car.delete',[$value->id])}}" href="#">Xóa</a>
+>>>>>>> e07d08275f432fef0920e8ceba29e40808701de5
                                                         </div>
                                                     </div>
                                                 </td>

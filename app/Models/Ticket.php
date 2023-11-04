@@ -25,13 +25,13 @@ class Ticket extends Model
     ];
     protected $attributes =[
         'email' => NULL,
-        'user_id' => NULL
+        'user_id' => 0
     ];
-    public function user():BelongsTo{ 
+    public function user():BelongsTo{
         return $this->belongsTo(User::class);
     }
     public function passengerCar():BelongsTo{
-        return $this->belongsTo(PassengerCar::class);
+        return $this->belongsTo(PassengerCar::class,'passenger_car_id','id');
     }
 
 }

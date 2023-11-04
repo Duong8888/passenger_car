@@ -33,6 +33,8 @@ class TicketController extends AdminBaseController
     {
         $validator = Validator::make($request->all(), [
             'username' => 'required',
+        ],[
+            'username.required' => 'yêu cầu nhập tiêu đề',
         ]);
 
         if ($validator->fails()) {
@@ -62,7 +64,8 @@ class TicketController extends AdminBaseController
     public function edit(string $id)
     {
         $model = $this->model->findOrFail($id);
-        $user_relationship = User::find($model->user_id);
+        $user_relationship  = User::find($model->phone);
+        dd($user_relationship);
         $passengerCar_relationship = PassengerCar::find($model->passenger_car_id);
         $user = User::all();
 
@@ -84,8 +87,8 @@ class TicketController extends AdminBaseController
 
         $tripList = Routes::where('departure', $departure)
             ->orWhere('arrival', $arrival)
-            ->get();    
-       
+            ->get();
+
 
         return response()->json($tripList);
     }

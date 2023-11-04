@@ -19,6 +19,6 @@ class CheckAdmin
         if (Auth::check() && Auth::user()->isAdmin()) {
             return $next($request);
         }
-        abort(401);
+        abort(403);
     }
 }
