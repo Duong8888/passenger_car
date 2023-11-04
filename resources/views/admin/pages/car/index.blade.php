@@ -64,7 +64,7 @@
                                                 <div class="mb-3 d-flex flex-wrap">
                                                     @foreach($service as $value)
                                                         <div class="form-check mb-2 form-check-success" style="margin-right: 25px">
-                                                            <input class="form-check-input" name="service[]" type="checkbox" value="{{$value->id}}" id="customckeck{{$value->id}}">
+                                                            <input class="form-check-input service" name="service[]" type="checkbox" value="{{$value->id}}" id="customckeck{{$value->id}}">
                                                             <label class="form-check-label" for="customckeck{{$value->id}}">{{$value->service_name}}</label>
                                                         </div>
                                                     @endforeach
@@ -172,7 +172,11 @@
                                                         </button>
                                                         <div class="dropdown-menu" style="">
                                                             <a class="dropdown-item btn-update" id="{{$value->id}}" href="#">Sửa</a>
+<<<<<<< HEAD
+                                                            <a class="dropdown-item delete" data-id="{{$value->id}}" href="#">Xóa</a>
+=======
                                                             <a class="dropdown-item delete" data-action="{{route('admin.car.delete',[$value->id])}}" href="#">Xóa</a>
+>>>>>>> e07d08275f432fef0920e8ceba29e40808701de5
                                                         </div>
                                                     </div>
                                                 </td>

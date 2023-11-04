@@ -1,5 +1,6 @@
 @extends('client.layout.master')
 @section('content')
+<<<<<<< HEAD
 <div id="popupContainer" class="popup-container" style="display: none;
 position: fixed;
 width: 100%;
@@ -86,10 +87,6 @@ padding:00px ">
   </div>
 </div>
 </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> 6c7fa26e82dea8f787d007470cf06f871b5f2c58
     <!-- Tìm kiếm -->
     @include('client.pages.home.search')
     <!-- End tìm kiếm -->
@@ -528,10 +525,8 @@ padding:00px ">
     <!-- end blog -->
 @endsection
 @section('page-script')
-<script>
-    var openButton = document.getElementById("openPopupButton");
-    var closeButton = document.getElementById("closePopupButton");
 
+<<<<<<< HEAD
     openButton.addEventListener("click", function () {
         popupContainer.style.display = "block";
     });
@@ -541,6 +536,8 @@ padding:00px ">
         popupContainer.style.display = "none";
     });
 </script>
+=======
+>>>>>>> develop
     <script src="{{asset('client/libs/choices.js/public/assets/scripts/choices.min.js')}}"></script>
 
     <script src="{{asset('client/js/pages/job-list.init.js')}}"></script>

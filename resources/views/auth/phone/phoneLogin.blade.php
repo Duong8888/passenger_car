@@ -26,11 +26,7 @@
         // messagingSenderId: "793008679902",
         // appId: "1:793008679902:web:01e40657ee99f0150dcb4f",
         // measurementId: "G-CTLCZLM3R1"
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 6c7fa26e82dea8f787d007470cf06f871b5f2c58
+        
         // apiKey: "AIzaSyCJ8pbe36jbzUmVQK_pFOZlPKXRW6JNoG8",
         // authDomain: "test2-5f15d.firebaseapp.com",
         // projectId: "test2-5f15d",
@@ -103,7 +99,13 @@
                         phone: phoneNumber,
                     },
                     success: function (data) {
-                        window.location.href ='/';
+                        var user_type = data.user_type
+                        if(user_type === 'user'){
+                            window.location.href ='/admin.dashboard';
+                        }else{
+                            window.location.href ='/';
+                        }
+
                     },
                     error: function (error) {
                         $("#error").text(error.message);
