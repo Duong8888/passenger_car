@@ -85,7 +85,7 @@
 
                                             <div class="mb-3">
                                                 <label class="form-label">Xe hoạt đông *</label>
-                                                <select id="selectize-optgroup" multiple
+                                                <select id="selectize-optgroup"  name="car[]" multiple
                                                         placeholder="Select gear...">
                                                     @if(count($carData) == 0)
                                                         <option value="">Select car...</option>
@@ -189,7 +189,7 @@
                                             <button type="button" class="btn btn-secondary waves-effect"
                                                     data-bs-dismiss="modal">Đóng
                                             </button>
-                                            <button type="submit" id="btn-main"
+                                            <button type="submit" data-action="add" id="btn-main"
                                                     class="btn btn-info waves-effect waves-light">Lưu
                                             </button>
                                         </div>
@@ -207,9 +207,9 @@
                                         <th>Action</th>
                                     </tr>
                                     </thead>
-                                    @foreach ($data as $route)
-                                        <tbody>
-                                        <tr>
+                                        <tbody class="show-item-table">
+                                        @foreach ($data as $route)
+                                            <tr>
                                             <td>{{ $route->departure }}</td>
                                             <td>{{ $route->arrival }}</td>
                                             <td style="display: flex;">
@@ -224,15 +224,16 @@
                                                             tin</a>
                                                         <a class="dropdown-item btn-update" id="1" href="#">Sửa</a>
                                                         <a class="dropdown-item delete"
-                                                           data-action="http://127.0.0.1:8000/admin/car/delete/1"
+                                                           data-action="delete/{{$route->id}}"
                                                            href="#">Xóa</a>
                                                     </div>
                                                 </div>
 
                                             </td>
                                         </tr>
+                                        @endforeach
                                         </tbody>
-                                    @endforeach
+
                                 </table>
                                 <div class="float-end mt-4">
                                     {{--                                    {{ $data->links() }}--}}
