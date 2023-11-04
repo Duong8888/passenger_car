@@ -79,7 +79,7 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
     Route::group(['middleware' => 'checkRoles:SupperAdmin,Admin'], function () {
         Route::prefix('route')->controller(RouteController::class)->name('route.')->group(function () {
             Route::get('/', 'index')->name('index');
-            Route::post('/', 'store')->name('store');
+            Route::post('/store', 'store')->name('store');
             Route::get('/create', 'create')->name('create');
             Route::put('/{route}', 'update')->name('update');
             Route::delete('/{route}', 'destroy')->name('destroy');

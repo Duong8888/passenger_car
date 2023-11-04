@@ -60,7 +60,14 @@ $(document).ready(function () {
             contentType: false, // Set false để không thiết lập Header 'Content-Type'
             success: function (data) {
                 console.log(data)
-                toogleModal();
+                toggleModal();
+                Swal.fire({
+                    position: "top-center",
+                    icon: "success",
+                    title: "Thêm thành công",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
                 loadData();
             },
             error: function (xhr, status, error) {
@@ -75,7 +82,7 @@ $(document).ready(function () {
         title.text('Thêm mới xe');
     });
 
-    function toogleModal() {
+    function toggleModal() {
         uppy.cancelAll();
         formMain.attr('action', baseUrl + '/' + 'store');
         modalBtn.trigger("click");
@@ -176,7 +183,7 @@ $(document).ready(function () {
                     console.log(error)
                 }
             });
-            toogleModal();
+            toggleModal();
         });
     }
 
@@ -199,7 +206,14 @@ $(document).ready(function () {
             contentType: false, // Set false để không thiết lập Header 'Content-Type'
             success: function (data) {
                 console.log(data)
-                toogleModal();
+                toggleModal();
+                Swal.fire({
+                    position: "top-center",
+                    icon: "success",
+                    title: "Cập nhật thành công",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
                 loadData();
             },
             error: function (xhr, status, error) {
@@ -288,19 +302,40 @@ $(document).ready(function () {
 
     function deleteCar() {
         $(document).on('click', '.delete', function () {
-            $.ajax({
-                url: baseUrl + '/delete/' + $(this).data('id'),
-                type: "DELETE",
-                success: function (data) {
-                    console.log('xóa thành công')
-                    loadData();
-                },
-                error: function (xhr, status, error) {
-                    console.error("Error sending data:", error);
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: baseUrl + '/delete/' + $(this).data('id'),
+                        type: "DELETE",
+                        success: function (data) {
+                            console.log('xóa thành công')
+                            Swal.fire({
+                                position: "top-center",
+                                icon: "success",
+                                title: "Xóa thành công",
+                                showConfirmButton: false,
+                                timer: 1500,
+                            });
+                            loadData();
+                        },
+                        error: function (xhr, status, error) {
+                            console.error("Error sending data:", error);
+                        }
+                    });
                 }
-            });
+            })
         });
     }
+
     deleteCar();
 
 });
