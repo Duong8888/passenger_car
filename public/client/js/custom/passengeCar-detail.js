@@ -73,35 +73,51 @@ $(document).ready(function () {
         var quantity = CountTicket;
         var departure = $('input[name="departure"]:checked').val();
         var arrival = $('input[name="arrival1"]:checked').val();
-
-        let passenger_car_id = $(this).data("id");
-        var totalArray = {
-            username: username,
-            user_id: user_id,
-            phone: phone,
-            email: email,
-            total_price: total_price,
-            quantity: quantity,
-            passenger_car_id: passenger_car_id,
-            departure: departure,
-            arrival: arrival
-        };
-        let url = $(this).data("action");
-
-        $.ajax({
-            url: url,
-            method: "POST",
-            dataType: "JSON",
-            data: totalArray,
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function (response) {
-                if (response.success) {
-                    window.location.href = '/payment-method';
+        const error = [];
+        if(username === ''){
+            error.push('Tên Không được để trống. !');
+        }
+        if (phone === '') {
+            error.push('Số điện thoại không được để trống.');
+        }
+          
+        if (email === '') {
+            error.push('Email không được để trống.');
+        }
+     
+        if(error.length === 0){
+             let passenger_car_id = $(this).data("id");
+            var totalArray = {
+                username: username,
+                user_id: user_id,
+                phone: phone,
+                email: email,
+                total_price: total_price,
+                quantity: quantity,
+                passenger_car_id: passenger_car_id,
+                departure: departure,
+                arrival: arrival
+            };
+            let url = $(this).data("action");
+    
+            $.ajax({
+                url: url,
+                method: "POST",
+                dataType: "JSON",
+                data: totalArray,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    if (response.success) {
+                        window.location.href = '/payment-method';
+                    }
                 }
-            }
-        }, TIME_TO_UPDATE);
+            }, TIME_TO_UPDATE);
+        }else{
+            swal("Lỗi", "Vui lòng điền đủ thông tin !", "error");
+        }
+       
     })
     const firstTab = document.getElementById('first');
     const secondTab = document.getElementById('second');
