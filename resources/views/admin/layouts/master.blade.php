@@ -198,11 +198,16 @@
 <!-- Right bar overlay-->
 <div class="rightbar-overlay"></div>
 <script src="{{ asset('toast.js') }}"></script>
-
+<script>
+    
+</script>
 <script>
     const infoUser = @json(auth()->user());
     const urlNotification = '{{route('notifications.loadMessage')}}';
+
+
 </script>
+
 @include('admin.layouts.partials.script')
 @yield('page-script')
 

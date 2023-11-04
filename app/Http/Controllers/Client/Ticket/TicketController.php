@@ -9,7 +9,9 @@ use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TiketMail;
+use Twilio\Rest\Client;
 class TicketController extends Controller
 {
     public function CountTicket(Request $request)
@@ -29,9 +31,32 @@ class TicketController extends Controller
 
     public function endPayment(Request $request)
     {
+        dd(session()->get('value'));
         $ticket = new Ticket();
         $ticket->fill($request->all());
         $ticket->save();
+
+
+        $email = new TiketMail($ticket);
+        Mail::to($request->email)->send($email);
+
+
+        $phoneNumber = substr_replace($ticket->phone, "+84", 0, 0);
+
+        $twilioSid = env('TWILIO_SID');
+        $twilioToken = env('TWILIO_AUTH_TOKEN');
+        // dd($twilioSid,$twilioToken);
+        $twilio = new Client($twilioSid, $twilioToken);
+        $mess = "Thông báo đặt vé! ".$ticket->name . "\n  Người đặt: ".$ticket->username . "\n Điểm đón: ".$ticket->departure .
+        "\n Điểm trả:" . $ticket->arrival . "\n Số lượng vé: " . $ticket->quantity . "\n Tổng tiền: ".$ticket->total_price.
+        "\n Hình thức thanh toán:". $ticket->payment_method;
+        $message = $twilio->messages->create(
+            $phoneNumber,
+            [
+                "from" => "+13342314820",
+                "body" =>  (string)$mess
+            ]
+        );
 
         session()->forget('value');
         return response()->json(['success' => 'Done'], Response::HTTP_OK);
@@ -197,7 +222,31 @@ class TicketController extends Controller
                 'departure' => $a['departure'],
                 'arrival' => $a['arrival'],
             ]);
+            $a['payment_method'] = 'Đã Thanh toán VNPAY';
+            $a = (object)$a;
+            $email = new TiketMail($a);
+            Mail::to($a->email)->send($email);
+
+
+            $phoneNumber = substr_replace($a->phone, "+84", 0, 0);
+
+            $twilioSid = env('TWILIO_SID');
+            $twilioToken = env('TWILIO_AUTH_TOKEN');
+            // dd($twilioSid,$twilioToken);
+            $twilio = new Client($twilioSid, $twilioToken);
+            $mess = "Thông báo đặt vé! ". "\n  Người đặt: ".$a->username . "\n Điểm đón: ".$a->departure .
+            "\n Điểm trả:" . $a->arrival . "\n Số lượng vé: " . $a->quantity . "\n Tổng tiền: ".$a->total_price.
+            "\n Hình thức thanh toán:". $a->payment_method;
+            $message = $twilio->messages->create(
+                $phoneNumber,
+                [
+                    "from" => "+13342314820",
+                    "body" =>  (string)$mess
+                ]
+            );
+
         }
+
         session()->forget('cart');
         return to_route('client.finish.ticket')->with('success', 'Đặt hàng thành công');
     }
