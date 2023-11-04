@@ -1,53 +1,101 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr" data-mode="light" class="scroll-smooths group" data-theme-color="violet">
+@extends('client.layout.master')
 
-<head>
-    <meta charset="utf-8" />
-    <title>index</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta content="Tailwind Multipurpose Admin & Dashboard Template" name="description" />
-    <meta content="" name="Themesbrand" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="csrf-token" content="{{csrf_token()}}">
-    @include('client.layout.partials.style')
-    @yield('page-style')
-</head>
-
-<body class="bg-white dark:bg-neutral-800">
-    <section class="py-20 bg-gray-50 dark:bg-neutral-700">
-        <div class="container mx-auto">
-            <div class="mb-5">
-                <a href="{{route('home')}}" class="flex items-center">
-                    <img src="client/images/logo-dark.png" alt="" class="logo-dark h-[22px] block dark:hidden">
-                    <img src="client/images/logo-light.png" alt="" class="logo-dark h-[22px] hidden dark:block">
-                </a>
-                <h4 class="mb-3 text-lg text-gray-900 dark:text-gray-50">Hello</h4>
+@section('content')
+<section class="py-28 dark:bg-neutral-800">
+    <div class="container mx-auto">
+        <div class="grid grid-cols-1 gap-5">
+            <div class="">
+                <h3 class="mb-3 text-3xl text-blue-600 ">Đặt chỗ thành công</h3>
             </div>
-            <div id="popup"
-                class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 hidden w-80 h-96 z-50">
-                <div class="bg-white p-6 rounded relative">
-                    <!-- Nút "x" -->
-                    <button onclick="hidePopup()"
-                        class="absolute top-0 right-0 mt-4 mr-4 text-gray-500 hover:text-gray-700 exit">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M6 18L18 6M6 6l12 12">
-                            </path>
-                        </svg>
-                    </button>
+        </div>
+        <div class="flex justify-between">
+            <div style="width: 60%;">
+                <p>Chúng tôi đã gửi thông tin chuyến đi đến email <span style="color: blue">{{
+                        session('value')[0]['email'] }}</span> bạn hãy kiểm tra lại nhé </p>
+                <p style="margin-top: 100px; font-size: 20px;font-weight: bold;">Thông tin vé</p>
+                <table style="border-collapse: collapse; width: 100%;">
+                    <tr>
+                        <th
+                            style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd; background-color: #f2f2f2;">
+                            Nhà xe</th>
+                        <th
+                            style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd; background-color: #f2f2f2;">
+                            Tuyến Đường</th>
+
+                    </tr>
+                    <tr>
+                        @foreach ($data as $value)
+                        <td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">Xe {{
+                            $value->license_plate }}</td>
+                        @endforeach
+                        <td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">{{
+                            session('value')[0]['route_departure']}}-{{ session('value')[0]['route_arrival']}}</td>
+
+                    </tr>
+                </table>
+                <hr>
+
+                <div style="background-color: #f2f2f2; padding: 10px; margin-bottom: 20px;">
+                    <p style="margin: 0;">Điểm đón</p>
+                    <p>{{ session('value')[0]['departure']}}</p>
+                    <p>Đón lúc: {{ session('value')[0]['time_departure']}}</p>
+                </div>
+                <hr>
+                <div style="background-color: #e6e6e6; padding: 10px; margin-top: 20px;">
+                    <p style="margin: 0;">Điểm trả</p>
+                    <p>{{ session('value')[0]['arrival']}}</p>
+                    <p>Đón lúc: {{ session('value')[0]['time_arrival']}}</p>
+                </div>
 
 
-                  
+                <button name="cancel-ticket" data style="display: block; margin: 0 auto; background-color: red; color: white; width: 100% ; margin-top: 50px; padding: 10px ">Hủy Vé</button>
+            </div>
+
+            <div style="width: 30%">
+                <div
+                    style="border: 1px solid #000; padding: 10px; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div style="margin-bottom: 10px;">
+                        <p style="margin: 0; font-size: 14px;">Hành Khách :</p>
+                        <p style="margin: 0; font-size: 16px;">{{ session('value')[0]['username'] }}</p>
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        <p style="margin: 0; font-size: 14px;">Số điện thoại :</p>
+                        <p style="margin: 0; font-size: 16px;">{{ session('value')[0]['phone'] }}</p>
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        <p style="margin: 0; font-size: 14px;">Email :</p>
+                        <p style="margin: 0; font-size: 16px;">{{ session('value')[0]['email'] }}</p>
+                    </div>
+                </div>
+                <div
+                    style="border: 1px solid #000; padding: 10px; display: flex; flex-direction: column; justify-content: space-between;margin-top: 50px">
+                    <h3>Thông tin giao dịch</h3>
+                    <div style="margin-bottom: 10px;">
+                        <p style="margin: 0; font-size: 14px;">Hình thức thanh toán: thanh toán tại nhà xe</p>
+                    </div>
+                    <div style="margin-bottom: 30px;">
+                        <p style="margin: 0; font-size: 14px;">Trạng thái: Trong Chờ Đợi</p>
+                       
+                    </div>
+                   
+                    <div style="margin-bottom: 10px;">
+                        <p style="margin: 0; font-size: 14px; font-size: 20px;font-weight: bold;">Tổng Tiền: {{ session('value')[0]['total_price'] }}</p>
+                     
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
-</body>
-@include('client.layout.partials.script')
-<script>
-    const infoUser = @json(auth()->user());
-const urlNotification = '{{route('notifications.loadMessage')}}';
+       
 
+    </div>
+</section>
+@endsection
+@section('page-script')
+<script src="{{ asset('client/js/custom/finish.js') }}"></script>
+<script src="{{asset('client/libs/choices.js/public/assets/scripts/choices.min.js')}}"></script>
 
+<script src="{{asset('client/js/pages/job-list.init.js')}}"></script>
 
-</html>
+<script src="{{asset('client/js/pages/dropdown%26modal.init.js')}}"></script>
+
+@endsection

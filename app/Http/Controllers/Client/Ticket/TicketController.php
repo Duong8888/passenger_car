@@ -33,7 +33,6 @@ class TicketController extends Controller
         $ticket->fill($request->all());
         $ticket->save();
 
-        session()->forget('value');
         return response()->json(['success' => 'Done'], Response::HTTP_OK);
     }
 
@@ -202,7 +201,11 @@ class TicketController extends Controller
         return to_route('client.finish.ticket')->with('success', 'Đặt hàng thành công');
     }
 
-    public function EndTicketPayment(){
-        return view('client.pages.ticket.finish');
+    public function EndTicketPayment(Request $request){
+        $passenger_car = PassengerCar::where('id', session('value')[0]['passenger_car_id'])->get();
+        
+        return view('client.pages.ticket.finish', [
+            'data' => $passenger_car,
+        ]);
     }
 }

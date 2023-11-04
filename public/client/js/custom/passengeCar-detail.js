@@ -69,8 +69,12 @@ $(document).ready(function () {
         var username = $('input[name="name"]').val();
         var phone = $('input[name="phone"]').val();
         var email = $('input[name="email"]').val();
+        var route_departure = $('input[name="route-departure"]').val();
+        var route_arrival = $('input[name="route-arrival"]').val();
         var total_price = TicketPrice * CountTicket;
         var quantity = CountTicket;
+        var time_departure = $('input[name="departureTimeInput"]').val();
+        var time_arrival = $('input[name="arrivalTimeInput"]').val();
         var departure = $('input[name="departure"]:checked').val();
         var arrival = $('input[name="arrival1"]:checked').val();
         const error = [];
@@ -96,7 +100,11 @@ $(document).ready(function () {
                 quantity: quantity,
                 passenger_car_id: passenger_car_id,
                 departure: departure,
-                arrival: arrival
+                arrival: arrival,
+                time_departure : time_departure,
+                time_arrival: time_arrival,
+                route_departure: route_departure,
+                route_arrival: route_arrival,
             };
             let url = $(this).data("action");
     
