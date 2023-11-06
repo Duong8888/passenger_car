@@ -10,7 +10,7 @@ class PassengerCar extends Model
 {
     use HasFactory;
 //    use Searchable;
-    public $timestamps = false;
+    // public $timestamps = false;
     protected $fillable = [
         'license_plate',
         'capacity',

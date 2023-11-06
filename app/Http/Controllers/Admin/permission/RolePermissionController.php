@@ -27,10 +27,10 @@ class RolePermissionController extends Controller
     {
         if ($request->input('action') === 'createRole') {
             $this->storeRole($request);
-            return redirect()->route('rolePermission.index')->with('successRole', 'Role đã được tạo thành công.');
+            return redirect()->route('admin.rolePermission.index')->with('successRole', 'Role đã được tạo thành công.');
         }elseif ($request->input('action') === 'createPermission') {
             $this->storePermission($request);
-            return redirect()->route('rolePermission.create')->with('successsPermission-', 'Permission đã được tạo thành công.');
+            return redirect()->route('admin.rolePermission.create')->with('successsPermission-', 'Permission đã được tạo thành công.');
         }
     }
     public function storeRole(Request $request)
@@ -75,18 +75,18 @@ class RolePermissionController extends Controller
             'permissions' => 'array',
         ]);
         $role->syncPermissions($request->input('permissions'));
-        return redirect()->route('rolePermission.index')->with('success', 'Bạn đã sửa lại vai trò cho Quyền thành công');
+        return redirect()->route('admin.rolePermission.index')->with('success', 'Bạn đã sửa lại vai trò cho Quyền thành công');
     }
     public function delete(string $id)
     {
         Permission::where('id',$id)->delete();
-        return redirect()->route('rolePermission.create')
+        return redirect()->route('admin.rolePermission.create')
             ->with('success', 'Bạn đã xóa vai trò thành công');
     }
     public function destroy(string $id)
     {
         Role::where('id',$id)->delete();
-        return redirect()->route('rolePermission.index')
+        return redirect()->route('admin.rolePermission.index')
             ->with('success', 'Bạn đã xóa Quyền thành công');
     }
 }
