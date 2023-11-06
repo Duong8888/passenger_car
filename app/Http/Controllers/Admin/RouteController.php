@@ -33,7 +33,7 @@ class RouteController extends AdminBaseController
         parent::index($request);
         $dataRoute = VietnameseProvinces::all();
         $carData = PassengerCar::query()
-            ->where('user_id',Auth::user()->id)
+            ->where('user_id', Auth::user()->id)
             ->whereNull('route_id')
             ->get();
         $data = Stops::where('user_id', Auth::user()->id)
@@ -41,7 +41,10 @@ class RouteController extends AdminBaseController
             ->select('routes.departure', 'routes.arrival')
             ->distinct()
             ->paginate(10);
-        return view($this->pathView . __FUNCTION__, compact('data', 'dataRoute','carData'))
+        if($request->ajax()){
+            return response()->json($data);
+        }
+        return view($this->pathView . __FUNCTION__, compact('data', 'dataRoute', 'carData'))
             ->with('title', $this->titleIndex)
             ->with('colums', $this->colums)
             ->with('urlbase', $this->urlbase)
@@ -50,9 +53,9 @@ class RouteController extends AdminBaseController
 
     public function store(Request $request)
     {
-
-        $departure = $request->input('route-departure');
-        $arrival = $request->input('route-arrival');
+        $carId = $request->input('car');
+        $departure = $request->input('routeDeparture');
+        $arrival = $request->input('routeArrival');
         $departureArr = $request->input('departure');
         $arrivalArr = $request->input('arrival');
         $stops = new Stops();
@@ -68,8 +71,16 @@ class RouteController extends AdminBaseController
                 'price' => '0',
             ]);
         }
+        foreach ($carId as $key => $id) {
+            $car = PassengerCar::query()->findOrFail($id);
+            if($car){
+                $car->route_id = $route->id;
+                $car->save();
+            }
+        }
 
-        foreach ($arrivalArr as $key => $value){
+
+        foreach ($arrivalArr as $key => $value) {
             $stops->stop_name = $value;
             $stops->stop_type = 1;
             $stops->route_id = $route->id;
@@ -85,7 +96,7 @@ class RouteController extends AdminBaseController
             $stops->order = $key;
             $stops->save();
         }
-        return back();
+        return response()->json('Thêm mới thành công');
     }
 
 }

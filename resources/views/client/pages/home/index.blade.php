@@ -613,7 +613,7 @@ padding:00px ">
                                                 </div>
                                                 <div class="col-span-12 lg:col-span-2">
                                                     <div class="flex flex-wrap gap-1.5">
-                                                        <a href="/car/${item.id}?time="${item.working_time_id}"
+                                                        <a href="/car/${item.id}?time=${item.working_time_id}"
                                                            class="badge text-sky-500 text-13 px-2 py-0.5 font-medium rounded">Thông tin chi tiết </a>
                                                     </div>
                                                 </div>

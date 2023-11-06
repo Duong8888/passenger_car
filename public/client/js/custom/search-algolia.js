@@ -127,36 +127,46 @@ $(document).ready(function () {
     $('.btn-find').click();
 
     function search() {
-        dataList.html('');
-        dataList.append(skeleton);
-        $.ajax({
-            url: baseUrl,
-            method: 'GET',
-            data: {
-                departure: departure.val(),
-                arrival: arrival.val(),
-                filterArrival: filterStopsArrival.val(),
-                filterDeparture: filterStopsDeparture.val()
-            },
-            success: function (response) {
-                loading.hide();
-                console.log(response.dataRoute);
-                dataList.html('');
-                loadStopRoute(response.filterStops)
-                if (response.data.length === 0) {
-                    dataList.append(`
-                    <div class="text-center">
-                       Tuyến đường chưa có xe hoạt động .
-                    </div>
-                    `);
-                } else {
-                    loadItem(response.data, response.dataRoute);
-                }
-            },
-            error: function (error) {
-                loadFail(error, 'Tuyến đường chưa có xe hoạt động .');
-            }
-        })
+        var formData = new FormData($('#uploadForm')[0]);
+        formData.append('departure', $('select[name="departure"]').val());
+        formData.append('arrival', $('select[name="arrival"]').val());
+        formData.append('type', 'asc');
+        ajaxRequest(
+            'sortBy',
+            formData,
+        true
+        );
+
+        // dataList.html('');
+        // dataList.append(skeleton);
+        // $.ajax({
+        //     url: baseUrl,
+        //     method: 'GET',
+        //     data: {
+        //         departure: departure.val(),
+        //         arrival: arrival.val(),
+        //         filterArrival: filterStopsArrival.val(),
+        //         filterDeparture: filterStopsDeparture.val()
+        //     },
+        //     success: function (response) {
+        //         loading.hide();
+        //         console.log(response.dataRoute);
+        //         dataList.html('');
+        //         loadStopRoute(response.filterStops)
+        //         if (response.data.length === 0) {
+        //             dataList.append(`
+        //             <div class="text-center">
+        //                Tuyến đường chưa có xe hoạt động .
+        //             </div>
+        //             `);
+        //         } else {
+        //             loadItem(response.data, response.dataRoute);
+        //         }
+        //     },
+        //     error: function (error) {
+        //         loadFail(error, 'Tuyến đường chưa có xe hoạt động .');
+        //     }
+        // })
 
     }
 
@@ -234,7 +244,7 @@ $(document).ready(function () {
                                                 </div>
                                                 <!--end col-->
                                                 <div class="col-span-10">
-                                                    <h5 class="mb-1 fs-17"><a href="#" class="dark:text-gray-50">Nhà xe</a>
+                                                    <h5 class="mb-1 fs-17"><a href="#" class="dark:text-gray-50">${item.passengerCar_name}</a>
                                                         <small class="font-normal text-gray-500 dark:text-gray-300"></small>
                                                     </h5>
                                                     <ul class="mb-0 lg:gap-3 gap-y-3">
@@ -265,7 +275,7 @@ $(document).ready(function () {
                                                 <!--end col-->
                                                 <div class="col-span-12 mt-2 lg:col-span-6 lg:mt-0">
                                                     <div class="ltr:lg:text-right rtl:lg:text-left dark:text-gray-50">
-                                                        <a id="pasengerCarUrl" href="/car/${item.id}?time=" data-bs-toggle="modal">Chi tiết <i class="mdi mdi-chevron-double-right"></i></a>
+                                                        <a id="pasengerCarUrl" href="/car/${item.id}?time=${itemWorking.id}" data-bs-toggle="modal">Chi tiết <i class="mdi mdi-chevron-double-right"></i></a>
                                                     </div>
                                                 </div>
                                                 <!--end col-->
@@ -305,7 +315,7 @@ $(document).ready(function () {
                                                 </div>
                                                 <!--end col-->
                                                 <div class="col-span-10">
-                                                    <h5 class="mb-1 fs-17"><a href="job-details.html" class="dark:text-gray-50">Dương Đẹp Trai 102</a>
+                                                    <h5 class="mb-1 fs-17"><a href="job-details.html" class="dark:text-gray-50">${item.passengerCar_name}</a>
                                                         <small class="font-normal text-gray-500 dark:text-gray-300"></small>
                                                     </h5>
                                                     <ul class="mb-0 lg:gap-3 gap-y-3">
@@ -336,7 +346,7 @@ $(document).ready(function () {
                                                 <!--end col-->
                                                 <div class="col-span-12 mt-2 lg:col-span-6 lg:mt-0">
                                                     <div class="ltr:lg:text-right rtl:lg:text-left dark:text-gray-50">
-                                                        <a href="#applyNow" data-bs-toggle="modal">Chi tiết <i class="mdi mdi-chevron-double-right"></i></a>
+                                                        <a href="/car/${item.id}?time=${item.working_times_id}&filterArrival=${filterStopsArrivalValue}&filterDeparture=${filterStopsDepartureValue}" data-bs-toggle="modal">Chi tiết <i class="mdi mdi-chevron-double-right"></i></a>
                                                     </div>
                                                 </div>
                                                 <!--end col-->

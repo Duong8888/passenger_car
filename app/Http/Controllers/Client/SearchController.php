@@ -78,6 +78,8 @@ class SearchController extends Controller
             ->join('passenger_car_working_times', 'passenger_cars.id', '=', 'passenger_car_working_times.passenger_car_id')
             ->join('working_times', 'passenger_car_working_times.working_time_id', '=', 'working_times.id')
             ->join('stops', 'stops.route_id', '=', 'routes.id')
+            ->join('users', 'users.id', '=', 'passenger_cars.user_id')
+            ->join('contacts', 'contacts.phone', '=', 'users.phone')
             ->select(
                 'passenger_cars.id',
                 'passenger_cars.price',
@@ -86,6 +88,8 @@ class SearchController extends Controller
                 'passenger_cars.capacity',
                 'working_times.departure_time',
                 'working_times.arrival_time',
+                'working_times.id as working_times_id',
+                'contacts.passengerCar_name'
             )
             ->where('routes.departure', $departure)
             ->where('routes.arrival', $arrival);

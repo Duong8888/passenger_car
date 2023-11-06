@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\TiketMail;
 use Twilio\Rest\Client;
+
 class TicketController extends Controller
 {
     public function CountTicket(Request $request)
@@ -31,32 +32,72 @@ class TicketController extends Controller
 
     public function endPayment(Request $request)
     {
-        dd(session()->get('value'));
+
         $ticket = new Ticket();
         $ticket->fill($request->all());
         $ticket->save();
 
 
-        $email = new TiketMail($ticket);
-        Mail::to($request->email)->send($email);
+//        $email = new TiketMail($ticket);
+//        Mail::to($request->email)->send($email);
 
 
         $phoneNumber = substr_replace($ticket->phone, "+84", 0, 0);
 
-        $twilioSid = env('TWILIO_SID');
-        $twilioToken = env('TWILIO_AUTH_TOKEN');
-        // dd($twilioSid,$twilioToken);
-        $twilio = new Client($twilioSid, $twilioToken);
-        $mess = "Thông báo đặt vé! ".$ticket->name . "\n  Người đặt: ".$ticket->username . "\n Điểm đón: ".$ticket->departure .
-        "\n Điểm trả:" . $ticket->arrival . "\n Số lượng vé: " . $ticket->quantity . "\n Tổng tiền: ".$ticket->total_price.
-        "\n Hình thức thanh toán:". $ticket->payment_method;
-        $message = $twilio->messages->create(
-            $phoneNumber,
-            [
-                "from" => "+13342314820",
-                "body" =>  (string)$mess
-            ]
-        );
+//        $twilioSid = env('TWILIO_SID');
+//        $twilioToken = env('TWILIO_AUTH_TOKEN');
+//        // dd($twilioSid,$twilioToken);
+//        $twilio = new Client($twilioSid, $twilioToken);
+        $mess = "Thông báo đặt vé! " . $ticket->name . "\n  Người đặt: " . $ticket->username . "\n Điểm đón: " . $ticket->departure .
+            "\n Điểm trả:" . $ticket->arrival . "\n Số lượng vé: " . $ticket->quantity . "\n Tổng tiền: " . $ticket->total_price .
+            "\n Hình thức thanh toán:" . $ticket->payment_method;
+//        $message = $twilio->messages->create(
+//            $phoneNumber,
+//            [
+//                "from" => "+13342314820",
+//                "body" =>  (string)$mess
+//            ]
+//        );
+
+
+        $APIKey = env('ESMS_API_KEY');
+        $SecretKey = env('ESMS_API_SEC');
+        $ch = curl_init();
+
+
+        $initXml = "<RQST>"
+            . "<APIKEY>" . $APIKey . "</APIKEY>"
+            . "<SECRETKEY>" . $SecretKey . "</SECRETKEY>"
+            . "<ISFLASH>0</ISFLASH>"
+            . "<SMSTYPE>2</SMSTYPE>"
+            . "<CONTENT>" . $mess . "</CONTENT>"
+            . "<BRANDNAME>CAR_FINDER_PRO</BRANDNAME>"//De dang ky brandname rieng vui long lien he hotline 0902435340 hoac nhan vien kinh Doanh cua ban
+            . "<CONTACTS>"
+            . "<CUSTOMER>"
+            . "<PHONE>" . $phoneNumber . "</PHONE>"
+            . "</CUSTOMER>"
+            . "</CONTACTS>"
+            . "</RQST>";
+
+
+        curl_setopt($ch, CURLOPT_URL, "http://api.esms.vn/MainService.svc/xml/SendMultipleMessage_V4/");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $initXml);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: text/plain'));
+
+        $result = curl_exec($ch);
+        $xml = simplexml_load_string($result);
+
+        if ($xml === false) {
+            die('Error parsing XML');
+        }
+
+        //now we can loop through the xml structure
+        //Tham khao them ve SMSTYPE de gui tin nhan hien thi ten cong ty hay gui bang dau so 8755... tai day :http://esms.vn/SMSApi/ApiSendSMSNormal
+
+        print "Ket qua goi API: " . $xml->CodeResult . "\n";
+
 
         session()->forget('value');
         return response()->json(['success' => 'Done'], Response::HTTP_OK);
@@ -108,7 +149,7 @@ class TicketController extends Controller
             $orderInfo = $orderInfo;
             $amount = $amount;
             $ipnUrl = $ipnUrl;
-            $redirectUrl =  $redirectUrl;
+            $redirectUrl = $redirectUrl;
             $extraData = $extraData;
 
             $requestId = time() . "";
@@ -140,6 +181,7 @@ class TicketController extends Controller
             header('Location: ' . $jsonResult['payUrl']);
         }
     }
+
     public function vnpay_payment(Request $request)
     {
         $a = json_decode($request->session);
@@ -194,7 +236,7 @@ class TicketController extends Controller
 
         $vnp_Url = $vnp_Url . "?" . $query;
         if (isset($vnp_HashSecret)) {
-            $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret); //
+            $vnpSecureHash = hash_hmac('sha512', $hashdata, $vnp_HashSecret); //
             $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
         }
         $returnData = array(
@@ -205,6 +247,7 @@ class TicketController extends Controller
         die();
 
     }
+
     public function checkoutPayment()
     {
         $data = (session()->get('value'));
@@ -224,34 +267,62 @@ class TicketController extends Controller
             ]);
             $a['payment_method'] = 'Đã Thanh toán VNPAY';
             $a = (object)$a;
-            $email = new TiketMail($a);
-            Mail::to($a->email)->send($email);
+//            $email = new TiketMail($a);
+//            Mail::to($a->email)->send($email);
 
 
-            $phoneNumber = substr_replace($a->phone, "+84", 0, 0);
+            $phoneNumber = substr_replace($a->phone, "", 0, 0);
 
-            $twilioSid = env('TWILIO_SID');
-            $twilioToken = env('TWILIO_AUTH_TOKEN');
-            // dd($twilioSid,$twilioToken);
-            $twilio = new Client($twilioSid, $twilioToken);
-            $mess = "Thông báo đặt vé! ". "\n  Người đặt: ".$a->username . "\n Điểm đón: ".$a->departure .
-            "\n Điểm trả:" . $a->arrival . "\n Số lượng vé: " . $a->quantity . "\n Tổng tiền: ".$a->total_price.
-            "\n Hình thức thanh toán:". $a->payment_method;
-            $message = $twilio->messages->create(
-                $phoneNumber,
-                [
-                    "from" => "+13342314820",
-                    "body" =>  (string)$mess
-                ]
-            );
+//            $twilioSid = env('TWILIO_SID');
+//            $twilioToken = env('TWILIO_AUTH_TOKEN');
+//            // dd($twilioSid,$twilioToken);
+//            $twilio = new Client($twilioSid, $twilioToken);
+            $mess = "Thông báo đặt vé! " . "\n  Người đặt: " . $a->username . "\n Điểm đón: " . $a->departure .
+                "\n Điểm trả:" . $a->arrival . "\n Số lượng vé: " . $a->quantity . "\n Tổng tiền: " . $a->total_price .
+                "\n Hình thức thanh toán:" . $a->payment_method;
+//            $message = $twilio->messages->create(
+//                $phoneNumber,
+//                [
+//                    "from" => "+13342314820",
+//                    "body" =>  (string)$mess
+//                ]
+//            );
+
+            $APIKey = "371FC468F99345C39169670876C613"; //env('ESMS_API_KEY');
+            $SecretKey = "CE2DD09E775331ABA3C0A53F349260"; // env('ESMS_API_SEC');
+
+
+            $SendContent = urlencode($mess);
+            $data = "http://rest.esms.vn/MainService.svc/json/SendMultipleMessage_V4_get?Phone=$phoneNumber&ApiKey=$APIKey&SecretKey=$SecretKey&Content=$SendContent&SmsType=8";
+            //De dang ky brandname rieng vui long lien he hotline 0901.888.484 hoac nhan vien kinh Doanh cua ban
+
+            $curl = curl_init($data);
+            curl_setopt($curl, CURLOPT_FAILONERROR, true);
+            curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            $result = curl_exec($curl);
+
+            $obj = json_decode($result, true);
+            if ($obj['CodeResult'] == 100) {
+                print "<br>";
+                print "CodeResult:" . $obj['CodeResult'];
+                print "<br>";
+                print "CountRegenerate:" . $obj['CountRegenerate'];
+                print "<br>";
+                print "SMSID:" . $obj['SMSID'];
+                print "<br>";
+            } else {
+                print "ErrorMessage:" . $obj['ErrorMessage'];
+            }
 
         }
-
+//        return response()->json($dataDebug);
         session()->forget('cart');
         return to_route('client.finish.ticket')->with('success', 'Đặt hàng thành công');
     }
 
-    public function EndTicketPayment(){
+    public function EndTicketPayment()
+    {
         return view('client.pages.ticket.finish');
     }
 }
