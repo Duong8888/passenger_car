@@ -38,8 +38,8 @@ class TicketController extends Controller
         $ticket->save();
 
 
-//        $email = new TiketMail($ticket);
-//        Mail::to($request->email)->send($email);
+        $email = new TiketMail($ticket);
+        Mail::to($request->email)->send($email);
 
 
         $phoneNumber = substr_replace($ticket->phone, "+84", 0, 0);
@@ -60,43 +60,32 @@ class TicketController extends Controller
 //        );
 
 
-        $APIKey = env('ESMS_API_KEY');
-        $SecretKey = env('ESMS_API_SEC');
-        $ch = curl_init();
+        $APIKey = "371FC468F99345C39169670876C613"; //env('ESMS_API_KEY');
+        $SecretKey = "CE2DD09E775331ABA3C0A53F349260"; // env('ESMS_API_SEC');
 
 
-        $initXml = "<RQST>"
-            . "<APIKEY>" . $APIKey . "</APIKEY>"
-            . "<SECRETKEY>" . $SecretKey . "</SECRETKEY>"
-            . "<ISFLASH>0</ISFLASH>"
-            . "<SMSTYPE>2</SMSTYPE>"
-            . "<CONTENT>" . $mess . "</CONTENT>"
-            . "<BRANDNAME>CAR_FINDER_PRO</BRANDNAME>"//De dang ky brandname rieng vui long lien he hotline 0902435340 hoac nhan vien kinh Doanh cua ban
-            . "<CONTACTS>"
-            . "<CUSTOMER>"
-            . "<PHONE>" . $phoneNumber . "</PHONE>"
-            . "</CUSTOMER>"
-            . "</CONTACTS>"
-            . "</RQST>";
+        $SendContent = urlencode($mess);
+        $data = "http://rest.esms.vn/MainService.svc/json/SendMultipleMessage_V4_get?Phone=$phoneNumber&ApiKey=$APIKey&SecretKey=$SecretKey&Content=$SendContent&SmsType=8";
+        //De dang ky brandname rieng vui long lien he hotline 0901.888.484 hoac nhan vien kinh Doanh cua ban
 
+        $curl = curl_init($data);
+        curl_setopt($curl, CURLOPT_FAILONERROR, true);
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($curl);
 
-        curl_setopt($ch, CURLOPT_URL, "http://api.esms.vn/MainService.svc/xml/SendMultipleMessage_V4/");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $initXml);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: text/plain'));
-
-        $result = curl_exec($ch);
-        $xml = simplexml_load_string($result);
-
-        if ($xml === false) {
-            die('Error parsing XML');
+        $obj = json_decode($result, true);
+        if ($obj['CodeResult'] == 100) {
+            print "<br>";
+            print "CodeResult:" . $obj['CodeResult'];
+            print "<br>";
+            print "CountRegenerate:" . $obj['CountRegenerate'];
+            print "<br>";
+            print "SMSID:" . $obj['SMSID'];
+            print "<br>";
+        } else {
+            print "ErrorMessage:" . $obj['ErrorMessage'];
         }
-
-        //now we can loop through the xml structure
-        //Tham khao them ve SMSTYPE de gui tin nhan hien thi ten cong ty hay gui bang dau so 8755... tai day :http://esms.vn/SMSApi/ApiSendSMSNormal
-
-        print "Ket qua goi API: " . $xml->CodeResult . "\n";
 
 
         session()->forget('value');
@@ -267,8 +256,8 @@ class TicketController extends Controller
             ]);
             $a['payment_method'] = 'Đã Thanh toán VNPAY';
             $a = (object)$a;
-//            $email = new TiketMail($a);
-//            Mail::to($a->email)->send($email);
+            $email = new TiketMail($a);
+            Mail::to($a->email)->send($email);
 
 
             $phoneNumber = substr_replace($a->phone, "", 0, 0);

@@ -53,14 +53,6 @@ $(document).ready(function () {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function (response) {
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "success",
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
-
                 if (response.success) {
                     window.location.href = '/end-ticket-payment';
                 }
@@ -105,7 +97,7 @@ $(document).ready(function () {
         var popup = document.getElementById("popup");
         popup.classList.add("hidden");
     }
-    
+
     $(document).on("click", ".exit", function () {
         hidePopup();
     })
