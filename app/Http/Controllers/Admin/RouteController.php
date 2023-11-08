@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\Routes;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -38,11 +39,11 @@ class RouteController extends AdminBaseController
             ->get();
         $data = Stops::where('user_id', Auth::user()->id)
             ->join('routes', 'stops.route_id', '=', 'routes.id')
-            ->select('routes.departure', 'routes.arrival')
+            ->select('routes.departure', 'routes.arrival', 'routes.id')
             ->distinct()
             ->paginate(10);
-        if($request->ajax()){
-            return response()->json($data);
+        if ($request->ajax()) {
+            return response()->json(['data' => $data, 'carData' => $carData,]);
         }
         return view($this->pathView . __FUNCTION__, compact('data', 'dataRoute', 'carData'))
             ->with('title', $this->titleIndex)
@@ -53,12 +54,12 @@ class RouteController extends AdminBaseController
 
     public function store(Request $request)
     {
+        Log::info($request->all());
         $carId = $request->input('car');
         $departure = $request->input('routeDeparture');
         $arrival = $request->input('routeArrival');
         $departureArr = $request->input('departure');
         $arrivalArr = $request->input('arrival');
-        $stops = new Stops();
         $route = Routes::where('departure', $departure)
             ->where('arrival', $arrival)
             ->first();
@@ -73,30 +74,60 @@ class RouteController extends AdminBaseController
         }
         foreach ($carId as $key => $id) {
             $car = PassengerCar::query()->findOrFail($id);
-            if($car){
+            if ($car) {
                 $car->route_id = $route->id;
                 $car->save();
             }
         }
 
-
+        $arrStop = [];
         foreach ($arrivalArr as $key => $value) {
-            $stops->stop_name = $value;
-            $stops->stop_type = 1;
-            $stops->route_id = $route->id;
-            $stops->user_id = Auth::user()->id;
-            $stops->order = $key;
-            $stops->save();
+            $arrStop[] = [
+                'stop_name' =>$value,
+                'stop_type' =>1,
+                'route_id' =>$route->id,
+                'user_id' => Auth::user()->id,
+                'order' =>$key,
+            ];
         }
         foreach ($departureArr as $key => $value) {
-            $stops->stop_name = $value;
-            $stops->stop_type = 0;
-            $stops->route_id = $route->id;
-            $stops->user_id = Auth::user()->id;
-            $stops->order = $key;
-            $stops->save();
+            $arrStop[] = [
+                'stop_name' =>$value,
+                'stop_type' =>0,
+                'route_id' =>$route->id,
+                'user_id' => Auth::user()->id,
+                'order' =>$key,
+            ];
         }
+
+        Stops::query()->insert($arrStop);
         return response()->json('Thêm mới thành công');
+    }
+
+    public function edit(string $id)
+    {
+        if (\request()->ajax()) {
+            $userId = Auth::id();
+            $route = $this->model->findOrFail($id);
+            $stops = $route->stops()
+                ->where('user_id', $userId)
+                ->get();
+            $cars = $route->passengerCars()
+                ->where('user_id', $userId)
+                ->where('route_id', $route->id)
+                ->get();
+            $carsNull = PassengerCar::query()
+                ->where('user_id', Auth::user()->id)
+                ->whereNull('route_id')
+                ->get();
+            return response()->json(['route' => $route, 'cars' => $cars, 'stops' => $stops, 'carNull' => $carsNull]);
+        }
+        return parent::edit($id);
+    }
+
+    public function update(Request $request, string $id)
+    {
+
     }
 
 }

@@ -1,55 +1,17 @@
 @extends('admin.layouts.master')
 
 @section('page-script')
-    <!--Morris Chart-->
-    <script src="admin/libs/morris.js06/morris.min.js"></script>
-    <script src="admin/libs/raphael/raphael.min.js"></script>
-
-    <!-- Dashboar init js-->
-    <script src="admin/js/pages/dashboard.init.js"></script>
-
-
-
-    {{--    <script src="{{asset('admin/libs/jquery/jquery.min.js')}}"></script>--}}
-    {{--    <script src="{{asset('admin/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>--}}
-    {{--    <script src="{{asset('admin/libs/simplebar/simplebar.min.js')}}"></script>--}}
-    {{--    <script src="{{asset('admin/libs/node-waves/waves.min.js')}}"></script>--}}
-    {{--    <script src="{{asset('admin/libs/waypoints/lib/jquery.waypoints.min.js')}}"></script>--}}
-    {{--    <script src="{{asset('admin/libs/jquery.counterup/jquery.counterup.min.js')}}"></script>--}}
-    {{--    <script src="{{asset('admin/libs/feather-icons/feather.min.js')}}"></script>--}}
-
-
-    <script src="{{asset('admin/libs/selectize/js/standalone/selectize.min.js')}}"></script>
-    <script src="{{asset('admin/libs/mohithg-switchery/switchery.min.js')}}"></script>
-    <script src="{{asset('admin/libs/multiselect/js/jquery.multi-select.js')}}"></script>
-    <script src="{{asset('admin/libs/select2/js/select2.min.js')}}"></script>
-    <script src="{{asset('admin/libs/jquery-mockjax/jquery.mockjax.min.js')}}"></script>
-    <script src="{{asset('admin/libs/devbridge-autocomplete/jquery.autocomplete.min.js')}}"></script>
-    <script src="{{asset('admin/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js')}}"></script>
-    <script src="{{asset('admin/libs/bootstrap-maxlength/bootstrap-maxlength.min.js')}}"></script>
-
 
     <!-- Init js-->
     <script src="{{asset('admin/js/pages/form-advanced.init.js')}}"></script>
 
-
-
-
     <script src="{{asset('client/libs/choices.js/public/assets/scripts/choices.min.js')}}"></script>
-
     <script src="{{asset('client/js/pages/job-list.init.js')}}"></script>
     <script type="module" src="{{asset('admin/js/custom/route.js')}}"></script>
 @endsection
 
 @section('page-style')
     <link rel="stylesheet" href="{{asset('client/libs/choices.js/public/assets/styles/choices.min.css')}}">
-    <!-- Plugins css -->
-    <link href="{{asset('admin/libs/mohithg-switchery/switchery.min.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{asset('admin/libs/multiselect/css/multi-select.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{asset('admin/libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{asset('admin/libs/selectize/css/selectize.bootstrap3.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{asset('admin/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css')}}" rel="stylesheet"
-          type="text/css"/>
 @endsection
 
 @section('content')
@@ -82,23 +44,6 @@
                                         <div class="modal-body">
 
 
-
-                                            <div class="mb-3">
-                                                <label class="form-label">Xe hoạt đông *</label>
-                                                <select id="selectize-optgroup"  name="car[]" multiple
-                                                        placeholder="Select gear...">
-                                                    @if(count($carData) == 0)
-                                                        <option value="">Select car...</option>
-                                                    @endif
-                                                    @foreach($carData as $value)
-                                                        <option value="{{$value->id}}">{{$value->license_plate}}
-                                                            | {{$value->capacity}} chỗ
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-
-
                                             <div class="row">
                                                 <label for="field-1" class="form-label">Tuyến đường *</label>
                                             </div>
@@ -107,13 +52,12 @@
                                                     <div class="mb-3">
                                                         <div class="mt-3 filter-search-form mt-lg-0">
                                                             <i class="uil uil-clipboard-notes"></i>
-                                                            <select class="form-select" data-trigger
+                                                            <select class="form-select"
                                                                     name="route-departure"
-                                                                    id="choices-single-categories"
-                                                                    aria-label="Default select example">
+                                                                    id="route-departure"
+                                                                    >
                                                                 @foreach($dataRoute as $key => $value)
-                                                                    <option
-                                                                        value="{{$value->name}}">{{$value->name}}</option>
+                                                                        <option value="{{trim($value->name)}}">{{trim($value->name)}}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -122,13 +66,13 @@
                                                 <div class="col-md-6">
                                                     <div class="mt-3 filter-search-form mt-md-0 filter-border">
                                                         <i class="uil uil-map-marker"></i>
-                                                        <select class="form-select" data-trigger
+                                                        <select class="form-select"
                                                                 name="route-arrival"
-                                                                id="choices-single-location"
-                                                                aria-label="Default select example">
+                                                                id="route-arrival"
+                                                                >
                                                             @foreach($dataRoute as $key => $value)
                                                                 <option
-                                                                    value="{{$value->name}}">{{$value->name}}</option>
+                                                                    value="{{trim($value->name)}}">{{trim($value->name)}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -139,6 +83,20 @@
 
                                             </div>
 
+
+                                            <div class="mb-3">
+                                                <label class="form-label">Xe hoạt đông *</label>
+                                                <select id="states" class="w-100" name="car[]" multiple="multiple">
+                                                    @if(count($carData) == 0)
+                                                        <option value="">Select car...</option>
+                                                    @endif
+                                                    @foreach($carData as $value)
+                                                        <option value="{{$value->id}}">{{$value->license_plate}}
+                                                            | {{$value->capacity}} chỗ
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
 
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -168,6 +126,7 @@
                                                                 class="close btn btn-danger waves-effect waves-light"><i
                                                                 class="mdi mdi-close"></i></button>
                                                     </div>
+
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -220,10 +179,10 @@
                                                         Action <i class="mdi mdi-chevron-down"></i>
                                                     </button>
                                                     <div class="dropdown-menu" style="">
-                                                        <a class="dropdown-item btn-update" id="1" href="#">Thông
+                                                        <a class="dropdown-item btn-update" data-id="{{$route->id}}" href="#">Thông
                                                             tin</a>
-                                                        <a class="dropdown-item btn-update" id="1" href="#">Sửa</a>
-                                                        <a class="dropdown-item delete"
+                                                        <a class="dropdown-item btn-update" data-id="{{$route->id}}"  href="#">Sửa</a>
+                                                        <a class="dropdown-item delete" data-id="{{$route->id}}"
                                                            data-action="delete/{{$route->id}}"
                                                            href="#">Xóa</a>
                                                     </div>

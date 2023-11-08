@@ -81,6 +81,7 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
             Route::get('/', 'index')->name('index');
             Route::post('/store', 'store')->name('store');
             Route::get('/create', 'create')->name('create');
+            Route::get('/edit/{id}', 'edit')->name('edit');
             Route::put('/{route}', 'update')->name('update');
             Route::delete('/{route}', 'destroy')->name('destroy');
             Route::get('/{route}/edit', 'edit')->name('edit');
