@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\permission\RolePermissionController;
 use App\Http\Controllers\admin\permission\UserPermissionController;
 use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\RouteController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PhoneAuthController;
 use App\Http\Controllers\Admin\TicketController;
@@ -150,7 +151,11 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         Route::put('revenue/edit/{id}', [RevenueController::class, 'update'])->name('revenue.update');
         Route::delete('revenue/delete/{id}', [RevenueController::class, 'delete'])->name('revenue.delete');
 
-
+Route::group(['prefix' => 'notifications', 'as' => 'notifications.'], function () {
+    Route::get('/', [NotificationController::class, 'showList']);
+    Route::post('send', [NotificationController::class, 'sendNotification'])->name('sendMessage');
+    Route::post('load', [NotificationController::class, 'getNotification'])->name('loadMessage');
+});
 
 // Route::get('/management/index',[App\Http\Controllers\Admin\AdminManagementController::class,'index'])->name('route_adminmanagement_index');
 // Route::match(['GET','POST'],'/management/edit/{id}',[App\Http\Controllers\Admin\AdminManagementController::class,'edit'])->name('route_adminmanagement_edit');

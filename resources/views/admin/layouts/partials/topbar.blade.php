@@ -87,23 +87,23 @@
             <a class="nav-link dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown" href="#"
                 role="button" aria-haspopup="false" aria-expanded="false">
                 <i class="fe-bell noti-icon"></i>
-                <span class="badge bg-danger rounded-circle noti-icon-badge count-btn">9</span>
+                <span class="badge bg-danger rounded-circle noti-icon-badge"></span>
             </a>
+
+
+
             <div class="dropdown-menu dropdown-menu-end dropdown-lg">
 
                 <!-- item-->
                 <div class="dropdown-item noti-title">
                     <h5 class="m-0">
-                        <span class="float-end">
-
-                        </span>Thông báo
+                        Thông báo
                     </h5>
                 </div>
-
-                <div class="noti-scroll" data-simplebar>
+                <div class="noti-scroll overflow-auto" style="max-height: 300px;" data-simplebar>
 
                     <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item active">
+                    <a href="#" class="dropdown-item notify-item active">
                         <div class="notify-icon">
                             <img src="admin/images/users/user-1.jpg" class="img-fluid rounded-circle" alt="" />
                         </div>

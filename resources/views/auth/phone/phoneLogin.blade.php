@@ -106,7 +106,7 @@
                         }else{
                             window.location.href ='/';
                         }
-                       
+
                     },
                     error: function (error) {
                         $("#error").text(error.message);
