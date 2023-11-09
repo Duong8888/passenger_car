@@ -325,11 +325,6 @@ class TicketController extends Controller
         return to_route('client.finish.ticket')->with('success', 'Đặt hàng thành công');
     }
 
-
-    public function EndTicketPayment()
-    {
-        return view('client.pages.ticket.finish');
-
     public function EndTicketPayment(Request $request){
         $passenger_car = PassengerCar::where('id', session('value')[0]['passenger_car_id'])->get();
 
