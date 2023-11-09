@@ -5,6 +5,7 @@ $(document).ready(function () {
     const btnArrival = $('.btn-arrival');
     const modalBtn = $('#modal-btn');
     const btnMain = $('#btn-main');
+    let formAction = 'add';
     const basUrl = 'route';
     let myChoices;
     let selectStatesInputEl;
@@ -12,6 +13,7 @@ $(document).ready(function () {
     let routeArrival;
     let myChoicesDeparture;
     let myChoicesArrival
+
     function initializeChoices() {
         selectStatesInputEl = document.querySelector('#states');
         routeDeparture = document.querySelector('#route-departure');
@@ -53,6 +55,7 @@ $(document).ready(function () {
 
 
     modalBtn.on('click', function () {
+        formAction = 'add';
         myChoices.clearStore();
         $("#form-main").attr('data-action', 'add');
         $.ajax({
@@ -81,11 +84,12 @@ $(document).ready(function () {
 
     $("#form-main").submit(function (e) {
         e.preventDefault();
-        if ($(this).data('action') === 'add') {
+        console.log(formAction);
+        if (formAction === 'add') {
             add();
         }
 
-        if ($(this).data('action') === 'update') {
+        if (formAction === 'update') {
             update();
         }
 
@@ -154,19 +158,22 @@ $(document).ready(function () {
                                     <div class="dropdown-menu" style="">
                                         <a class="dropdown-item" href="#">Thông tin</a>
                                         <a class="dropdown-item btn-update" data-id="${route[i].id}" href="#">Sửa</a>
-                                        <a class="dropdown-item delete" data-action="delete/${route[i].id}" href="#">Xóa</a>
+                                        <a class="dropdown-item delete" data-id="${route[i].id}" data-action="delete/${route[i].id}" href="#">Xóa</a>
                                     </div>
                                 </div>
                             </td>
                         </tr>`);
                 }
-                showUpdate();
+
             }
         });
     }
 
+    var idUpdate = '';
+
     function showUpdate() {
         $(document).on('click', '.btn-update', function () {
+            idUpdate = $(this).data('id');
             $.ajax({
                 url: basUrl + '/edit/' + $(this).data('id'),
                 method: 'GET',
@@ -174,6 +181,7 @@ $(document).ready(function () {
                     console.log(data);
                     console.log(data.route.departure);
                     toggleModal();
+                    formAction = 'update';
                     $("#form-main").attr('data-action', 'update');
                     const carOptions = [];
                     const selectedCarValues = [];
@@ -198,12 +206,12 @@ $(document).ready(function () {
                     myChoicesDeparture.setChoiceByValue(data.route.departure);
                     myChoicesArrival.setChoiceByValue(data.route.arrival);
 
-                    var arrivalItem =  $('.col-arrival');
+                    var arrivalItem = $('.col-arrival');
                     var departureItem = $('.col-departure');
                     departureItem.html('');
                     arrivalItem.html('');
-                    $.each(data.stops,function (index,stop){
-                        if(stop.stop_type === 0){
+                    $.each(data.stops, function (index, stop) {
+                        if (stop.stop_type === 0) {
                             departureItem.append(`
                                 <div class="mb-3 d-flex">
                                     <input type="text" name="departure[]" class="form-control"
@@ -216,7 +224,7 @@ $(document).ready(function () {
                                             class="mdi mdi-close"></i></button>
                                 </div>
                             `);
-                        }else {
+                        } else {
                             arrivalItem.append(`
                                 <div class="mb-3 d-flex">
                                     <input type="text" name="arrival[]" class="form-control"
@@ -232,9 +240,7 @@ $(document).ready(function () {
                         }
                     });
 
-
-
-
+                    deleteRoute();
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     console.log(jqXHR);
@@ -249,8 +255,8 @@ $(document).ready(function () {
     function update() {
         var selectedCars = $("#states").val();
         // Lấy giá trị của các trường khác từ form
-        var routeDeparture = $("#choices-single-categories").val();
-        var routeArrival = $("#choices-single-location").val();
+        var routeDeparture = $("#route-departure").val();
+        var routeArrival = $("#route-arrival").val();
         var departureLocations = $("input[name='departure[]']").map(function () {
             return $(this).val();
         }).get();
@@ -260,7 +266,6 @@ $(document).ready(function () {
 
         // Tạo đối tượng dữ liệu để gửi lên server
         var data = {
-            _token: "{{ csrf_token() }}",
             car: selectedCars,
             route_departure: routeDeparture,
             route_arrival: routeArrival,
@@ -270,22 +275,66 @@ $(document).ready(function () {
 
         // Gửi yêu cầu cập nhật dữ liệu lên server
         $.ajax({
-            type: "POST",
-            url: "{{ route('admin.route.update') }}", // Thay thế bằng URL cập nhật thực tế
+            method: "PUT",
+            url: basUrl + '/' + 'update/' + idUpdate, // Thay thế bằng URL cập nhật thực tế
             data: data,
             success: function (response) {
-                // Xử lý kết quả từ server (response) ở đây
-                alert(response); // Hiển thị thông báo
-                $("#con-close-modal").modal("hide"); // Đóng modal
-                loadData(); // Làm mới dữ liệu trang
+                console.log(response);
+                Swal.fire({
+                    position: "top-center",
+                    icon: "success",
+                    title: response,
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                loadData();
             },
             error: function (xhr, status, error) {
-                // Xử lý lỗi (nếu có)
                 console.log("Error: " + error);
             }
         });
 
     }
+
+
+    function deleteRoute() {
+        console.log($(this).data('id'));
+        $(document).on('click', '.delete', function () {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        method: "DELETE",
+                        url: basUrl + '/' + 'destroy/' + $(this).data('id'),
+                        data: data,
+                        success: function (response) {
+                            console.log(response);
+                            Swal.fire({
+                                position: "top-center",
+                                icon: "success",
+                                title: response,
+                                showConfirmButton: false,
+                                timer: 1500,
+                            });
+                            loadData();
+                        },
+                        error: function (xhr, status, error) {
+                            console.log("Error: " + error);
+                        }
+                    });
+                }
+            });
+        });
+    }
+
+    deleteRoute();
 
 
 });

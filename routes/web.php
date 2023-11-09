@@ -83,9 +83,8 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
             Route::post('/store', 'store')->name('store');
             Route::get('/create', 'create')->name('create');
             Route::get('/edit/{id}', 'edit')->name('edit');
-            Route::put('/{route}', 'update')->name('update');
-            Route::delete('/{route}', 'destroy')->name('destroy');
-            Route::get('/{route}/edit', 'edit')->name('edit');
+            Route::put('/update/{id}', 'update')->name('update');
+            Route::delete('/destroy/{route}', 'destroy')->name('destroy');
         });
 
         // thống kê
