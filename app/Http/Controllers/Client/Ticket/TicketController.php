@@ -90,7 +90,7 @@ class TicketController extends Controller
 
         $twilioSid = env('TWILIO_SID');
         $twilioToken = env('TWILIO_AUTH_TOKEN');
-       
+
         $twilio = new Client($twilioSid, $twilioToken);
         $mess = "Thông báo đặt vé! ".$ticket->name . "\n  Người đặt: ".$ticket->username . "\n Điểm đón: ".$ticket->departure .
         "\n Điểm trả:" . $ticket->arrival . "\n Số lượng vé: " . $ticket->quantity . "\n Tổng tiền: ".$ticket->total_price.
@@ -326,13 +326,9 @@ class TicketController extends Controller
     }
 
 
-    public function EndTicketPayment()
-    {
-        return view('client.pages.ticket.finish');
-      
     public function EndTicketPayment(Request $request){
         $passenger_car = PassengerCar::where('id', session('value')[0]['passenger_car_id'])->get();
-        
+
         return view('client.pages.ticket.finish', [
             'data' => $passenger_car,
         ]);
