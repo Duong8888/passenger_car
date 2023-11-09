@@ -199,11 +199,11 @@
 <div class="rightbar-overlay"></div>
 <script src="{{ asset('toast.js') }}"></script>
 <script>
-    
+
 </script>
 <script>
     const infoUser = @json(auth()->user());
-    const urlNotification = '{{route('notifications.loadMessage')}}';
+    const urlNotification = '{{route('admin.notifications.loadMessage')}}';
 
 
 </script>

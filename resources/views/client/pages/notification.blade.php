@@ -17,7 +17,7 @@
                                 <input type="hidden" name="message" value="Dương đẹp trai 123">
                                 <button class="btn btn-success btn-send" id="{{$value->id}}" type="submit">Send</button>
                             </form>
-{{-- 
+{{--
                            <button class="btn btn-success btn-send" id="{{$value->id}}" type="button">Send</button>
                         </td> --}}
                 </tr>

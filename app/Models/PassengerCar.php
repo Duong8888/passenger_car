@@ -10,7 +10,7 @@ class PassengerCar extends Model
 {
     use HasFactory;
 //    use Searchable;
-    // public $timestamps = false;
+//    public $timestamps = false;
     protected $fillable = [
         'license_plate',
         'capacity',
@@ -33,27 +33,39 @@ class PassengerCar extends Model
 //        ];
 //    }
 
-    public function albums(){
+    public function albums()
+    {
         return $this->hasMany(Album::class);
     }
-    public function user(){
-        return $this->belongsTo(User::class,'user_id','id');
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function route(){
-        return $this->belongsTo(Routes::class,'route_id');
+    public function route()
+    {
+        return $this->belongsTo(Routes::class, 'route_id');
     }
-    public function workingTime() {
+
+    public function workingTime()
+    {
         return $this->belongsToMany(WorkingTime::class, 'passenger_car_working_times');
 
     }
-    public function services(){
-        return $this->belongsToMany(Service::class ,"passenger_car_services");
+
+    public function services()
+    {
+        return $this->belongsToMany(Service::class, "passenger_car_services");
     }
-    public function tickets(){
+
+    public function tickets()
+    {
         return $this->hasMany(Ticket::class);
     }
-    public function comments(){
+
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
     }
 }

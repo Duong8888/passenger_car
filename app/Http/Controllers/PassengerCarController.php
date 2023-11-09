@@ -17,7 +17,7 @@ class PassengerCarController extends Controller
         if($request->post()){
             $params = $request->except('_token');
             $passenger_cars = PassengerCar::create($params);
-         
+
          if($passenger_cars->id){
             Session::flash('success','thêm mới thành công');
             return redirect()->route('route_passengerCar_add');
