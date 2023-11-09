@@ -57,7 +57,7 @@
                                     </div>
                                     <ul class="list-inline wizard mb-0">
                                         <li class="next list-inline-item float-start">
-                                            <a href="{{ route('rolePermission.index') }}" class="btn btn-secondary">Quay lại</a>
+                                            <a href="{{ route('admin.rolePermission.index') }}" class="btn btn-secondary">Quay lại</a>
                                         </li>
                                         <li class="next list-inline-item float-end">
                                             <button class="btn btn-secondary">Thêm</button>
@@ -81,7 +81,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{ route('rolePermission.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.rolePermission.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="action" value="createPermission">
                             <div id="basicwizard">

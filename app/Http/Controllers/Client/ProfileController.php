@@ -10,6 +10,8 @@ use App\Models\User;
 // use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
+use function Laravel\Prompts\alert;
+
 class ProfileController extends Controller
 {
       /**
@@ -18,47 +20,11 @@ class ProfileController extends Controller
 
     public function index(Request $request){
         $user = auth()->user();
-        $tickets = Ticket::with('passengerCar')->where('user_id', $user->id)->get();
+        $tickets = Ticket::with('passengerCar')->where('phone', $user->phone)->get();
         // return response()->json($tickets[0]->passengerCar->albums[0]->path, 200, [], JSON_PRETTY_PRINT);
         return view('client.pages.profile.profile',compact('user','tickets'));
 
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show()
-    {
-       //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Request $request, $id)
-    {
-      //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
 
     public function update(Request $request, $id)
     {
@@ -122,26 +88,22 @@ class ProfileController extends Controller
         }
     }
 
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
-    // đây là hiện thị vé tikets
-    // public function indexTK(){
-    //     $tickets = DB::table('tickets')->select('id','username','phone','email','user_id','passenger_car_id','quantity','total_price','payment_method','status','created_at')->get();
-    //     // return response()->json($tickets->passengerCars, 200, [], JSON_PRETTY_PRINT);
-    //     return view('client.pages.profile.profile',compact('tickets'));
-    // }
-
-
     public function ticketDetails(Request $request,$id){
         $user = auth()->user();
         $tickets = Ticket::find($id);
         //  return response()->json($tickets->passengerCar, 200, [], JSON_PRETTY_PRINT);
-        return view('client.pages.ticketdetails.index',compact('user','tickets'));
+        return view('client.pages.profile.ticketDetail',compact('user','tickets'));
+    }
+
+    public function ticketDetailsDelete(Request $request,$id){
+        $user = auth()->user();
+        $tickets = Ticket::find($id);
+        $tickets->update(['status' => 0]);
+        // if ($tickets) {
+        //     alert()->success('Post Created', 'Successfully');
+        // } else {
+        //     alert()->error('Post Created', 'Something went wrong!');
+        // }
+        return view('client.pages.profile.ticketDetail',compact('user','tickets'));
     }
 }

@@ -37,12 +37,12 @@ class TicketController extends Controller
         $ticket->fill($request->all());
         $ticket->save();
 
-
         $email = new TiketMail($ticket);
         Mail::to($request->email)->send($email);
 
 
         $phoneNumber = substr_replace($ticket->phone, "+84", 0, 0);
+
 
 //        $twilioSid = env('TWILIO_SID');
 //        $twilioToken = env('TWILIO_AUTH_TOKEN');
@@ -88,7 +88,22 @@ class TicketController extends Controller
         }
 
 
-        session()->forget('value');
+        $twilioSid = env('TWILIO_SID');
+        $twilioToken = env('TWILIO_AUTH_TOKEN');
+       
+        $twilio = new Client($twilioSid, $twilioToken);
+        $mess = "Thông báo đặt vé! ".$ticket->name . "\n  Người đặt: ".$ticket->username . "\n Điểm đón: ".$ticket->departure .
+        "\n Điểm trả:" . $ticket->arrival . "\n Số lượng vé: " . $ticket->quantity . "\n Tổng tiền: ".$ticket->total_price.
+        "\n Hình thức thanh toán:". $ticket->payment_method;
+        $message = $twilio->messages->create(
+            $phoneNumber,
+            [
+                "from" => "+13342314820",
+                "body" =>  (string)$mess
+            ]
+        );
+
+
         return response()->json(['success' => 'Done'], Response::HTTP_OK);
     }
 
@@ -310,8 +325,16 @@ class TicketController extends Controller
         return to_route('client.finish.ticket')->with('success', 'Đặt hàng thành công');
     }
 
+
     public function EndTicketPayment()
     {
         return view('client.pages.ticket.finish');
+      
+    public function EndTicketPayment(Request $request){
+        $passenger_car = PassengerCar::where('id', session('value')[0]['passenger_car_id'])->get();
+        
+        return view('client.pages.ticket.finish', [
+            'data' => $passenger_car,
+        ]);
     }
 }
