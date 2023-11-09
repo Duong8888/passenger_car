@@ -17,7 +17,6 @@ class Stops extends Model
         'stop_type',
         'route_id',
         'order',
-        'user_id',
     ];
 
     public function toSearchableArray()
@@ -34,8 +33,4 @@ class Stops extends Model
         return $this->belongsTo(Route::class,'route_id','id',);
     }
 
-    public function user()
-    {
-        return $this->belongsTo(User::class,'user_id','id');
-    }
 }

@@ -65,7 +65,6 @@ $(document).ready(function () {
     const TIME_TO_UPDATE = 1000;
 
     $(document).on('click', '.submit', function () {
-        var user_id = $('input[name="user_id"]').val();
         var username = $('input[name="name"]').val();
         var phone = $('input[name="phone"]').val();
         var email = $('input[name="email"]').val();
@@ -77,6 +76,7 @@ $(document).ready(function () {
         var time_arrival = $('input[name="arrivalTimeInput"]').val();
         var departure = $('input[name="departure"]:checked').val();
         var arrival = $('input[name="arrival1"]:checked').val();
+        var date =  $('input[name="date"]').val();
         const error = [];
         if(username === ''){
             error.push('Tên Không được để trống. !');
@@ -93,7 +93,6 @@ $(document).ready(function () {
              let passenger_car_id = $(this).data("id");
             var totalArray = {
                 username: username,
-                user_id: user_id,
                 phone: phone,
                 email: email,
                 total_price: total_price,
@@ -105,6 +104,7 @@ $(document).ready(function () {
                 time_arrival: time_arrival,
                 route_departure: route_departure,
                 route_arrival: route_arrival,
+                date: date,
             };
             let url = $(this).data("action");
     
@@ -143,11 +143,10 @@ $(document).ready(function () {
 
     const firstNextButton = document.getElementById('first-next');
     const inputTicket = document.querySelector('input[name="countTicket"]');
-
-
         firstNextButton.addEventListener('click', function() {
-             const inputValue = inputTicket.value;
-        if(inputValue > 0 ){
+            const inputDate = document.getElementById('date').value;
+            const inputValue = inputTicket.value;
+        if(inputValue > 0 && inputDate != ''){
             firstTab.classList.add('hidden');
             secondTab.classList.remove('hidden');
             firstTabBtn.before(icon);
@@ -156,7 +155,7 @@ $(document).ready(function () {
             $('.firstItem>.icon-item').attr('data-item','first')
         } else{
 
-            swal("Lỗi", "Vui lòng chọn ít nhất 1 chỗ ngồi", "error");
+            swal("Lỗi", "Vui lòng chọn ít nhất 1 chỗ ngồi và chọn ngày đi !", "error");
         }
     });
 
@@ -171,12 +170,13 @@ $(document).ready(function () {
 
 
     secondNextButton.addEventListener('click', function () {
-        secondTab.classList.add('hidden');
-        thirdTab.classList.remove('hidden');
-        secondTabBtn.before(icon);
-        $('.second-li>button').removeClass('active');
-        $('.third-li>button').addClass('active');
-        $('.secondItem>.icon-item').attr('data-item','second')
+            secondTab.classList.add('hidden');
+            thirdTab.classList.remove('hidden');
+            secondTabBtn.before(icon);
+            $('.second-li>button').removeClass('active');
+            $('.third-li>button').addClass('active');
+            $('.secondItem>.icon-item').attr('data-item','second')
+        
     });
 
 

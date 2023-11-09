@@ -21,11 +21,9 @@
     <section class="py-20 bg-gray-50 dark:bg-neutral-700">
         <div class="container mx-auto">
             <div class="mb-5">
-                <a href="{{route('home')}}" class="flex items-center">
+                <a class="flex items-center">
                     <img src="client/images/logo-dark.png" alt="" class="logo-dark h-[22px] block dark:hidden">
                     <img src="client/images/logo-light.png" alt="" class="logo-dark h-[22px] hidden dark:block">
-
-
                 </a>
                 <h4 class="mb-3 text-lg text-gray-900 dark:text-gray-50">Chọn phương thức thanh toán</h4>
             </div>
@@ -61,23 +59,23 @@
 
 
                         <h6 class="mb-3 text-1 text-gray-900 dark:text-gray-50">Tên</h6>
-                        <p class="mb-3">{{ isset(session('value')[0]['username']) ? session('value')[0]['username'] :
+                        <p class="mb-3 nameChange">{{ isset(session('value')[0]['username']) ? session('value')[0]['username'] :
                             Auth::user()->name }}</p>
 
                         <h6 class="mb-3 text-1 text-gray-900 dark:text-gray-50">Số điện thoại</h6>
-                        <p class="mb-3">{{ session('value')[0]['phone'] }}</p>
+                        <p class="mb-3 phoneChange">{{ session('value')[0]['phone'] }}</p>
                         <h6 class="mb-3 text-1 text-gray-900 dark:text-gray-50">Email</h6>
-                        <p class="mb-3">{{ session('value')[0]['email'] }}</p>
+                        <p class="mb-3 emailChange">{{ session('value')[0]['email'] }}</p>
                         <hr class="border border-gray-300">
                         {{-- ----------------This is where i shining--------------------}}
                         <div class="flex justify-between">
                             <h6 class="mb-3 text-1 text-gray-900 dark:text-gray-50">Điểm đón</h6>
-                            <button><i class="text-2xl mdi mdi-pencil"></i></button>
+                            <button id="departure-change"><i class="text-2xl mdi mdi-pencil"></i></button>
                         </div>
                         <p class="mb-3">{{ session('value')[0]['departure'] }}</p>
                         <div class="flex justify-between">
                             <h6 class="mb-3 text-1 text-gray-900 dark:text-gray-50">Điểm trả</h6>
-                            <button><i class="text-2xl mdi mdi-pencil"></i></button>
+                            <button id="arrival-change"><i class="text-2xl mdi mdi-pencil"></i></button>
                         </div>
                         <p class="mb-3">{{ session('value')[0]['arrival'] }}</p>
                     </div>
@@ -122,10 +120,10 @@
                         <div
                             class="rounded dark:border-neutral-600 nav-tabs bottom-border-tab col-span-12 lg:col-span-12 lg:col-start-12">
                             <div class="p-4 tab-content">
-                                <div id="second" class="hidden w-full tab-pane">
-                                    <div class="flex justify-between">
-                                        <div class="flex flex-col w-1/2"
-                                            style="overflow-y: auto; max-height: 200px; max-width: 50%;">
+
+                                <div id="departure" class="hidden w-full tab-pane">
+                                    <div class="">
+                                        <div class="flex flex-col" style="overflow-y: auto; max-height: 200px; width: 100%">
                                             Điểm đón:
                                             @php
                                             $firstDeparture = true;
@@ -133,11 +131,8 @@
                                             @foreach ($stops as $data)
                                             @if ($data->stop_type == 0)
                                             <div class="mb-5">
-                                                <input type="radio" id="departure{{$data->id}}" name="departure"
-                                                    class="form-radio h-5 w-5 text-blue-600 outline-none focus:ring-0"
-                                                    value="{{$data->stop_name}}" {{ $firstDeparture ? 'checked' : '' }}>
-                                                <label for="departure{{$data->id}}" class="ml-2 mb-3"
-                                                    id="{{$data->id}}">{{$data->stop_name}}</label>
+                                                <input type="radio" id="departure{{$data->id}}" name="departure" class="form-radio h-5 w-5 text-blue-600 outline-none focus:ring-0" value="{{$data->stop_name}}" {{ $firstDeparture ? 'checked' : '' }}>
+                                                <label for="departure{{$data->id}}" class="ml-2 mb-3" id="{{$data->id}}" style="margin-left: 2px; margin-bottom: 3px;">{{$data->stop_name}}</label>
                                             </div>
                                             @php
                                             $firstDeparture = false;
@@ -145,8 +140,15 @@
                                             @endif
                                             @endforeach
                                         </div>
-                                        <div class="flex flex-col w-1/2"
-                                            style="overflow-y: auto; max-height: 200px; max-width: 50%;">
+                                        <button style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;margin-top: 10px">Cập Nhật</button>
+
+                                    </div>                                    
+                                </div>
+
+                                <div id="arrival" class="hidden w-full tab-pane">
+                                    <div class="">
+                                       <div class="flex flex-col"
+                                            style="overflow-y: auto; max-height: 200px; max-width: 100%;">
                                             Điểm đón:
                                             @php
                                             $firstArrival = true;
@@ -166,8 +168,11 @@
                                             @endif
                                             @endforeach
                                         </div>
+                                        <button style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;margin-top: 10px">Cập Nhật</button>
                                     </div>
                                 </div>
+
+                                
 
                                 <div id="third" class="hidden w-full tab-pane">
                                     <div class="max-w-md mx-auto bg-white rounded p-8 ">
@@ -197,15 +202,12 @@
                                                 name="email" id="email" type="text" value="{{ session('value')[0]['email'] }}"
                                                 placeholder="Nhập địa chỉ email của bạn">
                                         </div>
-                                        <div class="mb-4">
-                                            <button></button>
-                                        </div>
+                                        <button style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;margin-top: 10px" id="User-info"  data-action="{{ route('client.ticket.changed-ticket') }}">Cập Nhật</button>
+                                      
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>

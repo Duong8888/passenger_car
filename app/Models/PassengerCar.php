@@ -19,7 +19,7 @@ class PassengerCar extends Model
         'transport_unit_id',
         'route_id',
     ];
-    // public $timestamps = false;
+   
 
 //    public function toSearchableArray()
 //    {

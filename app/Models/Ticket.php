@@ -14,18 +14,17 @@ class Ticket extends Model
         'username',
         'phone',
         'email',
-        'user_id',
         'passenger_car_id',
         'quantity',
         'total_price',
         'payment_method',
         'status',
         'departure',
-        'arrival'
+        'arrival',
+        'date',
     ];
     protected $attributes =[
         'email' => NULL,
-        'user_id' => 0
     ];
     public function user():BelongsTo{
         return $this->belongsTo(User::class);

@@ -20,7 +20,7 @@ class TicketController extends Controller
         session()->forget('value');
 
         session()->push('value', $request->all());
-
+        Log::info(session('value'));
         return response()->json(['success' => 'Done'], Response::HTTP_OK);
     }
 
@@ -37,12 +37,11 @@ class TicketController extends Controller
         $ticket->fill($request->all());
         $ticket->save();
 
-        $email = new TiketMail($ticket);
-        Mail::to($request->email)->send($email);
+        // $email = new TiketMail($ticket);
+        // Mail::to($request->email)->send($email);
 
 
-        $phoneNumber = substr_replace($ticket->phone, "+84", 0, 0);
-
+        // $phoneNumber = substr_replace($ticket->phone, "+84", 0, 0);
 
 //        $twilioSid = env('TWILIO_SID');
 //        $twilioToken = env('TWILIO_AUTH_TOKEN');
@@ -102,7 +101,6 @@ class TicketController extends Controller
                 "body" =>  (string)$mess
             ]
         );
-
 
         return response()->json(['success' => 'Done'], Response::HTTP_OK);
     }
@@ -190,7 +188,7 @@ class TicketController extends Controller
     {
         $a = json_decode($request->session);
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = route('client.ticket.add-vnpay-to-db');
+        $vnp_Returnurl = route('client.ticket.end-payment-ticket');
         $vnp_TmnCode = "AUOGLFUH"; //Mã website tại VNPAY
         $vnp_HashSecret = "GVTYEMYJEHIQHBAUVYJAPQSDYIIKZEIK"; //Chuỗi bí mật
         $vnp_TxnRef = time(); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
@@ -260,7 +258,6 @@ class TicketController extends Controller
                 'username' => $a['username'],
                 'status' => 2,
                 'payment_method' => 'Đã Thanh toán VNPAY',
-                'user_id' => 1,
                 'total_price' => $a['total_price'],
                 'email' => $a['email'],
                 'phone' => $a['phone'],
@@ -270,12 +267,14 @@ class TicketController extends Controller
                 'arrival' => $a['arrival'],
             ]);
             $a['payment_method'] = 'Đã Thanh toán VNPAY';
+
             $a = (object)$a;
             $email = new TiketMail($a);
             Mail::to($a->email)->send($email);
 
 
             $phoneNumber = substr_replace($a->phone, "", 0, 0);
+
 
 //            $twilioSid = env('TWILIO_SID');
 //            $twilioToken = env('TWILIO_AUTH_TOKEN');
@@ -332,5 +331,18 @@ class TicketController extends Controller
         return view('client.pages.ticket.finish', [
             'data' => $passenger_car,
         ]);
+    }
+
+    public function ChangeTicket(Request $request){
+        $arrayInfo = [
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+        ];
+        session()->put('value.0.username', $request->name);
+        session()->put('value.0.phone', $request->phone);
+        session()->put('value.0.email', $request->email);
+        Log::info(session()->all());
+        return response()->json($arrayInfo, Response::HTTP_OK);
     }
 }

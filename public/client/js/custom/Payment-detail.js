@@ -102,16 +102,67 @@ $(document).ready(function () {
     $(document).on("click", ".exit", function () {
         hidePopup();
     })
-    const secondTab = document.getElementById('second');
+    const departureTab = document.getElementById('departure');
+    const arrivalTab = document.getElementById('arrival');
     const thirdTab = document.getElementById('third');
     const secondNextButton = document.getElementById('second-next');
+    const departureChange = document.getElementById('departure-change');
+    const ArrivalChange = document.getElementById('arrival-change');
     secondNextButton.addEventListener('click', function () {
         showPopup();
-        secondTab.classList.add('hidden');
+        departureTab.classList.add('hidden');
+        arrivalTab.classList.add('hidden');
         thirdTab.classList.remove('hidden');
-        $('.second-li>button').removeClass('active');
-        $('.third-li>button').addClass('active');
-        $('.secondItem>.icon-item').attr('data-item','second');
     });
 
+    departureChange.addEventListener('click', function() {
+        showPopup();
+        departureTab.classList.remove('hidden');
+        arrivalTab.classList.add('hidden');
+        thirdTab.classList.add('hidden');
+    })
+
+    ArrivalChange.addEventListener('click', function() {
+        showPopup();
+        departureTab.classList.add('hidden');
+        arrivalTab.classList.remove('hidden');
+        thirdTab.classList.add('hidden');
+    })
+
+    $(document).on('click', '#User-info', function(){
+        const name = $('input[name="name"]').val();
+        const phone = $('input[name="phone"]').val();
+        const email = $('input[name="email"]').val();
+        const url =  $(this).data("action");
+        $.ajax({
+            url: url,
+            method: "POST",
+            dataType: "JSON",
+            data: {
+                name : name,
+                phone : phone,
+                email: email,
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (response) {
+                
+                $('.nameChange').html(response.name);
+                $('.phoneChange').html(response.phone);
+                $('.emailChange').html(response.email);
+                
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "success",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                
+                hidePopup();
+                
+            }
+        })
+    })
 })
