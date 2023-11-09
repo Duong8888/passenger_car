@@ -381,10 +381,16 @@
                                     </ul>
 
                                     <div class="mt-8 space-y-2">
-                                        <a href="#applyNow" data-bs-toggle="modal"
-                                            class="btn w-full group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 border-transparent text-white hover:-translate-y-1.5"
-                                            style="background-color: rgb(242, 35, 35) !important;">Hủy <i
-                                                class="uil uil-arrow-right"></i></a>
+                                        @if ($tickets->status != 2 && $tickets->status != 0)
+                                        <form action="{{ route('ticketDetails_delete', $tickets->id) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <button data-bs-toggle="modal"
+                                                class="btn w-full group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 border-transparent text-white hover:-translate-y-1.5"
+                                                style="background-color: rgb(242, 35, 35) !important;">Hủy <i class="uil uil-arrow-right"></i>
+                                            </button>
+                                        </form>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

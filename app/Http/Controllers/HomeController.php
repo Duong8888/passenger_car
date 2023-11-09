@@ -9,6 +9,7 @@ use App\Models\Routes;
 use App\Models\PassengerCar;
 use App\Models\WorkingTime;
 use App\Models\Comment;
+use App\Models\Posts;
 use App\Models\Service;
 use App\Models\Stops;
 use App\Models\User;
@@ -43,7 +44,10 @@ class HomeController extends Controller
 
         $users = User::where('user_type', 'staff')->take(8)->get();
         $passengerCars = PassengerCar::with('workingTime')->whereNotNull('route_id')->inRandomOrder()->get();
-        return view('client.pages.home.index', compact('albums', 'routes', 'passengerCars', 'stops', 'users'));
+
+        $posts = Posts::orderBy('created_at', 'desc')->take(3)->get();
+        // return response()->json($routes, 200, [], JSON_PRETTY_PRINT);
+        return view('client.pages.home.index', compact('albums', 'routes', 'passengerCars', 'stops', 'users','posts'));
     }
 
     public function passengerCarDetail(Request $request)
