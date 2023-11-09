@@ -128,6 +128,59 @@ class RouteController extends AdminBaseController
     public function update(Request $request, string $id)
     {
 
+        Log::info($request->all());
+        $carId = $request->input('car');
+        $departure = $request->input('route_departure');
+        $arrival = $request->input('route_arrival');
+        $departureArr = $request->input('departure');
+        $arrivalArr = $request->input('arrival');
+
+        $route = Routes::findOrFail($id);
+
+        $route->update([
+            'departure' => $departure,
+            'arrival' => $arrival,
+        ]);
+
+        $route->passengerCars()->update(['route_id' => null]);
+        foreach ($carId as $carId) {
+            $car = PassengerCar::findOrFail($carId);
+            $car->update(['route_id' => $route->id]);
+        }
+
+        Stops::where('route_id', $route->id)->delete();
+        $arrStop = [];
+        foreach ($arrivalArr as $key => $value) {
+            $arrStop[] = [
+                'stop_name' => $value,
+                'stop_type' => 1,
+                'route_id' => $route->id,
+                'user_id' => Auth::user()->id,
+                'order' => $key,
+            ];
+        }
+        foreach ($departureArr as $key => $value) {
+            $arrStop[] = [
+                'stop_name' => $value,
+                'stop_type' => 0,
+                'route_id' => $route->id,
+                'user_id' => Auth::user()->id,
+                'order' => $key,
+            ];
+        }
+        Stops::query()->insert($arrStop);
+        return response()->json('Cập nhật thành công');
     }
+
+
+    public function destroy(string $id)
+    {
+        $route = Routes::findOrFail($id);
+        $route->stops()->delete();
+        $route->passengerCars()->update(['route_id' => null]);
+        $route->delete();
+        return response()->json('Xóa thành công');
+    }
+
 
 }
