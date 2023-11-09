@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NotificationMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class CarRegisterController extends Controller
 {
@@ -49,6 +51,10 @@ class CarRegisterController extends Controller
 
         $message = "Cảm ơn bạn đã tin tưởng chúng tôi. Chúng tôi sẽ liên hệ bạn vào thời gian sớm nhất.";
         $messageStatus = "Bạn đã đăng ký thành công";
+
+
+        $mailSender = new NotificationMail($messageStatus, 'mails.carRegister', $message);
+        Mail::to($email)->send($mailSender);
 
         return view('client.pages.car-register.index', ['message' => $message, 'messageStatus' => $messageStatus]);
     }

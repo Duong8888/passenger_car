@@ -30,6 +30,6 @@ class UserPermissionController extends Controller
         $roleName = $request->input('role');
         $role = Role::where('name', $roleName)->first();
         $user->syncRoles([$role->name]);
-        return Redirect::route('permission.index')->with('success', 'Vai trò đã được cập nhật thành công.');
+        return Redirect::route('admin.permission.index')->with('success', 'Vai trò đã được cập nhật thành công.');
     }
 }

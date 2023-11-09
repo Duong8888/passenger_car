@@ -10,7 +10,6 @@ use App\Http\Controllers\Client\BlogController;
 use App\Http\Controllers\Client\CategoryController;
 use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\Client\CarRegisterController;
-
 use App\Http\Controllers\MapController;
 
 
@@ -41,6 +40,7 @@ Route::group(['prefix' => 'notifications', 'as' => 'notifications.'], function (
     Route::post('send', [NotificationController::class, 'sendNotification'])->name('sendMessage');
     Route::post('load', [NotificationController::class, 'getNotification'])->name('loadMessage');
 });
+
 use App\Http\Middleware\CheckUser;
 
 
@@ -51,6 +51,7 @@ Route::middleware(CheckUser::class)->group(function(){
     //Route::post('/passengerCar-detail',[HomeController::class,'passengerCarDetail'])->name('passengerCar-detail');
     Route::resource('/profile',ProfileController::class);
     Route::get('/profile/ticketdetails/{id}',[ProfileController::class,'ticketDetails'])->name('ticketDetails_index');
+    Route::put('/profile/ticketDetailDelete/{id}',[ProfileController::class,'ticketDetailsDelete'])->name('ticketDetails_delete');
 
     Route::get('/search', [SearchController::class, 'searchRequest'])->name('search');
     Route::post('/sortBy', [SearchController::class, 'sortBy'])->name('sortBy');
@@ -80,9 +81,10 @@ Route::middleware(CheckUser::class)->group(function(){
     Route::get('/vnpay-todb', [TicketController::class, 'checkoutPayment'])->name('client.ticket.add-vnpay-to-db');
     Route::get('/end-ticket-payment', [TicketController::class, 'EndTicketPayment'])->name('client.finish.ticket');
     Route::get('/contact', [App\Http\Controllers\Client\ContactController::class, 'index'])->name('contact.index');
-    Route::get('/map', [MapController::class, 'index'])->name('map');
 
 });
+
+Route::get('/loginadmin', [App\Http\Controllers\LoginAdminController::class, 'showLoginAdmin'])->name('login_admin');
 
 
     Route::get('/loginadmin', [App\Http\Controllers\LoginAdminController::class, 'showLoginAdmin'])->name('login_admin');
@@ -91,12 +93,6 @@ Route::middleware(CheckUser::class)->group(function(){
 
     Route::get('/logoutadmin', [App\Http\Controllers\LoginAdminController::class, 'logoutAdmin'])->name('logoutAdmin');
 
-
-
-
-
-
 #Dang ky xe
-// Route::get('/car-register', [CarRegisterController::class, 'index'])->name('car-register.index');
-// Route::post('/car-register', [CarRegisterController::class, 'post'])->name('car-register.index');
-
+Route::get('/car-register', [CarRegisterController::class, 'index'])->name('car-register.index');
+Route::post('/car-register', [CarRegisterController::class, 'post'])->name('car-register.index');

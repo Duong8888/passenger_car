@@ -47,7 +47,7 @@
                             @if($item->status == 'Chưa xử lý')
                             <form  action="{{route('admin.route_contact_edit',$item->id)}}" method="post" class="js-update-contact">
                                 @csrf
-                                <select style="background-color: #FF5733; color: #FFFFFF;" name="status" class="js-select-status-contact">
+                                <select class="js-select-status-contact status-ChuaXuLy" style="background-color: #FF5733; color: #FFFFFF;" name="status" class="js-select-status-contact">
 
 
                                     <option class="form-control" style="background-color: #FF5733; color: #FFFFFF;" @if($item->status == 'Chưa xử lý') selected @endif
