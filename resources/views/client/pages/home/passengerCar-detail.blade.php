@@ -469,8 +469,14 @@
                                                     <span class="text-lg font-bold">+</span>
                                                 </button>
                                             </div>
-                                        </div>
 
+                                        </div>
+                                        <div class="flex items-center mb-8">
+                                            <label for="date" class="mr-2">Chọn thời gian:</label>
+                                            <input type="date" id="date" name="date" class="px-2 py-1 border-none outline-none">
+                                          </div>
+                                          
+                                          
                                         <div class="show-total text-sm my-4"></div>
 
                                         <div class="flex justify-end">
@@ -505,7 +511,7 @@
                                                         @endphp
                                                     @endif
                                                 @endforeach
-                                              
+                                               
                                             </div>
 
                                             <div class="flex flex-col w-1/2 p-4" style="overflow-y: auto; max-height: 200px; max-width: 50%;">
@@ -590,7 +596,7 @@
                                             </button>
                                             <button
                                                 class="flex submit text-white border-transparent group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 py-2 px-4 rounded float-right"
-                                                data-action="{{ route('client.ticket.update-ticket') }}" onclick="sendOTP();"
+                                                data-action="{{ route('client.ticket.update-ticket') }}"
                                                 data-id="
                                             {{ $passengerCars[0]->id }} 
                                             ">

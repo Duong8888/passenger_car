@@ -71,6 +71,7 @@ Route::middleware(CheckUser::class)->group(function(){
 
 
     Route::post('/update-ticket', [TicketController::class, 'CountTicket'])->name('client.ticket.update-ticket');
+    Route::post('/change-ticket', [TicketController::class, 'ChangeTicket'])->name('client.ticket.changed-ticket');
     Route::get('/payment-method', [TicketController::class, 'PaymentView'])->name('client.ticket.payment-method');
     Route::post('/send-ticket', [TicketController::class, 'endPayment'])->name('client.ticket.end-payment-ticket');
     Route::get('/send-ticket', [TicketController::class, 'endPayment'])->name('client.ticket.end-payment-ticket');

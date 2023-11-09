@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\AdminBaseController;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
+use App\Models\Contact;
 use App\Models\PassengerCar;
 use App\Models\Posts;
 use App\Models\Ticket;
@@ -29,14 +30,13 @@ class DashboardController extends Controller
         $passengerCarsCountToday = PassengerCar::whereDate('created_at', today())->count();
         $comments = Comment::all();
         $commentsCountToday = Comment::whereDate('created_at', today())->count();
-        $today = now()->toDateString();
-        $today = Carbon::now()->toDateString(); // Lấy ngày hôm nay (dạng 'Y-m-d')
-        $users = User::whereHas('tickets', function($query) use ($today) {
-        $query->whereDate('created_at', $today);})->get();
-        // return response()->json($users, 200, [], JSON_PRETTY_PRINT);
+        $today = Carbon::now()->toDateString();
+        $tickets = Ticket::whereDate('created_at', $today)->get();
+        $contacts = Contact::whereDate('created_at', $today)->get();
+        // return response()->json($contacts, 200, [], JSON_PRETTY_PRINT);
         return view('admin.pages.dashboard.index',compact('totalUsers','totalPosts',
-        'totalPassengerCars','comments','users','admins','commentsCountToday',
-        'userCountToday','postCountToday','passengerCarsCountToday'
+        'totalPassengerCars','comments','admins','commentsCountToday',
+        'userCountToday','postCountToday','passengerCarsCountToday','tickets','contacts',
     ));
     }
 

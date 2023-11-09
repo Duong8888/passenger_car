@@ -10,7 +10,7 @@ class PassengerCar extends Model
 {
     use HasFactory;
 //    use Searchable;
-    public $timestamps = false;
+    // public $timestamps = false;
     protected $fillable = [
         'license_plate',
         'capacity',
@@ -19,7 +19,7 @@ class PassengerCar extends Model
         'transport_unit_id',
         'route_id',
     ];
-    // public $timestamps = false;
+   
 
 //    public function toSearchableArray()
 //    {

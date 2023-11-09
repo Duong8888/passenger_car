@@ -20,7 +20,7 @@ class TicketController extends Controller
         session()->forget('value');
 
         session()->push('value', $request->all());
-
+        Log::info(session('value'));
         return response()->json(['success' => 'Done'], Response::HTTP_OK);
     }
 
@@ -158,7 +158,6 @@ class TicketController extends Controller
                 'username' => $a['username'],
                 'status' => 2,
                 'payment_method' => 'Đã Thanh toán VNPAY',
-                'user_id' => 1,
                 'total_price' => $a['total_price'],
                 'email' => $a['email'],
                 'phone' => $a['phone'],
@@ -202,5 +201,18 @@ class TicketController extends Controller
         return view('client.pages.ticket.finish', [
             'data' => $passenger_car,
         ]);
+    }
+
+    public function ChangeTicket(Request $request){
+        $arrayInfo = [
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+        ];
+        session()->put('value.0.username', $request->name);
+        session()->put('value.0.phone', $request->phone);
+        session()->put('value.0.email', $request->email);
+        Log::info(session()->all());
+        return response()->json($arrayInfo, Response::HTTP_OK);
     }
 }
