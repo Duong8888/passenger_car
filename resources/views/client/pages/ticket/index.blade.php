@@ -198,7 +198,7 @@
                                                 placeholder="Nhập địa chỉ email của bạn">
                                         </div>
                                         <div class="mb-4">
-                                            <button></button>
+                                           
                                         </div>
                                     </div>
                                 </div>

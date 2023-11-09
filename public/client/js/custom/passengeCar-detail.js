@@ -143,10 +143,8 @@ $(document).ready(function () {
 
     const firstNextButton = document.getElementById('first-next');
     const inputTicket = document.querySelector('input[name="countTicket"]');
-
-
         firstNextButton.addEventListener('click', function() {
-             const inputValue = inputTicket.value;
+            const inputValue = inputTicket.value;
         if(inputValue > 0 ){
             firstTab.classList.add('hidden');
             secondTab.classList.remove('hidden');
@@ -171,12 +169,13 @@ $(document).ready(function () {
 
 
     secondNextButton.addEventListener('click', function () {
-        secondTab.classList.add('hidden');
-        thirdTab.classList.remove('hidden');
-        secondTabBtn.before(icon);
-        $('.second-li>button').removeClass('active');
-        $('.third-li>button').addClass('active');
-        $('.secondItem>.icon-item').attr('data-item','second')
+            secondTab.classList.add('hidden');
+            thirdTab.classList.remove('hidden');
+            secondTabBtn.before(icon);
+            $('.second-li>button').removeClass('active');
+            $('.third-li>button').addClass('active');
+            $('.secondItem>.icon-item').attr('data-item','second')
+        
     });
 
 

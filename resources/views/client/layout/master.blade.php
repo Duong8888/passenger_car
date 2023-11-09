@@ -22,9 +22,11 @@ width: 100%;
 height: 100%;
 background: rgba(0, 0, 0, 0.7);
 z-index: 999;"  >
+
 <div
     class="col-span-12 rounded-b-md lg:col-span-6 group-data-[theme-color=violet]:bg-violet-700 group-data-[theme-color=sky]:bg-sky-700 group-data-[theme-color=red]:bg-red-700 group-data-[theme-color=green]:bg-green-700 group-data-[theme-color=pink]:bg-pink-700 group-data-[theme-color=blue]:bg-blue-700 lg:rounded-b-none lg:ltr:rounded-r-lg rtl:rounded-l-lg" style="width: 50%; z-index: 1000; margin: auto; margin-top: 60px;
     ">
+    
     <div class="flex flex-col justify-center items-center h-screen p-12">   
         <div class="text-center">
             <h5 class="text-[18.5px] text-white">Welcome Back !</h5>
@@ -35,7 +37,7 @@ z-index: 999;"  >
                 <label for="number" class="text-white">Enter Your Phone Number</label>
                 <input type="text" id="number"
                     class="w-full mt-1 group-data-[theme-color=violet]:bg-violet-400/40 group-data-[theme-color=sky]:bg-sky-400/40 group-data-[theme-color=red]:bg-red-400/40 group-data-[theme-color=green]:bg-green-400/40 group-data-[theme-color=pink]:bg-pink-400/40 group-data-[theme-color=blue]:bg-blue-400/40 py-2.5 rounded border-transparent placeholder:text-sm placeholder:text-gray-50 text-white"
-                    name="number" placeholder="Phone..." oninput="validatePhoneNumber(this)" required>
+                    name="number" placeholder="Phone..." onblur="validatePhoneNumber(this)" required>
                 <br><br>
                 <div id="recaptcha-container"></div>
             </div>

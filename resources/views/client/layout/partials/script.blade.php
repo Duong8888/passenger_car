@@ -142,7 +142,10 @@
             formattedPhoneNumber += phoneNumber[i];
         }
     }
-    if (formattedPhoneNumber !== phoneNumber) {
+    if (formattedPhoneNumber.length !== 10) {
+        input.value = '';
+        alert('Số điện thoại hợp lệ!');
+    } else {
         input.value = formattedPhoneNumber;
     }
 }

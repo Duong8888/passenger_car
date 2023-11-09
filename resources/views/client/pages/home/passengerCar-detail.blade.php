@@ -505,9 +505,10 @@
                                                         @endphp
                                                     @endif
                                                 @endforeach
+                                              
                                             </div>
 
-                                            <div class="flex flex-col w-1/2" style="overflow-y: auto; max-height: 200px; max-width: 50%;">
+                                            <div class="flex flex-col w-1/2 p-4" style="overflow-y: auto; max-height: 200px; max-width: 50%;">
                                                 Điểm trả:
 
                                                 @php
@@ -527,6 +528,7 @@
                                                         @endphp
                                                     @endif
                                                 @endforeach
+                                                
                                             </div>
                                         </div>
 
@@ -562,7 +564,7 @@
                                                     thoại</label>
                                                 <input
                                                     class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                                    name="phone" id="phone" type="text"
+                                                    name="phone" id="phone" type="text" onblur="validatePhoneNumber(this)"
                                                     value="{{ isset(Auth::user()->phone) ? Auth::user()->phone : '' }}"
                                                     placeholder="Nhập Số điện thoại của bạn">
                                                     
@@ -588,9 +590,9 @@
                                             </button>
                                             <button
                                                 class="flex submit text-white border-transparent group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 py-2 px-4 rounded float-right"
-                                                data-action="{{ route('client.ticket.update-ticket') }}"
+                                                data-action="{{ route('client.ticket.update-ticket') }}" onclick="sendOTP();"
                                                 data-id="
-                                            {{ $passengerCars[0]->id }}
+                                            {{ $passengerCars[0]->id }} 
                                             ">
                                                 Tiếp tục
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"></path></svg>

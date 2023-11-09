@@ -21,7 +21,7 @@ class Ticket extends Model
         'payment_method',
         'status',
         'departure',
-        'arrival'
+        'arrival',
     ];
     protected $attributes =[
         'email' => NULL,
