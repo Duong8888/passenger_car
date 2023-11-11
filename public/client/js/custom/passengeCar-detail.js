@@ -77,6 +77,7 @@ $(document).ready(function () {
         var departure = $('input[name="departure"]:checked').val();
         var arrival = $('input[name="arrival1"]:checked').val();
         var date =  $('input[name="date"]').val();
+        var passenger_car_user = $('input[name="passenger-user"]').val();
         const error = [];
         if(username === ''){
             error.push('Tên Không được để trống. !');
@@ -105,6 +106,7 @@ $(document).ready(function () {
                 route_departure: route_departure,
                 route_arrival: route_arrival,
                 date: date,
+                passenger_car_user: passenger_car_user,
             };
             let url = $(this).data("action");
     

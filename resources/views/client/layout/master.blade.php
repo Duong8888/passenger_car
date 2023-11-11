@@ -53,10 +53,7 @@ z-index: 999;"  >
         <div class="text-center">
           
             <div class="p-10">
-                <a href="index.html">
-                    <img src="client/images/logo-light.png" alt="" class="hidden mx-auto dark:block">
-                    <img src="client/images/logo-dark.png" alt="" class="block mx-auto dark:hidden">
-                </a>
+               
                 <button id="closePopupButton">Đóng</button>
             </div>
         </div>
@@ -92,13 +89,6 @@ padding:00px ">
       <div class="text-center">
           
           <div class="p-10">
-              <a href="index.html">
-                  <img src="client/images/logo-light.png" alt=""
-                      class="hidden mx-auto dark:block">
-                  <img src="client/images/logo-dark.png" alt=""
-                      class="block mx-auto dark:hidden">
-              </a>
-             
           </div>
       </div>
   </div>
@@ -117,7 +107,7 @@ padding:00px ">
     <script>
         var openButton = document.getElementById("openPopupButton");
         var closeButton = document.getElementById("closePopupButton");
-    
+        var popupContainer =  document.getElementById("popupContainer");
         openButton.addEventListener("click", function () {
             popupContainer.style.display = "block";
         });

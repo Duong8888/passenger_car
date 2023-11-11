@@ -66,7 +66,7 @@ class HomeController extends Controller
         $albums = $passengerCars[0]->albums;
         $routes = $passengerCars[0]->route;
         $services = $passengerCars[0]->services;
-        $user = User::where('id', $passengerCars[0]->user->id)->get('id');
+        $user = User::where('id', $passengerCars[0]->user->id)->get();
         $comments = $passengerCars[0]->comments;
         $workingTime = WorkingTime::query()->where('id', $request->time)->get();
         $stops = Stops::where('route_id', $passengerCars[0]->route->id)->where('user_id', $user[0]->id)->get();

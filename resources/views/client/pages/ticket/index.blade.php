@@ -22,8 +22,8 @@
         <div class="container mx-auto">
             <div class="mb-5">
                 <a class="flex items-center">
-                    <img src="client/images/logo-dark.png" alt="" class="logo-dark h-[22px] block dark:hidden">
-                    <img src="client/images/logo-light.png" alt="" class="logo-dark h-[22px] hidden dark:block">
+                    <img src="https://i.imgur.com/chCW0o6.png" alt="" >
+                    
                 </a>
                 <h4 class="mb-3 text-lg text-gray-900 dark:text-gray-50">Chọn phương thức thanh toán</h4>
             </div>

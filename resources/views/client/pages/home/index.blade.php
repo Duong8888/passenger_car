@@ -1,6 +1,5 @@
 @extends('client.layout.master')
 @section('content')
-<<<<<<< HEAD
 <div id="popupContainer" class="popup-container" style="display: none;
 position: fixed;
 width: 100%;
@@ -386,7 +385,7 @@ padding:00px ">
                                     <a href="job-categories.html" class="text-gray-900">
                                         <h5 class="text-lg dark:text-gray-50">{{ $nhaxe->name }}</h5>
                                     </a>
-                                    <p class="mt-1 font-medium text-gray-500 dark:text-gray-300">{{ $nhaxe->created_at->format('d-m-Y') }}</p>
+                                    {{-- <p class="mt-1 font-medium text-gray-500 dark:text-gray-300">{{ $nhaxe->created_at->format('d-m-Y') }}</p> --}}
                                 </div>
                             </div>
                         </div>
@@ -449,7 +448,7 @@ padding:00px ">
 @endsection
 @section('page-script')
 
-<<<<<<< HEAD
+<script>
     openButton.addEventListener("click", function () {
         popupContainer.style.display = "block";
     });
@@ -459,8 +458,7 @@ padding:00px ">
         popupContainer.style.display = "none";
     });
 </script>
-=======
->>>>>>> develop
+
     <script src="{{asset('client/libs/choices.js/public/assets/scripts/choices.min.js')}}"></script>
 
     <script src="{{asset('client/js/pages/job-list.init.js')}}"></script>

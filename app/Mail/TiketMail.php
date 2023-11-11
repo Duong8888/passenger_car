@@ -13,9 +13,7 @@ class TiketMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    private $data;
-
-
+    protected $data;
 
     public function __construct($data)
     {
@@ -28,9 +26,9 @@ class TiketMail extends Mailable
     public function build()
     {
         return $this->view('mails.tiket')
-        ->subject('Thông báo đặt vé xe')
-        ->with([
-            'data'    => $this->data,
-        ]);
+            ->subject('Thông báo đặt vé xe')
+            ->with([
+                'data' => $this->data,
+            ]);
     }
 }

@@ -26,10 +26,7 @@
                         </div>
                     </div>
                 </div>
-                <img src="assets/images/about/shape.png" alt=""
-                     class="absolute block bg-cover -bottom-0 dark:hidden">
-                <img src="assets/images/about/shape-dark.png" alt=""
-                     class="absolute hidden bg-cover -bottom-0 dark:block">
+                
             </section>
 
 
@@ -44,7 +41,7 @@
                                     <div class="text-center">
                                         <img src="{{asset($albums[0]->path)}}" alt="anh"
                                              style="min-width: 100%;height: 200px; object-fit: cover">
-                                        <h6 class="mt-4 mb-0 text-lg text-gray-900 dark:text-gray-50">Duong</h6>
+                                        <h6 class="mt-4 mb-0 text-lg text-gray-900 dark:text-gray-50">{{ $user[0]->name }}</h6>
                                     </div>
                                 </div>
                                 <div class="p-5 border-b border-gray-100/50 dark:border-neutral-600">
@@ -473,7 +470,7 @@
                                         </div>
                                         <div class="flex items-center mb-8">
                                             <label for="date" class="mr-2">Chọn thời gian:</label>
-                                            <input type="date" id="date" name="date" class="px-2 py-1 border-none outline-none">
+                                            <input type="date" id="date" name="date" class="px-2 py-1 border-none outline-none" value="{{ date('Y-m-d') }}">
                                           </div>
                                           
                                           
@@ -619,6 +616,7 @@
     <input name="arrivalTimeInput" type="hidden" value="{{date("H:i", strtotime($workingTime[0]->arrival_time))}}h">
     <input type="hidden" value="{{ $routes->departure }}" name="route-departure">
     <input type="hidden" value="{{ $routes->arrival }}" name="route-arrival">
+    <input type="hidden" value="{{ $user[0]->id }}" name="passenger-user">
 @endsection
 @section('page-script')
     <script type="module" src="{{ asset('client/js/custom/passengeCar-detail.js') }}"></script>

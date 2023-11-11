@@ -226,21 +226,8 @@
 
     <!-- LOGO -->
     <div class="logo-box">
-        <a href="index.html" class="logo logo-light text-center">
-            <span class="logo-sm">
-                <img src="admin/images/logo-sm.png" alt="" height="22">
-            </span>
-            <span class="logo-lg">
-                <img src="admin/images/logo-light.png" alt="" height="16">
-            </span>
-        </a>
-        <a href="index.html" class="logo logo-dark text-center">
-            <span class="logo-sm">
-                <img src="admin/images/logo-sm.png" alt="" height="22">
-            </span>
-            <span class="logo-lg">
-                <img src="admin/images/logo-dark.png" alt="" height="16">
-            </span>
+        <a class="logo logo-dark text-center">    
+                <img src="https://i.imgur.com/chCW0o6.png" alt="" height="22"> 
         </a>
     </div>
 

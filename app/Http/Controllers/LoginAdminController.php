@@ -34,7 +34,7 @@ class LoginAdminController extends Controller
         // Đảm bảo hủy phiên làm việc hiện tại
         $request->session()->invalidate();
         // Điều hướng đến trang đăng nhập
-        return redirect('/admin/loginadmin');
+        return redirect()->route('login_admin');
     }
 
 
