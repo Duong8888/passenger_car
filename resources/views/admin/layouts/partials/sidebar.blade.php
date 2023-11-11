@@ -85,13 +85,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.category.index') }}">
-                        <i class="mdi mdi-view-dashboard-outline"></i>
-                        <span> Quản lý danh mục </span>
-                    </a>
-                </li>
-
-                <li>
                     <a href="{{ route('admin.customer.index') }}">
                         <i class="mdi mdi-view-dashboard-outline"></i>
                         <span> Quản lý khách hàng </span>

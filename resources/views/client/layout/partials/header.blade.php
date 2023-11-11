@@ -176,15 +176,6 @@
 
 
                     </li>
-                    <li class="relative dropdown lg:mt-0">
-                        <button href="#"
-                            class="py-5 text-gray-800 lg:px-4 dropdown-toggle dark:text-gray-50 lg:h-[70px]" id="blog"
-                            data-bs-toggle="dropdown">Categories</button>
-
-
-                    </li>
-
-
 
                     <li class="py-5 lg:px-4">
                         <a href="{{route('contact.index')}}" class="py-2.5 text-gray-800 font-medium leading-tight" id="contact"

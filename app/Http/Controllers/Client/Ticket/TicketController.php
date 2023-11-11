@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Client\Ticket;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\NotificationController;
+use App\Jobs\SendMail;
 use App\Models\PassengerCar;
 use App\Models\Stops;
 use App\Models\Ticket;
@@ -12,6 +14,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\TiketMail;
 use Twilio\Rest\Client;
+use Illuminate\Support\Str;
 
 class TicketController extends Controller
 {
@@ -32,75 +35,40 @@ class TicketController extends Controller
 
     public function endPayment(Request $request)
     {
-
+       
+        $user_id = $request->passenger_car_user;
+        $message = $request->username . ' đã đặt vé cần xác nhận ';
         $ticket = new Ticket();
         $ticket->fill($request->all());
         $ticket->save();
+        $phoneNumber = $request->phone;
+       
+        // $APIKey = "4804FCD90B5191173B9C05ADAEB455";
+        // $SecretKey = "ECA5AFD4D982FAF3E2315AF3654B4A";
 
-        // $email = new TiketMail($ticket);
-        // Mail::to($request->email)->send($email);
+        // $YourPhone = $phoneNumber;
+        // $Content = "Cam on quy khach da su dung dich vu cua chung toi. Chuc quy khach mot ngay tot lanh!";
 
+        // $SendContent = urlencode($Content);
+        // $data = "http://rest.esms.vn/MainService.svc/json/SendMultipleMessage_V4_get?Phone=$YourPhone&ApiKey=$APIKey&SecretKey=$SecretKey&Content=$SendContent&Brandname=Baotrixemay&SmsType=2";
 
-        // $phoneNumber = substr_replace($ticket->phone, "+84", 0, 0);
+        // $curl = curl_init($data);
+        // curl_setopt($curl, CURLOPT_FAILONERROR, true);
+        // curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+        // curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        // $result = curl_exec($curl);
 
-//        $twilioSid = env('TWILIO_SID');
-//        $twilioToken = env('TWILIO_AUTH_TOKEN');
-//        // dd($twilioSid,$twilioToken);
-//        $twilio = new Client($twilioSid, $twilioToken);
-        $mess = "Thông báo đặt vé! " . $ticket->name . "\n  Người đặt: " . $ticket->username . "\n Điểm đón: " . $ticket->departure .
-            "\n Điểm trả:" . $ticket->arrival . "\n Số lượng vé: " . $ticket->quantity . "\n Tổng tiền: " . $ticket->total_price .
-            "\n Hình thức thanh toán:" . $ticket->payment_method;
-//        $message = $twilio->messages->create(
-//            $phoneNumber,
-//            [
-//                "from" => "+13342314820",
-//                "body" =>  (string)$mess
-//            ]
-//        );
+        // $obj = json_decode($result, true);
+        // if ($obj['CodeResult'] == 100) {
+        //     Log::info("thành công ");
+        // } else {
+        //     Log::info("lỗi  ");
+        // }
+       
+        // $notification = new NotificationController();
+        // $notification->sendNotification($user_id, $message);
 
-
-        $APIKey = "371FC468F99345C39169670876C613"; //env('ESMS_API_KEY');
-        $SecretKey = "CE2DD09E775331ABA3C0A53F349260"; // env('ESMS_API_SEC');
-
-
-        $SendContent = urlencode($mess);
-        $data = "http://rest.esms.vn/MainService.svc/json/SendMultipleMessage_V4_get?Phone=$phoneNumber&ApiKey=$APIKey&SecretKey=$SecretKey&Content=$SendContent&SmsType=8";
-        //De dang ky brandname rieng vui long lien he hotline 0901.888.484 hoac nhan vien kinh Doanh cua ban
-
-        $curl = curl_init($data);
-        curl_setopt($curl, CURLOPT_FAILONERROR, true);
-        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        $result = curl_exec($curl);
-
-        $obj = json_decode($result, true);
-        if ($obj['CodeResult'] == 100) {
-            print "<br>";
-            print "CodeResult:" . $obj['CodeResult'];
-            print "<br>";
-            print "CountRegenerate:" . $obj['CountRegenerate'];
-            print "<br>";
-            print "SMSID:" . $obj['SMSID'];
-            print "<br>";
-        } else {
-            print "ErrorMessage:" . $obj['ErrorMessage'];
-        }
-
-
-        $twilioSid = env('TWILIO_SID');
-        $twilioToken = env('TWILIO_AUTH_TOKEN');
-
-        $twilio = new Client($twilioSid, $twilioToken);
-        $mess = "Thông báo đặt vé! ".$ticket->name . "\n  Người đặt: ".$ticket->username . "\n Điểm đón: ".$ticket->departure .
-        "\n Điểm trả:" . $ticket->arrival . "\n Số lượng vé: " . $ticket->quantity . "\n Tổng tiền: ".$ticket->total_price.
-        "\n Hình thức thanh toán:". $ticket->payment_method;
-        $message = $twilio->messages->create(
-            $phoneNumber,
-            [
-                "from" => "+13342314820",
-                "body" =>  (string)$mess
-            ]
-        );
+        SendMail::dispatch($request->email,  $ticket);
 
         return response()->json(['success' => 'Done'], Response::HTTP_OK);
     }
@@ -247,13 +215,14 @@ class TicketController extends Controller
         // return redirect()->route('client.ticket.add-vnpay-to-db');
         header('Location: ' . $vnp_Url);
         die();
-
     }
 
     public function checkoutPayment()
     {
         $data = (session()->get('value'));
+
         foreach ($data as $a) {
+
             Ticket::query()->create([
                 'username' => $a['username'],
                 'status' => 2,
@@ -265,6 +234,7 @@ class TicketController extends Controller
                 'passenger_car_id' => $a['passenger_car_id'],
                 'departure' => $a['departure'],
                 'arrival' => $a['arrival'],
+                'date' => $a['date']
             ]);
             $a['payment_method'] = 'Đã Thanh toán VNPAY';
 
@@ -272,24 +242,26 @@ class TicketController extends Controller
             $email = new TiketMail($a);
             Mail::to($a->email)->send($email);
 
-
+            $notification = new NotificationController();
+            $message = $a['username'] . 'đã đặt vé thành công';
+            $notification->sendNotification($a['passenger_car_user'], $message);
             $phoneNumber = substr_replace($a->phone, "", 0, 0);
 
 
-//            $twilioSid = env('TWILIO_SID');
-//            $twilioToken = env('TWILIO_AUTH_TOKEN');
-//            // dd($twilioSid,$twilioToken);
-//            $twilio = new Client($twilioSid, $twilioToken);
+            //            $twilioSid = env('TWILIO_SID');
+            //            $twilioToken = env('TWILIO_AUTH_TOKEN');
+            //            // dd($twilioSid,$twilioToken);
+            //            $twilio = new Client($twilioSid, $twilioToken);
             $mess = "Thông báo đặt vé! " . "\n  Người đặt: " . $a->username . "\n Điểm đón: " . $a->departure .
                 "\n Điểm trả:" . $a->arrival . "\n Số lượng vé: " . $a->quantity . "\n Tổng tiền: " . $a->total_price .
                 "\n Hình thức thanh toán:" . $a->payment_method;
-//            $message = $twilio->messages->create(
-//                $phoneNumber,
-//                [
-//                    "from" => "+13342314820",
-//                    "body" =>  (string)$mess
-//                ]
-//            );
+            //            $message = $twilio->messages->create(
+            //                $phoneNumber,
+            //                [
+            //                    "from" => "+13342314820",
+            //                    "body" =>  (string)$mess
+            //                ]
+            //            );
 
             $APIKey = "371FC468F99345C39169670876C613"; //env('ESMS_API_KEY');
             $SecretKey = "CE2DD09E775331ABA3C0A53F349260"; // env('ESMS_API_SEC');
@@ -317,15 +289,15 @@ class TicketController extends Controller
             } else {
                 print "ErrorMessage:" . $obj['ErrorMessage'];
             }
-
         }
-//        return response()->json($dataDebug);
+        //        return response()->json($dataDebug);
         session()->forget('cart');
         return to_route('client.finish.ticket')->with('success', 'Đặt hàng thành công');
     }
 
 
-    public function EndTicketPayment(Request $request){
+    public function EndTicketPayment(Request $request)
+    {
         $passenger_car = PassengerCar::where('id', session('value')[0]['passenger_car_id'])->get();
 
         return view('client.pages.ticket.finish', [
@@ -333,7 +305,8 @@ class TicketController extends Controller
         ]);
     }
 
-    public function ChangeTicket(Request $request){
+    public function ChangeTicket(Request $request)
+    {
         $arrayInfo = [
             'name' => $request->name,
             'phone' => $request->phone,

@@ -11,13 +11,13 @@ use Illuminate\Support\Facades\Log;
 
 class NotificationController extends Controller
 {
-    public function sendNotification(Request $request)
+    public function sendNotification($id ,$message)
     {
-        event(new NewNotification($request->id, $request->message));
+        event(new NewNotification($id, $message));
         $data = [
-            'user_id' => $request->id,
+            'user_id' => $id,
             'user_send' => \auth()->user()->id,
-            'content' => $request->message,
+            'content' => $message,
             'is_read' => false,
             'url' => 'test',
         ];
