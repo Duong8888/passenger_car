@@ -45,15 +45,17 @@ class SearchController extends Controller
 
     public function searchRequest(Request $request)
     {
-        $query = $request->departure . " " . $request->arrival;
-        $routes = $this->routes::search($query)->get();
+        $routes = $this->routes
+            ->where('arrival',$request->arrival)
+            ->where('departure',$request->departure)
+            ->get();
         $dataRoutes = $this->dataRouter();
         $passengerCar = [];
         $message = null;
 
         $filterStops = $this->filterStops($request->departure, $request->arrival);
         if (count($routes) > 0) {
-            $passengerCar = $routes[0]->passengerCars()->orderBy('price', 'desc')->with(['workingTime', 'services'])->get();
+            $passengerCar = $routes[0]->passengerCars()->orderBy('price', 'desc')->with(['workingTime', 'services','user','albums'])->get();
         } else {
             $routes = [];
         }
@@ -71,15 +73,13 @@ class SearchController extends Controller
     }
 
 
-    public function filterPassengerCars($departure, $arrival, $filterArrival, $filterDeparture, $type = null, $minTimes = [], $maxTimes = [], $priceStart = null, $priceEnd = null)
+    public function filterPassengerCars($departure, $arrival, $filterArrival = null, $filterDeparture = null, $type = null, $minTimes = [], $maxTimes = [], $priceStart = null, $priceEnd = null)
     {
         $query = DB::table('passenger_cars')
             ->join('routes', 'passenger_cars.route_id', '=', 'routes.id')
             ->join('passenger_car_working_times', 'passenger_cars.id', '=', 'passenger_car_working_times.passenger_car_id')
             ->join('working_times', 'passenger_car_working_times.working_time_id', '=', 'working_times.id')
             ->join('stops', 'stops.route_id', '=', 'routes.id')
-            ->join('users', 'users.id', '=', 'passenger_cars.user_id')
-            ->join('contacts', 'contacts.phone', '=', 'users.phone')
             ->select(
                 'passenger_cars.id',
                 'passenger_cars.price',
@@ -89,7 +89,6 @@ class SearchController extends Controller
                 'working_times.departure_time',
                 'working_times.arrival_time',
                 'working_times.id as working_times_id',
-                'contacts.passengerCar_name'
             )
             ->where('routes.departure', $departure)
             ->where('routes.arrival', $arrival);
@@ -122,8 +121,11 @@ class SearchController extends Controller
 
     public function sortBy(Request $request)
     {
-        $query = $request->departure . " " . $request->arrival;
-        $routes = $this->routes::search($query)->get();
+        Log::info($request->all());
+        $routes = $this->routes
+            ->where('arrival',$request->arrival)
+            ->where('departure',$request->departure)
+            ->get();
         $departure = $request->departure;
         $arrival = $request->arrival;
         $filterArrival = $request->filterArrival;
@@ -138,6 +140,7 @@ class SearchController extends Controller
         $idPassengerCars = $this->filterPassengerCars($departure, $arrival, $filterArrival, $filterDeparture, $type, $min, $max, $priceStart, $priceEnd);
         $service = $this->service::all();
         $PassengerCarsService = $this->passengerCarService::all();
+        Log::info($idPassengerCars);
         return response()->json(['data' => $idPassengerCars, 'dataRoute' => $routes[0], 'service' => $service, 'passengerCarsService' => $PassengerCarsService]);
     }
 

@@ -10,7 +10,6 @@ use App\Http\Controllers\Client\BlogController;
 use App\Http\Controllers\Client\CategoryController;
 use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\Client\CarRegisterController;
-use App\Http\Controllers\MapController;
 
 
 //Nam
@@ -32,12 +31,12 @@ Route::post('/sortBy', [SearchController::class, 'sortBy'])->name('sortBy');
 
 Route::get('/login', [PhoneAuthController::class, 'login'])->name('client.phone.login');
 Route::get('/verify-otp', [PhoneAuthController::class, 'otp'])->name('client.phone.verify-otp');
-Route::post('/process', [PhoneAuthController::class, 'store'])->name('client.phone.process');
 Route::get('/log-out', [PhoneAuthController::class, 'logout'])->name('client.phone.logout');
 
 Route::group(['prefix' => 'notifications', 'as' => 'notifications.'], function () {
     Route::get('/', [NotificationController::class, 'showList']);
-    Route::post('send', [NotificationController::class, 'sendNotification'])->name('sendMessage');
+    Route::post('send', [NotificationController::class, 'test'])->name('sendMessage');
+    Route::post('test', [NotificationController::class, 'test'])->name('duong');
     Route::post('load', [NotificationController::class, 'getNotification'])->name('loadMessage');
 });
 

@@ -1,80 +1,48 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-   <title>Car Finder Pro</title>
-   <style>
-      body {
-         font-family: Arial, sans-serif;
-         background-color: #f2f2f2;
-         padding: 20px;
-      }
-
-      h3 {
-         color: #333333;
-      }
-
-      .container {
-         display: flex;
-         flex-direction: column;
-         align-items: center;
-         background-color: #ffffff;
-         padding: 20px;
-         border-radius: 5px;
-         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
-
-      .info {
-         display: flex;
-         flex-direction: column;
-         margin-top: 20px;
-      }
-
-      .info-item {
-         margin-bottom: 10px;
-      }
-
-      .info-label {
-         font-weight: bold;
-      }
-
-      .footer {
-         margin-top: 20px;
-         text-align: center;
-         color: #999999;
-      }
-   </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hóa Đơn</title>
 </head>
+<body style="font-family: Arial, sans-serif;">
 
-<body>
+<div>
+    <p>Xin chào {{ $data->username }},</p>
+    <p>Chúng tôi xin gửi Quý khách hàng hóa đơn điện tử.</p>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        <thead>
+        <tr>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">Điểm đón</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">Điểm trả</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">Số lượng vé</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">Hình thức thanh toán</th>
+        </tr>
+        </thead>
+        <tbody>
 
-   <div class="container">
-      <h3>Thông báo đơn đặt vé xe:</h3>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 10px;">{{ $data->departure }}</td>
+            <td style="border: 1px solid #ddd; padding: 10px;">{{ $data->arrival }}</td>
+            <td style="border: 1px solid #ddd; padding: 10px;">{{ $data->quantity }}</td>
+            <td style="border: 1px solid #ddd; padding: 10px;">{{ $data->payment_method }}</td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="3" style="border: 1px solid #ddd; padding: 10px;">Tổng Cộng:</td>
+            <td style="border: 1px solid #ddd; padding: 10px;">{{number_format($data->total_price, 0, '.', '.')}} VND</td>
+        </tr>
+        </tfoot>
+    </table>
 
-      <div class="info">
-         <div class="info-item">
-            <span class="info-label">Người đặt:</span> {{$data->username}}
-         </div>
-         <div class="info-item">
-            <span class="info-label">Điểm đón:</span> {{$data->departure}}
-         </div>
-         <div class="info-item">
-            <span class="info-label">Điểm trả:</span> {{$data->arrival}}
-         </div>
-         <div class="info-item">
-            <span class="info-label">Số lượng vé:</span> {{$data->quantity}}
-         </div>
-         <div class="info-item">
-            <span class="info-label">Tổng tiền:</span> {{$data->total_price}} vnđ
-         </div>
-         <div class="info-item">
-            <span class="info-label">Hình thức thanh toán:</span> {{$data->payment_method}}
-         </div>
-      </div>
+    <p style="margin-top: 20px;">Cảm ơn bạn đã mua hàng!</p>
 
-      <strong class="footer">Thanks & Regards.</strong>
-   </div>
+    <p>Trân trọng,<br><br>
+        <img style="height:40px;" src="https://i.imgur.com/ntDje2g.png" alt="logo">
+    </p>
+
+</div>
 
 </body>
-
 </html>

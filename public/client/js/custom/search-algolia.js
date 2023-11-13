@@ -127,46 +127,36 @@ $(document).ready(function () {
     $('.btn-find').click();
 
     function search() {
-        var formData = new FormData($('#uploadForm')[0]);
-        formData.append('departure', $('select[name="departure"]').val());
-        formData.append('arrival', $('select[name="arrival"]').val());
-        formData.append('type', 'asc');
-        ajaxRequest(
-            'sortBy',
-            formData,
-        true
-        );
-
-        // dataList.html('');
-        // dataList.append(skeleton);
-        // $.ajax({
-        //     url: baseUrl,
-        //     method: 'GET',
-        //     data: {
-        //         departure: departure.val(),
-        //         arrival: arrival.val(),
-        //         filterArrival: filterStopsArrival.val(),
-        //         filterDeparture: filterStopsDeparture.val()
-        //     },
-        //     success: function (response) {
-        //         loading.hide();
-        //         console.log(response.dataRoute);
-        //         dataList.html('');
-        //         loadStopRoute(response.filterStops)
-        //         if (response.data.length === 0) {
-        //             dataList.append(`
-        //             <div class="text-center">
-        //                Tuyến đường chưa có xe hoạt động .
-        //             </div>
-        //             `);
-        //         } else {
-        //             loadItem(response.data, response.dataRoute);
-        //         }
-        //     },
-        //     error: function (error) {
-        //         loadFail(error, 'Tuyến đường chưa có xe hoạt động .');
-        //     }
-        // })
+        dataList.html('');
+        dataList.append(skeleton);
+        $.ajax({
+            url: baseUrl,
+            method: 'GET',
+            data: {
+                departure: departure.val(),
+                arrival: arrival.val(),
+                filterArrival: filterStopsArrival.val(),
+                filterDeparture: filterStopsDeparture.val()
+            },
+            success: function (response) {
+                loading.hide();
+                console.log(response.dataRoute);
+                dataList.html('');
+                loadStopRoute(response.filterStops)
+                if (response.data.length === 0) {
+                    dataList.append(`
+                    <div class="text-center">
+                       Tuyến đường chưa có xe hoạt động .
+                    </div>
+                    `);
+                } else {
+                    loadItem(response.data, response.dataRoute);
+                }
+            },
+            error: function (error) {
+                loadFail(error, 'Tuyến đường chưa có xe hoạt động .');
+            }
+        })
 
     }
 
@@ -227,6 +217,7 @@ $(document).ready(function () {
         dataList.html('');
         loading.hide();
         var service = '';
+        console.log(data);
         $.each(data, function (index, item) {
             $.each(item.working_time, function (indexWorking, itemWorking) {
                 service = '';
@@ -237,14 +228,17 @@ $(document).ready(function () {
                                     <div class="relative overflow-hidden transition-all duration-500 ease-in-out bg-white border rounded-md border-gray-100/50 group/jobs group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:-translate-y-2 dark:bg-neutral-900 dark:border-neutral-600">
                                         <div class="p-6">
                                             <div class="grid grid-cols-12 gap-5">
-                                                <div class="col-span-12 lg:col-span-1">
+                                                <div class="col-span-12 lg:col-span-3">
                                                     <div class="px-2 mb-4 text-center mb-md-0">
-                                                        <a href="company-details.html"><img src="assets/images/featured-job/img-01.png" alt="" class="mx-auto img-fluid rounded-3"></a>
+                                                        <a href="company-details.html">
+                                                            <img src="${item.albums[0].path}" alt="ảnh xe" class="mx-auto h-full object-cover rounded-3">
+                                                        </a>
                                                     </div>
                                                 </div>
+
                                                 <!--end col-->
-                                                <div class="col-span-10">
-                                                    <h5 class="mb-1 fs-17"><a href="#" class="dark:text-gray-50">${item.passengerCar_name}</a>
+                                                <div class="col-span-9">
+                                                    <h5 class="mb-1 fs-17"><a href="#" class="dark:text-gray-50">${item.user.name}</a>
                                                         <small class="font-normal text-gray-500 dark:text-gray-300"></small>
                                                     </h5>
                                                     <ul class="mb-0 lg:gap-3 gap-y-3">
@@ -275,7 +269,7 @@ $(document).ready(function () {
                                                 <!--end col-->
                                                 <div class="col-span-12 mt-2 lg:col-span-6 lg:mt-0">
                                                     <div class="ltr:lg:text-right rtl:lg:text-left dark:text-gray-50">
-                                                        <a id="pasengerCarUrl" href="/car/${item.id}?time=${itemWorking.id}" data-bs-toggle="modal">Chi tiết <i class="mdi mdi-chevron-double-right"></i></a>
+                                                        <a id="pasengerCarUrl" href="/car/${item.id}?time=" data-bs-toggle="modal">Chi tiết <i class="mdi mdi-chevron-double-right"></i></a>
                                                     </div>
                                                 </div>
                                                 <!--end col-->
@@ -315,7 +309,7 @@ $(document).ready(function () {
                                                 </div>
                                                 <!--end col-->
                                                 <div class="col-span-10">
-                                                    <h5 class="mb-1 fs-17"><a href="job-details.html" class="dark:text-gray-50">${item.passengerCar_name}</a>
+                                                    <h5 class="mb-1 fs-17"><a href="job-details.html" class="dark:text-gray-50">Dương Đẹp Trai 102</a>
                                                         <small class="font-normal text-gray-500 dark:text-gray-300"></small>
                                                     </h5>
                                                     <ul class="mb-0 lg:gap-3 gap-y-3">
@@ -346,7 +340,7 @@ $(document).ready(function () {
                                                 <!--end col-->
                                                 <div class="col-span-12 mt-2 lg:col-span-6 lg:mt-0">
                                                     <div class="ltr:lg:text-right rtl:lg:text-left dark:text-gray-50">
-                                                        <a href="/car/${item.id}?time=${item.working_times_id}&filterArrival=${filterStopsArrivalValue}&filterDeparture=${filterStopsDepartureValue}" data-bs-toggle="modal">Chi tiết <i class="mdi mdi-chevron-double-right"></i></a>
+                                                        <a href="#applyNow" data-bs-toggle="modal">Chi tiết <i class="mdi mdi-chevron-double-right"></i></a>
                                                     </div>
                                                 </div>
                                                 <!--end col-->

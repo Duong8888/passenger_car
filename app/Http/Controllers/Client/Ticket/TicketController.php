@@ -35,14 +35,14 @@ class TicketController extends Controller
 
     public function endPayment(Request $request)
     {
-       
+
         $user_id = $request->passenger_car_user;
         $message = $request->username . ' đã đặt vé cần xác nhận ';
         $ticket = new Ticket();
         $ticket->fill($request->all());
         $ticket->save();
         $phoneNumber = $request->phone;
-       
+
         // $APIKey = "4804FCD90B5191173B9C05ADAEB455";
         // $SecretKey = "ECA5AFD4D982FAF3E2315AF3654B4A";
 
@@ -64,9 +64,9 @@ class TicketController extends Controller
         // } else {
         //     Log::info("lỗi  ");
         // }
-       
-        // $notification = new NotificationController();
-        // $notification->sendNotification($user_id, $message);
+
+         $notification = new NotificationController();
+         $notification->sendNotification($user_id, $message);
 
         SendMail::dispatch($request->email,  $ticket);
 
