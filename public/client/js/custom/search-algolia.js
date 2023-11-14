@@ -231,7 +231,7 @@ $(document).ready(function () {
                                                 <div class="col-span-12 lg:col-span-3">
                                                     <div class="px-2 mb-4 text-center mb-md-0">
                                                         <a href="company-details.html">
-                                                            <img src="${item.albums[0].path}" alt="ảnh xe" class="mx-auto h-full object-cover rounded-3">
+                                                            <img src="${item.albums[0].path}" style="border-radius: 5px" alt="ảnh xe" class="mx-auto h-full object-cover rounded-3">
                                                         </a>
                                                     </div>
                                                 </div>
@@ -302,14 +302,16 @@ $(document).ready(function () {
                                     <div class="relative overflow-hidden transition-all duration-500 ease-in-out bg-white border rounded-md border-gray-100/50 group/jobs group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:-translate-y-2 dark:bg-neutral-900 dark:border-neutral-600">
                                         <div class="p-6">
                                             <div class="grid grid-cols-12 gap-5">
-                                                <div class="col-span-12 lg:col-span-1">
+                                                <div class="col-span-12 lg:col-span-3">
                                                     <div class="px-2 mb-4 text-center mb-md-0">
-                                                        <a href="company-details.html"><img src="assets/images/featured-job/img-01.png" alt="" class="mx-auto img-fluid rounded-3"></a>
+                                                        <a href="company-details.html">
+                                                            <img src="${item.path}" style="border-radius: 5px" alt="ảnh xe" class="mx-auto h-full object-cover rounded-3">
+                                                        </a>
                                                     </div>
                                                 </div>
                                                 <!--end col-->
-                                                <div class="col-span-10">
-                                                    <h5 class="mb-1 fs-17"><a href="job-details.html" class="dark:text-gray-50">Dương Đẹp Trai 102</a>
+                                                <div class="col-span-9">
+                                                    <h5 class="mb-1 fs-17"><a href="job-details.html" class="dark:text-gray-50">${item.name}</a>
                                                         <small class="font-normal text-gray-500 dark:text-gray-300"></small>
                                                     </h5>
                                                     <ul class="mb-0 lg:gap-3 gap-y-3">
@@ -441,6 +443,20 @@ $(document).ready(function () {
         } else {
             formData.delete('min[' + e.target.id + ']');
             formData.delete('max[' + e.target.id + ']');
+            ajaxRequest('sortBy', formData, true);
+        }
+    });
+
+    $(document).on('change', '.users', function (e) {
+        formData.append('departure', $('select[name="departure"]').val());
+        formData.append('arrival', $('select[name="arrival"]').val());
+        if ($(this).is(':checked')) {
+            console.log($(this).val());
+            var user = $(this).val()
+            formData.append('users[' + user + ']', user);
+            ajaxRequest('sortBy', formData, true);
+        } else {
+            formData.delete('users[' + $(this).val() + ']');
             ajaxRequest('sortBy', formData, true);
         }
     });

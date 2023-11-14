@@ -201,53 +201,15 @@
                                     </h6>
                                     <div class="block accordion-body">
                                         <div class="p-5">
-                                            <div class="mt-2">
-                                                <input
-                                                    class="rounded cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-zinc-600 dark:checked:bg-violet-500/20"
-                                                    type="checkbox" value="" id="flexCheckChecked1">
-                                                <label
-                                                    class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">All</label>
-                                            </div>
-                                            <div class="mt-2">
-                                                <input
-                                                    class="rounded cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-zinc-600 dark:checked:bg-violet-500/20"
-                                                    checked type="checkbox" value="" id="flexCheckChecked1">
-                                                <label
-                                                    class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">Last
-                                                    Hour</label>
-                                            </div>
-                                            <div class="mt-2">
-                                                <input
-                                                    class="rounded cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-zinc-600 dark:checked:bg-violet-500/20"
-                                                    type="checkbox" value="" id="flexCheckChecked1">
-                                                <label
-                                                    class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">Last
-                                                    24 hours</label>
-                                            </div>
-                                            <div class="mt-2">
-                                                <input
-                                                    class="rounded cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-zinc-600 dark:checked:bg-violet-500/20"
-                                                    type="checkbox" value="" id="flexCheckChecked1">
-                                                <label
-                                                    class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">Last
-                                                    7 days</label>
-                                            </div>
-                                            <div class="mt-2">
-                                                <input
-                                                    class="rounded cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-zinc-600 dark:checked:bg-violet-500/20"
-                                                    type="checkbox" value="" id="flexCheckChecked1">
-                                                <label
-                                                    class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">Last
-                                                    14 days</label>
-                                            </div>
-                                            <div class="mt-2">
-                                                <input
-                                                    class="rounded cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-zinc-600 dark:checked:bg-violet-500/20"
-                                                    type="checkbox" value="" id="flexCheckChecked1">
-                                                <label
-                                                    class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">Last
-                                                    30 days</label>
-                                            </div>
+                                            @foreach($user as $key => $value)
+                                                <div class="mt-2">
+                                                    <input
+                                                        class="users rounded cursor-pointer group-data-[theme-color=violet]:checked:bg-violet-500 group-data-[theme-color=sky]:checked:bg-sky-500 group-data-[theme-color=red]:checked:bg-red-500 group-data-[theme-color=green]:checked:bg-green-500 group-data-[theme-color=pink]:checked:bg-pink-500 group-data-[theme-color=blue]:checked:bg-blue-500 focus:ring-0 focus:ring-offset-0 dark:bg-zinc-600 dark:checked:bg-violet-500/20"
+                                                        type="checkbox" value="{{$value->id}}" name="user[]" id="{{$value->id}}">
+                                                    <label for="{{$value->id}}"
+                                                        class="text-gray-500 cursor-pointer ltr:ml-2 rtl:mr-2 dark:text-gray-300">{{$value->name}}</label>
+                                                </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
