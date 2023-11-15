@@ -24,10 +24,23 @@
                                         <div class="p-5">
                                             <div class="mt-2">
                                                 <div class="col-span-12 xl:col-span-4">
-                                                    <select class="custom-select"
-                                                            data-trigger name="filterStopsDeparture"
-                                                            id="filterStopsDeparture"
-                                                            aria-label="filterStopsDeparture">
+{{--                                                    <select class="custom-select"--}}
+{{--                                                            data-trigger name="filterStopsDeparture"--}}
+{{--                                                            id="filterStopsDeparture"--}}
+{{--                                                            aria-label="filterStopsDeparture">--}}
+{{--                                                        @if(!empty($filterStops) || count($filterStops) != 0)--}}
+{{--                                                            <option value="">Chọn điểm đón</option>--}}
+{{--                                                            @foreach($filterStops as $value)--}}
+{{--                                                                <option value="{{$value->id}}">{{$value->stop_name}}</option>--}}
+{{--                                                            @endforeach--}}
+{{--                                                        @endif--}}
+{{--                                                        @if(empty($filterStops)  || count($filterStops) == 0)--}}
+{{--                                                            <option  value="">Không có điểm đón</option>--}}
+{{--                                                        @endif--}}
+{{--                                                    </select>--}}
+
+
+                                                    <select id="filterStopsDeparture" name="filterStopsDeparture" class="w-100" name="state">
                                                         @if(!empty($filterStops) || count($filterStops) != 0)
                                                             <option value="">Chọn điểm đón</option>
                                                             @foreach($filterStops as $value)
@@ -38,6 +51,8 @@
                                                             <option  value="">Không có điểm đón</option>
                                                         @endif
                                                     </select>
+
+
                                                 </div>
                                             </div>
                                         </div>
@@ -57,9 +72,21 @@
                                         <div class="p-5">
                                             <div class="mt-2">
                                                 <div class="col-span-12 xl:col-span-4">
-                                                    <select class="custom-select" data-trigger name="filterStopsArrival"
-                                                            id="filterStopsArrival"
-                                                            aria-label="filterStopsArrival">
+{{--                                                    <select class="custom-select" data-trigger name="filterStopsArrival"--}}
+{{--                                                            id="filterStopsArrival"--}}
+{{--                                                            aria-label="filterStopsArrival">--}}
+{{--                                                        @if(!empty($filterStops) || count($filterStops) != 0)--}}
+{{--                                                            <option value="">Chọn điểm trả</option>--}}
+{{--                                                            @foreach($filterStops as $value)--}}
+{{--                                                                <option value="{{$value->id}}">{{$value->stop_name}}</option>--}}
+{{--                                                            @endforeach--}}
+{{--                                                        @endif--}}
+{{--                                                        @if(empty($filterStops)  || count($filterStops) == 0)--}}
+{{--                                                            <option  value="">Không có điểm trả</option>--}}
+{{--                                                        @endif--}}
+{{--                                                    </select>--}}
+
+                                                    <select id="filterStopsArrival" name="filterStopsArrival" class="w-100" name="state">
                                                         @if(!empty($filterStops) || count($filterStops) != 0)
                                                             <option value="">Chọn điểm trả</option>
                                                             @foreach($filterStops as $value)
@@ -292,10 +319,10 @@
                                 </form>
                             </div>
                             <div class="space-y-2 mt-4 filterOption">
-                                <span class="filterOptionValue" id="departureFilterShow"></span>
-                                <span class="filterOptionValue" id="arrivalFilterShow"></span>
+                                <span class="inline-block" id="departureFilterShow"></span>
+                                <span class="inline-block" id="arrivalFilterShow"></span>
                             </div>
-                            <div class="space-y-8 mt-14 list-route">
+                            <div class="space-y-8 mt-6 list-route">
                             </div>
                         </div>
                         <!-- end right -->
@@ -322,10 +349,6 @@
     <script src="{{asset('client/js/pages/job-list.init.js')}}"></script>
 
     <script src="{{asset('client/js/pages/dropdown%26modal.init.js')}}"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-        });
-    </script>
     <style>
         div.mt-2 input.your-custom-class-hoa {
             width: 230px; /* Điều chỉnh chiều rộng theo ý muốn */

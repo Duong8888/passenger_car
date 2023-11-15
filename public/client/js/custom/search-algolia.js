@@ -1,4 +1,9 @@
 $(document).ready(function () {
+    var selectDeparture = document.querySelector('#filterStopsDeparture');
+    const choicesDeparture = new Choices(selectDeparture);
+    var selectArrival = document.querySelector('#filterStopsArrival');
+    const choicesArrival = new Choices(selectArrival);
+
     const $inputLeft = $("#input-left");
     const $inputRight = $("#input-right");
     const $thumbLeft = $(".slider > .thumb.left");
@@ -15,38 +20,6 @@ $(document).ready(function () {
 
     let filterStopsArrivalValue = ''
     let filterStopsDepartureValue = '';
-
-    filterStopsArrival.on("change", function (event) {
-        filterStopsArrivalValue = filterStopsArrival.val()
-        if(filterStopsArrivalValue){
-            $('#arrivalFilterShow').html('<span clas="filterOptionValue"><span>Điểm trả : ' + $("#filterStopsArrival  option:selected").text() + '</span><svg viewBox="64 64 896 896" focusable="false" class="" data-icon="close" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 0 0 203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"></path></svg></span>')
-        }
-        search()
-    });
-
-    $('#arrivalFilterShow').on("click", function (event) {
-        filterStopsArrival.val('');
-        filterStopsArrivalValue = '';
-        $('#arrivalFilterShow').html('');
-        search()
-    });
-
-    filterStopsDeparture.on("change", function (event) {
-        filterStopsDepartureValue = filterStopsDeparture.val()
-        if(filterStopsDepartureValue){
-            $('#departureFilterShow').html('<span clas="filterOptionValue"><span>Điểm đón : ' + $("#filterStopsDeparture  option:selected").text() + '</span><svg viewBox="64 64 896 896" focusable="false" class="" data-icon="close" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 0 0 203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"></path></svg></span>')
-
-        }
-        search()
-    });
-
-    $('#departureFilterShow').on("click", function (event) {
-        filterStopsDeparture.val('');
-        filterStopsDepartureValue = '';
-        $('#departureFilterShow').html('');
-        search()
-    });
-
 
 
     let skeleton = `
@@ -171,7 +144,7 @@ $(document).ready(function () {
         console.log(error)
     }
 
-    function loadStopRoute(filterStops){
+    function loadStopRoute(filterStops) {
 
         filterStopsDeparture.empty();
         filterStopsArrival.empty();
@@ -186,11 +159,11 @@ $(document).ready(function () {
             $.each(filterStops, function (index, item) {
                 if (item.stop_type === 0) {
                     offDeparture = false;
-                    let isSelect  = filterStopsDepartureValue == item.id ? 'selected' : '';
+                    let isSelect = filterStopsDepartureValue == item.id ? 'selected' : '';
                     filterStopsDeparture.append('<option value="' + item.id + '" ' + isSelect + ' >' + item.stop_name + '</option>');
                 } else if (item.stop_type === 1) {
                     offArrival = false;
-                    let isSelect  = filterStopsArrivalValue == item.id ? 'selected' : '';
+                    let isSelect = filterStopsArrivalValue == item.id ? 'selected' : '';
                     filterStopsArrival.append('<option value="' + item.id + '" ' + isSelect + ' >' + item.stop_name + '</option>');
                 }
             });
@@ -269,7 +242,7 @@ $(document).ready(function () {
                                                 <!--end col-->
                                                 <div class="col-span-12 mt-2 lg:col-span-6 lg:mt-0">
                                                     <div class="ltr:lg:text-right rtl:lg:text-left dark:text-gray-50">
-                                                        <a id="pasengerCarUrl" href="/car/${item.id}?time=" data-bs-toggle="modal">Chi tiết <i class="mdi mdi-chevron-double-right"></i></a>
+                                                        <a id="pasengerCarUrl" href="/car/${item.id}?time=${itemWorking.id}" data-bs-toggle="modal">Chi tiết <i class="mdi mdi-chevron-double-right"></i></a>
                                                     </div>
                                                 </div>
                                                 <!--end col-->
@@ -342,7 +315,7 @@ $(document).ready(function () {
                                                 <!--end col-->
                                                 <div class="col-span-12 mt-2 lg:col-span-6 lg:mt-0">
                                                     <div class="ltr:lg:text-right rtl:lg:text-left dark:text-gray-50">
-                                                        <a href="#applyNow" data-bs-toggle="modal">Chi tiết <i class="mdi mdi-chevron-double-right"></i></a>
+                                                        <a href="/car/${item.id}?time=${item.working_times_id}" data-bs-toggle="modal">Chi tiết <i class="mdi mdi-chevron-double-right"></i></a>
                                                     </div>
                                                 </div>
                                                 <!--end col-->
@@ -462,7 +435,7 @@ $(document).ready(function () {
     });
 
 
-    // loch theo khoảng giá tiền
+    // lọc theo khoảng giá tiền
     $inputLeft.on("input", setLeftValue);
     $inputRight.on("input", setRightValue);
     $inputLeft.add($inputRight).on("mouseup", function () {
@@ -476,6 +449,67 @@ $(document).ready(function () {
             true
         );
     });
+
+    // lọc theo điểm đón trả
+
+    filterStopsArrival.on("change", function (event) {
+        filterStopsArrivalValue = filterStopsArrival.val()
+        if (filterStopsArrivalValue) {
+            $('#arrivalFilterShow').html(`<div class="inline-block border p-[6px] border-gray-100/50 rounded group/joblist dark:border-gray-100/20">
+                                                <div class="flex items-center">
+                                                    <i class="uil uil-clipboard-notes">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(235, 87, 87, 1);transform: ;msFilter:;">
+                                                            <circle cx="12" cy="12" r="4"></circle>
+                                                            <path d="M13 4.069V2h-2v2.069A8.01 8.01 0 0 0 4.069 11H2v2h2.069A8.008 8.008 0 0 0 11 19.931V22h2v-2.069A8.007 8.007 0 0 0 19.931 13H22v-2h-2.069A8.008 8.008 0 0 0 13 4.069zM12 18c-3.309 0-6-2.691-6-6s2.691-6 6-6 6 2.691 6 6-2.691 6-6 6z"></path>
+                                                        </svg>
+                                                    </i>
+                                                    <a href="javascript:void(0)" class="text-gray-900 ltr:ml-2 rtl:mr-2 dark:text-gray-50">
+                                                        <h6 class="mb-0 transition-all duration-300 fs-14 group-data-[theme-color=violet]:group-hover/joblist:text-violet-500 group-data-[theme-color=sky]:group-hover/joblist:text-sky-500 group-data-[theme-color=red]:group-hover/joblist:text-red-500 group-data-[theme-color=green]:group-hover/joblist:text-green-500 group-data-[theme-color=pink]:group-hover/joblist:text-pink-500 group-data-[theme-color=blue]:group-hover/joblist:text-blue-500">Điểm trả : ${$("#filterStopsArrival  option:selected").text()}</h6>
+                                                    </a>
+                                                </div>
+                                            </div>`)
+        }
+        search()
+    });
+
+    $('#arrivalFilterShow').on("click", function (event) {
+        const defaultValue = selectArrival.options[0].value;
+        choicesArrival.setChoiceByValue(defaultValue);
+        filterStopsArrival.val('');
+        filterStopsArrivalValue = '';
+        $('#arrivalFilterShow').html('');
+        search()
+    });
+
+    filterStopsDeparture.on("change", function (event) {
+        filterStopsDepartureValue = filterStopsDeparture.val()
+        if (filterStopsDepartureValue) {
+            $('#departureFilterShow').html(`<div class="mr-4 inline-block border p-[6px] border-gray-100/50 rounded group/joblist dark:border-gray-100/20">
+                                                <div class="flex items-center">
+                                                    <i class="uil uil-map-marker">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(96, 165, 250, 1);transform: ;msFilter:;">
+                                                            <path d="M12 5c-3.859 0-7 3.141-7 7s3.141 7 7 7 7-3.141 7-7-3.141-7-7-7zm0 12c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"></path>
+                                                            <path d="M12 9c-1.627 0-3 1.373-3 3s1.373 3 3 3 3-1.373 3-3-1.373-3-3-3z"></path>
+                                                        </svg>
+                                                    </i>
+                                                    <a href="javascript:void(0)" class="text-gray-900 ltr:ml-2 rtl:mr-2 dark:text-gray-50">
+                                                        <h6 class="mb-0 transition-all duration-300 fs-14 group-data-[theme-color=violet]:group-hover/joblist:text-violet-500 group-data-[theme-color=sky]:group-hover/joblist:text-sky-500 group-data-[theme-color=red]:group-hover/joblist:text-red-500 group-data-[theme-color=green]:group-hover/joblist:text-green-500 group-data-[theme-color=pink]:group-hover/joblist:text-pink-500 group-data-[theme-color=blue]:group-hover/joblist:text-blue-500">Điểm đón : ${$("#filterStopsDeparture  option:selected").text()}</h6>
+                                                    </a>
+                                                </div>
+                                            </div>`)
+        }
+        search()
+    });
+
+    $('#departureFilterShow').on("click", function (event) {
+        const defaultValue = selectDeparture.options[0].value;
+        choicesDeparture.setChoiceByValue(defaultValue);
+        filterStopsDeparture.val('');
+        filterStopsDepartureValue = '';
+        $('#departureFilterShow').html('');
+        search()
+    });
+
 
 
 });
