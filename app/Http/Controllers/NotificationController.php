@@ -19,7 +19,7 @@ class NotificationController extends Controller
             'user_send' => \auth()->user()->id,
             'content' => $message,
             'is_read' => false,
-            'url' => 'test',
+            'url' => 'ticket',
         ];
         $this->store($data);
     }
@@ -30,8 +30,8 @@ class NotificationController extends Controller
     }
 
     public function getNotification(Request $request){
-        $notification = Notifications::query()->where('user_id',$request->id)->with(['user'])->get();
-        $countNotification = Notifications::query()->where('is_read',false)->where('user_id',$request->id)->count();
+        $notification = Notifications::orderBy("created_at", "DESC")->get();
+        $countNotification = Notifications::query()->where('is_read',false)->count();
         return response()->json(['notification' => $notification, 'count' => $countNotification]);
     }
 
