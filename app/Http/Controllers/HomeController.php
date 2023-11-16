@@ -70,8 +70,8 @@ class HomeController extends Controller
         $comments = $passengerCars[0]->comments;
         $workingTime = WorkingTime::query()->where('id', $request->time)->get();
 
-        $userID = $user[0]->id;
-        $routeID = $passengerCars[0]->route->id;
+        $userID = $user[0]->id; 
+        $routeID = $passengerCars[0]->route->id; 
 
         $stops = Stops::where('route_id', $routeID)
             ->where(function ($query) use ($userID) {
