@@ -48,7 +48,7 @@
                 </div>
 
 
-                <button name="cancel-ticket" data style="display: block; margin: 0 auto; background-color: red; color: white; width: 100% ; margin-top: 50px; padding: 10px ">Hủy Vé</button>
+                <button data-id="{{ session('value')[1] }}" data-action="{{ route('client.ticket.cancel-ticket') }}" class="cancel-ticket" style="display: block; margin: 0 auto; background-color: red; color: white; width: 100% ; margin-top: 50px; padding: 10px ">Hủy Vé</button>
             </div>
 
             <div style="width: 30%">
@@ -79,10 +79,11 @@
                     </div>
                    
                     <div style="margin-bottom: 10px;">
-                        <p style="margin: 0; font-size: 14px; font-size: 20px;font-weight: bold;">Tổng Tiền: {{ session('value')[0]['total_price'] }}</p>
+                        <p class="showTotalPrice" style="margin: 0; font-size: 14px; font-size: 20px;font-weight: bold;">
+                            {{number_format(session('value')[0]['total_price']) }}đ</p>
                      
                     </div>
-
+                    
                 </div>
             </div>
         </div>

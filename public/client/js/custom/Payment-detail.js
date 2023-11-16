@@ -39,11 +39,11 @@ $(document).ready(function () {
         let url = $(this).data("action");
 
         let data = $(this).data("session");
-
+        
         let payment_method = 'thanh toán tại nhà xe';
         data[0]['status'] = 1;
         data[0]['payment_method'] = payment_method;
-      
+
         let res = data[0];
         $.ajax({
             url: url,
@@ -54,6 +54,13 @@ $(document).ready(function () {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function (response) {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "success",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
                 if (response.success) {
                     window.location.href = '/end-ticket-payment';
                 }
@@ -115,54 +122,69 @@ $(document).ready(function () {
         thirdTab.classList.remove('hidden');
     });
 
-    departureChange.addEventListener('click', function() {
+    departureChange.addEventListener('click', function () {
         showPopup();
         departureTab.classList.remove('hidden');
         arrivalTab.classList.add('hidden');
         thirdTab.classList.add('hidden');
     })
 
-    ArrivalChange.addEventListener('click', function() {
+    ArrivalChange.addEventListener('click', function () {
         showPopup();
         departureTab.classList.add('hidden');
         arrivalTab.classList.remove('hidden');
         thirdTab.classList.add('hidden');
     })
 
-    $(document).on('click', '#User-info', function(){
+    $(document).on('click', '#User-info', function () {
         const name = $('input[name="name"]').val();
         const phone = $('input[name="phone"]').val();
         const email = $('input[name="email"]').val();
-        const url =  $(this).data("action");
-        $.ajax({
-            url: url,
-            method: "POST",
-            dataType: "JSON",
-            data: {
-                name : name,
-                phone : phone,
-                email: email,
-            },
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function (response) {
-                
-                $('.nameChange').html(response.name);
-                $('.phoneChange').html(response.phone);
-                $('.emailChange').html(response.email);
-                
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "success",
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
-                
-                hidePopup();
-                
-            }
-        })
+        const error = [];
+        if (name === '') {
+            error.push('Tên Không được để trống. !');
+        }
+        if (phone === '') {
+            error.push('Số điện thoại không được để trống.');
+        }
+
+        if (email === '') {
+            error.push('Email không được để trống.');
+        }
+        const url = $(this).data("action");
+        if (error.length === 0) {
+            $.ajax({
+                url: url,
+                method: "POST",
+                dataType: "JSON",
+                data: {
+                    name: name,
+                    phone: phone,
+                    email: email,
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                   
+                    $('.nameChange').html(response.name);
+                    $('.phoneChange').html(response.phone);
+                    $('.emailChange').html(response.email);
+
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "success",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+
+                    hidePopup();
+
+                }
+            })
+        } else {
+            swal("Lỗi", "Vui lòng điền đủ thông tin !", "error");
+        }
     })
 })
