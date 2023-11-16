@@ -32,7 +32,6 @@ class HomeController extends Controller
 
     public function index()
     {
-
         $data = $this->vietnameseProvinces->get('name');
         $stops = [];
         foreach ($data as $key => $value) {
@@ -70,7 +69,7 @@ class HomeController extends Controller
         $comments = $passengerCars[0]->comments;
         $workingTime = WorkingTime::query()->where('id', $request->time)->get();
         $stops = Stops::where('route_id', $passengerCars[0]->route->id)->where('user_id', $user[0]->id)->get();
-
+                // return response()->json($passengerCars[0]->id, 200, [], JSON_PRETTY_PRINT);
         return view('client.pages.home.passengerCar-detail', compact('albums', 'routes', 'passengerCars', 'user', 'comments', 'stops', 'services', 'workingTime'));
     }
 
@@ -105,6 +104,17 @@ class HomeController extends Controller
             ->join('users', 'passenger_cars.user_id', '=', 'users.id');
         $data = $query->get();
         return ['data' => $data];
+    }
+    
+    public function addComment(Request $request)
+    {
+        $comment = new Comment();
+        $comment->passenger_car_id = $request->input('passengerCarId');
+        $comment->user_id = $request->user()->id;
+        $comment->star = 5;
+        $comment->content = $request->input('comments');
+        $comment->save();
+        return back();
     }
 
 
