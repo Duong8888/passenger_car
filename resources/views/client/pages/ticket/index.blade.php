@@ -63,7 +63,7 @@
                             Auth::user()->name }}</p>
 
                         <h6 class="mb-3 text-1 text-gray-900 dark:text-gray-50">Số điện thoại</h6>
-                        <p class="mb-3 phoneChange">{{ session('value')[0]['phone'] }}</p>
+                        <p class="mb-3 phoneChange">{{ session()->has('value.0.phone') ? session('value')[0]['phone'] = session('value.0.phone') : session('value')[0]['phone'] }}  </p>
                         <h6 class="mb-3 text-1 text-gray-900 dark:text-gray-50">Email</h6>
                         <p class="mb-3 emailChange">{{ session('value')[0]['email'] }}</p>
                         <hr class="border border-gray-300">
@@ -86,10 +86,14 @@
                 </div>
             </div>
         </div>
+        @php
+        \Log::info(session('value'));
+        @endphp
         <div class="fixed bottom-0 left-0 right-0 p-4 bg-white shadow-md flex justify-center offline-ticket hidden">
 
             <button data-action="{{ route('client.ticket.end-payment-ticket') }}"
                 data-session="{{ json_encode(session('value')) }}"
+               
                 class="bg-yellow-500 w-1/2 p-2 m-2 finish-ticket-offline">Thanh toán tại
                 nhà xe</button>
         </div>
@@ -191,7 +195,7 @@
                                                 thoại</label>
                                             <input
                                                 class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                                name="phone" id="phone" type="text" value="{{ session('value')[0]['phone'] }}"
+                                                name="phone" onblur="validatePhoneNumber(this)" id="phone" type="text" value="{{ session('value')[0]['phone'] }}"
                                                 placeholder="Nhập Số điện thoại của bạn">
                                         </div>
                                         <div class="mb-4">

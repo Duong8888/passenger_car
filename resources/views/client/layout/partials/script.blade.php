@@ -59,6 +59,7 @@
 <script type="text/javascript">
     window.onload = function () {
         render();
+        hidePopup();
     };
     document.getElementById("number").addEventListener("keyup", function (event) {
         if (event.key === "Enter") {
