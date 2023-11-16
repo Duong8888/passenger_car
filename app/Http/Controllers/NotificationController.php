@@ -37,14 +37,9 @@ class NotificationController extends Controller
     }
 
     public function getNotification(Request $request){
+
         $notification = Notifications::orderBy("created_at", "DESC")->get();
         $countNotification = Notifications::query()->where('is_read',false)->count();
-        $notification = Notifications::query()
-            ->where('user_id', $request->id)
-            ->with(['user'])
-            ->orderBy('id', 'desc')
-            ->get();
-        $countNotification = Notifications::query()->where('is_read',false)->where('user_id',$request->id)->count();
         return response()->json(['notification' => $notification, 'count' => $countNotification]);
     }
 

@@ -7,6 +7,7 @@ $(document).ready(function () {
     const notificationAdmin = $('.noti-scroll');
     const countNotificationsAdmin = $('.noti-title');
     const countNotificationsBtnAdmin = $('.noti-icon-badge');
+
     Echo.private(channelName)
         .listen('NewNotification', (e) => {
             loadNotification();
@@ -30,7 +31,12 @@ $(document).ready(function () {
                 id: infoUser.id,
             },
             success: function (data) {
+<<<<<<<<< Temporary merge branch 1
+
+=========
+>>>>>>>>> Temporary merge branch 2
                 if (notificationClient[0]) {
+                    console.log(data);
                     notificationClient.html('');
                     if (data.count === 0) {
                         countNotificationsBtn.html('');
@@ -70,6 +76,7 @@ $(document).ready(function () {
                         countNotificationsAdmin.html(`<h5 class="m-0">Bạn có ${data.count} thông báo chưa đọc</h5>`);
                         countNotificationsBtnAdmin.html(data.count);
                         $.each(data.notification, function (index, item) {
+
                             let createdAtDate = new Date(item.created_at);
                             const date = formatDate(createdAtDate);
                             notificationAdmin.append(`
