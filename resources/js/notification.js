@@ -31,10 +31,7 @@ $(document).ready(function () {
                 id: infoUser.id,
             },
             success: function (data) {
-<<<<<<<<< Temporary merge branch 1
 
-=========
->>>>>>>>> Temporary merge branch 2
                 if (notificationClient[0]) {
                     console.log(data);
                     notificationClient.html('');
