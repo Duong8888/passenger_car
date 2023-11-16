@@ -80,27 +80,50 @@ class RouteController extends AdminBaseController
             }
         }
 
-        $arrStop = [];
-        foreach ($arrivalArr as $key => $value) {
-            $arrStop[] = [
-                'stop_name' =>$value,
-                'stop_type' =>1,
-                'route_id' =>$route->id,
-                'user_id' => Auth::user()->id,
-                'order' =>$key,
-            ];
-        }
-        foreach ($departureArr as $key => $value) {
-            $arrStop[] = [
-                'stop_name' =>$value,
-                'stop_type' =>0,
-                'route_id' =>$route->id,
-                'user_id' => Auth::user()->id,
-                'order' =>$key,
-            ];
+        $user_id = Auth::id();
+        foreach ($departureArr as $key => $departure) {
+            $existingStop = Stops::where('stop_name', strtolower($departure))->where('route_id', $route->id)->first();
+            if ($existingStop) {
+                $userIds = json_decode($existingStop->user_id, true);
+                $user_ids = $userIds ?? [];
+                if (!in_array($user_id, $user_ids)) {
+                    $user_ids[] = $user_id;
+                    $existingStop->user_id = $user_ids;
+                    $existingStop->save();
+                }
+            } else {
+                $data = [
+                    'route_id' => $route->id,
+                    'stop_name' => strtolower($departure),
+                    'stop_type' => 0,
+                    'user_id' => json_encode([$user_id]),
+                    'order' => $key,
+                ];
+                Stops::create($data);
+            }
         }
 
-        Stops::query()->insert($arrStop);
+        foreach ($arrivalArr as $key => $arrival) {
+            $existingStop = Stops::where('stop_name', strtolower($arrival))->where('route_id', $route->id)->first();
+            if ($existingStop) {
+                $userIds = json_decode($existingStop->user_id, true);
+                $user_ids = $userIds ?? [];
+                if (!in_array($user_id, $user_ids)) {
+                    $user_ids[] = $user_id;
+                    $existingStop->user_id = $user_ids;
+                    $existingStop->save();
+                }
+            } else {
+                $data = [
+                    'route_id' => $route->id,
+                    'stop_name' => strtolower($arrival),
+                    'stop_type' => 1,
+                    'user_id' => json_encode([$user_id]),
+                    'order' => $key,
+                ];
+                Stops::create($data);
+            }
+        }
         return response()->json('Thêm mới thành công');
     }
 
@@ -128,7 +151,6 @@ class RouteController extends AdminBaseController
     public function update(Request $request, string $id)
     {
 
-        Log::info($request->all());
         $carId = $request->input('car');
         $departure = $request->input('route_departure');
         $arrival = $request->input('route_arrival');
@@ -175,8 +197,14 @@ class RouteController extends AdminBaseController
 
     public function destroy(string $id)
     {
+        $user = Auth::user();
+
         $route = Routes::findOrFail($id);
-        $route->stops()->delete();
+
+        $route->stops()
+            ->where('user_id', $user->id)
+            ->delete();
+
         $route->passengerCars()->update(['route_id' => null]);
         $route->delete();
         return response()->json('Xóa thành công');

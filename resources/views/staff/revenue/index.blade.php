@@ -31,7 +31,10 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="mt-0 header-title">Thống kê doanh thu</h4>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="mt-0">Doanh thu: 44444444444444444444 VND</h4>
+                    <!-- <a href="{{ route('admin.revenue.add') }}" class="btn btn-primary">Thêm mới </a> -->
+                </div>
                 <form method="GET" class="mb-4 mt-4">
                     <div class="row align-items-end">
                         <div class="col-lg-4 mb-2   ">

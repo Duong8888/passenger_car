@@ -146,7 +146,7 @@
                             <div class="grid grid-cols-12">
                                 <div class="col-span-12 lg:col-span-12 lg:col-start-12">
                                     <div class="swiper testimonialSlider">
-                                        <div class=" swiper-wrapper">
+                                        <div class="    ">
                                             @foreach ($albums as $album)
                                                 <div class="swiper-slide">
                                                     <div class="text-center">
@@ -277,7 +277,7 @@
                                                             <div class="shrink-0">
                                                                 <img
                                                                     class="w-10 h-10 p-1 border-2 rounded-full border-gray-100/50"
-                                                                    src="assets/images/user/img-04.jpg"
+                                                                    src="{{asset('client/images/user/img-04.jpg')}}"
                                                                     alt="img">
                                                             </div>
                                                             <div class="grow ltr:ml-3 rtl:mr-3">
@@ -301,6 +301,77 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    @endforeach
+                                                @endif
+                                                @php
+                                                $userId = Auth::id();
+                                                $userOne = App\Models\User::find($userId);
+                                                    if ($userOne) {
+                                                        $tickets = App\Models\Ticket::where('phone', $userOne->phone)->get();
+                                                        if ($tickets->isNotEmpty()) {
+                                                            $passenger_cars = [];
+                                                            $cars = [];
+                                                            foreach ($tickets as $ticket) {
+                                                                $passenger_car = App\Models\PassengerCar::find($ticket->passenger_car_id);
+                                                                if ($passenger_car) {
+                                                                    $passenger_cars[] = $passenger_car;
+                                                                }
+                                                            }
+                                                            foreach ($passenger_cars as $passenger_car) {
+                                                                $car = App\Models\User::find($passenger_car->user_id);
+                                                                if($car){
+                                                                    $cars[] = $car;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                @endphp
+                                                @if (isset($cars) && count($cars) > 0)
+                                                @php $formOneHit = false; @endphp
+                                                    @foreach ($cars as $car)
+                                                     @if ($car->name == $user[0]->name && !$formOneHit)
+                                                        @php $formOneHit = true; @endphp
+                                                            <div class="mt-8">
+                                                                <form action="{{route('passengerCar.detail.comment')}}" method="POST" enctype="multipart/form-data" class="mt-8 contact-form">
+                                                                    @csrf
+                                                                    <input type="hidden" value="{{request()->route('id')}}" name="passengerCarId">
+                                                                    <div class="col-span-12">
+                                                                            <div class="relative mb-3">
+                                                                                <div class="sm:flex" style="padding: 10px">
+                                                                                    <div class="shrink-0">
+                                                                                        <img
+                                                                                            class="w-10 h-10 p-1 border-2 rounded-full border-gray-100/50"
+                                                                                            src="{{asset('client/images/user/img-04.jpg')}}"
+                                                                                            alt="img">
+                                                                                    </div>
+                                                                                    <div class="grow ltr:ml-3 rtl:mr-3">
+                                                                                        <div>
+                                                                                            <h6 class="text-gray-900 dark:text-gray-50">
+                                                                                                {{ Auth::user()->name }}
+                                                                                            </h6>
+                                                                                            <div class="text-yellow-500 text-17">
+                                                                                                    <i class="mdi mdi-star"></i>
+                                                                                                    <i class="mdi mdi-star"></i>
+                                                                                                    <i class="mdi mdi-star"></i>
+                                                                                                    <i class="mdi mdi-star"></i>
+                                                                                                    <i class="mdi mdi-star"></i>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <textarea name="comments" id="comments" rows="4" class="w-full mt-1 rounded border-gray-100/50 placeholder:text-xs dark:bg-transparent dark:border-gray-800 dark:text-gray-300" placeholder="Hãy đánh giá 5 sao cho chúng tôi"></textarea>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-sm-12 text-end">
+                                                                            <button name="submit" type="submit" id="submit" class="text-white border-transparent btn group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 hover:-translate-y-1">
+                                                                            Gửi đi     <i class="uil uil-message ms-1"></i></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        @endif
                                                     @endforeach
                                                 @endif
                                             </div>

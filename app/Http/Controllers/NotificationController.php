@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Log;
 
 class NotificationController extends Controller
 {
+
     public function sendNotification($id ,$message)
     {
         event(new NewNotification($id, $message));
@@ -24,6 +25,12 @@ class NotificationController extends Controller
         $this->store($data);
     }
 
+
+    public function test(Request $request){
+        Log::info($request->all());
+        $this->sendNotification($request->id ,$request->message);
+    }
+
     public function store($data)
     {
         Notifications::create($data);
@@ -32,6 +39,7 @@ class NotificationController extends Controller
     public function getNotification(Request $request){
         $notification = Notifications::orderBy("created_at", "DESC")->get();
         $countNotification = Notifications::query()->where('is_read',false)->count();
+
         return response()->json(['notification' => $notification, 'count' => $countNotification]);
     }
 

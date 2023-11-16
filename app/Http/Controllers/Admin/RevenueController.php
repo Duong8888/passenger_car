@@ -24,7 +24,7 @@ class RevenueController extends Controller
 
         $revenue = $result->get();
         $totalToday = $price->sum('total_price');
-        return view('admin.pages.revenue.index', compact('revenue', 'totalToday'));
+        return view('admin.pages.revenuestaff.index', compact('revenue', 'totalToday'));
     }
     public function add()
     {

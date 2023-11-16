@@ -11,7 +11,7 @@
                 <tr>
                         <td>{{$value->name}}</td>
                         <td>
-                            <form action="{{route('notifications.sendMessage')}}" method="POST">
+                            <form action="{{url('notifications/test')}}" method="POST">
                                 @csrf
                                 <input type="hidden" name="id" value="{{$value->id}}">
                                 <input type="hidden" name="message" value="Dương đẹp trai 123">
