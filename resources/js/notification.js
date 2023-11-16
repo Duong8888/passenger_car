@@ -7,7 +7,7 @@ $(document).ready(function () {
     const notificationAdmin = $('.noti-scroll');
     const countNotificationsAdmin = $('.noti-title');
     const countNotificationsBtnAdmin = $('.noti-icon-badge');
-    console.log(urlNotification);
+
     Echo.private(channelName)
         .listen('NewNotification', (e) => {
             loadNotification();
