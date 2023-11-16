@@ -69,6 +69,7 @@ class HomeController extends Controller
         $user = User::where('id', $passengerCars[0]->user->id)->get();
         $comments = $passengerCars[0]->comments;
         $workingTime = WorkingTime::query()->where('id', $request->time)->get();
+
         $userID = $user[0]->id; 
         $routeID = $passengerCars[0]->route->id; 
 
@@ -78,7 +79,7 @@ class HomeController extends Controller
                     ->orWhereRaw('JSON_CONTAINS(user_id, ?)', ['['.$userID.']']);
             })
             ->get();
-                
+
         return view('client.pages.home.passengerCar-detail', compact('albums', 'routes', 'passengerCars', 'user', 'comments', 'stops', 'services', 'workingTime'));
     }
 
