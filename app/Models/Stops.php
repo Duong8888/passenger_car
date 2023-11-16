@@ -16,6 +16,7 @@ class Stops extends Model
         'stop_name',
         'stop_type',
         'route_id',
+        'user_id',
         'order',
     ];
 
