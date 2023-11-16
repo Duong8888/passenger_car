@@ -123,7 +123,7 @@ $(document).ready(function () {
                     </div>
                     `);
                 } else {
-                    loadItem(response.data, response.dataRoute);
+                    loadItem(response.data, response.dataRoute, response.filterStops);
                 }
             },
             error: function (error) {
@@ -186,7 +186,33 @@ $(document).ready(function () {
 
     }
 
-    function loadItem(data, dataRoute) {
+    function loadStops(filterStops){
+        choicesDeparture.clearStore();
+        choicesArrival.clearStore();
+        const stopOptionsDeparture = [];
+        const stopOptionsArrival = [];
+        $.each(filterStops, function (index, stop) {
+            if(stop.stop_type == 0){
+                const optionDeparture = {
+                    value: stop.id,
+                    label: stop.stop_name
+                };
+                stopOptionsDeparture.push(optionDeparture);
+            }else {
+                const optionArrival = {
+                    value: stop.id,
+                    label: stop.stop_name
+                };
+                stopOptionsArrival.push(optionArrival);
+            }
+        });
+        choicesDeparture.setChoices(stopOptionsDeparture, 'value', 'label', true);
+        choicesArrival.setChoices(stopOptionsArrival, 'value', 'label', true);
+    }
+
+    function loadItem(data, dataRoute,filterStops) {
+        loadStops(filterStops);
+        console.log(filterStops);
         dataList.html('');
         loading.hide();
         var service = '';
@@ -453,7 +479,10 @@ $(document).ready(function () {
     // lọc theo điểm đón trả
 
     filterStopsArrival.on("change", function (event) {
-        filterStopsArrivalValue = filterStopsArrival.val()
+        filterStopsArrivalValue = filterStopsArrival.val();
+        formData.append('departure', $('select[name="departure"]').val());
+        formData.append('arrival', $('select[name="arrival"]').val());
+        formData.append('arrivalStop', filterStopsArrivalValue);
         if (filterStopsArrivalValue) {
             $('#arrivalFilterShow').html(`<div class="inline-block border p-[6px] border-gray-100/50 rounded group/joblist dark:border-gray-100/20">
                                                 <div class="flex items-center">
@@ -469,7 +498,11 @@ $(document).ready(function () {
                                                 </div>
                                             </div>`)
         }
-        search()
+        ajaxRequest(
+            'sortBy',
+            formData,
+            true
+        );
     });
 
     $('#arrivalFilterShow').on("click", function (event) {
@@ -478,11 +511,18 @@ $(document).ready(function () {
         filterStopsArrival.val('');
         filterStopsArrivalValue = '';
         $('#arrivalFilterShow').html('');
-        search()
+        ajaxRequest(
+            'sortBy',
+            formData,
+            true
+        );
     });
 
     filterStopsDeparture.on("change", function (event) {
         filterStopsDepartureValue = filterStopsDeparture.val()
+        formData.append('departure', $('select[name="departure"]').val());
+        formData.append('arrival', $('select[name="arrival"]').val());
+        formData.append('departureStop', filterStopsDepartureValue);
         if (filterStopsDepartureValue) {
             $('#departureFilterShow').html(`<div class="mr-4 inline-block border p-[6px] border-gray-100/50 rounded group/joblist dark:border-gray-100/20">
                                                 <div class="flex items-center">
@@ -498,7 +538,11 @@ $(document).ready(function () {
                                                 </div>
                                             </div>`)
         }
-        search()
+        ajaxRequest(
+            'sortBy',
+            formData,
+            true
+        );
     });
 
     $('#departureFilterShow').on("click", function (event) {
@@ -507,7 +551,11 @@ $(document).ready(function () {
         filterStopsDeparture.val('');
         filterStopsDepartureValue = '';
         $('#departureFilterShow').html('');
-        search()
+        ajaxRequest(
+            'sortBy',
+            formData,
+            true
+        );
     });
 
 

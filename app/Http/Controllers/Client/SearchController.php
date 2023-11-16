@@ -24,7 +24,7 @@ class SearchController extends Controller
         public VietnameseProvinces $vietnameseProvinces,
         public Service             $service,
         public PassengerCarService $passengerCarService,
-        public User $users,
+        public User                $users,
     )
     {
     }
@@ -42,7 +42,7 @@ class SearchController extends Controller
 
     public function searchRequest(Request $request)
     {
-        $user = $this->users->where('user_type','admin')->get();
+        $user = $this->users->where('user_type', 'admin')->get();
         $routes = $this->routes
             ->where('arrival', $request->arrival)
             ->where('departure', $request->departure)
@@ -66,12 +66,12 @@ class SearchController extends Controller
             if (empty($routes)) {
                 $routes[0] = [];
             }
-            return view($this->pathview . '.findRoutes', ['data' => $passengerCar, 'dataRoute' => $routes[0], 'stops' => $dataRoutes['stops'], 'filterStops' => $filterStops['data'], 'message' => $message,'user'=>$user]);
+            return view($this->pathview . '.findRoutes', ['data' => $passengerCar, 'dataRoute' => $routes[0], 'stops' => $dataRoutes['stops'], 'filterStops' => $filterStops['data'], 'message' => $message, 'user' => $user]);
         }
     }
 
 
-    public function filterPassengerCars($departure = null, $arrival = null, $filterArrival = null, $filterDeparture = null, $type = null, $minTimes = null, $maxTimes = null, $priceStart = null, $priceEnd = null,$users = null)
+    public function filterPassengerCars($departure = null, $arrival = null, $type = null, $minTimes = null, $maxTimes = null, $priceStart = null, $priceEnd = null, $users = null, $departureStop = null, $arrivalStop = null)
     {
         $query = DB::table('passenger_cars')
             ->join('routes', 'passenger_cars.route_id', '=', 'routes.id')
@@ -101,14 +101,29 @@ class SearchController extends Controller
         if ($type != null) {
             $query->orderBy('passenger_cars.price', $type);
         }
-//
-//        if (!empty($filterArrival != null)) {
-//            $query->where('stops.id', $filterArrival);
-//        }
-//        if (!empty($filterDeparture != null)) {
-//            $query->where('stops.id', $filterDeparture);
-//        }
-//
+
+        if ($departureStop !== null) {
+            $query->whereExists(function ($query) use ($departureStop) {
+                $query->select(DB::raw(1))
+                    ->from('stops')
+                    ->whereColumn('stops.route_id', 'routes.id')
+                    ->where('stops.id', $departureStop)
+                    ->whereRaw('JSON_CONTAINS(stops.user_id, CAST(passenger_cars.user_id AS CHAR))');
+            });
+        }
+
+        if ($arrivalStop !== null) {
+            $query->whereExists(function ($query) use ($arrivalStop) {
+                $query->select(DB::raw(1))
+                    ->from('stops')
+                    ->whereColumn('stops.route_id', 'routes.id')
+                    ->where('stops.id', $arrivalStop)
+                    ->whereRaw('JSON_CONTAINS(stops.user_id, CAST(passenger_cars.user_id AS CHAR))');
+            });
+        }
+
+
+
         if ($minTimes != null || $maxTimes != null) {
             $query->where(function ($query) use ($minTimes, $maxTimes) {
                 foreach ($minTimes as $key => $minTime) {
@@ -121,7 +136,7 @@ class SearchController extends Controller
             $query->whereBetween('passenger_cars.price', [$priceStart, $priceEnd]);
         }
 
-        if($users != null){
+        if ($users != null) {
             $userIdsArray = $users;
             $userIds = array_keys($userIdsArray);
             $query->whereIn('passenger_cars.user_id', $userIds);
@@ -141,17 +156,17 @@ class SearchController extends Controller
         Log::info($routes);
         $departure = $request->departure;
         $arrival = $request->arrival;
-        $filterArrival = $request->input('filterArrival', '');
-        $filterDeparture = $request->input('filterDeparture', '');
         $type = $request->input('type', 'desc');
         $max = $request->input('max', '');
         $min = $request->input('min', '');
         $priceStart = $request->input('price-start', '0');
         $priceEnd = $request->input('price-end', '2000000');
         $users = $request->input('users');
+        $departureStop = $request->input('departureStop',null);
+        $arrivalStop = $request->input('arrivalStop', null);
 
 
-        $idPassengerCars = $this->filterPassengerCars($departure, $arrival, $filterArrival, $filterDeparture, $type, $min, $max, $priceStart, $priceEnd, $users);
+        $idPassengerCars = $this->filterPassengerCars($departure, $arrival, $type, $min, $max, $priceStart, $priceEnd, $users,$departureStop,$arrivalStop);
         $service = $this->service::all();
         $PassengerCarsService = $this->passengerCarService::all();
         Log::info($idPassengerCars);

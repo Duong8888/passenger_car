@@ -69,7 +69,16 @@ class HomeController extends Controller
         $user = User::where('id', $passengerCars[0]->user->id)->get();
         $comments = $passengerCars[0]->comments;
         $workingTime = WorkingTime::query()->where('id', $request->time)->get();
-        $stops = Stops::where('route_id', $passengerCars[0]->route->id)->where('user_id', $user[0]->id)->get();
+
+        $userID = $user[0]->id;
+        $routeID = $passengerCars[0]->route->id;
+
+        $stops = Stops::where('route_id', $routeID)
+            ->where(function ($query) use ($userID) {
+                $query->whereRaw('JSON_CONTAINS(user_id, ?)', ['["' . $userID . '"]'])
+                    ->orWhereRaw('JSON_CONTAINS(user_id, ?)', ['['.$userID.']']);
+            })
+            ->get();
 
         return view('client.pages.home.passengerCar-detail', compact('albums', 'routes', 'passengerCars', 'user', 'comments', 'stops', 'services', 'workingTime'));
     }
