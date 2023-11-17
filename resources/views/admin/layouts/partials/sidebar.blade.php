@@ -78,6 +78,14 @@
 
                     </a>
                 </li>
+                @if(auth()->user()->hasAnyRole(['SupperAdmin', 'Admin','AdminTicket']))
+                    <li>
+                        <a href="{{ route('admin.ticket.index') }}" >
+                            <i class="mdi mdi-texture"></i>
+                            <span>Quản lý Vé</span>
+                        </a>
+                    </li>
+                @endif
                 <li>
                     <a href="{{ route('admin.revenue.index') }}">
                         <i class="mdi mdi-view-dashboard-outline"></i>
@@ -124,14 +132,7 @@
                         </a>
                     </li>
                 @endif
-                @if(auth()->user()->hasAnyRole(['SupperAdmin', 'Admin','AdminTicket']))
-                    <li>
-                        <a href="{{ route('admin.ticket.index') }}" >
-                            <i class="mdi mdi-texture"></i>
-                            <span>Quản lý Vé</span>
-                        </a>
-                    </li>
-                @endif
+                
                 @if(auth()->user()->hasAnyRole(['SupperAdmin', 'Admin','Nhà xe']))
                     <li>
                         <a href="{{ route('admin.service.index') }}">

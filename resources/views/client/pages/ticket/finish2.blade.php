@@ -47,7 +47,8 @@
                     <p>Đón lúc: {{ session('value')[0]['time_arrival']}}</p>
                 </div>
 
-                <button data-id="{{ session('value')[1] }}" data-action="{{ route('client.ticket.cancel-ticket') }}" id="cancel-ticket" style="display: block; margin: 0 auto; background-color: red; color: white; width: 100% ; margin-top: 50px; padding: 10px ">Hủy Vé</button>
+              
+               
             </div>
 
             <div style="width: 30%">
@@ -70,10 +71,10 @@
                     style="border: 1px solid #000; padding: 10px; display: flex; flex-direction: column; justify-content: space-between;margin-top: 50px">
                     <h3>Thông tin giao dịch</h3>
                     <div style="margin-bottom: 10px;">
-                        <p style="margin: 0; font-size: 14px;">Hình thức thanh toán: thanh toán tại nhà xe</p>
+                        <p style="margin: 0; font-size: 14px;">Hình thức thanh toán: đã thanh toán qua vnpay</p>
                     </div>
                     <div style="margin-bottom: 30px;">
-                        <p style="margin: 0; font-size: 14px;">Trạng thái: Trong Chờ Đợi</p>
+                        <p style="margin: 0; font-size: 14px;">Trạng thái: Đã Thanh Toán Thành Công</p>
                        
                     </div>
                    

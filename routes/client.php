@@ -75,7 +75,7 @@ Route::middleware(CheckUser::class)->group(function(){
     Route::get('/payment-method', [TicketController::class, 'PaymentView'])->name('client.ticket.payment-method');
     Route::post('/cancel-ticket', [TicketController::class, 'CancelTicket'])->name('client.ticket.cancel-ticket');
     Route::post('/send-ticket', [TicketController::class, 'endPayment'])->name('client.ticket.end-payment-ticket');
-    Route::get('/send-ticket', [TicketController::class, 'endPayment'])->name('client.ticket.end-payment-ticket');
+    
     Route::post('/vnpay-method', [TicketController::class, 'vnpay_payment'])->name('client.ticket.vnpay-method');
     Route::post('/momo-method', [TicketController::class, 'momo_payment'])->name('client.ticket.momo-method');
     Route::get('/vnpay-todb', [TicketController::class, 'checkoutPayment'])->name('client.ticket.add-vnpay-to-db');

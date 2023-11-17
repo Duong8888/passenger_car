@@ -18,7 +18,7 @@ class TicketController extends AdminBaseController
     public $pathView = 'admin.pages.ticket.';
     public $urlbase = 'admin.tickets.';
     public $fieldImage = 'ticket';
-    public $urlIndex = 'ticket.index';
+    public $urlIndex = 'admin.ticket.index';
     public $titleIndex = 'Danh sách Danh mục';
     public $titleCreate = 'Thêm mới Danh mục';
     public $titleShow = 'Xem chi tiết danh mục';
@@ -65,7 +65,7 @@ class TicketController extends AdminBaseController
     {
         $model = $this->model->findOrFail($id);
         $user_relationship  = User::find($model->phone);
-        dd($user_relationship);
+       
         $passengerCar_relationship = PassengerCar::find($model->passenger_car_id);
         $user = User::all();
 
