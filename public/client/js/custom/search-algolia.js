@@ -115,7 +115,7 @@ $(document).ready(function () {
                 loading.hide();
                 console.log(response.dataRoute);
                 dataList.html('');
-                loadStopRoute(response.filterStops)
+                loadStops(response.filterStops)
                 if (response.data.length === 0) {
                     dataList.append(`
                     <div class="text-center">
@@ -127,6 +127,7 @@ $(document).ready(function () {
                 }
             },
             error: function (error) {
+                loadStops([]);
                 loadFail(error, 'Tuyến đường chưa có xe hoạt động .');
             }
         })
@@ -144,73 +145,104 @@ $(document).ready(function () {
         console.log(error)
     }
 
-    function loadStopRoute(filterStops) {
+    // function loadStopRoute(filterStops) {
+    //
+    //     filterStopsDeparture.empty();
+    //     filterStopsArrival.empty();
+    //
+    //     let offDeparture = true;
+    //     let offArrival = true;
+    //
+    //
+    //     if (!filterStops || filterStops.length > 0) {
+    //         filterStopsArrival.append('<option value="">Chọn điểm trả</option>')
+    //         filterStopsDeparture.append('<option value="">Chọn điểm đón</option>')
+    //         $.each(filterStops, function (index, item) {
+    //             if (item.stop_type === 0) {
+    //                 offDeparture = false;
+    //                 let isSelect = filterStopsDepartureValue == item.id ? 'selected' : '';
+    //                 filterStopsDeparture.append('<option value="' + item.id + '" ' + isSelect + ' >' + item.stop_name + '</option>');
+    //             } else if (item.stop_type === 1) {
+    //                 offArrival = false;
+    //                 let isSelect = filterStopsArrivalValue == item.id ? 'selected' : '';
+    //                 filterStopsArrival.append('<option value="' + item.id + '" ' + isSelect + ' >' + item.stop_name + '</option>');
+    //             }
+    //         });
+    //     }
+    //
+    //     if (offDeparture) {
+    //         filterStopsDeparture.attr('disabled', 'disabled');
+    //         filterStopsDeparture.append('<option  value="">không có điểm đi</option>');
+    //     } else {
+    //         filterStopsDeparture.removeAttr('disabled');
+    //     }
+    //
+    //     if (offArrival) {
+    //         filterStopsArrival.attr('disabled', 'disabled');
+    //         filterStopsArrival.append('<option  value="">không có điểm đến</option>');
+    //     } else {
+    //         filterStopsArrival.removeAttr('disabled');
+    //     }
+    //
+    //
+    // }
 
-        filterStopsDeparture.empty();
-        filterStopsArrival.empty();
-
-        let offDeparture = true;
-        let offArrival = true;
-
-
-        if (!filterStops || filterStops.length > 0) {
-            filterStopsArrival.append('<option value="">Chọn điểm trả</option>')
-            filterStopsDeparture.append('<option value="">Chọn điểm đón</option>')
-            $.each(filterStops, function (index, item) {
-                if (item.stop_type === 0) {
-                    offDeparture = false;
-                    let isSelect = filterStopsDepartureValue == item.id ? 'selected' : '';
-                    filterStopsDeparture.append('<option value="' + item.id + '" ' + isSelect + ' >' + item.stop_name + '</option>');
-                } else if (item.stop_type === 1) {
-                    offArrival = false;
-                    let isSelect = filterStopsArrivalValue == item.id ? 'selected' : '';
-                    filterStopsArrival.append('<option value="' + item.id + '" ' + isSelect + ' >' + item.stop_name + '</option>');
-                }
-            });
-        }
-
-        if (offDeparture) {
-            filterStopsDeparture.attr('disabled', 'disabled');
-            filterStopsDeparture.append('<option  value="">không có điểm đi</option>');
-        } else {
-            filterStopsDeparture.removeAttr('disabled');
-        }
-
-        if (offArrival) {
-            filterStopsArrival.attr('disabled', 'disabled');
-            filterStopsArrival.append('<option  value="">không có điểm đến</option>');
-        } else {
-            filterStopsArrival.removeAttr('disabled');
-        }
-
-
-    }
-
-    function loadStops(filterStops){
-        choicesDeparture.clearStore();
-        choicesArrival.clearStore();
+    function loadStops(filterStops, action = null) {
+        console.log('Anh Duong');
+        console.log(filterStops);
         const stopOptionsDeparture = [];
         const stopOptionsArrival = [];
-        $.each(filterStops, function (index, stop) {
-            if(stop.stop_type == 0){
-                const optionDeparture = {
-                    value: stop.id,
-                    label: stop.stop_name
-                };
-                stopOptionsDeparture.push(optionDeparture);
-            }else {
-                const optionArrival = {
-                    value: stop.id,
-                    label: stop.stop_name
-                };
-                stopOptionsArrival.push(optionArrival);
+        if (action != null) {
+            if (action === true) {
+                choicesDeparture.clearStore();
+                $.each(filterStops, function (index, stop) {
+                    if (stop.stop_type == 0) {
+                        const optionDeparture = {
+                            value: stop.id,
+                            label: stop.stop_name
+                        };
+                        stopOptionsDeparture.push(optionDeparture);
+                    }
+                });
+                choicesDeparture.setChoices(stopOptionsDeparture, 'value', 'label', true);
             }
-        });
-        choicesDeparture.setChoices(stopOptionsDeparture, 'value', 'label', true);
-        choicesArrival.setChoices(stopOptionsArrival, 'value', 'label', true);
+            if (action === false){
+                choicesArrival.clearStore();
+                $.each(filterStops, function (index, stop) {
+                    if (stop.stop_type == 1) {
+                        const optionArrival = {
+                            value: stop.id,
+                            label: stop.stop_name
+                        };
+                        stopOptionsArrival.push(optionArrival);
+                    }
+                });
+                choicesArrival.setChoices(stopOptionsArrival, 'value', 'label', true);
+            }
+        } else {
+            choicesDeparture.clearStore();
+            choicesArrival.clearStore();
+            $.each(filterStops, function (index, stop) {
+                if (stop.stop_type == 0) {
+                    const optionDeparture = {
+                        value: stop.id,
+                        label: stop.stop_name
+                    };
+                    stopOptionsDeparture.push(optionDeparture);
+                } else {
+                    const optionArrival = {
+                        value: stop.id,
+                        label: stop.stop_name
+                    };
+                    stopOptionsArrival.push(optionArrival);
+                }
+            });
+            choicesDeparture.setChoices(stopOptionsDeparture, 'value', 'label', true);
+            choicesArrival.setChoices(stopOptionsArrival, 'value', 'label', true);
+        }
     }
 
-    function loadItem(data, dataRoute,filterStops) {
+    function loadItem(data, dataRoute, filterStops) {
         loadStops(filterStops);
         console.log(filterStops);
         dataList.html('');
@@ -390,30 +422,38 @@ $(document).ready(function () {
 
     // ajax request
     function ajaxRequest(url, data, type = false) {
-        dataList.html('');
-        dataList.append(skeleton);
-        $.ajax({
-            url: url,
-            method: "POST",
-            processData: false, // Set false để ngăn jQuery xử lý dữ liệu FormData
-            contentType: false, // Set false để không thiết lập Header 'Content-Type'
-            data: data,
-            success: function (response) {
-                if (type) {
-                    console.log(response)
-                    loadItem2(response)
-                    if (response.data.length === 0) {
-                        loadFail('fails', 'Không có kết quả phù phợp .');
+        return new Promise((resolve, reject) => {
+            dataList.html('');
+            dataList.append(skeleton);
+            $.ajax({
+                url: url,
+                method: "POST",
+                processData: false,
+                contentType: false,
+                data: data,
+                success: function (response) {
+                    if (type) {
+                        console.log(response);
+                        loadItem2(response);
+                        if (response.data.length === 0) {
+                            loadFail('fails', 'Không có kết quả phù phợp .');
+                            reject('No matching results');
+                        }
+                    } else {
+                        loadItem(response.data, response.dataRoute);
                     }
-                } else {
-                    loadItem(response.data, response.dataRoute);
+                    resolve(response.filterStops);
+                },
+                error: function (error) {
+                    loadFail(error, 'Không có kết quả phù phợp .');
+                    reject(error);
                 }
-                console.log(response);
-            },
-            error: function (error) {
-                loadFail(error, 'Không có kết quả phù phợp .');
-            }
+            });
         });
+    }
+
+    function handleDataStop(dataStop) {
+        loadStops(dataStop);
     }
 
     //sắp xếp theo thứ tự tăng dần
@@ -506,16 +546,17 @@ $(document).ready(function () {
     });
 
     $('#arrivalFilterShow').on("click", function (event) {
-        const defaultValue = selectArrival.options[0].value;
-        choicesArrival.setChoiceByValue(defaultValue);
+        formData.delete('arrivalStop');
         filterStopsArrival.val('');
         filterStopsArrivalValue = '';
         $('#arrivalFilterShow').html('');
-        ajaxRequest(
-            'sortBy',
-            formData,
-            true
-        );
+        ajaxRequest('sortBy', formData, true)
+            .then((filterStops) => {
+                loadStops(filterStops, false)
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
     });
 
     filterStopsDeparture.on("change", function (event) {
@@ -546,18 +587,16 @@ $(document).ready(function () {
     });
 
     $('#departureFilterShow').on("click", function (event) {
-        const defaultValue = selectDeparture.options[0].value;
-        choicesDeparture.setChoiceByValue(defaultValue);
+        formData.delete('departureStop');
         filterStopsDeparture.val('');
         filterStopsDepartureValue = '';
         $('#departureFilterShow').html('');
-        ajaxRequest(
-            'sortBy',
-            formData,
-            true
-        );
+        ajaxRequest('sortBy', formData, true)
+            .then((filterStops) => {
+                loadStops(filterStops, true)
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
     });
-
-
-
 });
