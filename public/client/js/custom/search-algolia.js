@@ -416,6 +416,10 @@ $(document).ready(function () {
         });
     }
 
+    function handleDataStop(dataStop) {
+        loadStops(dataStop);
+    }
+
     //sắp xếp theo thứ tự tăng dần
     var formData = new FormData($('#uploadForm')[0]);
     $(document).on('change', '.sortBy', function (e) {
@@ -506,6 +510,7 @@ $(document).ready(function () {
     });
 
     $('#arrivalFilterShow').on("click", function (event) {
+        formData.delete('arrivalStop');
         const defaultValue = selectArrival.options[0].value;
         choicesArrival.setChoiceByValue(defaultValue);
         filterStopsArrival.val('');
@@ -516,6 +521,7 @@ $(document).ready(function () {
             formData,
             true
         );
+        // loadStops(dataStop);
     });
 
     filterStopsDeparture.on("change", function (event) {
@@ -546,6 +552,7 @@ $(document).ready(function () {
     });
 
     $('#departureFilterShow').on("click", function (event) {
+        formData.delete('departureStop');
         const defaultValue = selectDeparture.options[0].value;
         choicesDeparture.setChoiceByValue(defaultValue);
         filterStopsDeparture.val('');
@@ -556,6 +563,8 @@ $(document).ready(function () {
             formData,
             true
         );
+        // console.log(dataStop);
+        // loadStops(dataStop);
     });
 
 
