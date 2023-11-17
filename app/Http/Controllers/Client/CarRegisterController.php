@@ -59,12 +59,23 @@ class CarRegisterController extends Controller
         Notifications::create($data);
         $message = "Cảm ơn bạn đã tin tưởng chúng tôi. Chúng tôi sẽ liên hệ bạn vào thời gian sớm nhất.";
         $messageStatus = "Bạn đã đăng ký thành công";
+        $alreadySent = false;
+        if (!$alreadySent) {
+            $mailSender = new NotificationMail($messageStatus, 'mails.carRegister', $message);
+            Mail::to($email)->send($mailSender);
 
-
-        $mailSender = new NotificationMail($messageStatus, 'mails.carRegister', $message);
-        Mail::to($email)->send($mailSender);
+            $alreadySent = true; // Đặt cờ để chỉ ra rằng email đã được gửi
+        }
 
         return view('client.pages.car-register.index', ['message' => $message, 'messageStatus' => $messageStatus]);
+
+
     }
 
+//Họ và tên: $fullName
+////          Số điện thoại: $phone
+////            Email: $email
+////            Xe muốn đăng ký: $passengerCar_name
+////            Tỉnh/thành phố: $province
+////            Nội dung tin nhắn: $meassageInput
 }
