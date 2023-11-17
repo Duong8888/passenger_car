@@ -17,8 +17,7 @@ use App\Http\Controllers\Client\CarRegisterController;
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/listPassengerCar',[HomeController::class,'listPassengerCar'])->name('listPassengerCar');
 Route::get('car/{id}',[HomeController::class,'passengerCarDetail'])->name('passengerCar.detail');
-
-//Route::post('/passengerCar-detail',[HomeController::class,'passengerCarDetail'])->name('passengerCar-detail');
+Route::post('addComment',[HomeController::class,'addComment'])->name('passengerCar.detail.comment');
 Route::resource('/profile',ProfileController::class);
 Route::get('/profile/ticketdetails/{id}',[ProfileController::class,'ticketDetails'])->name('ticketDetails_index');
 

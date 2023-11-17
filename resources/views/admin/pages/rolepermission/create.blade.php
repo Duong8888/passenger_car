@@ -1,14 +1,31 @@
 @extends('admin.layouts.master')
-
-@section('page-script')
-    <!--Morris Chart-->
-    <script src="admin/libs/morris.js06/morris.min.js"></script>
-    <script src="admin/libs/raphael/raphael.min.js"></script>
-
-    <!-- Dashboar init js-->
-    <script src="admin/js/pages/dashboard.init.js"></script>
+@section('page-style')
+   <!-- third party css -->
+<link href="{{ asset('admin/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('admin/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('admin/libs/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('admin/libs/datatables.net-select-bs5/css//select.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="{{ asset ('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css') }}">
+<!-- third party css end -->
 @endsection
-
+@section('page-script')
+    <!-- third party js -->
+    <script src="{{ asset('admin/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('admin/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('admin/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('admin/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('admin/libs/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('admin/libs/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('admin/libs/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('admin/libs/datatables.net-buttons/js/buttons.flash.min.js') }}"></script>
+    <script src="{{ asset('admin/libs/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('admin/libs/datatables.net-keytable/js/dataTables.keyTable.min.js') }}"></script>
+    <script src="{{ asset('admin/libs/datatables.net-select/js/dataTables.select.min.js') }}"></script>
+    <script src="{{ asset('admin/libs/pdfmake/build/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('admin/libs/pdfmake/build/vfs_fonts.js') }}"></script>
+    <!-- Datatables init -->
+    <script src="{{ asset('admin/js/pages/datatables.init.js') }}"></script>
+@endsection
 @section('content')
     <div class="content">
         <div class="row">
