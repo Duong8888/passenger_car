@@ -67,7 +67,10 @@
                 <div class="col-6">
                   <div class="mb-3">
                     <label class="form-label">Payment Method</label>
-                    <input type="text" class="form-control" name="payment_method">
+                    <select name="payment_method" class="form-control">
+                      <option value="Đã Thanh toán VNPAY">Đã Thanh toán VNPAY</option>
+                      <option value="thanh toán tại nhà xe">thanh toán tại nhà xe</option>
+              </select>
                   </div>
                   <div class="mb-3">
                     <label class="form-label">User</label>
@@ -116,6 +119,7 @@
                     <select name="passenger_car_id" class="form-control PassengerCar">
 
                     </select>
+                   
                   </div>
                 </div>
 

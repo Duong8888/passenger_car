@@ -49,8 +49,8 @@ class TicketController extends Controller
            
         Log::info(session('value'));
 
-        // $APIKey = "4804FCD90B5191173B9C05ADAEB455";
-        // $SecretKey = "ECA5AFD4D982FAF3E2315AF3654B4A";
+        // $APIKey = env("APIKEY");
+        // $SecretKey = env("SECRETKEY ");
 
         // $YourPhone = $phoneNumber;
         // $Content = "Cam on quy khach da su dung dich vu cua chung toi. Chuc quy khach mot ngay tot lanh!";
@@ -108,7 +108,7 @@ class TicketController extends Controller
     {
         $a = json_decode($request->session);
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = route('client.ticket.end-payment-ticket');
+        $vnp_Returnurl = route('client.ticket.add-vnpay-to-db');
         $vnp_TmnCode = "AUOGLFUH"; //Mã website tại VNPAY
         $vnp_HashSecret = "GVTYEMYJEHIQHBAUVYJAPQSDYIIKZEIK"; //Chuỗi bí mật
         $vnp_TxnRef = time(); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
@@ -172,10 +172,10 @@ class TicketController extends Controller
     public function checkoutPayment()
     {
         $data = (session()->get('value'));
-
+      
         foreach ($data as $a) {
 
-            Ticket::query()->create([
+          $ticket = Ticket::query()->create([
                 'username' => $a['username'],
                 'status' => 2,
                 'payment_method' => 'Đã Thanh toán VNPAY',
@@ -191,7 +191,38 @@ class TicketController extends Controller
             $a['payment_method'] = 'Đã Thanh toán VNPAY';
         }
      
-        return to_route('client.finish.ticket')->with('success', 'Đặt hàng thành công');
+         // $APIKey = env("APIKEY");
+        // $SecretKey = env("SECRETKEY ");
+
+        // $YourPhone = $phoneNumber;
+        // $Content = "Cam on quy khach da su dung dich vu cua chung toi. Chuc quy khach mot ngay tot lanh!";
+
+        // $SendContent = urlencode($Content);
+        // $data = "http://rest.esms.vn/MainService.svc/json/SendMultipleMessage_V4_get?Phone=$YourPhone&ApiKey=$APIKey&SecretKey=$SecretKey&Content=$SendContent&Brandname=Baotrixemay&SmsType=2";
+
+        // $curl = curl_init($data);
+        // curl_setopt($curl, CURLOPT_FAILONERROR, true);
+        // curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+        // curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        // $result = curl_exec($curl);
+
+        // $obj = json_decode($result, true);
+        // if ($obj['CodeResult'] == 100) {
+        //     Log::info("thành công ");
+        // } else {
+        //     Log::info("lỗi  ");
+        // }
+        $user_id = session('value')[0]['passenger_car_user'];
+        $message =session('value')[0]['username']. ' đã đặt vé thành công';
+        $notification = new NotificationController();
+        $notification->sendNotification($user_id, $message);
+
+        SendMail::dispatch(session('value')[0]['email'],  $ticket);
+        $passenger_car = PassengerCar::where('id', session('value')[0]['passenger_car_id'])->get();
+
+        return view('client.pages.ticket.finish2', [
+            'data' => $passenger_car,
+        ]);
     }
 
 
