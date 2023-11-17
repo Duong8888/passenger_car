@@ -32,7 +32,6 @@ class HomeController extends Controller
 
     public function index()
     {
-
         $data = $this->vietnameseProvinces->get('name');
         $stops = [];
         foreach ($data as $key => $value) {
@@ -70,8 +69,8 @@ class HomeController extends Controller
         $comments = $passengerCars[0]->comments;
         $workingTime = WorkingTime::query()->where('id', $request->time)->get();
 
-        $userID = $user[0]->id;
-        $routeID = $passengerCars[0]->route->id;
+        $userID = $user[0]->id; 
+        $routeID = $passengerCars[0]->route->id; 
 
         $stops = Stops::where('route_id', $routeID)
             ->where(function ($query) use ($userID) {
@@ -114,6 +113,17 @@ class HomeController extends Controller
             ->join('users', 'passenger_cars.user_id', '=', 'users.id');
         $data = $query->get();
         return ['data' => $data];
+    }
+    
+    public function addComment(Request $request)
+    {
+        $comment = new Comment();
+        $comment->passenger_car_id = $request->input('passengerCarId');
+        $comment->user_id = $request->user()->id;
+        $comment->star = 5;
+        $comment->content = $request->input('comments');
+        $comment->save();
+        return back();
     }
 
 
