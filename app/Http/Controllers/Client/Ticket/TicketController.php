@@ -8,6 +8,7 @@ use App\Jobs\SendMail;
 use App\Models\PassengerCar;
 use App\Models\Stops;
 use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
@@ -70,10 +71,12 @@ class TicketController extends Controller
         //     Log::info("lỗi  ");
         // }
 
-         $notification = new NotificationController();
-         $notification->sendNotification($user_id, $message);
+        $notification = new NotificationController();
+        $notification->sendNotification($user_id, $message);
+        $emailAdmin = User::query()->findOrFail($user_id);
 
-        SendMail::dispatch($request->email,  $ticket);
+        SendMail::dispatch($emailAdmin, $ticket);
+        SendMail::dispatch($request->email, $ticket);
 
         return response()->json(['success' => 'Done'], Response::HTTP_OK);
     }

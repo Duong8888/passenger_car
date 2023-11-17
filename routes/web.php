@@ -20,7 +20,9 @@ use App\Http\Controllers\Admin\EditorController;
 
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\PostCategoryController;
+use App\Http\Controllers\Admin\RevenueAdminController;
 use App\Http\Controllers\Admin\RevenueController;
+use App\Http\Controllers\admin\RevenueStaffController;
 
 /*
 |--------------------------------------------------------------------------
@@ -142,8 +144,8 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         Route::get('customers/edit/{customer}', [CustomerController::class, 'edit'])->name('customer.edit');
         Route::put('customers/edit/{id}', [CustomerController::class, 'update'])->name('customer.update');
         Route::delete('customers/delete/{id}', [CustomerController::class, 'delete'])->name('customer.delete');
-
-        Route::get('revenue/', [RevenueController::class, 'index'])->name('revenue.index');
+//Bùi Hiếu
+        Route::get('revenue1/', [RevenueController::class, 'index'])->name('revenue.index');
         Route::get('revenue/add', [RevenueController::class, 'add'])->name('revenue.add');
         Route::post('revenue/add', [RevenueController::class, 'store'])->name('revenue.store');
         Route::get('revenue/edit/{revenue}', [RevenueController::class, 'edit'])->name('revenue.edit');
@@ -154,6 +156,14 @@ Route::group(['prefix' => 'notifications', 'as' => 'notifications.'], function (
     Route::get('/', [NotificationController::class, 'showList']);
     Route::post('send', [NotificationController::class, 'sendNotification'])->name('sendMessage');
     Route::post('load', [NotificationController::class, 'getNotification'])->name('loadMessage');
+});
+// Tổng doanh thu cho admin
+Route::prefix('revenue')->controller(RevenueAdminController::class)->name('revenueAdmin.')->group(function (){
+    Route::get('/', 'index')->name('index');
+});
+// Tổng doanh thu cho nhà xe
+Route::prefix('revenueStaff')->controller(RevenueStaffController::class)->name('revenueStaff.')->group(function (){
+    Route::get('/', 'index')->name('index');
 });
 
 // Route::get('/management/index',[App\Http\Controllers\Admin\AdminManagementController::class,'index'])->name('route_adminmanagement_index');

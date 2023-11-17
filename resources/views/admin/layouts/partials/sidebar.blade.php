@@ -78,6 +78,7 @@
 
                     </a>
                 </li>
+
                 @if(auth()->user()->hasAnyRole(['SupperAdmin', 'Admin','AdminTicket']))
                     <li>
                         <a href="{{ route('admin.ticket.index') }}" >
@@ -87,11 +88,14 @@
                     </li>
                 @endif
                 <li>
+
+                {{-- <li>
+>
                     <a href="{{ route('admin.revenue.index') }}">
                         <i class="mdi mdi-view-dashboard-outline"></i>
                         <span> Thống kê doanh thu </span>
                     </a>
-                </li>
+                </li> --}}
                 <li>
                     <a href="{{ route('admin.customer.index') }}">
                         <i class="mdi mdi-view-dashboard-outline"></i>

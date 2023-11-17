@@ -165,12 +165,14 @@ class SearchController extends Controller
         $departureStop = $request->input('departureStop',null);
         $arrivalStop = $request->input('arrivalStop', null);
 
+        $filterStops = $this->filterStops($departure, $arrival);
+
 
         $idPassengerCars = $this->filterPassengerCars($departure, $arrival, $type, $min, $max, $priceStart, $priceEnd, $users,$departureStop,$arrivalStop);
         $service = $this->service::all();
         $PassengerCarsService = $this->passengerCarService::all();
         Log::info($idPassengerCars);
-        return response()->json(['data' => $idPassengerCars, 'dataRoute' => $routes[0], 'service' => $service, 'passengerCarsService' => $PassengerCarsService]);
+        return response()->json(['data' => $idPassengerCars, 'dataRoute' => $routes[0], 'service' => $service, 'passengerCarsService' => $PassengerCarsService,'filterStops' => $filterStops['data']]);
     }
 
     public function filterStops($departure, $arrival)
