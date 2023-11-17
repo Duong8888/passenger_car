@@ -17,10 +17,6 @@ $(document).ready(function () {
         popup.classList.add("hidden");
     }
 
-    window.onload = function () {
-        hidePopup();
-    };
-
 
     var CountTicket = $(".qty-input").val();
     var totalTicket = '';

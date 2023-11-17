@@ -1,27 +1,50 @@
 @extends('admin.layouts.master')
-
+@section('page-style')
+   <!-- third party css -->
+<link href="{{ asset('admin/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('admin/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('admin/libs/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('admin/libs/datatables.net-select-bs5/css//select.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="{{ asset ('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css') }}">
+<!-- third party css end -->
+@endsection
 @section('page-script')
-    <!--Morris Chart-->
-    <script src="admin/libs/morris.js06/morris.min.js"></script>
-    <script src="admin/libs/raphael/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="{{ asset('admin/js/custom/ticket-report.js') }}"></script>
-    <script src="{{ asset('admin/js/custom/user-report.js') }}"></script>
-    <!-- Dashboar init js-->
-    <script src="admin/js/pages/dashboard.init.js"></script>
+ <!-- third party js -->
+ <script src="{{ asset('admin/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+ <script src="{{ asset('admin/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
+ <script src="{{ asset('admin/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+ <script src="{{ asset('admin/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js') }}"></script>
+ <script src="{{ asset('admin/libs/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
+ <script src="{{ asset('admin/libs/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js') }}"></script>
+ <script src="{{ asset('admin/libs/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
+ <script src="{{ asset('admin/libs/datatables.net-buttons/js/buttons.flash.min.js') }}"></script>
+ <script src="{{ asset('admin/libs/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
+ <script src="{{ asset('admin/libs/datatables.net-keytable/js/dataTables.keyTable.min.js') }}"></script>
+ <script src="{{ asset('admin/libs/datatables.net-select/js/dataTables.select.min.js') }}"></script>
+ <script src="{{ asset('admin/libs/pdfmake/build/pdfmake.min.js') }}"></script>
+ <script src="{{ asset('admin/libs/pdfmake/build/vfs_fonts.js') }}"></script>
+ <!-- Datatables init -->
+ <script src="{{ asset('admin/js/pages/datatables.init.js') }}"></script>
+<!--Morris Chart-->
+<script src="{{asset('admin/libs/morris.js06/morris.min.js')}}"></script>
+<script src="{{asset('admin/libs/raphael/raphael.min.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ asset('admin/js/custom/ticket-report.js') }}"></script>
+<script src="{{ asset('admin/js/custom/user-report.js') }}"></script>
+<!-- Dashboar init js-->
+<script src="{{asset('admin/js/pages/dashboard.init.js')}}"></script>
+<script src="{{ asset('admin/libs/flot-charts/jquery.flot.js') }}"></script>
+<script src="{{ asset('admin/libs/flot-charts/jquery.flot.time.js') }}"></script>
+<script src="{{ asset('admin/libs/jquery.flot.tooltip/js/jquery.flot.tooltip.min.js') }}"></script>
+<script src="{{ asset('admin/libs/flot-charts/jquery.flot.resize.js') }}"></script>
+<script src="{{ asset('admin/libs/flot-charts/jquery.flot.pie.js') }}"></script>
+<script src="{{ asset('admin/libs/flot-charts/jquery.flot.selection.js') }}"></script>
+<script src="{{ asset('admin/libs/flot-charts/jquery.flot.stack.js') }}"></script>
+<script src="{{ asset('admin/libs/flot-orderbars/js/jquery.flot.orderBars.js') }}"></script>
+<script src="{{ asset('admin/libs/flot-charts/jquery.flot.crosshair.js') }}"></script>
 
-    <script src="{{ asset('admin/libs/flot-charts/jquery.flot.js') }}"></script>
-    <script src="{{ asset('admin/libs/flot-charts/jquery.flot.time.js') }}"></script>
-    <script src="{{ asset('admin/libs/jquery.flot.tooltip/js/jquery.flot.tooltip.min.js') }}"></script>
-    <script src="{{ asset('admin/libs/flot-charts/jquery.flot.resize.js') }}"></script>
-    <script src="{{ asset('admin/libs/flot-charts/jquery.flot.pie.js') }}"></script>
-    <script src="{{ asset('admin/libs/flot-charts/jquery.flot.selection.js') }}"></script>
-    <script src="{{ asset('admin/libs/flot-charts/jquery.flot.stack.js') }}"></script>
-    <script src="{{ asset('admin/libs/flot-orderbars/js/jquery.flot.orderBars.js') }}"></script>
-    <script src="{{ asset('admin/libs/flot-charts/jquery.flot.crosshair.js') }}"></script>
-
-    <!-- init js -->
-    <script src="{{ asset('admin/js/pages/flot.init.js') }}"></script>
+<!-- init js -->
+<script src="{{ asset('admin/js/pages/flot.init.js') }}"></script>
 
 @endsection
 
@@ -226,8 +249,8 @@
                                 </div>
                             </div>
                             <h4 class="header-title mt-0">Thống kê vé</h4>
-                            <div id="morris-bar-example" dir="ltr" class="morris-chart">
-                                <canvas id="myChart"></canvas>
+                            <div id="morris-bar-example" style="height: 390px;" dir="ltr" class="morris-chart">
+                                <canvas id="myChart" ></canvas>
                             </div>
                         </div>
                     </div>

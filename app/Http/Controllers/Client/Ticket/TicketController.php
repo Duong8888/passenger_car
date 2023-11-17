@@ -35,14 +35,19 @@ class TicketController extends Controller
 
     public function endPayment(Request $request)
     {
-       
+
         $user_id = $request->passenger_car_user;
         $message = $request->username . ' đã đặt vé cần xác nhận ';
         $ticket = new Ticket();
         $ticket->fill($request->all());
         $ticket->save();
+        $ticketId = $ticket->id;
         $phoneNumber = $request->phone;
-       
+
+        session()->push('value', $ticketId);
+           
+        Log::info(session('value'));
+
         // $APIKey = "4804FCD90B5191173B9C05ADAEB455";
         // $SecretKey = "ECA5AFD4D982FAF3E2315AF3654B4A";
 
@@ -64,9 +69,9 @@ class TicketController extends Controller
         // } else {
         //     Log::info("lỗi  ");
         // }
-       
-        // $notification = new NotificationController();
-        // $notification->sendNotification($user_id, $message);
+
+         $notification = new NotificationController();
+         $notification->sendNotification($user_id, $message);
 
         SendMail::dispatch($request->email,  $ticket);
 
@@ -94,62 +99,6 @@ class TicketController extends Controller
         //close connection
         curl_close($ch);
         return $result;
-    }
-
-    public function momo_payment()
-    {
-        $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
-        $partnerCode = 'MOMOBKUN20180529';
-        $accessKey = 'klm05TvNBzhg7h7j';
-        $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
-
-        $orderInfo = "Thanh toán qua MoMo";
-        $amount = "10000";
-        $orderId = time() . "";
-        $redirectUrl = "http://127.0.0.1:8000/home";
-        $ipnUrl = "http://127.0.0.1:8000/home";
-        $extraData = "";
-
-
-        if (!empty($_POST)) {
-            $partnerCode = $partnerCode;
-            $accessKey = $accessKey;
-            $serectkey = $secretKey;
-            $orderId = $orderId; // Mã đơn hàng
-            $orderInfo = $orderInfo;
-            $amount = $amount;
-            $ipnUrl = $ipnUrl;
-            $redirectUrl = $redirectUrl;
-            $extraData = $extraData;
-
-            $requestId = time() . "";
-            $requestType = "payWithATM";
-            //$extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
-            //before sign HMAC SHA256 signature
-            $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
-            $signature = hash_hmac("sha256", $rawHash, $serectkey);
-            $data = array(
-                'partnerCode' => $partnerCode,
-                'partnerName' => "Test",
-                "storeId" => "MomoTestStore",
-                'requestId' => $requestId,
-                'amount' => $amount,
-                'orderId' => $orderId,
-                'orderInfo' => $orderInfo,
-                'redirectUrl' => $redirectUrl,
-                'ipnUrl' => $ipnUrl,
-                'lang' => 'vi',
-                'extraData' => $extraData,
-                'requestType' => $requestType,
-                'signature' => $signature
-            );
-            $result = $this->execPostRequest($endpoint, json_encode($data));
-            $jsonResult = json_decode($result, true);  // decode json
-
-            //Just a example, please check more in there
-
-            header('Location: ' . $jsonResult['payUrl']);
-        }
     }
 
     public function vnpay_payment(Request $request)
@@ -206,7 +155,7 @@ class TicketController extends Controller
 
         $vnp_Url = $vnp_Url . "?" . $query;
         if (isset($vnp_HashSecret)) {
-            $vnpSecureHash = hash_hmac('sha512', $hashdata, $vnp_HashSecret); //
+            $vnpSecureHash = hash_hmac('sha512', $hashdata, $vnp_HashSecret); 
             $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
         }
         $returnData = array(
@@ -237,61 +186,8 @@ class TicketController extends Controller
                 'date' => $a['date']
             ]);
             $a['payment_method'] = 'Đã Thanh toán VNPAY';
-
-            $a = (object)$a;
-            $email = new TiketMail($a);
-            Mail::to($a->email)->send($email);
-
-            $notification = new NotificationController();
-            $message = $a['username'] . 'đã đặt vé thành công';
-            $notification->sendNotification($a['passenger_car_user'], $message);
-            $phoneNumber = substr_replace($a->phone, "", 0, 0);
-
-
-            //            $twilioSid = env('TWILIO_SID');
-            //            $twilioToken = env('TWILIO_AUTH_TOKEN');
-            //            // dd($twilioSid,$twilioToken);
-            //            $twilio = new Client($twilioSid, $twilioToken);
-            $mess = "Thông báo đặt vé! " . "\n  Người đặt: " . $a->username . "\n Điểm đón: " . $a->departure .
-                "\n Điểm trả:" . $a->arrival . "\n Số lượng vé: " . $a->quantity . "\n Tổng tiền: " . $a->total_price .
-                "\n Hình thức thanh toán:" . $a->payment_method;
-            //            $message = $twilio->messages->create(
-            //                $phoneNumber,
-            //                [
-            //                    "from" => "+13342314820",
-            //                    "body" =>  (string)$mess
-            //                ]
-            //            );
-
-            $APIKey = "371FC468F99345C39169670876C613"; //env('ESMS_API_KEY');
-            $SecretKey = "CE2DD09E775331ABA3C0A53F349260"; // env('ESMS_API_SEC');
-
-
-            $SendContent = urlencode($mess);
-            $data = "http://rest.esms.vn/MainService.svc/json/SendMultipleMessage_V4_get?Phone=$phoneNumber&ApiKey=$APIKey&SecretKey=$SecretKey&Content=$SendContent&SmsType=8";
-            //De dang ky brandname rieng vui long lien he hotline 0901.888.484 hoac nhan vien kinh Doanh cua ban
-
-            $curl = curl_init($data);
-            curl_setopt($curl, CURLOPT_FAILONERROR, true);
-            curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            $result = curl_exec($curl);
-
-            $obj = json_decode($result, true);
-            if ($obj['CodeResult'] == 100) {
-                print "<br>";
-                print "CodeResult:" . $obj['CodeResult'];
-                print "<br>";
-                print "CountRegenerate:" . $obj['CountRegenerate'];
-                print "<br>";
-                print "SMSID:" . $obj['SMSID'];
-                print "<br>";
-            } else {
-                print "ErrorMessage:" . $obj['ErrorMessage'];
-            }
         }
-        //        return response()->json($dataDebug);
-        session()->forget('cart');
+     
         return to_route('client.finish.ticket')->with('success', 'Đặt hàng thành công');
     }
 
@@ -315,7 +211,13 @@ class TicketController extends Controller
         session()->put('value.0.username', $request->name);
         session()->put('value.0.phone', $request->phone);
         session()->put('value.0.email', $request->email);
-        Log::info(session()->all());
+        Log::info(session('value'));
         return response()->json($arrayInfo, Response::HTTP_OK);
+    }
+
+    public function CancelTicket(Request $request){
+        $ticket = Ticket::where('id', $request->id)->update(['status' => 0]);
+        session()->forget('value');
+        return response()->json(['success' => 'Done'], Response::HTTP_OK);
     }
 }
