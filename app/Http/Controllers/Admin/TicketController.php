@@ -47,12 +47,10 @@ class TicketController extends AdminBaseController
         $user = User::all();
 
         $route = Routes::all();
-        $passengerCar = PassengerCar::with('relatedRoute')->where('route_id',)->get();
 
 
         return view($this->pathView . __FUNCTION__, [
             'user' => $user,
-            'passengerCar' => $passengerCar,
             'route' => $route,
         ])
 

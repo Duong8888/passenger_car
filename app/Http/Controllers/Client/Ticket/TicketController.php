@@ -210,7 +210,7 @@ class TicketController extends Controller
         //     Log::info("lỗi  ");
         // }
         $user_id = session('value')[0]['passenger_car_user'];
-        $message =session('value')[0]['username']. ' đã đặt vé cần xác nhận ';
+        $message =session('value')[0]['username']. ' đã đặt vé thành công';
         $notification = new NotificationController();
         $notification->sendNotification($user_id, $message);
 
