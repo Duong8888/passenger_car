@@ -15,7 +15,6 @@ $(document).ready(function () {
         .subscribed((channel) => {
             console.log(infoUser.name);
         });
-
     // load notification
     $.ajaxSetup({
         headers: {
@@ -45,6 +44,7 @@ $(document).ready(function () {
                             let createdAtDate = new Date(item.created_at);
                             let formattedDate = createdAtDate.getDate() + '/' + (+createdAtDate.getMonth() + 1) + '/' + createdAtDate.getFullYear();
 
+                            const date = formatDate(createdAtDate);
                             notificationClient.append(`
                         <a href="${item.url}">
                             <div class="flex p-4 hover:bg-gray-50/30">
@@ -55,6 +55,7 @@ $(document).ready(function () {
                                         <p class="mb-0"><i
                                                 class="mdi mdi-clock-outline"></i>
                                             <span>${formattedDate}</span></p>
+                                            <span>${date}</span></p>
                                     </div>
                                 </div>
                                 ${item.is_read ? '' : '<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" style="fill: rgba(59, 130, 246, 1);transform: ;msFilter:;"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2z"></path></svg>'}
@@ -74,8 +75,13 @@ $(document).ready(function () {
                         countNotificationsAdmin.html(`<h5 class="m-0">Bạn có ${data.count} thông báo chưa đọc</h5>`);
                         countNotificationsBtnAdmin.html(data.count);
                         $.each(data.notification, function (index, item) {
+                            var getUrl = window.location;
+                            var baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+                            let createdAtDate = new Date(item.created_at);
+                            const date = formatDate(createdAtDate);
                             notificationAdmin.append(`
                                 <a href="${item.url}" class="dropdown-item notify-item">
+                                <a href="${baseUrl + "/"+ item.url}" class="dropdown-item notify-item">
                                     <div class="notify-icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" style="fill: rgba(113, 182, 249, 1);transform: ;msFilter:;"><path d="M12 2C6.579 2 2 6.579 2 12s4.579 10 10 10 10-4.579 10-10S17.421 2 12 2zm0 5c1.727 0 3 1.272 3 3s-1.273 3-3 3c-1.726 0-3-1.272-3-3s1.274-3 3-3zm-5.106 9.772c.897-1.32 2.393-2.2 4.106-2.2h2c1.714 0 3.209.88 4.106 2.2C15.828 18.14 14.015 19 12 19s-3.828-.86-5.106-2.228z"></path></svg>
                                     </div>
@@ -83,6 +89,11 @@ $(document).ready(function () {
                                     <p class="text-muted mb-0 user-msg">
                                         <small>${item.content}</small>
                                     </p>
+                                    <div class="notify-details">
+                                        <p class="mb-0 text-muted d-flex align-items-center"><i
+                                                class="mdi mdi-clock-outline"></i>
+                                            <span class="text-muted mb-0 mx-1">${date}</span></p>
+                                    </div>
                                 </a>
                             `);
                         });
@@ -93,6 +104,18 @@ $(document).ready(function () {
                 console.log(error)
             }
         });
+    }
+    function formatDate(date){
+        const formatter = new Intl.DateTimeFormat('vi-VN', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            timeZone: 'Asia/Ho_Chi_Minh',
+        });
+        const formattedDate = formatter.format(date);
+        return formattedDate
     }
 
     loadNotification();
