@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Events\NewNotification;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\NotificationController;
 use App\Mail\NotificationMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

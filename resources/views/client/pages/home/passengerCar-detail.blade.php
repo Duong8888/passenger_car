@@ -26,7 +26,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </section>
 
 
@@ -146,7 +146,7 @@
                             <div class="grid grid-cols-12">
                                 <div class="col-span-12 lg:col-span-12 lg:col-start-12">
                                     <div class="swiper testimonialSlider">
-                                        <div class="    ">
+                                        <div class="swiper-wrapper">
                                             @foreach ($albums as $album)
                                                 <div class="swiper-slide">
                                                     <div class="text-center">
@@ -543,8 +543,8 @@
                                             <label for="date" class="mr-2">Chọn thời gian:</label>
                                             <input type="date" id="date" name="date" class="px-2 py-1 border-none outline-none" value="{{ date('Y-m-d') }}">
                                           </div>
-                                          
-                                          
+
+
                                         <div class="show-total text-sm my-4"></div>
 
                                         <div class="flex justify-end">
@@ -579,7 +579,7 @@
                                                         @endphp
                                                     @endif
                                                 @endforeach
-                                               
+
                                             </div>
 
                                             <div class="flex flex-col w-1/2 p-4" style="overflow-y: auto; max-height: 200px; max-width: 50%;">
@@ -602,7 +602,7 @@
                                                         @endphp
                                                     @endif
                                                 @endforeach
-                                                
+
                                             </div>
                                         </div>
 
@@ -641,7 +641,7 @@
                                                     name="phone" id="phone" type="text" onblur="validatePhoneNumber(this)"
                                                     value="{{ isset(Auth::user()->phone) ? Auth::user()->phone : '' }}"
                                                     placeholder="Nhập Số điện thoại của bạn">
-                                                    
+
                                             </div>
                                             <div class="mb-4">
                                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email
@@ -651,7 +651,7 @@
                                                     name="email" id="email" type="text"
                                                     value="{{ isset(Auth::user()->email) ? Auth::user()->email : '' }}"
                                                     placeholder="Nhập địa chỉ email của bạn">
-                                                  
+
                                             </div>
                                         </div>
 
@@ -666,7 +666,7 @@
                                                 class="flex submit text-white border-transparent group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 py-2 px-4 rounded float-right"
                                                 data-action="{{ route('client.ticket.update-ticket') }}"
                                                 data-id="
-                                            {{ $passengerCars[0]->id }} 
+                                            {{ $passengerCars[0]->id }}
                                             ">
                                                 Tiếp tục
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"></path></svg>
