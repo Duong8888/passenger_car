@@ -172,14 +172,10 @@ class TicketController extends Controller
     public function checkoutPayment()
     {
         $data = (session()->get('value'));
-      
+
         foreach ($data as $a) {
 
-<<<<<<< HEAD
-            $ticket = Ticket::query()->create([
-=======
           $ticket = Ticket::query()->create([
->>>>>>> 5dea8d91b5404c617593b419d7ae1630eb68c078
                 'username' => $a['username'],
                 'status' => 2,
                 'payment_method' => 'Đã Thanh toán VNPAY',
@@ -194,13 +190,8 @@ class TicketController extends Controller
             ]);
             $a['payment_method'] = 'Đã Thanh toán VNPAY';
         }
-<<<<<<< HEAD
 
-        // $APIKey = env("APIKEY");
-=======
-     
          // $APIKey = env("APIKEY");
->>>>>>> 5dea8d91b5404c617593b419d7ae1630eb68c078
         // $SecretKey = env("SECRETKEY ");
 
         // $YourPhone = $phoneNumber;

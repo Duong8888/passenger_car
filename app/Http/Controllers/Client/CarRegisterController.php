@@ -49,6 +49,7 @@ class CarRegisterController extends Controller
             "Chưa xử lý",
             $created_at,
         ]);
+
         $data = [
             'user_id' =>0,
             'user_send' => 0,

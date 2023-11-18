@@ -9,8 +9,10 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Spatie\Permission\Models\Role;
 
 
 class ContactController extends Controller
@@ -48,14 +50,16 @@ class ContactController extends Controller
             $data->password = $this->randomPassword();
             $data->hashPassword = Hash::make($data->password);
 
-            DB::insert('insert into users (name, email, phone, password, user_type) values (?, ?, ?, ?, ?)', [
-                $data->fullName[0]['fullName'],
-                $data->email[0]['email'],
-                $data->phone[0]['phone'],
-                $data->hashPassword,
-                'staff'
+            $user = User::create([
+                'name' => $data->fullName[0]['fullName'],
+                'email' => $data->email[0]['email'],
+                'phone' => $data->phone[0]['phone'],
+                'password' => $data->hashPassword,
+                'user_type' => 'staff'
             ]);
 
+            $role = Role::where('name', 'Nhà xe')->first();
+            $user->assignRole($role);
             $mailSender = new NotificationMail($messageStatus, 'mails.carRegisterSuccess', $data);
             Mail::to($contact->get(['email']))->send($mailSender);
         }
