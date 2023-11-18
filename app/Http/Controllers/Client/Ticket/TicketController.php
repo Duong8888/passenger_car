@@ -46,7 +46,7 @@ class TicketController extends Controller
         $phoneNumber = $request->phone;
 
         session()->push('value', $ticketId);
-           
+
         Log::info(session('value'));
 
         // $APIKey = env("APIKEY");
@@ -158,7 +158,7 @@ class TicketController extends Controller
 
         $vnp_Url = $vnp_Url . "?" . $query;
         if (isset($vnp_HashSecret)) {
-            $vnpSecureHash = hash_hmac('sha512', $hashdata, $vnp_HashSecret); 
+            $vnpSecureHash = hash_hmac('sha512', $hashdata, $vnp_HashSecret);
             $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
         }
         $returnData = array(
@@ -172,7 +172,7 @@ class TicketController extends Controller
     public function checkoutPayment()
     {
         $data = (session()->get('value'));
-      
+
         foreach ($data as $a) {
 
           $ticket = Ticket::query()->create([
@@ -190,7 +190,7 @@ class TicketController extends Controller
             ]);
             $a['payment_method'] = 'Đã Thanh toán VNPAY';
         }
-     
+
          // $APIKey = env("APIKEY");
         // $SecretKey = env("SECRETKEY ");
 
@@ -248,7 +248,6 @@ class TicketController extends Controller
         Log::info(session('value'));
         return response()->json($arrayInfo, Response::HTTP_OK);
     }
-
     public function CancelTicket(Request $request){
         $ticket = Ticket::where('id', $request->id)->update(['status' => 0]);
         session()->forget('value');
