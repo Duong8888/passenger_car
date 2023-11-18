@@ -4,17 +4,24 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
 class CheckRoles
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, ...$roles)
     {
-        return $next($request);
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
+
+        $userRoles = Auth::user()->roles->pluck('name')->toArray();
+
+        foreach ($roles as $role) {
+            if (in_array($role, $userRoles)) {
+                return $next($request);
+            }
+        }
+
+        return abort(403, 'Bạn không có quyền truy cập vào trang web này! Cảm ơn ^^ ');
     }
 }
