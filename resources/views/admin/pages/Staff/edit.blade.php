@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 @section('content')
 
-<form action="{{ route('route_staff_edit',['id'=>$users->id]) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('admin.route_staff_edit',['id'=>$users->id]) }}" method="POST" enctype="multipart/form-data">
     @csrf
     <h1 class="ml-5 mb-3">Sửa dữ liệu nhân viên</h1>
     

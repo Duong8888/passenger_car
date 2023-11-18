@@ -18,7 +18,7 @@
     <div class="row">
 
 
-      <div class="col-xl-8">
+      <div class="col-xl-12">
         <div class="card">
           <div class="card-body">
             <h4 class="header-title mt-0 mb-3">Tickets Edit</h4>
@@ -45,13 +45,25 @@
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Status</label>
+                 
                   <select name="status" class="form-control">
-                    <option>Choosen status</option>
-                    
-                    @foreach (json_decode('{"0":"Pending","1":"Success"}', true) as $key => $value)
-                    <option value="{{ $key }}">{{ $value }}</option>
-                    @endforeach
-                  </select>
+                    @if ($model->status == 0)
+                        <option value="0" selected>Cancel</option>
+                    @elseif ($model->status == 1)
+                        <option value="1" selected>Pending</option>
+                    @elseif ($model->status == 2)
+                        <option value="2" selected>Success</option>
+                    @endif
+                    @if ($model->status != 0)
+                        <option value="0">Cancel</option>
+                    @endif
+                    @if ($model->status != 1)
+                        <option value="1">Pending</option>
+                    @endif
+                    @if ($model->status != 2)
+                        <option value="2">Success</option>
+                    @endif
+                </select>
                 </div>
                 <div class="mb-3">
                   <label for="quantity" class="form-label">Quantity</label>
@@ -67,17 +79,21 @@
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Payment Method</label>
-                  <input type="text" class="form-control" name="payment_method" value="{{ $model->payment_method }}">
+                  <select name="payment_method" class="form-control">
+                    @if ($model->payment_method == "Đã Thanh toán VNPAY")
+                        <option value="Đã Thanh toán VNPAY" selected>Đã Thanh toán VNPAY</option>
+                        <option value="thanh toán tại nhà xe">thanh toán tại nhà xe</option>
+                    @elseif ($model->payment_method == "thanh toán tại nhà xe")
+                        <option value="thanh toán tại nhà xe" selected>thanh toán tại nhà xe</option>
+                        <option value="Đã Thanh toán VNPAY">Đã Thanh toán VNPAY</option>
+                    @else
+                        <option value="Đã Thanh toán VNPAY">Đã Thanh toán VNPAY</option>
+                        <option value="thanh toán tại nhà xe">thanh toán tại nhà xe</option>
+                    @endif
+                </select>
+                 
                 </div>
-                <div class="mb-3">
-                  <label class="form-label">User</label>
-                  <select name="user_id" class="form-control">
-                    <option value="{{ $user_relationship->id }}">{{ $user_relationship->name }}</option>
-                    @foreach ($user as $key => $data)
-                    <option value="{{ $key + 1 }}">{{ $data->name }}</option>
-                    @endforeach
-                  </select>
-                </div>
+               
                 <div class="mb-3">
                   <label class="form-label">Passenger</label>
                   <select name="passenger_car_id" class="form-control">

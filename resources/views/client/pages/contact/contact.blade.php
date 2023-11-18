@@ -128,274 +128,6 @@
 
 
 
-        {{-- <nav class="navbar fixed right-0 left-0 top-0 lg:top-[44.5px] px-5 lg:px-24 transition-all duration-500 ease shadow-lg shadow-gray-200/20 bg-white border-gray-200 dark:bg-neutral-800 z-40 dark:shadow-neutral-900" id="navbar">
-            <div class="mx-auto container-fluid">
-                <div class="flex flex-wrap items-center justify-between mx-auto">
-                    <a href="index.html" class="flex items-center">
-                        <img src="assets/images/logo-dark.png" alt="" class="logo-dark h-[22px] block dark:hidden">
-                        <img src="assets/images/logo-light.png" alt="" class="logo-dark h-[22px] hidden dark:block">
-                    </a>
-                    <button data-collapse-toggle="navbar-collapse" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg navbar-toggler group lg:hidden hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
-                        <span class="sr-only">Open main menu</span>
-                        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
-                    </button>
-                    <div class="flex items-center lg:order-2">
-                        <div>
-                            <div class="relative dropdown">
-                                <div class="relative">
-                                    <button type="button" class="btn border-0 h-[70px] dropdown-toggle px-4 text-gray-500 dark:text-gray-300" aria-expanded="false" data-dropdown-toggle="notification">
-                                        <i class="text-2xl mdi mdi-bell"></i>
-                                    </button>
-                                        <span class="absolute text-xs px-1.5 bg-red-500 text-white font-medium rounded-full left-6 top-3 ring-2 ring-white dark:ring-neutral-800">3</span>
-                                </div>
-                                <div class="absolute right-0 top-auto left-auto z-50 hidden list-none bg-white rounded shadow dropdown-menu w-72 dark:bg-neutral-800 " id="notification">
-                                    <div class="border rounded border-gray-50 dark:border-neutral-600" aria-labelledby="notification">
-                                        <div class="grid grid-cols-1 ">
-                                            <div class="p-4 bg-gray-50 dark:bg-neutral-700">
-                                                <h6 class="mb-1 text-gray-800 dark:text-gray-50"> Notification </h6>
-                                                <p class="mb-0 text-gray-500 text-13 dark:text-gray-300">You have 4 unread Notification</p>
-                                            </div>
-                                        </div>
-                                        <div class="h-60" data-simplebar>
-                                            <div>
-                                                <a href="#!">
-                                                    <div class="flex p-4 hover:bg-gray-50/30 dark:hover:bg-neutral-600/50">
-                                                        <div class="flex-shrink-0 ltr:mr-3 rtl:ml-3">
-                                                            <div class="h-10 w-10 bg-violet-500/20 rounded-full text-center leading-[2.8]">
-                                                                <i class="text-lg text-violet-500 uil uil-user-check"></i>
-                                                            </div>
-                                                        </div>
-                                                        <div class="flex-grow">
-                                                            <h6 class="mb-1 text-sm text-gray-700 dark:text-gray-300">22 verified registrations</h6>
-                                                            <div class="text-gray-600 text-13 dark:text-gray-300">
-                                                                <p class="mb-0"><i class="mdi mdi-clock-outline dark:text-gray-300"></i> <span>3 hour ago</span></p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-
-                                                <a href="#!">
-                                                    <div class="flex items-center p-4 hover:bg-gray-50/30 dark:hover:bg-neutral-600/50">
-                                                        <div class="flex-shrink-0 ltr:mr-3 rtl:ml-3">
-                                                            <img src="assets/images/user/img-01.jpg" class="w-10 h-10 rounded-full" alt="user-pic">
-                                                        </div>
-                                                        <div class="flex-grow">
-                                                            <h6 class="mb-1 text-sm text-gray-700 dark:text-gray-300">Kevin Stewart</h6>
-                                                            <div class="text-gray-600 text-13 dark:text-gray-300">
-                                                                <p class="mb-0"><i class="mdi mdi-clock-outline dark:text-gray-300"></i> <span>1 hour ago</span></p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-
-                                                <a href="#!">
-                                                    <div class="flex items-center p-4 hover:bg-gray-50/30 dark:hover:bg-neutral-600/50">
-                                                        <div class="flex-shrink-0 ltr:mr-3 rtl:ml-3">
-                                                            <img src="assets/images/featured-job/img-04.png" class="w-10 h-10 rounded-full" alt="user-pic">
-                                                        </div>
-                                                        <div class="flex-grow">
-                                                            <h6 class="mb-1 text-sm text-gray-700 dark:text-gray-300">Applications has been approved</h6>
-                                                            <div class="text-gray-600 text-13 dark:text-gray-300">
-                                                                <p class="mb-0"><i class="mdi mdi-clock-outline dark:text-gray-300"></i> <span>45 min ago</span></p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-
-                                                <a href="#!">
-                                                    <div class="flex items-center p-4 hover:bg-gray-50/30 dark:hover:bg-neutral-600/50">
-                                                        <div class="flex-shrink-0 ltr:mr-3 rtl:ml-3">
-                                                            <img src="assets/images/user/img-02.jpg" class="w-10 h-10 rounded-full" alt="user-pic">
-                                                        </div>
-                                                        <div class="flex-grow">
-                                                            <h6 class="mb-1 text-sm text-gray-700 dark:text-gray-300">Salena Layfield</h6>
-                                                            <div class="text-gray-600 text-13 dark:text-gray-300">
-                                                                <p class="mb-0"><i class="mdi mdi-clock-outline dark:text-gray-300"></i> <span>15 min ago</span></p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-
-                                                <a href="#!">
-                                                    <div class="flex items-center p-4 hover:bg-gray-50/30 dark:hover:bg-neutral-600/50">
-                                                        <div class="flex-shrink-0 ltr:mr-3 rtl:ml-3">
-                                                            <img src="assets/images/featured-job/img-01.png" class="w-10 h-10 rounded-full" alt="user-pic">
-                                                        </div>
-                                                        <div class="flex-grow">
-                                                            <h6 class="mb-1 text-sm text-gray-700 dark:text-gray-300">Creative Agency</h6>
-                                                            <div class="text-gray-600 text-13 dark:text-gray-300">
-                                                                <p class="mb-0"><i class="mdi mdi-clock-outline dark:text-gray-300"></i> <span>15 min ago</span></p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-
-                                            </div>
-                                        </div>
-                                        <div class="grid p-1 border-t border-gray-50 dark:border-zinc-600 justify-items-center bg-gray-50 dark:bg-neutral-700">
-                                            <a class="border-0 group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500 btn dark:text-gray-50" href="javascript:void(0)">
-                                                <i class="mr-1 mdi mdi-arrow-right-circle"></i> <span>View More..</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="relative dropdown ltr:mr-4 rtl:ml-4">
-                                <button type="button" class="flex items-center px-4 py-5 dropdown-toggle" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    <img class="w-8 h-8 rounded-full ltr:xl:mr-2 rtl:xl:ml-2" src="assets/images/user/img-02.jpg" alt="Header Avatar">
-                                    <span class="hidden fw-medium xl:block dark:text-gray-50">Shawn L.</span>
-                                </button>
-                                <ul class="absolute top-auto z-50 hidden w-48 p-3 list-none bg-white border rounded shadow-lg dropdown-menu border-gray-500/20 xl:ltr:-left-3 ltr:-left-32 rtl:-right-3 dark:bg-neutral-800" id="profile/log" aria-labelledby="navNotifications">
-                                    <li class="p-2 dropdown-item group/dropdown dark:text-gray-300">
-                                        <a class="text-15 font-medium text-gray-800  group-data-[theme-color=violet]:group-hover/dropdown:text-violet-500 group-data-[theme-color=sky]:group-hover/dropdown:text-sky-500 group-data-[theme-color=red]:group-hover/dropdown:text-red-500 group-data-[theme-color=green]:group-hover/dropdown:text-green-500 group-data-[theme-color=pink]:group-hover/dropdown:text-pink-500 group-data-[theme-color=blue]:group-hover/dropdown:text-blue-500 group-hover:pl-1.5 transition-all duration-300 ease-in dark:text-gray-50" href="manage-jobs.html">Manage Jobs</a>
-                                    </li>
-                                    <li class="p-2 dropdown-item group/dropdown dark:text-gray-300">
-                                        <a class="text-15 font-medium text-gray-800 group-data-[theme-color=violet]:group-hover/dropdown:text-violet-500 group-data-[theme-color=sky]:group-hover/dropdown:text-sky-500 group-data-[theme-color=red]:group-hover/dropdown:text-red-500 group-data-[theme-color=green]:group-hover/dropdown:text-green-500 group-data-[theme-color=pink]:group-hover/dropdown:text-pink-500 group-data-[theme-color=blue]:group-hover/dropdown:text-blue-500 group-hover:pl-1.5 transition-all duration-300 ease-in dark:text-gray-50" href="bookmark-jobs.html">Bookmarks Jobs</a>
-                                    </li>
-                                    <li class="p-2 dropdown-item group/dropdown dark:text-gray-300">
-                                        <a class="text-15 font-medium text-gray-800 group-data-[theme-color=violet]:group-hover/dropdown:text-violet-500 group-data-[theme-color=sky]:group-hover/dropdown:text-sky-500 group-data-[theme-color=red]:group-hover/dropdown:text-red-500 group-data-[theme-color=green]:group-hover/dropdown:text-green-500 group-data-[theme-color=pink]:group-hover/dropdown:text-pink-500 group-data-[theme-color=blue]:group-hover/dropdown:text-blue-500 group-hover:pl-1.5 transition-all duration-300 ease-in dark:text-gray-50" href="profile.html">My Profile</a>
-                                    </li>
-                                    <li class="p-2 dropdown-item group/dropdown dark:text-gray-300">
-                                        <a class="text-15 font-medium text-gray-800 group-data-[theme-color=violet]:group-hover/dropdown:text-violet-500 group-data-[theme-color=sky]:group-hover/dropdown:text-sky-500 group-data-[theme-color=red]:group-hover/dropdown:text-red-500 group-data-[theme-color=green]:group-hover/dropdown:text-green-500 group-data-[theme-color=pink]:group-hover/dropdown:text-pink-500 group-data-[theme-color=blue]:group-hover/dropdown:text-blue-500 group-hover:pl-1.5 transition-all duration-300 ease-in dark:text-gray-50" href="sign-out.html">Logout</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="navbar-collapse" class="navbar-res items-center justify-between w-full text-sm lg:flex lg:w-auto lg:order-1 group-focus:[.navbar-toggler]:block hidden">
-                        <ul class="flex flex-col items-start mt-5 mb-10 font-medium lg:mt-0 lg:mb-0 lg:items-center lg:flex-row" id="navigation-menu">
-                            <li class="relative dropdown">
-                                <button class="py-5 text-gray-800 lg:px-4 dropdown-toggle dark:text-gray-50 lg:h-[70px]" id="home" data-bs-toggle="dropdown">Home <i class='align-middle bx bxs-chevron-down ltr:ml-1 rtl:mr-1'></i></button>
-
-                                <ul class="relative top-auto z-50 w-full py-2 list-none bg-white border-0 rounded dropdown-menu lg:border border-gray-500/20 lg:absolute ltr:-left-3 rtl:-right-3 lg:w-48 lg:shadow-lg dark:bg-neutral-800 " aria-labelledby="home">
-                                    <li class="w-full">
-                                        <a
-                                        class="block w-full px-4 py-2 text-13 font-medium text-gray-700 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50"
-                                        href="index.html">Home 1</a>
-                                    </li>
-                                    <li class="w-full"><a class="block w-full px-4 py-2 text-13 font-medium text-gray-700 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="index-2.html">Home 2</a >
-                                    </li>
-                                    <li class="w-full"><a class="block w-full px-4 py-2 text-13 font-medium text-gray-700 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="index-3.html">Home 3</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="relative dropdown lg:mt-0">
-                                <button class="py-5 text-gray-800 lg:px-4 dropdown-toggle dark:text-gray-50 lg:h-[70px]" id="company" data-bs-toggle="dropdown">Company <i class='align-middle bx bxs-chevron-down ltr:ml-1 rtl:mr-1'></i></button>
-
-                                <ul class="relative top-auto z-50 py-2 list-none bg-white border-0 rounded dropdown-menu lg:border border-gray-500/20 lg:absolute ltr:-left-3 rtl:-right-3 lg:w-48 lg:shadow-lg dark:bg-neutral-800" aria-labelledby="company">
-                                    <li><a
-                                        class="block w-full px-4 py-2 text-13 font-medium text-gray-700 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50"
-                                        href="about.html">About Us</a>
-                                    </li>
-                                    <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-700 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="services.html">Services</a >
-                                    </li>
-                                    <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-700 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="team.html">Team</a >
-                                    </li>
-                                    <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-700 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="pricing.html">Pricing</a>
-                                    </li>
-                                    <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-700 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="privacy-policy.html">Privacy & Policy</a>
-                                    </li>
-                                    <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-700 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="faqs.html">Faqs</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="relative dropdown lg:mt-0">
-                                <button href="#" class="py-5 text-gray-800 lg:px-4 dropdown-toggle dark:text-gray-50 lg:h-[70px]"id="pages" data-bs-toggle="dropdown">Pages <i class='align-middle bx bxs-chevron-down ltr:ml-1 rtl:mr-1'></i></button>
-                                <div class="relative top-auto z-50 py-2 list-none bg-white border-0 rounded dropdown-menu lg:border border-gray-500/20 lg:absolute  lg:w-[40rem] lg:shadow-lg dark:bg-neutral-800">
-                                    <div class="grid grid-cols-12">
-                                        <div class="col-span-12 lg:col-span-4">
-                                            <ul class="relative top-auto z-50 py-2 list-none dark:bg-neutral-800" aria-labelledby="pages">
-                                                <span class="block px-4 py-3 font-normal text-gray-500 uppercase text-13">Jobs</span>
-                                                <li><a
-                                                    class="block w-full px-4 py-2 text-13 font-medium text-gray-900 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50"
-                                                    href="job-list.html">Job List</a>
-                                                </li>
-                                                <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-900 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="job-list-2.html">Job List-2</a >
-                                                </li>
-                                                <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-900 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="job-grid.html">Job Grid</a>
-                                                </li>
-                                                <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-900 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="job-grid-2.html">Job Grid-2</a>
-                                                </li>
-                                                <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-900 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="job-details.html">Job Details</a>
-                                                </li>
-                                                <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-900 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="job-categories.html">Jobs Categories</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-
-                                        <div class="col-span-12 lg:col-span-4">
-                                            <ul class="relative top-auto z-50 py-2 list-none dark:bg-neutral-800" aria-labelledby="pages">
-                                                <span class="block px-4 py-3 font-normal text-gray-500 uppercase text-13">Candidates / Companys</span>
-                                                <li><a
-                                                    class="block w-full px-4 py-2 text-13 font-medium text-gray-900 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50"
-                                                    href="candidate-list.html">Candidate List</a>
-                                                </li>
-                                                <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-900 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="candidate-grid.html">Candidate Grid</a >
-                                                </li>
-                                                <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-900 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="candidate-details.html">Candidate Details</a>
-                                                </li>
-                                                <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-900 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="company-list.html">Company List</a>
-                                                </li>
-                                                <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-900 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="company-details.html">Company Details</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-
-                                        <div class="col-span-12 lg:col-span-4">
-                                            <ul class="relative top-auto z-50 py-2 list-none dark:bg-neutral-800" aria-labelledby="pages">
-                                                <span class="block px-4 py-3 font-normal text-gray-500 uppercase text-13">Extra Pages</span>
-                                                <li><a
-                                                    class="block w-full px-4 py-2 text-13 font-medium text-gray-900 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50"
-                                                    href="sign-up.html">Sign Up</a>
-                                                </li>
-                                                <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-900 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="sign-in.html">Sign In</a >
-                                                </li>
-                                                <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-900 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="sign-out.html">Sign Out</a>
-                                                </li>
-                                                <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-900 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="reset-password.html">Reset Password</a>
-                                                </li>
-                                                <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-900 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="coming-soon.html">Coming Soon</a>
-                                                </li>
-                                                <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-900 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="404-error.html">404 Error</a>
-                                                </li>
-                                                <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-900 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="components.html">Components</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="relative dropdown lg:mt-0">
-                                <button href="#" class="py-5 text-gray-800 lg:px-4 dropdown-toggle dark:text-gray-50 lg:h-[70px]"id="blog" data-bs-toggle="dropdown">Blog <i class='align-middle bx bxs-chevron-down ltr:ml-1 rtl:mr-1'></i></button>
-
-                                <ul class="relative top-auto z-50 py-2 list-none bg-white border-0 rounded dropdown-menu lg:border border-gray-500/20 lg:absolute ltr:-left-3 rtl:-right-3 lg:w-48 lg:shadow-lg dark:bg-neutral-800" aria-labelledby="blog">
-
-                                    <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-700 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50"
-                                        href="blog.html">Blog</a>
-                                    </li>
-                                    <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-700 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="blog-grid.html">Blog Grid</a >
-                                    </li>
-                                    <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-700 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="blog-modern.html">Blog Modern</a>
-                                    </li>
-                                    <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-700 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="blog-masonry.html">Blog Masonry</a>
-                                    </li>
-                                    <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-700 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="blog-details.html">Blog details</a>
-                                    </li>
-                                    <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-700 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="blog-author.html">Blog Author</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="py-5 lg:px-4">
-                                <a href="contact.html" class="py-2.5 text-gray-800 font-medium leading-tight dark:text-gray-50" id="contact" data-bs-toggle="dropdown">Contact </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </nav> --}}
 
 
                    <div class="fixed z-40 flex flex-col gap-3 ltr:left-0 rtl:right-0 top-[330px]">
@@ -478,278 +210,167 @@
                     <img src="assets/images/about/shape-dark.png" alt="" class="absolute hidden bg-cover -bottom-0 dark:block">
                 </section>
 
-                <!-- Start grid -->
-                    <section class="pt-16">
-                        <div class="container mx-auto">
-                            <div class="grid items-center grid-cols-12 mt-5 lg:gap-8 gap-y-8">
+
+                </section>
+                <!-- start process -->
+                <section>
+                    <div class="container mx-auto">
+                        <div class="nav-tabs round-pill">
+                            <div class="grid items-center grid-cols-12 gap-5">
+
                                 <div class="col-span-12 lg:col-span-6">
+                                    <br>
+                                    <br>
+                                    <br>
+
+                                    <h3 class="mb-3 text-3xl text-gray-900 dark:text-gray-50 ">Đăng ký trở thành nhà xe theo 3 bước
+                                        đơn giản</h3>
+                                    <p class="text-gray-500 dark:text-gray-300">Nhà xe của bạn sẽ tận hưởng bộ quyền lợi truyền
+                                        thông từ CarFinder Pro lên đến 50 triệu đồng, ưu tiên hiển thị trên các trang bán vé của
+                                        CarFinder Pro, ưu đãi các sản phẩm trong hệ sinh thái CarFinder Pro. </p>
+
+                                    <div class="mt-5">
+                                        <ul class="text-gray-700 nav">
+                                            <li class="w-full mb-[22px]">
+                                                <a href="javascript:void(0);" data-tw-toggle="tab" data-tw-target="v-pills-home-tab"
+                                                   class="relative inline-block w-full p-2 active group/active" aria-current="page">
+                                                    <div
+                                                        class="after:content-[''] after:h-[65px] after:border after:border-dashed after:border-gray-100 after:absolute ltr:after:left-7 rtl:after:right-7 after:-bottom-5 after:group-[.active]:bg-violet-300 hidden md:block"></div>
+                                                    <div class="flex">
+                                                        <div
+                                                            class="shrink-0 h-10 w-10 rounded-full text-center bg-gray-500/20 group-[.active]:group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:group-[.active]:bg-sky-500 group-data-[theme-color=red]:group-[.active]:bg-red-500 group-data-[theme-color=green]:group-[.active]:bg-green-500 group-data-[theme-color=pink]:group-[.active]:bg-pink-500 group-data-[theme-color=blue]:group-[.active]:bg-blue-500">
+                                                <span
+                                                    class="text-gray-900 group-[.active]:text-white text-16 leading-[2.5] dark:text-gray-50">1</span>
+                                                        </div>
+                                                        <div class="grow ltr:ml-4 rtl:mr-4">
+                                                            <h5 class="fs-18 text-gray-900 group-data-[theme-color=violet]:group-[.active]:text-violet-500 group-data-[theme-color=sky]:group-[.active]:text-sky-500 dark:text-gray-50">
+                                                                Đăng ký thông tin</h5>
+                                                            <p class="mt-1 mb-2 text-gray-500 dark:text-gray-300">Quý khách vui lòng
+                                                                để lại thông tin hoặc liên hệ hotline để được tư vấn hỗ trợ</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li class="w-full mb-[22px]">
+                                                <a href="javascript:void(0);" data-tw-toggle="tab" data-tw-target="v-pills-profile"
+                                                   class="relative inline-block w-full p-2 group" aria-current="page">
+                                                    <div
+                                                        class="after:content-[''] after:h-[65px] after:border after:border-dashed after:border-gray-100 after:absolute ltr:after:left-7 rtl:after:right-7 after:-bottom-5 after:group-[.active]:bg-violet-300 hidden md:block"></div>
+                                                    <div class="flex">
+                                                        <div
+                                                            class="shrink-0 h-10 w-10 rounded-full text-center bg-gray-500/20 group-[.active]:bg-violet-500">
+                                                <span
+                                                    class="text-gray-900 group-[.active]:text-white text-16 leading-[2.5] dark:text-gray-50">2</span>
+                                                        </div>
+                                                        <div class="grow ltr:ml-4 rtl:mr-4">
+                                                            <h5 class="fs-18 text-gray-900 group-[.active]:text-violet-500 dark:text-gray-50">
+                                                                Tư vấn Ký hợp đồng </h5>
+                                                            <p class="mt-1 mb-2 text-gray-500">CarFinder Pro sẽ liên hệ xác minh
+                                                                thông tin và tư vấn sớm nhất. Giải đáp tất cả thắc mắc của nhà xe
+                                                                .Sau khi tư vấn thành công, Chủ nhà xe và CarFinder Pro sẽ tiến hành
+                                                                ký kết hợp đồng.</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li class="w-full mb-[22px]">
+                                                <a href="javascript:void(0);" data-tw-toggle="tab" data-tw-target="v-pills-messages"
+                                                   class="relative inline-block w-full p-2 group" aria-current="page">
+                                                    <div class="flex">
+                                                        <div
+                                                            class="shrink-0 h-10 w-10 rounded-full text-center bg-gray-500/20 group-[.active]:bg-violet-500">
+                                                <span
+                                                    class="text-gray-900 group-[.active]:text-white text-16 leading-[2.5] dark:text-gray-50">3</span>
+                                                        </div>
+                                                        <div class="grow ltr:ml-4 rtl:mr-4">
+                                                            <h5 class="fs-18 text-gray-900 group-[.active]:text-violet-500 dark:text-gray-50">
+                                                                Mở bán tại CarFinder Pro</h5>
+                                                            <p class="mt-1 mb-2 text-gray-500">Mở bán trên sàn CarFinder Pro.vn.com,
+                                                                chúng tôi luôn đồng hành và hỗ trợ nhà xe cho đến khi phát sinh
+                                                                doanh thu. Chủ nhà xe hoàn toàn kiểm soát được nội dung hiển thị
+                                                                trên sàn về thương hiệu nhà xe.</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                                <div class="col-span-12 lg:col-span-6">
+                                    <div class="tab-content">
+                                        <div class="block tab-pane" id="v-pills-home-tab">
+                                            <img src="{{asset('')}}client/images/process-01.png" alt=""
+                                                 class="max-w-full">
+                                        </div>
+                                        <div class="hidden tab-pane" id="v-pills-profile">
+                                            <img src="{{asset('')}}client/images/process-02.png" alt=""
+                                                 class="max-w-full">
+                                        </div>
+                                        <div class="hidden tab-pane" id="v-pills-messages">
+                                            <img src="{{asset('')}}client/images/process-03.png" alt=""
+                                                 class="max-w-full">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1">
+                        <div class="text-center">
+                            <a href="/car-register"
+                               class="text-white border-transparent group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 btn focus:ring focus:ring-custom-500/20 ">Đăng
+                                kí trở thành nhà xe
+                                <i class="uil uil-arrow-right ms-1"></i></a>
+                        </div>
+                </section>
+                <!-- end process -->
+
+                <section class="py-20 dark:bg-neutral-800">
+                    <div class="container mx-auto">
+                        <div class="grid grid-cols-1 gap-5">
+                            <div class="text-center">
+                                <h3 class="mb-3 text-3xl text-gray-900 dark:text-gray-50">Nhà xe</h3>
+                                <p class="mb-5 text-gray-500  dark:text-gray-300">Một số nhà xe có lượt đặt vé
+                                    cao trong các tháng vừa qua.</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-12 gap-5">
+                            @if($users)
+                            @foreach ($users as $nhaxe)
+                                <div class="col-span-12 md:col-span-6 lg:col-span-3">
                                     <div class="mt-4">
-                                        <h3 class="mb-2 text-3xl text-gray-900 dark:text-white">Liên Hệ</h3>
-                                        {{-- <p class="text-gray-500 dark:text-gray-300">Start working with Jobcy that can provide everything you need to generate
-                                            awareness, drive traffic, connect.</p> --}}
-                                        <form method="post" onsubmit="return validateForm()" class="mt-4 contact-form" name="myForm" id="myForm">
-                                            <span id="error-msg"></span>
-                                            <div class="grid grid-cols-12 gap-5">
-                                                <div class="col-span-12">
-                                                    <div class="mb-3">
-                                                        <label for="nameInput" class="text-gray-900 dark:text-gray-50">Tên của bạn</label>
-                                                        <input type="text" name="name" id="name" class="w-full mt-1 rounded border-gray-100/50 placeholder:text-sm placeholder:text-gray-400 dark:bg-transparent dark:border-gray-800 focus:ring-0 focus:ring-offset-0 dark:text-gray-200" placeholder="Enter your name">
-                                                    </div>
-                                                </div><!--end col-->
-                                                <div class="col-span-12 lg:col-span-6">
-                                                    <div class="mb-3">
-                                                        <label for="emailInput" class="text-gray-900 dark:text-gray-50">Email</label>
-                                                        <input type="email" class="w-full mt-1 rounded border-gray-100/50 placeholder:text-sm placeholder:text-gray-400 dark:bg-transparent dark:border-gray-800 focus:ring-0 focus:ring-offset-0 dark:text-gray-200" id="emaiol" name="email" placeholder="Enter your email">
-                                                    </div>
-                                                </div><!--end col-->
-                                                <div class="col-span-12 lg:col-span-6">
-                                                    <div class="mb-3">
-                                                        <label for="subjectInput" class="text-gray-900 dark:text-gray-50">Số điện thoại</label>
-                                                        <input type="text" class="w-full mt-1 rounded border-gray-100/50 placeholder:text-sm placeholder:text-gray-400 dark:bg-transparent dark:border-gray-800 focus:ring-0 focus:ring-offset-0 dark:text-gray-200" id="subjectInput" name="subject" placeholder="Enter your phone number">
-                                                    </div>
-                                                </div><!--end col-->
-                                                <div class="col-span-12">
-                                                    <div class="mb-3">
-                                                        <label for="meassageInput" class="text-gray-900 dark:text-gray-50">Yêu cầu của bạn</label>
-                                                        <textarea class="w-full mt-1 rounded border-gray-100/50 placeholder:text-sm placeholder:text-gray-400 dark:bg-transparent dark:border-gray-800 focus:ring-0 focus:ring-offset-0 dark:text-gray-200" id="meassageInput" placeholder="Enter your message" name="comments" rows="3"></textarea>
-                                                    </div>
-                                                </div><!--end col-->
-                                            </div><!--end row-->
-                                            <div class="text-right">
-                                                <button type="submit" id="submit" name="submit" class="text-white border-transparent btn group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500"> Gửi yêu cầu <i class="uil uil-message ms-1"></i></button>
+                                        <div
+                                            class="px-6 py-5 transition-all duration-500 ease-in-out cursor-pointer lg:py-10 hover:-translate-y-2">
+                                            <div
+                                                class="job-categorie h-16 w-16 group-data-[theme-color=violet]:bg-violet-500/20 group-data-[theme-color=sky]:bg-sky-500/20 group-data-[theme-color=red]:bg-red-500/20 group-data-[theme-color=green]:bg-green-500/20 group-data-[theme-color=pink]:bg-pink-500/20 group-data-[theme-color=blue]:bg-blue-500/20 rounded-lg text-center leading-[4.4] mx-auto dark:bg-violet-900">
+                                                {{-- <i class="uim uim-layers-alt"></i> --}}
+                                                <img src="{{ $nhaxe->image }}" alt="nhaxe" style="height: 100%;width: 100%;">
                                             </div>
-                                        </form><!--end form-->
-                                    </div>
-                                </div><!--end col-->
-                                <div class="col-span-12 lg:col-span-5 lg:ml-20">
-                                    <div class="text-center">
-                                        <img src="views/client/contact/image/contact.png" alt="" class="img-fluid">
-                                    </div>
-                                    <div class="pt-3 mt-4">
-                                        <div class="flex items-center mt-2 text-gray-500">
-                                            <div class="group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500 shrink-0 text-22">
-                                                <i class="uil uil-map-marker"></i>
-                                            </div>
-                                            <div class="ltr:ml-2 rtl:mr-2 grow-1">
-                                                <p class="mb-0 dark:text-gray-300">2453 Clinton StreetLittle Rock, California, USA</p>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center mt-2 text-gray-500">
-                                            <div class="group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500 shrink-0 text-22">
-                                                <i class="uil uil-envelope"></i>
-                                            </div>
-                                            <div class="ltr:ml-2 rtl:mr-2 grow-1">
-                                                <p class="mb-0 dark:text-gray-300">contactus@Jobcy.com</p>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center mt-2 text-gray-500">
-                                            <div class="group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500 shrink-0 text-22">
-                                                <i class="uil uil-phone-alt"></i>
-                                            </div>
-                                            <div class="ltr:ml-2 rtl:mr-2 grow-1">
-                                                <p class="mb-0 dark:text-gray-300">(+245) 223 1245</p>
+                                            <div class="mt-4 text-center">
+                                                <a href="job-categories.html" class="text-gray-900">
+                                                    <h5 class="text-lg dark:text-gray-50">{{ $nhaxe->name }}</h5>
+                                                </a>
+                                                {{-- <p class="mt-1 font-medium text-gray-500 dark:text-gray-300">{{ $nhaxe->created_at->format('d-m-Y') }}</p> --}}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <!--end col-->
-                            </div>
+                            @endforeach
+                            @else
+
+                            @endif
+
                         </div>
-                        <div class="pt-20">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6509157.364974411!2d-123.79641389801948!3d37.193115265681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb9fe5f285e3d%3A0x8b5109a227086f55!2sCalifornia%2C%20USA!5e0!3m2!1sen!2sin!4v1628684675253!5m2!1sen!2sin" height="350" style="border:0;width: 100%;" allowfullscreen="" loading="lazy"></iframe>
-                        </div>
-                    </section>
-                <!-- End grid -->
+
+                </section>
 
             </div>
         </div>
 
 
-        <!-- start subscribe -->
-        {{-- <section class="relative py-16 overflow-hidden bg-zinc-700 dark:bg-neutral-900">
-            <div class="container mx-auto">
-                <div class="grid items-center grid-cols-12 gap-5">
-                    <div class="col-span-12 lg:col-span-7">
-                        <div class="text-center lg:text-start">
-                            <h4 class="text-white">Get New Jobs Notification!</h4>
-                            <p class="mt-1 mb-0 text-white/50 dark:text-gray-300">Subscribe &amp; get all related jobs notification.</p>
-                        </div>
-                    </div>
-                    <div class="z-40 col-span-12 lg:col-span-5">
-                        <form class="flex" action="#">
-                            <input
-                                type="text" class="w-full text-gray-100 bg-transparent rounded-md border-gray-50/30 ltr:border-r-0 rtl:border-l-0 ltr:rounded-r-none rtl:rounded-l-none placeholder:text-13 placeholder:text-gray-100 dark:text-gray-100 dark:bg-white/5 dark:border-neutral-600 focus:ring-0 focus:ring-offset-0"
-                                id="subscribe" placeholder="Enter your email" >
-                            <button class="text-white border-transparent btn ltr:rounded-l-none rtl:rounded-r-none group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 focus:ring focus:ring-custom-500/30" type="button" id="subscribebtn">Subscribe</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="absolute right-0 -top-10 -z-0 opacity-20">
-                <img src="assets/images/subscribe.png" alt="" class="img-fluid">
-            </div>
-        </section> --}}
-        <!-- end subscribe -->
-        <!-- Footer Start -->
-        {{-- <footer class="footer ">
-            <!-- start footer -->
-            <section class="py-12 bg-zinc-800 dark:bg-neutral-900">
-                <div class="container mx-auto">
-                    <div class="grid grid-cols-12 lg:gap-10">
-                        <div class="col-span-12 xl:col-span-4">
-                            <div class="mr-12">
-                                <h4 class="text-white mb-6 text-[23px]">Jobcy</h4>
-                                <p class="text-white/50 dark:text-gray-300">
-                                    It is a long established fact that a reader will be of a page reader
-                                    will be of at its layout.
-                                </p>
-                                <p class="mt-3 text-white dark:text-gray-50">Follow Us on:</p>
-                                <div class="mt-5">
-                                    <ul class="flex gap-3">
-                                        <li class="w-8 h-8 leading-loose text-center text-gray-200 transition-all duration-300 border rounded-full cursor-pointer border-gray-200/50 hover:text-gray-50 group-data-[theme-color=violet]:hover:bg-violet-500 group-data-[theme-color=sky]:hover:bg-sky-500 group-data-[theme-color=red]:hover:bg-red-500 group-data-[theme-color=green]:hover:bg-green-500 group-data-[theme-color=pink]:hover:bg-pink-500 group-data-[theme-color=blue]:hover:bg-blue-500 hover:border-transparent">
-                                            <a href="#">
-                                                <i class="uil uil-facebook-f"></i>
-                                            </a>
-                                        </li>
-                                        <li class="w-8 h-8 leading-loose text-center text-gray-200 transition-all duration-300 border rounded-full cursor-pointer border-gray-200/50 hover:text-gray-50 group-data-[theme-color=violet]:hover:bg-violet-500 group-data-[theme-color=sky]:hover:bg-sky-500 group-data-[theme-color=red]:hover:bg-red-500 group-data-[theme-color=green]:hover:bg-green-500 group-data-[theme-color=pink]:hover:bg-pink-500 group-data-[theme-color=blue]:hover:bg-blue-500 hover:border-transparent">
-                                            <a href="#">
-                                                <i class="uil uil-linkedin-alt"></i>
-                                            </a>
-                                        </li>
-                                        <li class="w-8 h-8 leading-loose text-center text-gray-200 transition-all duration-300 border rounded-full cursor-pointer border-gray-200/50 hover:text-gray-50 group-data-[theme-color=violet]:hover:bg-violet-500 group-data-[theme-color=sky]:hover:bg-sky-500 group-data-[theme-color=red]:hover:bg-red-500 group-data-[theme-color=green]:hover:bg-green-500 group-data-[theme-color=pink]:hover:bg-pink-500 group-data-[theme-color=blue]:hover:bg-blue-500 hover:border-transparent">
-                                            <a href="#">
-                                                <i class="uil uil-google"></i>
-                                            </a>
-                                        </li>
-                                        <li class="w-8 h-8 leading-loose text-center text-gray-200 transition-all duration-300 border rounded-full cursor-pointer border-gray-200/50 hover:text-gray-50 group-data-[theme-color=violet]:hover:bg-violet-500 group-data-[theme-color=sky]:hover:bg-sky-500 group-data-[theme-color=red]:hover:bg-red-500 group-data-[theme-color=green]:hover:bg-green-500 group-data-[theme-color=pink]:hover:bg-pink-500 group-data-[theme-color=blue]:hover:bg-blue-500 hover:border-transparent">
-                                            <a href="#">
-                                                <i class="uil uil-twitter"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-span-12 mt-8 md:col-span-6 xl:col-span-2 md:mt-0">
-                            <p class="mb-6 text-white text-16">Company</p>
-                            <ul class="space-y-4">
-                                <li class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                                    <a href="about.html">
-                                        <i class="mdi mdi-chevron-right"></i> About Us
-                                    </a>
-                                </li>
-                                <li class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                                    <a href="contact.html">
-                                        <i class="mdi mdi-chevron-right"></i> Contact Us
-                                    </a>
-                                </li>
-                                <li class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                                    <a href="services.html">
-                                        <i class="mdi mdi-chevron-right"></i> Services
-                                    </a>
-                                </li>
-                                <li class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                                    <a href="blog.html">
-                                        <i class="mdi mdi-chevron-right"></i> Blog
-                                    </a>
-                                </li>
-                                <li class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                                    <a href="team.html">
-                                        <i class="mdi mdi-chevron-right"></i> Team
-                                    </a>
-                                </li>
-                                <li class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                                    <a href="pricing.html">
-                                        <i class="mdi mdi-chevron-right"></i> Pricing
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-span-12 mt-8 md:col-span-6 xl:col-span-2 md:mt-0">
-                            <p class="mb-6 text-white text-16">For Jobs</p>
-                            <ul class="space-y-4">
-                                <li class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                                    <a href="job-categories.html">
-                                        <i class="mdi mdi-chevron-right"></i> Browser Categories
-                                    </a>
-                                </li>
-                                <li class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                                    <a href="job-list.html">
-                                        <i class="mdi mdi-chevron-right"></i> Browser Jobs
-                                    </a>
-                                </li>
-                                <li class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                                    <a href="job-details.html">
-                                        <i class="mdi mdi-chevron-right"></i> Job Details
-                                    </a>
-                                </li>
-                                <li class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                                    <a href="bookmark-jobs.html">
-                                        <i class="mdi mdi-chevron-right"></i> Bookmark Jobs
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-span-12 mt-8 md:col-span-6 xl:col-span-2 md:mt-0">
-                            <p class="mb-6 text-white text-16">For Candidates</p>
-                            <ul class="space-y-4">
-                                <li class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                                    <a href="candidate-list.html">
-                                        <i class="mdi mdi-chevron-right"></i> Candidate List
-                                    </a>
-                                </li>
-                                <li class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                                    <a href="candidate-grid.html">
-                                        <i class="mdi mdi-chevron-right"></i> Candidate Grid
-                                    </a>
-                                </li>
-                                <li class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                                    <a href="candidate-details.html">
-                                        <i class="mdi mdi-chevron-right"></i> Candidate Details
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-span-12 mt-8 md:col-span-6 xl:col-span-2 md:mt-0">
-                            <p class="mb-6 text-white text-16">Support</p>
-                            <ul class="space-y-4">
-                                <li class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                                    <a href="contact.html">
-                                        <i class="mdi mdi-chevron-right"></i> Help Center
-                                    </a>
-                                </li>
-                                <li class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                                    <a href="faqs.html">
-                                        <i class="mdi mdi-chevron-right"></i> FAQ'S
-                                    </a>
-                                </li>
-                                <li class="text-sm transition-all duration-500 ease-in-out text-white/50 hover:text-gray-50 hover:text-base dark:text-gray-300 dark:hover:text-gray-50">
-                                    <a href="privacy-policy.html">
-                                        <i class="mdi mdi-chevron-right"></i> Privacy Policy
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- end footer -->
-            <!-- strat footer alt -->
-            <section class="py-6 border-t bg-zinc-800 border-gray-100/10 dark:bg-neutral-900">
-                <div class="container mx-auto">
-                    <div class="text-center">
-                        <p class="mb-0 text-center text-white/50">
-                            <script>document.write(new Date().getFullYear())</script>
-                            © Jobcy - Job Listing Page
-                                Template by
-                            <a href="https://themeforest.net/search/themesdesign" target="_blank" class="underline transition-all duration-300 hover:text-gray-50">Themesdesign</a>
-                        </p>
-                    </div>
-                </div>
-            </section>
-            <!-- end footer alt -->
-        </footer> --}}
-        <!-- end Footer -->
+
 
 
      <script src="../../../unicons.iconscout.com/release/v4.0.0/script/monochrome/bundle.js"></script>

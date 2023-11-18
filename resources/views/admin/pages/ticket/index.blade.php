@@ -23,16 +23,6 @@
                                     Ticket
                                 </button>
                             </a>
-                            <a href="{{ route('admin.ticket.create') }}">
-                                <button type="button" class="btn btn-success waves-effect waves-light mb-4">Create New
-                                    Ticket
-                                </button>
-                            </a>
-                            <a href="{{ route('admin.ticket.create') }}">
-                                <button type="button" class="btn btn-success waves-effect waves-light mb-4">Create New
-                                    Ticket
-                                </button>
-                            </a>
                             @if ($message = Session::get('success'))
                                 <div>
                                     <ul>
@@ -63,10 +53,12 @@
                                             <td>{{ $ticket->email }}</td>
                                             <td>{{ $ticket->quantity }}</td>
                                             <td>
-                                                @if ($ticket->status == 0 )
-                                                    <span class="badge bg-danger">Pending</span>
-                                                @elseif($ticket->status == 1)
+                                                @if ($ticket->status == 1 )
+                                                    <span class="badge bg-warning">Pending</span>
+                                                @elseif($ticket->status == 2)
                                                     <span class="badge bg-success">Success</span>
+                                                @elseif($ticket->status == 0)
+                                                    <span class="badge bg-danger">Cancel</span>
                                                 @endif
                                             </td>
                                             <td>{{ $ticket->total_price }}</td>

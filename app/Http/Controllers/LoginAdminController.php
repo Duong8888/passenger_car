@@ -25,7 +25,7 @@ class LoginAdminController extends Controller
             return redirect()->route('admin.dashboard');
         }
 
-        return redirect()->route('loginAdmin')->with('error', 'Invalid login credentials.');
+        return view('auth.sign_in_admin');
     }
 
     public function logoutAdmin(Request $request)
