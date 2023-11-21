@@ -146,7 +146,7 @@
                             <div class="grid grid-cols-12">
                                 <div class="col-span-12 lg:col-span-12 lg:col-start-12">
                                     <div class="swiper testimonialSlider">
-                                        <div class="    ">
+                                        <div class="swiper-wrapper">
                                             @foreach ($albums as $album)
                                                 <div class="swiper-slide">
                                                     <div class="text-center">
