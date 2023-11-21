@@ -24,7 +24,7 @@
             <h4 class="header-title mt-0 mb-3">Services Create</h4>
             <div class="table-responsive">
 
-              <form action="{{ route('service.store') }}" method="post" enctype="multipart/form-data">
+              <form action="{{ route('admin.service.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
                   <label for="name" class="form-label">Service Name</label>
@@ -33,7 +33,7 @@
                   <div class="alert alert-danger mt-1 mb-1" style="color: red;font-size: 12px;">{{ $message }}</div>
                   @enderror
                 </div>
-                <a href="{{ route('service.index') }}" class="btn btn-primary">
+                <a href="{{ route('admin.service.index') }}" class="btn btn-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                       class="bi bi-arrow-left" viewBox="0 0 16 16">
                       <path fill-rule="evenodd"

@@ -25,7 +25,7 @@ class TiketMail extends Mailable
      */
     public function build()
     {
-        return $this->view('mails.tiket')
+        return $this->view('mails.ticket')
             ->subject('Thông báo đặt vé xe')
             ->with([
                 'data' => $this->data,

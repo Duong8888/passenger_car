@@ -22,7 +22,7 @@
 
         <div class="table-responsive">
             <table class="table mb-0">
-                <form action="{{ route('route_staff_add') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.route_staff_add') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <h1 class="ml-5 mb-3">Quản lý nhân viên</h1>
                     
@@ -48,7 +48,7 @@
                     </div>
                    
                     <button class="ml-3 ml-5 btn btn-primary" type="submit">Thêm</button> 
-                    <button  class="btn btn-primary ml-5 "><a style="text-decoration: none; color: white;" href="{{route('route_staff_index')}}">List Users</a></button>
+                    <button  class="btn btn-primary ml-5 "><a style="text-decoration: none; color: white;" href="{{route('admin.route_staff_index')}}">List Users</a></button>
                 </form>
             </table>
         </div>
