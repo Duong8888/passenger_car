@@ -59,3 +59,4 @@ document.querySelectorAll("#style-switcher li").forEach(function (item) {
         this.classList.add("active");
     })
 })
+
