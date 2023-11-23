@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>index</title>
+    <title>@yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta content="Tailwind Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="" name="Themesbrand" />
@@ -54,7 +54,9 @@ z-index: 999;"  >
           
             <div class="p-10">
                
-                <button id="closePopupButton">Đóng</button>
+                <button  style="background: white !important;
+                padding: 10px 30px !important;
+                border-radius: 5px !important; " id="closePopupButton">Đóng</button>
             </div>
         </div>
     </div>

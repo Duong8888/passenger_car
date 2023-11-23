@@ -1,4 +1,5 @@
 @extends('client.layout.master')
+@section('title', "Trang chủ")
 @section('content')
 <div id="popupContainer" class="popup-container" style="display: none;
 position: fixed;
@@ -371,7 +372,7 @@ padding:00px ">
                 </div>
             </div>
             <div class="grid grid-cols-12 gap-5">
-                @foreach ($users as $nhaxe)
+                @foreach ($users as $item)
                     <div class="col-span-12 md:col-span-6 lg:col-span-3">
                         <div class="mt-4">
                             <div
@@ -379,13 +380,13 @@ padding:00px ">
                                 <div
                                     class="job-categorie h-16 w-16 group-data-[theme-color=violet]:bg-violet-500/20 group-data-[theme-color=sky]:bg-sky-500/20 group-data-[theme-color=red]:bg-red-500/20 group-data-[theme-color=green]:bg-green-500/20 group-data-[theme-color=pink]:bg-pink-500/20 group-data-[theme-color=blue]:bg-blue-500/20 rounded-lg text-center leading-[4.4] mx-auto dark:bg-violet-900">
                                     {{-- <i class="uim uim-layers-alt"></i> --}}
-                                    <img src="{{ $nhaxe->image }}" alt="nhaxe" style="height: 100%;width: 100%;">
+                                    <img src="{{ $item->image }}" alt="nhaxe" style="height: 100%;width: 100%;">
                                 </div>
                                 <div class="mt-4 text-center">
                                     <a href="job-categories.html" class="text-gray-900">
-                                        <h5 class="text-lg dark:text-gray-50">{{ $nhaxe->name }}</h5>
+                                        <h5 class="text-lg dark:text-gray-50">{{ $item->name }}</h5>
                                     </a>
-                                    {{-- <p class="mt-1 font-medium text-gray-500 dark:text-gray-300">{{ $nhaxe->created_at->format('d-m-Y') }}</p> --}}
+                                    {{-- <p class="mt-1 font-medium text-gray-500 dark:text-gray-300">{{date('d-m-Y', strtotime($item->created_at))}}</p> --}}
                                 </div>
                             </div>
                         </div>
@@ -405,7 +406,7 @@ padding:00px ">
                     <p class="mb-5 text-gray-500 dark:text-gray-300">Dưới đây là một số bài viết mới nhất và được cập nhật nhanh nhất trong các ngày qua.</p>
                 </div>
             </div>
-            <div class="grid grid-cols-12 gap-5">
+            <div class="grid grid-cols-4 gap-5">
                 @foreach ($posts as $post)
                     <div class="col-span-12 md:col-span-6 lg:col-span-4">
                         <div
