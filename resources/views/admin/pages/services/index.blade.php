@@ -20,7 +20,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title mt-0 mb-3">Services List</h4>
-                        <a href="{{ route('service.create') }}">Create New Services</a>
+                        <a href="{{ route('admin.service.create') }}">Create New Services</a>
                         @if ($message = Session::get('success'))
                             <div>
                                     <p style="color: blue;background-coler:red;">{{ $message }}</p>
@@ -41,8 +41,8 @@
                                         <td>{{ $service->id }}</td>
                                         <td>{{ $service->service_name }}</td>
                                         <td style="display: flex;">
-                                            <a class="btn btn-primary" style="margin-right: 5px" href="{{ route('service.edit', $service->id) }}">Edit</a>
-                                            <form action="{{ route('service.destroy', $service->id) }}" method="post">
+                                            <a class="btn btn-primary" style="margin-right: 5px" href="{{ route('admin.service.edit', $service->id) }}">Edit</a>
+                                            <form action="{{ route('admin.service.destroy', $service->id) }}" method="post">
                                                 @csrf
                                                 @method('delete')
                                                 <button onclick="return confirm('Are you sure ?')" class="btn btn-warning">Delete</button>

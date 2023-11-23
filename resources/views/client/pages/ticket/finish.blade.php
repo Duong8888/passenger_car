@@ -1,5 +1,5 @@
 @extends('client.layout.master')
-
+@section("title", "Thông báo đặt xe")
 @section('content')
 <section class="py-28 dark:bg-neutral-800">
     <div class="container mx-auto">

@@ -28,7 +28,7 @@ class ServicesController extends AdminBaseController
     public function index(Request $request)
     {
         // Lấy danh sách dịch vụ
-        $services = $this->model->paginate(5);
+        $services = $this->model->paginate(10);
 
         return view($this->pathView . 'index', compact('services'))
             ->with('title', 'Danh sách dịch vụ')
@@ -54,16 +54,17 @@ class ServicesController extends AdminBaseController
     public function store(Request $request)
     {
         $request->validate([
-            'sericename' => 'required|max:50',
+            'sericename' => 'required|max:50|unique:services,service_name',
         ], [
             'sericename.required' => 'Tên dịch vụ là trường bắt buộc.',
             'sericename.max' => 'Tên dịch vụ không được vượt quá 50 ký tự.',
+            'sericename.unique' => 'Tên dịch vụ đã tồn tại. Vui lòng chọn tên khác.',
         ]);
         $service = new $this->model;
         $service->service_name = $request->input('sericename');
         $service->save();
 
-        return to_route('service.index')->with('success', 'Created Successfully');
+        return to_route('admin.service.index')->with('success', 'Thêm thành công dịch vụ');
     }
 
     /**
@@ -104,7 +105,7 @@ class ServicesController extends AdminBaseController
         $model->service_name = $request->input('sericename');
         $model->save();
 
-        return to_route('service.index')->with('success', 'Edited Successfully!');
+        return to_route('admin.service.index')->with('success', 'Edited Successfully!');
     }
 
     /**
@@ -114,6 +115,6 @@ class ServicesController extends AdminBaseController
     {
         $model = $this->model->findOrFail($id);
         $model->delete();
-        return to_route('service.index')->with('success', 'Delete Successfully');
+        return to_route('admin.service.index')->with('success', 'Delete Successfully');
     }
 }
