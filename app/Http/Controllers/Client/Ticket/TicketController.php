@@ -75,7 +75,7 @@ class TicketController extends Controller
         // }
 
         $notification = new NotificationController();
-        $notification->sendNotification($user_id, $message);
+        $notification->sendNotification($user_id, $message,'ticket');
         $emailAdmin = User::query()->findOrFail($user_id);
 
         SendMail::dispatch($emailAdmin, $ticket);
@@ -231,11 +231,11 @@ class TicketController extends Controller
                 'total_price' => $total_price,
                
             ]);
+
         
     }else{
         return redirect()->route('client.ticket.payment-method');
     }
-
     }
 
 
