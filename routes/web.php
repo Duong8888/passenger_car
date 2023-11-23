@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\PassengerCarController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\admin\permission\RolePermissionController;
 use App\Http\Controllers\admin\permission\UserPermissionController;
+use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\RouteController;
 use App\Http\Controllers\NotificationController;
@@ -164,6 +165,11 @@ Route::prefix('revenue')->controller(RevenueAdminController::class)->name('reven
 // Tổng doanh thu cho nhà xe
 Route::prefix('revenueStaff')->controller(RevenueStaffController::class)->name('revenueStaff.')->group(function (){
     Route::get('/', 'index')->name('index');
+});
+
+// quản lý lich trình
+Route::group(['prefix' => 'schedule', 'as' => 'schedule.'], function () {
+    Route::get('/', [ScheduleController::class, 'index'])->name('index');
 });
 
 // Route::get('/management/index',[App\Http\Controllers\Admin\AdminManagementController::class,'index'])->name('route_adminmanagement_index');

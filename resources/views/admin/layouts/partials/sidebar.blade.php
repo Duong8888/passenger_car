@@ -136,7 +136,7 @@
                         </a>
                     </li>
                 @endif
-                
+
                 @if(auth()->user()->hasAnyRole(['SupperAdmin', 'Admin','Nhà xe']))
                     <li>
                         <a href="{{ route('admin.service.index') }}">
@@ -145,6 +145,16 @@
                         </a>
                     </li>
                 @endif
+
+
+                <li>
+                    <a href="{{ route('admin.schedule.index') }}">
+                        <i class="mdi mdi-clipboard-outline"></i>
+                        <span>Lịch trình hôm nay</span>
+                    </a>
+                </li>
+
+
                 @if(auth()->user()->hasAnyRole(['SupperAdmin', 'Admin']))
                     <li>
                         <a href="{{ route('admin.route.index') }}">
