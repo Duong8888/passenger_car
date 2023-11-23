@@ -11,7 +11,7 @@
         <div class="flex justify-between">
             <div style="width: 60%;">
                 <p>Chúng tôi đã gửi thông tin chuyến đi đến email <span style="color: blue">{{
-                        session('value')[0]['email'] }}</span> bạn hãy kiểm tra lại nhé </p>
+                       $email }}</span> bạn hãy kiểm tra lại nhé </p>
                 <p style="margin-top: 100px; font-size: 20px;font-weight: bold;">Thông tin vé</p>
                 <table style="border-collapse: collapse; width: 100%;">
                     <tr>
@@ -29,7 +29,7 @@
                             $value->license_plate }}</td>
                         @endforeach
                         <td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">{{
-                            session('value')[0]['route_departure']}}-{{ session('value')[0]['route_arrival']}}</td>
+                           $route_departure}}-{{ $route_arrival}}</td>
 
                     </tr>
                 </table>
@@ -37,17 +37,17 @@
 
                 <div style="background-color: #f2f2f2; padding: 10px; margin-bottom: 20px;">
                     <p style="margin: 0;">Điểm đón</p>
-                    <p>{{ session('value')[0]['departure']}}</p>
-                    <p>Đón lúc: {{ session('value')[0]['time_departure']}}</p>
+                    <p>{{  $departure}}</p>
+                    <p>Đón lúc: {{ $time_departure}}</p>
                 </div>
                 <hr>
                 <div style="background-color: #e6e6e6; padding: 10px; margin-top: 20px;">
                     <p style="margin: 0;">Điểm trả</p>
-                    <p>{{ session('value')[0]['arrival']}}</p>
-                    <p>Đón lúc: {{ session('value')[0]['time_arrival']}}</p>
+                    <p>{{ $arrival}}</p>
+                    <p>Đón lúc: {{ $time_arrival}}</p>
                 </div>
 
-                <button data-id="{{ session('value')[1] }}" data-action="{{ route('client.ticket.cancel-ticket') }}" id="cancel-ticket" style="display: block; margin: 0 auto; background-color: red; color: white; width: 100% ; margin-top: 50px; padding: 10px ">Hủy Vé</button>
+                <button data-id="{{$id }}" data-action="{{ route('client.ticket.cancel-ticket') }}" id="cancel-ticket" style="display: block; margin: 0 auto; background-color: red; color: white; width: 100% ; margin-top: 50px; padding: 10px ">Hủy Vé</button>
             </div>
 
             <div style="width: 30%">
@@ -55,15 +55,15 @@
                     style="border: 1px solid #000; padding: 10px; display: flex; flex-direction: column; justify-content: space-between;">
                     <div style="margin-bottom: 10px;">
                         <p style="margin: 0; font-size: 14px;">Hành Khách :</p>
-                        <p style="margin: 0; font-size: 16px;">{{ session('value')[0]['username'] }}</p>
+                        <p style="margin: 0; font-size: 16px;">{{  $username }}</p>
                     </div>
                     <div style="margin-bottom: 10px;">
                         <p style="margin: 0; font-size: 14px;">Số điện thoại :</p>
-                        <p style="margin: 0; font-size: 16px;">{{ session('value')[0]['phone'] }}</p>
+                        <p style="margin: 0; font-size: 16px;">{{  $phone }}</p>
                     </div>
                     <div style="margin-bottom: 10px;">
                         <p style="margin: 0; font-size: 14px;">Email :</p>
-                        <p style="margin: 0; font-size: 16px;">{{ session('value')[0]['email'] }}</p>
+                        <p style="margin: 0; font-size: 16px;">{{ $email }}</p>
                     </div>
                 </div>
                 <div
@@ -79,7 +79,7 @@
                    
                     <div style="margin-bottom: 10px;">
                         <p class="showTotalPrice" style="margin: 0; font-size: 14px; font-size: 20px;font-weight: bold;">
-                            {{number_format(session('value')[0]['total_price']) }}đ</p>
+                            {{number_format($total_price) }}đ</p>
                      
                     </div>
                     
