@@ -16,7 +16,7 @@
     @yield('page-style')
 </head>
 
-
+@if (session()->has('value'))
 <body class="bg-white dark:bg-neutral-800">
     <section class="py-20 bg-gray-50 dark:bg-neutral-700">
         <div class="container mx-auto">
@@ -70,12 +70,12 @@
                         {{-- ----------------This is where i shining--------------------}}
                         <div class="flex justify-between">
                             <h6 class="mb-3 text-1 text-gray-900 dark:text-gray-50">Điểm đón</h6>
-                            <button id="departure-change"><i class="text-2xl mdi mdi-pencil"></i></button>
+                            <button id="departure-change" style="display: none"><i class="text-2xl mdi mdi-pencil"></i></button>
                         </div>
                         <p class="mb-3">{{ session('value')[0]['departure'] }}</p>
                         <div class="flex justify-between">
                             <h6 class="mb-3 text-1 text-gray-900 dark:text-gray-50">Điểm trả</h6>
-                            <button id="arrival-change"><i class="text-2xl mdi mdi-pencil"></i></button>
+                            <button id="arrival-change"  style="display: none"><i class="text-2xl mdi mdi-pencil"></i></button>
                         </div>
                         <p class="mb-3">{{ session('value')[0]['arrival'] }}</p>
                     </div>
@@ -219,6 +219,16 @@
 
     </section>
 </body>
+@else
+<body class="bg-white dark:bg-neutral-800">
+    <section class="py-20 bg-gray-50 dark:bg-neutral-700">
+        <div class="container mx-auto">
+            <h1>Errol Page Expire !</h1>
+        </div>
+    </section>
+</body>
+@endif
+
 
 <script>
     const infoUser = @json(auth()->user());

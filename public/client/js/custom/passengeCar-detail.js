@@ -1,6 +1,26 @@
 $(document).ready(function () {
     const icon = `<svg class="mr-2 icon-item" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: #5f6273;transform: ;msFilter:;"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M9.999 13.587 7.7 11.292l-1.412 1.416 3.713 3.705 6.706-6.706-1.414-1.414z"></path></svg>`;
 
+    document.querySelectorAll('input[name="departure"]').forEach(function(radio) {
+        radio.addEventListener('change', function() {
+            if (this.value === 'other') {
+                document.getElementById('otherInput').style.display = 'block';
+            } else {
+                document.getElementById('otherInput').style.display = 'none';
+            }
+        });
+    });
+
+    document.querySelectorAll('input[name="arrival"]').forEach(function(radio) {
+        radio.addEventListener('change', function() {
+            if (this.value === 'other1') {
+                document.getElementById('otherInput1').style.display = 'block';
+            } else {
+                document.getElementById('otherInput1').style.display = 'none';
+            }
+        });
+    });
+    
     $(document).on("click", ".Ticket", function () {
         showPopup();
     })
@@ -63,6 +83,10 @@ $(document).ready(function () {
     $(document).on('click', '.submit', function () {
         var username = $('input[name="name"]').val();
         var phone = $('input[name="phone"]').val();
+        
+        var lmao = $('input[name="other"]').val();
+        var lmao1 = $('input[name="other1"]').val();
+      
         var email = $('input[name="email"]').val();
         var route_departure = $('input[name="route-departure"]').val();
         var route_arrival = $('input[name="route-arrival"]').val();
@@ -71,7 +95,14 @@ $(document).ready(function () {
         var time_departure = $('input[name="departureTimeInput"]').val();
         var time_arrival = $('input[name="arrivalTimeInput"]').val();
         var departure = $('input[name="departure"]:checked').val();
-        var arrival = $('input[name="arrival1"]:checked').val();
+        var arrival = $('input[name="arrival"]:checked').val();
+        if(lmao != ''){
+            departure = lmao;
+        }
+        if(lmao1 != ''){
+            arrival = lmao;
+        }
+       
         var date =  $('input[name="date"]').val();
         var passenger_car_user = $('input[name="passenger-user"]').val();
         const error = [];
@@ -103,6 +134,8 @@ $(document).ready(function () {
                 route_arrival: route_arrival,
                 date: date,
                 passenger_car_user: passenger_car_user,
+                status: 0,
+                payment_method: 0,
             };
             let url = $(this).data("action");
     
