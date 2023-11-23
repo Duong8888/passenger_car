@@ -37,7 +37,9 @@ class RouteController extends AdminBaseController
             ->where('user_id', Auth::user()->id)
             ->whereNull('route_id')
             ->get();
-        $data = Stops::where('user_id', Auth::user()->id)
+        $id = auth()->id();
+
+        $data = Stops::whereRaw("JSON_CONTAINS(user_id, '$id')")
             ->join('routes', 'stops.route_id', '=', 'routes.id')
             ->select('routes.departure', 'routes.arrival', 'routes.id')
             ->distinct()
@@ -133,7 +135,7 @@ class RouteController extends AdminBaseController
             $userId = Auth::id();
             $route = $this->model->findOrFail($id);
             $stops = $route->stops()
-                ->where('user_id', $userId)
+                ->whereRaw("JSON_CONTAINS(user_id, '$userId')")
                 ->get();
             $cars = $route->passengerCars()
                 ->where('user_id', $userId)
@@ -171,26 +173,52 @@ class RouteController extends AdminBaseController
         }
 
         Stops::where('route_id', $route->id)->delete();
-        $arrStop = [];
-        foreach ($arrivalArr as $key => $value) {
-            $arrStop[] = [
-                'stop_name' => $value,
-                'stop_type' => 1,
-                'route_id' => $route->id,
-                'user_id' => Auth::user()->id,
-                'order' => $key,
-            ];
+
+        $user_id = Auth::id();
+
+        foreach ($departureArr as $key => $departure) {
+            $existingStop = Stops::where('stop_name', strtolower($departure))->where('route_id', $route->id)->first();
+            if ($existingStop) {
+                $userIds = json_decode($existingStop->user_id, true);
+                $user_ids = $userIds ?? [];
+                if (!in_array($user_id, $user_ids)) {
+                    $user_ids[] = $user_id;
+                    $existingStop->user_id = $user_ids;
+                    $existingStop->save();
+                }
+            } else {
+                $data = [
+                    'route_id' => $route->id,
+                    'stop_name' => strtolower($departure),
+                    'stop_type' => 0,
+                    'user_id' => json_encode([$user_id]),
+                    'order' => $key,
+                ];
+                Stops::create($data);
+            }
         }
-        foreach ($departureArr as $key => $value) {
-            $arrStop[] = [
-                'stop_name' => $value,
-                'stop_type' => 0,
-                'route_id' => $route->id,
-                'user_id' => Auth::user()->id,
-                'order' => $key,
-            ];
+
+        foreach ($arrivalArr as $key => $arrival) {
+            $existingStop = Stops::where('stop_name', strtolower($arrival))->where('route_id', $route->id)->first();
+            if ($existingStop) {
+                $userIds = json_decode($existingStop->user_id, true);
+                $user_ids = $userIds ?? [];
+                if (!in_array($user_id, $user_ids)) {
+                    $user_ids[] = $user_id;
+                    $existingStop->user_id = $user_ids;
+                    $existingStop->save();
+                }
+            } else {
+                $data = [
+                    'route_id' => $route->id,
+                    'stop_name' => strtolower($arrival),
+                    'stop_type' => 1,
+                    'user_id' => json_encode([$user_id]),
+                    'order' => $key,
+                ];
+                Stops::create($data);
+            }
         }
-        Stops::query()->insert($arrStop);
         return response()->json('Cập nhật thành công');
     }
 

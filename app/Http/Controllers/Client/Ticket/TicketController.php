@@ -47,7 +47,9 @@ class TicketController extends Controller
         $phoneNumber = $request->phone;
 
         session()->push('value', $ticketId);
+
         Log::info($request->all());
+
         Log::info(session('value'));
 
       
@@ -137,7 +139,7 @@ class TicketController extends Controller
 
         $vnp_Url = $vnp_Url . "?" . $query;
         if (isset($vnp_HashSecret)) {
-            $vnpSecureHash = hash_hmac('sha512', $hashdata, $vnp_HashSecret); 
+            $vnpSecureHash = hash_hmac('sha512', $hashdata, $vnp_HashSecret);
             $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
         }
         $returnData = array(
@@ -150,6 +152,7 @@ class TicketController extends Controller
 
     public function checkoutPayment(Request $request)
     {
+
         if ($request->vnp_ResponseCode == '00' && $request->vnp_TransactionStatus == '00') {
             $passenger_car = PassengerCar::where('id', session('value')[0]['passenger_car_id'])->get();
             $data = (session()->get('value'));
@@ -283,7 +286,6 @@ class TicketController extends Controller
         Log::info(session('value'));
         return response()->json($arrayInfo, Response::HTTP_OK);
     }
-
     public function CancelTicket(Request $request){
         $ticket = Ticket::where('id', $request->id)->update(['status' => 0]);
         session()->forget('value');
