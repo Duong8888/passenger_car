@@ -72,7 +72,7 @@ class TicketController extends Controller
         // }
 
         $notification = new NotificationController();
-        $notification->sendNotification($user_id, $message);
+        $notification->sendNotification($user_id, $message,'ticket');
         $emailAdmin = User::query()->findOrFail($user_id);
 
         SendMail::dispatch($emailAdmin, $ticket);
@@ -215,7 +215,7 @@ class TicketController extends Controller
         $user_id = session('value')[0]['passenger_car_user'];
         $message =session('value')[0]['username']. ' đã đặt vé thành công';
         $notification = new NotificationController();
-        $notification->sendNotification($user_id, $message);
+        $notification->sendNotification($user_id, $message,'ticket');
 
         SendMail::dispatch(session('value')[0]['email'],  $ticket);
         $passenger_car = PassengerCar::where('id', session('value')[0]['passenger_car_id'])->get();

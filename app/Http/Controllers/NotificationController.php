@@ -12,23 +12,28 @@ use Illuminate\Support\Facades\Log;
 class NotificationController extends Controller
 {
 
-    public function sendNotification($id ,$message)
+    public function sendNotification($id, $message, $url)
     {
+        $id_send = 0;
+        if (Auth::check()) {
+            $id_send = Auth::user()->id;
+        }
         event(new NewNotification($id, $message));
         $data = [
             'user_id' => $id,
-            'user_send' => \auth()->user()->id,
+            'user_send' => $id_send,
             'content' => $message,
             'is_read' => false,
-            'url' => 'ticket',
+            'url' => $url,
         ];
         $this->store($data);
     }
 
 
-    public function test(Request $request){
+    public function test(Request $request)
+    {
         Log::info($request->all());
-        $this->sendNotification($request->id ,$request->message);
+        $this->sendNotification($request->id, $request->message);
     }
 
     public function store($data)
@@ -36,10 +41,11 @@ class NotificationController extends Controller
         Notifications::create($data);
     }
 
-    public function getNotification(Request $request){
+    public function getNotification(Request $request)
+    {
 
         $notification = Notifications::orderBy("created_at", "DESC")->get();
-        $countNotification = Notifications::query()->where('is_read',false)->count();
+        $countNotification = Notifications::query()->where('is_read', false)->count();
         return response()->json(['notification' => $notification, 'count' => $countNotification]);
     }
 

@@ -26,8 +26,8 @@ z-index: 999;"  >
 <div
     class="col-span-12 rounded-b-md lg:col-span-6 group-data-[theme-color=violet]:bg-violet-700 group-data-[theme-color=sky]:bg-sky-700 group-data-[theme-color=red]:bg-red-700 group-data-[theme-color=green]:bg-green-700 group-data-[theme-color=pink]:bg-pink-700 group-data-[theme-color=blue]:bg-blue-700 lg:rounded-b-none lg:ltr:rounded-r-lg rtl:rounded-l-lg" style="width: 50%; z-index: 1000; margin: auto; margin-top: 60px;
     ">
-    
-    <div class="flex flex-col justify-center items-center h-screen p-12">   
+
+    <div class="flex flex-col justify-center items-center h-screen p-12">
         <div class="text-center">
             <h5 class="text-[18.5px] text-white">Welcome Back !</h5>
             <p class="mt-3 text-white/80">Sign in to continue to Jobcy.</p>
@@ -51,9 +51,8 @@ z-index: 999;"  >
             </div>
         </form>
         <div class="text-center">
-          
+
             <div class="p-10">
-               
                 <button  style="background: white !important;
                 padding: 10px 30px !important;
                 border-radius: 5px !important; " id="closePopupButton">Đóng</button>
@@ -89,7 +88,7 @@ padding:00px ">
           </div>
       </form>
       <div class="text-center">
-          
+
           <div class="p-10">
           </div>
       </div>
@@ -105,6 +104,55 @@ padding:00px ">
 
     <!-- Footer Start -->
     @include('client.layout.partials.footer')
+    <div class="fixed transition-all duration-300 ease-linear top-[27.5rem] switcher" id="style-switcher">
+        <div class="w-48 p-4 bg-white shadow-md">
+            <div>
+                <h3 class="mb-2 font-semibold text-gray-900 text-16">Select your color</h3>
+                <ul class="flex gap-3 ">
+                    <li>
+                        <a class="h-10 w-10 bg-[#815DF2] block rounded-full" data-color="violet"
+                           href="javascript: void(0);"></a>
+                    </li>
+                    <li>
+                        <a class="h-10 w-10 bg-[#69cdf1] block rounded-full" data-color="sky"
+                           href="javascript: void(0);"></a>
+                    </li>
+                    <li>
+                        <a class="h-10 w-10 bg-[#dd4948] block rounded-full" data-color="red"
+                           href="javascript: void(0);"></a>
+                    </li>
+                </ul>
+                <ul class="flex gap-3 mt-4">
+                    <li>
+                        <a class="h-10 w-10 bg-[#38c284] block rounded-full" data-color="green"
+                           href="javascript: void(0);"></a>
+                    </li>
+                    <li>
+                        <a class="h-10 w-10 bg-[#e35490] block rounded-full" data-color="pink"
+                           href="javascript: void(0);"></a>
+                    </li>
+                    <li>
+                        <a class="h-10 w-10 bg-[#5276f4] block rounded-full active" data-color="blue"
+                           href="javascript: void(0);"></a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="mt-5">
+                <h3 class="mb-2 font-semibold text-gray-900 text-16">Light/dark Layout</h3>
+                <div class="flex justify-center mt-2">
+                    <!-- light-dark mode button -->
+                    <a href="javascript: void(0);" id="mode"
+                       class="z-40 px-6 py-2 font-normal text-white transition-all duration-300 ease-linear rounded text-14 bg-zinc-800"
+                       onclick="changeMode(event)">
+                        <i class="hidden text-xl uil uil-brightness dark:text-white dark:inline-block"></i>
+                        <i class="inline-block text-xl uil uil-moon dark:text-zinc-800 dark:hidden"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- end Footer -->
     <script>
         var openButton = document.getElementById("openPopupButton");
@@ -113,8 +161,8 @@ padding:00px ">
         openButton.addEventListener("click", function () {
             popupContainer.style.display = "block";
         });
-    
-      
+
+
         closeButton.addEventListener("click", function () {
             popupContainer.style.display = "none";
         });
@@ -122,6 +170,7 @@ padding:00px ">
     <script>
         const infoUser = @json(auth()->user());
     const urlNotification = '{{route('notifications.loadMessage')}}';
+        sessionStorage.setItem("data-theme-color", "blue");
     </script>
     @include('client.layout.partials.script')
     @yield('page-script')
