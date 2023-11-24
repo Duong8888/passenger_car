@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('working_time_id');
             $table->unsignedBigInteger('passenger_car_id');
+            $table->string('status')->default(0);
             $table->timestamps();
         });
     }

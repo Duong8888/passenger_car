@@ -52,7 +52,7 @@ class TicketController extends Controller
 
         Log::info(session('value'));
 
-      
+
         // $APIKey="4804FCD90B5191173B9C05ADAEB455";
         // $SecretKey="ECA5AFD4D982FAF3E2315AF3654B4A";
         // $YourPhone = $phoneNumber;
@@ -80,7 +80,7 @@ class TicketController extends Controller
 
         SendMail::dispatch($emailAdmin, $ticket);
         SendMail::dispatch($request->email, $ticket);
-      
+
         return response()->json(['success' => 'Done'], Response::HTTP_OK);
     }
 
@@ -156,10 +156,10 @@ class TicketController extends Controller
         if ($request->vnp_ResponseCode == '00' && $request->vnp_TransactionStatus == '00') {
             $passenger_car = PassengerCar::where('id', session('value')[0]['passenger_car_id'])->get();
             $data = (session()->get('value'));
-          
+
             foreach ($data as $a) {
                 $YourPhone = $a['phone'];
-                
+
                 $ticket = Ticket::query()->create([
                     'username' => $a['username'],
                     'status' => 2,
@@ -175,22 +175,22 @@ class TicketController extends Controller
                 ]);
                 $a['payment_method'] = 'Đã Thanh toán VNPAY';
             }
-         
+
             // $APIKey="4804FCD90B5191173B9C05ADAEB455";
             // $SecretKey="ECA5AFD4D982FAF3E2315AF3654B4A";
-    
-           
+
+
             // $Content = "Cam on quy khach da su dung dich vu cua chung toi. Chuc quy khach mot ngay tot lanh!";
-    
+
             // $SendContent = urlencode($Content);
             // $data = "http://rest.esms.vn/MainService.svc/json/SendMultipleMessage_V4_get?Phone=$YourPhone&ApiKey=$APIKey&SecretKey=$SecretKey&Content=$SendContent&Brandname=Baotrixemay&SmsType=2";
-    
+
             // $curl = curl_init($data);
             // curl_setopt($curl, CURLOPT_FAILONERROR, true);
             // curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
             // curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             // $result = curl_exec($curl);
-    
+
             // $obj = json_decode($result, true);
             // if ($obj['CodeResult'] == 100) {
             //     Log::info("thành công ");
@@ -200,8 +200,8 @@ class TicketController extends Controller
             $user_id = session('value')[0]['passenger_car_user'];
             $message =session('value')[0]['username']. ' đã đặt vé thành công';
             $notification = new NotificationController();
-            $notification->sendNotification($user_id, $message);
-    
+            $notification->sendNotification($user_id, $message,'ticket');
+
             SendMail::dispatch(session('value')[0]['email'],  $ticket);
 
             $email =  session('value')[0]['email'];
@@ -229,10 +229,10 @@ class TicketController extends Controller
                 'phone' => $phone,
                 'email' => $email,
                 'total_price' => $total_price,
-               
+
             ]);
 
-        
+
     }else{
         return redirect()->route('client.ticket.payment-method');
     }

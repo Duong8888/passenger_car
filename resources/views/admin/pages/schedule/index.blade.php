@@ -6,12 +6,11 @@
     <script src="{{asset('admin/js/pages/form-advanced.init.js')}}"></script>
 
     <script src="{{asset('client/libs/choices.js/public/assets/scripts/choices.min.js')}}"></script>
-    <script src="{{asset('client/js/pages/job-list.init.js')}}"></script>
-    <script type="module" src="{{asset('admin/js/custom/route.js')}}"></script>
+    <script type="module" src="{{asset('admin/js/custom/schedule.js')}}"></script>
 @endsection
 
 @section('page-style')
-    <link rel="stylesheet" href="{{asset('client/libs/choices.js/public/assets/styles/choices.min.css')}}">
+
 @endsection
 
 @section('content')
@@ -39,13 +38,13 @@
                                     </thead>
                                     <tbody class="show-item-table">
                                     @foreach($car as $key => $value)
-                                        @foreach($value->workingTime as $time)
+                                        @foreach($value->workingTime as $keyTime => $time)
                                             <tr>
                                                 <td>{{$value->license_plate}} | {{$value->capacity}} chỗ</td>
                                                 <td>{{$value->route->departure}} - {{$value->route->arrival}}</td>
                                                 <td>{{date("H:i", strtotime($time->departure_time)) }}</td>
                                                 <td>{{date("H:i", strtotime($time->arrival_time))}}</td>
-                                                <td>Đang khởi hành</td>
+                                                <td  id="text-{{$time->pivot->id}}" >{!!  $time->pivot->status == 0? '<span class="badge bg-purple">Chưa khởi hành</span>' : ($time->pivot->status == 1  ?'<span class="badge bg-primary">Đang khởi hành</span>':'<span class="badge bg-success">Đã hoàn thành chuyến</span>')  !!}</td>
                                                 <td style="display: flex;">
                                                     <div class="btn-group">
                                                         <button type="button" class="btn btn-primary dropdown-toggle"
@@ -53,14 +52,10 @@
                                                                 aria-expanded="false">
                                                             Action <i class="mdi mdi-chevron-down"></i>
                                                         </button>
-                                                        <div class="dropdown-menu" style="">
-                                                            <a class="dropdown-item btn-update" data-id="1" href="#">Thông
-                                                                tin</a>
-                                                            <a class="dropdown-item btn-update" data-id="1"
-                                                               href="#">Sửa</a>
-                                                            <a class="dropdown-item delete" data-id="1"
-                                                               data-action="delete/1"
-                                                               href="#">Xóa</a>
+                                                        <div class="dropdown-menu" id="action" data-action="{{route('admin.schedule.update')}}" style="" >
+                                                            <div class="dropdown-item btn-update" data-item="{{$time->pivot->id}}" data-value="0" style="cursor: pointer;">Chưa khởi hành</div>
+                                                            <div class="dropdown-item btn-update" data-item="{{$time->pivot->id}}" data-value="1" style="cursor: pointer;">Đang khởi hành</div>
+                                                            <div class="dropdown-item btn-update" data-item="{{$time->pivot->id}}" data-value="2" style="cursor: pointer;">Đã hoàn thành chuyến</div>
                                                         </div>
                                                     </div>
 
