@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('content');
-            $table->text('image');
+            $table->text('image')->nullable(false);
             $table->string('slug')->unique();
             $table->unsignedBigInteger('category_id');
 //            $table->foreign('category_id')->references('id')->on('posts_categories');
