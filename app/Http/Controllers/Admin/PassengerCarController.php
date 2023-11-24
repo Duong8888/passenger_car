@@ -29,7 +29,7 @@ class PassengerCarController extends AdminBaseController
     public $titleEdit = 'Cập nhật xe';
     public $colums = [
         'license_plate' => 'Biển số',
-        'capacity' => 'Số gế',
+        'capacity' => 'Số ghế',
         'price' => 'Giá vé',
         'route' => 'Tuyến đường',
         'action' => 'Thao tác',

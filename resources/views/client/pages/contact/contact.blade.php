@@ -336,7 +336,7 @@
                                     cao trong các tháng vừa qua.</p>
                             </div>
                         </div>
-                        <div class="grid grid-cols-12 gap-5">
+                        <div class="grid grid-cols-4 gap-5">
                             @if($users)
                             @foreach ($users as $nhaxe)
                                 <div class="col-span-12 md:col-span-6 lg:col-span-3">
