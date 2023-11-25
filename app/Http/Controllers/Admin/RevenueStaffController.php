@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\PassengerCar;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RevenueStaffController extends Controller
 {
@@ -19,14 +20,19 @@ class RevenueStaffController extends Controller
         if (is_null($end_date)) {
             $end_date = now()->toDateString();
         }
+        
+        $currentUser = Auth::user();
+
         if ($start_date && $end_date) {
             $passengerCarsQuery = PassengerCar::with('user', 'tickets')
+                ->where('user_id', $currentUser->id)
                 ->whereHas('tickets', function ($ticketQuery) use ($start_date, $end_date) {
                     $ticketQuery->whereBetween('created_at', [$start_date, $end_date]);
                 });
         } else {
             $today = Carbon::now()->endOfDay();
             $passengerCarsQuery = PassengerCar::with('user', 'tickets')
+                ->where('user_id', $currentUser->id)
                 ->whereHas('tickets', function ($ticketQuery) use ($today) {
                     $ticketQuery->whereBetween('created_at', [$today, $today]);
                 });
@@ -63,7 +69,7 @@ class RevenueStaffController extends Controller
                 }),
             ];
         });
-        // return response()->json($mergedCars, 200, [], JSON_PRETTY_PRINT);
+        // return response()->json($currentUser, 200, [], JSON_PRETTY_PRINT);
         return view('staff.revenue.index',compact('mergedCars'));
     }
 

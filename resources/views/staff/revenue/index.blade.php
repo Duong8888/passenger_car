@@ -31,10 +31,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h4 class="mt-0">Doanh thu: 44444444444444444444 VND</h4>
-                    <!-- <a href="{{ route('admin.revenue.add') }}" class="btn btn-primary">Thêm mới </a> -->
-                </div>
+                <h4 class="mt-0 header-title">Thống kê doanh thu</h4>
                 <form method="GET" class="mb-4 mt-4">
                     <div class="row align-items-end">
                         <div class="col-lg-4 mb-2   ">
@@ -48,7 +45,7 @@
                                 value="{{ Request()->end_date ?? date('Y-m-d') }}" class="form-control ">
                         </div>
                         <div class="col-md-4 mb-2 text-md-end">
-                            <a href="{{ route('admin.revenueAdmin.index') }}" class="btn btn-outline-secondary">Đặt lại </a>
+                            <a href="{{ route('admin.revenueStaff.index') }}" class="btn btn-outline-secondary">Đặt lại </a>
                             <button type="submit" class="btn btn-primary">Tìm kiếm</button>
                         </div>
 

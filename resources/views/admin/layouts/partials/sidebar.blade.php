@@ -116,7 +116,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('admin.revenue.index') }}">
+                        <a href="{{ route('admin.revenueStaff.index') }}">
                             <i class="mdi mdi-view-dashboard-outline"></i>
                             <span> Thống kê doanh thu </span>
                         </a>

@@ -112,13 +112,18 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         Route::get('customers/edit/{customer}', [CustomerController::class, 'edit'])->name('customer.edit');
         Route::put('customers/edit/{id}', [CustomerController::class, 'update'])->name('customer.update');
         Route::delete('customers/delete/{id}', [CustomerController::class, 'delete'])->name('customer.delete');
+        // Tổng doanh thu cho nhà xe
+        Route::prefix('revenueStaff')->controller(RevenueStaffController::class)->name('revenueStaff.')->group(function (){
+        Route::get('/', 'index')->name('index');
+        
         //Thống kê doanh thu nhà xe
-        Route::get('revenue/', [RevenueController::class, 'index'])->name('revenue.index');
-        Route::get('revenue/add', [RevenueController::class, 'add'])->name('revenue.add');
-        Route::post('revenue/add', [RevenueController::class, 'store'])->name('revenue.store');
-        Route::get('revenue/edit/{revenue}', [RevenueController::class, 'edit'])->name('revenue.edit');
-        Route::put('revenue/edit/{id}', [RevenueController::class, 'update'])->name('revenue.update');
-        Route::delete('revenue/delete/{id}', [RevenueController::class, 'delete'])->name('revenue.delete');
+        // Route::get('revenue/', [RevenueController::class, 'index'])->name('revenue.index');
+        // Route::get('revenue/add', [RevenueController::class, 'add'])->name('revenue.add');
+        // Route::post('revenue/add', [RevenueController::class, 'store'])->name('revenue.store');
+        // Route::get('revenue/edit/{revenue}', [RevenueController::class, 'edit'])->name('revenue.edit');
+        // Route::put('revenue/edit/{id}', [RevenueController::class, 'update'])->name('revenue.update');
+        // Route::delete('revenue/delete/{id}', [RevenueController::class, 'delete'])->name('revenue.delete');
+});
     });
 
     //  SupperAdmin-Admin
@@ -156,10 +161,7 @@ Route::group(['prefix' => 'notifications', 'as' => 'notifications.'], function (
     Route::post('load', [NotificationController::class, 'getNotification'])->name('loadMessage');
 });
 
-// Tổng doanh thu cho nhà xe
-Route::prefix('revenueStaff')->controller(RevenueStaffController::class)->name('revenueStaff.')->group(function (){
-    Route::get('/', 'index')->name('index');
-});
+
 
 // Route::get('/management/index',[App\Http\Controllers\Admin\AdminManagementController::class,'index'])->name('route_adminmanagement_index');
 // Route::match(['GET','POST'],'/management/edit/{id}',[App\Http\Controllers\Admin\AdminManagementController::class,'edit'])->name('route_adminmanagement_edit');

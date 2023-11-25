@@ -7,11 +7,13 @@ use App\Models\PassengerCar;
 use App\Models\Ticket;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RevenueAdminController extends Controller
 {
     public function index(Request $request)
     {
+        
         $start_date = $request->input('start_date');
         $end_date = Carbon::parse($request->input('end_date'))->endOfDay();
         if (is_null($start_date)) {
@@ -20,16 +22,17 @@ class RevenueAdminController extends Controller
         if (is_null($end_date)) {
             $end_date = now()->toDateString();
         }
+
         if ($start_date && $end_date) {
             $passengerCarsQuery = PassengerCar::with('user', 'tickets')
                 ->whereHas('tickets', function ($ticketQuery) use ($start_date, $end_date) {
-                    $ticketQuery->whereBetween('created_at', [$start_date, $end_date]);
+                    $ticketQuery->whereBetween('tickets.created_at', [$start_date, $end_date]);
                 });
         } else {
             $today = Carbon::now()->endOfDay();
             $passengerCarsQuery = PassengerCar::with('user', 'tickets')
                 ->whereHas('tickets', function ($ticketQuery) use ($today) {
-                    $ticketQuery->whereBetween('created_at', [$today, $today]);
+                    $ticketQuery->whereBetween('tickets.created_at', [$today, $today]);
                 });
         }
         
@@ -64,7 +67,7 @@ class RevenueAdminController extends Controller
                 }),
             ];
         });
-        // return response()->json($mergedCars, 200, [], JSON_PRETTY_PRINT);
+        // return response()->json($passengerCars, 200, [], JSON_PRETTY_PRINT);
         return view('admin.pages.revenue.index',compact('mergedCars'));
     }
 
