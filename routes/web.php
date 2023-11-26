@@ -77,8 +77,11 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         });
         Route::post('/trip', [TicketController::class, 'Trip']);
         Route::post('/passgenerCar/{id}', [TicketController::class, 'PassengerCar']);
+        Route::post('/confirm', [TicketController::class, 'Confirm']);
+    });
+    // tuyến đường SupperAdmin-Admin
+    Route::group(['middleware' => 'checkRoles:SupperAdmin,Admin'], function () {
 
-        // Quản lý tuyến đường nhà xe
         Route::prefix('route')->controller(RouteController::class)->name('route.')->group(function () {
             Route::get('/', 'index')->name('index');
             Route::post('/store', 'store')->name('store');
