@@ -6,7 +6,7 @@
         <div class="user-box text-center">
 
 
-            <img src="https://i.imgur.com/GNi3im6.png" alt="user-img" title="Mat Helme" class="rounded-circle img-thumbnail avatar-md">
+            <img src="{{asset('https://i.imgur.com/GNi3im6.png')}}" alt="user-img" title="Mat Helme" class="rounded-circle img-thumbnail avatar-md">
 
             <div class="dropdown">
 
@@ -78,78 +78,87 @@
 
                     </a>
                 </li>
-
-                @if(auth()->user()->hasAnyRole(['SupperAdmin', 'Admin','AdminTicket']))
+                <li>
+                    <a href="{{ route('admin.postsing') }}">
+                        <i class="mdi mdi-calendar-blank-outline"></i>
+                        <span> Quản lý tin tức </span>
+                    </a>
+                </li>
+                @if(auth()->user()->hasAnyRole(['Nhà xe']))
                     <li>
                         <a href="{{ route('admin.ticket.index') }}" >
                             <i class="mdi mdi-texture"></i>
                             <span>Quản lý Vé</span>
                         </a>
                     </li>
-                @endif
-                <li>
-
-                {{-- <li>
->
-                    <a href="{{ route('admin.revenue.index') }}">
-                        <i class="mdi mdi-view-dashboard-outline"></i>
-                        <span> Thống kê doanh thu </span>
-                    </a>
-                </li> --}}
-                <li>
-                    <a href="{{ route('admin.customer.index') }}">
-                        <i class="mdi mdi-view-dashboard-outline"></i>
-                        <span> Quản lý khách hàng </span>
-                    </a>
-                </li>
-
-
-                @if(auth()->user()->hasAnyRole(['SupperAdmin', 'Admin', 'AdminPost']))
                     <li>
-                        <a href="{{ route('admin.postsing') }}">
-                            <i class="mdi mdi-calendar-blank-outline"></i>
-                            <span> Quản lý tin tức </span>
+                        <a href="{{ route('admin.customer.index') }}">
+                            <i class="mdi mdi-view-dashboard-outline"></i>
+                            <span> Quản lý khách hàng </span>
                         </a>
                     </li>
-                @endif
-                @if(auth()->user()->hasAnyRole(['SupperAdmin', 'Admin', 'Nhà xe']))
                     <li>
                         <a href="{{route('admin.car.index')}}">
                             <i class="mdi mdi-forum-outline"></i>
                             <span> Quản lý xe </span>
                         </a>
                     </li>
-                @endif
-
-
-                @if(auth()->user()->hasAnyRole(['SupperAdmin']))
-                    <li>
-                        <a href="{{ route('admin.permission.index') }}">
-                            <i class="mdi mdi-briefcase-variant-outline"></i>
-                            <span> Phân quyền user </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('admin.rolePermission.index') }}">
-                            <i class="mdi mdi-book-open-page-variant-outline"></i>
-                            <span> Cài đặt quyền/vai trò </span>
-                        </a>
-                    </li>
-                @endif
-                
-                @if(auth()->user()->hasAnyRole(['SupperAdmin', 'Admin','Nhà xe']))
                     <li>
                         <a href="{{ route('admin.service.index') }}">
                             <i class="mdi mdi-clipboard-outline"></i>
                             <span> Dịch vụ </span>
                         </a>
                     </li>
-                @endif
-                @if(auth()->user()->hasAnyRole(['SupperAdmin', 'Admin']))
                     <li>
                         <a href="{{ route('admin.route.index') }}">
                             <i class="mdi mdi-table"></i>
                             <span> Quản lí tuyến đường </span>
+                        </a>
+                    </li>
+
+                @endif
+
+                @if(auth()->user()->hasAnyRole(['SupperAdmin', 'Admin','Nhà xe']))
+
+                    <li>
+                        <a href="{{ route('admin.revenue.index') }}">
+                            <i class="mdi mdi-view-dashboard-outline"></i>
+                            <span> Thống kê doanh thu </span>
+                        </a>
+                    </li>
+                @endif
+
+
+
+                <li>
+                    <a href="{{ route('admin.schedule.index') }}">
+                        <i class="mdi mdi-clipboard-outline"></i>
+                        <span>Lịch trình hôm nay</span>
+                    </a>
+                </li>
+
+
+
+                    @if(auth()->user()->hasAnyRole(['SupperAdmin']))
+                        <li>
+                            <a href="{{ route('admin.permission.index') }}">
+                                <i class="mdi mdi-briefcase-variant-outline"></i>
+                                <span> Phân quyền user </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.rolePermission.index') }}">
+                                <i class="mdi mdi-book-open-page-variant-outline"></i>
+                                <span> Cài đặt quyền/vai trò </span>
+                            </a>
+                        </li>
+                    @endif
+
+                @if(auth()->user()->hasAnyRole(['SupperAdmin', 'Admin']))
+                    <li>
+                        <a href="{{ route('admin.revenueAdmin.index') }}">
+                            <i class="mdi mdi-view-dashboard-outline"></i>
+                            <span> Thống kê doanh thu </span>
                         </a>
                     </li>
                     <li>
@@ -164,7 +173,7 @@
                             <span> Quản lý nhà xe </span>
                         </a>
                     </li>
-                    {{-- <li>
+                    <li>
                         <a href="{{ route('admin.user.report') }}">
                             <i class="mdi mdi-table"></i>
                             <span> Thống kê user </span>
@@ -175,10 +184,11 @@
                             <i class="mdi mdi-table"></i>
                             <span> Thống kê vé </span>
                         </a>
-                    </li> --}}
+                    </li>
                 @endif
 
-
+             
+                
             </ul>
 
         </div>

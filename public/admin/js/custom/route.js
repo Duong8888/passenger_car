@@ -280,6 +280,7 @@ $(document).ready(function () {
             data: data,
             success: function (response) {
                 console.log(response);
+                toggleModal();
                 Swal.fire({
                     position: "top-center",
                     icon: "success",

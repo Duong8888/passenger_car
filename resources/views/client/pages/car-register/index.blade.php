@@ -1,11 +1,11 @@
 @extends('client.layout.master')
-
+@section('title', 'Đăng kí nhà xe')
 @section('content')
     <!-- Start grid -->
     <section class="pt-16">
         <div class="container mx-auto">
             @if("" != trim($messageStatus))
-                <div class="grid items-center grid-cols-8 mt-5 lg:gap-8 gap-y-8 p-4">
+                <div  style="text-align: center; padding: 20px;" class="grid items-center grid-cols-8 mt-5 lg:gap-8 gap-y-8 p-4">
                     <h3 class="mb-2 text-3xl text-gray-900 dark:text-white">{{$messageStatus}}</h3>
                     <p class="text-gray-500 dark:text-gray-300 center-content">{{$message}}</p>
                 </div>

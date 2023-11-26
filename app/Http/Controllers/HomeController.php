@@ -41,7 +41,7 @@ class HomeController extends Controller
         $albums = PassengerCar::with('albums')->get();
         $routes = Routes::all();
 
-        $users = User::where('user_type', 'staff')->take(8)->get();
+        $users = User::where('user_type', 'staff')->orderBy('updated_at', 'DESC')->take(4)->get();
         $passengerCars = PassengerCar::with('workingTime')->whereNotNull('route_id')->inRandomOrder()->get();
 
         $posts = Posts::orderBy('created_at', 'desc')->take(3)->get();

@@ -40,6 +40,7 @@
                                     </thead>
                                     <tbody>
                                     @foreach ($data as $posts)
+                                        @if ("admin" == auth()->user()->user_type)
                                         <tr>
                                             <td>{{ $posts->title }}</td>
                                             <td><a href="{{ route('admin.posts.edit', ['id' => $posts->id]) }}">Xem chi
@@ -65,6 +66,35 @@
                                                 </div>
                                             </td>
                                         </tr>
+                                        @else
+                                        @if (auth()->user()->id == $posts->author_id)
+                                        <tr>
+                                            <td>{{ $posts->title }}</td>
+                                            <td><a href="{{ route('admin.posts.edit', ['id' => $posts->id]) }}">Xem chi
+                                                    tiết</a></td>
+                                            <td>{{ $posts->slug }}</td>
+                                            <td>{{ $posts->category->category_name}}</td>
+                                            <td>{{ $posts->user->name}}</td>
+                                            <td>
+                                                <div class="d-flex align-items-center justify-content-center">
+                                                    <div class="btn-group">
+                                                        <i class="fe-settings dropdown-toggle font-18"
+                                                           data-bs-toggle="dropdown" aria-haspopup="true"
+                                                           aria-expanded="false"></i>
+                                                        <div class="dropdown-menu" style="">
+                                                            <a class="dropdown-item" href="{{route('admin.posts.edit',$posts->id)}}">Cập nhật</a>
+                                                            <form action="{{route('admin.posts.destroy',$posts->id)}}" method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button class="dropdown-item" type="submit">Xóa</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @endif
+                                        @endif
                                     @endforeach
                                     </tbody>
                                 </table>

@@ -1,4 +1,5 @@
 @extends('client.layout.master')
+@section('title', "Danh mục")
 @section('content')
     <div class="main-content">
         <div class="page-content">
