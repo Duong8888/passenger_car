@@ -12,5 +12,6 @@ class PassengerCarWorkingTime extends Model
     protected $fillable = [
         'working_time_id',
         'passenger_car_id',
+        'status'
     ];
 }

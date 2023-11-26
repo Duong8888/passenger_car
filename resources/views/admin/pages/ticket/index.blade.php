@@ -1,14 +1,5 @@
 @extends('admin.layouts.master')
 
-@section('page-script')
-    <!--Morris Chart-->
-    <script src="admin/libs/morris.js06/morris.min.js"></script>
-    <script src="admin/libs/raphael/raphael.min.js"></script>
-
-    <!-- Dashboar init js-->
-    <script src="admin/js/pages/dashboard.init.js"></script>
-@endsection
-
 @section('content')
     <div class="content">
         <!-- Start Content-->
@@ -38,6 +29,9 @@
                                         <th>Username</th>
                                         <th>Phone</th>
                                         <th>Email</th>
+                                        <th>Departure</th>
+                                        <th>Arrival</th>
+                                        <th>Date</th>
                                         <th>Quantity</th>
                                         <th>Status</th>
                                         <th>Price</th>
@@ -51,6 +45,9 @@
                                             <td>{{ $ticket->username }}</td>
                                             <td>{{ $ticket->phone }}</td>
                                             <td>{{ $ticket->email }}</td>
+                                            <td>{{ $ticket->departure }}</td>
+                                            <td>{{ $ticket->arrival }}</td>
+                                            <td>{{ $ticket->date }}</td>
                                             <td>{{ $ticket->quantity }}</td>
                                             <td>
                                                 @if ($ticket->status == 1 )
@@ -59,22 +56,20 @@
                                                     <span class="badge bg-success">Success</span>
                                                 @elseif($ticket->status == 0)
                                                     <span class="badge bg-danger">Cancel</span>
+                                                @elseif($ticket->status == 3)
+                                                    <span class="badge bg-info">Confirmed</span>
                                                 @endif
                                             </td>
                                             <td>{{ $ticket->total_price }}</td>
 
-                                            <td style="display: flex;">
+                                            <td style="display: flex">
                                                 <a class="btn btn-primary"
-                                                   href="{{ route('admin.ticket.edit', $ticket->id) }}">Edit</a>
-                                                <form action="{{ route('admin.ticket.destroy', $ticket->id) }}"
-                                                      method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button onclick="return confirm('Are you sure ?')"
-                                                            class="btn btn-warning">Delete
-                                                    </button>
-                                                </form>
-
+                                                   href="{{ route('admin.ticket.edit', $ticket->id) }}">Edit
+                                                </a>
+                                                
+                                                <a class="btn btn-primary confirm" data-id="{{ $ticket->id }}">
+                                                    Confirm
+                                                </a>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -95,4 +90,42 @@
         </div> <!-- container -->
 
     </div> <!-- content -->
+@endsection
+
+@section('page-script')
+    <script>
+        $(document).ready(function(){
+            $(document).on('click','.confirm', function(){
+                let id = $(this).data('id');
+               $.ajax({
+                url : '/admin/confirm',
+                method: 'POST',
+                headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                dataType: "json",
+                data: {
+                    id: id
+                },
+                        success: function (response) {
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: "success",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        window.location.href = '/admin/ticket';
+                    }
+               })
+            })
+        })  
+    </script>
+  
+    <!--Morris Chart-->
+    <script src="admin/libs/morris.js06/morris.min.js"></script>
+    <script src="admin/libs/raphael/raphael.min.js"></script>
+
+    <!-- Dashboar init js-->
+    <script src="admin/js/pages/dashboard.init.js"></script>
 @endsection

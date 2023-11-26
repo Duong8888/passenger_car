@@ -119,7 +119,7 @@ padding:00px ">
                                                     <div class="col-span-12 lg:col-span-2">
                                                         <div class="mb-4 text-center mb-md-0">
                                                             <a href="company-details.html">
-                                                                <img style="width: 55%;"
+                                                                <img style="width: 55%; border-radius: 5px"
                                                                      src="{{asset($car->albums[0]->path)}}"
                                                                      alt="anh0001" class="mx-auto img-fluid rounded-3"></a>
                                                             {{-- Ảnh: <img src="{{ $car->albums->first()->path }}" alt="Ảnh xe"> --}}
@@ -406,9 +406,9 @@ padding:00px ">
                     <p class="mb-5 text-gray-500 dark:text-gray-300">Dưới đây là một số bài viết mới nhất và được cập nhật nhanh nhất trong các ngày qua.</p>
                 </div>
             </div>
-            <div class="grid grid-cols-4 gap-5">
+            <div class="flex" style="justify-content: space-around;">
                 @foreach ($posts as $post)
-                    <div class="col-span-12 md:col-span-6 lg:col-span-4">
+                    <div class="col-span-12 md:col-span-6 lg:col-span-4" style="width: 500px">
                         <div
                             class="p-2 mt-3 transition-all duration-500 bg-white rounded shadow-lg shadow-gray-100/50 card dark:bg-neutral-800 dark:shadow-neutral-600/20 group/blog">
                             <div class="relative overflow-hidden">

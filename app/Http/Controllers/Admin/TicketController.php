@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Ticket;
 use App\Models\User;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -34,8 +35,6 @@ class TicketController extends AdminBaseController
     {
         $validator = Validator::make($request->all(), [
             'username' => 'required',
-        ],[
-            'username.required' => 'yêu cầu nhập tiêu đề',
         ]);
 
         if ($validator->fails()) {
@@ -67,11 +66,11 @@ class TicketController extends AdminBaseController
        
         $passengerCar_relationship = PassengerCar::find($model->passenger_car_id);
         $user = User::all();
-
+        $route = Routes::all();
         $passengerCar = PassengerCar::all();
 
 
-        return view($this->pathView . __FUNCTION__, compact('model', 'user', 'user_relationship', 'passengerCar_relationship', 'passengerCar'))
+        return view($this->pathView . __FUNCTION__, compact('model', 'user', 'user_relationship', 'passengerCar_relationship', 'passengerCar', 'route'))
 
             ->with('title', $this->titleEdit)
             ->with('colums', $this->colums)
@@ -106,5 +105,33 @@ class TicketController extends AdminBaseController
         $model->delete();
 
         return to_route($this->urlIndex)->with('success', 'Delete Successfully!');
+    }
+    public function store(Request $request)
+    {
+        $validator = $this->validateStore($request);
+
+        // if ($validator->fails()) {
+        //     return back()->withErrors($validator)->withInput();
+        // }
+
+        $model = new $this->model;
+
+        $model->fill($request->except([$this->fieldImage]));
+
+        if ($request->hasFile($this->fieldImage)) {
+            $tmpPath = Storage::put($this->folderImage, $request->{$this->fieldImage});
+
+            $model->{$this->fieldImage} = 'storage/' . $tmpPath;
+        }
+
+        $model->save();
+
+        return redirect()->route($this->urlIndex)->with('success', 'Created Successfully');
+    }
+
+    public function Confirm(Request $request){
+        Ticket::where('id', $request->id)->update(['status' => 3]);
+      
+        return response()->json(['success' => 'Done'], Response::HTTP_OK);
     }
 }

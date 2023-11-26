@@ -51,7 +51,7 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-   
+
     Route::get('/logoutadmin', [App\Http\Controllers\LoginAdminController::class, 'logoutAdmin'])->name('logoutAdmin');
 
     // Quản lý tin tức chung
@@ -77,8 +77,11 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         });
         Route::post('/trip', [TicketController::class, 'Trip']);
         Route::post('/passgenerCar/{id}', [TicketController::class, 'PassengerCar']);
+        Route::post('/confirm', [TicketController::class, 'Confirm']);
+    });
+    // tuyến đường SupperAdmin-Admin
+    Route::group(['middleware' => 'checkRoles:SupperAdmin,Admin'], function () {
 
-        // Quản lý tuyến đường nhà xe
         Route::prefix('route')->controller(RouteController::class)->name('route.')->group(function () {
             Route::get('/', 'index')->name('index');
             Route::post('/store', 'store')->name('store');
@@ -87,8 +90,8 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
             Route::put('/update/{id}', 'update')->name('update');
             Route::delete('/destroy/{route}', 'destroy')->name('destroy');
         });
-    
-        // Quản lý xe 
+
+        // Quản lý xe
         Route::group(["prefix" => "car", "as" => "car."], function () {
             Route::get('/', [PassengerCarController::class, 'index'])->name('index');
             Route::post('store', [PassengerCarController::class, 'store'])->name('store');
@@ -131,7 +134,7 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         Route::prefix('revenueAdmin')->controller(RevenueAdminController::class)->name('revenueAdmin.')->group(function (){
             Route::get('/', 'index')->name('index');
         });
-        // Quản lý contact 
+        // Quản lý contact
         Route::get('/contact/index', [App\Http\Controllers\Admin\ContactController::class, 'index'])->name('route_contact_index');
         Route::match(['GET', 'POST'], '/contact/add', [App\Http\Controllers\Admin\ContactController::class, 'add'])->name('route_contact_add');
         Route::match(['GET', 'POST'], '/contact/update/{id}', [App\Http\Controllers\Admin\ContactController::class, 'edit'])->name('route_contact_edit');
@@ -149,6 +152,14 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         Route::resource('/rolePermission', RolePermissionController::class);
         Route::delete('/rolePermission/create/{id}', [RolePermissionController::class, 'delete'])->name('rolePermission.delete');
     });
+
+
+
+    // quản lý lich trình
+    Route::group(['prefix' => 'schedule', 'as' => 'schedule.'], function () {
+        Route::get('/', [ScheduleController::class, 'index'])->name('index');
+        Route::post('/update', [ScheduleController::class, 'update'])->name('update');
+    });
 });
 
 Route::group(['prefix' => 'notifications', 'as' => 'notifications.'], function () {
@@ -162,10 +173,7 @@ Route::prefix('revenueStaff')->controller(RevenueStaffController::class)->name('
     Route::get('/', 'index')->name('index');
 });
 
-// quản lý lich trình
-Route::group(['prefix' => 'schedule', 'as' => 'schedule.'], function () {
-    Route::get('/', [ScheduleController::class, 'index'])->name('index');
-});
+
 
 // Route::get('/management/index',[App\Http\Controllers\Admin\AdminManagementController::class,'index'])->name('route_adminmanagement_index');
 // Route::match(['GET','POST'],'/management/edit/{id}',[App\Http\Controllers\Admin\AdminManagementController::class,'edit'])->name('route_adminmanagement_edit');
