@@ -171,7 +171,7 @@
                                                         type="checkbox" id="flexCheckDefault">
                                                     <a href="reset-password.html"
                                                         class="text-white ltr:float-right rtl:float-left">Forgot
-                                                        Password?</a>
+                                                        Password ?</a>
                                                     <label class="text-white align-middle"
                                                         for="flexCheckDefault">Remember me</label>
                                                 </div>
@@ -182,8 +182,7 @@
                                                 </div>
                                             </form>
                                             <div class="text-center">
-                                                <p class="text-white">Already a member ? <a href="sign-up.html"
-                                                        class="text-white underline fw-medium"> Sign Up </a></p>
+                                                <p class="text-white"></a></p>
                                             </div>
                                         </div>
                                     </div>

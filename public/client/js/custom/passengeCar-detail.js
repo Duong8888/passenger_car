@@ -100,7 +100,7 @@ $(document).ready(function () {
             departure = lmao;
         }
         if(lmao1 != ''){
-            arrival = lmao;
+            arrival = lmao1;
         }
        
         var date =  $('input[name="date"]').val();
@@ -118,7 +118,7 @@ $(document).ready(function () {
         }
      
         if(error.length === 0){
-             let passenger_car_id = $(this).data("id");
+            let passenger_car_id = $(this).data("id");
             var totalArray = {
                 username: username,
                 phone: phone,
