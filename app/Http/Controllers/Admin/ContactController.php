@@ -59,7 +59,7 @@ class ContactController extends Controller
         $role = Role::where('name', 'Nhà xe')->first();
         $user->assignRole($role);
         $pdf = PDF::loadView('mails.registerApply', $data);
-        Mail::send('mails.registerApply', $data, function ($message) use ($data, $pdf) {
+        Mail::send('mails.carRegisterSuccess', $data, function ($message) use ($data, $pdf) {
             $text = $this->convertTextToSlug($data['name']);
             $message->to($data["email"], $data["email"])
                 ->subject($data["title"])

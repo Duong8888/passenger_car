@@ -75,7 +75,7 @@ class TicketController extends Controller
         // }
 
         $notification = new NotificationController();
-        $notification->sendNotification($user_id, $message,'ticket');
+        $notification->sendNotification($user_id, $message, 'ticket');
         $emailAdmin = User::query()->findOrFail($user_id);
 
         SendMail::dispatch($emailAdmin, $ticket);
@@ -152,7 +152,6 @@ class TicketController extends Controller
 
     public function checkoutPayment(Request $request)
     {
-
         if ($request->vnp_ResponseCode == '00' && $request->vnp_TransactionStatus == '00') {
             $passenger_car = PassengerCar::where('id', session('value')[0]['passenger_car_id'])->get();
             $data = (session()->get('value'));
@@ -198,9 +197,9 @@ class TicketController extends Controller
             //     Log::info("lỗi  ");
             // }
             $user_id = session('value')[0]['passenger_car_user'];
-            $message =session('value')[0]['username']. ' đã đặt vé thành công';
+            $message = session('value')[0]['username'] . ' đã đặt vé thành công';
             $notification = new NotificationController();
-            $notification->sendNotification($user_id, $message,'ticket');
+            $notification->sendNotification($user_id, $message, 'ticket');
 
             SendMail::dispatch(session('value')[0]['email'],  $ticket);
 
@@ -216,7 +215,7 @@ class TicketController extends Controller
             $email = session('value')[0]['email'];
             $total_price = session('value')[0]['total_price'];
             session()->forget('value');
-            return view('client.pages.ticket.finish2',[
+            return view('client.pages.ticket.finish2', [
                 'data' => $passenger_car,
                 'email' => $email,
                 'route_departure' => $route_departure,
@@ -231,46 +230,48 @@ class TicketController extends Controller
                 'total_price' => $total_price,
 
             ]);
-
-
-    }else{
-        return redirect()->route('client.ticket.payment-method');
-    }
+        } else {
+            return redirect()->route('client.ticket.payment-method');
+        }
     }
 
 
     public function EndTicketPayment(Request $request)
     {
-        $passenger_car = PassengerCar::where('id', session('value')[0]['passenger_car_id'])->get();
-        $email =  session('value')[0]['email'];
-        $route_departure =  session('value')[0]['route_departure'];
-        $route_arrival =  session('value')[0]['route_arrival'];
-        $departure = session('value')[0]['departure'];
-        $time_departure = session('value')[0]['time_departure'];
-        $arrival = session('value')[0]['arrival'];
-        $time_arrival = session('value')[0]['time_arrival'];
-        $username =  session('value')[0]['username'];
-        $phone = session('value')[0]['phone'];
-        $email = session('value')[0]['email'];
-        $total_price = session('value')[0]['total_price'];
-        $id =  session('value')[1];
-        session()->forget('value');
-
-        return view('client.pages.ticket.finish', [
-            'data' => $passenger_car,
-            'email' => $email,
-            'route_departure' => $route_departure,
-            'route_arrival' => $route_arrival,
-            'departure' => $departure,
-            'arrival' => $arrival,
-            'time_departure' =>  $time_departure,
-            'time_arrival' =>  $time_arrival,
-            'username' =>  $username,
-            'phone' => $phone,
-            'email' => $email,
-            'total_price' => $total_price,
-            'id' => $id,
-        ]);
+        if(session('value')){
+            $passenger_car = PassengerCar::where('id', session('value')[0]['passenger_car_id'])->get();
+            $email =  session('value')[0]['email'];
+            $route_departure =  session('value')[0]['route_departure'];
+            $route_arrival =  session('value')[0]['route_arrival'];
+            $departure = session('value')[0]['departure'];
+            $time_departure = session('value')[0]['time_departure'];
+            $arrival = session('value')[0]['arrival'];
+            $time_arrival = session('value')[0]['time_arrival'];
+            $username =  session('value')[0]['username'];
+            $phone = session('value')[0]['phone'];
+            $email = session('value')[0]['email'];
+            $total_price = session('value')[0]['total_price'];
+            $id =  session('value')[1];
+            session()->forget('value');
+    
+            return view('client.pages.ticket.finish', [
+                'data' => $passenger_car,
+                'email' => $email,
+                'route_departure' => $route_departure,
+                'route_arrival' => $route_arrival,
+                'departure' => $departure,
+                'arrival' => $arrival,
+                'time_departure' =>  $time_departure,
+                'time_arrival' =>  $time_arrival,
+                'username' =>  $username,
+                'phone' => $phone,
+                'email' => $email,
+                'total_price' => $total_price,
+                'id' => $id,
+            ]);
+        }
+        return redirect()->route('client.ticket.payment-method');
+        
     }
 
     public function ChangeTicket(Request $request)
@@ -286,7 +287,8 @@ class TicketController extends Controller
         Log::info(session('value'));
         return response()->json($arrayInfo, Response::HTTP_OK);
     }
-    public function CancelTicket(Request $request){
+    public function CancelTicket(Request $request)
+    {
         $ticket = Ticket::where('id', $request->id)->update(['status' => 0]);
         session()->forget('value');
         return response()->json(['success' => 'Done'], Response::HTTP_OK);
