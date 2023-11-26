@@ -192,7 +192,6 @@
         firebase.auth().signInWithPhoneNumber(number, window.recaptchaVerifier).then(function (confirmationResult) {
             window.confirmationResult = confirmationResult;
             coderesult = confirmationResult;
-            console.log(coderesult);
             $("#successAuth").text("Message sent");
             $("#successAuth").show();
         }).catch(function (error)
@@ -205,7 +204,6 @@
         var code = $("#verification").val();
         coderesult.confirm(code).then(function (result) {
             var user = result.user;
-            console.log(user);
             $("#successOtpAuth").text("Auth is successful");
             $("#successOtpAuth").show();
         }).catch(function (error) {

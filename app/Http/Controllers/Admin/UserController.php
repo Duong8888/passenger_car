@@ -21,7 +21,7 @@ class UserController extends Controller
          
          if($users->id){
             Session::flash('success','User added successfully');
-            return redirect()->route('route_staff_add');
+            return redirect('admin/staff/index');
          }
       }
         return view('admin.pages.Staff.add');
@@ -41,6 +41,6 @@ class UserController extends Controller
     public function delete(Request $request,$id){
         User::where('id',$id)->delete();
         Session::flash('success','xóa thành công'.$id);
-        return redirect()->route('route_staff_index');
+        return redirect('admin/staff/index');
     }
 }
