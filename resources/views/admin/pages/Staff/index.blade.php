@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+@section("title", "Danh sách nhà xe")
 @section('content')
 
     <div class="card">

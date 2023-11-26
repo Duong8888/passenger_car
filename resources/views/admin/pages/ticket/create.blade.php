@@ -161,7 +161,6 @@
                         $('.route').html(showTrip);
                     },
                     error: function(error) {
-                        console.log(error);
                     }
                 })
             })
@@ -217,7 +216,6 @@
                         $('.route').html(showTrip);
                     },
                     error: function(error) {
-                        console.log(error);
                     }
                 })
             })

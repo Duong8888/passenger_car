@@ -5,7 +5,6 @@
     ClassicEditor
          .create(document.querySelector('#description'))
          .catch(error =>{
-             console.log(error);
          })
  </script>
 <!--Morris Chart-->
