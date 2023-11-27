@@ -13,6 +13,7 @@
         "aloha/twilio": "^3.0",
         "barryvdh/laravel-dompdf": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
+        "kreait/firebase-php": "*",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
         "laravel/scout": "^10.4",

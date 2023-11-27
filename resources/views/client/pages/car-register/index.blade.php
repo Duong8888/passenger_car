@@ -18,7 +18,7 @@
                             <h3 class="mb-2 text-3xl text-gray-900 dark:text-white">Đăng ký trở thành nhà xe</h3>
                             <p class="text-gray-500 dark:text-gray-300 center-content">Bắt đầu lấp đầy chỗ trống trên xe của bạn với hơn 10 triệu lượt khách đi thành công trên Car Finder Pro</p>
                             <form
-                                method="post" class="mt-4 contact-form" name="myForm" id="myForm">
+                                method="post" class="mt-4 contact-form" name="myForm" id="myForm" enctype="multipart/form-data">
                                 @csrf
                                 <span id="error-msg"></span>
                                 <div class="grid grid-cols-12 gap-4">
@@ -54,6 +54,14 @@
                                         <div class="mb-3">
                                             <label for="meassageInput" class="text-gray-900 dark:text-gray-50">Nội dung tư vấn</label>
                                             <textarea class="w-full mt-1 rounded border-gray-100/50 placeholder:text-sm placeholder:text-gray-400 dark:bg-transparent dark:border-gray-800 focus:ring-0 focus:ring-offset-0 dark:text-gray-200" id="meassageInput" placeholder="Nhập nội dung bạn muốn tư vấn" name="meassageInput" rows="3"></textarea>
+                                        </div>
+                                    </div><!--end col-->
+                                    <div class="col-span-12 px-2">
+                                        <div class="mb-3">
+                                            <label for="meassageInput" class="text-gray-900 dark:text-gray-50">Nội dung tư vấn</label>
+                                            <input type="file" name="images[]" multiple>
+
+{{--                                            <input required type="file" name="province" id="" class="w-full mt-1 rounded border-gray-100/50 placeholder:text-sm placeholder:text-gray-400 dark:bg-transparent dark:border-gray-800 focus:ring-0 focus:ring-offset-0 dark:text-gray-200" placeholder="Nhập Tỉnh/ Thành phố">--}}
                                         </div>
                                     </div><!--end col-->
                                 </div><!--end row-->
