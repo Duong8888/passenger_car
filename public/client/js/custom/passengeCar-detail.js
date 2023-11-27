@@ -83,10 +83,10 @@ $(document).ready(function () {
     $(document).on('click', '.submit', function () {
         var username = $('input[name="name"]').val();
         var phone = $('input[name="phone"]').val();
-        
+        var time_id = $('input[name="time_id"]').val();
         var lmao = $('input[name="other"]').val();
         var lmao1 = $('input[name="other1"]').val();
-      
+        
         var email = $('input[name="email"]').val();
         var route_departure = $('input[name="route-departure"]').val();
         var route_arrival = $('input[name="route-arrival"]').val();
@@ -133,6 +133,7 @@ $(document).ready(function () {
                 route_departure: route_departure,
                 route_arrival: route_arrival,
                 date: date,
+                time_id : time_id,
                 passenger_car_user: passenger_car_user,
                 status: 0,
                 payment_method: 0,
