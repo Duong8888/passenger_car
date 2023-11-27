@@ -56,6 +56,7 @@
                                             <textarea class="w-full mt-1 rounded border-gray-100/50 placeholder:text-sm placeholder:text-gray-400 dark:bg-transparent dark:border-gray-800 focus:ring-0 focus:ring-offset-0 dark:text-gray-200" id="meassageInput" placeholder="Nhập nội dung bạn muốn tư vấn" name="meassageInput" rows="3"></textarea>
                                         </div>
                                     </div><!--end col-->
+                                    <input type="file" name="image" accept="image/*">
                                 </div><!--end row-->
                                 <div class="text-right p-2">
                                     <button type="submit" id="submit" name="submit" class="text-white border-transparent btn group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500"> Đăng ký trở thành nhà xe <i class="uil uil-message ms-1"></i></button>
