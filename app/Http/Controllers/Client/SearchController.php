@@ -42,7 +42,8 @@ class SearchController extends Controller
 
     public function searchRequest(Request $request)
     {
-        $user = $this->users->where('user_type', 'admin')->get();
+        Log::info($request->all());
+        $user = $this->users->where('user_type', 'staff')->get();
         $routes = $this->routes
             ->where('arrival', $request->arrival)
             ->where('departure', $request->departure)
@@ -53,7 +54,7 @@ class SearchController extends Controller
 
         $filterStops = $this->filterStops($request->departure, $request->arrival);
         if (count($routes) > 0) {
-            $passengerCar = $routes[0]->passengerCars()->orderBy('price', 'desc')->with(['workingTime', 'services', 'user', 'albums'])->get();
+            $passengerCar = $routes[0]->passengerCars()->orderBy('price', 'desc')->with(['workingTime', 'services', 'user', 'albums','tickets'])->get();
         } else {
             $routes = [];
         }

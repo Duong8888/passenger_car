@@ -169,7 +169,7 @@ padding:00px ">
     </script>
     <script>
         const infoUser = @json(auth()->user());
-    const urlNotification = '{{route('notifications.loadMessage')}}';
+        const urlNotification = '{{route('notifications.loadMessage')}}';
         sessionStorage.setItem("data-theme-color", "blue");
     </script>
     @include('client.layout.partials.script')

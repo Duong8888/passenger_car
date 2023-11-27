@@ -469,8 +469,10 @@ padding:00px ">
     <script src="{{asset('admin/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            console.log('ready');
-
+            const today = new Date().toISOString().split('T')[0];
+            const inputDate = $('#datepicker');
+            inputDate.attr('min', today);
+            inputDate.val(today);
         });
 
         function listPassengerCar() {
