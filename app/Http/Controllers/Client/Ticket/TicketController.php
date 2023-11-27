@@ -170,7 +170,8 @@ class TicketController extends Controller
                     'passenger_car_id' => $a['passenger_car_id'],
                     'departure' => $a['departure'],
                     'arrival' => $a['arrival'],
-                    'date' => $a['date']
+                    'date' => $a['date'],
+                    'time_id' => $a['time_id'],
                 ]);
                 $a['payment_method'] = 'Đã Thanh toán VNPAY';
             }

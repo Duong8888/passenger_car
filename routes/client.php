@@ -10,13 +10,13 @@ use App\Http\Controllers\Client\BlogController;
 use App\Http\Controllers\Client\CategoryController;
 use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\Client\CarRegisterController;
-
+use App\Http\Middleware\CheckUser;
 
 //Nam
 
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/listPassengerCar',[HomeController::class,'listPassengerCar'])->name('listPassengerCar');
-Route::get('car/{id}',[HomeController::class,'passengerCarDetail'])->name('passengerCar.detail');
+Route::get('car/{id}?{time}',[HomeController::class,'passengerCarDetail'])->name('passengerCar.detail');
 Route::post('addComment',[HomeController::class,'addComment'])->name('passengerCar.detail.comment');
 Route::resource('/profile',ProfileController::class);
 Route::get('/profile/ticketdetails/{id}',[ProfileController::class,'ticketDetails'])->name('ticketDetails_index');
@@ -39,7 +39,7 @@ Route::group(['prefix' => 'notifications', 'as' => 'notifications.'], function (
     Route::post('load', [NotificationController::class, 'getNotification'])->name('loadMessage');
 });
 
-use App\Http\Middleware\CheckUser;
+
 
 
 Route::middleware(CheckUser::class)->group(function(){

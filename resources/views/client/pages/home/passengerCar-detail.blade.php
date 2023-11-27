@@ -705,6 +705,7 @@
     <input type="hidden" value="{{ $routes->departure }}" name="route-departure">
     <input type="hidden" value="{{ $routes->arrival }}" name="route-arrival">
     <input type="hidden" value="{{ $user[0]->id }}" name="passenger-user">
+    <input type="hidden" value="{{ $time_id }}" name="time_id">
 @endsection
 @section('page-script')
     <script type="module" src="{{ asset('client/js/custom/passengeCar-detail.js') }}"></script>
