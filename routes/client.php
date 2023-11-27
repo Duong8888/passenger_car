@@ -94,3 +94,11 @@ Route::get('/loginadmin', [App\Http\Controllers\LoginAdminController::class, 'sh
 #Dang ky xe
 Route::get('/car-register', [CarRegisterController::class, 'index'])->name('car-register.index');
 Route::post('/car-register', [CarRegisterController::class, 'post'])->name('car-register.index');
+
+//về chúng tôi
+Route::get('/about_us',[App\Http\Controllers\Client\AboutController::class,'index'])->name('about_us.index');
+Route::get('/vision',[App\Http\Controllers\Client\AboutController::class,'vision'])->name('about_us.vision');
+Route::get('/mission',[App\Http\Controllers\Client\AboutController::class,'mission'])->name('about_us.mission');
+
+
+

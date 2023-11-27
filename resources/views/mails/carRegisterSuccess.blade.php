@@ -47,13 +47,13 @@
 <div class="email-container">
     <h3>CAR FINDER PRO</h3>
     <div class="content">
-        <p>Xin chào {{$data->fullName[0]['fullName']}},</p>
+        <p>Xin chào {{$fullName}},</p>
         <p>Yêu cầu của bạn đã được xử lý thành công. Cảm bạn đã tin tưởng CAR FINDER PRO trở thành Đối tác tin cay nhất của chung tôi</p>
         <p>Chúc mừng bạn đã trở thành nhà xe của chúng tôi.</p>
         <p>Bạn hãy đăng nhập vào hệ thống bằng thông tin sau:</p>
         <div class="login-info">
-            <p><span class="login-details">Tài khoản:</span> {{$data->email[0]['email']}}</p>
-            <p><span class="login-details">Mật khẩu:</span> {{$data->password}}</p>
+            <p><span class="login-details">Tài khoản:</span> {{$email}}</p>
+            <p><span class="login-details">Mật khẩu:</span> {{$hashPassword}}</p>
         </div>
     </div>
 </div>

@@ -229,9 +229,6 @@
             </button>
         </li>
 
-        <li>
-            <h4 class="page-title-main">Preloader</h4>
-        </li>
 
     </ul>
 

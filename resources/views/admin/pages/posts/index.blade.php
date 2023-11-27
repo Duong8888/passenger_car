@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-
+@section("title", "Danh sách bài viết")
 @section('page-script')
     <!--Morris Chart-->
     <script src="{{asset('')}}admin/libs/morris.js06/morris.min.js"></script>
@@ -26,7 +26,7 @@
                                     </ul>
                                 </div>
                             @endif
-                            <div class="table-responsive">
+                            <div class="table">
                                 <table class="table table-hover mb-0">
                                     <thead>
                                     <tr>
@@ -50,7 +50,7 @@
                                             <td>{{ $posts->user->name}}</td>
                                             <td>
                                                 <div class="d-flex align-items-center justify-content-center">
-                                                    <div class="btn-group">
+                                                    <div class="btn-group" style="cursor: pointer;">
                                                         <i class="fe-settings dropdown-toggle font-18"
                                                            data-bs-toggle="dropdown" aria-haspopup="true"
                                                            aria-expanded="false"></i>
@@ -77,7 +77,7 @@
                                             <td>{{ $posts->user->name}}</td>
                                             <td>
                                                 <div class="d-flex align-items-center justify-content-center">
-                                                    <div class="btn-group">
+                                                    <div class="btn-group" style="cursor: pointer;">
                                                         <i class="fe-settings dropdown-toggle font-18"
                                                            data-bs-toggle="dropdown" aria-haspopup="true"
                                                            aria-expanded="false"></i>
