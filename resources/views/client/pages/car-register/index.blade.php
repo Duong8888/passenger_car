@@ -18,7 +18,7 @@
                             <h3 class="mb-2 text-3xl text-gray-900 dark:text-white">Đăng ký trở thành nhà xe</h3>
                             <p class="text-gray-500 dark:text-gray-300 center-content">Bắt đầu lấp đầy chỗ trống trên xe của bạn với hơn 10 triệu lượt khách đi thành công trên Car Finder Pro</p>
                             <form
-                                method="post" class="mt-4 contact-form" name="myForm" id="myForm">
+                                method="post" class="mt-4 contact-form" name="myForm" id="myForm" enctype="multipart/form-data">
                                 @csrf
                                 <span id="error-msg"></span>
                                 <div class="grid grid-cols-12 gap-4">
