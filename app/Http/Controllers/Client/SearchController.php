@@ -72,16 +72,28 @@ class SearchController extends Controller
     }
 
 
-    public function filterPassengerCars($departure = null, $arrival = null, $type = null, $minTimes = null, $maxTimes = null, $priceStart = null, $priceEnd = null, $users = null, $departureStop = null, $arrivalStop = null)
+    public function filterPassengerCars($departure = null, $arrival = null, $type = null, $minTimes = null, $maxTimes = null, $priceStart = null, $priceEnd = null, $users = null, $departureStop = null, $arrivalStop = null,$date = null)
     {
+        $subQuery = DB::table('tickets')
+            ->select(
+                'passenger_car_id',
+                'time_id',
+                DB::raw('SUM(quantity) as total_quantity')
+            )
+            ->where('tickets.date', $date)
+            ->groupBy('passenger_car_id', 'time_id');
+
         $query = DB::table('passenger_cars')
             ->join('routes', 'passenger_cars.route_id', '=', 'routes.id')
             ->join('passenger_car_working_times', 'passenger_cars.id', '=', 'passenger_car_working_times.passenger_car_id')
             ->join('working_times', 'passenger_car_working_times.working_time_id', '=', 'working_times.id')
-//            ->join('stops', 'stops.route_id', '=', 'routes.id')
             ->join('users', 'passenger_cars.user_id', '=', 'users.id')
             ->leftjoin('albums', function ($join) {
                 $join->on('passenger_cars.id', '=', 'albums.passenger_car_id');
+            })
+            ->leftJoinSub($subQuery, 'total_quantity', function ($join) {
+                $join->on('passenger_cars.id', '=', 'total_quantity.passenger_car_id');
+                $join->on('working_times.id', '=', 'total_quantity.time_id');
             })
             ->select(
                 'passenger_cars.id',
@@ -93,11 +105,13 @@ class SearchController extends Controller
                 'working_times.arrival_time',
                 'working_times.id as working_times_id',
                 'users.name',
-                DB::raw('MAX(albums.path) as path')
+                DB::raw('MAX(albums.path) as path'),
+                'total_quantity.total_quantity as total_quantity'
             )
-            ->groupBy('passenger_cars.id', 'passenger_cars.price', 'routes.departure', 'routes.arrival', 'passenger_cars.capacity', 'working_times.departure_time', 'working_times.arrival_time', 'working_times.id', 'users.name')
+            ->groupBy('passenger_cars.id', 'passenger_cars.price', 'routes.departure', 'routes.arrival', 'passenger_cars.capacity', 'working_times.departure_time', 'working_times.arrival_time', 'working_times.id', 'users.name', 'total_quantity.total_quantity')
             ->where('routes.departure', $departure)
             ->where('routes.arrival', $arrival);
+
 
         if ($type != null) {
             $query->orderBy('passenger_cars.price', $type);
@@ -165,11 +179,12 @@ class SearchController extends Controller
         $users = $request->input('users');
         $departureStop = $request->input('departureStop',null);
         $arrivalStop = $request->input('arrivalStop', null);
+        $date = $request->input('date');
 
         $filterStops = $this->filterStops($departure, $arrival);
 
 
-        $idPassengerCars = $this->filterPassengerCars($departure, $arrival, $type, $min, $max, $priceStart, $priceEnd, $users,$departureStop,$arrivalStop);
+        $idPassengerCars = $this->filterPassengerCars($departure, $arrival, $type, $min, $max, $priceStart, $priceEnd, $users,$departureStop,$arrivalStop,$date);
         $service = $this->service::all();
         $PassengerCarsService = $this->passengerCarService::all();
         Log::info($idPassengerCars);

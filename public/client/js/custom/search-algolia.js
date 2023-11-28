@@ -253,10 +253,19 @@ $(document).ready(function () {
         dataList.html('');
         loading.hide();
         var service = '';
+        var slot = '';
         console.log(data);
         $.each(data, function (index, item) {
             $.each(item.working_time, function (indexWorking, itemWorking) {
                 service = '';
+                slot = item.capacity;
+                console.log(slot);
+                $.each(item.tickets, function (indexTicket, itemTicket) {
+                    if(itemTicket.time_id == itemWorking.id && itemTicket.date == inputDate.val()){
+                        slot-= itemTicket.quantity;
+                        console.log(slot);
+                    }
+                })
                 $.each(item.services, function (indexServices, itemServices) {
                     service += `<span class="bg-sky-500/20 text-sky-500 text-11 px-2 py-0.5 font-medium rounded">${itemServices.service_name}</span>`;
                 })
@@ -297,7 +306,7 @@ $(document).ready(function () {
                                                         <p class="mb-4 font-bold group-data-[theme-color=violet]:text-violet-600 group-data-[theme-color=sky]:text-sky-600 group-data-[theme-color=red]:text-red-600 group-data-[theme-color=green]:text-green-600 group-data-[theme-color=pink]:text-pink-600 group-data-[theme-color=blue]:text-blue-600">
                                                             Giá vé: ${item.price.toLocaleString('en-US')}đ
                                                         </p>
-                                                        <p>Còn 9 chỗ trống</p>
+                                                        <p>Còn ${slot} chỗ trống</p>
                                                     </div>
                                                     <a id="pasengerCarUrl" class="mt-2 border-transparent btn group-data-[theme-color=violet]:bg-violet-500/20 group-data-[theme-color=sky]:bg-sky-500/20 group-data-[theme-color=red]:bg-red-500/20 group-data-[theme-color=green]:bg-green-500/20 group-data-[theme-color=pink]:bg-pink-500/20 group-data-[theme-color=blue]:bg-blue-500/20 group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500 hover:-translate-y-1 group-data-[theme-color=violet]:hover:bg-violet-500 group-data-[theme-color=violet]:hover:text-white group-data-[theme-color=sky]:hover:bg-sky-500 group-data-[theme-color=sky]:hover:text-white group-data-[theme-color=red]:hover:bg-red-500 group-data-[theme-color=red]:hover:text-white group-data-[theme-color=green]:hover:bg-green-500 group-data-[theme-color=green]:hover:text-white group-data-[theme-color=pink]:hover:bg-pink-500 group-data-[theme-color=pink]:hover:text-white group-data-[theme-color=blue]:hover:bg-blue-500 group-data-[theme-color=blue]:hover:text-white hover:ring group-data-[theme-color=violet]:hover:ring-violet-500/20 group-data-[theme-color=sky]:hover:ring-sky-500/20 group-data-[theme-color=red]:hover:ring-red-500/20 group-data-[theme-color=green]:hover:ring-green-500/20 group-data-[theme-color=pink]:hover:ring-pink-500/20 group-data-[theme-color=blue]:hover:ring-blue-500/20" href="/car/${item.id}?time=${itemWorking.id}" data-bs-toggle="modal">Chi tiết <i class="mdi mdi-chevron-double-right"></i></a>
                                                 </div>
@@ -362,7 +371,7 @@ $(document).ready(function () {
                                                         <p class="mb-4 font-bold group-data-[theme-color=violet]:text-violet-600 group-data-[theme-color=sky]:text-sky-600 group-data-[theme-color=red]:text-red-600 group-data-[theme-color=green]:text-green-600 group-data-[theme-color=pink]:text-pink-600 group-data-[theme-color=blue]:text-blue-600">
                                                             Giá vé: ${item.price.toLocaleString('en-US')}đ
                                                         </p>
-                                                        <p>Còn 9 chỗ trống</p>
+                                                        <p>Còn ${item.capacity - item.total_quantity} chỗ trống</p>
                                                     </div>
                                                     <a id="pasengerCarUrl" class="mt-2 border-transparent btn group-data-[theme-color=violet]:bg-violet-500/20 group-data-[theme-color=sky]:bg-sky-500/20 group-data-[theme-color=red]:bg-red-500/20 group-data-[theme-color=green]:bg-green-500/20 group-data-[theme-color=pink]:bg-pink-500/20 group-data-[theme-color=blue]:bg-blue-500/20 group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500 hover:-translate-y-1 group-data-[theme-color=violet]:hover:bg-violet-500 group-data-[theme-color=violet]:hover:text-white group-data-[theme-color=sky]:hover:bg-sky-500 group-data-[theme-color=sky]:hover:text-white group-data-[theme-color=red]:hover:bg-red-500 group-data-[theme-color=red]:hover:text-white group-data-[theme-color=green]:hover:bg-green-500 group-data-[theme-color=green]:hover:text-white group-data-[theme-color=pink]:hover:bg-pink-500 group-data-[theme-color=pink]:hover:text-white group-data-[theme-color=blue]:hover:bg-blue-500 group-data-[theme-color=blue]:hover:text-white hover:ring group-data-[theme-color=violet]:hover:ring-violet-500/20 group-data-[theme-color=sky]:hover:ring-sky-500/20 group-data-[theme-color=red]:hover:ring-red-500/20 group-data-[theme-color=green]:hover:ring-green-500/20 group-data-[theme-color=pink]:hover:ring-pink-500/20 group-data-[theme-color=blue]:hover:ring-blue-500/20" href="/car/${item.id}?time=${item.working_times_id}" data-bs-toggle="modal">Chi tiết <i class="mdi mdi-chevron-double-right"></i></a>
                                                 </div>
@@ -450,6 +459,7 @@ $(document).ready(function () {
     $(document).on('change', '.sortBy', function (e) {
         formData.append('departure', $('select[name="departure"]').val());
         formData.append('arrival', $('select[name="arrival"]').val());
+        formData.append('date', inputDate.val());
         formData.append('type', $(this).val());
         ajaxRequest(
             'sortBy',
@@ -462,6 +472,7 @@ $(document).ready(function () {
     $(document).on('change', '.find-time', function (e) {
         formData.append('departure', $('select[name="departure"]').val());
         formData.append('arrival', $('select[name="arrival"]').val());
+        formData.append('date', inputDate.val());
         if ($(this).is(':checked')) {
             var min = $(this).data('min');
             var max = $(this).data('max');
@@ -478,6 +489,7 @@ $(document).ready(function () {
     $(document).on('change', '.users', function (e) {
         formData.append('departure', $('select[name="departure"]').val());
         formData.append('arrival', $('select[name="arrival"]').val());
+        formData.append('date', inputDate.val());
         if ($(this).is(':checked')) {
             console.log($(this).val());
             var user = $(this).val()
@@ -496,6 +508,7 @@ $(document).ready(function () {
     $inputLeft.add($inputRight).on("mouseup", function () {
         formData.append('departure', $('select[name="departure"]').val());
         formData.append('arrival', $('select[name="arrival"]').val());
+        formData.append('date', inputDate.val());
         formData.append('price-start', $inputLeft.val());
         formData.append('price-end', $inputRight.val());
         ajaxRequest(
@@ -511,6 +524,7 @@ $(document).ready(function () {
         filterStopsArrivalValue = filterStopsArrival.val();
         formData.append('departure', $('select[name="departure"]').val());
         formData.append('arrival', $('select[name="arrival"]').val());
+        formData.append('date', inputDate.val());
         formData.append('arrivalStop', filterStopsArrivalValue);
         if (filterStopsArrivalValue) {
             $('#arrivalFilterShow').html(`<div class="inline-block border p-[6px] border-gray-100/50 rounded group/joblist dark:border-gray-100/20">
@@ -552,6 +566,7 @@ $(document).ready(function () {
         filterStopsDepartureValue = filterStopsDeparture.val()
         formData.append('departure', $('select[name="departure"]').val());
         formData.append('arrival', $('select[name="arrival"]').val());
+        formData.append('date', inputDate.val());
         formData.append('departureStop', filterStopsDepartureValue);
         if (filterStopsDepartureValue) {
             $('#departureFilterShow').html(`<div class="mr-4 inline-block border p-[6px] border-gray-100/50 rounded group/joblist dark:border-gray-100/20">

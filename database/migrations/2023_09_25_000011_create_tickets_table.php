@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('passenger_car_id');
 //            $table->foreign('passenger_car_id')->references('id')->on('passenger_cars');
             $table->integer('quantity');
+            $table->date('date');
             $table->bigInteger('total_price');
             $table->string('payment_method');
             $table->string('status')->default(0);
