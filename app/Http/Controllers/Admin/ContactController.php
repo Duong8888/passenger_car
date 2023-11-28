@@ -95,6 +95,7 @@ class ContactController extends Controller
     public function detail(Request $request, $id)
     {
         $user = Contact::where('id', $id)->first();
+        $images = json_decode($user->images);
         return view('admin.pages.contact.detail', ['user' => $user]);
     }
 
