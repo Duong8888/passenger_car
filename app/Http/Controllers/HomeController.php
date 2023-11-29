@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SeatsLayout;
 use App\Models\VietnameseProvinces;
 use Illuminate\Http\Request;
 use App\Models\Album;
@@ -60,10 +61,13 @@ class HomeController extends Controller
                 'user',
                 'route',
                 'comments',
-                'workingTime'
+                'workingTime',
+                'vehicle'
             ])->get();
+
+        $layout = SeatsLayout::query()->where('vehicle_id', $passengerCars[0]->vehicle->id)->get();
         $time_id = $request->time;
-      
+
         $albums = $passengerCars[0]->albums;
         $routes = $passengerCars[0]->route;
         $services = $passengerCars[0]->services;
@@ -71,8 +75,8 @@ class HomeController extends Controller
         $comments = $passengerCars[0]->comments;
         $workingTime = WorkingTime::query()->where('id', $request->time)->get();
 
-        $userID = $user[0]->id; 
-        $routeID = $passengerCars[0]->route->id; 
+        $userID = $user[0]->id;
+        $routeID = $passengerCars[0]->route->id;
 
         $stops = Stops::where('route_id', $routeID)
             ->where(function ($query) use ($userID) {
@@ -81,7 +85,7 @@ class HomeController extends Controller
             })
             ->get();
 
-        return view('client.pages.home.passengerCar-detail', compact('albums', 'routes', 'passengerCars', 'user', 'comments', 'stops', 'services', 'workingTime', 'time_id'));
+        return view('client.pages.home.passengerCar-detail', compact('albums', 'routes', 'passengerCars', 'user', 'comments', 'stops', 'services', 'workingTime', 'time_id','layout'));
     }
 
     public function listPassengerCar(Request $request)
@@ -116,7 +120,7 @@ class HomeController extends Controller
         $data = $query->get();
         return ['data' => $data];
     }
-    
+
     public function addComment(Request $request)
     {
         $comment = new Comment();

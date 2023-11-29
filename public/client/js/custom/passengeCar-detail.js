@@ -20,7 +20,7 @@ $(document).ready(function () {
             }
         });
     });
-    
+
     $(document).on("click", ".Ticket", function () {
         showPopup();
     })
@@ -86,7 +86,7 @@ $(document).ready(function () {
         var time_id = $('input[name="time_id"]').val();
         var lmao = $('input[name="other"]').val();
         var lmao1 = $('input[name="other1"]').val();
-        
+
         var email = $('input[name="email"]').val();
         var route_departure = $('input[name="route-departure"]').val();
         var route_arrival = $('input[name="route-arrival"]').val();
@@ -102,7 +102,7 @@ $(document).ready(function () {
         if(lmao1 != ''){
             arrival = lmao1;
         }
-       
+
         var date =  $('input[name="date"]').val();
         var passenger_car_user = $('input[name="passenger-user"]').val();
         const error = [];
@@ -112,11 +112,11 @@ $(document).ready(function () {
         if (phone === '') {
             error.push('Số điện thoại không được để trống.');
         }
-          
+
         if (email === '') {
             error.push('Email không được để trống.');
         }
-     
+
         if(error.length === 0){
             let passenger_car_id = $(this).data("id");
             var totalArray = {
@@ -139,7 +139,7 @@ $(document).ready(function () {
                 payment_method: 0,
             };
             let url = $(this).data("action");
-    
+
             $.ajax({
                 url: url,
                 method: "POST",
@@ -157,7 +157,7 @@ $(document).ready(function () {
         }else{
             swal("Lỗi", "Vui lòng điền đủ thông tin !", "error");
         }
-       
+
     })
     const firstTab = document.getElementById('first');
     const secondTab = document.getElementById('second');
@@ -208,7 +208,7 @@ $(document).ready(function () {
             $('.second-li>button').removeClass('active');
             $('.third-li>button').addClass('active');
             $('.secondItem>.icon-item').attr('data-item','second')
-        
+
     });
 
 
@@ -219,6 +219,15 @@ $(document).ready(function () {
         $('.third-li>button').removeClass('active');
         $('.icon-item[data-item="second"]').hide();
     });
+
+
+
+
+
+    // sử lý chọn ghế
+
+
+
 })
 
 

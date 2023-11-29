@@ -23,7 +23,7 @@
             <div class="mb-5">
                 <a class="flex items-center">
                     <img src="https://i.imgur.com/chCW0o6.png" alt="" >
-                    
+
                 </a>
                 <h4 class="mb-3 text-lg text-gray-900 dark:text-gray-50">Chọn phương thức thanh toán</h4>
             </div>
@@ -93,7 +93,7 @@
 
             <button data-action="{{ route('client.ticket.end-payment-ticket') }}"
                 data-session="{{ json_encode(session('value')) }}"
-               
+
                 class="bg-yellow-500 w-1/2 p-2 m-2 finish-ticket-offline">Thanh toán tại
                 nhà xe</button>
         </div>
@@ -146,7 +146,7 @@
                                         </div>
                                         <button style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;margin-top: 10px">Cập Nhật</button>
 
-                                    </div>                                    
+                                    </div>
                                 </div>
 
                                 <div id="arrival" class="hidden w-full tab-pane">
@@ -176,7 +176,7 @@
                                     </div>
                                 </div>
 
-                                
+
 
                                 <div id="third" class="hidden w-full tab-pane">
                                     <div class="max-w-md mx-auto bg-white rounded p-8 ">
@@ -207,7 +207,7 @@
                                                 placeholder="Nhập địa chỉ email của bạn">
                                         </div>
                                         <button style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;margin-top: 10px" id="User-info"  data-action="{{ route('client.ticket.changed-ticket') }}">Cập Nhật</button>
-                                      
+
                                     </div>
                                 </div>
                             </div>
