@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('payment_method');
             $table->string('status')->default(0);
             $table->unsignedBigInteger('time_id');
+            $table->json('seat_id');
             $table->timestamps();
         });
     }

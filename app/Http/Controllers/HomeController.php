@@ -62,6 +62,8 @@ class HomeController extends Controller
                 'route',
                 'comments',
                 'workingTime',
+                'vehicle',
+                'tickets',
                 'vehicle'
             ])->get();
 

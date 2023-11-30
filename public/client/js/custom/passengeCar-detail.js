@@ -137,6 +137,7 @@ $(document).ready(function () {
                 passenger_car_user: passenger_car_user,
                 status: 0,
                 payment_method: 0,
+                seat:checkedValues
             };
             let url = $(this).data("action");
 
@@ -176,9 +177,11 @@ $(document).ready(function () {
     const firstNextButton = document.getElementById('first-next');
     const inputTicket = document.querySelector('input[name="countTicket"]');
         firstNextButton.addEventListener('click', function() {
-            const inputDate = document.getElementById('date').value;
-            const inputValue = inputTicket.value;
-        if(inputValue > 0 && inputDate != ''){
+            let inputValue = 0;
+            if(inputTicket){
+                 inputValue = inputTicket.value;
+            }
+        if(inputValue > 0 || countSlot > 0){
             firstTab.classList.add('hidden');
             secondTab.classList.remove('hidden');
             firstTabBtn.before(icon);
@@ -186,8 +189,7 @@ $(document).ready(function () {
             $('.second-li>button').addClass('active');
             $('.firstItem>.icon-item').attr('data-item','first')
         } else{
-
-            swal("Lỗi", "Vui lòng chọn ít nhất 1 chỗ ngồi và chọn ngày đi !", "error");
+            swal("Vui lòng chọn ít nhất 1 chỗ ngồi !");
         }
     });
 
@@ -225,7 +227,41 @@ $(document).ready(function () {
 
 
     // sử lý chọn ghế
+    var countSlot = 0;
+    var checkedValues = [];
+    $(document).on('change', '.slot', function() {
+        checkedValues = [];
+        $('input[name="slot[]"]:checked').each(function() {
+            checkedValues.push($(this).val());
+        });
 
+        var $label = $('label[for="' + $(this).attr('id') + '"]');
+        var $span = $label.find('span.material-symbols-outlined');
+
+        if ($span.css('color') === 'rgb(116, 120, 141)' && $span.html() === 'weekend') {
+            countSlot++;
+            $span.css('color', 'green');
+        } else if ($span.css('color') === 'rgb(0, 128, 0)') {
+            countSlot--;
+            $span.css('color', '#74788d');
+        }
+
+        console.log(checkedValues);
+
+        let y;
+        y = countSlot * parseInt($('.price-slot').text());
+        $(".qty-input").val(countSlot);
+
+        function formatCurrency(amount) {
+            return amount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+        }
+
+        let formattedMoney = formatCurrency(y);
+        totalTicket = `
+        <span>Tổng cộng: <span style="color: rgb(0, 96, 196);font-weight: bold;">${formattedMoney}</span></span>
+    `
+        $('.show-total').html(totalTicket);
+    });
 
 
 })

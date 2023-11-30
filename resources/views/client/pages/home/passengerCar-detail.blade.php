@@ -102,7 +102,7 @@
                                                     số ghế</label>
                                                 <div>
                                                     <p class="mb-0 text-gray-500 dark:text-gray-300">
-                                                        {{$passengerCars[0]->capacity}}</p>
+                                                        {{$passengerCars[0]->vehicle->type_name}}</p>
                                                 </div>
                                             </div>
                                         </li>
@@ -112,7 +112,19 @@
                                                     ghế
                                                     trống</label>
                                                 <div>
-                                                    <p class="mb-0 text-gray-500 dark:text-gray-300">5</p>
+                                                    <p class="mb-0 text-gray-500 dark:text-gray-300">
+                                                        @php
+                                                            $countSlot = $passengerCars[0]->capacity;
+                                                        @endphp
+                                                        @foreach($passengerCars[0]->tickets as $key => $value)
+                                                            @if($value->time_id == $_GET['time'] && $value->date == $_GET['date'])
+                                                                @php
+                                                                    $countSlot -= $value->quantity;
+                                                                @endphp
+                                                            @endif
+                                                        @endforeach
+                                                        {{$countSlot}}
+                                                    </p>
                                                 </div>
                                             </div>
                                         </li>
@@ -535,56 +547,80 @@
                     <div class="tab-content">
 
                         <div id="first" class="block w-full tab-pane p-4">
+                            <span hidden class="price-slot">{{$passengerCars[0]->price}}</span>
+                            <input type="date" id="date" name="date"
+                                   class="px-2 py-1 border-none outline-none"
+                                   hidden
+                                   value="{{$_GET['date']}}">
 
-
-                            {{--                                <p class="my-4">Số lượng khách</p>--}}
-                            {{--                                <div class="flex justify-between mb-8 items-center">--}}
-                            {{--                                    <p>Ghế thường - <span class="price">--}}
-                            {{--                                                                    {{ $passengerCars[0]->price }}--}}
-                            {{--                                                                </span>đ</p>--}}
-                            {{--                                    <div class="flex items-center">--}}
-                            {{--                                        <button--}}
-                            {{--                                            class="w-8 h-8 w-8 h-8 border border-black rounded-full bg-white-500 text-black flex items-center justify-center decrement-btn">--}}
-                            {{--                                            <span class="text-lg font-bold">-</span>--}}
-                            {{--                                        </button>--}}
-                            {{--                                        <input type="text" min="1" value="0" name="countTicket"--}}
-                            {{--                                               class="w-12 border-0 rounded text-center qty-input">--}}
-                            {{--                                        <button--}}
-                            {{--                                            class="w-8 h-8 border border-black rounded-full bg-white-500 text-black flex items-center justify-center increment-btn">--}}
-                            {{--                                            <span class="text-lg font-bold">+</span>--}}
-                            {{--                                        </button>--}}
-                            {{--                                    </div>--}}
-
-                            {{--                                </div>--}}
-                            {{--                                <div class="flex items-center mb-8">--}}
-                            {{--                                    <label for="date" class="mr-2">Chọn thời gian:</label>--}}
-                            {{--                                    <input type="date" id="date" name="date"--}}
-                            {{--                                           class="px-2 py-1 border-none outline-none"--}}
-                            {{--                                           value="{{ date('Y-m-d') }}">--}}
-                            {{--                                </div>--}}
-
-
-                            <div class="justify-between mb-8 items-center w-full">
-                                <div class="flex items-center">
-                                    <div class="flex flex-col w-[50%]">
-
+                            @if($passengerCars[0]->vehicle_id == 0)
+                                <p class="my-4">Số lượng khách</p>
+                                <div class="flex justify-between mb-8 items-center">
+                                    <p>Ghế thường - <span class="price">
+                                                                {{ $passengerCars[0]->price }}
+                                                            </span>đ</p>
+                                    <div class="flex items-center">
+                                        <button
+                                            class="w-8 h-8 w-8 h-8 border border-black rounded-full bg-white-500 text-black flex items-center justify-center decrement-btn">
+                                            <span class="text-lg font-bold">-</span>
+                                        </button>
+                                        <input type="text" min="1" value="0" name="countTicket"
+                                               class="w-12 border-0 rounded text-center qty-input">
+                                        <button
+                                            class="w-8 h-8 border border-black rounded-full bg-white-500 text-black flex items-center justify-center increment-btn">
+                                            <span class="text-lg font-bold">+</span>
+                                        </button>
                                     </div>
-                                    <div class="flex flex-col w-[50%]">
-                                        <div class="">
-                                            @foreach($layout as $key => $value)
-                                                @php
-                                                    $array = json_decode($value->seat, true);
-                                                @endphp
-                                                <div class="flex">
-                                                    @foreach($array as $keyItem => $item)
-                                                        <div class="w-12 border border-gray-400 h-12 flex justify-center items-center" style="width: 10px;height: 10px">{!! $item=="icon"?'<span class="material-symbols-outlined">search_hands_free</span>':($item!=""?'<span class="material-symbols-outlined">weekend</span>':'') !!}</div>
-                                                    @endforeach
-                                                </div>
-                                            @endforeach
+
+                                </div>
+
+                            @else
+                                <div class="justify-between mb-8 items-center w-full">
+                                    <div class="flex items-center flex-col lg:flex-row">
+                                        <div class="flex flex-col w-full lg:w-1/2 justify-center items-center">
+                                            <div>
+                                                <p class="font-bold">Chú thích</p>
+                                                <p class="flex items-center my-4"><span
+                                                        class="material-symbols-outlined"
+                                                        style="font-size: 40px;color: red;margin-right: 5px">weekend</span>Gế
+                                                    không bán</p>
+                                                <p class="flex items-center my-4"><span
+                                                        class="material-symbols-outlined"
+                                                        style="font-size: 40px;color: green;margin-right: 5px">weekend</span>Gế
+                                                    không đang chọn</p>
+                                                <p class="flex items-center my-4"><span
+                                                        class="material-symbols-outlined"
+                                                        style="font-size: 40px;color: #74788d;margin-right: 5px">weekend</span>Gế
+                                                    thường <span
+                                                        style="display: block;color: #0a58ca;font-weight: bold;margin-left: 5px"> {{ number_format($passengerCars[0]->price) }} đ</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="flex-col w-full lg:w-1/2" style="user-select: none;">
+                                            <!-- Bảng ghế -->
+                                            <div style="max-height: 30vh;overflow: auto">
+                                                @foreach($layout as $key => $value)
+                                                    @php
+                                                        $array = json_decode($value->seat, true);
+                                                    @endphp
+                                                    <div class="flex justify-center items-center">
+                                                        @foreach($array as $keyItem => $item)
+                                                            <label for="{{$item}}"
+                                                                   class="choices-slot cursor-pointer w-12 border border-gray-400 h-12 flex justify-center items-center lg:w-12"
+                                                                   style="width: 10px;height: 10px">{!! $item=="icon"?'<span class="material-symbols-outlined" style="font-size: 40px;color: #74788d">search_hands_free</span>':($item!=""?'<span class="material-symbols-outlined" style="font-size: 40px;color: #74788d">weekend</span>':'') !!}</label>
+                                                            @if($item != "" && $item != "icon")
+                                                                <input style="display: none;" class="slot"
+                                                                       type="checkbox"
+                                                                       name="slot[]" id="{{$item}}" value="{{$item}}">
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                @endforeach
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
 
 
                             <div class="show-total text-sm my-4"></div>
