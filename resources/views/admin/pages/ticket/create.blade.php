@@ -1,7 +1,5 @@
 @extends('admin.layouts.master')
 
-
-
 @section('content')
     <div class="content">
         <?php
@@ -45,7 +43,7 @@
                     <label class="form-label">Status</label>
                     <select name="status" class="form-control">
                       <option>Choosen status</option>
-                      @foreach (json_decode('{"0":"Pending","1":"Success"}', true) as $key => $value)
+                      @foreach (json_decode('{"1":"Pending","2":"Success"","3":"Confirmed"}', true) as $key => $value)
                       <option value="{{ $key }}">{{ $value }}</option>
                       @endforeach
                     </select>
@@ -161,7 +159,6 @@
                         $('.route').html(showTrip);
                     },
                     error: function(error) {
-                        console.log(error);
                     }
                 })
             })
@@ -194,7 +191,7 @@
 
             $('.arrival').change(function() {
                 var arrival = $(this).val();
-
+               
                 $.ajax({
                     url: '/admin/trip',
                     method: 'POST',
@@ -217,7 +214,6 @@
                         $('.route').html(showTrip);
                     },
                     error: function(error) {
-                        console.log(error);
                     }
                 })
             })

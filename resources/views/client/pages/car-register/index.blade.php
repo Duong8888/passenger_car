@@ -1,11 +1,11 @@
 @extends('client.layout.master')
-
+@section('title', 'Đăng kí nhà xe')
 @section('content')
     <!-- Start grid -->
     <section class="pt-16">
         <div class="container mx-auto">
             @if("" != trim($messageStatus))
-                <div class="grid items-center grid-cols-8 mt-5 lg:gap-8 gap-y-8 p-4">
+                <div  style="text-align: center; padding: 20px;" class="grid items-center grid-cols-8 mt-5 lg:gap-8 gap-y-8 p-4">
                     <h3 class="mb-2 text-3xl text-gray-900 dark:text-white">{{$messageStatus}}</h3>
                     <p class="text-gray-500 dark:text-gray-300 center-content">{{$message}}</p>
                 </div>
@@ -24,30 +24,30 @@
                                 <div class="grid grid-cols-12 gap-4">
                                         <div class="col-span-12 lg:col-span-6 px-2">
                                             <label for="fullName" class="text-gray-900 dark:text-gray-50">Họ và tên <span style="color: red;">*</span> </label>
-                                            <input type="text" name="fullName" id="fullName" class="w-full mt-1 rounded border border-gray-200 placeholder:text-sm placeholder:text-gray-400 dark:bg-transparent dark:border-none focus:ring-0 focus:ring-offset-0 dark:text-gray-200" placeholder="Họ và tên">
+                                            <input required type="text" name="fullName" id="fullName" class="w-full mt-1 rounded border border-gray-200 placeholder:text-sm placeholder:text-gray-400 dark:bg-transparent dark:border-none focus:ring-0 focus:ring-offset-0 dark:text-gray-200" placeholder="Họ và tên">
                                         </div>
                                     <div class="col-span-12 lg:col-span-6 px-2">
                                         <div class="mb-3">
                                             <label for="phone" class="text-gray-900 dark:text-gray-50">Số điện thoại liên hệ <span style="color: red;">*</span> </label>
-                                            <input type="text" name="phone" id="phone" class="w-full mt-1 rounded border-gray-100/50 placeholder:text-sm placeholder:text-gray-400 dark:bg-transparent dark:border-gray-800 focus:ring-0 focus:ring-offset-0 dark:text-gray-200" placeholder="Số điện thoại liên hệ">
+                                            <input required type="text" name="phone" id="phone" class="w-full mt-1 rounded border-gray-100/50 placeholder:text-sm placeholder:text-gray-400 dark:bg-transparent dark:border-gray-800 focus:ring-0 focus:ring-offset-0 dark:text-gray-200" placeholder="Số điện thoại liên hệ">
                                         </div>
                                     </div><!--end col-->
                                     <div class="col-span-12 lg:col-span-6 px-2">
                                         <div class="mb-3">
                                             <label for="email" class="text-gray-900 dark:text-gray-50">Email</label>
-                                            <input type="email" class="w-full mt-1 rounded border-gray-100/50 placeholder:text-sm placeholder:text-gray-400 dark:bg-transparent dark:border-gray-800 focus:ring-0 focus:ring-offset-0 dark:text-gray-200" id="emaiol" name="email" placeholder="Nhập email của bạn">
+                                            <input required type="email" class="w-full mt-1 rounded border-gray-100/50 placeholder:text-sm placeholder:text-gray-400 dark:bg-transparent dark:border-gray-800 focus:ring-0 focus:ring-offset-0 dark:text-gray-200" id="emaiol" name="email" placeholder="Nhập email của bạn">
                                         </div>
                                     </div><!--end col-->
                                     <div class="col-span-12 lg:col-span-6 px-2">
                                         <div class="mb-3">
-                                            <label for="passengerCar_name" class="text-gray-900 dark:text-gray-50">Tên hãng xe</label>
-                                            <input type="text" class="w-full mt-1 rounded border-gray-100/50 placeholder:text-sm placeholder:text-gray-400 dark:bg-transparent dark:border-gray-800 focus:ring-0 focus:ring-offset-0 dark:text-gray-200" id="passengerCar_name" name="passengerCar_name" placeholder="Nhập tên hãng xe">
+                                            <label for="passengerCar_name" class="text-gray-900 dark:text-gray-50">Tên hãng xe<span style="color: red;">*</span> </label>
+                                            <input required type="text" class="w-full mt-1 rounded border-gray-100/50 placeholder:text-sm placeholder:text-gray-400 dark:bg-transparent dark:border-gray-800 focus:ring-0 focus:ring-offset-0 dark:text-gray-200" id="passengerCar_name" name="passengerCar_name" placeholder="Nhập tên hãng xe">
                                         </div>
                                     </div><!--end col-->
                                     <div class="col-span-12 px-2">
                                         <div class="mb-3">
                                             <label for="province" class="text-gray-900 dark:text-gray-50">Tỉnh/ Thành phố <span style="color: red;">*</span> </label>
-                                            <input type="text" name="province" id="" class="w-full mt-1 rounded border-gray-100/50 placeholder:text-sm placeholder:text-gray-400 dark:bg-transparent dark:border-gray-800 focus:ring-0 focus:ring-offset-0 dark:text-gray-200" placeholder="Nhập Tỉnh/ Thành phố">
+                                            <input required type="text" name="province" id="" class="w-full mt-1 rounded border-gray-100/50 placeholder:text-sm placeholder:text-gray-400 dark:bg-transparent dark:border-gray-800 focus:ring-0 focus:ring-offset-0 dark:text-gray-200" placeholder="Nhập Tỉnh/ Thành phố">
                                         </div>
                                     </div><!--end col-->
                                     <div class="col-span-12 px-2">

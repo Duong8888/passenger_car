@@ -19,7 +19,7 @@ class PassengerCar extends Model
         'transport_unit_id',
         'route_id',
     ];
-   
+
 
 //    public function toSearchableArray()
 //    {
@@ -50,7 +50,7 @@ class PassengerCar extends Model
 
     public function workingTime()
     {
-        return $this->belongsToMany(WorkingTime::class, 'passenger_car_working_times');
+        return $this->belongsToMany(WorkingTime::class, 'passenger_car_working_times')->withPivot('status','id');
 
     }
 

@@ -15,6 +15,7 @@ use App\Models\Stops;
 use App\Models\User;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 // use App\Models\PassengerCarWorkingTime;
 
@@ -41,7 +42,7 @@ class HomeController extends Controller
         $albums = PassengerCar::with('albums')->get();
         $routes = Routes::all();
 
-        $users = User::where('user_type', 'staff')->take(8)->get();
+        $users = User::where('user_type', 'staff')->orderBy('updated_at', 'DESC')->take(4)->get();
         $passengerCars = PassengerCar::with('workingTime')->whereNotNull('route_id')->inRandomOrder()->get();
 
         $posts = Posts::orderBy('created_at', 'desc')->take(3)->get();
@@ -61,7 +62,8 @@ class HomeController extends Controller
                 'comments',
                 'workingTime'
             ])->get();
-
+        $time_id = $request->time;
+      
         $albums = $passengerCars[0]->albums;
         $routes = $passengerCars[0]->route;
         $services = $passengerCars[0]->services;
@@ -79,7 +81,7 @@ class HomeController extends Controller
             })
             ->get();
 
-        return view('client.pages.home.passengerCar-detail', compact('albums', 'routes', 'passengerCars', 'user', 'comments', 'stops', 'services', 'workingTime'));
+        return view('client.pages.home.passengerCar-detail', compact('albums', 'routes', 'passengerCars', 'user', 'comments', 'stops', 'services', 'workingTime', 'time_id'));
     }
 
     public function listPassengerCar(Request $request)

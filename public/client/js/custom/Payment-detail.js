@@ -39,33 +39,43 @@ $(document).ready(function () {
         let url = $(this).data("action");
 
         let data = $(this).data("session");
-        
+
         let payment_method = 'thanh toán tại nhà xe';
         data[0]['status'] = 1;
         data[0]['payment_method'] = payment_method;
 
         let res = data[0];
-        $.ajax({
-            url: url,
-            method: "POST",
-            dataType: "JSON",
-            data: res,
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function (response) {
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "success",
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
-                if (response.success) {
-                    window.location.href = '/end-ticket-payment';
-                }
+        Swal.fire({
+            title: "Thông báo",
+            text: "Bạn có chắc chắn muốn đặt vé!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Đúng!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: url,
+                    method: "POST",
+                    dataType: "JSON",
+                    data: res,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            Swal.fire({
+                                title: "Thông báo",
+                                text: "Đặt vé thành công.",
+                                icon: "success"
+                            });
+                            window.location.href = '/end-ticket-payment';
+                        }
+                    }
+                })
             }
-        })
+        });
     })
 
     $('.finish-ticket-vnpay').click(function () {
@@ -166,7 +176,7 @@ $(document).ready(function () {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function (response) {
-                   
+
                     $('.nameChange').html(response.name);
                     $('.phoneChange').html(response.phone);
                     $('.emailChange').html(response.email);

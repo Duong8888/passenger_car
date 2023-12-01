@@ -10,13 +10,13 @@ use App\Http\Controllers\Client\BlogController;
 use App\Http\Controllers\Client\CategoryController;
 use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\Client\CarRegisterController;
-
+use App\Http\Middleware\CheckUser;
 
 //Nam
 
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/listPassengerCar',[HomeController::class,'listPassengerCar'])->name('listPassengerCar');
-Route::get('car/{id}',[HomeController::class,'passengerCarDetail'])->name('passengerCar.detail');
+Route::get('car/{id}?{time}',[HomeController::class,'passengerCarDetail'])->name('passengerCar.detail');
 Route::post('addComment',[HomeController::class,'addComment'])->name('passengerCar.detail.comment');
 Route::resource('/profile',ProfileController::class);
 Route::get('/profile/ticketdetails/{id}',[ProfileController::class,'ticketDetails'])->name('ticketDetails_index');
@@ -39,7 +39,7 @@ Route::group(['prefix' => 'notifications', 'as' => 'notifications.'], function (
     Route::post('load', [NotificationController::class, 'getNotification'])->name('loadMessage');
 });
 
-use App\Http\Middleware\CheckUser;
+
 
 
 Route::middleware(CheckUser::class)->group(function(){
@@ -94,3 +94,11 @@ Route::get('/loginadmin', [App\Http\Controllers\LoginAdminController::class, 'sh
 #Dang ky xe
 Route::get('/car-register', [CarRegisterController::class, 'index'])->name('car-register.index');
 Route::post('/car-register', [CarRegisterController::class, 'post'])->name('car-register.index');
+
+//về chúng tôi
+Route::get('/about_us',[App\Http\Controllers\Client\AboutController::class,'index'])->name('about_us.index');
+Route::get('/vision',[App\Http\Controllers\Client\AboutController::class,'vision'])->name('about_us.vision');
+Route::get('/mission',[App\Http\Controllers\Client\AboutController::class,'mission'])->name('about_us.mission');
+
+
+

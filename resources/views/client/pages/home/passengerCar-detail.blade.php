@@ -1,4 +1,5 @@
 @extends('client.layout.master')
+@section('title', "Chi tiết thông tin xe")
 @section('content')
     <div class="main-content">
         <div class="page-content">
@@ -26,7 +27,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </section>
 
 
@@ -543,8 +544,8 @@
                                             <label for="date" class="mr-2">Chọn thời gian:</label>
                                             <input type="date" id="date" name="date" class="px-2 py-1 border-none outline-none" value="{{ date('Y-m-d') }}">
                                           </div>
-                                          
-                                          
+
+
                                         <div class="show-total text-sm my-4"></div>
 
                                         <div class="flex justify-end">
@@ -579,7 +580,15 @@
                                                         @endphp
                                                     @endif
                                                 @endforeach
-                                               
+
+                                                <div class="mb-5">
+                                                    <input type="radio" id="new" name="departure"
+                                                           class="form-radio h-5 w-5 text-blue-600 outline-none focus:ring-0"
+                                                           value="other">
+                                                    <label for="new" class="ml-2 mb-3" id="{{$data->id}}">Khác</label>
+                                                    <input type="text" name="other" id="otherInput" style="display: none;">
+                                                </div>                                        
+
                                             </div>
 
                                             <div class="flex flex-col w-1/2 p-4" style="overflow-y: auto; max-height: 200px; max-width: 50%;">
@@ -591,7 +600,7 @@
                                                 @foreach ($stops as $data)
                                                     @if ($data->stop_type == 1)
                                                         <div class="mb-5">
-                                                            <input type="radio" id="arrival{{$data->id}}" name="arrival1"
+                                                            <input type="radio" id="arrival{{$data->id}}" name="arrival"
                                                                    class="form-radio h-5 w-5 text-blue-600 outline-none focus:ring-0"
                                                                    value="{{$data->stop_name}}" {{ $firstArrival ? 'checked' : '' }}>
                                                             <label for="arrival{{$data->id}}"
@@ -602,7 +611,15 @@
                                                         @endphp
                                                     @endif
                                                 @endforeach
-                                                
+
+                                                <div class="mb-5">
+                                                    <input type="radio" id="new1" name="arrival"
+                                                           class="form-radio h-5 w-5 text-blue-600 outline-none focus:ring-0"
+                                                           value="other1">
+                                                    <label for="new1" class="ml-2 mb-3" id="{{$data->id}}">Khác</label>
+                                                    <input type="text" name="other1" id="otherInput1" style="display: none;">
+                                                </div>  
+
                                             </div>
                                         </div>
 
@@ -641,7 +658,7 @@
                                                     name="phone" id="phone" type="text" onblur="validatePhoneNumber(this)"
                                                     value="{{ isset(Auth::user()->phone) ? Auth::user()->phone : '' }}"
                                                     placeholder="Nhập Số điện thoại của bạn">
-                                                    
+
                                             </div>
                                             <div class="mb-4">
                                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email
@@ -651,7 +668,7 @@
                                                     name="email" id="email" type="text"
                                                     value="{{ isset(Auth::user()->email) ? Auth::user()->email : '' }}"
                                                     placeholder="Nhập địa chỉ email của bạn">
-                                                  
+
                                             </div>
                                         </div>
 
@@ -666,7 +683,7 @@
                                                 class="flex submit text-white border-transparent group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 py-2 px-4 rounded float-right"
                                                 data-action="{{ route('client.ticket.update-ticket') }}"
                                                 data-id="
-                                            {{ $passengerCars[0]->id }} 
+                                            {{ $passengerCars[0]->id }}
                                             ">
                                                 Tiếp tục
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"></path></svg>
@@ -688,6 +705,7 @@
     <input type="hidden" value="{{ $routes->departure }}" name="route-departure">
     <input type="hidden" value="{{ $routes->arrival }}" name="route-arrival">
     <input type="hidden" value="{{ $user[0]->id }}" name="passenger-user">
+    <input type="hidden" value="{{ $time_id }}" name="time_id">
 @endsection
 @section('page-script')
     <script type="module" src="{{ asset('client/js/custom/passengeCar-detail.js') }}"></script>

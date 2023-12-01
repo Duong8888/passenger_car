@@ -25,7 +25,36 @@
 </head>
 
 <body class="bg-white dark:bg-neutral-800">
+<!-- Messenger Plugin chat Code -->
+<div id="fb-root"></div>
 
+<!-- Your Plugin chat code -->
+<div id="fb-customer-chat" class="fb-customerchat">
+</div>
+
+<script>
+    var chatbox = document.getElementById('fb-customer-chat');
+    chatbox.setAttribute("page_id", "101712082566367");
+    chatbox.setAttribute("attribution", "biz_inbox");
+</script>
+
+<!-- Your SDK code -->
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            xfbml            : true,
+            version          : 'v18.0'
+        });
+    };
+
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
 
     <div class="fixed z-40 flex flex-col gap-3 ltr:left-0 rtl:right-0 top-[330px]">
         <!-- light-dark mode button -->
@@ -142,7 +171,7 @@
                                                         type="checkbox" id="flexCheckDefault">
                                                     <a href="reset-password.html"
                                                         class="text-white ltr:float-right rtl:float-left">Forgot
-                                                        Password?</a>
+                                                        Password ?</a>
                                                     <label class="text-white align-middle"
                                                         for="flexCheckDefault">Remember me</label>
                                                 </div>
@@ -153,8 +182,7 @@
                                                 </div>
                                             </form>
                                             <div class="text-center">
-                                                <p class="text-white">Already a member ? <a href="sign-up.html"
-                                                        class="text-white underline fw-medium"> Sign Up </a></p>
+                                                <p class="text-white"></a></p>
                                             </div>
                                         </div>
                                     </div>
