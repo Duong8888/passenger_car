@@ -17,7 +17,8 @@ return new class extends Migration
             $table->date('date');
             $table->unsignedBigInteger('time_id')->comment('Lu thoi gian xe chay');
             $table->string('seat_status');
-            $table->string('seat_name');
+            $table->string('seat_id');
+            $table->unsignedBigInteger('ticket_id')->nullable();
             $table->timestamps();
         });
     }

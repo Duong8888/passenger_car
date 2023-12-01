@@ -14,6 +14,7 @@ class SeatStatus extends Model
         'date',
         'time_id',
         'seat_status',
-        'seat_name'
+        'seat_id',
+        'ticket_id'
     ];
 }

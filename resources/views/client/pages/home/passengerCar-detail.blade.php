@@ -102,7 +102,12 @@
                                                     số ghế</label>
                                                 <div>
                                                     <p class="mb-0 text-gray-500 dark:text-gray-300">
-                                                        {{$passengerCars[0]->vehicle->type_name}}</p>
+                                                        @if($passengerCars[0]->vehicle_id != 0)
+                                                            {{$passengerCars[0]->vehicle->type_name}}
+                                                        @else
+                                                            {{$passengerCars[0]->capacity}} chỗ
+                                                        @endif
+                                                    </p>
                                                 </div>
                                             </div>
                                         </li>
@@ -556,9 +561,10 @@
                             @if($passengerCars[0]->vehicle_id == 0)
                                 <p class="my-4">Số lượng khách</p>
                                 <div class="flex justify-between mb-8 items-center">
-                                    <p>Ghế thường - <span class="price">
+                                    <p>Ghế thường - <span class="">
                                                                 {{ $passengerCars[0]->price }}
                                                             </span>đ</p>
+                                    <input type="hidden" value="{{$passengerCars[0]->price}}" class="price">
                                     <div class="flex items-center">
                                         <button
                                             class="w-8 h-8 w-8 h-8 border border-black rounded-full bg-white-500 text-black flex items-center justify-center decrement-btn">
@@ -575,6 +581,9 @@
                                 </div>
 
                             @else
+                                <input type="hidden" value="{{$passengerCars[0]->price}}" class="price">
+                                <input type="hidden" min="1" value="0" name="countTicket"
+                                       class="w-12 border-0 rounded text-center qty-input">
                                 <div class="justify-between mb-8 items-center w-full">
                                     <div class="flex items-center flex-col lg:flex-row">
                                         <div class="flex flex-col w-full lg:w-1/2 justify-center items-center">
@@ -602,16 +611,25 @@
                                                 @foreach($layout as $key => $value)
                                                     @php
                                                         $array = json_decode($value->seat, true);
+                                                        $span = [];
                                                     @endphp
                                                     <div class="flex justify-center items-center">
                                                         @foreach($array as $keyItem => $item)
+                                                            @foreach($checkSlot as $slot)
+                                                                @php
+                                                                    if($item == $slot->seat_id){
+                                                                        $span[] = $item;
+                                                                    }
+                                                                @endphp
+                                                            @endforeach
                                                             <label for="{{$item}}"
                                                                    class="choices-slot cursor-pointer w-12 border border-gray-400 h-12 flex justify-center items-center lg:w-12"
-                                                                   style="width: 10px;height: 10px">{!! $item=="icon"?'<span class="material-symbols-outlined" style="font-size: 40px;color: #74788d">search_hands_free</span>':($item!=""?'<span class="material-symbols-outlined" style="font-size: 40px;color: #74788d">weekend</span>':'') !!}</label>
+                                                                   style="width: 10px;height: 10px">{!! $item=="icon"?'<span class="material-symbols-outlined" style="font-size: 40px;color: #74788d">search_hands_free</span>':($item!=""?(in_array($item,$span)?'<span class="material-symbols-outlined" style="font-size: 40px;color: red">weekend</span>':'<span class="material-symbols-outlined" style="font-size: 40px;color: #74788d">weekend</span>'):'') !!}</label>
                                                             @if($item != "" && $item != "icon")
                                                                 <input style="display: none;" class="slot"
                                                                        type="checkbox"
-                                                                       name="slot[]" id="{{$item}}" value="{{$item}}">
+                                                                       name="slot[]" id="{{$item}}"
+                                                                       value="{{$item}}">
                                                             @endif
                                                         @endforeach
                                                     </div>

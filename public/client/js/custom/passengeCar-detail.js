@@ -38,15 +38,16 @@ $(document).ready(function () {
     }
 
 
-    var CountTicket = $(".qty-input").val();
+    var CountTicket = $(".qty-input");
     var totalTicket = '';
     var TicketPrice;
-    TicketPrice = $('.price').text();
+    TicketPrice = $('.price');
+    var x = CountTicket.val();
     $('.increment-btn').click(function () {
-        CountTicket++;
+        x++;
         let y;
-        y = CountTicket * TicketPrice;
-        $(".qty-input").val(CountTicket);
+        y = x * TicketPrice.val();
+        $(".qty-input").val(x);
         function formatCurrency(amount) {
             return amount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
         }
@@ -61,12 +62,12 @@ $(document).ready(function () {
     })
 
     $('.decrement-btn').click(function () {
-        if (CountTicket > 0) {
-            CountTicket--;
+        if (x > 0) {
+            x--;
         }
         let y;
-        y = CountTicket * TicketPrice;
-        $(".qty-input").val(CountTicket);
+        y = x * TicketPrice.val();
+        $(".qty-input").val(x);
         function formatCurrency(amount) {
             return amount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
         }
@@ -90,8 +91,8 @@ $(document).ready(function () {
         var email = $('input[name="email"]').val();
         var route_departure = $('input[name="route-departure"]').val();
         var route_arrival = $('input[name="route-arrival"]').val();
-        var total_price = TicketPrice * CountTicket;
-        var quantity = CountTicket;
+        var total_price = TicketPrice.val() * CountTicket.val();
+        var quantity = CountTicket.val();
         var time_departure = $('input[name="departureTimeInput"]').val();
         var time_arrival = $('input[name="arrivalTimeInput"]').val();
         var departure = $('input[name="departure"]:checked').val();

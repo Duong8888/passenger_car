@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SeatsLayout;
+use App\Models\SeatStatus;
 use App\Models\VietnameseProvinces;
 use Illuminate\Http\Request;
 use App\Models\Album;
@@ -66,8 +67,18 @@ class HomeController extends Controller
                 'tickets',
                 'vehicle'
             ])->get();
-
-        $layout = SeatsLayout::query()->where('vehicle_id', $passengerCars[0]->vehicle->id)->get();
+        if($passengerCars[0]->vehicle_id != 0){
+            $layout = SeatsLayout::query()->where('vehicle_id', $passengerCars[0]->vehicle->id)->get();
+            $checkSlot = SeatStatus::query()
+                ->where('passenger_car_id',$passengerCars[0]->id)
+                ->where('date',$request->date)
+                ->where('time_id',$request->time)
+                ->get();
+//            dd($checkSlot);
+        }else{
+            $layout = [];
+            $checkSlot = [];
+        }
         $time_id = $request->time;
 
         $albums = $passengerCars[0]->albums;
@@ -87,7 +98,7 @@ class HomeController extends Controller
             })
             ->get();
 
-        return view('client.pages.home.passengerCar-detail', compact('albums', 'routes', 'passengerCars', 'user', 'comments', 'stops', 'services', 'workingTime', 'time_id','layout'));
+        return view('client.pages.home.passengerCar-detail', compact('albums', 'routes', 'passengerCars', 'user', 'comments', 'stops', 'services', 'workingTime', 'time_id','layout','checkSlot'));
     }
 
     public function listPassengerCar(Request $request)
