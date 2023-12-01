@@ -11,8 +11,10 @@ use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Http;
 
 class TicketController extends AdminBaseController
 {
@@ -63,7 +65,7 @@ class TicketController extends AdminBaseController
     {
         $model = $this->model->findOrFail($id);
         $user_relationship  = User::find($model->phone);
-       
+
         $passengerCar_relationship = PassengerCar::find($model->passenger_car_id);
         $user = User::all();
         $route = Routes::all();
@@ -129,9 +131,80 @@ class TicketController extends AdminBaseController
         return redirect()->route($this->urlIndex)->with('success', 'Created Successfully');
     }
 
-    public function Confirm(Request $request){
+    public function Confirm(Request $request)
+    {
         Ticket::where('id', $request->id)->update(['status' => 3]);
-      
+
         return response()->json(['success' => 'Done'], Response::HTTP_OK);
+    }
+
+    public function cancel(Request $request)
+    {
+        $data_cancel = DB::table("tickets")
+            ->join('vnpay_payments', 'vnpay_payments.inc_id', '=', 'tickets.inc_id')
+            ->where('tickets.id', $request->id)->get();
+        if (count($data_cancel) > 0) {
+            $other_field = json_decode($data_cancel[0]->other_field);
+            $apiUrl = 'https://sandbox.vnpayment.vn/merchant_webapi/api/transaction';
+            $vnp_TmnCode = env('VNP_TMNCODE');
+            $vnp_HashSecret  = env('VNP_HASHSECRET');
+
+            $vnp_TxnRef = $data_cancel[0]->vnp_TxnRef;
+            $vnp_Amount = $data_cancel[0]->total_price;
+            $vnp_TransactionType = "02";
+            $vnp_RequestId = date("YmdHis");
+            $inputData = array(
+                "vnp_RequestId" => $vnp_RequestId,
+                "vnp_Version" => '2.1.0',
+                "vnp_Command" => "refund",
+                "vnp_TmnCode" => $vnp_TmnCode,
+                "vnp_TransactionType" => $vnp_TransactionType,
+                "vnp_TxnRef" => $vnp_TxnRef,
+                "vnp_Amount" => $vnp_Amount,
+                "vnp_TransactionNo" => $other_field->vnp_TransactionNo,
+                "vnp_TransactionDate" => date('YmdHis', time()),
+                "vnp_CreateBy" => "admin",
+                "vnp_CreateDate" => date('YmdHis', time()),
+                "vnp_IpAddr" => request()->ip(),
+                "vnp_OrderInfo" => 'Hoan tra giao dich ' . $data_cancel[0]->id,
+            );
+
+            $format = '%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s';
+
+            $dataHash = sprintf(
+                $format,
+                $inputData['vnp_RequestId'], //1
+                $inputData['vnp_Version'], //2
+                $inputData['vnp_Command'], //3
+                $inputData['vnp_TmnCode'], //4
+                $inputData['vnp_TransactionType'], //5
+                $inputData['vnp_TxnRef'], //6
+                $inputData['vnp_Amount'], //7
+                $inputData['vnp_TransactionNo'],  //8
+                $inputData['vnp_TransactionDate'], //9
+                $inputData['vnp_CreateBy'], //10
+                $inputData['vnp_CreateDate'], //11
+                $inputData['vnp_IpAddr'], //12
+                $inputData['vnp_OrderInfo'] //13
+            );
+
+            if (isset($vnp_HashSecret)) {
+                $vnpSecureHash = hash('sha256', $vnp_HashSecret . $dataHash);
+                $inputData['vnp_SecureHash'] = $vnpSecureHash;
+            }
+            $headers = [
+                "Content-Type" => "application/json"
+            ];
+            $response = Http::withHeaders($headers)->post($apiUrl, $inputData);
+            $statusCode = $response->status();
+            $responseBody = json_decode($response->getBody(), true);
+            return Response([
+                'status' => $statusCode,
+                'body' => $responseBody,
+                'data' => $inputData
+            ]);
+        }
+
+        
     }
 }

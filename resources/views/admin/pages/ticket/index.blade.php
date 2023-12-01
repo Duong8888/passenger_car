@@ -21,11 +21,11 @@
                                     </ul>
                                 </div>
                             @endif
-                            <div class="table-responsive">
+                            <div class="table">
                                 <table class="table table-bordered mb-0">
                                     <thead>
                                     <tr>
-                                        <th>#</th>
+                                        <th>ID</th>
                                         <th>Username</th>
                                         <th>Phone</th>
                                         <th>Email</th>
@@ -41,7 +41,7 @@
                                     @foreach ($data as $ticket)
                                         <tbody>
                                         <tr>
-                                            <td>{{ $ticket->id }}</td>
+                                            <td>#{{ $ticket->id }}</td>
                                             <td>{{ $ticket->username }}</td>
                                             <td>{{ $ticket->phone }}</td>
                                             <td>{{ $ticket->email }}</td>
@@ -62,15 +62,26 @@
                                             </td>
                                             <td>{{ $ticket->total_price }}</td>
 
-                                            <td style="display: flex">
-                                                <a class="btn btn-primary"
-                                                   href="{{ route('admin.ticket.edit', $ticket->id) }}">Edit
-                                                </a>
-                                                
-                                                <a class="btn btn-primary confirm" data-id="{{ $ticket->id }}">
-                                                    Confirm
-                                                </a>
+                                            <td>
+                                                <div class="dropdown float-end">
+                                                    <a href="#" class="dropdown-toggle arrow-none card-drop"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="mdi mdi-dots-vertical"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-end">
+                                                        <!-- item-->
+                                                        <a class="dropdown-item"
+                                                            href="{{ route('admin.ticket.edit', $ticket->id) }}">Sửa
+                                                        </a>
+                                                        <a href="javascript:void(0);" class="dropdown-item confirm" data-id="{{ $ticket->id }}">
+                                                            Xác nhận
+                                                        </a>
+                                                        <!-- item-->
+                                                        <a  data-id="<?= $ticket->id; ?>" href="javascript:void(0);" class="dropdown-item vnpay-cancel">Hủy vé</a>
+                                                    </div>
+                                                </div>
                                             </td>
+
                                         </tr>
                                         </tbody>
                                     @endforeach
@@ -118,6 +129,38 @@
                         window.location.href = '/admin/ticket';
                     }
                })
+            })
+
+            $('.vnpay-cancel').on('click', function(){
+                $value = $(this).data("id");
+                Swal.fire({
+                title: "Thông báo",
+                text: "Bạn có chắc chắn muốn xác nhận!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Đúng!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'post',
+                        url: '/admin/ticket/cancel',
+                        data: {
+                            "id": $value
+                        },
+                        success: function(data) {
+                            console.log(data)
+                            // Swal.fire({
+                            //     title: "Thông báo",
+                            //     text: "Xác nhận thành công.",
+                            //     icon: "success"
+                            // });
+                            // window.location.href = "/admin/contact/index"
+                        }
+                    });
+                }
+            });
             })
         })  
     </script>
