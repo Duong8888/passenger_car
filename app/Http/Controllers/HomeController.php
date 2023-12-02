@@ -74,7 +74,6 @@ class HomeController extends Controller
                 ->where('date',$request->date)
                 ->where('time_id',$request->time)
                 ->get();
-//            dd($checkSlot);
         }else{
             $layout = [];
             $checkSlot = [];

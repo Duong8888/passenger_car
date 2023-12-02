@@ -51,7 +51,7 @@ class TicketController extends Controller
                         ]);
                     }
                 }else{
-                    return back();
+                    return back()->with('message','Ghế của bạn đã có người nhanh tay hơn đặt rồi vui lòng chọn gế khác !');
                 }
             }
         }
@@ -80,15 +80,14 @@ class TicketController extends Controller
         foreach ($data as $a) {
             if (isset($a['seat'])) {
                 foreach ($a['seat'] as $value) {
-                    SeatStatus::create([
-                        'passenger_car_id' => $a['passenger_car_id'],
-                        'date' => $a['date'],
-                        'time_id' => $a['time_id'],
-                        'seat_status' => 1,
-                        'seat_id' => $value,
-                        'ticket_id' => $ticket->id
-                    ]);
-
+                    SeatStatus::query()
+                        ->where([
+                            'passenger_car_id' => $a['passenger_car_id'],
+                            'date' => $a['date'],
+                            'time_id' => $a['time_id'],
+                            'seat_id' => $value,
+                        ])
+                        ->update(['seat_status'=>1,'ticket_id' => $ticket->id]);
                 }
             }
         }

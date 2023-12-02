@@ -506,7 +506,7 @@
 
 
         <div id="popup"
-             class="fixed justify-center flex items-center inset-0 bg-gray-500 bg-opacity-50 hidden w-80 h-96 z-50">
+                 class="fixed justify-center flex items-center inset-0 bg-gray-500 bg-opacity-50  @php if(!session('message')){echo 'hidden';} @endphp w-80 h-96 z-50">
             <div class="bg-white w-[75%] rounded h-2/5 m-auto p-4 overflow-auto">
                 <div class="flex justify-between items-center p-4">
                     <p>Mua vé xe</p>
@@ -552,6 +552,19 @@
                     <div class="tab-content">
 
                         <div id="first" class="block w-full tab-pane p-4">
+                            @if(session('message'))
+                            <div class="flex items-center p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300" role="alert">
+                                <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                </svg>
+                                <span class="sr-only">Info</span>
+                                <div>
+                                    <span class="font-medium ml-2">{{session('message')}}</span>
+                                </div>
+                            </div>
+                            @endif
+
+
                             <span hidden class="price-slot">{{$passengerCars[0]->price}}</span>
                             <input type="date" id="date" name="date"
                                    class="px-2 py-1 border-none outline-none"
