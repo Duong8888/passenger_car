@@ -20,7 +20,7 @@ $(document).ready(function () {
             }
         });
     });
-    
+
     $(document).on("click", ".Ticket", function () {
         showPopup();
     })
@@ -38,15 +38,16 @@ $(document).ready(function () {
     }
 
 
-    var CountTicket = $(".qty-input").val();
+    var CountTicket = $(".qty-input");
     var totalTicket = '';
     var TicketPrice;
-    TicketPrice = $('.price').text();
+    TicketPrice = $('.price');
+    var x = CountTicket.val();
     $('.increment-btn').click(function () {
-        CountTicket++;
+        x++;
         let y;
-        y = CountTicket * TicketPrice;
-        $(".qty-input").val(CountTicket);
+        y = x * TicketPrice.val();
+        $(".qty-input").val(x);
         function formatCurrency(amount) {
             return amount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
         }
@@ -61,12 +62,12 @@ $(document).ready(function () {
     })
 
     $('.decrement-btn').click(function () {
-        if (CountTicket > 0) {
-            CountTicket--;
+        if (x > 0) {
+            x--;
         }
         let y;
-        y = CountTicket * TicketPrice;
-        $(".qty-input").val(CountTicket);
+        y = x * TicketPrice.val();
+        $(".qty-input").val(x);
         function formatCurrency(amount) {
             return amount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
         }
@@ -86,12 +87,12 @@ $(document).ready(function () {
         var time_id = $('input[name="time_id"]').val();
         var lmao = $('input[name="other"]').val();
         var lmao1 = $('input[name="other1"]').val();
-        
+
         var email = $('input[name="email"]').val();
         var route_departure = $('input[name="route-departure"]').val();
         var route_arrival = $('input[name="route-arrival"]').val();
-        var total_price = TicketPrice * CountTicket;
-        var quantity = CountTicket;
+        var total_price = TicketPrice.val() * CountTicket.val();
+        var quantity = CountTicket.val();
         var time_departure = $('input[name="departureTimeInput"]').val();
         var time_arrival = $('input[name="arrivalTimeInput"]').val();
         var departure = $('input[name="departure"]:checked').val();
@@ -102,7 +103,7 @@ $(document).ready(function () {
         if(lmao1 != ''){
             arrival = lmao1;
         }
-       
+
         var date =  $('input[name="date"]').val();
         var passenger_car_user = $('input[name="passenger-user"]').val();
         const error = [];
@@ -112,11 +113,11 @@ $(document).ready(function () {
         if (phone === '') {
             error.push('Số điện thoại không được để trống.');
         }
-          
+
         if (email === '') {
             error.push('Email không được để trống.');
         }
-     
+
         if(error.length === 0){
             let passenger_car_id = $(this).data("id");
             var totalArray = {
@@ -137,9 +138,10 @@ $(document).ready(function () {
                 passenger_car_user: passenger_car_user,
                 status: 0,
                 payment_method: 0,
+                seat:checkedValues
             };
             let url = $(this).data("action");
-    
+
             $.ajax({
                 url: url,
                 method: "POST",
@@ -157,7 +159,7 @@ $(document).ready(function () {
         }else{
             swal("Lỗi", "Vui lòng điền đủ thông tin !", "error");
         }
-       
+
     })
     const firstTab = document.getElementById('first');
     const secondTab = document.getElementById('second');
@@ -176,9 +178,11 @@ $(document).ready(function () {
     const firstNextButton = document.getElementById('first-next');
     const inputTicket = document.querySelector('input[name="countTicket"]');
         firstNextButton.addEventListener('click', function() {
-            const inputDate = document.getElementById('date').value;
-            const inputValue = inputTicket.value;
-        if(inputValue > 0 && inputDate != ''){
+            let inputValue = 0;
+            if(inputTicket){
+                 inputValue = inputTicket.value;
+            }
+        if(inputValue > 0 || countSlot > 0){
             firstTab.classList.add('hidden');
             secondTab.classList.remove('hidden');
             firstTabBtn.before(icon);
@@ -186,8 +190,7 @@ $(document).ready(function () {
             $('.second-li>button').addClass('active');
             $('.firstItem>.icon-item').attr('data-item','first')
         } else{
-
-            swal("Lỗi", "Vui lòng chọn ít nhất 1 chỗ ngồi và chọn ngày đi !", "error");
+            swal("Vui lòng chọn ít nhất 1 chỗ ngồi !");
         }
     });
 
@@ -208,7 +211,7 @@ $(document).ready(function () {
             $('.second-li>button').removeClass('active');
             $('.third-li>button').addClass('active');
             $('.secondItem>.icon-item').attr('data-item','second')
-        
+
     });
 
 
@@ -219,6 +222,49 @@ $(document).ready(function () {
         $('.third-li>button').removeClass('active');
         $('.icon-item[data-item="second"]').hide();
     });
+
+
+
+
+
+    // sử lý chọn ghế
+    var countSlot = 0;
+    var checkedValues = [];
+    $(document).on('change', '.slot', function() {
+        checkedValues = [];
+        $('input[name="slot[]"]:checked').each(function() {
+            checkedValues.push($(this).val());
+        });
+
+        var $label = $('label[for="' + $(this).attr('id') + '"]');
+        var $span = $label.find('span.material-symbols-outlined');
+
+        if ($span.css('color') === 'rgb(116, 120, 141)' && $span.html() === 'weekend') {
+            countSlot++;
+            $span.css('color', 'green');
+        } else if ($span.css('color') === 'rgb(0, 128, 0)') {
+            countSlot--;
+            $span.css('color', '#74788d');
+        }
+
+        console.log(checkedValues);
+
+        let y;
+        y = countSlot * parseInt($('.price-slot').text());
+        $(".qty-input").val(countSlot);
+
+        function formatCurrency(amount) {
+            return amount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+        }
+
+        let formattedMoney = formatCurrency(y);
+        totalTicket = `
+        <span>Tổng cộng: <span style="color: rgb(0, 96, 196);font-weight: bold;">${formattedMoney}</span></span>
+    `
+        $('.show-total').html(totalTicket);
+    });
+
+
 })
 
 

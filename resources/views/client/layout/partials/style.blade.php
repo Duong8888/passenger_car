@@ -11,6 +11,7 @@
 
 
 <link rel="stylesheet" href="{{asset('client/css/custom/home.css')}}" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,100,1,0" />
 <style>
 
     body::-webkit-scrollbar{
