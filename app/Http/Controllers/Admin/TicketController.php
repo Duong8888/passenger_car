@@ -200,8 +200,7 @@ class TicketController extends AdminBaseController
             $responseBody = json_decode($response->getBody(), true);
             return Response([
                 'status' => $statusCode,
-                'body' => $responseBody,
-                'data' => $inputData
+                'body' => $responseBody
             ]);
         }
 
