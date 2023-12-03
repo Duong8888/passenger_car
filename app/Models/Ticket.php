@@ -25,7 +25,8 @@ class Ticket extends Model
         'date',
         'time_id',
         'vnpay_status',
-        'inc_id'
+        'inc_id',
+        'seat_id'
     ];
     protected $attributes =[
         'email' => NULL,

@@ -3,8 +3,8 @@
     <div class="inset-0 absolute bg-[url('../images/home/img-01.html')] bg-center"></div>
     <div class="container relative mx-auto">
         <div class="grid items-center grid-cols-12 rtl:gap-10">
-            <div class="col-span-12 col-start-2">
-                <div class="mb-3 text-center ltr:mr-14 rtl:ml-14">
+            <div class="col-span-10 col-start-2">
+                <div class="mb-3 text-center">
 
                     <h1 class="mb-3 text-5xl leading-tight text-white fw-semibold">Khám phá thế giới bằng xe bus</h1>
                     <p class="text-white text-17">"Hãy tìm xe và bắt đầu hành trình của bạn ngay hôm nay, để biết mọi cuộc hành trình đều đặc biệt!</p>
@@ -13,7 +13,14 @@
                 <form action="{{ route('search') }}" method="GET">
                     <div class="registration-form">
                         <div class="grid grid-cols-12">
-                            <div class="col-span-12 xl:col-span-4">
+
+                            <div class="col-span-12 xl:col-span-3">
+                                <div class="mt-3 rounded-l filter-search-form filter-border mt-md-0">
+                                    <input type="date" id="datepicker" name="date" class="w-full filter-input-box placeholder:text-gray-100 placeholder:text-13 dark:text-gray-100" placeholder="Job, Company name...">
+                                </div>
+                            </div>
+
+                            <div class="col-span-12 xl:col-span-3">
                                 <div class="mt-3 rounded-l filter-search-form filter-border mt-md-0">
                                     <i class="uil uil-map-marker">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -34,7 +41,7 @@
                                 </div>
                             </div><!--end col-->
 
-                            <div class="col-span-12 xl:col-span-4">
+                            <div class="col-span-12 xl:col-span-3">
                                 <div class="mt-3 filter-search-form mt-lg-0">
                                     <i class="uil uil-clipboard-notes">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -54,14 +61,11 @@
                                                 value="{{$value}}">{{$value}}</option>
                                         @endforeach
                                     </select>
-                                </div> 
+                                </div>
                             </div><!--end col-->
                             <div class="col-span-12 xl:col-span-3">
                                 <div class="h-full mt-3">
-                                    <button
-                                        class="btn group-data-[theme-color=violet]:bg-violet-400 group-data-[theme-color=sky]:bg-sky-400 group-data-[theme-color=red]:bg-red-400 group-data-[theme-color=green]:bg-green-400 group-data-[theme-color=pink]:bg-pink-400 group-data-[theme-color=blue]:bg-blue-400 border rounded-lg border-transparent ltr:xl:rounded-l-none rtl:xl:rounded-r-none w-full py-[18px] text-white"
-                                        style="border-radius: 0 !important;" type="submit"><i
-                                            class="uil uil-search me-1"></i>Tìm kiếm</button>
+                                    <button class="btn group-data-[theme-color=violet]:bg-violet-400 group-data-[theme-color=sky]:bg-sky-400 group-data-[theme-color=red]:bg-red-400 group-data-[theme-color=green]:bg-green-400 group-data-[theme-color=pink]:bg-pink-400 group-data-[theme-color=blue]:bg-blue-400 border rounded-lg border-transparent ltr:xl:rounded-l-none rtl:xl:rounded-r-none w-full py-[18px] text-white" type="submit"><i class="uil uil-search me-1"></i>Tìm kiếm</button>
                                 </div>
                             </div><!--end col-->
                         </div><!--end row-->
