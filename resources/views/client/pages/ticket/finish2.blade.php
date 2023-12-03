@@ -86,7 +86,10 @@
                 </div>
             </div>
         </div>
-       
+        <form action="https://sandbox.vnpayment.vn/merchant_webapi/api/transaction" method="post">
+        @csrf
+            <button>Cancled</button>
+        </form>
 
     </div>
 </section>

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->bigInteger('total_price');
             $table->string('payment_method');
+            $table->string('reason');
             $table->string('status')->default(0);
             $table->timestamps();
         });
