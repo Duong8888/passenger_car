@@ -13,7 +13,6 @@ $(document).ready(function () {
             loadNotification();
         })
         .subscribed((channel) => {
-            console.log(infoUser.name);
         });
     // load notification
     $.ajaxSetup({
@@ -32,7 +31,6 @@ $(document).ready(function () {
             success: function (data) {
 
                 if (notificationClient[0]) {
-                    console.log(data);
                     notificationClient.html('');
                     if (data.count === 0) {
                         countNotificationsBtn.html('');
@@ -66,7 +64,6 @@ $(document).ready(function () {
                     }
                 }
                 if (notificationAdmin[0]) {
-                    console.log(data);
                     notificationAdmin.html(``);
                     if (data.count === 0) {
                         countNotificationsBtnAdmin.hide();
@@ -100,7 +97,6 @@ $(document).ready(function () {
                 }
             },
             error: function (error) {
-                console.log(error)
             }
         });
     }

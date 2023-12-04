@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-
+@section("title", "Lịch trình")
 @section('page-script')
 
     <!-- Init js-->
