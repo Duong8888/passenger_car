@@ -26,6 +26,7 @@ class Ticket extends Model
         'time_id',
         'vnpay_status',
         'inc_id',
+        'reason',
         'seat_id'
     ];
     protected $attributes =[

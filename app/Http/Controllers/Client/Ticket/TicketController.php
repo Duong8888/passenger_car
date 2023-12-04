@@ -379,14 +379,14 @@ class TicketController extends Controller
         session()->put('value.0.username', $request->name);
         session()->put('value.0.phone', $request->phone);
         session()->put('value.0.email', $request->email);
-        Log::info(session('value'));
+       
         return response()->json($arrayInfo, Response::HTTP_OK);
     }
 
-    public function CancelTicket(Request $request)
-    {
-        $ticket = Ticket::where('id', $request->id)->update(['status' => 0]);
+    public function CancelTicket(Request $request){
+        $ticket = Ticket::where('id', $request->id)->update(['status' => 0, 'reason' => $request->reason]);
         session()->forget('value');
+        SeatStatus::where('ticket_id', $request->id)->destroy($request->id);
         return response()->json(['success' => 'Done'], Response::HTTP_OK);
     }
 }
