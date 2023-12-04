@@ -151,20 +151,20 @@ class TicketController extends AdminBaseController
 
             $vnp_TxnRef = $data_cancel[0]->vnp_TxnRef;
             $vnp_Amount = $data_cancel[0]->total_price;
-            $vnp_TransactionType = "02";
+            $vnp_TransactionType = 02;
             $vnp_RequestId = date("YmdHis");
             $inputData = array(
-                "vnp_RequestId" => $vnp_RequestId,
+                "vnp_RequestId" => (int)$vnp_RequestId,
                 "vnp_Version" => '2.1.0',
                 "vnp_Command" => "refund",
                 "vnp_TmnCode" => $vnp_TmnCode,
-                "vnp_TransactionType" => $vnp_TransactionType,
-                "vnp_TxnRef" => $vnp_TxnRef,
+                "vnp_TransactionType" => (int)$vnp_TransactionType,
+                "vnp_TxnRef" => (int)$vnp_TxnRef,
                 "vnp_Amount" => $vnp_Amount,
-                "vnp_TransactionNo" => $other_field->vnp_TransactionNo,
-                "vnp_TransactionDate" => date('YmdHis', time()),
+                "vnp_TransactionNo" => $other_field->vnp_BankTranNo,
+                "vnp_TransactionDate" => (int)date('YmdHis', time()),
                 "vnp_CreateBy" => "admin",
-                "vnp_CreateDate" => date('YmdHis', time()),
+                "vnp_CreateDate" => (int)date('YmdHis', time()),
                 "vnp_IpAddr" => request()->ip(),
                 "vnp_OrderInfo" => 'Hoan tra giao dich ' . $data_cancel[0]->id,
             );
@@ -188,10 +188,8 @@ class TicketController extends AdminBaseController
                 $inputData['vnp_OrderInfo'] //13
             );
 
-            if (isset($vnp_HashSecret)) {
-                $vnpSecureHash = hash('sha256', $vnp_HashSecret . $dataHash);
-                $inputData['vnp_SecureHash'] = $vnpSecureHash;
-            }
+            $vnpSecureHash = hash_hmac('sha512', $dataHash, $vnp_HashSecret);
+            $inputData['vnp_SecureHash'] = $vnpSecureHash;
             $headers = [
                 "Content-Type" => "application/json"
             ];
@@ -200,7 +198,8 @@ class TicketController extends AdminBaseController
             $responseBody = json_decode($response->getBody(), true);
             return Response([
                 'status' => $statusCode,
-                'body' => $responseBody
+                'body' => $responseBody,
+                'data' => $inputData
             ]);
         }
 
