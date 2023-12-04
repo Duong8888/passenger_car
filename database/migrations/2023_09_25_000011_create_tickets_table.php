@@ -24,6 +24,7 @@ return new class extends Migration
             $table->date('date');
             $table->bigInteger('total_price');
             $table->string('payment_method');
+            $table->string('reason');
             $table->string('status')->default(0);
             $table->unsignedBigInteger('time_id');
             $table->json('seat_id');

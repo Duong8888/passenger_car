@@ -23,6 +23,7 @@ class Ticket extends Model
         'arrival',
         'date',
         'time_id',
+        'reason',
         'seat_id'
     ];
     protected $attributes =[

@@ -121,12 +121,12 @@
                                                 Thông tin cá nhân
                                             </button>
                                         </li>
-                                        <li class="nav-item" role="presentation">
+                                        {{-- <li class="nav-item" role="presentation">
                                             <button class="inline-block w-full py-4 px-[18px] dark:text-gray-50"
                                                 data-tw-toggle="tab" type="button" data-tw-target="password-tab">
                                                 Đổi mật khẩu
                                             </button>
-                                        </li>
+                                        </li> --}}
                                     </ul>
                                 </div>
 
