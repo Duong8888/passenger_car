@@ -69,16 +69,20 @@ class ContactController extends Controller
     }
     public function edit(Request $request, $id)
     {
-        $status = $request->status;
         $contact = Contact::query()->where('id', $id)->first();
-        $contact->update(['status' => $status]);
-
-        if ($status === 'Đã xử lý') {
-            $data['title'] = "Thông tin xác nhận đăng kí làm đối tác CAR FINDER PRO";
-            $this->handleCheckSuccess($data, $contact);
+        if(!$request->type){
+            $status = $request->status;
+            $contact->update(['status' => $status]);
+            if ($status === 'Đã xử lý') {
+                $data['title'] = "Thông tin xác nhận đăng kí làm đối tác CAR FINDER PRO";
+                $this->handleCheckSuccess($data, $contact);
+                return redirect()->back();
+            }
+        }else{
+            return view('admin.pages.contact.edit', compact('contact'));
         }
-
-        return redirect()->back();
+        
+        
     }
 
     public function delete(Request $request, $id)
@@ -91,6 +95,7 @@ class ContactController extends Controller
     public function detail(Request $request, $id)
     {
         $user = Contact::where('id', $id)->first();
+        $images = json_decode($user->images);
         return view('admin.pages.contact.detail', ['user' => $user]);
     }
 

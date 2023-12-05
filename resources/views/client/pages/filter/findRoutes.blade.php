@@ -251,7 +251,13 @@
                                 <form action="#">
 
                                     <div class="grid grid-cols-12 gap-3">
-                                        <div class="col-span-12 xl:col-span-4">
+                                        <div class="col-span-12 xl:col-span-3">
+                                            <div class="relative filler-job-form h-full">
+                                                <input type="date" value="{{$_GET['date']}}" id="datepicker" name="date" class="h-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            </div>
+                                        </div>
+                                        <!--end col-->
+                                        <div class="col-span-12 xl:col-span-3">
                                             <div class="relative filler-job-form">
                                                 <i class="uil uil-map-marker">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -275,7 +281,7 @@
                                             </div>
                                         </div>
                                         <!--end col-->
-                                        <div class="col-span-12 xl:col-span-4">
+                                        <div class="col-span-12 xl:col-span-3">
                                             <div class="relative filler-job-form">
                                                 <i class="uil uil-clipboard-notes">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -299,7 +305,7 @@
                                             </div>
                                         </div>
                                         <!--end col-->
-                                        <div class="col-span-12 xl:col-span-4">
+                                        <div class="col-span-12 xl:col-span-3">
                                             <div class="relative">
                                                 <a href="javascript:void(0)"
                                                    class="btn-find w-full text-white border-transparent flex justify-center items-center btn group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500">

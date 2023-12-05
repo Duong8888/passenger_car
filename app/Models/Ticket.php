@@ -22,7 +22,9 @@ class Ticket extends Model
         'departure',
         'arrival',
         'date',
-        'time_id'
+        'time_id',
+        'reason',
+        'seat_id'
     ];
     protected $attributes =[
         'email' => NULL,

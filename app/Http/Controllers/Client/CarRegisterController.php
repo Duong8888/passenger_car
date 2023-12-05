@@ -11,9 +11,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Notifications;
-
+use Google\Cloud\Storage\StorageClient;
+use App\Models\Firebase;
 class CarRegisterController extends Controller
 {
+    protected $firebase;
+    public function __construct(Firebase $firebase = null) {
+        $this->firebase = $firebase;
+    }
     public function index()
     {
         $message = "";
@@ -23,6 +28,8 @@ class CarRegisterController extends Controller
 
     public function post(Request $request)
     {
+        
+        //
         $this->validate($request, [
             'fullName' => 'required|string|max:255',
             // 'phone' => 'required|string|max:20',
@@ -42,6 +49,7 @@ class CarRegisterController extends Controller
 
         $isRegisterCar = DB::table("contacts")->where("email", $email)->get();
         if ($isRegisterCar->count() == 0) {
+            $url_image = $this->firebase->uploadImage($request);
             // Tiếp theo, bạn có thể thêm dữ liệu vào cơ sở dữ liệu
             Contact::create([
                 'user_name' => $fullName,
@@ -52,7 +60,11 @@ class CarRegisterController extends Controller
                 'province' => $province,
                 'meassageInput' => $meassageInput,
                 'status' => "Chưa xử lý",
-                'created_at' => $created_at
+                'created_at' => $created_at,
+                'images' => json_encode($url_image),
+                'number_card' => $request->input('number_card'),
+                'rental_code' => $request->input('rental_code'),
+
             ]);
 
             $data = [
@@ -74,10 +86,4 @@ class CarRegisterController extends Controller
         return view('client.pages.car-register.index', ['message' => "Bạn đã gửi đơn đăng kí nhà xe. Vui lòng đợi quản trị viên kiểm tra!", 'messageStatus' => "Đang xử lý"]);
     }
 
-    //Họ và tên: $fullName
-    ////          Số điện thoại: $phone
-    ////            Email: $email
-    ////            Xe muốn đăng ký: $passengerCar_name
-    ////            Tỉnh/thành phố: $province
-    ////            Nội dung tin nhắn: $meassageInput
 }

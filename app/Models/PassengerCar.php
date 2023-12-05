@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Routing\Route;
+use const http\Client\Curl\VERSIONS;
 
 class PassengerCar extends Model
 {
@@ -18,6 +19,7 @@ class PassengerCar extends Model
         'description',
         'transport_unit_id',
         'route_id',
+        'vehicle_id'
     ];
 
 
@@ -67,5 +69,9 @@ class PassengerCar extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function vehicle(){
+        return $this->belongsTo(Vehicles::class,'vehicle_id');
     }
 }
