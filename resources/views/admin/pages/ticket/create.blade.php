@@ -39,7 +39,7 @@
                     <label for="phone" class="form-label">Phone</label>
                     <input type="text" class="form-control" id="phone" name="phone">
                   </div>
-                  <div class="mb-3">
+                  {{-- <div class="mb-3">
                     <label class="form-label">Status</label>
                     <select name="status" class="form-control">
                       <option>Choosen status</option>
@@ -47,7 +47,7 @@
                       <option value="{{ $key }}">{{ $value }}</option>
                       @endforeach
                     </select>
-                  </div>
+                  </div> --}}
                   <div class="mb-3">
                     <label for="quantity" class="form-label">Quantity</label>
                     <input type="text" class="form-control" id="quantity" name="quantity">

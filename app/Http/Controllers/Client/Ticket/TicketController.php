@@ -136,6 +136,7 @@ class TicketController extends Controller
 
     public function vnpay_payment(Request $request)
     {
+        
         $a = json_decode($request->session);
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
         $vnp_Returnurl = route('client.ticket.add-vnpay-to-db');
@@ -215,7 +216,7 @@ class TicketController extends Controller
 
                 $ticket = Ticket::query()->create([
                     'username' => $a['username'],
-                    'status' => 2,
+                    'status' => 1,
                     'payment_method' => 'Đã Thanh toán VNPAY',
                     'total_price' => $a['total_price'],
                     'email' => $a['email'],

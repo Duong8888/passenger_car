@@ -17,4 +17,8 @@ class WorkingTime extends Model
     public function passengerCars(){
         return $this->belongsToMany(PassengerCar::class,'passenger_car_working_times');
     }
+
+    public function hasManyTicket(){
+        return $this->hasMany(Ticket::class, 'time_id', 'id');
+    }
 }
