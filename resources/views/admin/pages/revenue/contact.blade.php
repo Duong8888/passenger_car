@@ -46,14 +46,14 @@
         // });
         var chart = new Morris.Area({
             element: 'myfirstchart',
-            lineColors: ['red', '#10fc87', '#FF0000', '#A4ADD3'],
+            lineColors: ['#A4ADD3', '#10fc87', '#FF0000', '#A4ADD3'],
             pointFillColors: ['#ffffff'],
             pointStrokeColors: ['black'],
             fillOpacity: 0.3,
             hideHover: 'auto',
             parseTime: false,
             xkey: 'created_at',
-            ykeys: ['count','status.Chưa xử lý', 'status["Đã xử lý"]'],
+            ykeys: ['count','status_Chưa_xử_lý', 'status_Đã_xử_lý'],
             behaveLikeLine: true,
             labels: ['Số lượt liên hệ', 'Chưa xử lý', 'Đã xử lý']
         });

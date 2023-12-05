@@ -42,7 +42,7 @@
             hideHover: 'auto',
             parseTime: false,
             xkey: 'created_at',
-            ykeys: ['count', 'user_type.admin', 'user_type.staff', 'user_type.user'],
+            ykeys: ['count', 'user_type_admin', 'user_type_staff', 'user_type_user'],
             behaveLikeLine: true,
             labels: ['Số người đăng ký', 'Admin', 'Staff', 'User'],
         });

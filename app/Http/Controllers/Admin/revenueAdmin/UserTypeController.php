@@ -107,8 +107,49 @@ class UserTypeController extends Controller
             $chart_data[$date]['count']++;
             $chart_data[$date]['user_type'][$user_type]++;
         }
+
+        $flattened_data = [];
+        foreach ($chart_data as $date_data) {
+            $flattened_data[] = [
+                'created_at' => $date_data['created_at'],
+                'count' => $date_data['count'],
+                'user_type_admin' => $date_data['user_type']['admin'],
+                'user_type_staff' => $date_data['user_type']['staff'],
+                'user_type_user' => $date_data['user_type']['user'],
+            ];
+        }
+        return response()->json($flattened_data);
+        // 
+        $chart_data = [];
+        foreach ($tickets as $val) {
+            $date = Carbon::parse($val->created_at)->toDateString();
+            $status = $val->status;
     
-        $chart_data = array_values($chart_data);
-        return response()->json($chart_data);
+            if (!isset($chart_data[$date])) {
+                $chart_data[$date] = [
+                    'created_at' => $date,
+                    'count' => 0,
+                    'status' => [
+                        'Chưa xử lý' => 0,
+                        'Đã xử lý' => 0,
+                    ],
+                ];
+            }
+    
+            $chart_data[$date]['count']++;
+            $chart_data[$date]['status'][$status]++;
+        }
+    
+        $flattened_data = [];
+        foreach ($chart_data as $date_data) {
+            $flattened_data[] = [
+                'created_at' => $date_data['created_at'],
+                'count' => $date_data['count'],
+                'status_Chưa_xử_lý' => $date_data['status']['Chưa xử lý'],
+                'status_Đã_xử_lý' => $date_data['status']['Đã xử lý'],
+            ];
+        }
+    
+        return response()->json($flattened_data);
     }
 }
