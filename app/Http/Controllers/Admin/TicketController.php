@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\AdminBaseController;
 use App\Models\PassengerCar;
 use App\Models\Routes;
+use App\Models\SeatStatus;
 use Illuminate\Http\Request;
 
 use App\Models\Ticket;
@@ -144,29 +145,32 @@ class TicketController extends AdminBaseController
             ->join('vnpay_payments', 'vnpay_payments.inc_id', '=', 'tickets.inc_id')
             ->where('tickets.id', $request->id)->get();
         if (count($data_cancel) > 0) {
-            $other_field = json_decode($data_cancel[0]->other_field);
+            $other_field = null;
+            if(isset($data_cancel[0])){
+                $other_field = json_decode($data_cancel[0]->other_field);
+            }
             $apiUrl = 'https://sandbox.vnpayment.vn/merchant_webapi/api/transaction';
             $vnp_TmnCode = env('VNP_TMNCODE');
             $vnp_HashSecret  = env('VNP_HASHSECRET');
 
             $vnp_TxnRef = $data_cancel[0]->vnp_TxnRef;
             $vnp_Amount = $data_cancel[0]->total_price;
-            $vnp_TransactionType = 02;
+            $vnp_TransactionType = "02";
             $vnp_RequestId = date("YmdHis");
             $inputData = array(
                 "vnp_RequestId" => (int)$vnp_RequestId,
                 "vnp_Version" => '2.1.0',
                 "vnp_Command" => "refund",
                 "vnp_TmnCode" => $vnp_TmnCode,
-                "vnp_TransactionType" => (int)$vnp_TransactionType,
+                "vnp_TransactionType" => $vnp_TransactionType,
                 "vnp_TxnRef" => (int)$vnp_TxnRef,
-                "vnp_Amount" => $vnp_Amount,
-                "vnp_TransactionNo" => $other_field->vnp_BankTranNo,
+                "vnp_Amount" => $vnp_Amount * 100,
+                "vnp_TransactionNo" => $other_field ? $other_field->vnp_TransactionNo : 0,
                 "vnp_TransactionDate" => (int)date('YmdHis', time()),
                 "vnp_CreateBy" => "admin",
                 "vnp_CreateDate" => (int)date('YmdHis', time()),
                 "vnp_IpAddr" => request()->ip(),
-                "vnp_OrderInfo" => 'Hoan tra giao dich ' . $data_cancel[0]->id,
+                "vnp_OrderInfo" => 'Hoan tra giao dich #' . $request->id,
             );
 
             $format = '%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s';
@@ -194,15 +198,32 @@ class TicketController extends AdminBaseController
                 "Content-Type" => "application/json"
             ];
             $response = Http::withHeaders($headers)->post($apiUrl, $inputData);
-            $statusCode = $response->status();
             $responseBody = json_decode($response->getBody(), true);
+            $message = "Lỗi hệ thống vui lòng thử lại sau!";
+            if($responseBody['vnp_ResponseCode'] == 00) {
+                Ticket::where('id', $request->id)->update(['status' => 0]);
+                $message = "Hoàn tiền thành công";
+            }else if($responseBody['vnp_ResponseCode'] == 91){
+                $message = "Không tìm thấy yêu cầu hoàn trả";
+            }else if($responseBody['vnp_ResponseCode'] == 94){
+                $message = "Giao dịch đã được gửi yêu cầu hoàn tiền trước đó. Yêu cầu này VNPAY đang xử lý";
+            }
+            else if($responseBody['vnp_ResponseCode'] == 95){
+                $message = "Giao dịch này không thành công bên VNPAY. VNPAY từ chối xử lý yêu cầu";
+            }
+            else if($responseBody['vnp_ResponseCode'] == 97){
+                $message = "Dữ liệu gửi sang không đúng";
+            }
             return Response([
-                'status' => $statusCode,
+                'status' => $responseBody['vnp_ResponseCode'],
                 'body' => $responseBody,
-                'data' => $inputData
+                'message' => $message
             ]);
         }
-
+        return Response([
+            'status' => 400,
+            'message' => "Lỗi vui lòng thử lại"
+        ]);
         
     }
 }

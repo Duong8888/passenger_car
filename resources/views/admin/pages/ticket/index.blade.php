@@ -77,7 +77,9 @@
                                                             Xác nhận
                                                         </a>
                                                         <!-- item-->
-                                                        <a  data-id="<?= $ticket->id; ?>" href="javascript:void(0);" class="dropdown-item vnpay-cancel">Hủy vé</a>
+                                                        @if ($ticket->status < 2 && $ticket->payment_method === "Đã Thanh toán VNPAY" )
+                                                            <a  data-id="<?= $ticket->id; ?>" href="javascript:void(0);" class="dropdown-item vnpay-cancel">Hủy vé</a>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </td>
@@ -150,13 +152,18 @@
                             "id": $value
                         },
                         success: function(data) {
-                            console.log(data)
-                            // Swal.fire({
-                            //     title: "Thông báo",
-                            //     text: "Xác nhận thành công.",
-                            //     icon: "success"
-                            // });
-                            // window.location.href = "/admin/contact/index"
+                            $icon = 'error';
+                            if(data.status === "00"){
+                                $icon = 'success';
+                            }
+                            Swal.fire({
+                                title: "Thông báo",
+                                text: data.message,
+                                icon: $icon
+                            });
+                            if(data.status == 00){
+                                window.location.href = "/admin/ticket"
+                            }
                         }
                     });
                 }
