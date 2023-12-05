@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', "Thống kê doanh thu")
+@section('title', "Thống kê liên hệ")
 @section('page-style')
 <!-- third party css -->
 {{-- thongke --}}
@@ -36,30 +36,32 @@
         // var chart = new Morris.Bar({
         //     element: 'myfirstchart',
         //     parseTime: false,
-        //     xkey: 'date',
-        //     ykeys: ['quantity','total_price'],
+        //     xkey: 'created_at',
+        //     ykeys: ['province','status'],
         //     labels: ['Số lượng vé','Doanh thu']
         //     });
-
+        // flattenedData.forEach(function(item) {
+        //     // Sử dụng toISOString() có thể gây ra vấn đề với Morris.js, thử sử dụng format khác
+        //     item.created_at = item.created_at.split(' ')[0];
+        // });
         var chart = new Morris.Area({
             element: 'myfirstchart',
-            lineColors: ['#819C79', '#10fc87','#FF6541'],
-            // '#FF6541', '#A4ADD3', '#766B56'
+            lineColors: ['red', '#10fc87', '#FF0000', '#A4ADD3'],
             pointFillColors: ['#ffffff'],
             pointStrokeColors: ['black'],
             fillOpacity: 0.3,
             hideHover: 'auto',
             parseTime: false,
-            xkey: 'date',
-            ykeys: ['quantity','total_price'],
+            xkey: 'created_at',
+            ykeys: ['count','status.Chưa xử lý', 'status["Đã xử lý"]'],
             behaveLikeLine: true,
-            labels: ['Số lượng vé','Doanh thu']
-            });
+            labels: ['Số lượt liên hệ', 'Chưa xử lý', 'Đã xử lý']
+        });
             
         function chart30daysorder() {
             var _token = $('input[name="_token"]').val();
             $.ajax({
-                url: "{{ route('admin.revenueStaff.dayrevenue') }}",
+                url: "{{ route('admin.contactStaff.dayrevenue') }}",
                 method: "POST",
                 dataType: "JSON",
                 data: { _token: _token },
@@ -115,18 +117,17 @@
                 <p class="title_thongke" style="text-align: center;font-size: 20px;font-weight: bold;">Thông kê doanh thu</p>
                 <form autocomplete="off" class="mb-4 mt-4">
                     @csrf
+                    {{-- <input type="text" hidden data-url="{{route('admin.contactStaff.dayrevenue')}}"> --}}
                     <div class="row align-items-end">
                         <div class="col-md-3">
                             <p>Từ ngày: <input type="text" id="datepicker" class="form-control"></p>
-                          
                         </div>
                         <div class="col-md-3">
                             <p>Đến ngày: <input type="text" id="datepicker2" class="form-control"></p>
-                          
                         </div>
                         <div class="col-md-3">
                             <p>Lọc theo: 
-                                <select class="dashboard-filter form-control" data-url="{{route('admin.revenueStaff.filter_by_select')}}">
+                                <select class="dashboard-filter form-control" data-url="{{route('admin.contactStaff.filter_by_select')}}">
                                     <option>--Chọn--</option>
                                     <option value="7ngay">7 ngày qua</option>
                                     <option value="thangtruoc">Tháng trước</option>
@@ -136,7 +137,7 @@
                             </p>
                         </div>
                         <div class="col-md-3">
-                            <p><input type="button" data-url="{{route('admin.revenueStaff.filter_by_date')}}" id="btn-dashboard-filter" class="btn btn-primary btn-sm form-control" value="Lọc kết quả"></p>
+                            <p><input type="button" data-url="{{route('admin.contactStaff.filter_by_date')}}" id="btn-dashboard-filter" class="btn btn-primary btn-sm form-control" value="Lọc kết quả"></p>
                         </div>
                     </div>
                 </form>

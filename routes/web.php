@@ -20,6 +20,8 @@ use App\Http\Controllers\admin\StopsController;
 use App\Http\Controllers\Admin\EditorController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\PostCategoryController;
+use App\Http\Controllers\Admin\revenueAdmin\ContactStaffController;
+use App\Http\Controllers\Admin\revenueAdmin\UserTypeController;
 use App\Http\Controllers\Admin\RevenueAdminController;
 use App\Http\Controllers\Admin\RevenueController;
 use App\Http\Controllers\admin\RevenueStaffController;
@@ -135,9 +137,20 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
             Route::post('/filter-by-date', 'filter_by_date')->name('filter_by_date');
             Route::post('/filter-by-select', 'filter_by_select')->name('filter_by_select');
         });
-        // Route::get('/revenueAdmin',[RevenueAdminController::class,'index'])->name('revenueAdmin.index');
-        // Route::post('/revenueAdmin',[RevenueAdminController::class,'filter_by_date'])->name('revenueAdmin.filter_by_date');
-        // Route::post('/revenueAdmin','RevenueAdminController@filter_by_date');
+        //Thống kê liên hệ
+        Route::prefix('contactStaff')->controller(ContactStaffController::class)->name('contactStaff.')->group(function (){
+            Route::get('/', 'index')->name('index');
+            Route::post('/dayrevenue', 'dayrevenue')->name('dayrevenue');
+            Route::post('/filter-by-date', 'filter_by_date')->name('filter_by_date');
+            Route::post('/filter-by-select', 'filter_by_select')->name('filter_by_select');
+        });
+        //Thống kê người dùng
+        Route::prefix('userType')->controller(UserTypeController::class)->name('userType.')->group(function (){
+            Route::get('/', 'index')->name('index');
+            Route::post('/dayrevenue', 'dayrevenue')->name('dayrevenue');
+            Route::post('/filter-by-date', 'filter_by_date')->name('filter_by_date');
+            Route::post('/filter-by-select', 'filter_by_select')->name('filter_by_select');
+        });
         // Quản lý contact 
         Route::get('/contact/index', [App\Http\Controllers\Admin\ContactController::class, 'index'])->name('route_contact_index');
         Route::match(['GET', 'POST'], '/contact/add', [App\Http\Controllers\Admin\ContactController::class, 'add'])->name('route_contact_add');

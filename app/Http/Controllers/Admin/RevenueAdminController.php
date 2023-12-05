@@ -22,14 +22,16 @@ class RevenueAdminController extends Controller
         $to_date = $data['to_date'];
 
         $tickets = Ticket::whereBetween('date',[$form_date,$to_date])->orderBy('date','ASC')->get();
-        foreach($tickets as $val){
-            $chart_data[] = [
-                'date' => $val->date,
-                'quantity' => $val->quantity,
-                'total_price' => $val->total_price,
+        $chart_data = [];
+        $chart_data = $tickets->groupBy('date')->map(function ($items) {
+            return [
+                'date' => $items->first()->date,
+                'quantity' => $items->sum('quantity'),
+                'total_price' => $items->sum('total_price'),
             ];
-        }
-        echo $data = json_encode($chart_data);
+        })->values()->all();
+          return response()->json($chart_data);
+        echo $data = json_encode($chart_data);;
     }
     
     public function filter_by_select(Request $request){
@@ -52,29 +54,33 @@ class RevenueAdminController extends Controller
         $tickets = Ticket::whereBetween('date',[$sub365days,$now])->orderBy('date','ASC')->get();
        }
 
-       foreach($tickets as $val){
-            $chart_data[] = [
-                'date' => $val->date,
-                'quantity' => $val->quantity,
-                'total_price' => $val->total_price,
-            ];
-        }
-        echo $data = json_encode($chart_data);
+       $chart_data = [];
+       $chart_data = $tickets->groupBy('date')->map(function ($items) {
+           return [
+               'date' => $items->first()->date,
+               'quantity' => $items->sum('quantity'),
+               'total_price' => $items->sum('total_price'),
+           ];
+       })->values()->all();
+         return response()->json($chart_data);
+       echo $data = json_encode($chart_data);
 
     }
     public function dayrevenue(Request $request){
        $sub60days = Carbon::now('Asia/Ho_Chi_Minh')->subDays(60)->toDateString();
        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
        $tickets = Ticket::whereBetween('date',[$sub60days,$now])->orderBy('date','ASC')->get();
-
-       foreach($tickets as $val){
-            $chart_data[] = [
-                'date' => $val->date,
-                'quantity' => $val->quantity,
-                'total_price' => $val->total_price,
-            ];
-        }
-        echo $data = json_encode($chart_data);
+        
+       $chart_data = [];
+       $chart_data = $tickets->groupBy('date')->map(function ($items) {
+           return [
+               'date' => $items->first()->date,
+               'quantity' => $items->sum('quantity'),
+               'total_price' => $items->sum('total_price'),
+           ];
+       })->values()->all();
+         return response()->json($chart_data);
+       echo $data = json_encode($chart_data);
 
     }
 

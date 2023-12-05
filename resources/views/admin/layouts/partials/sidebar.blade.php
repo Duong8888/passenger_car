@@ -115,11 +115,6 @@
                             <span> Quản lí tuyến đường </span>
                         </a>
                     </li>
-
-                @endif
-
-                @if(auth()->user()->hasAnyRole(['SupperAdmin', 'Admin','Nhà xe']))
-
                     <li>
                         <a href="{{ route('admin.revenueStaff.index') }}">
                             <i class="mdi mdi-view-dashboard-outline"></i>
@@ -127,6 +122,16 @@
                         </a>
                     </li>
                 @endif
+
+                {{-- @if(auth()->user()->hasAnyRole(['SupperAdmin', 'Admin','Nhà xe']))
+
+                    <li>
+                        <a href="{{ route('admin.revenueStaff.index') }}">
+                            <i class="mdi mdi-view-dashboard-outline"></i>
+                            <span> Thống kê doanh thu </span>
+                        </a>
+                    </li>
+                @endif --}}
 
 
 
@@ -156,10 +161,33 @@
 
                 @if(auth()->user()->hasAnyRole(['SupperAdmin', 'Admin']))
                     <li>
-                        <a href="{{ route('admin.revenueAdmin.index') }}">
-                            <i class="mdi mdi-view-dashboard-outline"></i>
-                            <span> Thống kê doanh thu </span>
+                        <a href="#sidebarIcons" data-bs-toggle="collapse">
+                            <i class="mdi mdi-shield-outline"></i>
+                            <span> Thống kê </span>
+                            <span class="menu-arrow"></span>
                         </a>
+                        <div class="collapse" id="sidebarIcons">
+                            <ul class="nav-second-level">
+                                <li>
+                                    <a href="{{ route('admin.contactStaff.index') }}">
+                                        <i class="mdi mdi-view-dashboard-outline"></i>
+                                        <span> Thống kê liên hệ </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.userType.index') }}">
+                                        <i class="mdi mdi-view-dashboard-outline"></i>
+                                        <span> Thống kê người dùng</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.revenueAdmin.index') }}">
+                                        <i class="mdi mdi-view-dashboard-outline"></i>
+                                        <span> Thống kê doanh thu </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                     <li>
                         <a href="{{ route('admin.route_contact_index') }}">

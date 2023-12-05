@@ -107,6 +107,7 @@ class RevenueStaffController extends Controller
                 'total_price' => $items->sum('total_price'),
             ];
         })->values()->all();
+          return response()->json($chart_data);
         echo $data = json_encode($chart_data);
 
     }

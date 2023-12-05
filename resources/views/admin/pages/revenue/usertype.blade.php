@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', "Thống kê doanh thu")
+@section('title', "Thống kê người dùng")
 @section('page-style')
 <!-- third party css -->
 {{-- thongke --}}
@@ -33,43 +33,36 @@
     // ajax
     $(document).ready(function(){
         chart30daysorder();
-        // var chart = new Morris.Bar({
-        //     element: 'myfirstchart',
-        //     parseTime: false,
-        //     xkey: 'date',
-        //     ykeys: ['quantity','total_price'],
-        //     labels: ['Số lượng vé','Doanh thu']
-        //     });
-
         var chart = new Morris.Area({
             element: 'myfirstchart',
-            lineColors: ['#819C79', '#10fc87','#FF6541'],
-            // '#FF6541', '#A4ADD3', '#766B56'
+            lineColors: ['#ffd699', '#ff7f00', '#ff6600', '#e65100'],
             pointFillColors: ['#ffffff'],
             pointStrokeColors: ['black'],
             fillOpacity: 0.3,
             hideHover: 'auto',
             parseTime: false,
-            xkey: 'date',
-            ykeys: ['quantity','total_price'],
+            xkey: 'created_at',
+            ykeys: ['count', 'user_type.admin', 'user_type.staff', 'user_type.user'],
             behaveLikeLine: true,
-            labels: ['Số lượng vé','Doanh thu']
-            });
-            
+            labels: ['Số người đăng ký', 'Admin', 'Staff', 'User'],
+        });
+        chart.options.labels.forEach(function(label, index) {
+            $('.morris-hover.morris-default-style .morris-legend text').eq(index).css('fill', chart.options.lineColors[index]);
+        });
         function chart30daysorder() {
             var _token = $('input[name="_token"]').val();
             $.ajax({
-                url: "{{ route('admin.revenueStaff.dayrevenue') }}",
+                url: "{{ route('admin.userType.dayrevenue') }}",
                 method: "POST",
                 dataType: "JSON",
                 data: { _token: _token },
-
                 success: function(data) {
                     console.log(data);
                     chart.setData(data);
                 }
             });
         }
+        chart.resize(30);
 
     $('.dashboard-filter').change(function(){
         var dashboard_value = $(this).val();
@@ -97,7 +90,6 @@
             method: "POST",
             dataType: "JSON",
             data: { form_date: form_date, to_date: to_date, _token: _token },
-
             success: function(data){
                 chart.setData(data);
             }
@@ -115,18 +107,17 @@
                 <p class="title_thongke" style="text-align: center;font-size: 20px;font-weight: bold;">Thông kê doanh thu</p>
                 <form autocomplete="off" class="mb-4 mt-4">
                     @csrf
+                    {{-- <input type="text" hidden data-url="{{route('admin.userType.dayrevenue')}}"> --}}
                     <div class="row align-items-end">
                         <div class="col-md-3">
                             <p>Từ ngày: <input type="text" id="datepicker" class="form-control"></p>
-                          
                         </div>
                         <div class="col-md-3">
                             <p>Đến ngày: <input type="text" id="datepicker2" class="form-control"></p>
-                          
                         </div>
                         <div class="col-md-3">
                             <p>Lọc theo: 
-                                <select class="dashboard-filter form-control" data-url="{{route('admin.revenueStaff.filter_by_select')}}">
+                                <select class="dashboard-filter form-control" data-url="{{route('admin.userType.filter_by_select')}}">
                                     <option>--Chọn--</option>
                                     <option value="7ngay">7 ngày qua</option>
                                     <option value="thangtruoc">Tháng trước</option>
@@ -136,7 +127,7 @@
                             </p>
                         </div>
                         <div class="col-md-3">
-                            <p><input type="button" data-url="{{route('admin.revenueStaff.filter_by_date')}}" id="btn-dashboard-filter" class="btn btn-primary btn-sm form-control" value="Lọc kết quả"></p>
+                            <p><input type="button" data-url="{{route('admin.userType.filter_by_date')}}" id="btn-dashboard-filter" class="btn btn-primary btn-sm form-control" value="Lọc kết quả"></p>
                         </div>
                     </div>
                 </form>

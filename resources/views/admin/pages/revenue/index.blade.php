@@ -114,7 +114,6 @@
                 <p class="title_thongke" style="text-align: center;font-size: 20px;font-weight: bold;">Thông kê doanh thu</p>
                 <form autocomplete="off" class="mb-4 mt-4">
                     @csrf
-                    {{-- <input type="text" hidden data-url="{{route('admin.revenueAdmin.dayrevenue')}}"> --}}
                     <div class="row align-items-end">
                         <div class="col-md-3">
                             <p>Từ ngày: <input type="text" id="datepicker" class="form-control"></p>
