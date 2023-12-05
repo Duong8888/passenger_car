@@ -89,7 +89,7 @@
                                             <!-- item-->
                                             <a href="detail/<?= $item->id ?>" class="dropdown-item">Xem chi tiết</a>
                                             <!-- item-->
-                                            <a href="javascript:void(0);" class="dropdown-item">Chỉnh sửa</a>
+                                            <a href="update/<?= $item->id ?>?type=edit" class="dropdown-item">Chỉnh sửa</a>
                                             <!-- item-->
                                             <a href="javascript:void(0);" class="dropdown-item">Hủy đăng kí</a>
                                         </div>

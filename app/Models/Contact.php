@@ -15,7 +15,10 @@ class Contact extends Model
         'phone',
         'passengerCar_name',
         'province',
-        'status'
+        'status',
+        'images',
+        'number_card',
+        'rental_code'
     ];
 
 }
