@@ -55,14 +55,14 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
     Route::get('/logoutadmin', [App\Http\Controllers\LoginAdminController::class, 'logoutAdmin'])->name('logoutAdmin');
 
     // Quản lý tin tức chung
-        Route::match(['GET', 'POST'], 'posts', [PostController::class, 'index'])->name('postsing');
-        Route::get('postadd', [PostController::class, 'create'])->name('posts.create');
-        Route::post('postadd', [PostController::class, 'store'])->name('posts.store');
-        Route::post('ckeditor/image_upload', [EditorController::class, 'upload'])->name('upload');
-        Route::get('/posts/{id}/edit',  [PostController::class, 'edit'])->name('posts.edit');
-        Route::put('/posts/{id}',  [PostController::class, 'update'])->name('posts.update');
-        Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
-        Route::get('/posting/{slug}', [PostController::class, 'createSlug'])->name('post.show');
+    Route::match(['GET', 'POST'], 'posts', [PostController::class, 'index'])->name('postsing');
+    Route::get('postadd', [PostController::class, 'create'])->name('posts.create');
+    Route::post('postadd', [PostController::class, 'store'])->name('posts.store');
+    Route::post('ckeditor/image_upload', [EditorController::class, 'upload'])->name('upload');
+    Route::get('/posts/{id}/edit',  [PostController::class, 'edit'])->name('posts.edit');
+    Route::put('/posts/{id}',  [PostController::class, 'update'])->name('posts.update');
+    Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
+    Route::get('/posting/{slug}', [PostController::class, 'createSlug'])->name('post.show');
 
     //  Nhà xe
     Route::group(['middleware' => 'checkRoles:Nhà xe'], function () {
@@ -77,11 +77,8 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         });
         Route::post('/trip', [TicketController::class, 'Trip']);
         Route::post('/passgenerCar/{id}', [TicketController::class, 'PassengerCar']);
-        Route::post('/confirm', [TicketController::class, 'Confirm']);
-    });
-    // tuyến đường SupperAdmin-Admin
-    Route::group(['middleware' => 'checkRoles:SupperAdmin,Admin'], function () {
 
+        // Quản lý tuyến đường nhà xe
         Route::prefix('route')->controller(RouteController::class)->name('route.')->group(function () {
             Route::get('/', 'index')->name('index');
             Route::post('/store', 'store')->name('store');
@@ -116,13 +113,18 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         Route::get('customers/edit/{customer}', [CustomerController::class, 'edit'])->name('customer.edit');
         Route::put('customers/edit/{id}', [CustomerController::class, 'update'])->name('customer.update');
         Route::delete('customers/delete/{id}', [CustomerController::class, 'delete'])->name('customer.delete');
-        //Thống kê doanh thu nhà xe
-        Route::get('revenue/', [RevenueController::class, 'index'])->name('revenue.index');
-        Route::get('revenue/add', [RevenueController::class, 'add'])->name('revenue.add');
-        Route::post('revenue/add', [RevenueController::class, 'store'])->name('revenue.store');
-        Route::get('revenue/edit/{revenue}', [RevenueController::class, 'edit'])->name('revenue.edit');
-        Route::put('revenue/edit/{id}', [RevenueController::class, 'update'])->name('revenue.update');
-        Route::delete('revenue/delete/{id}', [RevenueController::class, 'delete'])->name('revenue.delete');
+        // //Thống kê doanh thu nhà xe
+        // Route::get('revenue/', [RevenueController::class, 'index'])->name('revenue.index');
+        // Route::get('revenue/add', [RevenueController::class, 'add'])->name('revenue.add');
+        // Route::post('revenue/add', [RevenueController::class, 'store'])->name('revenue.store');
+        // Route::get('revenue/edit/{revenue}', [RevenueController::class, 'edit'])->name('revenue.edit');
+        // Route::put('revenue/edit/{id}', [RevenueController::class, 'update'])->name('revenue.update');
+        // Route::delete('revenue/delete/{id}', [RevenueController::class, 'delete'])->name('revenue.delete');
+
+        // Tổng doanh thu cho nhà xe
+        Route::prefix('revenueStaff')->controller(RevenueStaffController::class)->name('revenueStaff.')->group(function (){
+            Route::get('/', 'index')->name('index');
+        });
     });
 
     //  SupperAdmin-Admin
@@ -136,8 +138,6 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         });
         // Quản lý contact
         Route::get('/contact/index', [App\Http\Controllers\Admin\ContactController::class, 'index'])->name('route_contact_index');
-        Route::get('/contact/detail/{id}', [App\Http\Controllers\Admin\ContactController::class, 'detail'])->name('route_contact_detail');
-        Route::post('/contact/sendmail', [App\Http\Controllers\Admin\ContactController::class, 'sendmail'])->name('route_contact_sendmail');
         Route::match(['GET', 'POST'], '/contact/add', [App\Http\Controllers\Admin\ContactController::class, 'add'])->name('route_contact_add');
         Route::match(['GET', 'POST'], '/contact/update/{id}', [App\Http\Controllers\Admin\ContactController::class, 'edit'])->name('route_contact_edit');
         // Quản lý nhà xe
@@ -154,14 +154,14 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         Route::resource('/rolePermission', RolePermissionController::class);
         Route::delete('/rolePermission/create/{id}', [RolePermissionController::class, 'delete'])->name('rolePermission.delete');
     });
+});
 
 
 
-    // quản lý lich trình
-    Route::group(['prefix' => 'schedule', 'as' => 'schedule.'], function () {
-        Route::get('/', [ScheduleController::class, 'index'])->name('index');
-        Route::post('/update', [ScheduleController::class, 'update'])->name('update');
-    });
+// quản lý lich trình
+Route::group(['prefix' => 'schedule', 'as' => 'schedule.'], function () {
+    Route::get('/', [ScheduleController::class, 'index'])->name('index');
+    Route::post('/update', [ScheduleController::class, 'update'])->name('update');
 });
 
 Route::group(['prefix' => 'notifications', 'as' => 'notifications.'], function () {
@@ -170,10 +170,7 @@ Route::group(['prefix' => 'notifications', 'as' => 'notifications.'], function (
     Route::post('load', [NotificationController::class, 'getNotification'])->name('loadMessage');
 });
 
-// Tổng doanh thu cho nhà xe
-Route::prefix('revenueStaff')->controller(RevenueStaffController::class)->name('revenueStaff.')->group(function (){
-    Route::get('/', 'index')->name('index');
-});
+
 
 
 

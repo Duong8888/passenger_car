@@ -49,9 +49,28 @@
                                             <div class="col-md-4">
                                                 <div class="mb-3">
                                                     <label for="field-2" class="form-label">Số chỗ ngồi *</label>
-                                                    <input type="number" name="capacity" class="form-control"
-                                                           id="example-number"
-                                                           placeholder="35">
+                                                    <select class="form-select" name="capacity">
+                                                        @foreach($type as $key => $value)
+                                                            <option id="{{$value->id}}" value="{{$value->type_name}}">{{$value->type_name}} chỗ</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div>
+                                                <label class="form-label">Loại vé *</label>
+                                            </div>
+                                            <div class="col-md-5 d-flex">
+
+                                                <div class="form-check mb-2 form-check-success">
+                                                    <input class="form-check-input" checked id="y" value="1" name="type" type="radio">
+                                                    <label class="form-check-label"  for="y">Có chọn ghế</label>
+                                                </div>
+                                                <div class="form-check mb-2 form-check-success px-4">
+                                                    <input class="form-check-input" id="n" value="0" name="type" type="radio">
+                                                    <label class="form-check-label"  for="n">Không chọn ghế</label>
                                                 </div>
                                             </div>
                                         </div>

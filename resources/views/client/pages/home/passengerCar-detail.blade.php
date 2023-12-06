@@ -700,7 +700,7 @@
                                         <input type="radio" id="new" name="departure"
                                                class="form-radio h-5 w-5 text-blue-600 outline-none focus:ring-0"
                                                value="other">
-                                        <label for="new" class="ml-2 mb-3" id="{{$data->id}}">Khác</label>
+                                        <label for="new" class="ml-2 mb-3" id="">Khác</label>
                                         <input type="text" name="other" id="otherInput"
                                                style="display: none;">
                                     </div>
@@ -734,7 +734,7 @@
                                         <input type="radio" id="new1" name="arrival"
                                                class="form-radio h-5 w-5 text-blue-600 outline-none focus:ring-0"
                                                value="other1">
-                                        <label for="new1" class="ml-2 mb-3" id="{{$data->id}}">Khác</label>
+                                        <label for="new1" class="ml-2 mb-3" id="">Khác</label>
                                         <input type="text" name="other1" id="otherInput1"
                                                style="display: none;">
                                     </div>

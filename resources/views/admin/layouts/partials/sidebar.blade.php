@@ -120,12 +120,12 @@
 
                 @if(auth()->user()->hasAnyRole(['SupperAdmin', 'Admin','Nhà xe']))
 
-                    <li>
-                        <a href="{{ route('admin.revenue.index') }}">
-                            <i class="mdi mdi-view-dashboard-outline"></i>
-                            <span> Thống kê doanh thu </span>
-                        </a>
-                    </li>
+{{--                    <li>--}}
+{{--                        <a href="{{ route('admin.revenue.index') }}">--}}
+{{--                            <i class="mdi mdi-view-dashboard-outline"></i>--}}
+{{--                            <span> Thống kê doanh thu </span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
                 @endif
 
 
@@ -187,8 +187,8 @@
                     </li>
                 @endif
 
-             
-                
+
+
             </ul>
 
         </div>
