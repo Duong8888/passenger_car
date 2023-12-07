@@ -124,7 +124,6 @@
                 @endif
 
                 {{-- @if(auth()->user()->hasAnyRole(['SupperAdmin', 'Admin','Nhà xe']))
-
                     <li>
                         <a href="{{ route('admin.revenueStaff.index') }}">
                             <i class="mdi mdi-view-dashboard-outline"></i>
@@ -132,6 +131,7 @@
                         </a>
                     </li>
                 @endif --}}
+
 
 
 
@@ -215,8 +215,8 @@
                     </li>
                 @endif
 
-             
-                
+
+
             </ul>
 
         </div>

@@ -43,11 +43,17 @@ $(document).ready(function () {
         }
     });
 
+    var select = $('select[name="capacity"]');
+    var typeId = '';
+    select.on('change', function(){
+        typeId = $(this).children("option:selected").attr('id');
+    });
     function add() {
         var formData = new FormData($('#form-main')[0])
         // Lấy nội dung từ Quill Editor
         var content = $(".ql-editor").html();
         formData.append('description', content);
+        formData.append('vehicle_id', typeId);
         uppy.getFiles().forEach((file, index) => {
             formData.append('path[' + index + ']', file.data);
         });

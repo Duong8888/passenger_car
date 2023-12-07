@@ -115,13 +115,13 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         Route::get('customers/edit/{customer}', [CustomerController::class, 'edit'])->name('customer.edit');
         Route::put('customers/edit/{id}', [CustomerController::class, 'update'])->name('customer.update');
         Route::delete('customers/delete/{id}', [CustomerController::class, 'delete'])->name('customer.delete');
-       
         // Tổng doanh thu cho nhà xe
         Route::prefix('revenueStaff')->controller(RevenueStaffController::class)->name('revenueStaff.')->group(function (){
             Route::get('/', 'index')->name('index');
             Route::post('/dayrevenue', 'dayrevenue')->name('dayrevenue');
             Route::post('/filter-by-date', 'filter_by_date')->name('filter_by_date');
             Route::post('/filter-by-select', 'filter_by_select')->name('filter_by_select');
+
         });
     });
 
@@ -178,6 +178,7 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         Route::get('/', [ScheduleController::class, 'index'])->name('index');
         Route::post('/update', [ScheduleController::class, 'update'])->name('update');
     });
+
 
 Route::group(['prefix' => 'notifications', 'as' => 'notifications.'], function () {
     Route::get('/', [NotificationController::class, 'showList']);
