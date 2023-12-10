@@ -60,7 +60,7 @@
                                                     <span class="badge bg-info">Confirmed</span>
                                                 @endif
                                             </td>
-                                            <td>{{ $ticket->total_price }}</td>
+                                            <td>{{ number_format($ticket->total_price, 0, '', ',') }}</td>
 
                                             <td>
                                                 <div class="dropdown float-end">
