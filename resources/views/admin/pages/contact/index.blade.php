@@ -21,7 +21,7 @@
                         @foreach ($users as $item)
                             <tr>
                                 <td>#{{ $item->id }}</td>
-                                <td>{{ $item->fullName }}</td>
+                                <td>{{ $item->user_name }}</td>
                                 <td>{{ $item->email }}</td>
                                 <td>{{ $item->phone }}</td>
                                 <td>{{ $item->passengerCar_name }}</td>
