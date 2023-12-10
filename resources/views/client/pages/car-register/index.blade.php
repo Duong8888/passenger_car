@@ -25,9 +25,9 @@
                                 <span id="error-msg"></span>
                                 <div class="grid grid-cols-6 gap-4">
                                     <div class="col-span-12 lg:col-span-6 px-2">
-                                        <label for="fullName" class="text-gray-900 dark:text-gray-50">Họ và tên <span
+                                        <label for="user_name" class="text-gray-900 dark:text-gray-50">Họ và tên <span
                                                 style="color: red;">*</span> </label>
-                                        <input required type="text" name="fullName" id="fullName"
+                                        <input required type="text" name="user_name" id="user_name"
                                             class="w-full mt-1 rounded border border-gray-200 placeholder:text-sm placeholder:text-gray-400 dark:bg-transparent dark:border-none focus:ring-0 focus:ring-offset-0 dark:text-gray-200"
                                             placeholder="Họ và tên">
                                     </div>
