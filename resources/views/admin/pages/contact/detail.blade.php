@@ -66,21 +66,6 @@
         </div>
         
     </div>
-    <button class="send-email" id="<?= $user->id ?>">Xác nhận đơn đăng kí</button>
-    <script type="text/javascript">
-        $('.send-email').on('click', function() {
-            $value = $(this).attr("id");
-            Swal.fire({
-                title: "Thông báo",
-                text: "Bạn có chắc chắn muốn xác nhận!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Đúng!"
-            })
-        })
-    </script>
     <button  id="<?= $user->id;?>" type="submit" class="send-email btn btn-primary">Xác nhận đơn đăng kí</button>
 </div>
 
