@@ -609,11 +609,11 @@
                                                 <p class="flex items-center my-4"><span
                                                         class="material-symbols-outlined"
                                                         style="font-size: 40px;color: green;margin-right: 5px">weekend</span>Gế
-                                                    không đang chọn</p>
+                                                    đang chọn</p>
                                                 <p class="flex items-center my-4"><span
                                                         class="material-symbols-outlined"
                                                         style="font-size: 40px;color: #74788d;margin-right: 5px">weekend</span>Gế
-                                                    thường <span
+                                                    chưa chọn <span
                                                         style="display: block;color: #0a58ca;font-weight: bold;margin-left: 5px"> {{ number_format($passengerCars[0]->price) }} đ</span>
                                                 </p>
                                             </div>

@@ -274,10 +274,12 @@
     const infoUser = @json(auth()->user());
     const urlNotification = '{{route('notifications.loadMessage')}}';
 
-    var startTime = new Date();
-    function startCountdown(startTime) {
+        function startCountdown(startTime) {
         var endTime = new Date(startTime);
-        endTime.setMinutes(endTime.getMinutes() + {{env('PAYMENT_TIME',3)}});
+        var paymentTime = {{env('PAYMENT_TIME',3)}};
+
+        // Thời gian kết thúc được tính dựa trên thời gian bắt đầu và thời gian đặt chỗ
+        endTime.setMinutes(endTime.getMinutes() + paymentTime);
 
         var x = setInterval(function () {
             var now = new Date().getTime();
@@ -288,18 +290,27 @@
 
             var countdownElement = document.getElementById("countdown");
             if (countdownElement) {
-                countdownElement.innerHTML = minutes + ":" + seconds;
+                countdownElement.innerHTML = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
 
                 if (distance < 0) {
                     clearInterval(x);
                     countdownElement.innerHTML = "Hết thời gian đặt chỗ.";
+                    localStorage.removeItem("startTime");
                     window.history.back();
                 }
             }
         }, 1000);
     }
 
-    startCountdown(startTime);
+    var storedStartTime = localStorage.getItem("startTime");
+    if (storedStartTime) {
+        startCountdown(parseInt(storedStartTime));
+    } else {
+        var currentTime = new Date().getTime();
+        localStorage.setItem("startTime", currentTime); // Lưu thời gian bắt đầu vào LocalStorage
+        startCountdown(currentTime);
+    }
+
 
 </script>
 @include('client.layout.partials.script')

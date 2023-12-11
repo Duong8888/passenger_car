@@ -99,6 +99,9 @@ padding:00px ">
 
 
     @yield('content')
+    <div id="countdownDisplay" style="display: none; right: 10px; bottom: 100px;" class="fixed bg-white p-4 border border-gray-300 rounded-lg">
+    </div>
+
 
 
 

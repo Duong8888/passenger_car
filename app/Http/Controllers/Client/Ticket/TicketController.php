@@ -24,7 +24,7 @@ class TicketController extends Controller
     {
         session()->forget('value');
 
-        session()->push('value', $request->all());
+        session()->push('value', $request->all(), now()->addMinutes(env('PAYMENT_TIME')));
         Log::info(session('value'));
         return response()->json(['success' => 'Done'], Response::HTTP_OK);
     }
@@ -50,8 +50,13 @@ class TicketController extends Controller
                             'seat_id' => $value,
                         ]);
                     }
+                    session()->put('checkSeat', 'true', now()->addMinutes(env('PAYMENT_TIME')));
                 }else{
-                    return back()->with('message','Ghế của bạn đã có người nhanh tay hơn đặt rồi vui lòng chọn gế khác !');
+                    if(session('checkSeat')){
+                        return view('client.pages.ticket.index', ['stops' => $stops]);
+                    }else{
+                        return back()->with('message','Ghế của bạn đã có người nhanh tay hơn đặt rồi vui lòng chọn gế khác !');
+                    }
                 }
             }
         }
@@ -129,7 +134,7 @@ class TicketController extends Controller
 
         SendMail::dispatch($emailAdmin, $ticket);
         SendMail::dispatch($request->email, $ticket);
-
+        session()->put('checkSeat', 'false');
         return response()->json(['success' => 'Done'], Response::HTTP_OK);
     }
 
@@ -195,6 +200,8 @@ class TicketController extends Controller
             'code' => '00', 'message' => 'success', 'data' => $vnp_Url
         );
         // return redirect()->route('client.ticket.add-vnpay-to-db');
+        session()->put('checkSeat', 'false');
+
         header('Location: ' . $vnp_Url);
         die();
     }
