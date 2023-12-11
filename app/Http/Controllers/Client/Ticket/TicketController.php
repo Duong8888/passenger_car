@@ -13,26 +13,26 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\TiketMail;
-use Twilio\Rest\Client;
-use Illuminate\Support\Str;
+use App\Models\VnpayPayment;
 
 class TicketController extends Controller
 {
     public function CountTicket(Request $request)
     {
         session()->forget('value');
-
         session()->push('value', $request->all());
+        session()->put('value.0.vnp',  time());
         Log::info(session('value'));
-        return response()->json(['success' => 'Done'], Response::HTTP_OK);
+        return response()->json(['success' => $request->all()], Response::HTTP_OK);
     }
 
     public function PaymentView()
     {
         $stops = Stops::all();
         $data = (session()->get('value'));
+        if(!isset($data)){
+            return view('client.pages.ticket.index', ['stops' => $stops]);
+        }
         foreach ($data as $a) {
             if (isset($a['seat'])) {
                 $seat = SeatStatus::query()
@@ -60,8 +60,9 @@ class TicketController extends Controller
 
     public function endPayment(Request $request)
     {
-        session()->put('value.0.status', $request->status);
-        session()->put('value.0.payment_method', $request->payment_method);
+        
+        session()->put('value.0.status',  $request->status);
+        session()->put('value.0.payment_method',  $request->payment_method);
         $user_id = $request->passenger_car_user;
         $message = $request->username . ' đã đặt vé cần xác nhận ';
         $ticket = new Ticket();
@@ -80,7 +81,7 @@ class TicketController extends Controller
         foreach ($data as $a) {
             if (isset($a['seat'])) {
                 foreach ($a['seat'] as $value) {
-                    SeatStatus::query()
+                   $data = SeatStatus::query()
                         ->where([
                             'passenger_car_id' => $a['passenger_car_id'],
                             'date' => $a['date'],
@@ -100,28 +101,6 @@ class TicketController extends Controller
         Log::info($request->all());
 
         Log::info(session('value'));
-
-
-        // $APIKey="4804FCD90B5191173B9C05ADAEB455";
-        // $SecretKey="ECA5AFD4D982FAF3E2315AF3654B4A";
-        // $YourPhone = $phoneNumber;
-        // $Content = "Cam on quy khach da su dung dich vu cua chung toi. Chuc quy khach mot ngay tot lanh!";
-
-        // $SendContent = urlencode($Content);
-        // $data = "http://rest.esms.vn/MainService.svc/json/SendMultipleMessage_V4_get?Phone=$YourPhone&ApiKey=$APIKey&SecretKey=$SecretKey&Content=$SendContent&Brandname=Baotrixemay&SmsType=2";
-
-        // $curl = curl_init($data);
-        // curl_setopt($curl, CURLOPT_FAILONERROR, true);
-        // curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-        // curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        // $result = curl_exec($curl);
-
-        // $obj = json_decode($result, true);
-        // if ($obj['CodeResult'] == 100) {
-        //     Log::info("thành công ");
-        // } else {
-        //     Log::info("lỗi  ");
-        // }
 
         $notification = new NotificationController();
         $notification->sendNotification($user_id, $message, 'ticket');
@@ -149,7 +128,7 @@ class TicketController extends Controller
         $vnp_BankCode = "NCB";
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR']; //127.0.0.1
 
-        $inputData = array(
+        $inputData = [
             "vnp_Version" => "2.1.0",
             "vnp_TmnCode" => $vnp_TmnCode,
             "vnp_Amount" => $vnp_Amount,
@@ -162,7 +141,18 @@ class TicketController extends Controller
             "vnp_OrderType" => $vnp_OrderType,
             "vnp_ReturnUrl" => $vnp_Returnurl,
             "vnp_TxnRef" => $vnp_TxnRef,
-        );
+        ];
+        $vnpdb = VnpayPayment::query()->where('inc_id', $a[0]->vnp)->first();
+        if (!$vnpdb) {
+            VnpayPayment::query()->create([
+                'vnp_TmnCode' => $vnp_TmnCode,
+                'vnp_CreateDate' => $inputData['vnp_CreateDate'],
+                'vnp_TxnRef' => $vnp_TxnRef,
+                'passenger_car_id' => $a[0]->passenger_car_id,
+                'status' => "Hoàn tiền",
+                'inc_id' => $a[0]->vnp
+            ]);
+        }
 
         if (isset($vnp_BankCode) && $vnp_BankCode != "") {
             $inputData['vnp_BankCode'] = $vnp_BankCode;
@@ -171,7 +161,6 @@ class TicketController extends Controller
             $inputData['vnp_Bill_State'] = $vnp_Bill_State;
         }
 
-        //var_dump($inputData);
         ksort($inputData);
         $query = "";
         $i = 0;
@@ -191,16 +180,87 @@ class TicketController extends Controller
             $vnpSecureHash = hash_hmac('sha512', $hashdata, $vnp_HashSecret);
             $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
         }
-        $returnData = array(
-            'code' => '00', 'message' => 'success', 'data' => $vnp_Url
-        );
-        // return redirect()->route('client.ticket.add-vnpay-to-db');
+
         header('Location: ' . $vnp_Url);
         die();
     }
 
     public function checkoutPayment(Request $request)
     {
+        if (session('value')) {
+            $data = (session()->get('value'));
+            $vnpay_item = VnpayPayment::query()->where('inc_id', $data[0]['vnp'])->first();
+            if ($request->vnp_ResponseCode == '00' && $request->vnp_TransactionStatus == '00') {
+                $passenger_car = PassengerCar::where('id', session('value')[0]['passenger_car_id'])->get();
+                
+                $seatArr = [];
+                foreach ($data as $a) {
+                    if (isset($a['seat'])) {
+                        foreach ($a['seat'] as $value) {
+                            array_push($seatArr, $value);
+                        }
+                    }
+                    $ticket = Ticket::query()->create([
+                        'username' => $a['username'],
+                        'status' => 1,
+                        'payment_method' => 'Đã Thanh toán VNPAY',
+                        'total_price' => $a['total_price'],
+                        'email' => $a['email'],
+                        'phone' => $a['phone'],
+                        'quantity' => $a['quantity'],
+                        'passenger_car_id' => $a['passenger_car_id'],
+                        'departure' => $a['departure'],
+                        'arrival' => $a['arrival'],
+                        'date' => $a['date'],
+                        'time_id' => $a['time_id'],
+                        'inc_id' =>  $data[0]['vnp'],
+                        'seat_id' => json_encode($seatArr)
+                    ]);
+                    $a['payment_method'] = 'Đã Thanh toán VNPAY';
+                    $data_vnp = [
+                        'vnp_BankTranNo' => $request->vnp_BankTranNo,
+                        'vnp_OrderInfo' => $request->vnp_OrderInfo,
+                        'vnp_TransactionNo' => $request->vnp_TransactionNo,
+                        'ticket_id' => $ticket->id
+                    ];
+                    $vnpay_item->update(['other_field' => json_encode($data_vnp)]);
+                }
+
+                $user_id = session('value')[0]['passenger_car_user'];
+                $message = session('value')[0]['username'] . ' đã đặt vé thành công';
+                $notification = new NotificationController();
+                $notification->sendNotification($user_id, $message, 'ticket');
+
+                SendMail::dispatch(session('value')[0]['email'],  $ticket);
+
+                $email =  session('value')[0]['email'];
+                $route_departure =  session('value')[0]['route_departure'];
+                $route_arrival =  session('value')[0]['route_arrival'];
+                $departure = session('value')[0]['departure'];
+                $time_departure = session('value')[0]['time_departure'];
+                $arrival = session('value')[0]['arrival'];
+                $time_arrival = session('value')[0]['time_arrival'];
+                $username =  session('value')[0]['username'];
+                $phone = session('value')[0]['phone'];
+                $email = session('value')[0]['email'];
+                $total_price = session('value')[0]['total_price'];
+                session()->forget('value');
+                return view('client.pages.ticket.finish2', [
+                    'data' => $passenger_car,
+                    'email' => $email,
+                    'route_departure' => $route_departure,
+                    'route_arrival' => $route_arrival,
+                    'departure' => $departure,
+                    'arrival' => $arrival,
+                    'time_departure' =>  $time_departure,
+                    'time_arrival' =>  $time_arrival,
+                    'username' =>  $username,
+                    'phone' => $phone,
+                    'email' => $email,
+                    'total_price' => $total_price,
+                ]);
+
+            }
         if ($request->vnp_ResponseCode == '00' && $request->vnp_TransactionStatus == '00') {
             $passenger_car = PassengerCar::where('id', session('value')[0]['passenger_car_id'])->get();
             $data = (session()->get('value'));
@@ -228,30 +288,10 @@ class TicketController extends Controller
                     'time_id' => $a['time_id'],
                     'seat_id' => json_encode($seatArr)
                 ]);
-                $a['payment_method'] = 'Đã Thanh toán VNPAY';
             }
-
-            // $APIKey="4804FCD90B5191173B9C05ADAEB455";
-            // $SecretKey="ECA5AFD4D982FAF3E2315AF3654B4A";
-
-
-            // $Content = "Cam on quy khach da su dung dich vu cua chung toi. Chuc quy khach mot ngay tot lanh!";
-
-            // $SendContent = urlencode($Content);
-            // $data = "http://rest.esms.vn/MainService.svc/json/SendMultipleMessage_V4_get?Phone=$YourPhone&ApiKey=$APIKey&SecretKey=$SecretKey&Content=$SendContent&Brandname=Baotrixemay&SmsType=2";
-
-            // $curl = curl_init($data);
-            // curl_setopt($curl, CURLOPT_FAILONERROR, true);
-            // curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-            // curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            // $result = curl_exec($curl);
-
-            // $obj = json_decode($result, true);
-            // if ($obj['CodeResult'] == 100) {
-            //     Log::info("thành công ");
-            // } else {
-            //     Log::info("lỗi  ");
-            // }
+            } else {
+                return redirect()->route('client.ticket.payment-method');
+            }
             $user_id = session('value')[0]['passenger_car_user'];
             $message = session('value')[0]['username'] . ' đã đặt vé thành công';
             $notification = new NotificationController();
@@ -289,8 +329,8 @@ class TicketController extends Controller
         } else {
             return redirect()->route('client.ticket.payment-method');
         }
+        return redirect()->route('client.ticket.payment-method');
     }
-
 
     public function EndTicketPayment(Request $request)
     {
@@ -327,7 +367,6 @@ class TicketController extends Controller
             ]);
         }
         return redirect()->route('client.ticket.payment-method');
-
     }
 
     public function ChangeTicket(Request $request)

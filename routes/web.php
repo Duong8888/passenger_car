@@ -76,6 +76,7 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
             Route::put('/{ticket}', 'update')->name('update');
             Route::delete('/{ticket}', 'destroy')->name('destroy');
             Route::get('/{ticket}/edit', 'edit')->name('edit');
+            Route::post('/cancel', 'cancel')->name('cancel-vnp');
         });
         Route::post('/trip', [TicketController::class, 'Trip']);
         Route::post('/passgenerCar/{id}', [TicketController::class, 'PassengerCar']);
@@ -153,6 +154,8 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         });
         // Quản lý contact 
         Route::get('/contact/index', [App\Http\Controllers\Admin\ContactController::class, 'index'])->name('route_contact_index');
+        Route::get('/contact/detail/{id}', [App\Http\Controllers\Admin\ContactController::class, 'detail'])->name('route_contact_detail');
+        Route::post('/contact/sendmail', [App\Http\Controllers\Admin\ContactController::class, 'sendmail'])->name('route_contact_sendmail');
         Route::match(['GET', 'POST'], '/contact/add', [App\Http\Controllers\Admin\ContactController::class, 'add'])->name('route_contact_add');
         Route::match(['GET', 'POST'], '/contact/update/{id}', [App\Http\Controllers\Admin\ContactController::class, 'edit'])->name('route_contact_edit');
         // Quản lý nhà xe
