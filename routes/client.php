@@ -100,5 +100,7 @@ Route::get('/about_us',[App\Http\Controllers\Client\AboutController::class,'inde
 Route::get('/vision',[App\Http\Controllers\Client\AboutController::class,'vision'])->name('about_us.vision');
 Route::get('/mission',[App\Http\Controllers\Client\AboutController::class,'mission'])->name('about_us.mission');
 
+Route::post('clear-session',[TicketController::class, 'clearSession'])->name('clear');
+
 
 

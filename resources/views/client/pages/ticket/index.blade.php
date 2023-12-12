@@ -278,7 +278,6 @@
         var endTime = new Date(startTime);
         var paymentTime = {{env('PAYMENT_TIME',3)}};
 
-        // Thời gian kết thúc được tính dựa trên thời gian bắt đầu và thời gian đặt chỗ
         endTime.setMinutes(endTime.getMinutes() + paymentTime);
 
         var x = setInterval(function () {
@@ -293,10 +292,24 @@
                 countdownElement.innerHTML = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
 
                 if (distance < 0) {
-                    clearInterval(x);
-                    countdownElement.innerHTML = "Hết thời gian đặt chỗ.";
-                    localStorage.removeItem("startTime");
-                    window.history.back();
+                    $.ajax({
+                        url: "{{route('clear')}}",
+                        method: "POST",
+                        data:{
+                            _token:$('meta[name="csrf-token"]').attr('content'),
+                        },
+                        success:function (data){
+                            console.log(data);
+                            clearInterval(x);
+                            countdownElement.innerHTML = "Hết thời gian đặt chỗ.";
+                            localStorage.removeItem("startTime");
+                            sessionStorage.setItem("shouldReload", "true");
+                            window.history.back();
+                        },
+                        error:function (error){
+                            console.log(error)
+                        }
+                    });
                 }
             }
         }, 1000);
@@ -307,7 +320,7 @@
         startCountdown(parseInt(storedStartTime));
     } else {
         var currentTime = new Date().getTime();
-        localStorage.setItem("startTime", currentTime); // Lưu thời gian bắt đầu vào LocalStorage
+        localStorage.setItem("startTime", currentTime);
         startCountdown(currentTime);
     }
 

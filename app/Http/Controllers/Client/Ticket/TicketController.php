@@ -29,10 +29,28 @@ class TicketController extends Controller
         return response()->json(['success' => 'Done'], Response::HTTP_OK);
     }
 
+    public function clearSession(){
+        $arraySeat = session('value')[0];
+        foreach($arraySeat['seat'] as $key => $value){
+            SeatStatus::query()
+                ->where('seat_id',$value)
+                ->where('date',$arraySeat['date'])
+                ->where('passenger_car_id',$arraySeat['passenger_car_id'])
+                ->delete();
+        }
+        session()->forget('value');
+        session()->forget('checkSeat');
+        return response()->json('done');
+    }
+
+
     public function PaymentView()
     {
         $stops = Stops::all();
         $data = (session()->get('value'));
+        if(isset($data) == 0){
+            return back();
+        }
         foreach ($data as $a) {
             if (isset($a['seat'])) {
                 $seat = SeatStatus::query()
