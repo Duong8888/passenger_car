@@ -4,7 +4,7 @@
 
     <div class="card">
         <div class="card-body">
-            <div class="table-responsive">
+            <div class="table">
                 <table class="table mb-0">
                     <thead>
                         <tr>
@@ -21,7 +21,7 @@
                         @foreach ($users as $item)
                             <tr>
                                 <td>#{{ $item->id }}</td>
-                                <td>{{ $item->fullName }}</td>
+                                <td>{{ $item->user_name }}</td>
                                 <td>{{ $item->email }}</td>
                                 <td>{{ $item->phone }}</td>
                                 <td>{{ $item->passengerCar_name }}</td>
@@ -89,7 +89,7 @@
                                             <!-- item-->
                                             <a href="detail/<?= $item->id ?>" class="dropdown-item">Xem chi tiết</a>
                                             <!-- item-->
-                                            <a href="javascript:void(0);" class="dropdown-item">Chỉnh sửa</a>
+                                            <a href="update/<?= $item->id ?>?type=edit" class="dropdown-item">Chỉnh sửa</a>
                                             <!-- item-->
                                             <a href="javascript:void(0);" class="dropdown-item">Hủy đăng kí</a>
                                         </div>

@@ -47,7 +47,7 @@
                     <p>Đón lúc: {{ $time_arrival}}</p>
                 </div>
 
-                <button data-id="{{$id }}" data-action="{{ route('client.ticket.cancel-ticket') }}" id="cancel-ticket" style="display: block; margin: 0 auto; background-color: red; color: white; width: 100% ; margin-top: 50px; padding: 10px ">Hủy Vé</button>
+                <button  id="cancel-ticket" style="display: block; margin: 0 auto; background-color: red; color: white; width: 100% ; margin-top: 50px; padding: 10px ">Hủy Vé</button>
             </div>
 
             <div style="width: 30%">
@@ -86,9 +86,44 @@
                 </div>
             </div>
         </div>
-
-
     </div>
+    <div id="popup" class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 hidden w-80 h-96 z-50">
+        <div class="bg-white p-6 rounded relative">
+            <div class="flex justify-between items-center">
+                <p>Chọn lý do hủy đơn hàng </p>
+                <button class="top-0 right-0 text-gray-500 hover:text-gray-700 exit">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="flex items-center gap-x-3">
+                <div class="rounded mx-auto mt-4">
+                    <div class="rounded dark:border-neutral-600 nav-tabs bottom-border-tab col-span-12 lg:col-span-12 lg:col-start-12">
+                        <div class="tab-content">
+                            <div class="block w-full tab-pane p-4">
+                                <input type="radio" id="option1" name="options" value="Tôi bận nên không đi nữa" class="mr-2">
+                                <label for="option1">Tôi bận nên không đi nữa</label><br>
+                                <input type="radio" id="option2" name="options" value="Tôi đặt nhầm giờ/ngày" class="mr-2">
+                                <label for="option2">Tôi đặt nhầm giờ/ngày</label><br>
+                                <input type="radio" id="option3" name="options" value="Tôi đặt nhầm tuyến đường" class="mr-2">
+                                <label for="option3">Tôi đặt nhầm tuyến đường</label><br>
+                                <input type="radio" id="option4" name="options" value="Hãng xe không có tiện ích cần thiết" class="mr-2">
+                                <label for="option4">Hãng xe không có tiện ích cần thiết</label><br>
+                                <input type="radio" id="option5" name="options" value="Tôi muốn đón dọc đường/trung chuyển nhưng nhà xe không đón" class="mr-2">
+                                <label for="option5">Tôi muốn đón dọc đường/trung chuyển nhưng nhà xe không đón</label><br>
+                                <input type="radio" id="option6" name="options" value="Bất khả kháng vì sức khỏe" class="mr-2">
+                                <label for="option6">Bất khả kháng vì sức khỏe</label><br>
+                                <button data-id="{{$id }}" data-action="{{ route('client.ticket.cancel-ticket') }}" id="cancled">Xác nhận hủy chuyến</button><br>
+                                <button class="exit">Quay lại</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 </section>
 <script>
     localStorage.removeItem("startTime");

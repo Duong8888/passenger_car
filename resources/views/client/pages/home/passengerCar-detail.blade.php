@@ -120,9 +120,10 @@
                                                     <p class="mb-0 text-gray-500 dark:text-gray-300">
                                                         @php
                                                             $countSlot = $passengerCars[0]->capacity;
+                                                            $date = date("Y-m-d");
                                                         @endphp
                                                         @foreach($passengerCars[0]->tickets as $key => $value)
-                                                            @if($value->time_id == $_GET['time'] && $value->date == $_GET['date'])
+                                                            @if($value->time_id == $_GET['time'] && $value->date == $date)
                                                                 @php
                                                                     $countSlot -= $value->quantity;
                                                                 @endphp
@@ -564,12 +565,12 @@
                             </div>
                             @endif
 
-
+                            <?php $date = date("Y-m-d");?>
                             <span hidden class="price-slot">{{$passengerCars[0]->price}}</span>
                             <input type="date" id="date" name="date"
                                    class="px-2 py-1 border-none outline-none"
                                    hidden
-                                   value="{{$_GET['date']}}">
+                                   value="{{$date}}">
 
                             @if($passengerCars[0]->vehicle_id == 0)
                                 <p class="my-4">Số lượng khách</p>
