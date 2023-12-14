@@ -151,3 +151,86 @@
     }
 }
 </script>
+
+
+<script>
+    var check = true;
+    var storedStartTime = '';
+    storedStartTime = localStorage.getItem("startTime");
+    function createCountdown(startTime, elementId) {
+        var endTime = new Date(startTime);
+        var paymentTime = {{env('PAYMENT_TIME', 3)}};
+        endTime.setMinutes(endTime.getMinutes() + paymentTime);
+
+        var x = setInterval(function () {
+            var now = new Date().getTime();
+            var distance = endTime - now;
+            console.log(check);
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            var countdownElement = document.getElementById(elementId);
+            if (countdownElement && check) {
+                countdownElement.style.display = 'block';
+                countdownElement.innerHTML = `
+                <div class="text-center">
+                    Thời gian thanh toán còn lại <span id="countdownTime" class="text-red-500">${minutes + ":" + (seconds < 10 ? "0" : "") + seconds}</span>
+                    <div class="mt-4">
+                        <button onclick="cancelPayment()" class="bg-red-500 text-white px-4 py-2 mr-2 rounded">Hủy hàng</button>
+                        <a href="{{route('client.ticket.payment-method')}}" class="bg-[#69cdf1] text-white px-4 py-2 rounded">Thanh toán</a>
+                    </div>
+                </div>
+                `;
+
+
+                if (distance < 0) {
+                    clearInterval(x);
+                    countdownElement.style.display = 'none';
+                    localStorage.removeItem("startTime");
+                    refreshSession();
+                }
+            }
+        }, 1000);
+    }
+
+    function refreshSession(){
+        $.ajax({
+            url: "{{route('clear')}}",
+            method: "POST",
+            data:{
+                _token:$('meta[name="csrf-token"]').attr('content'),
+            },
+            success:function (data){
+                console.log(data)
+                check = false;
+                $('#countdownDisplay').hide();
+                localStorage.removeItem("startTime");
+            },
+            error:function (error){
+                console.log(error)
+            }
+        });
+    }
+
+    if (storedStartTime) {
+        // Tạo bộ đếm ngược mới từ thời gian đã lưu trong LocalStorage
+        createCountdown(parseInt(storedStartTime), "countdownDisplay");
+    }
+    function cancelPayment(){
+        Swal.fire({
+            title: "Hủy vé đang chờ thanh toán?",
+            text: "Chúng tôi vẫn đang giữ vé cho bạn. Bạn có muốn hủy đơn hàng hiện tại",
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: "Hủy đơn hàng",
+            denyButtonText: `Đóng`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                refreshSession();
+                Swal.fire("Saved!", "", "success");
+            }
+        });
+    }
+
+</script>
+
