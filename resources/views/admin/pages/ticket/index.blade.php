@@ -29,6 +29,7 @@
                                         <th>Username</th>
                                         <th>Phone</th>
                                         <th>Email</th>
+                                        <th>Thanh toán</th>
                                         <th>Departure</th>
                                         <th>Arrival</th>
                                         <th>Date</th>
@@ -45,6 +46,7 @@
                                             <td>{{ $ticket->username }}</td>
                                             <td>{{ $ticket->phone }}</td>
                                             <td>{{ $ticket->email }}</td>
+                                            <td>{{ $ticket->payment_method }}</td>
                                             <td>{{ $ticket->departure }}</td>
                                             <td>{{ $ticket->arrival }}</td>
                                             <td>{{ $ticket->date }}</td>
@@ -60,7 +62,7 @@
                                                     <span class="badge bg-info">Confirmed</span>
                                                 @endif
                                             </td>
-                                            <td>{{ $ticket->total_price }}</td>
+                                            <td>{{ number_format($ticket->total_price, 0, '', ',') }}</td>
 
                                             <td>
                                                 <div class="dropdown float-end">
@@ -77,7 +79,7 @@
                                                             Xác nhận
                                                         </a>
                                                         <!-- item-->
-                                                        @if ($ticket->status < 2 && $ticket->payment_method === "Đã Thanh toán VNPAY" )
+                                                        @if ($ticket->status == 1 && $ticket->payment_method === "Đã Thanh toán VNPAY" )
                                                             <a  data-id="<?= $ticket->id; ?>" href="javascript:void(0);" class="dropdown-item vnpay-cancel">Hủy vé</a>
                                                         @endif
                                                     </div>
