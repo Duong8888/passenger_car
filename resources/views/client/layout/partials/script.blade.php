@@ -74,8 +74,13 @@
     }
 
     function render() {
-        window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+        window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+            'size': 'invisible',
+            'callback': (response) => {
+            }
+            }); 
         recaptchaVerifier.render();
+        
     }
 
     var coderesult;
@@ -145,7 +150,7 @@
     }
     if (formattedPhoneNumber.length !== 10) {
         input.value = '';
-        alert('Số điện thoại hợp lệ!');
+        alert('Số điện thoại không hợp lệ!');
     } else {
         input.value = formattedPhoneNumber;
     }

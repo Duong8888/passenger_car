@@ -115,6 +115,7 @@
                             <span> Quản lí tuyến đường </span>
                         </a>
                     </li>
+
                     <li>
                         <a href="{{ route('admin.revenueStaff.index') }}">
                             <i class="mdi mdi-view-dashboard-outline"></i>
@@ -122,18 +123,6 @@
                         </a>
                     </li>
                 @endif
-
-                {{-- @if(auth()->user()->hasAnyRole(['SupperAdmin', 'Admin','Nhà xe']))
-                    <li>
-                        <a href="{{ route('admin.revenueStaff.index') }}">
-                            <i class="mdi mdi-view-dashboard-outline"></i>
-                            <span> Thống kê doanh thu </span>
-                        </a>
-                    </li>
-                @endif --}}
-
-
-
 
                 <li>
                     <a href="{{ route('admin.schedule.index') }}">
