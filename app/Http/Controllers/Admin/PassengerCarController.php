@@ -8,6 +8,7 @@ use App\Models\Album;
 use App\Models\PassengerCar;
 use App\Models\Routes;
 use App\Models\Service;
+use App\Models\Vehicles;
 use App\Models\WorkingTime;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
@@ -48,7 +49,8 @@ class PassengerCarController extends AdminBaseController
         }
         $data = $this->model->orderBy('id', 'desc')->where('user_id', $userId)->paginate(10);
         $service = Service::all();
-        return view($this->pathView . __FUNCTION__, compact('data', 'service'))
+        $type = Vehicles::all();
+        return view($this->pathView . __FUNCTION__, compact('data', 'service','type'))
             ->with('title', $this->titleIndex)
             ->with('colums', $this->colums)
             ->with('urlbase', $this->urlbase)
@@ -57,6 +59,7 @@ class PassengerCarController extends AdminBaseController
 
     public function store(Request $request)
     {
+        Log::info($request->all());
         $car = new $this->model;
         $album = new Album();
         $images = $request->file($this->fieldImage);
@@ -67,6 +70,9 @@ class PassengerCarController extends AdminBaseController
 
         $car->fill($request->except([$this->fieldImage, 'arrival', 'departure', '_token']));
         $car->user_id = Auth::user()->id;
+        if($request->type == '0'){
+            $car->vehicle_id = 0;
+        }
         $car->save();
 
         foreach ($arrService as $service) {

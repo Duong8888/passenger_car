@@ -4,7 +4,7 @@
 
     <div class="card">
         <div class="card-body">
-            <div class="table-responsive">
+            <div class="table">
                 <table class="table mb-0">
                     <thead>
                         <tr>
@@ -21,7 +21,7 @@
                         @foreach ($users as $item)
                             <tr>
                                 <td>#{{ $item->id }}</td>
-                                <td>{{ $item->fullName }}</td>
+                                <td>{{ $item->user_name }}</td>
                                 <td>{{ $item->email }}</td>
                                 <td>{{ $item->phone }}</td>
                                 <td>{{ $item->passengerCar_name }}</td>

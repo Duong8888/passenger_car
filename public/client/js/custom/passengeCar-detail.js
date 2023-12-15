@@ -1,6 +1,14 @@
 $(document).ready(function () {
     const icon = `<svg class="mr-2 icon-item" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: #5f6273;transform: ;msFilter:;"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M9.999 13.587 7.7 11.292l-1.412 1.416 3.713 3.705 6.706-6.706-1.414-1.414z"></path></svg>`;
 
+    window.onload = function() {
+        var shouldReload = sessionStorage.getItem("shouldReload");
+        if (shouldReload) {
+            sessionStorage.removeItem("shouldReload");
+            location.reload();
+        }
+    };
+
     document.querySelectorAll('input[name="departure"]').forEach(function(radio) {
         radio.addEventListener('change', function() {
             if (this.value === 'other') {
@@ -97,6 +105,7 @@ $(document).ready(function () {
         var time_arrival = $('input[name="arrivalTimeInput"]').val();
         var departure = $('input[name="departure"]:checked').val();
         var arrival = $('input[name="arrival"]:checked').val();
+        var checkSession = $('input[name="data-session"]').val();
         if(lmao != ''){
             departure = lmao;
         }
@@ -141,21 +150,65 @@ $(document).ready(function () {
                 seat:checkedValues
             };
             let url = $(this).data("action");
+            if(checkSession == 1){
+                Swal.fire({
+                    title: "Hủy vé đang chờ thanh toán?",
+                    text: "Chúng tôi vẫn đang giữ vé cho bạn. Bạn có muốn hủy đơn hàng hiện tại",
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: "Hủy và đặt vé mới",
+                    denyButtonText: `Giữ vé`
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url:$('input[name="clear-session"]').val(),
+                            method: "POST",
+                            data:{
+                                _token:$('meta[name="csrf-token"]').attr('content'),
+                            },
+                            success:function (data){
+                                console.log(data);
+                                localStorage.removeItem("startTime");
+                                $.ajax({
+                                    url: url,
+                                    method: "POST",
+                                    dataType: "JSON",
+                                    data: totalArray,
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    },
+                                    success: function (response) {
+                                        if (response.success) {
+                                            Swal.fire("Saved!", "", "success");
+                                            window.location.href = '/payment-method';
+                                        }
+                                    }
+                                }, TIME_TO_UPDATE);
+                            },
+                            error:function (error){
+                                console.log(error)
+                            }
+                        });
 
-            $.ajax({
-                url: url,
-                method: "POST",
-                dataType: "JSON",
-                data: totalArray,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function (response) {
-                    if (response.success) {
-                        window.location.href = '/payment-method';
                     }
-                }
-            }, TIME_TO_UPDATE);
+                });
+            }else {
+                $.ajax({
+                    url: url,
+                    method: "POST",
+                    dataType: "JSON",
+                    data: totalArray,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            window.location.href = '/payment-method';
+                        }
+                    }
+                }, TIME_TO_UPDATE);
+            }
+
         }else{
             swal("Lỗi", "Vui lòng điền đủ thông tin !", "error");
         }

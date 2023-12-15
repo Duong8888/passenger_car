@@ -11,6 +11,7 @@ class Ticket extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'username',
         'phone',
         'email',
@@ -23,6 +24,8 @@ class Ticket extends Model
         'arrival',
         'date',
         'time_id',
+        'vnpay_status',
+        'inc_id',
         'reason',
         'seat_id'
     ];
