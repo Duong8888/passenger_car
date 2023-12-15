@@ -21,14 +21,14 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         DB::table('vehicles')->insert([
-            ['type_name' => '9 chỗ'],
-            ['type_name' => '11 chỗ'],
-            ['type_name' => '16 chỗ'],
-            ['type_name' => '20 chỗ'],
-            ['type_name' => '24 chỗ'],
-            ['type_name' => '30 chỗ'],
-            ['type_name' => '35 chỗ'],
-            ['type_name' => '45 chỗ'],
+            ['type_name' => '9'],
+            ['type_name' => '11'],
+            ['type_name' => '16'],
+            ['type_name' => '29'],
+            ['type_name' => '24'],
+            ['type_name' => '30'],
+            ['type_name' => '35'],
+            ['type_name' => '45'],
             // Thêm dữ liệu cho các loại xe khác nếu cần
         ]);
 
@@ -101,6 +101,66 @@ class DatabaseSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+
+
+
+            [
+                'vehicle_id' => 4,
+                'row' => 1,
+                'seat' => json_encode(["icon","", "","",""]),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'vehicle_id' => 4,
+                'row' => 2,
+                'seat' => json_encode(["B1","B2","","B3","B5"]),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'vehicle_id' => 4,
+                'row' => 3,
+                'seat' => json_encode(["B6", "B7", "","B8","B9"]),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'vehicle_id' => 4,
+                'row' => 4,
+                'seat' => json_encode(["N1", "N2", "","N3","N4"]),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'vehicle_id' => 4,
+                'row' => 5,
+                'seat' => json_encode(["N5", "N6", "","N7","N8"]),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'vehicle_id' => 4,
+                'row' => 6,
+                'seat' => json_encode(["K1", "K2", "","K3","K4"]),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'vehicle_id' => 4,
+                'row' => 7,
+                'seat' => json_encode(["K5", "K6", "","K7","K8"]),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'vehicle_id' => 4,
+                'row' => 8,
+                'seat' => json_encode(["V1", "V2", "V3","V4","V5"]),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+
 
 
 

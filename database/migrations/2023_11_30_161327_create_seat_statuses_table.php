@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('seat_statuses', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('passenger_car_id');
+//            $table->foreign('passenger_car_id')->references('id')->on('passenger_cars');
             $table->date('date');
             $table->unsignedBigInteger('time_id')->comment('Lu thoi gian xe chay');
+//            $table->foreign('time_id')->references('id')->on('passenger_car_working_times');
             $table->string('seat_status');
             $table->string('seat_id');
             $table->unsignedBigInteger('ticket_id')->nullable();

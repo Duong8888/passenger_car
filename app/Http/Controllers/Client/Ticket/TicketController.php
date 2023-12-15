@@ -28,6 +28,7 @@ class TicketController extends Controller
 
     public function clearSession(){
         $arraySeat = session('value')[0];
+        Log::info('Deleted seats:', $arraySeat['seat']);
         foreach($arraySeat['seat'] as $key => $value){
             SeatStatus::query()
                 ->where('seat_id',$value)
@@ -35,6 +36,7 @@ class TicketController extends Controller
                 ->where('passenger_car_id',$arraySeat['passenger_car_id'])
                 ->delete();
         }
+
         session()->forget('value');
         session()->forget('checkSeat');
         return response()->json('done');
@@ -80,7 +82,7 @@ class TicketController extends Controller
 
     public function endPayment(Request $request)
     {
-        
+
         session()->put('value.0.status',  $request->status);
         session()->put('value.0.payment_method',  $request->payment_method);
         $user_id = $request->passenger_car_user;
@@ -218,7 +220,7 @@ class TicketController extends Controller
             $vnpay_item = VnpayPayment::query()->where('inc_id', $data[0]['vnp'])->first();
             if ($request->vnp_ResponseCode == '00' && $request->vnp_TransactionStatus == '00') {
                 $passenger_car = PassengerCar::where('id', session('value')[0]['passenger_car_id'])->get();
-                
+
                 $seatArr = [];
                 foreach ($data as $a) {
                     if (isset($a['seat'])) {
@@ -405,7 +407,7 @@ class TicketController extends Controller
         session()->put('value.0.username', $request->name);
         session()->put('value.0.phone', $request->phone);
         session()->put('value.0.email', $request->email);
-       
+
         return response()->json($arrayInfo, Response::HTTP_OK);
     }
 

@@ -9,19 +9,19 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    // public function up(): void
-    // {
-    //     Schema::create('contacts', function (Blueprint $table) {
-    //         $table->id();
-    //         $table->string('user_name');
-    //         $table->string('email');
-    //         $table->string('phone')->unique();
-    //         $table->string('passengerCar_name');
-    //         $table->string('province');
-    //         $table->string('status');
-    //         $table->timestamps();
-    //     });
-    // }
+     public function up(): void
+     {
+         Schema::create('contacts', function (Blueprint $table) {
+             $table->id();
+             $table->string('user_name');
+             $table->string('email');
+             $table->string('phone')->unique();
+             $table->string('passengerCar_name');
+             $table->string('province');
+             $table->string('status');
+             $table->timestamps();
+         });
+     }
 
     /**
      * Reverse the migrations.
