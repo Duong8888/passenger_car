@@ -144,6 +144,8 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         Route::match(['GET', 'POST'], '/contact/update/{id}', [App\Http\Controllers\Admin\ContactController::class, 'edit'])->name('route_contact_edit');
         // Quản lý nhà xe
         Route::get('/staff/index', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('route_staff_index');
+        Route::get('/contact/detail/{id}', [App\Http\Controllers\Admin\ContactController::class, 'detail'])->name('route_contact_detail');
+        Route::post('/contact/sendmail', [App\Http\Controllers\Admin\ContactController::class, 'sendmail'])->name('route_contact_sendmail');
         Route::match(['GET', 'POST'], '/staff/add', [App\Http\Controllers\Admin\UserController::class, 'add'])->name('route_staff_add');
         Route::match(['GET', 'POST'], '/staff/edit/{id}', [App\Http\Controllers\Admin\UserController::class, 'edit'])->name('route_staff_edit');
         Route::match(['GET', 'POST'], '/staff/delete/{id}', [App\Http\Controllers\Admin\UserController::class, 'delete'])->name('route_staff_delete');
