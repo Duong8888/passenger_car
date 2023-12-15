@@ -40,10 +40,10 @@ class UpdateStatusTicket extends Command
             $arrivalTime = Carbon::parse($workingTime->arrival_time);
             foreach ($tickets as $ticket) {
 
-                if ($departureTime->gt($currentTime)) {
-                    $ticket->status = 1;
-                } elseif ($arrivalTime->gt($currentTime)) {
+                if ($currentTime->between($departureTime, $arrivalTime)) {
                     $ticket->status = 2;
+                } elseif ($currentTime->lt($departureTime)) {
+                    $ticket->status = 1;
                 } else {
                     $ticket->status = 3;
                 }

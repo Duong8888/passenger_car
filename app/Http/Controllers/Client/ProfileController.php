@@ -7,6 +7,7 @@ use App\Http\Requests\ProfileUser\ProfileUpdateUserRequest;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\WorkingTime;
 // use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -91,8 +92,11 @@ class ProfileController extends Controller
     public function ticketDetails(Request $request,$id){
         $user = auth()->user();
         $tickets = Ticket::find($id);
+        $time_id = $tickets->time_id;
+        $working_time = WorkingTime::where('id', $time_id)->get();
+      
         //  return response()->json($tickets->passengerCar, 200, [], JSON_PRETTY_PRINT);
-        return view('client.pages.profile.ticketDetail',compact('user','tickets'));
+        return view('client.pages.profile.ticketDetail',compact('user','tickets','working_time'));
     }
 
     public function ticketDetailsDelete(Request $request,$id){

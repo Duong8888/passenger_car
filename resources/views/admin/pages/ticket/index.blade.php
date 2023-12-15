@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-
+@section("title", "Quản lí  vé")
 @section('content')
     <div class="content">
         <!-- Start Content-->
