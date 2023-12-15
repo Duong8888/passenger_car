@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('route_id')->nullable();
 //            $table->foreign('route_id')->references('id')->on('routes');
             $table->unsignedBigInteger('vehicle_id')->default('1')->comment('loại của xe ví dụ như 9 chỗ 11 chỗ 16 chỗ');
+//            $table->foreign('vehicle_id')->references('id')->on('vehicles');
             $table->timestamps();
         });
     }
