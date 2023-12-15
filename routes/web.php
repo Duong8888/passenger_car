@@ -126,7 +126,6 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
             Route::post('/filter-by-date', 'filter_by_date')->name('filter_by_date');
             Route::post('/filter-by-select', 'filter_by_select')->name('filter_by_select');
 
-
         });
     });
 
