@@ -74,12 +74,15 @@
                     </div>
                     <div style="margin-bottom: 30px;">
                         <p style="margin: 0; font-size: 14px;">Trạng thái: Trong Chờ Đợi</p>
-                       
+
                     </div>
+
                     <div style="margin-bottom: 10px;">
                         <p class="showTotalPrice" style="margin: 0; font-size: 14px; font-size: 20px;font-weight: bold;">
                             {{number_format($total_price) }}đ</p>
+
                     </div>
+
                 </div>
             </div>
         </div>
@@ -122,6 +125,9 @@
     </div>
     
 </section>
+<script>
+    localStorage.removeItem("startTime");
+</script>
 @endsection
 @section('page-script')
 <script src="{{ asset('client/js/custom/finish.js') }}"></script>

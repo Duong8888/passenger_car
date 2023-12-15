@@ -14,7 +14,6 @@
     @yield('page-style')
 </head>
 
-
 <body class="bg-white dark:bg-neutral-800">
     <div id="popupContainer" class="popup-container" style="display: none;
 position: fixed;
@@ -29,15 +28,15 @@ z-index: 999;"  >
 
     <div class="flex flex-col justify-center items-center h-screen p-12">
         <div class="text-center">
-            <h5 class="text-[18.5px] text-white">Welcome Back !</h5>
-            <p class="mt-3 text-white/80">Sign in to continue to Jobcy.</p>
+            <h5 class="text-[18.5px] text-white">Car Finder Pro xin chào quý khách.</h5>
+            <p class="mt-3 text-white/80">Đăng nhập để tiếp tục ngay thôi nào.</p>
         </div>
         <form onsubmit="return false;" class="mt-8">
             <div class="mb-5">
-                <label for="number" class="text-white">Enter Your Phone Number</label>
+                <label for="number" class="text-white">Nhập số điện thoại của bạn</label>
                 <input type="text" id="number"
                     class="w-full mt-1 group-data-[theme-color=violet]:bg-violet-400/40 group-data-[theme-color=sky]:bg-sky-400/40 group-data-[theme-color=red]:bg-red-400/40 group-data-[theme-color=green]:bg-green-400/40 group-data-[theme-color=pink]:bg-pink-400/40 group-data-[theme-color=blue]:bg-blue-400/40 py-2.5 rounded border-transparent placeholder:text-sm placeholder:text-gray-50 text-white"
-                    name="number" placeholder="Phone..." onblur="validatePhoneNumber(this)" required>
+                    name="number" placeholder="Số điện thoại" onblur="validatePhoneNumber(this)" required>
                 <br><br>
                 <div id="recaptcha-container"></div>
             </div>
@@ -45,17 +44,14 @@ z-index: 999;"  >
                 <div class="fxt-transformY-50 fxt-transition-delay-4">
                     <button type="button"
                         class="bg-white border border-gray-300 text-gray-800 py-2 px-4 rounded-md"
-                        onclick="sendOTP();">Send Code To My Phone
+                        onclick="sendOTP();">Gửi mã tới số điện thoại
                     </button>
                 </div>
             </div>
         </form>
-        <div class="text-center">
-
-            <div class="p-10">
-                <button  style="background: white !important;
-                padding: 10px 30px !important;
-                border-radius: 5px !important; " id="closePopupButton">Đóng</button>
+        <div class="text-center" >
+            <div class="p-10" style="margin-top:-420px;margin-right:-680px;">
+                <button  style="padding: 10px 30px !important;border-radius: 5px !important;" id="closePopupButton"><i class="fa-solid fa-xmark" style="font-size: 30px;color:#023c7a;"></i></button>
             </div>
         </div>
     </div>
@@ -73,8 +69,8 @@ padding:00px ">
   ">
   <div class="flex flex-col justify-center h-full p-12">
       <div class="text-center">
-          <h5 class="text-[18.5px] text-white">Now You Have To Verify Your Code.</h5>
-          <p class="mt-3 text-white/80">We’ve sent a verification code to <span>Your Number</span></p>
+          <h5 class="text-[18.5px] text-white">Bạn hãy xác minh mã của mình.</h5>
+          <p class="mt-3 text-white/80">Mã đã được gửi về số điện thoại của bạn</p>
       </div>
       <form onsubmit="return false;" method="post" class="mt-8">
           @csrf
@@ -83,15 +79,10 @@ padding:00px ">
           </div>
           <div class="mb-5">
               <div class="fxt-transformY-50 fxt-transition-delay-4">
-                  <button type="button" class="bg-white border border-gray-300 text-gray-800 py-2 px-4 rounded-md" onclick="verify()">Verify</button>
+                  <button type="button" class="bg-white border border-gray-300 text-gray-800 py-2 px-4 rounded-md" onclick="verify()">Xác minh</button>
               </div>
           </div>
       </form>
-      <div class="text-center">
-
-          <div class="p-10">
-          </div>
-      </div>
   </div>
 </div>
 </div>
@@ -99,6 +90,9 @@ padding:00px ">
 
 
     @yield('content')
+    <div id="countdownDisplay" style="display: none; right: 10px; bottom: 100px;" class="fixed bg-white p-4 border border-gray-300 rounded-lg">
+    </div>
+
 
 
 

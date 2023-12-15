@@ -31,15 +31,10 @@ class CarRegisterController extends Controller
         
         //
         $this->validate($request, [
-            'fullName' => 'required|string|max:255',
-            // 'phone' => 'required|string|max:20',
             'email' => 'required|email|max:255',
-            'passengerCar_name' => 'required|string|max:255',
-            'province' => 'required|string|max:255',
-            'meassageInput' => 'required|string',
         ]);
 
-        $fullName = $request->input('fullName');
+        $fullName = $request->input('user_name');
         $phone = $request->input('phone');
         $email = $request->input('email');
         $passengerCar_name = $request->input('passengerCar_name');
