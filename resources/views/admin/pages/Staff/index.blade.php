@@ -51,7 +51,7 @@
              @endforeach
                     </tbody>
                 </table>
-                <button  class="btn btn-primary ml-5 "><a style="text-decoration: none; color: white;" href="{{route('admin.route_staff_add')}}">New Product</a></button>
+                {{-- <button  class="btn btn-primary ml-5 mt-3"><a style="text-decoration: none; color: white;" href="{{route('admin.route_staff_add')}}">Thêm nhà xe</a></button> --}}
             </div>
         </div>
 

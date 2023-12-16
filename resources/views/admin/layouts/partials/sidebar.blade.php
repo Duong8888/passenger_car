@@ -201,7 +201,7 @@
                             <span> Quản lý nhà xe </span>
                         </a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a href="{{ route('admin.user.report') }}">
                             <i class="mdi mdi-table"></i>
                             <span> Thống kê user </span>
@@ -212,7 +212,7 @@
                             <i class="mdi mdi-table"></i>
                             <span> Thống kê vé </span>
                         </a>
-                    </li>
+                    </li> --}}
                 @endif
 
 

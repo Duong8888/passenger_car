@@ -45,7 +45,7 @@
                         </div>
                     @endif
 
-                    <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap">
+                    {{-- <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap">
                         <thead>
                         <tr style="color: red">
                             <th>Role({{ $roles->count() }})</th>
@@ -94,7 +94,7 @@
                                 </tr>
                              @endforeach
                         </tbody>
-                    </table>
+                    </table> --}}
 
                 </div>
             </div>
