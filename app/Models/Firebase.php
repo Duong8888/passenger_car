@@ -9,8 +9,7 @@ class Firebase
     public function uploadImage($request)
     {
         $request->validate([
-            'images' => 'required|array',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust validation rules as needed
+            'images' => 'required',
         ]);
 
         $uploadedUrls = [];
@@ -48,5 +47,34 @@ class Firebase
             ];
         }
         return $uploadedUrls;
+    }
+
+    public function updateImageSingle($request){
+
+        $image =  $request->images;
+        $fileName = time() . '_' . $image->getClientOriginalName();
+        $storage = new StorageClient([
+            'keyFilePath' => base_path(env('FIREBASE_CREDENTIALS_PATH')),
+            'projectId' => env('GOOGLE_CLOUD_PROJECT_ID'),
+        ]);
+
+        // Get the default bucket
+        $bucket = $storage->bucket(env('FIREBASE_STORAGE_BUCKET'));
+
+        // Upload the image to Google Cloud Storage
+        $object = $bucket->upload(
+            file_get_contents($image->getRealPath()),
+            [
+                'name' => $fileName,
+                'predefinedAcl' => 'publicRead', // Set ACL to allow public read access
+            ]
+        );
+        // Get the public URL
+        $publicUrl = $object->signedUrl(new \DateTime('2050-01-01'));
+
+        $parsedUrl = parse_url($publicUrl);
+        // Reconstruct the URL without the query string
+        $baseUrl = $parsedUrl['scheme'] . '://' . $parsedUrl['host'] . $parsedUrl['path'];
+        return $baseUrl;
     }
 }
