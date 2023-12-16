@@ -274,10 +274,11 @@
     const infoUser = @json(auth()->user());
     const urlNotification = '{{route('notifications.loadMessage')}}';
 
-    var startTime = new Date();
-    function startCountdown(startTime) {
+        function startCountdown(startTime) {
         var endTime = new Date(startTime);
-        endTime.setMinutes(endTime.getMinutes() + {{env('PAYMENT_TIME',3)}});
+        var paymentTime = {{env('PAYMENT_TIME',3)}};
+
+        endTime.setMinutes(endTime.getMinutes() + paymentTime);
 
         var x = setInterval(function () {
             var now = new Date().getTime();
@@ -288,18 +289,41 @@
 
             var countdownElement = document.getElementById("countdown");
             if (countdownElement) {
-                countdownElement.innerHTML = minutes + ":" + seconds;
+                countdownElement.innerHTML = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
 
                 if (distance < 0) {
-                    clearInterval(x);
-                    countdownElement.innerHTML = "Hết thời gian đặt chỗ.";
-                    window.history.back();
+                    $.ajax({
+                        url: "{{route('clear')}}",
+                        method: "POST",
+                        data:{
+                            _token:$('meta[name="csrf-token"]').attr('content'),
+                        },
+                        success:function (data){
+                            console.log(data);
+                            clearInterval(x);
+                            countdownElement.innerHTML = "Hết thời gian đặt chỗ.";
+                            localStorage.removeItem("startTime");
+                            sessionStorage.setItem("shouldReload", "true");
+                            window.history.back();
+                        },
+                        error:function (error){
+                            console.log(error)
+                        }
+                    });
                 }
             }
         }, 1000);
     }
 
-    startCountdown(startTime);
+    var storedStartTime = localStorage.getItem("startTime");
+    if (storedStartTime) {
+        startCountdown(parseInt(storedStartTime));
+    } else {
+        var currentTime = new Date().getTime();
+        localStorage.setItem("startTime", currentTime);
+        startCountdown(currentTime);
+    }
+
 
 </script>
 @include('client.layout.partials.script')

@@ -65,7 +65,7 @@
                                                                 <p class="text-gray-900 dark:text-white">{{ $tickets->departure }}</p>
                                                             </li>
                                                             <li class="px-4 py-2 bg-white rounded dark:bg-neutral-600">
-                                                                <p class="text-gray-900 dark:text-white">15:38 2/11/2023</p>
+                                                                <p class="text-gray-900 dark:text-white">{{ $working_time[0]->departure_time }}-{{ $tickets->date }}</p>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -84,7 +84,7 @@
                                                                 <p class="text-gray-900 dark:text-white"> {{ $tickets->arrival }}</p>
                                                             </li>
                                                             <li class="px-4 py-2 bg-white rounded dark:bg-neutral-600">
-                                                                <p class="text-gray-900 dark:text-white">15:38 2/11/2023
+                                                                <p class="text-gray-900 dark:text-white">{{ $working_time[0]->arrival_time }}-{{ $tickets->date }}
                                                                 </p>
                                                             </li>
                                                         </ul>

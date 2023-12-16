@@ -20,18 +20,35 @@ class TicketController extends Controller
     public function CountTicket(Request $request)
     {
         session()->forget('value');
-        session()->push('value', $request->all());
+        session()->push('value', $request->all(), now()->addMinutes(env('PAYMENT_TIME')));
         session()->put('value.0.vnp',  time());
         Log::info(session('value'));
         return response()->json(['success' => $request->all()], Response::HTTP_OK);
     }
 
+    public function clearSession(){
+        $arraySeat = session('value')[0];
+        Log::info('Deleted seats:', $arraySeat['seat']);
+        foreach($arraySeat['seat'] as $key => $value){
+            SeatStatus::query()
+                ->where('seat_id',$value)
+                ->where('date',$arraySeat['date'])
+                ->where('passenger_car_id',$arraySeat['passenger_car_id'])
+                ->delete();
+        }
+
+        session()->forget('value');
+        session()->forget('checkSeat');
+        return response()->json('done');
+    }
+
+
     public function PaymentView()
     {
         $stops = Stops::all();
         $data = (session()->get('value'));
-        if(!isset($data)){
-            return view('client.pages.ticket.index', ['stops' => $stops]);
+        if(isset($data) == 0){
+            return back();
         }
         foreach ($data as $a) {
             if (isset($a['seat'])) {
@@ -50,8 +67,13 @@ class TicketController extends Controller
                             'seat_id' => $value,
                         ]);
                     }
+                    session()->put('checkSeat', 'true', now()->addMinutes(env('PAYMENT_TIME')));
                 }else{
-                    return back()->with('message','Ghế của bạn đã có người nhanh tay hơn đặt rồi vui lòng chọn gế khác !');
+                    if(session('checkSeat')){
+                        return view('client.pages.ticket.index', ['stops' => $stops]);
+                    }else{
+                        return back()->with('message','Ghế của bạn đã có người nhanh tay hơn đặt rồi vui lòng chọn gế khác !');
+                    }
                 }
             }
         }
@@ -60,7 +82,7 @@ class TicketController extends Controller
 
     public function endPayment(Request $request)
     {
-        
+
         session()->put('value.0.status',  $request->status);
         session()->put('value.0.payment_method',  $request->payment_method);
         $user_id = $request->passenger_car_user;
@@ -108,13 +130,14 @@ class TicketController extends Controller
 
         SendMail::dispatch($emailAdmin, $ticket);
         SendMail::dispatch($request->email, $ticket);
-
+        session()->put('checkSeat', 'false');
         return response()->json(['success' => 'Done'], Response::HTTP_OK);
     }
 
 
     public function vnpay_payment(Request $request)
     {
+        
         $a = json_decode($request->session);
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
         $vnp_Returnurl = route('client.ticket.add-vnpay-to-db');
@@ -180,6 +203,12 @@ class TicketController extends Controller
             $vnpSecureHash = hash_hmac('sha512', $hashdata, $vnp_HashSecret);
             $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
         }
+        $returnData = array(
+            'code' => '00', 'message' => 'success', 'data' => $vnp_Url
+        );
+        // return redirect()->route('client.ticket.add-vnpay-to-db');
+        session()->put('checkSeat', 'false');
+
 
         header('Location: ' . $vnp_Url);
         die();
@@ -192,7 +221,7 @@ class TicketController extends Controller
             $vnpay_item = VnpayPayment::query()->where('inc_id', $data[0]['vnp'])->first();
             if ($request->vnp_ResponseCode == '00' && $request->vnp_TransactionStatus == '00') {
                 $passenger_car = PassengerCar::where('id', session('value')[0]['passenger_car_id'])->get();
-                
+
                 $seatArr = [];
                 foreach ($data as $a) {
                     if (isset($a['seat'])) {
@@ -275,7 +304,7 @@ class TicketController extends Controller
 
                 $ticket = Ticket::query()->create([
                     'username' => $a['username'],
-                    'status' => 2,
+                    'status' => 1,
                     'payment_method' => 'Đã Thanh toán VNPAY',
                     'total_price' => $a['total_price'],
                     'email' => $a['email'],
@@ -379,7 +408,7 @@ class TicketController extends Controller
         session()->put('value.0.username', $request->name);
         session()->put('value.0.phone', $request->phone);
         session()->put('value.0.email', $request->email);
-       
+
         return response()->json($arrayInfo, Response::HTTP_OK);
     }
 

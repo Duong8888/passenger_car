@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('reason');
             $table->string('status')->default(0);
             $table->unsignedBigInteger('time_id');
+//            $table->foreign('time_id')->references('id')->on('passenger_car_working_times');
             $table->json('seat_id');
             $table->timestamps();
         });

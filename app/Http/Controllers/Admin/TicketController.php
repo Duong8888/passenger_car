@@ -5,7 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\AdminBaseController;
 use App\Models\PassengerCar;
 use App\Models\Routes;
+
+use App\Models\SeatsLayout;
 use App\Models\SeatStatus;
+use App\Models\Stops;
+
 use Illuminate\Http\Request;
 
 use App\Models\Ticket;
@@ -14,6 +18,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Http;
 
@@ -132,13 +137,50 @@ class TicketController extends AdminBaseController
         return redirect()->route($this->urlIndex)->with('success', 'Created Successfully');
     }
 
-    public function Confirm(Request $request)
-    {
-        Ticket::where('id', $request->id)->update(['status' => 3]);
 
+    public function Confirm(Request $request){
+        Ticket::where('id', $request->id)->update(['status' => 2]);
+      
         return response()->json(['success' => 'Done'], Response::HTTP_OK);
     }
 
+    public function CheckPhone(Request $request){
+        $phone = $request->input('phone');
+        $user_name = User::where('phone', $phone)->pluck('name');
+        $user_email = User::where('phone', $phone)->pluck('email');
+        $user = [
+            'name' => $user_name,
+            'email' => $user_email
+        ];
+        return response()->json($user);
+    }
+
+    public function Price(Request $request){
+        $passengerCar =  PassengerCar::where('id', $request->value)->get();
+        $routes =  $passengerCar[0]->route;
+        $stops = Stops::where('route_id', $routes->id)->get();
+        $price = PassengerCar::where('id', $request->value)->pluck('price');
+        if($passengerCar[0]->vehicle_id != 0){
+            $layout = SeatsLayout::query()->where('vehicle_id', $passengerCar[0]->vehicle->id)->get();
+            $checkSlot = SeatStatus::query()
+                ->where('passenger_car_id',$passengerCar[0]->id)
+                ->where('date',$request->date)
+                ->where('time_id',$request->time)
+                ->get();
+        }else{
+            $layout = [];
+            $checkSlot = [];
+        }
+        $array =[
+            'price' => $price,
+            'layout' => $layout,
+            'checkSlot' => $checkSlot,
+            'passengerCars' => $passengerCar,
+            'routes' => $routes,
+            'stops' => $stops,
+        ];
+        return response()->json($array);
+    }
     public function cancel(Request $request)
     {
         $data_cancel = DB::table("tickets")
@@ -225,5 +267,6 @@ class TicketController extends AdminBaseController
             'message' => "Lỗi vui lòng thử lại"
         ]);
         
+
     }
 }

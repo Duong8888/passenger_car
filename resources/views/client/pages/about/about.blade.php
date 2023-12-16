@@ -333,7 +333,7 @@
                             </div>
                             <div class="col-span-12 lg:col-span-6">
                                 <div class="lg:w-[180%]">
-                                    <img src="{{ asset('') }}client/images/about/img-06.jpg" alt=""
+                                    <img src="{{ asset('client/images/about/banner2.png') }}" alt="banner"
                                         class="h-auto rounded" width="65%">
                                 </div>
                             </div>

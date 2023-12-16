@@ -507,7 +507,7 @@
 
 
         <div id="popup"
-                 class="fixed justify-center flex items-center inset-0 bg-gray-500 bg-opacity-50  @php if(!session('message')){echo 'hidden';} @endphp w-80 h-96 z-50">
+             class="fixed justify-center flex items-center inset-0 bg-gray-500 bg-opacity-50  @php if(!session('message')){echo 'hidden';} @endphp w-80 h-96 z-50">
             <div class="bg-white w-[75%] rounded h-2/5 m-auto p-4 overflow-auto">
                 <div class="flex justify-between items-center p-4">
                     <p>Mua vé xe</p>
@@ -554,18 +554,22 @@
 
                         <div id="first" class="block w-full tab-pane p-4">
                             @if(session('message'))
-                            <div class="flex items-center p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300" role="alert">
-                                <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-                                </svg>
-                                <span class="sr-only">Info</span>
-                                <div>
-                                    <span class="font-medium ml-2">{{session('message')}}</span>
+                                <div
+                                    class="flex items-center p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300"
+                                    role="alert">
+                                    <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"
+                                         xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                    </svg>
+                                    <span class="sr-only">Info</span>
+                                    <div>
+                                        <span class="font-medium ml-2">{{session('message')}}</span>
+                                    </div>
                                 </div>
-                            </div>
                             @endif
 
-                            <?php $date = date("Y-m-d");?>
+                            <?php $date = date("Y-m-d"); ?>
                             <span hidden class="price-slot">{{$passengerCars[0]->price}}</span>
                             <input type="date" id="date" name="date"
                                    class="px-2 py-1 border-none outline-none"
@@ -610,11 +614,11 @@
                                                 <p class="flex items-center my-4"><span
                                                         class="material-symbols-outlined"
                                                         style="font-size: 40px;color: green;margin-right: 5px">weekend</span>Gế
-                                                    không đang chọn</p>
+                                                    đang chọn</p>
                                                 <p class="flex items-center my-4"><span
                                                         class="material-symbols-outlined"
                                                         style="font-size: 40px;color: #74788d;margin-right: 5px">weekend</span>Gế
-                                                    thường <span
+                                                    chưa chọn <span
                                                         style="display: block;color: #0a58ca;font-weight: bold;margin-left: 5px"> {{ number_format($passengerCars[0]->price) }} đ</span>
                                                 </p>
                                             </div>
@@ -835,6 +839,8 @@
     <input type="hidden" value="{{ $routes->arrival }}" name="route-arrival">
     <input type="hidden" value="{{ $user[0]->id }}" name="passenger-user">
     <input type="hidden" value="{{ $time_id }}" name="time_id">
+    <input type="hidden" value="{{ session('value') !== null ?count(session('value')):""}}" name="data-session">
+    <input type="hidden" value="{{route('clear')}}" name="clear-session">
 @endsection
 @section('page-script')
     <script type="module" src="{{ asset('client/js/custom/passengeCar-detail.js') }}"></script>

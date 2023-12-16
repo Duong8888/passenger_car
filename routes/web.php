@@ -79,6 +79,8 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
             Route::post('/cancel', 'cancel')->name('cancel-vnp');
         });
         Route::post('/trip', [TicketController::class, 'Trip']);
+        Route::post('/phone', [TicketController::class, 'CheckPhone']);
+        Route::post('/price', [TicketController::class, 'Price']);
         Route::post('/passgenerCar/{id}', [TicketController::class, 'PassengerCar']);
 
         // Quản lý tuyến đường nhà xe
@@ -116,6 +118,7 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         Route::get('customers/edit/{customer}', [CustomerController::class, 'edit'])->name('customer.edit');
         Route::put('customers/edit/{id}', [CustomerController::class, 'update'])->name('customer.update');
         Route::delete('customers/delete/{id}', [CustomerController::class, 'delete'])->name('customer.delete');
+
         // Tổng doanh thu cho nhà xe
         Route::prefix('revenueStaff')->controller(RevenueStaffController::class)->name('revenueStaff.')->group(function (){
             Route::get('/', 'index')->name('index');
@@ -138,6 +141,7 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
             Route::post('/filter-by-date', 'filter_by_date')->name('filter_by_date');
             Route::post('/filter-by-select', 'filter_by_select')->name('filter_by_select');
         });
+
         //Thống kê liên hệ
         Route::prefix('contactStaff')->controller(ContactStaffController::class)->name('contactStaff.')->group(function (){
             Route::get('/', 'index')->name('index');
@@ -152,6 +156,7 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
             Route::post('/filter-by-date', 'filter_by_date')->name('filter_by_date');
             Route::post('/filter-by-select', 'filter_by_select')->name('filter_by_select');
         });
+
         // Quản lý contact 
         Route::get('/contact/index', [App\Http\Controllers\Admin\ContactController::class, 'index'])->name('route_contact_index');
         Route::get('/contact/detail/{id}', [App\Http\Controllers\Admin\ContactController::class, 'detail'])->name('route_contact_detail');
@@ -160,6 +165,8 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         Route::match(['GET', 'POST'], '/contact/update/{id}', [App\Http\Controllers\Admin\ContactController::class, 'edit'])->name('route_contact_edit');
         // Quản lý nhà xe
         Route::get('/staff/index', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('route_staff_index');
+        Route::get('/contact/detail/{id}', [App\Http\Controllers\Admin\ContactController::class, 'detail'])->name('route_contact_detail');
+        Route::post('/contact/sendmail', [App\Http\Controllers\Admin\ContactController::class, 'sendmail'])->name('route_contact_sendmail');
         Route::match(['GET', 'POST'], '/staff/add', [App\Http\Controllers\Admin\UserController::class, 'add'])->name('route_staff_add');
         Route::match(['GET', 'POST'], '/staff/edit/{id}', [App\Http\Controllers\Admin\UserController::class, 'edit'])->name('route_staff_edit');
         Route::match(['GET', 'POST'], '/staff/delete/{id}', [App\Http\Controllers\Admin\UserController::class, 'delete'])->name('route_staff_delete');
