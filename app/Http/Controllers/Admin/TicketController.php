@@ -49,6 +49,17 @@ class TicketController extends AdminBaseController
             return $validator;
         }
     }
+    public function index(Request $request)
+    {
+        $data = $this->model->orderBy('id','desc')->paginate(10);
+        $passengerCar = PassengerCar::get();
+    
+        return view($this->pathView . __FUNCTION__, compact('data', 'passengerCar'))
+            ->with('title', $this->titleIndex)
+            ->with('colums', $this->colums)
+            ->with('urlbase', $this->urlbase)
+            ->with('titleCreate', $this->titleCreate);
+    }
 
     public function create()
     {
@@ -93,6 +104,7 @@ class TicketController extends AdminBaseController
 
         $tripList = Routes::where('departure', $departure)
             ->orWhere('arrival', $arrival)
+            ->where('user_id', Auth::user()->id)
             ->get();
 
 
@@ -117,7 +129,7 @@ class TicketController extends AdminBaseController
     public function store(Request $request)
     {
         $validator = $this->validateStore($request);
-
+      
         // if ($validator->fails()) {
         //     return back()->withErrors($validator)->withInput();
         // }
@@ -268,5 +280,14 @@ class TicketController extends AdminBaseController
         ]);
         
 
+    }
+    public function search(Request $request){
+        $passengerCars = PassengerCar::where('license_plate', $request->license_plate)->get();
+      
+        $data = Ticket::where('passenger_car_id', $passengerCars[0]->id)->get();
+      
+        $passengerCar = PassengerCar::get();
+        return to_route($this->urlIndex,compact('data', 'passengerCar'));
+     
     }
 }
