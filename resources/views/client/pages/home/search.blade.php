@@ -6,7 +6,7 @@
             <div class="col-span-10 col-start-2">
                 <div class="mb-3 text-center">
 
-                    <h1 class="mb-3 text-5xl leading-tight text-white fw-semibold">Khám phá thế giới bằng xe bus</h1>
+                    <h1 class="mb-3 text-5xl leading-tight text-white fw-semibold">Khám phá thế giới bằng xe khách</h1>
                     <p class="text-white text-17">"Hãy tìm xe và bắt đầu hành trình của bạn ngay hôm nay, để biết mọi cuộc hành trình đều đặc biệt!</p>
 
                 </div>

@@ -210,6 +210,7 @@
                 </section>
                 
                 <!-- Start About us -->
+
                     <section class="py-16 overflow-hidden dark:bg-neutral-800">
                         <div class="container mx-auto">
                             <div class="grid items-center grid-cols-12 gap-5">
@@ -255,7 +256,8 @@
                                 </div>
                                 <div class="col-span-12 lg:col-span-6">
                                     <div class="lg:w-[180%]">
-                                        <img src="{{asset('')}}client/images/about/img-06.jpg" alt="" class="h-auto rounded" width="65%">
+                                        <img src="{{ asset('client/images/about/banner2.png') }}" alt="banner"
+                                        class="h-auto rounded" width="65%">
                                     </div>
                                 </div>
                             </div>
