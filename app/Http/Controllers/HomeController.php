@@ -67,6 +67,16 @@ class HomeController extends Controller
                 'tickets',
                 'vehicle'
             ])->get();
+        $similarCar = PassengerCar::where('route_id',$passengerCars[0]->route->id)
+            ->where('id', '<>', $request->id)
+            ->with([
+                'albums',
+                'route',
+                'vehicle',
+                'workingTime'
+            ])
+            ->limit(3)
+            ->get();
         if($passengerCars[0]->vehicle_id != 0){
             $layout = SeatsLayout::query()->where('vehicle_id', $passengerCars[0]->vehicle->id)->get();
             $checkSlot = SeatStatus::query()
@@ -97,7 +107,7 @@ class HomeController extends Controller
             })
             ->get();
 
-        return view('client.pages.home.passengerCar-detail', compact('albums', 'routes', 'passengerCars', 'user', 'comments', 'stops', 'services', 'workingTime', 'time_id','layout','checkSlot'));
+        return view('client.pages.home.passengerCar-detail', compact('albums', 'routes', 'passengerCars', 'user', 'comments', 'stops', 'services', 'workingTime', 'time_id','layout','checkSlot','similarCar'));
     }
 
     public function listPassengerCar(Request $request)
