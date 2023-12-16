@@ -51,7 +51,7 @@
                   </div>
                   <div class="mb-3">
                     <label for="quantity" class="form-label">Quantity</label>
-                    <div class="quantity"></div>
+                    <input type="number" class="form-control" id="quantity" name="quantity" disabled>
                   </div>
                   <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
@@ -62,8 +62,8 @@
                     <input type="text" class="form-control" id="price" name="total_price" readonly>
                   </div>
                   <div class="mb-3">
-                    <label for="route-departure" class="form-label">Route departure</label>
-                    <select id="route-departure" class="form-control route-departure" disabled>
+                    <label for="departure" class="form-label">Route departure</label>
+                    <select id="departure" name="departure" class="form-control departure" disabled>
                       <option>Choose route departure</option>
                     </select>
                   </div>
@@ -89,7 +89,7 @@
 
                   <div class="mb-3">
                     <label class="form-label">Departure</label>
-                    <select name="departure" class="form-control departure">
+                    <select name="route-departure" class="form-control route-departure">
                       <option>Choosen Departure</option>
                       @foreach ($route as $data)
                       @if (!in_array($data->departure, $uniqueDepartures))
@@ -102,7 +102,7 @@
                   </div>
                   <div class="mb-3">
                     <label class="form-label">Arrival</label>
-                    <select name="arrival" class="form-control arrival">
+                    <select name="route-arrival" class="form-control route-arrival">
                       <option>Choosen Arrival</option>
                       @foreach ($route as $data)
                       @if (!in_array($data->arrival, $uniqueArrival))
@@ -128,12 +128,16 @@
                   </div>
                   <div class="mb-3">
                     <label for="price" class="form-label">Route arrival</label>
-                    <select id="route-arrival" class="form-control route-arrival" disabled>
+                    <select id="arrival" name="arrival" class="form-control arrival" disabled>
                       <option>Choose route arrival</option>
                     </select>
                   </div>
+                  <div class="mb-3">
+                    <label for="date" class="form-label">Date</label>
+                    <input type="date" id="date" name="date" min="<?php echo date('Y-m-d'); ?>" class="form-control" value="<?php echo date('Y-m-d'); ?>">
+                  </div>
                 </div>
-
+                
                 <button type="submit" class="btn btn-primary">Create</button>
               </form>
 
@@ -163,11 +167,13 @@
           $('.PassengerCar').change(function() {
             let it = $(this).val();
             if (it !== "") {
-              $("#route-departure").prop('disabled', false);
-              $("#route-arrival").prop('disabled', false);
+              $("#departure").prop('disabled', false);
+              $("#arrival").prop('disabled', false);
+              $("#quantity").prop('disabled', false);
             } else {
-              $("#route-departure").prop('disabled', true);
-              $("#route-arrival").prop('disabled', true);
+              $("#departure").prop('disabled', true);
+              $("#arrival").prop('disabled', true);
+              $("#quantity").prop('disabled', true);
             }
           })
             $('#phone').mouseover(function() {
@@ -190,7 +196,7 @@
               })
             });
 
-            $('.departure').change(function() {
+            $('.route-departure').change(function() {
                 var departure = $(this).val();
 
                 $.ajax({
@@ -245,17 +251,8 @@
                                 stop.stop_name + '">' + stop.stop_name  + '</option>';
                           }
                         })
-                        $('.route-departure').html(showRouteDeparture);
-                        $('.route-arrival').html(showRouteArrival);
-                        response.layout.forEach(function(layout) {
-                          let showQuantity = '';
-                          if(layout.vehicle_id == 0){
-                            showQuantity = '<input type="text" class="form-control" id="quantity" name="total_price">'
-                          }else{
-                            showQuantity = ''
-                          }
-                        })
-                        $('.quantity').html(showQuantity);
+                        $('.departure').html(showRouteDeparture);
+                        $('.arrival').html(showRouteArrival);
                     }
                 })
             });
@@ -288,7 +285,7 @@
                 })
             });
 
-            $('.arrival').change(function() {
+            $('.route-arrival').change(function() {
                 var arrival = $(this).val();
                
                 $.ajax({

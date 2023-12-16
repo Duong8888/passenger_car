@@ -9,11 +9,19 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="header-title mt-0 mb-3">Tickets List</h4>
-                            <a href="{{ route('admin.ticket.create') }}">
-                                <button type="button" class="btn btn-success waves-effect waves-light mb-4">Create New
-                                    Ticket
-                                </button>
-                            </a>
+                            <div style="display: flex; justify-content: space-between">
+                                <a href="{{ route('admin.ticket.create') }}">
+                                    <button type="button" class="btn btn-success waves-effect waves-light mb-4">Create New
+                                        Ticket
+                                    </button>
+                                </a>
+                                <form action="{{ route('admin.ticket.search') }}" method="post" enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="text" name="license_plate" placeholder="Enter License..">
+                                    <button type="submit">Search</button>
+                                </form>
+                            </div>
+                           
                             @if ($message = Session::get('success'))
                                 <div>
                                     <ul>
@@ -21,12 +29,14 @@
                                     </ul>
                                 </div>
                             @endif
+                          
                             <div class="table">
-                                <table class="table table-bordered mb-0">
+                                <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap">
                                     <thead>
                                     <tr>
                                         <th>ID</th>
                                         <th>Username</th>
+                                        <th>PassengerCar</th>
                                         <th>Phone</th>
                                         <th>Email</th>
                                         <th>Thanh toán</th>
@@ -44,6 +54,13 @@
                                         <tr>
                                             <td>#{{ $ticket->id }}</td>
                                             <td>{{ $ticket->username }}</td>
+                                            <td>
+                                                @foreach ($passengerCar as $value)
+                                                    @if ($ticket->passenger_car_id == $value->id)
+                                                     {{ $value->license_plate }}
+                                                    @endif
+                                                @endforeach
+                                            </td>
                                             <td>{{ $ticket->phone }}</td>
                                             <td>{{ $ticket->email }}</td>
                                             <td>{{ $ticket->payment_method }}</td>
@@ -89,10 +106,12 @@
                                         </tr>
                                         </tbody>
                                     @endforeach
+
                                 </table>
                                 <div class="float-end mt-2">
                                     {{ $data->links() }}
                                 </div>
+                              
                             </div>
                         </div>
                     </div>
@@ -106,7 +125,6 @@
 
     </div> <!-- content -->
 @endsection
-
 @section('page-script')
     <script>
         $(document).ready(function(){
