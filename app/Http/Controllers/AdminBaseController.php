@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Firebase;
 use App\Models\Routes;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Request;
@@ -26,11 +27,13 @@ class AdminBaseController extends Controller
     public $titleEdit;
     public $urlIndex;
 
+    protected $firebase;
     /**
      * @throws BindingResolutionException
      */
-    public function __construct()
+    public function __construct(Firebase $firebase = null)
     {
+        $this->firebase = $firebase;
         $this->model = app()->make($this->model);
     }
 
@@ -73,11 +76,10 @@ class AdminBaseController extends Controller
         $model = new $this->model;
 
         $model->fill($request->except([$this->fieldImage]));
-
         if ($request->hasFile($this->fieldImage)) {
-            $tmpPath = Storage::put($this->folderImage, $request->{$this->fieldImage});
-
-            $model->{$this->fieldImage} = 'storage/' . $tmpPath;
+            $request->images = $request->{$this->fieldImage};
+            $url_image = $this->firebase->updateImageSingle($request);
+            $model->{$this->fieldImage} = $url_image;
         }
 
         $model->save();
@@ -105,7 +107,6 @@ class AdminBaseController extends Controller
     public function edit(string $id)
     {
         $model = $this->model->findOrFail($id);
-
         return view($this->pathView . __FUNCTION__, compact('model'))
             ->with('title', $this->titleEdit)
             ->with('colums', $this->colums)
@@ -117,30 +118,18 @@ class AdminBaseController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // $validator = $this->validateUpdate($request);
-
-        // if ($validator->fails()) {
-        //     return back()->withErrors($validator)->withInput();
-        // }
 
         $model = $this->model->findOrFail($id);
 
         $model->fill($request->except([$this->fieldImage]));
 
         if ($request->hasFile($this->fieldImage)) {
-            $oldImage = $model->{$this->fieldImage};
-
-            $tmpPath = Storage::put($this->folderImage, $request->{$this->fieldImage});
-
-            $model->{$this->fieldImage} = 'storage/' . $tmpPath;
+            $request->images = $request->{$this->fieldImage};
+            $url_image = $this->firebase->updateImageSingle($request);
+            $model->{$this->fieldImage} = $url_image;
         }
 
         $model->save();
-
-        if ($request->hasFile($this->fieldImage)) {
-            $oldImage = str_replace('storage/', '', $oldImage);
-            Storage::delete($oldImage);
-        }
 
         return to_route($this->urlIndex)->with('success', 'Edited Successfully!');
     }
@@ -159,6 +148,22 @@ class AdminBaseController extends Controller
             Storage::delete($image);
         }
         return to_route($this->urlIndex)->with('success', 'Delete Successfully!');
+    }
+
+    public function moveFileImage($request){
+        if ($request->hasFile('photo')) {
+
+            $image      = $request->file('photo');
+            $image_name = time() . '.' . $image->extension();
+
+            $image = Image::make($request->file('photo'))
+                ->resize(120, 120, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+
+            //here you can define any directory name whatever you want, if dir is not exist it will created automatically.
+            Storage::putFileAs('public/images/1/smalls/' . $image_name, (string)$image->encode('png', 95), $image_name);
+        }
     }
 
 }
