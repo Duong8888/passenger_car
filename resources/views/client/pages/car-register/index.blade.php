@@ -100,7 +100,7 @@
                                                 minh lên <span style="color: red;">*</span> </label>
                                             <input  id="uploadInput"
                                                 class="w-full mt-1 rounded border-gray-100/50 placeholder:text-sm placeholder:text-gray-400 dark:bg-transparent dark:border-gray-800 focus:ring-0 focus:ring-offset-0 dark:text-gray-200"
-                                                type="file" name="images[]" id="images" multiple accept="image/*">
+                                                type="file" name="images[]" id="multiple_files" required multiple accept="image/*">
                                         </div>
 
                                     </div>

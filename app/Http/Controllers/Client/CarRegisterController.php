@@ -78,7 +78,7 @@ class CarRegisterController extends Controller
 
             return view('client.pages.car-register.index', ['message' => $message, 'messageStatus' => $messageStatus]);
         }
-        return view('client.pages.car-register.index', ['message' => "Bạn đã gửi đơn đăng kí nhà xe. Vui lòng đợi quản trị viên kiểm tra!", 'messageStatus' => "Đang xử lý"]);
+        return view('client.pages.car-register.index', ['message' => "Bạn đã gửi đơn đăng kí nhà xe trước đó. Vui lòng đợi quản trị viên kiểm tra!", 'messageStatus' => "Đang xử lý"]);
     }
 
 }

@@ -36,14 +36,19 @@ class ContactController extends Controller
         
         $random_pass = $this->randomPassword();
         $data = [
-            "fullName" => isset($contact->fullName) ? $contact->fullName : "Default",
+            "fullName" => isset($contact->user_name) ? $contact->user_name : "Default",
             "email" =>  $contact->email,
             "phone" => $contact->phone,
             "password" => Hash::make($random_pass),
             "hashPassword" => $random_pass,
-            'name' => $contact->fullName,
+            'name' => $contact->user_name,
             'user_type' => 'staff',
-            "title" => $content['title']
+            "title" => $content['title'],
+            "province" => $contact->province,
+            "passengerCar_name" => $contact->passengerCar_name,
+            "number_card" => $contact->number_card,
+            "rental_code" => $contact->rental_code,
+            "created_at" => date("d/m/Y H:i:s", strtotime($contact->created_at))
         ];
         $messageStatus = "Yêu cầu của bạn đã được xử lý thành công ";
         $uniqueUser = User::query()->where('email', $data['email'])->first();
@@ -59,6 +64,7 @@ class ContactController extends Controller
         $role = Role::where('name', 'Nhà xe')->first();
         $user->assignRole($role);
         $pdf = PDF::loadView('mails.registerApply', $data);
+        
         Mail::send('mails.carRegisterSuccess', $data, function ($message) use ($data, $pdf) {
             $text = $this->convertTextToSlug($data['name']);
             $message->to($data["email"], $data["email"])
