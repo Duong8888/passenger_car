@@ -121,6 +121,7 @@
                             <span> Thống kê doanh thu </span>
                         </a>
                     </li>
+
                     <li>
                         <a href="{{ route('admin.schedule.index') }}">
                             <i class="mdi mdi-clipboard-outline"></i>
