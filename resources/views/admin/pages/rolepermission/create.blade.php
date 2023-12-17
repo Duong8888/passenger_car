@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+@section('title', "Thêm quyền và vai trò")
 @section('page-style')
    <!-- third party css -->
 <link href="{{ asset('admin/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
