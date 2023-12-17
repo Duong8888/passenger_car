@@ -40,7 +40,7 @@
                                 </div>
 
                                 <div class="col-md-6 d-flex  justify-content-center align-items-center">
-                                    <input type="file" hidden name="image" id="image">
+                                    <input type="file" hidden name="image" id="image" value="{{ $model->image }}">
                                     <label for="image" id="fileContent"
                                            class="rounded-1 w-100 h-100 d-flex  justify-content-center align-items-center">
                                         <img class="rounded" height="100%" width="100%" src="{{asset($model->image)}}" alt="">

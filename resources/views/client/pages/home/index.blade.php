@@ -382,7 +382,7 @@
                                 <div
                                     class="job-categorie h-16 w-16 group-data-[theme-color=violet]:bg-violet-500/20 group-data-[theme-color=sky]:bg-sky-500/20 group-data-[theme-color=red]:bg-red-500/20 group-data-[theme-color=green]:bg-green-500/20 group-data-[theme-color=pink]:bg-pink-500/20 group-data-[theme-color=blue]:bg-blue-500/20 rounded-lg text-center leading-[4.4] mx-auto dark:bg-violet-900">
                                     {{-- <i class="uim uim-layers-alt"></i> --}}
-                                    <img src="{{ $item->image }}" alt="nhaxe" style="height: 100%;width: 100%;">
+                                    <img src="https://xekhachhao.com/wp-content/uploads/2022/10/xe-phong-hao1.jpg" alt="nhaxe" style="height: 100%;width: 100%;">
                                 </div>
                                 <div class="mt-4 text-center">
                                     <a href="job-categories.html" class="text-gray-900">
@@ -414,8 +414,8 @@
                         <div
                             class="p-2 mt-3 transition-all duration-500 bg-white rounded shadow-lg shadow-gray-100/50 card dark:bg-neutral-800 dark:shadow-neutral-600/20 group/blog">
                             <div class="relative overflow-hidden">
-                                <img style="min-width: 100%;height: 300px;" src="{{ asset($post->image) }}"
-                                    alt="tin tuc" class="rounded">
+                                <a href=""><img style="min-width: 100%;height: 300px;" src="{{ asset($post->image) }}"
+                                    alt="tin tuc" class="rounded"></a>
                                 <div
                                     class="absolute inset-0 hidden transition-all duration-500 rounded-md bg-black/30 group-hover/blog:block">
                                 </div>
@@ -438,7 +438,7 @@
                                 </div>
                             </div>
                             <div class="p-5" style="min-height: 150px">
-                                <a href="blog-details.html" class="primary-link">
+                                <a href="{{ route('blog', ['id' => $post->id]) }}" class="primary-link">
                                     <h5 class="mb-1 text-gray-900 fs-17 dark:text-gray-50" style="min-height: 90px">
                                         {{ $post->title }}</h5>
                                 </a>

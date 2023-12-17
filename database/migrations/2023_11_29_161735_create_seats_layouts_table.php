@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('seats_layouts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('vehicle_id');
+//            $table->foreign('vehicle_id')->references('id')->on('vehicles');
             $table->integer('row');
             $table->json('seat');
             $table->timestamps();

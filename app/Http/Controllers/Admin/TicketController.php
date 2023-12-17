@@ -5,7 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\AdminBaseController;
 use App\Models\PassengerCar;
 use App\Models\Routes;
+
+use App\Models\SeatsLayout;
 use App\Models\SeatStatus;
+use App\Models\Stops;
+
 use Illuminate\Http\Request;
 
 use App\Models\Ticket;
@@ -14,6 +18,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Http;
 
@@ -43,6 +48,17 @@ class TicketController extends AdminBaseController
         if ($validator->fails()) {
             return $validator;
         }
+    }
+    public function index(Request $request)
+    {
+        $data = $this->model->orderBy('id','desc')->paginate(10);
+        $passengerCar = PassengerCar::get();
+    
+        return view($this->pathView . __FUNCTION__, compact('data', 'passengerCar'))
+            ->with('title', $this->titleIndex)
+            ->with('colums', $this->colums)
+            ->with('urlbase', $this->urlbase)
+            ->with('titleCreate', $this->titleCreate);
     }
 
     public function create()
@@ -88,6 +104,7 @@ class TicketController extends AdminBaseController
 
         $tripList = Routes::where('departure', $departure)
             ->orWhere('arrival', $arrival)
+            ->where('user_id', Auth::user()->id)
             ->get();
 
 
@@ -112,7 +129,7 @@ class TicketController extends AdminBaseController
     public function store(Request $request)
     {
         $validator = $this->validateStore($request);
-
+      
         // if ($validator->fails()) {
         //     return back()->withErrors($validator)->withInput();
         // }
@@ -132,13 +149,50 @@ class TicketController extends AdminBaseController
         return redirect()->route($this->urlIndex)->with('success', 'Created Successfully');
     }
 
-    public function Confirm(Request $request)
-    {
-        Ticket::where('id', $request->id)->update(['status' => 3]);
 
+    public function Confirm(Request $request){
+        Ticket::where('id', $request->id)->update(['status' => 2]);
+      
         return response()->json(['success' => 'Done'], Response::HTTP_OK);
     }
 
+    public function CheckPhone(Request $request){
+        $phone = $request->input('phone');
+        $user_name = User::where('phone', $phone)->pluck('name');
+        $user_email = User::where('phone', $phone)->pluck('email');
+        $user = [
+            'name' => $user_name,
+            'email' => $user_email
+        ];
+        return response()->json($user);
+    }
+
+    public function Price(Request $request){
+        $passengerCar =  PassengerCar::where('id', $request->value)->get();
+        $routes =  $passengerCar[0]->route;
+        $stops = Stops::where('route_id', $routes->id)->get();
+        $price = PassengerCar::where('id', $request->value)->pluck('price');
+        if($passengerCar[0]->vehicle_id != 0){
+            $layout = SeatsLayout::query()->where('vehicle_id', $passengerCar[0]->vehicle->id)->get();
+            $checkSlot = SeatStatus::query()
+                ->where('passenger_car_id',$passengerCar[0]->id)
+                ->where('date',$request->date)
+                ->where('time_id',$request->time)
+                ->get();
+        }else{
+            $layout = [];
+            $checkSlot = [];
+        }
+        $array =[
+            'price' => $price,
+            'layout' => $layout,
+            'checkSlot' => $checkSlot,
+            'passengerCars' => $passengerCar,
+            'routes' => $routes,
+            'stops' => $stops,
+        ];
+        return response()->json($array);
+    }
     public function cancel(Request $request)
     {
         $data_cancel = DB::table("tickets")
@@ -225,5 +279,15 @@ class TicketController extends AdminBaseController
             'message' => "Lỗi vui lòng thử lại"
         ]);
         
+
+    }
+    public function search(Request $request){
+        $passengerCars = PassengerCar::where('license_plate', $request->license_plate)->get();
+      
+        $data = Ticket::where('passenger_car_id', $passengerCars[0]->id)->get();
+      
+        $passengerCar = PassengerCar::get();
+        return to_route($this->urlIndex,compact('data', 'passengerCar'));
+     
     }
 }
