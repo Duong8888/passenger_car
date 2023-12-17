@@ -54,7 +54,7 @@ class TicketController extends AdminBaseController
         $data = $this->model->orderBy('id','desc')->paginate(10);
         $passengerCar = PassengerCar::get();
     
-        return view($this->pathView . __FUNCTION__, compact('data', 'passengerCar'))
+        return view('admin.pages.ticket.index', compact('data', 'passengerCar'))
             ->with('title', $this->titleIndex)
             ->with('colums', $this->colums)
             ->with('urlbase', $this->urlbase)
@@ -282,11 +282,15 @@ class TicketController extends AdminBaseController
     }
     public function search(Request $request){
         $passengerCars = PassengerCar::where('license_plate', $request->license_plate)->get();
-      
-        $data = Ticket::where('passenger_car_id', $passengerCars[0]->id)->get();
-      
+        
+        $data = Ticket::where('passenger_car_id', $passengerCars[0]->id)->orderBy('id','desc')->paginate(10);
+        
         $passengerCar = PassengerCar::get();
-        return to_route($this->urlIndex,compact('data', 'passengerCar'));
+        return view('admin.pages.ticket.index', compact('data', 'passengerCar'))
+        ->with('title', $this->titleIndex)
+        ->with('colums', $this->colums)
+        ->with('urlbase', $this->urlbase)
+        ->with('titleCreate', $this->titleCreate);
      
     }
 }

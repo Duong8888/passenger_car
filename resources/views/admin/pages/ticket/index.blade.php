@@ -15,9 +15,9 @@
                                         Ticket
                                     </button>
                                 </a>
-                                <form action="{{ route('admin.ticket.search') }}" method="post" enctype="multipart/form-data">
+                                <form action="{{ route('admin.ticket.search') }}" method="get">
                                     @csrf
-                                    <input type="text" name="license_plate" placeholder="Enter License..">
+                                    <input type="text" name="license_plate" placeholder="Enter License.." value="{{ isset($search) ? $search : '' }}">
                                     <button type="submit">Search</button>
                                 </form>
                             </div>
