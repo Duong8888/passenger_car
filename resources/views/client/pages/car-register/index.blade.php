@@ -5,6 +5,12 @@
     <section class="pt-16">
         <div class="container mx-auto">
             @if ('' != trim($messageStatus))
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbdc-toujxp29zmuuXNaL-dK4-qfUdh4B_kAqEVzG93ZN7NYIiiD6jZX0y7pKgfUUJ9NM&amp;usqp=CAU" style="
+                    padding-top: 30px;
+                    position: relative;
+                    left: 557px;
+                    width: 140px;
+                ">
                 <div style="text-align: center; padding: 20px;"
                     class="grid items-center grid-cols-8 mt-5 lg:gap-8 gap-y-8 p-4">
                     <h3 class="mb-2 text-3xl text-gray-900 dark:text-white">{{ $messageStatus }}</h3>

@@ -28,7 +28,7 @@ class CarRegisterController extends Controller
 
     public function post(Request $request)
     {
-        
+
         //
         $this->validate($request, [
             'email' => 'required|email|max:255',
@@ -42,8 +42,8 @@ class CarRegisterController extends Controller
         $meassageInput = $request->input('meassageInput');
         $created_at = now(); // Laravel's Carbon instance for the current date and time
 
-        $isRegisterCar = DB::table("contacts")->where("email", $email)->get();
-        if ($isRegisterCar->count() == 0) {
+        $isRegisterCar = DB::table("contacts")->where("email", $email)->first();
+        if ($isRegisterCar == null) {
             $url_image = $this->firebase->uploadImage($request);
             // Tiếp theo, bạn có thể thêm dữ liệu vào cơ sở dữ liệu
             Contact::create([
@@ -78,7 +78,7 @@ class CarRegisterController extends Controller
 
             return view('client.pages.car-register.index', ['message' => $message, 'messageStatus' => $messageStatus]);
         }
-        return view('client.pages.car-register.index', ['message' => "Bạn đã gửi đơn đăng kí nhà xe trước đó. Vui lòng đợi quản trị viên kiểm tra!", 'messageStatus' => "Đang xử lý"]);
+        return view('client.pages.car-register.index', ['message' => "Bạn đã gửi đơn đăng kí nhà xe trước đó. Vui lòng đợi quản trị viên kiểm tra!", 'messageStatus' => $isRegisterCar->status]);
     }
 
 }

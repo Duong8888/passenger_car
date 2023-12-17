@@ -48,7 +48,7 @@
                                     <form action="{{ route('admin.route_contact_edit', $item->id) }}" method="post"
                                         class="js-update-contact" class="btn btn-primary ml-5 ">
                                         @csrf
-                                        <select class="js-select-status-contact status-ChuaXuLy" style="<?= $style ?>"
+                                        <select id="confirmSubmit" class="js-select-status-contact status-ChuaXuLy" style="<?= $style ?>"
                                             name="status" class="js-select-status-contact">
                                                 <option class="form-control"
                                                     style="background-color: #FF5733; color: #FFFFFF;" <?php if ($status == 'Chưa xử lý') {
@@ -100,6 +100,7 @@
                     </tbody>
                 </table>
             </div>
+
         </div>
     </div>
 @endsection
