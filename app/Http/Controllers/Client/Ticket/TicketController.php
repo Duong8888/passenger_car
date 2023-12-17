@@ -415,7 +415,7 @@ class TicketController extends Controller
     public function CancelTicket(Request $request){
         $ticket = Ticket::where('id', $request->id)->update(['status' => 0, 'reason' => $request->reason]);
         session()->forget('value');
-        SeatStatus::where('ticket_id', $request->id)->destroy($request->id);
+        SeatStatus::where('ticket_id', $request->id)->delete();
         return response()->json(['success' => 'Done'], Response::HTTP_OK);
     }
 }
