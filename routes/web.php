@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\revenueAdmin\UserTypeController;
 use App\Http\Controllers\Admin\RevenueAdminController;
 use App\Http\Controllers\Admin\RevenueController;
 use App\Http\Controllers\Admin\RevenueStaffController;
+use App\Http\Controllers\Auth\PasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,10 +46,10 @@ Route::get('/sign_in', [PhoneAuthController::class, 'sign_in'])->name('sign_in')
 
 Route::get('/login', [App\Http\Controllers\LoginAdminController::class, 'showLoginAdmin'])->name('login');
 Route::post('/login', [App\Http\Controllers\LoginAdminController::class, 'loginAdmin']);
-
 Route::middleware(['auth', CheckAdmin::class])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
+    Route::post('/change-password', [\App\Http\Controllers\Admin\ProfileAdminController::class, 'changePassword'])->name('change-password');
+    Route::get('/change-password', [\App\Http\Controllers\Admin\ProfileAdminController::class, 'showChangePasswordForm'])->name('change-password');
     Route::post('dashboard/revenue', [DashboardController::class, 'dayrevenue'])->name('dashboard.dayrevenue');
     Route::post('dashboard/revenue1', [DashboardController::class, 'dayrevenue1'])->name('dashboard.dayrevenue1');
     Route::post('dashboard/revenue2', [DashboardController::class, 'dayrevenue2'])->name('dashboard.dayrevenue2');
@@ -167,7 +168,6 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
             Route::post('/filter-by-date', 'filter_by_date')->name('filter_by_date');
             Route::post('/filter-by-select', 'filter_by_select')->name('filter_by_select');
         });
-
         // Quản lý contact
         Route::get('/contact/index', [App\Http\Controllers\Admin\ContactController::class, 'index'])->name('route_contact_index');
         Route::get('/contact/detail/{id}', [App\Http\Controllers\Admin\ContactController::class, 'detail'])->name('route_contact_detail');
@@ -199,7 +199,7 @@ Route::group(['prefix' => 'notifications', 'as' => 'notifications.'], function (
     Route::post('load', [NotificationController::class, 'getNotification'])->name('loadMessage');
 });
 
-
+Route::get('password', [PasswordController::class, 'update'])->name('password');
 
 
 

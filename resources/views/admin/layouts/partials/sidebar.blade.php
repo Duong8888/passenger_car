@@ -21,7 +21,7 @@
                 <div class="dropdown-menu user-pro-dropdown">
 
                     <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                    <a href="{{ url('admin/change-password') }}" class="dropdown-item notify-item">
                         <i class="fe-user me-1"></i>
                         <span>My Account</span>
                     </a>
@@ -214,3 +214,4 @@
     <!-- Sidebar -left -->
 
 </div>
+
