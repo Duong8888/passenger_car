@@ -16,12 +16,12 @@ class UserPermissionController extends Controller
         $roles = Role::all();
         return view('admin.pages.userpermission.index',compact('users','roles'));
     }
-    public function edit(string $id)
+    public function edit(Request $request, string $id) 
     {
         $user = User::find($id);
         $roles = Role::whereNotIn('name', ['SupperAdmin'])->get();
         $roleId = $user->roles->pluck('id')->all();
-        //    return response()->json($roleID, 200, [], JSON_PRETTY_PRINT);
+        //    return response()->json($request, 200, [], JSON_PRETTY_PRINT);
         return view('admin.pages.userpermission.permission',compact('user','roles','roleId'));
     }
     public function update(Request $request, $id)
@@ -30,6 +30,14 @@ class UserPermissionController extends Controller
         $roleName = $request->input('role');
         $role = Role::where('name', $roleName)->first();
         $user->syncRoles([$role->name]);
+        $roles = $request->input('role');
+        if($roles == 'user'){
+            User::where('id',$id)->update(['user_type'=>'user']);
+        }else if($roles == 'Nhà xe'){
+            User::where('id',$id)->update(['user_type'=>'staff']);
+        }else{
+            User::where('id',$id)->update(['user_type'=>'admin']);
+        }
         return Redirect::route('admin.permission.index')->with('success', 'Vai trò đã được cập nhật thành công.');
     }
 }

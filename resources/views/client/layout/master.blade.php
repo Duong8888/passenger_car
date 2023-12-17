@@ -9,7 +9,6 @@
     <meta content="" name="Themesbrand" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="csrf-token" content="{{csrf_token()}}">
-
     @include('client.layout.partials.style')
     @yield('page-style')
 </head>

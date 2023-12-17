@@ -178,7 +178,7 @@
                                 <a class="block w-full px-4 py-2 text-13 font-medium {{ request()->routeIs('about_us.vision') ? 'text-violet-500' : 'text-gray-700' }} duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 uppercase {{ request()->routeIs('about_us.vision') ? 'active' : '' }}" href="{{ route('about_us.vision') }}">Tầm nhìn</a>
                             </li>
                             <li>
-                                <a class="block w-full px-4 py-2 text-13 font-medium {{ request()->routeIs('about_us.mission') ? 'text-violet-500' : 'text-gray-700' }} duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 uppercase {{ request()->routeIs('about_us.mission') ? 'active' : '' }}" href="{{ route('about_us.mission') }}">Sứ mệnh</a>
+                                <a class="block w-full px-4 py-2 text-13 font-medium {{ request()->routeIs('about_us.mission') ? 'text-violet-500' : 'text-gray-700' }} duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 uppercase {{ request()->routeIs('about_us.mission') ? 'active' : '' }}" href="{{ route('about_us.mission') }}">Chính sách</a>
                             </li>
                         </ul>
                     </li>
