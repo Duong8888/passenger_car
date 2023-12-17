@@ -115,23 +115,20 @@
                             <span> Quản lí tuyến đường </span>
                         </a>
                     </li>
-
                     <li>
                         <a href="{{ route('admin.revenueStaff.index') }}">
                             <i class="mdi mdi-view-dashboard-outline"></i>
                             <span> Thống kê doanh thu </span>
                         </a>
                     </li>
+
+                    <li>
+                        <a href="{{ route('admin.schedule.index') }}">
+                            <i class="mdi mdi-clipboard-outline"></i>
+                            <span>Lịch trình hôm nay</span>
+                        </a>
+                    </li>
                 @endif
-
-                <li>
-                    <a href="{{ route('admin.schedule.index') }}">
-                        <i class="mdi mdi-clipboard-outline"></i>
-                        <span>Lịch trình hôm nay</span>
-                    </a>
-                </li>
-
-
 
                     @if(auth()->user()->hasAnyRole(['SupperAdmin']))
                         <li>

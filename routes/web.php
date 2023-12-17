@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\Admin\PassengerCarController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\admin\permission\RolePermissionController;
-use App\Http\Controllers\admin\permission\UserPermissionController;
+use App\Http\Controllers\Admin\permission\RolePermissionController;
+use App\Http\Controllers\Admin\permission\UserPermissionController;
 use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\RouteController;
@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\Report\TicketReportController;
 use App\Http\Controllers\Admin\Report\UserReportController;
-use App\Http\Controllers\admin\StopsController;
+use App\Http\Controllers\Admin\StopsController;
 use App\Http\Controllers\Admin\EditorController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\PostCategoryController;
@@ -24,7 +24,7 @@ use App\Http\Controllers\Admin\revenueAdmin\ContactStaffController;
 use App\Http\Controllers\Admin\revenueAdmin\UserTypeController;
 use App\Http\Controllers\Admin\RevenueAdminController;
 use App\Http\Controllers\Admin\RevenueController;
-use App\Http\Controllers\admin\RevenueStaffController;
+use App\Http\Controllers\Admin\RevenueStaffController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +48,12 @@ Route::post('/login', [App\Http\Controllers\LoginAdminController::class, 'loginA
 
 Route::middleware(['auth', CheckAdmin::class])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::post('dashboard/revenue', [DashboardController::class, 'dayrevenue'])->name('dashboard.dayrevenue');
+    Route::post('dashboard/revenue1', [DashboardController::class, 'dayrevenue1'])->name('dashboard.dayrevenue1');
+    Route::post('dashboard/revenue2', [DashboardController::class, 'dayrevenue2'])->name('dashboard.dayrevenue2');
+    Route::post('dashboard/revenue3', [DashboardController::class, 'dayrevenue3'])->name('dashboard.dayrevenue3');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -127,6 +133,11 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
             Route::post('/filter-by-select', 'filter_by_select')->name('filter_by_select');
 
         });
+         // quản lý lich trình
+        Route::group(['prefix' => 'schedule', 'as' => 'schedule.'], function () {
+            Route::get('/', [ScheduleController::class, 'index'])->name('index');
+            Route::post('/update', [ScheduleController::class, 'update'])->name('update');
+        });
     });
 
     //  SupperAdmin-Admin
@@ -180,14 +191,6 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         Route::delete('/rolePermission/create/{id}', [RolePermissionController::class, 'delete'])->name('rolePermission.delete');
     });
 });
-
-
-
-    // quản lý lich trình
-    Route::group(['prefix' => 'schedule', 'as' => 'schedule.'], function () {
-        Route::get('/', [ScheduleController::class, 'index'])->name('index');
-        Route::post('/update', [ScheduleController::class, 'update'])->name('update');
-    });
 
 
 Route::group(['prefix' => 'notifications', 'as' => 'notifications.'], function () {

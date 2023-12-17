@@ -104,7 +104,6 @@ class TicketController extends AdminBaseController
 
         $tripList = Routes::where('departure', $departure)
             ->orWhere('arrival', $arrival)
-            ->where('user_id', Auth::user()->id)
             ->get();
 
 
