@@ -48,6 +48,7 @@ Route::post('/login', [App\Http\Controllers\LoginAdminController::class, 'loginA
 
 Route::middleware(['auth', CheckAdmin::class])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
     Route::post('dashboard/revenue', [DashboardController::class, 'dayrevenue'])->name('dashboard.dayrevenue');
     Route::post('dashboard/revenue1', [DashboardController::class, 'dayrevenue1'])->name('dashboard.dayrevenue1');
     Route::post('dashboard/revenue2', [DashboardController::class, 'dayrevenue2'])->name('dashboard.dayrevenue2');
@@ -69,7 +70,7 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         Route::put('/posts/{id}',  [PostController::class, 'update'])->name('posts.update');
         Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
         Route::get('/posting/{slug}', [PostController::class, 'createSlug'])->name('post.show');
-    
+
     //  Nhà xe
     Route::group(['middleware' => 'checkRoles:Nhà xe'], function () {
         // Quản lý vé
@@ -97,8 +98,8 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
             Route::put('/update/{id}', 'update')->name('update');
             Route::delete('/destroy/{route}', 'destroy')->name('destroy');
         });
-    
-        // Quản lý xe 
+
+        // Quản lý xe
         Route::group(["prefix" => "car", "as" => "car."], function () {
             Route::get('/', [PassengerCarController::class, 'index'])->name('index');
             Route::post('store', [PassengerCarController::class, 'store'])->name('store');
@@ -167,7 +168,7 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
             Route::post('/filter-by-select', 'filter_by_select')->name('filter_by_select');
         });
 
-        // Quản lý contact 
+        // Quản lý contact
         Route::get('/contact/index', [App\Http\Controllers\Admin\ContactController::class, 'index'])->name('route_contact_index');
         Route::get('/contact/detail/{id}', [App\Http\Controllers\Admin\ContactController::class, 'detail'])->name('route_contact_detail');
         Route::post('/contact/sendmail', [App\Http\Controllers\Admin\ContactController::class, 'sendmail'])->name('route_contact_sendmail');
