@@ -168,6 +168,11 @@
                     </li>
 
                     <li class="relative dropdown">
+                        <button class="py-5 text-gray-800 lg:px-4 dropdown-toggle lg:h-[70px] {{ request()->routeIs('client.contact.search') ? 'active' : '' }}" id="contact"
+                            ><a href="{{route('client.contact.search')}}">Tra Cứu Vé </a></button>
+                    </li>
+
+                    <li class="relative dropdown">
                         <button class="py-5 text-gray-800 lg:px-4 dropdown-toggle dark:text-gray-50 lg:h-[70px] {{ request()->routeIs(['about_us.index', 'about_us.vision', 'about_us.mission']) ? 'active' : '' }}" id="about">Về chúng tôi <i class='align-middle bx bxs-chevron-down ltr:ml-1 rtl:mr-1'></i></button>
                     
                         <ul class="relative top-auto z-50 py-2 list-none bg-white border-0 rounded dropdown-menu lg:border border-gray-500/20 lg:absolute ltr:-left-3 rtl:-right-3 lg:w-48 lg:shadow-lg dark:bg-neutral-800" aria-labelledby="blog">
