@@ -535,12 +535,11 @@
                                 </div>
                             @endif
 
-                            <?php $date = date("Y-m-d"); ?>
                             <span hidden class="price-slot">{{$passengerCars[0]->price}}</span>
                             <input type="date" id="date" name="date"
                                    class="px-2 py-1 border-none outline-none"
                                    hidden
-                                   value="{{$date}}">
+                                   value="{{$_GET['date']}}">
 
                             @if($passengerCars[0]->vehicle_id == 0)
                                 <p class="my-4">Số lượng khách</p>

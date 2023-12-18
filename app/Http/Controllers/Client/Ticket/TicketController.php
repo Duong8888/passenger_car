@@ -72,6 +72,7 @@ class TicketController extends Controller
                     if(session('checkSeat')){
                         return view('client.pages.ticket.index', ['stops' => $stops]);
                     }else{
+                        session()->forget('value');
                         return back()->with('message','Ghế của bạn đã có người nhanh tay hơn đặt rồi vui lòng chọn gế khác !');
                     }
                 }
@@ -137,7 +138,7 @@ class TicketController extends Controller
 
     public function vnpay_payment(Request $request)
     {
-        
+
         $a = json_decode($request->session);
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
         $vnp_Returnurl = route('client.ticket.add-vnpay-to-db');
