@@ -9,11 +9,30 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="header-title mt-0 mb-3">Tickets List</h4>
-                            <a href="{{ route('admin.ticket.create') }}">
-                                <button type="button" class="btn btn-success waves-effect waves-light mb-4">Create New
-                                    Ticket
-                                </button>
-                            </a>
+                            <div style="display: flex; justify-content: space-between">
+                                <a href="{{ route('admin.ticket.create') }}">
+                                    <button type="button" class="btn btn-success waves-effect waves-light mb-4">Create New
+                                        Ticket
+                                    </button>
+                                </a>
+                                <form action="{{ route('admin.ticket.search') }}" method="get" class="form-inline">
+                                    @csrf
+                                    <div class="form-group row">
+                                        <div class="col-auto">
+                                            <select name="license_plate" class="form-control">
+                                                @foreach ($passengerCar as $value)
+                                                    <option value="{{ $value->license_plate }}">{{ $value->license_plate }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-auto">
+                                            <button type="submit" class="btn btn-primary">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                
+                            </div>
+                           
                             @if ($message = Session::get('success'))
                                 <div>
                                     <ul>
@@ -21,12 +40,14 @@
                                     </ul>
                                 </div>
                             @endif
+                          
                             <div class="table">
-                                <table class="table table-bordered mb-0">
+                                <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap">
                                     <thead>
                                     <tr>
                                         <th>ID</th>
                                         <th>Username</th>
+                                        <th>PassengerCar</th>
                                         <th>Phone</th>
                                         <th>Email</th>
                                         <th>Thanh toán</th>
@@ -44,6 +65,13 @@
                                         <tr>
                                             <td>#{{ $ticket->id }}</td>
                                             <td>{{ $ticket->username }}</td>
+                                            <td>
+                                                @foreach ($passengerCar as $value)
+                                                    @if ($ticket->passenger_car_id == $value->id)
+                                                     {{ $value->license_plate }}
+                                                    @endif
+                                                @endforeach
+                                            </td>
                                             <td>{{ $ticket->phone }}</td>
                                             <td>{{ $ticket->email }}</td>
                                             <td>{{ $ticket->payment_method }}</td>
@@ -75,7 +103,7 @@
                                                         <a class="dropdown-item"
                                                             href="{{ route('admin.ticket.edit', $ticket->id) }}">Sửa
                                                         </a>
-                                                        <a href="javascript:void(0);" class="dropdown-item confirm" data-id="{{ $ticket->id }}">
+                                                        <a class="dropdown-item confirm" data-id="{{ $ticket->id }}">
                                                             Xác nhận
                                                         </a>
                                                         <!-- item-->
@@ -89,10 +117,12 @@
                                         </tr>
                                         </tbody>
                                     @endforeach
+
                                 </table>
                                 <div class="float-end mt-2">
                                     {{ $data->links() }}
                                 </div>
+                              
                             </div>
                         </div>
                     </div>
@@ -106,7 +136,6 @@
 
     </div> <!-- content -->
 @endsection
-
 @section('page-script')
     <script>
         $(document).ready(function(){

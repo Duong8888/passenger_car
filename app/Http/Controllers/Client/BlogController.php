@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\PostsCategory;
 use Illuminate\Http\Request;
 use App\Models\Posts;
 class BlogController extends Controller
@@ -10,15 +11,14 @@ class BlogController extends Controller
     public function blog($id)
     {
         $post = Posts::findOrFail($id);
-        return view('client.pages.blogs.blog_details', compact('post'));
+        $categories = PostsCategory::query()->get();
+        return view('client.pages.blogs.blog_details', compact('post', 'categories'));
     }
+
     public function show()
     {
-        $posts = Posts::query()->paginate(8);
+        $posts = Posts::query()->paginate(6);
         return view('client.pages.blogs.blog', compact('posts'));
     }
-//    public function getAllCategories(){
-////        $categories = Posts::all();
-////        return $categories;
-////    }
+
 }

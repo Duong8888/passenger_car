@@ -5,6 +5,12 @@
     <section class="pt-16">
         <div class="container mx-auto">
             @if ('' != trim($messageStatus))
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbdc-toujxp29zmuuXNaL-dK4-qfUdh4B_kAqEVzG93ZN7NYIiiD6jZX0y7pKgfUUJ9NM&amp;usqp=CAU" style="
+                    padding-top: 30px;
+                    position: relative;
+                    left: 557px;
+                    width: 140px;
+                ">
                 <div style="text-align: center; padding: 20px;"
                     class="grid items-center grid-cols-8 mt-5 lg:gap-8 gap-y-8 p-4">
                     <h3 class="mb-2 text-3xl text-gray-900 dark:text-white">{{ $messageStatus }}</h3>
@@ -100,7 +106,7 @@
                                                 minh lên <span style="color: red;">*</span> </label>
                                             <input  id="uploadInput"
                                                 class="w-full mt-1 rounded border-gray-100/50 placeholder:text-sm placeholder:text-gray-400 dark:bg-transparent dark:border-gray-800 focus:ring-0 focus:ring-offset-0 dark:text-gray-200"
-                                                type="file" name="images[]" id="images" multiple accept="image/*">
+                                                type="file" name="images[]" id="multiple_files" required multiple accept="image/*">
                                         </div>
 
                                     </div>

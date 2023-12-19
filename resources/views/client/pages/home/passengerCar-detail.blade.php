@@ -57,7 +57,7 @@
                                                     thoại</label>
                                                 <div>
                                                     <p class="mb-0 text-gray-500 dark:text-gray-300">
-                                                        {{$passengerCars[0]->license_plate}}</p>
+                                                        {{$user[0]->phone}}</p>
                                                 </div>
                                             </div>
                                         </li>
@@ -213,7 +213,7 @@
                                     <div class="p-6 tab-content">
 
                                         {{-- Mô tả --}}
-                                        <div class="block w-full tab-pane" id="mota-tab">
+                                        <div class="description block w-full tab-pane overflow-auto max-h-[calc(100vh_-_90px)]" id="mota-tab">
 
                                             <div class="p-6 rounded border-gray-100/50 dark:border-neutral-600">
                                                 <div class="mb-2 text-gray-500 dark:text-gray-300">
@@ -425,81 +425,47 @@
                     </div>
                 </div>
                 <div class="grid grid-cols-12 gap-5">
-                    @foreach ($passengerCars as $route)
-                        @if ($route != null && $route->id == $routes->id)
+                    @foreach ($similarCar as $route)
+
                             <div class="col-span-12 md:col-span-6 lg:col-span-4">
                                 <div
                                     class="p-2 mt-3 transition-all duration-500 bg-white rounded shadow-lg shadow-gray-100/50 card dark:bg-neutral-800 dark:shadow-neutral-600/20 group/blog">
                                     <div class="relative overflow-hidden">
-                                        <img style="min-width: 100%;height: 300px;"
+                                        <img style="min-width: 100%;height: 300px; object-fit: contain"
                                              src="{{ asset($route->albums[0]->path) }}" alt="car"
                                              class="rounded">
-                                        <div
-                                            class="absolute inset-0 hidden transition-all duration-500 rounded-md bg-black/30 group-hover/blog:block">
-                                        </div>
-                                        <div
-                                            class="hidden text-white transition-all duration-500 top-2 left-2 group-hover/blog:block author group-hover/blog:absolute">
-                                            <p class="mb-0 "><i class="fa-solid fa-map-location-dot"></i> <a
-                                                    href="javascript:void(0)"
-                                                    class="text-light user">{{ $route->route->departure }} ->
-                                                    {{ $route->route->arrival }}</a></p>
-                                            <p class="mb-0 text-light date"></i> {{$route->route->arrival}}</p>
-                                            <p class="mb-0 text-light date"><i
-                                                    class="fa-solid fa-money-check-dollar"></i>
-                                                {{ number_format($route->price, 0, ',', ',') }}đ</p>
-                                        </div>
-                                        <div
-                                            class="hidden bottom-2 right-2 group-hover/blog:block author group-hover/blog:absolute">
-                                            <ul class="mb-0 list-unstyled">
-                                                <li class="list-inline-item"><a href="javascript:void(0)"
-                                                                                class="text-white"><i
-                                                            class="mdi mdi-heart-outline me-1"></i>
-                                                        999</a></li>
-                                                <li class="list-inline-item"><a href="javascript:void(0)"
-                                                                                class="text-white"><i
-                                                            class="mdi mdi-comment-outline me-1"></i> 99</a></li>
-                                            </ul>
-                                        </div>
                                     </div>
                                     <div class="p-5">
-                                        <a href="" class="primary-link">
-                                            <h5 class="mb-1 text-gray-900 fs-17 dark:text-gray-50">{{$route->user->name}}</h5>
-                                        </a>
-                                        <p class="mb-6 text-gray-500 dark:text-gray-300"
-                                           style="min-height: 50px;max-height: 50px">
-                                            {{ Str::limit($route->description, 100, '...') }}</p>
+
+                                        <h5 class="mb-4 text-gray-900 fs-17 dark:text-gray-50">Nhà xe: {{$route->user->name}}</h5>
+                                        <p class="text-gray-500 dark:text-gray-300">
+                                            Giá vé :
+                                            {{ number_format($route->price, 0, ',', ',') }}đ
+                                        </p>
+                                        <p class="text-gray-500 dark:text-gray-300">
+                                            Loại xe :
+                                            {{ $route->capacity }} chỗ
+                                        </p>
+                                        <p class=" mb-6 text-gray-500 dark:text-gray-300">
+                                            Giờ khởi hành :
+                                            {{ date('H:i', strtotime($route->workingTime->first()->departure_time))}}
+                                        </p>
                                         <!--end col-->
                                         <div class="col-span-3 lg:col-span-2">
                                             <div class="text-start text-md-end dark:text-gray-50">
-                                                <form action="{{ URL::to('passengerCar-detail') }}" method="POST">
-                                                    @csrf
-                                                    <input type="text" hidden name='passenger_id'
-                                                           value="{{ $route->id }}">
-                                                    <input type="text" hidden name='image_id'
-                                                           value="{{ $route->album_id }}">
-                                                    <input type="text" hidden name='route_id'
-                                                           value="{{ $route->route_id }}">
-                                                    <button class="text-blue-500"
+                                                    <a href="{{route('passengerCar.detail',['id'=>$route->id,'time'=>$route->workingTime->first()->id,'date'=>date('Y-m-d')])}}" class="text-blue-500"
                                                             style="font-size: 16px;font-weight: bold;coler:rgb(68, 155, 254)">
                                                         <i
                                                             class="mdi mdi-chevron-double-right"></i>Đặt vé
                                                         ngay
-                                                    </button>
-                                                    <style>
-                                                        . {
-                                                            color: rgb(88, 50, 255);
-                                                            font-weight: bold
-                                                        }
-                                                    </style>
-                                                </form>
-
+                                                    </a>
                                             </div>
                                         </div>
                                         <!--end col-->
                                     </div>
                                 </div>
                             </div>
-                        @endif
+
                     @endforeach
                 </div>
             </div>
@@ -569,12 +535,11 @@
                                 </div>
                             @endif
 
-                            <?php $date = date("Y-m-d"); ?>
                             <span hidden class="price-slot">{{$passengerCars[0]->price}}</span>
                             <input type="date" id="date" name="date"
                                    class="px-2 py-1 border-none outline-none"
                                    hidden
-                                   value="{{$date}}">
+                                   value="{{$_GET['date']}}">
 
                             @if($passengerCars[0]->vehicle_id == 0)
                                 <p class="my-4">Số lượng khách</p>
@@ -625,7 +590,7 @@
                                         </div>
                                         <div class="flex-col w-full lg:w-1/2" style="user-select: none;">
                                             <!-- Bảng ghế -->
-                                            <div style="max-height: 30vh;overflow: auto">
+                                            <div style="max-height: 35vh;overflow: auto">
                                                 @foreach($layout as $key => $value)
                                                     @php
                                                         $array = json_decode($value->seat, true);
@@ -844,4 +809,18 @@
 @endsection
 @section('page-script')
     <script type="module" src="{{ asset('client/js/custom/passengeCar-detail.js') }}"></script>
+@endsection
+@section('page-style')
+    <style>
+        .description::-webkit-scrollbar {
+            width: 8px;
+        }
+        .description::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .description::-webkit-scrollbar-thumb {
+            background: #ccccdd;
+            border-radius: 5px;
+        }
+    </style>
 @endsection

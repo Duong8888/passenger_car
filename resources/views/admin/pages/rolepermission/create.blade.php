@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+@section('title', "Thêm quyền và vai trò")
 @section('page-style')
    <!-- third party css -->
 <link href="{{ asset('admin/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
@@ -91,12 +92,8 @@
             <div class="col-xl-6">
                 <div class="card">
                     <div class="card-body">
-                        @if ($message = Session::get('successsPermission'))
-                            <div>
-                                <ul>
-                                    <p  style="color: rgb(93, 82, 150)">{{ $message }}</p>
-                                </ul>
-                            </div>
+                        @if ($message = Session::get('success'))
+                            <div class="alert alert-success mt-1 mb-1" style="color: #004080; background-color: #cce5ff; font-size: 12px;">{{ $message }}</div>
                         @endif
                         <form action="{{ route('admin.rolePermission.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf

@@ -1,5 +1,6 @@
 <?php
 
+
 use App\Http\Controllers\Client\SearchController;
 use App\Http\Controllers\Client\Ticket\TicketController;
 use App\Http\Controllers\NotificationController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Client\BlogController;
 use App\Http\Controllers\Client\CategoryController;
 use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\Client\CarRegisterController;
+use App\Http\Controllers\Client\ContactController;
 use App\Http\Middleware\CheckUser;
 
 //Nam
@@ -66,7 +68,9 @@ Route::middleware(CheckUser::class)->group(function(){
 
     Route::get('/blog/{id}', [BlogController::class, 'blog'])->name('blog');
     Route::get('/blogs', [BlogController::class, 'show'])->name('blog.show');
-    Route::get('/category-detail/{id}',[BlogController::class, 'show'])->name('category-detail');
+//    Route::get('/category-detail/{id}',[BlogController::class, 'show'])->name('category-detail');
+//    Route::get('/category-blog/{id}', [BlogController::class, 'blog'])->name('category-blog');
+
 
 
     Route::post('/update-ticket', [TicketController::class, 'CountTicket'])->name('client.ticket.update-ticket');
@@ -79,8 +83,10 @@ Route::middleware(CheckUser::class)->group(function(){
     Route::post('/momo-method', [TicketController::class, 'momo_payment'])->name('client.ticket.momo-method');
     Route::get('/vnpay-todb', [TicketController::class, 'checkoutPayment'])->name('client.ticket.add-vnpay-to-db');
     Route::get('/end-ticket-payment', [TicketController::class, 'EndTicketPayment'])->name('client.finish.ticket');
-    Route::get('/contact', [App\Http\Controllers\Client\ContactController::class, 'index'])->name('contact.index');
-
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+    Route::get('/search-ticket', [ContactController::class, 'search'])->name('client.contact.search');
+    Route::post('/search-ticket', [ContactController::class, 'searchTicket'])->name('client.contact.searchTicket');
+    
 });
 
 Route::get('/loginadmin', [App\Http\Controllers\LoginAdminController::class, 'showLoginAdmin'])->name('login_admin');

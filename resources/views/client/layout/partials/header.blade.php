@@ -168,6 +168,11 @@
                     </li>
 
                     <li class="relative dropdown">
+                        <button class="py-5 text-gray-800 lg:px-4 dropdown-toggle lg:h-[70px] {{ request()->routeIs('client.contact.search') ? 'active' : '' }}" id="contact"
+                            ><a href="{{route('client.contact.search')}}">Tra Cứu Vé </a></button>
+                    </li>
+
+                    <li class="relative dropdown">
                         <button class="py-5 text-gray-800 lg:px-4 dropdown-toggle dark:text-gray-50 lg:h-[70px] {{ request()->routeIs(['about_us.index', 'about_us.vision', 'about_us.mission']) ? 'active' : '' }}" id="about">Về chúng tôi <i class='align-middle bx bxs-chevron-down ltr:ml-1 rtl:mr-1'></i></button>
                     
                         <ul class="relative top-auto z-50 py-2 list-none bg-white border-0 rounded dropdown-menu lg:border border-gray-500/20 lg:absolute ltr:-left-3 rtl:-right-3 lg:w-48 lg:shadow-lg dark:bg-neutral-800" aria-labelledby="blog">
@@ -178,7 +183,7 @@
                                 <a class="block w-full px-4 py-2 text-13 font-medium {{ request()->routeIs('about_us.vision') ? 'text-violet-500' : 'text-gray-700' }} duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 uppercase {{ request()->routeIs('about_us.vision') ? 'active' : '' }}" href="{{ route('about_us.vision') }}">Tầm nhìn</a>
                             </li>
                             <li>
-                                <a class="block w-full px-4 py-2 text-13 font-medium {{ request()->routeIs('about_us.mission') ? 'text-violet-500' : 'text-gray-700' }} duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 uppercase {{ request()->routeIs('about_us.mission') ? 'active' : '' }}" href="{{ route('about_us.mission') }}">Sứ mệnh</a>
+                                <a class="block w-full px-4 py-2 text-13 font-medium {{ request()->routeIs('about_us.mission') ? 'text-violet-500' : 'text-gray-700' }} duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 uppercase {{ request()->routeIs('about_us.mission') ? 'active' : '' }}" href="{{ route('about_us.mission') }}">Chính sách</a>
                             </li>
                         </ul>
                     </li>

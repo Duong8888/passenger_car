@@ -72,6 +72,7 @@ class TicketController extends Controller
                     if(session('checkSeat')){
                         return view('client.pages.ticket.index', ['stops' => $stops]);
                     }else{
+                        session()->forget('value');
                         return back()->with('message','Ghế của bạn đã có người nhanh tay hơn đặt rồi vui lòng chọn gế khác !');
                     }
                 }
@@ -137,7 +138,7 @@ class TicketController extends Controller
 
     public function vnpay_payment(Request $request)
     {
-        
+
         $a = json_decode($request->session);
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
         $vnp_Returnurl = route('client.ticket.add-vnpay-to-db');
@@ -148,7 +149,7 @@ class TicketController extends Controller
         $vnp_OrderType = "Trip Payment";
         $vnp_Amount = $a[0]->total_price * 100;
         $vnp_Locale = "VN";
-        $vnp_BankCode = "NCB";
+        $vnp_BankCode = "";
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR']; //127.0.0.1
 
         $inputData = [
@@ -415,7 +416,7 @@ class TicketController extends Controller
     public function CancelTicket(Request $request){
         $ticket = Ticket::where('id', $request->id)->update(['status' => 0, 'reason' => $request->reason]);
         session()->forget('value');
-        SeatStatus::where('ticket_id', $request->id)->destroy($request->id);
+        SeatStatus::where('ticket_id', $request->id)->delete();
         return response()->json(['success' => 'Done'], Response::HTTP_OK);
     }
 }

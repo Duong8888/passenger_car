@@ -41,7 +41,7 @@
                            <td>{{$item->name}}</td>
                            <td>{{$item->email}}</td>
                            <td>{{$item->phone}}</td>
-                           <td>{{$item->user_type}}</td>
+                           <td>Nhà xe</td>
                            <td>
                                <a class="btn btn-danger" href="{{route('admin.route_staff_edit',['id'=>$item->id])}}">Sửa</a>
                                <a class="btn btn-primary" href="{{route('admin.route_staff_delete',['id'=>$item->id])}}">Xóa</a>
@@ -51,7 +51,7 @@
              @endforeach
                     </tbody>
                 </table>
-                <button  class="btn btn-primary ml-5 "><a style="text-decoration: none; color: white;" href="{{route('admin.route_staff_add')}}">New Product</a></button>
+                {{-- <button  class="btn btn-primary ml-5 mt-3"><a style="text-decoration: none; color: white;" href="{{route('admin.route_staff_add')}}">Thêm nhà xe</a></button> --}}
             </div>
         </div>
 

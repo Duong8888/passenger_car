@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', "Quản trị Admin")
+@section('title', "Trang quản trị")
 @section('page-style')
    <!-- third party css -->
 <link href="{{ asset('admin/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
@@ -46,7 +46,121 @@
 
 <!-- init js -->
 <script src="{{ asset('admin/js/pages/flot.init.js') }}"></script>
+<script>
+    $(document).ready(function(){
+        chart30dayStaff();
+        var chart2 = new Morris.Area({
+            element: 'firstchart',
+            lineColors: ['#819C79', '#10fc87','#FF6541'],
+            pointFillColors: ['#ffffff'],
+            pointStrokeColors: ['black'],
+            fillOpacity: 0.3,
+            hideHover: 'auto',
+            parseTime: false,
+            xkey: 'date',
+            ykeys: ['quantity','total_price'],
+            behaveLikeLine: true,
+            labels: ['Số lượng vé','Doanh thu']
+            });
+        function chart30dayStaff() {
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url: "{{ route('admin.dashboard.dayrevenue2') }}",
+                method: "POST",
+                dataType: "JSON",
+                data: { _token: _token },
 
+                success: function(data) {
+                    console.log(data);
+                    chart2.setData(data);
+                }
+            });
+        }
+        chart30dayStaffs();
+        var chart3 = new Morris.Bar({
+            element: 'first',
+            lineColors: ['#819C79', '#10fc87','#FF6541'],
+            pointFillColors: ['#ffffff'],
+            pointStrokeColors: ['black'],
+            fillOpacity: 0.3,
+            hideHover: 'auto',
+            parseTime: false,
+            xkey: 'date',
+            ykeys: ['quantity'],
+            behaveLikeLine: true,
+            labels: ['Số lượng vé']
+            });
+        function chart30dayStaffs() {
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url: "{{ route('admin.dashboard.dayrevenue3') }}",
+                method: "POST",
+                dataType: "JSON",
+                data: { _token: _token },
+
+                success: function(data) {
+                    console.log(data);
+                    chart3.setData(data);
+                }
+            });
+        }
+    });
+       chart30daysorder();
+        var chart = new Morris.Area({
+                element: 'myfirstchart',
+                lineColors: ['#FF6633', '#6633FF', '#00FF00', '#FFFF00'],
+                pointFillColors: ['#ffffff'],
+                pointStrokeColors: ['black'],
+                fillOpacity: 0.3,
+                hideHover: 'auto',
+                parseTime: false,
+                xkey: 'created_at',
+                ykeys: ['count', 'user_type_admin', 'user_type_staff', 'user_type_user'],
+                behaveLikeLine: true,
+                labels: ['Số người đăng ký', 'Admin', 'Nhà xe', 'User'],
+            });
+            function chart30daysorder() {
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url: "{{ route('admin.dashboard.dayrevenue') }}",
+                    method: "POST",
+                    dataType: "JSON",
+                    data: { _token: _token },
+                    success: function(data) {
+                        console.log(data);
+                        chart.setData(data);
+                    }
+                });
+            }
+            chart30sdaysorder();
+        var chart1 = new Morris.Area({
+            element: 'chart',
+            lineColors: ['#819C79', '#10fc87','#FF6541'],
+            pointFillColors: ['#ffffff'],
+            pointStrokeColors: ['black'],
+            fillOpacity: 0.3,
+            hideHover: 'auto',
+            parseTime: false,
+            xkey: 'date',
+            ykeys: ['quantity','total_price'],
+            behaveLikeLine: true,
+            labels: ['Số lượng vé','Doanh thu']
+            });
+            
+        function chart30sdaysorder() {
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url: "{{ route('admin.dashboard.dayrevenue1') }}",
+                method: "POST",
+                dataType: "JSON",
+                data: { _token: _token },
+
+                success: function(data) {
+                    chart1.setData(data);
+                }
+            });
+        }
+</script>
 @endsection
 
 @section('content')
@@ -54,236 +168,436 @@
 
         <!-- Start Content-->
         <div class="container-fluid">
-
-            <div class="row">
-
-                <div class="col-xl-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="dropdown float-end">
-                                <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="mdi mdi-dots-vertical"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item">Another action</a>
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item">Something else</a>
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
-                                </div>
-                            </div>
-
-                            <h4 class="header-title mt-0 mb-4">Số lượng người dùng</h4>
-
-                            <div class="widget-chart-1" >
-
-                                <div class="widget-chart-box-1 float-start" dir="ltr" style="position: relative;">
-                                    <input data-plugin="knob" data-width="70" data-height="70" data-fgColor="#ffffff"
-                                           data-bgColor="#db3700"
-                                           data-skin="tron" data-angleOffset="180" data-readOnly=true
-                                           data-thickness=".15"/>
-                                           <i class="fa-solid fa-users fa-beat-fade" style="position: absolute; top: 30%; left: 30%; transform: translate(-50%, -50%);font-size:25px;color:#db3700"></i>
-                                </div>
-
-                                <div class="widget-detail-1 text-end">
-                                    <h2 class="fw-normal pt-2 mb-1">{{ $totalUsers->count() }}</h2>
-                                    <p class="text-muted mb-1">Người dùng mới: {{ $userCountToday }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- end col -->
-                <div class="col-xl-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="dropdown float-end">
-                                <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="mdi mdi-dots-vertical"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item">Another action</a>
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item">Something else</a>
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
-                                </div>
-                            </div>
-
-                            <h4 class="header-title mt-0 mb-4">Số lượng xe</h4>
-
-                            <div class="widget-chart-1" >
-
-                                <div class="widget-chart-box-1 float-start" dir="ltr" style="position: relative;">
-                                    <input data-plugin="knob" data-width="70" data-height="70" data-fgColor="#ffffff"
-                                           data-bgColor="#10c469"
-                                           data-skin="tron" data-angleOffset="180" data-readOnly=true
-                                           data-thickness=".15"/>
-                                           <i class="fa-solid fa-bus fa-beat-fade" style="position: absolute; top: 30%; left: 30%; transform: translate(-50%, -50%);font-size:25px;color:#10c469"></i>
-                                </div>
-
-                                <div class="widget-detail-1 text-end">
-                                    <h2 class="fw-normal pt-2 mb-1">{{ $totalPassengerCars }}</h2>
-                                    <p class="text-muted mb-1">Xe được thêm: {{ $passengerCarsCountToday }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- end col -->
-
-                <div class="col-xl-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="dropdown float-end">
-                                <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="mdi mdi-dots-vertical"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item">Another action</a>
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item">Something else</a>
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
-                                </div>
-                            </div>
-
-                            <h4 class="header-title mt-0 mb-4">Số bài viết</h4>
-
-                            <div class="widget-chart-1">
-                                <div class="widget-chart-box-1 float-start" dir="ltr" style="position: relative;">
-                                    <input data-plugin="knob" data-width="70" data-height="70" data-fgColor="#ffffff"
-                                           data-bgColor="#ffbd4a"
-                                           data-skin="tron" data-angleOffset="180" data-readOnly=true
-                                           data-thickness=".15"/>
-                                           <i class="fa-solid fa-pen fa-beat-fade" style="position: absolute; top: 30%; left: 30%; transform: translate(-50%, -50%);font-size:25px;color:#ffbd4a"></i>
-                                </div>
-                                <div class="widget-detail-1 text-end">
-                                    <h2 class="fw-normal pt-2 mb-1">{{ $totalPosts }}</h2>
-                                    <p class="text-muted mb-1">Bài viết hôm nay: {{ $postCountToday }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- end col -->
-                <div class="col-xl-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="dropdown float-end">
-                                <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="mdi mdi-dots-vertical"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item">Another action</a>
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item">Something else</a>
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
-                                </div>
-                            </div>
-
-                            <h4 class="header-title mt-0 mb-4">Số bình luận</h4>
-
-                            <div class="widget-chart-1">
-                                <div class="widget-chart-box-1 float-start" dir="ltr" style="position: relative;">
-                                    <input data-plugin="knob" data-width="70" data-height="70" data-fgColor="#ffffff"
-                                           data-bgColor="#ff8acc"
-                                           data-skin="tron" data-angleOffset="180" data-readOnly=true
-                                           data-thickness=".15"/>
-                                           <i class="fa-solid fa-comment fa-beat-fade" style="position: absolute; top: 30%; left: 30%; transform: translate(-50%, -50%);font-size:25px;color:#ff8acc"></i>
-                                </div>
-                                <div class="widget-detail-1 text-end">
-                                    <h2 class="fw-normal pt-2 mb-1">{{ $comments->count() }}</h2>
-                                    <p class="text-muted mb-1">Bình luận hôm nay: {{ $commentsCountToday }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- end col -->
-
-            </div>
-            <!-- end row -->
-
-            <div class="row">
-                <div class="col-xl-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="dropdown float-end">
-                                <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="mdi mdi-dots-vertical"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                                    <a href="javascript:void(0);" class="dropdown-item">Another action</a>
-                                    <a href="javascript:void(0);" class="dropdown-item">Something else</a>
-                                    <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
-                                </div>
-                            </div>
-
-                            <h4 class="header-title mt-0">Thống kê Người dùng</h4>
-                            <div id="website-stats" style="height: 390px;" class="flot-chart"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="dropdown float-end">
-                                <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="mdi mdi-dots-vertical"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                                    <a href="javascript:void(0);" class="dropdown-item">Another action</a>
-                                    <a href="javascript:void(0);" class="dropdown-item">Something else</a>
-                                    <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
-                                </div>
-                            </div>
-                            <h4 class="header-title mt-0">Thống kê vé</h4>
-                            <div id="morris-bar-example" style="height: 390px;" dir="ltr" class="morris-chart">
-                                <canvas id="myChart" ></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- end row -->
-
-            {{-- <div class="row">
-                @foreach ($admins as $admin)
+            @if(auth()->user()->hasAnyRole(['SupperAdmin', 'Admin']))
+                <div class="row">
                     <div class="col-xl-3 col-md-6">
                         <div class="card">
-                            <div class="card-body widget-user">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-shrink-0 avatar-lg me-3">
-                                        <img src="https://i.imgur.com/Psr9jJB.jpg" class="img-fluid rounded-circle" alt="user">
+                            <div class="card-body">
+                                <div class="dropdown float-end">
+                                    <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="mdi mdi-dots-vertical"></i>
+                                    </a>
+                                    
+                                </div>
+
+                                <h4 class="header-title mt-0 mb-4">Số lượng người dùng</h4>
+
+                                <div class="widget-chart-1" >
+
+                                    <div class="widget-chart-box-1 float-start" dir="ltr" style="position: relative;">
+                                        <input data-plugin="knob" data-width="70" data-height="70" data-fgColor="#ffffff"
+                                            data-bgColor="#db3700"
+                                            data-skin="tron" data-angleOffset="180" data-readOnly=true
+                                            data-thickness=".15"/>
+                                            <i class="fa-solid fa-users fa-beat-fade" style="position: absolute; top: 30%; left: 30%; transform: translate(-50%, -50%);font-size:25px;color:#db3700"></i>
                                     </div>
-                                    <div class="flex-grow-1 overflow-hidden">
-                                        <h5 class="mt-0 mb-1">{{ $admin->name }}</h5>
-                                        <p class="text-muted mb-2 font-13 text-truncate">{{ $admin->email }}</p>
-                                        <small class="text-warning"><b>{{ $admin->user_type }}</b></small>
+
+                                    <div class="widget-detail-1 text-end">
+                                        <h2 class="fw-normal pt-2 mb-1">{{ $totalUsers->count() }}</h2>
+                                        <p class="text-muted mb-1">Người dùng mới: {{ $userCountToday }}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div><!-- end col -->
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="dropdown float-end">
+                                    <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="mdi mdi-dots-vertical"></i>
+                                    </a>
+                                
+                                </div>
 
+                                <h4 class="header-title mt-0 mb-4">Số lượng xe</h4>
+
+                                <div class="widget-chart-1" >
+
+                                    <div class="widget-chart-box-1 float-start" dir="ltr" style="position: relative;">
+                                        <input data-plugin="knob" data-width="70" data-height="70" data-fgColor="#ffffff"
+                                            data-bgColor="#10c469"
+                                            data-skin="tron" data-angleOffset="180" data-readOnly=true
+                                            data-thickness=".15"/>
+                                            <i class="fa-solid fa-bus fa-beat-fade" style="position: absolute; top: 30%; left: 30%; transform: translate(-50%, -50%);font-size:25px;color:#10c469"></i>
+                                    </div>
+
+                                    <div class="widget-detail-1 text-end">
+                                        <h2 class="fw-normal pt-2 mb-1">{{ $totalPassengerCars }}</h2>
+                                        <p class="text-muted mb-1">Xe được thêm: {{ $passengerCarsCountToday }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- end col -->
+
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="dropdown float-end">
+                                    <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="mdi mdi-dots-vertical"></i>
+                                    </a>
+                                
+                                </div>
+
+                                <h4 class="header-title mt-0 mb-4">Số bài viết</h4>
+
+                                <div class="widget-chart-1">
+                                    <div class="widget-chart-box-1 float-start" dir="ltr" style="position: relative;">
+                                        <input data-plugin="knob" data-width="70" data-height="70" data-fgColor="#ffffff"
+                                            data-bgColor="#ffbd4a"
+                                            data-skin="tron" data-angleOffset="180" data-readOnly=true
+                                            data-thickness=".15"/>
+                                            <i class="fa-solid fa-pen fa-beat-fade" style="position: absolute; top: 30%; left: 30%; transform: translate(-50%, -50%);font-size:25px;color:#ffbd4a"></i>
+                                    </div>
+                                    <div class="widget-detail-1 text-end">
+                                        <h2 class="fw-normal pt-2 mb-1">{{ $totalPosts }}</h2>
+                                        <p class="text-muted mb-1">Bài viết hôm nay: {{ $postCountToday }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- end col -->
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="dropdown float-end">
+                                    <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="mdi mdi-dots-vertical"></i>
+                                    </a>
+                                    
+                                </div>
+
+                                <h4 class="header-title mt-0 mb-4">Số bình luận</h4>
+
+                                <div class="widget-chart-1">
+                                    <div class="widget-chart-box-1 float-start" dir="ltr" style="position: relative;">
+                                        <input data-plugin="knob" data-width="70" data-height="70" data-fgColor="#ffffff"
+                                            data-bgColor="#ff8acc"
+                                            data-skin="tron" data-angleOffset="180" data-readOnly=true
+                                            data-thickness=".15"/>
+                                            <i class="fa-solid fa-comment fa-beat-fade" style="position: absolute; top: 30%; left: 30%; transform: translate(-50%, -50%);font-size:25px;color:#ff8acc"></i>
+                                    </div>
+                                    <div class="widget-detail-1 text-end">
+                                        <h2 class="fw-normal pt-2 mb-1">{{ $comments->count() }}</h2>
+                                        <p class="text-muted mb-1">Bình luận hôm nay: {{ $commentsCountToday }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- end col -->
+                </div>
+            @endif
+            @if(auth()->user()->hasAnyRole(['Nhà xe']))
+                <div class="row">
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="dropdown float-end">
+                                    <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="mdi mdi-dots-vertical"></i>
+                                    </a>
+                                    
+                                </div>
+
+                                <h4 class="header-title mt-0 mb-4">Số lượng vé</h4>
+
+                                <div class="widget-chart-1" >
+
+                                    <div class="widget-chart-box-1 float-start" dir="ltr" style="position: relative;">
+                                        <input data-plugin="knob" data-width="70" data-height="70" data-fgColor="#ffffff"
+                                            data-bgColor="#db3700"
+                                            data-skin="tron" data-angleOffset="180" data-readOnly=true
+                                            data-thickness=".15"/>
+                                            <i class="fa-solid fa-users fa-beat-fade" style="position: absolute; top: 30%; left: 30%; transform: translate(-50%, -50%);font-size:25px;color:#db3700"></i>
+                                    </div>
+
+                                    <div class="widget-detail-1 text-end">
+                                        <h2 class="fw-normal pt-2 mb-1">{{ $totalUsers }}</h2>
+                                        <p class="text-muted mb-1">vé hôm nay: {{ $userCountToday }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- end col -->
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="dropdown float-end">
+                                    <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="mdi mdi-dots-vertical"></i>
+                                    </a>
+                                
+                                </div>
+
+                                <h4 class="header-title mt-0 mb-4">Số lượng xe</h4>
+
+                                <div class="widget-chart-1" >
+
+                                    <div class="widget-chart-box-1 float-start" dir="ltr" style="position: relative;">
+                                        <input data-plugin="knob" data-width="70" data-height="70" data-fgColor="#ffffff"
+                                            data-bgColor="#10c469"
+                                            data-skin="tron" data-angleOffset="180" data-readOnly=true
+                                            data-thickness=".15"/>
+                                            <i class="fa-solid fa-bus fa-beat-fade" style="position: absolute; top: 30%; left: 30%; transform: translate(-50%, -50%);font-size:25px;color:#10c469"></i>
+                                    </div>
+
+                                    <div class="widget-detail-1 text-end">
+                                        <h2 class="fw-normal pt-2 mb-1">{{ $totalPassengerCars }}</h2>
+                                        <p class="text-muted mb-1">Xe được thêm: {{ $passengerCarsCountToday }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- end col -->
+
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="dropdown float-end">
+                                    <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="mdi mdi-dots-vertical"></i>
+                                    </a>
+                                
+                                </div>
+
+                                <h4 class="header-title mt-0 mb-4">Số bài viết</h4>
+
+                                <div class="widget-chart-1">
+                                    <div class="widget-chart-box-1 float-start" dir="ltr" style="position: relative;">
+                                        <input data-plugin="knob" data-width="70" data-height="70" data-fgColor="#ffffff"
+                                            data-bgColor="#ffbd4a"
+                                            data-skin="tron" data-angleOffset="180" data-readOnly=true
+                                            data-thickness=".15"/>
+                                            <i class="fa-solid fa-pen fa-beat-fade" style="position: absolute; top: 30%; left: 30%; transform: translate(-50%, -50%);font-size:25px;color:#ffbd4a"></i>
+                                    </div>
+                                    <div class="widget-detail-1 text-end">
+                                        <h2 class="fw-normal pt-2 mb-1">{{ $totalPosts }}</h2>
+                                        <p class="text-muted mb-1">Bài viết hôm nay: {{ $postCountToday }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- end col -->
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="dropdown float-end">
+                                    <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="mdi mdi-dots-vertical"></i>
+                                    </a>
+                                    
+                                </div>
+
+                                <h4 class="header-title mt-0 mb-4">Số bình luận</h4>
+
+                                <div class="widget-chart-1">
+                                    <div class="widget-chart-box-1 float-start" dir="ltr" style="position: relative;">
+                                        <input data-plugin="knob" data-width="70" data-height="70" data-fgColor="#ffffff"
+                                            data-bgColor="#ff8acc"
+                                            data-skin="tron" data-angleOffset="180" data-readOnly=true
+                                            data-thickness=".15"/>
+                                            <i class="fa-solid fa-comment fa-beat-fade" style="position: absolute; top: 30%; left: 30%; transform: translate(-50%, -50%);font-size:25px;color:#ff8acc"></i>
+                                    </div>
+                                    <div class="widget-detail-1 text-end">
+                                        <h2 class="fw-normal pt-2 mb-1">{{ $comments}}</h2>
+                                        <p class="text-muted mb-1">Bình luận hôm nay: {{ $commentsCountToday }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- end col -->
+                </div>
+            @endif
+            @if(auth()->user()->hasAnyRole(['SupperAdmin', 'Admin']))
+                <div class="row">
+                    <div class="col-xl-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="dropdown float-end">
+                                    <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="mdi mdi-dots-vertical"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a href="{{route("admin.userType.index")}}" class="dropdown-item">Chi tiết</a>
+                                    </div>
+                                </div>
+                                <p class="title_thongke" style="text-align: center;font-size: 20px;font-weight: bold;">Thông kê người dùng</p>
+                                <form autocomplete="off" class="mb-4 mt-4" hidden>
+                                    @csrf
+                                    <div class="row align-items-end">
+                                        <div class="col-md-3">
+                                            <p>Từ ngày: <input type="text" id="datepicker" class="form-control"></p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p>Đến ngày: <input type="text" id="datepicker2" class="form-control"></p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p>Lọc theo: 
+                                                <select class="dashboard-filter form-control" data-url="{{route('admin.userType.filter_by_select')}}">
+                                                    <option>--Chọn--</option>
+                                                    <option value="7ngay">7 ngày qua</option>
+                                                    <option value="thangtruoc">Tháng trước</option>
+                                                    <option value="thangnay">Tháng này</option>
+                                                    <option value="365ngayqua">365 ngày qua</option>
+                                                </select>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p><input type="button" data-url="{{route('admin.userType.filter_by_date')}}" id="btn-dashboard-filter" class="btn btn-primary btn-sm form-control" value="Lọc kết quả"></p>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="col-md-12">
+                                    <div id="myfirstchart" style="height: 390px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                
                     </div>
-                @endforeach
-
-            </div> --}}
-            <!-- end row -->
-
-            <div class="row">
+                        <div class="col-xl-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="dropdown float-end">
+                                        <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <a href="{{route("admin.revenueAdmin.index")}}" class="dropdown-item">Chi tiết</a>
+                                        </div>
+                                    </div>
+                                    <p class="title_thongke" style="text-align: center;font-size: 20px;font-weight: bold;">Thông kê doanh thu</p>
+                                    <form autocomplete="off" class="mb-4 mt-4" hidden>
+                                        @csrf
+                                        <div class="row align-items-end">
+                                            <div class="col-md-3">
+                                                <p>Từ ngày: <input type="text" id="datepicker" class="form-control"></p>
+                                            
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p>Đến ngày: <input type="text" id="datepicker2" class="form-control"></p>
+                                            
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p>Lọc theo: 
+                                                    <select class="dashboard-filter form-control" data-url="{{route('admin.revenueAdmin.filter_by_select')}}">
+                                                        <option>--Chọn--</option>
+                                                        <option value="7ngay">7 ngày qua</option>
+                                                        <option value="thangtruoc">Tháng trước</option>
+                                                        <option value="thangnay">Tháng này</option>
+                                                        <option value="365ngayqua">365 ngày qua</option>
+                                                    </select>
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p><input type="button" data-url="{{route('admin.revenueAdmin.filter_by_date')}}" id="btn-dashboard-filter" class="btn btn-primary btn-sm form-control" value="Lọc kết quả"></p>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="col-md-12">
+                                        <div id="chart" style="height: 390px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                    
+                        </div>
+                </div>
+            @endif
+            @if(auth()->user()->hasAnyRole(['Nhà xe']))
+                <div class="row">
+                    <div class="col-xl-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="dropdown float-end">
+                                    <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="mdi mdi-dots-vertical"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a href="{{route("admin.userType.index")}}" class="dropdown-item">Chi tiết</a>
+                                    </div>
+                                </div>
+                                <p class="title_thongke" style="text-align: center;font-size: 20px;font-weight: bold;">Thông kê vé</p>
+                                <form autocomplete="off" class="mb-4 mt-4" hidden>
+                                    @csrf
+                                    <div class="row align-items-end">
+                                        <div class="col-md-3">
+                                            <p>Từ ngày: <input type="text" id="datepicker" class="form-control"></p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p>Đến ngày: <input type="text" id="datepicker2" class="form-control"></p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p>Lọc theo: 
+                                                <select class="dashboard-filter form-control" data-url="{{route('admin.userType.filter_by_select')}}">
+                                                    <option>--Chọn--</option>
+                                                    <option value="7ngay">7 ngày qua</option>
+                                                    <option value="thangtruoc">Tháng trước</option>
+                                                    <option value="thangnay">Tháng này</option>
+                                                    <option value="365ngayqua">365 ngày qua</option>
+                                                </select>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p><input type="button" data-url="{{route('admin.userType.filter_by_date')}}" id="btn-dashboard-filter" class="btn btn-primary btn-sm form-control" value="Lọc kết quả"></p>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="col-md-12">
+                                    <div id="first" style="height: 390px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="dropdown float-end">
+                                    <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="mdi mdi-dots-vertical"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a href="{{route("admin.revenueStaff.index")}}" class="dropdown-item">Chi tiết</a>
+                                    </div>
+                                </div>
+                                <p class="title_thongke" style="text-align: center;font-size: 20px;font-weight: bold;">Thông kê doanh thu</p>
+                                <form autocomplete="off" class="mb-4 mt-4" hidden>
+                                    @csrf
+                                    <div class="row align-items-end">
+                                        <div class="col-md-3">
+                                            <p>Từ ngày: <input type="text" id="datepicker" class="form-control"></p>
+                                          
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p>Đến ngày: <input type="text" id="datepicker2" class="form-control"></p>
+                                          
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p>Lọc theo: 
+                                                <select class="dashboard-filter form-control" data-url="{{route('admin.revenueStaff.filter_by_select')}}">
+                                                    <option>--Chọn--</option>
+                                                    <option value="7ngay">7 ngày qua</option>
+                                                    <option value="thangtruoc">Tháng trước</option>
+                                                    <option value="thangnay">Tháng này</option>
+                                                    <option value="365ngayqua">365 ngày qua</option>
+                                                </select>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p><input type="button" data-url="{{route('admin.revenueStaff.filter_by_date')}}" id="btn-dashboard-filter" class="btn btn-primary btn-sm form-control" value="Lọc kết quả"></p>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="col-md-12">
+                                    <div id="firstchart" style="height: 390px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                
+                    </div>
+                </div>
+            @endif
+            {{-- <div class="row">
                 <div class="col-xl-4">
                     <div class="card">
                         <div class="card-body">
@@ -389,7 +703,7 @@
 
                 </div><!-- end col -->
 
-            </div>
+            </div> --}}
         </div> <!-- container -->
 
     </div> <!-- content -->

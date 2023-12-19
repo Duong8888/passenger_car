@@ -33,17 +33,25 @@ class ContactController extends Controller
     }
     public function handleCheckSuccess($content, $contact)
     {
-        
+
         $random_pass = $this->randomPassword();
         $data = [
-            "fullName" => isset($contact->fullName) ? $contact->fullName : "Default",
+            "fullName" => isset($contact->user_name) ? $contact->user_name : "Default",
             "email" =>  $contact->email,
             "phone" => $contact->phone,
             "password" => Hash::make($random_pass),
             "hashPassword" => $random_pass,
-            'name' => $contact->fullName,
+            'name' => $contact->user_name,
             'user_type' => 'staff',
-            "title" => $content['title']
+            "title" => $content['title'],
+            "province" => $contact->province,
+            "passengerCar_name" => $contact->passengerCar_name,
+            "number_card" => $contact->number_card,
+            "rental_code" => $contact->rental_code,
+            "created_at" => date("d/m/Y H:i:s", strtotime($contact->created_at)),
+            "day" => date('D'),
+            "month" => date('M'),
+            "year" => date('Y')
         ];
         $messageStatus = "Yêu cầu của bạn đã được xử lý thành công ";
         $uniqueUser = User::query()->where('email', $data['email'])->first();
@@ -59,7 +67,8 @@ class ContactController extends Controller
         $role = Role::where('name', 'Nhà xe')->first();
         $user->assignRole($role);
         $pdf = PDF::loadView('mails.registerApply', $data);
-        Mail::send('mails.carRegisterSuccess', $data, function ($message) use ($data, $pdf) {
+
+        Mail::send('mails.carRegisterPending', $data, function ($message) use ($data, $pdf) {
             $text = $this->convertTextToSlug($data['name']);
             $message->to($data["email"], $data["email"])
                 ->subject($data["title"])
@@ -72,8 +81,36 @@ class ContactController extends Controller
         $contact = Contact::query()->where('id', $id)->first();
         if(!$request->type){
             $status = $request->status;
-            $contact->update(['status' => $status]);
+            $random_pass = $this->randomPassword();
+            $uniqueUser = User::query()->where('email', $contact->email)->first();
+            $roleUser = $uniqueUser;
             if ($status === 'Đã xử lý') {
+                $data = [
+                    "fullName" => $contact->user_name,
+                    "email" => $contact->email,
+                    "hashPassword" => $random_pass,
+                    "phone" => $contact->phone,
+                    "password" => Hash::make($random_pass),
+                    'name' => $contact->user_name,
+                    'user_type' => 'staff',
+                ];
+                if (!$uniqueUser) {
+                    User::create($data);
+                } else {
+                    $user = $uniqueUser->update($data);
+                    $user = $roleUser;
+                }
+                $role = Role::where('name', 'Nhà xe')->first();
+                $user->assignRole($role);
+                $contact->update(['status' => $status]);
+                $data['title'] = "Đăng kí thành công đối tác CAR FINDER PRO";
+
+                Mail::send('mails.carRegisterSuccess', $data, function($message) use ($data){
+                    $message->to($data['email'], 'Visitor')->subject($data['title']);
+                });
+                return redirect()->back();
+            }else if($status === 'Đang xử lý'){
+                $contact->update(['status' => $status]);
                 $data['title'] = "Thông tin xác nhận đăng kí làm đối tác CAR FINDER PRO";
                 $this->handleCheckSuccess($data, $contact);
                 return redirect()->back();
@@ -81,8 +118,8 @@ class ContactController extends Controller
         }else{
             return view('admin.pages.contact.edit', compact('contact'));
         }
-        
-        
+
+
     }
 
     public function delete(Request $request, $id)
@@ -101,7 +138,7 @@ class ContactController extends Controller
     public function sendmail(Request $request)
     {
         $contact = Contact::query()->where('id', $request->id)->first();
-        $contact->update(['status' => "Đã xử lý"]);
+        $contact->update(['status' => "Đang xử lý"]);
         $data["title"] = "Thông tin xác nhận đăng kí làm đối tác CAR FINDER PRO";
         $response = $this->handleCheckSuccess($data, $contact);
         return Response($response);

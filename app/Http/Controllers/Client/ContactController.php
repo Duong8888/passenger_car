@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -16,5 +17,15 @@ class ContactController extends Controller
         return view('client.pages.contact.contact', compact('users'));
     }
 
+    public function search(){
+        return view('client.pages.contact.search');
+    }
+
+    public function searchTicket(Request $request){
+        $ticket = Ticket::where('id', $request->id)
+        ->orWhere('phone', $request->phone)
+        ->get();
+        return view('client.pages.contact.search', compact('ticket'));
+    }
 
 }

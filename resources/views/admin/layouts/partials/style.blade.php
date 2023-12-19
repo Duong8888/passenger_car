@@ -1,5 +1,5 @@
 <!-- App favicon -->
-<link rel="shortcut icon" href="{{asset('admin/images/favicon.ico')}}">
+<link rel="shortcut icon" href="{{asset('images/icon-dev-01.png')}}" type="image/x-icon">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <!-- App css -->
 <link href="{{asset('admin/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-style" />
