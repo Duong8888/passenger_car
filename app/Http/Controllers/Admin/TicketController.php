@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\AdminBaseController;
 use App\Models\PassengerCar;
+use App\Models\revenue;
 use App\Models\Routes;
 
 use App\Models\SeatsLayout;
@@ -51,10 +52,14 @@ class TicketController extends AdminBaseController
     }
     public function index(Request $request)
     {
-        $data = $this->model->orderBy('id','desc')->paginate(10);
-        $passengerCar = PassengerCar::get();
-    
-        return view('admin.pages.ticket.index', compact('data', 'passengerCar'))
+        $transportUnitId = Auth::user()->id;
+        $page = request()->get('page') ?: 1;
+        $data = Ticket::whereHas('passengerCar', function ($query) use ($transportUnitId) {
+            $query->where('user_id', $transportUnitId);
+        })
+            ->paginate(10, ['*'], 'page', $page);
+        $passengerCar = PassengerCar::where('user_id', $transportUnitId)->get();
+        return view('admin.pages.ticket.index', compact('data','passengerCar'))
             ->with('title', $this->titleIndex)
             ->with('colums', $this->colums)
             ->with('urlbase', $this->urlbase)
@@ -65,8 +70,13 @@ class TicketController extends AdminBaseController
     {
         $user = User::where('id', Auth::user()->id)->get();
 
-        $route = Routes::all();
+        $id = auth()->id();
 
+        $route = Stops::whereRaw("JSON_CONTAINS(user_id, '$id')")
+            ->join('routes', 'stops.route_id', '=', 'routes.id')
+            ->select('routes.departure', 'routes.arrival', 'routes.id')
+            ->distinct()
+            ->paginate(10);
 
         return view($this->pathView . __FUNCTION__, [
             'user' => $user,
@@ -117,6 +127,21 @@ class TicketController extends AdminBaseController
 
         return response()->json($PassengerCar);
     }
+    public function getLayout(Request $request){
+        $passengerCars = PassengerCar::query()->where('id', $request->id)->first();
+        if($passengerCars->vehicle_id != 0){
+            $layout = SeatsLayout::query()->where('vehicle_id', $passengerCars->vehicle->id)->get();
+            $checkSlot = SeatStatus::query()
+                ->where('passenger_car_id',$passengerCars->id)
+                ->where('date',$request->date)
+                ->where('time_id',$request->time)
+                ->get();
+        }else{
+            $layout = [];
+            $checkSlot = [];
+        }
+        return \response()->json(['layout'=>$layout, 'checkSlot'=>$checkSlot]);
+    }
     public function destroy(string $id)
     {
         $model = $this->model->findOrFail($id);
@@ -128,7 +153,7 @@ class TicketController extends AdminBaseController
     public function store(Request $request)
     {
         $validator = $this->validateStore($request);
-      
+
         // if ($validator->fails()) {
         //     return back()->withErrors($validator)->withInput();
         // }
@@ -151,7 +176,7 @@ class TicketController extends AdminBaseController
 
     public function Confirm(Request $request){
         Ticket::where('id', $request->id)->update(['status' => 2]);
-      
+
         return response()->json(['success' => 'Done'], Response::HTTP_OK);
     }
 
@@ -277,20 +302,20 @@ class TicketController extends AdminBaseController
             'status' => 400,
             'message' => "Lỗi vui lòng thử lại"
         ]);
-        
+
 
     }
     public function search(Request $request){
         $passengerCars = PassengerCar::where('license_plate', $request->license_plate)->get();
-        
+
         $data = Ticket::where('passenger_car_id', $passengerCars[0]->id)->orderBy('id','desc')->paginate(10);
-        
+
         $passengerCar = PassengerCar::get();
         return view('admin.pages.ticket.index', compact('data', 'passengerCar'))
         ->with('title', $this->titleIndex)
         ->with('colums', $this->colums)
         ->with('urlbase', $this->urlbase)
         ->with('titleCreate', $this->titleCreate);
-     
+
     }
 }

@@ -1,4 +1,4 @@
-import {Uppy, Dashboard} from "https://releases.transloadit.com/uppy/v3.17.0/uppy.min.mjs"
+import { Uppy, Dashboard } from "https://releases.transloadit.com/uppy/v3.20.0/uppy.min.mjs"
 
 $(document).ready(function () {
     $.ajaxSetup({

@@ -30,9 +30,9 @@
                                         </div>
                                     </div>
                                 </form>
-                                
+
                             </div>
-                           
+
                             @if ($message = Session::get('success'))
                                 <div>
                                     <ul>
@@ -40,8 +40,8 @@
                                     </ul>
                                 </div>
                             @endif
-                          
-                            <div class="table">
+
+                            <div class="table overflow-auto">
                                 <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap">
                                     <thead>
                                     <tr>
@@ -119,10 +119,10 @@
                                     @endforeach
 
                                 </table>
-                                <div class="float-end mt-2">
-                                    {{ $data->links() }}
-                                </div>
-                              
+
+                            </div>
+                            <div class="float-end mt-2">
+                                {{ $data->links() }}
                             </div>
                         </div>
                     </div>
@@ -200,9 +200,9 @@
                 }
             });
             })
-        })  
+        })
     </script>
-  
+
     <!--Morris Chart-->
     <script src="admin/libs/morris.js06/morris.min.js"></script>
     <script src="admin/libs/raphael/raphael.min.js"></script>
