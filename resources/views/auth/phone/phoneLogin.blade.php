@@ -3,22 +3,13 @@
 <script>
     var csrfToken = $('meta[name="csrf-token"]').attr('content');
     const firebaseConfig = {
-
-        apiKey: "AIzaSyBVjPvLia-lQ3KTIlGyJtwkO6gnF4EhA6c",
-        authDomain: "fir-2-73a65.firebaseapp.com",
-        projectId: "fir-2-73a65",
-        storageBucket: "fir-2-73a65.appspot.com",
-        messagingSenderId: "793008679902",
-        appId: "1:793008679902:web:01e40657ee99f0150dcb4f",
-        measurementId: "G-CTLCZLM3R1"
-
-        // apiKey: "AIzaSyCJ8pbe36jbzUmVQK_pFOZlPKXRW6JNoG8",
-        // authDomain: "test2-5f15d.firebaseapp.com",
-        // projectId: "test2-5f15d",
-        // storageBucket: "test2-5f15d.appspot.com",
-        // messagingSenderId: "660182456617",
-        // appId: "1:660182456617:web:89d3c4ddf2b96307efff38",
-        // measurementId: "G-31DTR2L4VF"
+        apiKey: "AIzaSyCofQU_cd7BUg00L_VNb7iKash6OpJ4vKc",
+        authDomain: "carfinderpro-33d31.firebaseapp.com",
+        projectId: "carfinderpro-33d31",
+        storageBucket: "carfinderpro-33d31.appspot.com",
+        messagingSenderId: "404969026215",
+        appId: "1:404969026215:web:0e7d1228d652f10fe3e182",
+        measurementId: "G-W1Y5QPSC82"
 
         // apiKey: "AIzaSyBVjPvLia-lQ3KTIlGyJtwkO6gnF4EhA6c",
         // authDomain: "fir-2-73a65.firebaseapp.com",
@@ -27,6 +18,7 @@
         // messagingSenderId: "793008679902",
         // appId: "1:793008679902:web:01e40657ee99f0150dcb4f",
         // measurementId: "G-CTLCZLM3R1"
+
         // apiKey: "AIzaSyCJ8pbe36jbzUmVQK_pFOZlPKXRW6JNoG8",
         // authDomain: "test2-5f15d.firebaseapp.com",
         // projectId: "test2-5f15d",
@@ -35,6 +27,13 @@
         // appId: "1:660182456617:web:89d3c4ddf2b96307efff38",
         // measurementId: "G-31DTR2L4VF"
 
+        // apiKey: "AIzaSyCfRckUC7D7RH-PHrNnzgAqUAvHBnQS6h8",
+        // authDomain: "testproject-a5eaa.firebaseapp.com",
+        // projectId: "testproject-a5eaa",
+        // storageBucket: "testproject-a5eaa.appspot.com",
+        // messagingSenderId: "697634135649",
+        // appId: "1:697634135649:web:d1a0bd77bcc2c31fa7d420",
+        // measurementId: "G-LTMZSY8W25"
     };
     firebase.initializeApp(firebaseConfig);
 </script>
