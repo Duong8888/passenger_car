@@ -91,12 +91,12 @@
                             <span>Quản lý Vé</span>
                         </a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a href="{{ route('admin.customer.index') }}">
                             <i class="mdi mdi-view-dashboard-outline"></i>
                             <span> Quản lý khách hàng </span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li>
                         <a href="{{route('admin.car.index')}}">
                             <i class="mdi mdi-forum-outline"></i>
@@ -154,12 +154,12 @@
                         </a>
                         <div class="collapse" id="sidebarIcons">
                             <ul class="nav-second-level">
-                                <li>
+                                {{-- <li>
                                     <a href="{{ route('admin.contactStaff.index') }}">
                                         <i class="mdi mdi-view-dashboard-outline"></i>
                                         <span> Thống kê liên hệ </span>
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li>
                                     <a href="{{ route('admin.userType.index') }}">
                                         <i class="mdi mdi-view-dashboard-outline"></i>

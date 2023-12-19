@@ -33,17 +33,6 @@
     // ajax
     $(document).ready(function(){
         chart30daysorder();
-        // var chart = new Morris.Bar({
-        //     element: 'myfirstchart',
-        //     parseTime: false,
-        //     xkey: 'created_at',
-        //     ykeys: ['province','status'],
-        //     labels: ['Số lượng vé','Doanh thu']
-        //     });
-        // flattenedData.forEach(function(item) {
-        //     // Sử dụng toISOString() có thể gây ra vấn đề với Morris.js, thử sử dụng format khác
-        //     item.created_at = item.created_at.split(' ')[0];
-        // });
         var chart = new Morris.Area({
             element: 'myfirstchart',
             lineColors: ['#A4ADD3', '#10fc87', '#FF0000', '#A4ADD3'],
@@ -114,7 +103,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <p class="title_thongke" style="text-align: center;font-size: 20px;font-weight: bold;">Thông kê doanh thu</p>
+                <p class="title_thongke" style="text-align: center;font-size: 20px;font-weight: bold;">Thông kê liên hệ</p>
                 <form autocomplete="off" class="mb-4 mt-4">
                     @csrf
                     {{-- <input type="text" hidden data-url="{{route('admin.contactStaff.dayrevenue')}}"> --}}

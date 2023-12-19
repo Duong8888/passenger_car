@@ -108,7 +108,7 @@
        chart30daysorder();
         var chart = new Morris.Area({
                 element: 'myfirstchart',
-                lineColors: ['#ffd699', '#ff7f00', '#ff6600', '#e65100'],
+                lineColors: ['#FF6633', '#6633FF', '#00FF00', '#FFFF00'],
                 pointFillColors: ['#ffffff'],
                 pointStrokeColors: ['black'],
                 fillOpacity: 0.3,
@@ -117,7 +117,7 @@
                 xkey: 'created_at',
                 ykeys: ['count', 'user_type_admin', 'user_type_staff', 'user_type_user'],
                 behaveLikeLine: true,
-                labels: ['Số người đăng ký', 'Admin', 'Staff', 'User'],
+                labels: ['Số người đăng ký', 'Admin', 'Nhà xe', 'User'],
             });
             function chart30daysorder() {
                 var _token = $('input[name="_token"]').val();

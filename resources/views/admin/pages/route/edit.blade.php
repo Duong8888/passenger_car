@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-
+@section('title', "Sửa tuyến đường")
 @section('page-script')
 <script>
     ClassicEditor
