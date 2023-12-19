@@ -127,7 +127,10 @@ class TicketController extends AdminBaseController
 
         return response()->json($PassengerCar);
     }
+
+
     public function getLayout(Request $request){
+        Log::info($request->all());
         $passengerCars = PassengerCar::query()->where('id', $request->id)->first();
         if($passengerCars->vehicle_id != 0){
             $layout = SeatsLayout::query()->where('vehicle_id', $passengerCars->vehicle->id)->get();
@@ -140,7 +143,9 @@ class TicketController extends AdminBaseController
             $layout = [];
             $checkSlot = [];
         }
-        return \response()->json(['layout'=>$layout, 'checkSlot'=>$checkSlot]);
+
+        $times = $passengerCars->workingTime()->get();
+        return \response()->json(['layout'=>$layout, 'checkSlot'=>$checkSlot,'times'=>$times]);
     }
     public function destroy(string $id)
     {
@@ -152,6 +157,7 @@ class TicketController extends AdminBaseController
     }
     public function store(Request $request)
     {
+        Log::info($request->all());
         $validator = $this->validateStore($request);
 
         // if ($validator->fails()) {
@@ -168,7 +174,19 @@ class TicketController extends AdminBaseController
             $model->{$this->fieldImage} = 'storage/' . $tmpPath;
         }
 
+        $model->seat_id = json_encode($request->slot);
         $model->save();
+
+        foreach ($request->slot as $value) {
+            SeatStatus::create([
+                'passenger_car_id' => $request->passenger_car_id,
+                'date' => $request->date,
+                'time_id' => $request->time,
+                'seat_status' => 1,
+                'ticket_id' => $model->id,
+                'seat_id' => $value,
+            ]);
+        }
 
         return redirect()->route($this->urlIndex)->with('success', 'Created Successfully');
     }

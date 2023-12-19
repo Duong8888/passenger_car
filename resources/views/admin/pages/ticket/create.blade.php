@@ -42,25 +42,30 @@
                                             </select>
                                         </div>
 
-                                    </div>
-
-                                    <div class="col-4">
-                                        <div class="mb-3">
-                                            <label class="form-label">Chọn xe</label>
-                                            <select name="passenger_car_id" class="form-control PassengerCar"
-                                                    data-action="{{route('admin.showLayout')}}">
-                                            </select>
-                                        </div>
-
                                         <div class="mb-3">
                                             <label for="date" class="form-label">Ngày đi</label>
                                             <input type="date" id="date" name="date" min="<?php echo date('Y-m-d' ); ?>"
                                                    class="form-control" value="<?php echo date('Y-m-d'); ?>">
                                         </div>
+
+                                    </div>
+
+                                    <div class="col-4">
+
                                         <div class="mb-3">
+                                            <label class="form-label">Chọn xe</label>
+                                            <select name="passenger_car_id" class="form-control PassengerCar"
+                                                    data-action="{{route('admin.showLayout')}}">
+                                            </select>
+                                            <input type="number" name="quantity" value="" hidden>
+                                            <input type="number" name="total_price" value="" hidden>
+                                            <input type="number" name="status" value="1" hidden>
+                                        </div>
+
+                                        <div class="mb-3 form-label">
                                             <label for="time" class="form-label">Giờ đi</label>
-                                            <select id="time">
-                                                <option>12:15</option>
+                                            <select id="time" name="time" class="form-select" data-action="{{route('admin.showLayout')}}">
+
                                             </select>
                                         </div>
 
@@ -73,9 +78,7 @@
                                             <label for="arrival" class="form-label">Điểm trả</label>
                                             <input type="text" id="arrival" name="arrival" class="form-control arrival">
                                         </div>
-                                    </div>
 
-                                    <div class="col-4">
                                         <div class="mb-3">
                                             <label class="form-label">Hình thức thanh toán</label>
                                             <select name="payment_method" class="form-control">
@@ -83,15 +86,16 @@
                                                 <option value="thanh toán tại nhà xe">thanh toán tại nhà xe</option>
                                             </select>
                                         </div>
+                                    </div>
+
+                                    <div class="col-4 d-flex align-items-center justify-content-center flex-column">
                                         <div class="mb-3">
                                             <div class="showPassengerCar d-flex align-items-center flex-column">
-                                                {{--                                                <div class="d-flex">--}}
-                                                {{--                                                    <span class="material-symbols-outlined d-inline-block border" style="font-size: 40px;">weekend</span>--}}
-                                                {{--                                                    <span class="material-symbols-outlined d-inline-block border" style="font-size: 40px;">weekend</span>--}}
-                                                {{--                                                    <span class="material-symbols-outlined d-inline-block border" style="font-size: 40px;">weekend</span>--}}
-                                                {{--                                                </div>--}}
+                                                <img style="width: 100%;border-radius: 10px" src="{{asset('images/banner-11.jpg')}}">
                                             </div>
                                         </div>
+
+                                        <p class="totalPrice text-blue"></p>
                                     </div>
 
                                     <div class="mb-3">
@@ -111,6 +115,8 @@
                     @section('page-script')
                         <script>
                             let showPassenger = $('.showPassengerCar');
+                            var priceSeat = 0;
+
                             $(document).ready(function () {
                                 $('#phone').change(function () {
                                     let phone = $(this).val();
@@ -157,6 +163,8 @@
 
                                 $('select[name="passenger_car_id"]').on('change', function () {
                                     console.log($('select[name="passenger_car_id"]').attr('data-action'));
+                                    var selectedOption = $(this).find('option:selected');
+                                    priceSeat = selectedOption.data('price');
                                     $.ajax({
                                         url: $(this).data('action'),
                                         method: "POST",
@@ -165,8 +173,32 @@
                                             date: $('#date').val(),
                                         },
                                         success: function (data) {
+                                            $('#time').html('<option value="">Chọn</option>');
+                                            $.each(data.times, function (index, item) {
+                                                $('#time').append(`<option value="${item.id}">${item.departure_time} - ${item.arrival_time}</option>`);
+                                            });
+                                        },
+                                        error: function (error) {
+                                            console.log(error)
+                                        }
+                                    });
+                                });
+
+                                $('select[name="time"], input[type="date"]').on('change', function () {
+                                    $.ajax({
+                                        url: $('select[name="time"]').data('action'),
+                                        method: "POST",
+                                        data: {
+                                            id: $('select[name="passenger_car_id"]').val(),
+                                            date: $('#date').val(),
+                                            time: $('select[name="time"]').val()
+                                        },
+                                        success: function (data) {
                                             $('.showPassengerCar').html('');
                                             console.log(data);
+
+                                            var checkedSeatCount = 0;
+
                                             $.each(data.layout, function (index, item) {
                                                 var html = '';
                                                 $.each(JSON.parse(item.seat), function (index2, item2) {
@@ -175,7 +207,23 @@
                                                     } else if (item2 == '') {
                                                         html += `<span class="material-symbols-outlined d-inline-block border" style="font-size: 40px;color:#FFFFFF;">weekend</span>`;
                                                     } else {
-                                                        html += `<span class="material-symbols-outlined d-inline-block border" style="font-size: 40px;">weekend</span>`;
+                                                        var item = '';
+                                                        item = `
+                                                                    <label for="${item2}" class="border">
+                                                                        <span class="material-symbols-outlined d-inline-block" style="font-size: 40px;">weekend</span>
+                                                                    </label>
+                                                                    <input style="display: none;" class="slot" type="checkbox" name="slot[]" id="${item2}" value="${item2}">
+                                                                `;
+                                                        $.each(data.checkSlot, function (indexCheckSlot, itemCheckSlot) {
+                                                            if (itemCheckSlot.seat_id == item2) {
+                                                                item=`
+                                                                    <label for="${item2}" class="border">
+                                                                        <span class="material-symbols-outlined d-inline-block" style="font-size: 40px;color: red;">weekend</span>
+                                                                    </label>
+                                                                `;
+                                                            }
+                                                        });
+                                                        html += item;
                                                     }
                                                 });
                                                 $('.showPassengerCar').append(
@@ -183,7 +231,27 @@
                                                         ${html}
                                                     </div>`
                                                 );
+                                            });
 
+                                            $('.showPassengerCar').on('change', 'input[type="checkbox"]', function () {
+                                                var labelFor = $(this).attr('id');
+                                                var correspondingLabel = $('label[for="' + labelFor + '"]>span');
+
+                                                if ($(this).is(':checked')) {
+                                                    correspondingLabel.css('color', 'green');
+                                                    checkedSeatCount++;
+                                                } else {
+                                                    correspondingLabel.css('color', '');
+                                                    checkedSeatCount--;
+                                                }
+
+                                                $('input[name="quantity"]').val(checkedSeatCount);
+                                                $('input[name="total_price"]').val(checkedSeatCount*priceSeat);
+                                                function formatCurrency(amount) {
+                                                    return amount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+                                                }
+                                                let formattedMoney = formatCurrency(checkedSeatCount*priceSeat);
+                                                $('.totalPrice').html('Tổng tiền : '+formattedMoney);
                                             });
                                         },
                                         error: function (error) {
@@ -191,6 +259,10 @@
                                         }
                                     });
                                 });
+
+
+
+
 
                                 $('.route-departure').change(function () {
                                     var departure = $(this).val();
@@ -220,7 +292,6 @@
                                     })
                                 })
 
-
                                 $(document).on('click', '.route', function () {
                                     let id = $(this).val();
 
@@ -235,10 +306,10 @@
                                             id: id
                                         },
                                         success: function (response) {
-                                            let passengerCar = '';
+                                            let passengerCar = '<option data-id="">Chọn</option>';
                                             let price = '';
                                             response.forEach(function (Car) {
-                                                passengerCar += '<option data-id="' + Car.id + '" value="' +
+                                                passengerCar += '<option data-price="'+Car.price+'" data-id="' + Car.id + '" value="' +
                                                     Car.id + '">' + Car.license_plate + ' | ' + Car.capacity + ' chỗ' + '</option>';
                                             });
 
