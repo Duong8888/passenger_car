@@ -15,11 +15,22 @@
                                         Ticket
                                     </button>
                                 </a>
-                                <form action="{{ route('admin.ticket.search') }}" method="get">
+                                <form action="{{ route('admin.ticket.search') }}" method="get" class="form-inline">
                                     @csrf
-                                    <input type="text" name="license_plate" placeholder="Enter License.." value="{{ isset($search) ? $search : '' }}">
-                                    <button type="submit">Search</button>
+                                    <div class="form-group row">
+                                        <div class="col-auto">
+                                            <select name="license_plate" class="form-control">
+                                                @foreach ($passengerCar as $value)
+                                                    <option value="{{ $value->license_plate }}">{{ $value->license_plate }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-auto">
+                                            <button type="submit" class="btn btn-primary">Search</button>
+                                        </div>
+                                    </div>
                                 </form>
+                                
                             </div>
                            
                             @if ($message = Session::get('success'))
@@ -92,7 +103,7 @@
                                                         <a class="dropdown-item"
                                                             href="{{ route('admin.ticket.edit', $ticket->id) }}">Sửa
                                                         </a>
-                                                        <a href="javascript:void(0);" class="dropdown-item confirm" data-id="{{ $ticket->id }}">
+                                                        <a class="dropdown-item confirm" data-id="{{ $ticket->id }}">
                                                             Xác nhận
                                                         </a>
                                                         <!-- item-->

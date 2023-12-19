@@ -45,37 +45,25 @@ $(document).ready(function () {
         data[0]['payment_method'] = payment_method;
 
         let res = data[0];
-        Swal.fire({
-            title: "Thông báo",
-            text: "Bạn có chắc chắn muốn đặt vé!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Đúng!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: url,
-                    method: "POST",
-                    dataType: "JSON",
-                    data: res,
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function (response) {
-                        if (response.success) {
-                            Swal.fire({
-                                title: "Thông báo",
-                                text: "Đặt vé thành công.",
-                                icon: "success"
-                            });
-                            window.location.href = '/end-ticket-payment';
-                        }
+            $.ajax({
+                url: url,
+                method: "POST",
+                dataType: "JSON",
+                data: res,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    if (response.success) {
+                        Swal.fire({
+                            title: "Thông báo",
+                            text: "Đặt vé thành công.",
+                            icon: "success"
+                        });
+                        window.location.href = '/end-ticket-payment';
                     }
-                })
-            }
-        });
+                }
+            })
     })
 
     $('.finish-ticket-vnpay').click(function () {

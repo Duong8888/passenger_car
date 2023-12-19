@@ -149,7 +149,7 @@ class TicketController extends Controller
         $vnp_OrderType = "Trip Payment";
         $vnp_Amount = $a[0]->total_price * 100;
         $vnp_Locale = "VN";
-        $vnp_BankCode = "NCB";
+        $vnp_BankCode = "";
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR']; //127.0.0.1
 
         $inputData = [

@@ -89,7 +89,7 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         Route::post('/phone', [TicketController::class, 'CheckPhone']);
         Route::post('/price', [TicketController::class, 'Price']);
         Route::post('/passgenerCar/{id}', [TicketController::class, 'PassengerCar']);
-
+        Route::post('/confirm', [TicketController::class, 'Confirm'] );
         // Quản lý tuyến đường nhà xe
         Route::prefix('route')->controller(RouteController::class)->name('route.')->group(function () {
             Route::get('/', 'index')->name('index');
