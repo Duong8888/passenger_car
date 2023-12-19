@@ -21,13 +21,22 @@
     var csrfToken = $('meta[name="csrf-token"]').attr('content');
     const firebaseConfig = {
 
-        apiKey: "AIzaSyBVjPvLia-lQ3KTIlGyJtwkO6gnF4EhA6c",
-        authDomain: "fir-2-73a65.firebaseapp.com",
-        projectId: "fir-2-73a65",
-        storageBucket: "fir-2-73a65.appspot.com",
-        messagingSenderId: "793008679902",
-        appId: "1:793008679902:web:01e40657ee99f0150dcb4f",
-        measurementId: "G-CTLCZLM3R1"
+        // apiKey: "AIzaSyBVjPvLia-lQ3KTIlGyJtwkO6gnF4EhA6c",
+        // authDomain: "fir-2-73a65.firebaseapp.com",
+        // projectId: "fir-2-73a65",
+        // storageBucket: "fir-2-73a65.appspot.com",
+        // messagingSenderId: "793008679902",
+        // appId: "1:793008679902:web:01e40657ee99f0150dcb4f",
+        // measurementId: "G-CTLCZLM3R1"
+
+        apiKey: "AIzaSyBVp--doBXDD0jWY0Zx5eWpKPaFe7PFWR4",
+        authDomain: "ancient-jigsaw-395304.firebaseapp.com",
+        databaseURL: "https://ancient-jigsaw-395304-default-rtdb.firebaseio.com",
+        projectId: "ancient-jigsaw-395304",
+        storageBucket: "ancient-jigsaw-395304.appspot.com",
+        messagingSenderId: "108708909152",
+        appId: "1:108708909152:web:e8cfdd123c499540147305",
+        measurementId: "G-55T3S1CNGQ"
         // apiKey: "AIzaSyCJ8pbe36jbzUmVQK_pFOZlPKXRW6JNoG8",
         // authDomain: "test2-5f15d.firebaseapp.com",
         // projectId: "test2-5f15d",

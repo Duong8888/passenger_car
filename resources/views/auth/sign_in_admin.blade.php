@@ -147,7 +147,7 @@
                                         class="col-span-12 rounded-b-md lg:col-span-6 group-data-[theme-color=violet]:bg-violet-700 group-data-[theme-color=sky]:bg-sky-700 group-data-[theme-color=red]:bg-red-700 group-data-[theme-color=green]:bg-green-700 group-data-[theme-color=pink]:bg-pink-700 group-data-[theme-color=blue]:bg-blue-700 lg:rounded-b-none lg:ltr:rounded-r-lg rtl:rounded-l-lg">
                                         <div class="flex flex-col justify-center h-full p-12">
                                             <div class="text-center">
-                                                <h5 class="text-[18.5px] text-white">Chào mừng ngài quay trở lại.</h5>
+                                                <h5 class="text-[18.5px] text-white">Chào mừng quay trở lại.</h5>
                                                 <p class="mt-3 text-white/80">Đăng nhập để quản lý ngay thôi nào.</p>
                                             </div>
                                             <form action="{{route('admin.login')}}" method="post" class="mt-8">

@@ -99,15 +99,12 @@ class ProfileController extends Controller
         return view('client.pages.profile.ticketDetail',compact('user','tickets','working_time'));
     }
 
-    public function ticketDetailsDelete(Request $request,$id){
+    public function ticketDetailsDelete($id){
         $user = auth()->user();
         $tickets = Ticket::find($id);
+        $time_id = $tickets->time_id;
         $tickets->update(['status' => 0]);
-        // if ($tickets) {
-        //     alert()->success('Post Created', 'Successfully');
-        // } else {
-        //     alert()->error('Post Created', 'Something went wrong!');
-        // }
-        return view('client.pages.profile.ticketDetail',compact('user','tickets'));
+        $working_time = WorkingTime::where('id', $time_id)->get();
+        return view('client.pages.profile.ticketDetail',compact('user','tickets','working_time'));
     }
 }

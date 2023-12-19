@@ -33,16 +33,16 @@ class ContactController extends Controller
         $passenger_car = PassengerCar::where('id', $ticket[0]->passenger_car_id)->get();
         $route = Routes::where('id', $passenger_car[0]->route_id)->get();
         $time = WorkingTime::where('id', $ticket[0]->time_id )->get();
-        
+       
         return view('client.pages.ticket.finish',[
             'data' => $passenger_car[0]->license_plate,
             'email' => $ticket[0]->email,
             'route_departure' => $route[0]->departure,
             'route_arrival' => $route[0]->arrival,
-            'departure' => $time[0]->departure_time,
-            'arrival' => $time[0]->arrival_time,
-            'time_departure' => $ticket[0]->time_departure,
-            'time_arrival' => $ticket[0]->time_arrival,
+            'departure' => $ticket[0]->departure,
+            'arrival' => $ticket[0]->arrival,
+            'time_departure' => $time[0]->departure_time,
+            'time_arrival' => $time[0]->arrival_time,
             'username' => $ticket[0]->username,
             'phone' => $ticket[0]->phone,
             'email' => $ticket[0]->email,
