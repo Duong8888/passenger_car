@@ -262,7 +262,7 @@
                                                 <li><i class="bx bxs-chevron-right align-middle px-2.5"></i><a
                                                         href="javascript:void(0)">Về chúng tôi</a></li>
                                                 <li class="active" aria-current="page"><i
-                                                        class="bx bxs-chevron-right align-middle px-2.5"></i> Sứ mệnh </li>
+                                                        class="bx bxs-chevron-right align-middle px-2.5"></i> Chính sách </li>
                                             </ol>
                                         </nav>
                                     </div>
@@ -282,27 +282,22 @@
                         <div class="grid items-center grid-cols-12 gap-5">
                             <div class="col-span-12 lg:col-span-6">
                                 {{-- <h6 class="text-sm text-gray-900 uppercase dark:text-gray-50/80">About Us</h6> --}}
-                                <h2 class="mt-1 mb-4 text-gray-900 dark:text-gray-50/80">Chính sách</h2>
-                                <p>Sứ mệnh của Car Finder Pro là cung cấp một nền tảng đặt xe khách nhanh chóng và tin cậy,
-                                    giúp người dùng tiết kiệm thời gian, tìm kiếm và đặt vé xe khách một cách thuận tiện và
-                                    dễ dàng.</p>
+                                <h2 class="mt-1 mb-4 text-gray-900 dark:text-gray-50/80">Điều Kiện và Điều Khoản</h2>
+                                <h4>Đối với nhà xe</h4> <br>
+                                <h5>1. Chấp Nhận Các Điều Kiện và Điều Khoản:</h5>
+                                <p>Nhà xe phải chấp nhận và tuân theo toàn bộ điều khoản và điều kiện được quy định trong hợp đồng này. Bằng cách tiếp tục làm việc với chúng tôi, nhà xe đồng ý rằng họ đã đọc, hiểu và đồng ý với các điều khoản này.</p>
                                 <br>
+                                <h5>2. Bảo Quản Thông Tin Khách Hàng:</h5>
                                 <p>
-                                    Chúng tôi hiểu rằng việc tìm kiếm và chọn lựa dịch vụ xe khách có thể là một quá trình
-                                    phức tạp và mất nhiều thời gian. Vì vậy, sứ mệnh của chúng tôi là đơn giản hóa quy trình
-                                    này và mang lại trải nghiệm tuyệt vời cho người dùng.
+                                    Nhà xe cam kết bảo quản mọi thông tin liên quan đến khách hàng một cách an toàn và bảo mật. Thông tin này chỉ được sử dụng để cung cấp dịch vụ và không được tiết lộ cho bất kỳ bên thứ ba nào mà không có sự đồng ý rõ ràng từ phía khách hàng.
                                 </p> <br>
+                                <h5>  3. An Toàn và Tuân Thủ Pháp Luật:</h5>
                                 <p>
-                                    Chúng tôi đặt mục tiêu tạo ra một môi trường trực tuyến an toàn và đáng tin cậy cho
-                                    người dùng. Chúng tôi lựa chọn kỹ các đối tác và nhà cung cấp dịch vụ xe khách để đảm
-                                    bảo rằng chỉ những dịch vụ chất lượng cao và đáng tin cậy mới được cung cấp trên nền
-                                    tảng của chúng tôi.
+                                    Nhà xe đảm bảo rằng mọi phương tiện và lái xe của họ tuân thủ tất cả các quy định an toàn và pháp luật giao thông hiện hành. Họ sẽ chịu trách nhiệm và các hậu quả pháp lý nếu bị vi phạm.
                                 </p> <br>
+                                <h5>4. Bảo Hiểm Phương Tiện:</h5>
                                 <p>
-                                    Cuối cùng, sứ mệnh của Car Finder Pro là mang lại trải nghiệm đi du lịch và di chuyển
-                                    bằng xe khách tuyệt vời cho mọi người. Chúng tôi hy vọng rằng việc sử dụng nền tảng của
-                                    chúng tôi sẽ giúp người dùng có được sự thuận tiện, an toàn và thoải mái khi đi du lịch
-                                    hoặc di chuyển bằng xe khách.
+                                    Nhà xe cam kết duy trì bảo hiểm hợp lý cho phương tiện và đáp ứng đầy đủ các yêu cầu bảo hiểm pháp lý. Họ sẽ cung cấp chứng từ bảo hiểm khi được yêu cầu.
                                 </p>
                                 {{-- <div class="grid grid-cols-12 gap-5 mt-8">
                                         <div class="col-span-12 md:col-span-6">
@@ -331,10 +326,23 @@
                                 </div>
                             </div>
                             <div class="col-span-12 lg:col-span-6">
-                                <div class="lg:w-[180%]">
+                                {{-- <div class="lg:w-[180%]">
                                     <img src="{{ asset('client/images/about/banner2.png') }}" alt="banner"
                                         class="h-auto rounded" width="65%">
-                                </div>
+                                </div> --}}
+                                <h4 class="mt-6">Đối với khách hàng</h4> <br>
+                                <h5>1. Cần cọc trước 50% vé</h5>
+                                <p>Chính sách đặt cọc áp dụng cho tất cả các đặt xe có số ghế lớn hơn hoặc bằng 5 ghế.</p>
+                                <p class="mt-2">Để xác nhận đặt xe của bạn, chúng tôi yêu cầu một khoản đặt cọc trước tương đương 50% giá trị của đặt xe. Điều này giúp chúng tôi đảm bảo sẽ có sẵn phương tiện phù hợp cho bạn vào ngày chuyến đi.</p>
+                                <p class="mt-2">Sau khi bạn xác nhận thông tin đặt xe của mình, quy trình xác nhận đặt cọc sẽ được thực hiện. Bạn sẽ nhận được thông báo xác nhận cùng với chi tiết đặt cọc qua email hoặc ứng dụng di động của chúng tôi.</p>
+                                <p class="mt-2">Khi bạn hoàn thành chuyến đi và trả phương tiện một cách an toàn, chúng tôi sẽ hoàn trả lại số cọc đầy đủ mà bạn đã đặt trước.</p>
+                                <br>
+                                <h5>2. Bị chặn nếu huỷ xe liên tục</h5>
+                                <p>
+                                    Nếu khách hàng liên tục hủy đặt xe mà không có lý do hợp lý, chúng tôi có thể tạm chặn tài khoản của họ để bảo vệ sự công bằng và hiệu quả của dịch vụ.
+                                </p>
+                                <p class="mt-2">Mỗi lần huỷ đặt xe, hệ thống của chúng tôi sẽ ghi lại thông tin và tự động đánh giá mức độ hợp lý của hành động này.
+                                    Chúng tôi sẽ xem xét mỗi trường hợp một cách công bằng và dựa trên lịch sử hủy và lý do được cung cấp.</p>
                             </div>
                         </div>
                     </div>
