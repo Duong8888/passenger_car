@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-
+@section('title', "Thêm dịch vụ")
 @section('page-script')
 <!--Morris Chart-->
 <script src="admin/libs/morris.js06/morris.min.js"></script>

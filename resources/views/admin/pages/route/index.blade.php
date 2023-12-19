@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-
+@section('title', "Quản lý tuyến đường")
 @section('page-script')
 
     <!-- Init js-->

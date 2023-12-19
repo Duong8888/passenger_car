@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-
+@section('title', "Thêm tuyến đường")
 @section('content')
 <div class="content">
   <!-- Start Content-->

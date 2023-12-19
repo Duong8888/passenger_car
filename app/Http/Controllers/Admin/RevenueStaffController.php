@@ -96,7 +96,7 @@ class RevenueStaffController extends Controller
         $sub60days = Carbon::now('Asia/Ho_Chi_Minh')->subDays(30)->toDateString();
         $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
         foreach ($passengerCar as $car) {
-            $carTickets = $car->tickets()->whereBetween('date', [$sub60days, $now])->orderBy('date', 'ASC')->get();
+            $carTickets = $car->tickets()->whereBetween('date', [$sub60days, $now])->orderBy('date','ASC')->get();
             $tickets = $tickets->merge($carTickets);
         }
         $chart_data = [];

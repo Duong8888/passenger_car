@@ -35,7 +35,7 @@
         chart30daysorder();
         var chart = new Morris.Area({
             element: 'myfirstchart',
-            lineColors: ['#ffd699', '#ff7f00', '#ff6600', '#e65100'],
+            lineColors: ['#FF6633', '#6633FF', '#00FF00', '#FFFF00'],
             pointFillColors: ['#ffffff'],
             pointStrokeColors: ['black'],
             fillOpacity: 0.3,
@@ -44,10 +44,7 @@
             xkey: 'created_at',
             ykeys: ['count', 'user_type_admin', 'user_type_staff', 'user_type_user'],
             behaveLikeLine: true,
-            labels: ['Số người đăng ký', 'Admin', 'Staff', 'User'],
-        });
-        chart.options.labels.forEach(function(label, index) {
-            $('.morris-hover.morris-default-style .morris-legend text').eq(index).css('fill', chart.options.lineColors[index]);
+            labels: ['Số người đăng ký', 'Admin', 'Nhà xe', 'khách hàng'],
         });
         function chart30daysorder() {
             var _token = $('input[name="_token"]').val();
@@ -62,7 +59,6 @@
                 }
             });
         }
-        chart.resize(30);
 
     $('.dashboard-filter').change(function(){
         var dashboard_value = $(this).val();
@@ -104,7 +100,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <p class="title_thongke" style="text-align: center;font-size: 20px;font-weight: bold;">Thông kê doanh thu</p>
+                <p class="title_thongke" style="text-align: center;font-size: 20px;font-weight: bold;">Thông kê người dùng</p>
                 <form autocomplete="off" class="mb-4 mt-4">
                     @csrf
                     <div class="row align-items-end">

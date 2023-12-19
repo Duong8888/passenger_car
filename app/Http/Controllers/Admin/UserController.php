@@ -36,7 +36,7 @@ class UserController extends Controller
             return redirect()->route('admin.route_staff_edit',['id'=>$id]);
         }
         }
-        return view('admin.pages.Staff.edit',compact('users'));
+        return view('admin.pages.Staff.edit',compact('users'))->with('success', 'Sửa thành công nhà xe');;
     }
     public function delete(Request $request,$id){
         User::where('id',$id)->delete();

@@ -38,13 +38,9 @@
                     <h4 class="mt-0 header-title">Phân quyền (Role)</h4>
                     <a class="dropdown-item" href="{{ route('admin.rolePermission.create') }}">Thêm quyền</a>
                     @if ($message = Session::get('success'))
-                        <div>
-                            <ul>
-                                <p  style="color: rgb(43, 0, 255)">{{ $message }}</p>
-                            </ul>
-                        </div>
+                        <div class="alert alert-success mt-1 mb-1" style="color: #004080; background-color: #cce5ff; font-size: 12px;">{{ $message }}</div>
                     @endif
-
+                        
                     <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap">
                         <thead>
                         <tr style="color: red">

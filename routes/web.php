@@ -83,13 +83,13 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
             Route::delete('/{ticket}', 'destroy')->name('destroy');
             Route::get('/{ticket}/edit', 'edit')->name('edit');
             Route::post('/cancel', 'cancel')->name('cancel-vnp');
-            Route::post('/search', 'search')->name('search');
+            Route::get('/search', 'search')->name('search');
         });
         Route::post('/trip', [TicketController::class, 'Trip']);
         Route::post('/phone', [TicketController::class, 'CheckPhone']);
         Route::post('/price', [TicketController::class, 'Price']);
         Route::post('/passgenerCar/{id}', [TicketController::class, 'PassengerCar']);
-
+        Route::post('/confirm', [TicketController::class, 'Confirm'] );
         // Quản lý tuyến đường nhà xe
         Route::prefix('route')->controller(RouteController::class)->name('route.')->group(function () {
             Route::get('/', 'index')->name('index');
