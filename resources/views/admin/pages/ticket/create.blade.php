@@ -240,7 +240,7 @@
                     success: function(response) {
                         let showRouteDeparture = '';
                         let showRouteArrival = '';
-                        
+                        l
                         $('#price').val(response.price);
                         response.stops.forEach(function(stop) {
                           if(stop.stop_type == 0){

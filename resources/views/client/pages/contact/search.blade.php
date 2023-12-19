@@ -110,7 +110,7 @@
                             <h1 class="text-4xl font-bold mb-4">TRA CỨU THÔNG TIN VÉ</h1>
                             <input name="phone" type="text" placeholder="Vui lòng nhập số điện thoại"
                                 class="border p-2 mb-2" onblur="validatePhoneNumber(this)" required><br>
-                            <input name="id" type="text" placeholder="Vui lòng nhập mã vé" class="border p-2 mb-2"><br>
+                            <input name="id" type="text" placeholder="Vui lòng nhập mã vé" class="border p-2 mb-2" required><br>
                             <div id="recaptcha-container"></div>
                             <br>
                             <button
@@ -121,37 +121,6 @@
 
                     </div>
                 </div>
-                @if (isset($ticket))
-                <table style="border: 1px solid #000; width: 100%">
-                    <thead>
-                        <tr style="background-color: #f2f2f2;">
-                            <th style="border: 1px solid #000; padding: 5px;">id</th>
-                            <th style="border: 1px solid #000; padding: 5px;">username</th>
-                            <th style="border: 1px solid #000; padding: 5px;">phone</th>
-                            <th style="border: 1px solid #000; padding: 5px;">email</th>
-                            <th style="border: 1px solid #000; padding: 5px;">quantity</th>
-                            <th style="border: 1px solid #000; padding: 5px;">date</th>
-                            <th style="border: 1px solid #000; padding: 5px;">departure</th>
-                            <th style="border: 1px solid #000; padding: 5px;">arrival</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="border: 1px solid #000; padding: 5px;">Hêlo</td>
-                            <td style="border: 1px solid #000; padding: 5px;">Hêlo</td>
-                            <td style="border: 1px solid #000; padding: 5px;">Hêlo</td>
-                            <td style="border: 1px solid #000; padding: 5px;">Hêlo</td>
-                            <td style="border: 1px solid #000; padding: 5px;">Hêlo</td>
-                            <td style="border: 1px solid #000; padding: 5px;">Hêlo</td>
-                            <td style="border: 1px solid #000; padding: 5px;">Hêlo</td>
-                            <td style="border: 1px solid #000; padding: 5px;">Hêlo</td>
-                        </tr>
-                    </tbody>
-                </table>
-                @endif
-                
-
-
             </section>
         </div>
     </div>

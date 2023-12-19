@@ -24,10 +24,16 @@
 
                     </tr>
                     <tr>
-                        @foreach ($data as $value)
+                        @if ($id !== '')
+                           @foreach ($data as $value)
                         <td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">Xe {{
                             $value->license_plate }}</td>
-                        @endforeach
+                        @endforeach  
+                        @else
+                        <td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">Xe {{
+                            $data }}</td>
+                        @endif
+                       
                         <td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">{{
                            $route_departure}}-{{ $route_arrival}}</td>
 
@@ -46,8 +52,10 @@
                     <p>{{ $arrival}}</p>
                     <p>Đón lúc: {{ $time_arrival}}</p>
                 </div>
-
+                @if ($id !== '')
                 <button  id="cancel-ticket" style="display: block; margin: 0 auto; background-color: red; color: white; width: 100% ; margin-top: 50px; padding: 10px ">Hủy Vé</button>
+                @endif
+              
             </div>
 
             <div style="width: 30%">
