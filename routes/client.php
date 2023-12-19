@@ -51,7 +51,7 @@ Route::middleware(CheckUser::class)->group(function(){
     //Route::post('/passengerCar-detail',[HomeController::class,'passengerCarDetail'])->name('passengerCar-detail');
     Route::resource('/profile',ProfileController::class);
     Route::get('/profile/ticketdetails/{id}',[ProfileController::class,'ticketDetails'])->name('ticketDetails_index');
-    Route::put('/profile/ticketDetailDelete/{id}',[ProfileController::class,'ticketDetailsDelete'])->name('ticketDetails_delete');
+    Route::post('/profile/ticketDetailDelete/{id}',[ProfileController::class,'ticketDetailsDelete'])->name('ticketDetails_delete');
 
     Route::get('/search', [SearchController::class, 'searchRequest'])->name('search');
     Route::post('/sortBy', [SearchController::class, 'sortBy'])->name('sortBy');

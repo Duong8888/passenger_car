@@ -60,7 +60,7 @@
                                 aria-expanded="false" data-dropdown-toggle="notification">
                                 <i class="text-2xl mdi mdi-bell"></i>
                             </button>
-                            <span
+                            <span hidden
                                 class="absolute text-xs px-1.5 bg-red-500 text-white font-medium rounded-full left-6 top-3 ring-2 ring-white count-btn"></span>
                         </div>
                         <!--end notification btn-->
