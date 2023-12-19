@@ -33,7 +33,7 @@ class UserController extends Controller
           ->update($request->except('_token'));
           if($request){
             Session::flash('success','Sửa thành công dữ liệu người dùng');
-            return redirect()->route('route_staff_edit',['id'=>$id]);
+            return redirect()->route('admin.route_staff_edit',['id'=>$id]);
         }
         }
         return view('admin.pages.Staff.edit',compact('users'));

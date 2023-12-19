@@ -45,7 +45,14 @@
                 <button <?= $user->status == 'Đã xử lý' ? 'disabled' : '' ?> id="<?= $user->id ?>" type="submit"
                     class="send-email btn btn-primary">Xác nhận đơn đăng kí</button>
             </div>
-
+            <style>
+                .blockreloading {
+                    display: none !important;
+                }
+                .reloading {
+                    display: block !important;
+                }
+            </style>
             <script type="text/javascript">
                 $('.send-email').on('click', function() {
                     $value = $(this).attr("id");
@@ -59,19 +66,32 @@
                         confirmButtonText: "Đúng!"
                     }).then((result) => {
                         if (result.isConfirmed) {
+                            $('#preloader').addClass("reloading");
+                            $('#preloader #status').addClass("reloading");
                             $.ajax({
                                 type: 'post',
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                },
                                 url: '{{ URL::to('admin/contact/sendmail') }}',
                                 data: {
-                                    "id": $value
+                                    _token : $('meta[name="csrf-token"]').attr('content'), 
+                                    id: $value
                                 },
                                 success: function(data) {
+                                    $('#preloader').removeClass("reloading");
+                                    $('#preloader').removeClass("reloading");
+                                    $('#preloader #status').addClass("blockreloading");
+                                    $('#preloader #status').addClass("blockreloading");
                                     Swal.fire({
                                         title: "Thông báo",
                                         text: "Xác nhận thành công.",
                                         icon: "success"
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            window.location.href = "/admin/contact/index"
+                                        }
                                     });
-                                    window.location.href = "/admin/contact/index"
                                 }
                             });
                         }

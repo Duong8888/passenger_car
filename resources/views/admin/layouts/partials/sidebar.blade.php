@@ -21,7 +21,7 @@
                 <div class="dropdown-menu user-pro-dropdown">
 
                     <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                    <a href="{{ url('admin/change-password') }}" class="dropdown-item notify-item">
                         <i class="fe-user me-1"></i>
                         <span>My Account</span>
                     </a>
@@ -115,23 +115,20 @@
                             <span> Quản lí tuyến đường </span>
                         </a>
                     </li>
-
                     <li>
                         <a href="{{ route('admin.revenueStaff.index') }}">
                             <i class="mdi mdi-view-dashboard-outline"></i>
                             <span> Thống kê doanh thu </span>
                         </a>
                     </li>
+
+                    <li>
+                        <a href="{{ route('admin.schedule.index') }}">
+                            <i class="mdi mdi-clipboard-outline"></i>
+                            <span>Lịch trình hôm nay</span>
+                        </a>
+                    </li>
                 @endif
-
-                <li>
-                    <a href="{{ route('admin.schedule.index') }}">
-                        <i class="mdi mdi-clipboard-outline"></i>
-                        <span>Lịch trình hôm nay</span>
-                    </a>
-                </li>
-
-
 
                     @if(auth()->user()->hasAnyRole(['SupperAdmin']))
                         <li>
@@ -190,7 +187,7 @@
                             <span> Quản lý nhà xe </span>
                         </a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a href="{{ route('admin.user.report') }}">
                             <i class="mdi mdi-table"></i>
                             <span> Thống kê user </span>
@@ -201,7 +198,7 @@
                             <i class="mdi mdi-table"></i>
                             <span> Thống kê vé </span>
                         </a>
-                    </li>
+                    </li> --}}
                 @endif
 
 
@@ -217,3 +214,4 @@
     <!-- Sidebar -left -->
 
 </div>
+

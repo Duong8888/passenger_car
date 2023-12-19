@@ -68,7 +68,9 @@ Route::middleware(CheckUser::class)->group(function(){
 
     Route::get('/blog/{id}', [BlogController::class, 'blog'])->name('blog');
     Route::get('/blogs', [BlogController::class, 'show'])->name('blog.show');
-    Route::get('/category-detail/{id}',[BlogController::class, 'show'])->name('category-detail');
+//    Route::get('/category-detail/{id}',[BlogController::class, 'show'])->name('category-detail');
+//    Route::get('/category-blog/{id}', [BlogController::class, 'blog'])->name('category-blog');
+
 
 
     Route::post('/update-ticket', [TicketController::class, 'CountTicket'])->name('client.ticket.update-ticket');

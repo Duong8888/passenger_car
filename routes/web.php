@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\Admin\PassengerCarController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\admin\permission\RolePermissionController;
-use App\Http\Controllers\admin\permission\UserPermissionController;
+use App\Http\Controllers\Admin\permission\RolePermissionController;
+use App\Http\Controllers\Admin\permission\UserPermissionController;
 use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\RouteController;
@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\Report\TicketReportController;
 use App\Http\Controllers\Admin\Report\UserReportController;
-use App\Http\Controllers\admin\StopsController;
+use App\Http\Controllers\Admin\StopsController;
 use App\Http\Controllers\Admin\EditorController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\PostCategoryController;
@@ -24,7 +24,8 @@ use App\Http\Controllers\Admin\revenueAdmin\ContactStaffController;
 use App\Http\Controllers\Admin\revenueAdmin\UserTypeController;
 use App\Http\Controllers\Admin\RevenueAdminController;
 use App\Http\Controllers\Admin\RevenueController;
-use App\Http\Controllers\admin\RevenueStaffController;
+use App\Http\Controllers\Admin\RevenueStaffController;
+use App\Http\Controllers\Auth\PasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,9 +46,14 @@ Route::get('/sign_in', [PhoneAuthController::class, 'sign_in'])->name('sign_in')
 
 Route::get('/login', [App\Http\Controllers\LoginAdminController::class, 'showLoginAdmin'])->name('login');
 Route::post('/login', [App\Http\Controllers\LoginAdminController::class, 'loginAdmin']);
-
 Route::middleware(['auth', CheckAdmin::class])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::post('/change-password', [\App\Http\Controllers\Admin\ProfileAdminController::class, 'changePassword'])->name('change-password');
+    Route::get('/change-password', [\App\Http\Controllers\Admin\ProfileAdminController::class, 'showChangePasswordForm'])->name('change-password');
+    Route::post('dashboard/revenue', [DashboardController::class, 'dayrevenue'])->name('dashboard.dayrevenue');
+    Route::post('dashboard/revenue1', [DashboardController::class, 'dayrevenue1'])->name('dashboard.dayrevenue1');
+    Route::post('dashboard/revenue2', [DashboardController::class, 'dayrevenue2'])->name('dashboard.dayrevenue2');
+    Route::post('dashboard/revenue3', [DashboardController::class, 'dayrevenue3'])->name('dashboard.dayrevenue3');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -65,7 +71,7 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         Route::put('/posts/{id}',  [PostController::class, 'update'])->name('posts.update');
         Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
         Route::get('/posting/{slug}', [PostController::class, 'createSlug'])->name('post.show');
-    
+
     //  Nhà xe
     Route::group(['middleware' => 'checkRoles:Nhà xe'], function () {
         // Quản lý vé
@@ -93,8 +99,8 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
             Route::put('/update/{id}', 'update')->name('update');
             Route::delete('/destroy/{route}', 'destroy')->name('destroy');
         });
-    
-        // Quản lý xe 
+
+        // Quản lý xe
         Route::group(["prefix" => "car", "as" => "car."], function () {
             Route::get('/', [PassengerCarController::class, 'index'])->name('index');
             Route::post('store', [PassengerCarController::class, 'store'])->name('store');
@@ -128,6 +134,11 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
             Route::post('/filter-by-select', 'filter_by_select')->name('filter_by_select');
 
         });
+         // quản lý lich trình
+        Route::group(['prefix' => 'schedule', 'as' => 'schedule.'], function () {
+            Route::get('/', [ScheduleController::class, 'index'])->name('index');
+            Route::post('/update', [ScheduleController::class, 'update'])->name('update');
+        });
     });
 
     //  SupperAdmin-Admin
@@ -157,8 +168,7 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
             Route::post('/filter-by-date', 'filter_by_date')->name('filter_by_date');
             Route::post('/filter-by-select', 'filter_by_select')->name('filter_by_select');
         });
-
-        // Quản lý contact 
+        // Quản lý contact
         Route::get('/contact/index', [App\Http\Controllers\Admin\ContactController::class, 'index'])->name('route_contact_index');
         Route::get('/contact/detail/{id}', [App\Http\Controllers\Admin\ContactController::class, 'detail'])->name('route_contact_detail');
         Route::post('/contact/sendmail', [App\Http\Controllers\Admin\ContactController::class, 'sendmail'])->name('route_contact_sendmail');
@@ -183,21 +193,13 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
 });
 
 
-
-    // quản lý lich trình
-    Route::group(['prefix' => 'schedule', 'as' => 'schedule.'], function () {
-        Route::get('/', [ScheduleController::class, 'index'])->name('index');
-        Route::post('/update', [ScheduleController::class, 'update'])->name('update');
-    });
-
-
 Route::group(['prefix' => 'notifications', 'as' => 'notifications.'], function () {
     Route::get('/', [NotificationController::class, 'showList']);
     Route::post('send', [NotificationController::class, 'sendNotification'])->name('sendMessage');
     Route::post('load', [NotificationController::class, 'getNotification'])->name('loadMessage');
 });
 
-
+Route::get('password', [PasswordController::class, 'update'])->name('password');
 
 
 

@@ -282,7 +282,7 @@
                         <div class="grid items-center grid-cols-12 gap-5">
                             <div class="col-span-12 lg:col-span-6">
                                 {{-- <h6 class="text-sm text-gray-900 uppercase dark:text-gray-50/80">About Us</h6> --}}
-                                <h2 class="mt-1 mb-4 text-gray-900 dark:text-gray-50/80">Sứ mệnh</h2>
+                                <h2 class="mt-1 mb-4 text-gray-900 dark:text-gray-50/80">Chính sách</h2>
                                 <p>Sứ mệnh của Car Finder Pro là cung cấp một nền tảng đặt xe khách nhanh chóng và tin cậy,
                                     giúp người dùng tiết kiệm thời gian, tìm kiếm và đặt vé xe khách một cách thuận tiện và
                                     dễ dàng.</p>

@@ -24,7 +24,7 @@
             <table class="table mb-0">
                 <form action="{{ route('admin.route_staff_add') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <h1 class="ml-5 mb-3">Quản lý nhân viên</h1>
+                    <h1 class="ml-5 mb-3">Quản lý nhà xe</h1>
                     
                     <div class="mb-3 ml-5">  
                         <label class="form-label">Tên nhân viên</label>
