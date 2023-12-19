@@ -1,6 +1,11 @@
 import {Uppy, Dashboard} from "https://releases.transloadit.com/uppy/v3.17.0/uppy.min.mjs"
 
 $(document).ready(function () {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     const base = window.location.origin
     const modal = $('#con-close-modal');
     const modalBtn = $('#modal-btn');
@@ -49,46 +54,53 @@ $(document).ready(function () {
         typeId = $(this).children("option:selected").attr('id');
     });
     function add() {
-        var formData = new FormData($('#form-main')[0])
-        // Lấy nội dung từ Quill Editor
-        var content = $(".ql-editor").html();
-        formData.append('description', content);
-        formData.append('vehicle_id', typeId);
-        uppy.getFiles().forEach((file, index) => {
-            formData.append('path[' + index + ']', file.data);
-        });
+        if(validate('add')){
+            btnSubmit.attr('disabled', 'disabled');
+            btnSubmit.html('<div style="text-align: center"><div class="spinner-border spinner-border-sm text-primary" role="status"></div></div>');
+            var formData = new FormData($('#form-main')[0])
+            // Lấy nội dung từ Quill Editor
+            var content = $(".ql-editor").html();
+            formData.append('description', content);
+            formData.append('vehicle_id', typeId);
+            uppy.getFiles().forEach((file, index) => {
+                formData.append('path[' + index + ']', file.data);
+            });
 
-        $.ajax({
-            url: baseUrl + '/store',
-            type: "POST",
-            data: formData,
-            processData: false, // Set false để ngăn jQuery xử lý dữ liệu FormData
-            contentType: false, // Set false để không thiết lập Header 'Content-Type'
-            success: function (data) {
-                console.log(data)
-                toggleModal();
-                Swal.fire({
-                    position: "top-center",
-                    icon: "success",
-                    title: "Thêm thành công",
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
-                loadData();
-            },
-            error: function (xhr, status, error) {
-                console.error("Error sending data:", error);
-            }
-        });
+            $.ajax({
+                url: baseUrl + '/store',
+                type: "POST",
+                data: formData,
+                processData: false, // Set false để ngăn jQuery xử lý dữ liệu FormData
+                contentType: false, // Set false để không thiết lập Header 'Content-Type'
+                success: function (data) {
+                    console.log(data)
+                    toggleModal();
+                    Swal.fire({
+                        position: "top-center",
+                        icon: "success",
+                        title: "Thêm thành công",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                    loadData();
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error sending data:", error);
+                }
+            });
+        }
+
     }
 
     modalBtn.on('click', function () {
+        btnSubmit.removeAttr('disabled');
         btnSubmit.attr('data-action', 'add');
         btnSubmit.text('Thêm mới');
         title.text('Thêm mới xe');
     });
 
     function toggleModal() {
+        btnSubmit.removeAttr('disabled');
         uppy.cancelAll();
         formMain.attr('action', baseUrl + '/' + 'store');
         modalBtn.trigger("click");
@@ -196,36 +208,40 @@ $(document).ready(function () {
     showUpdate();
 
     function update() {
-        var formData = new FormData($('#form-main')[0])
-        // Lấy nội dung từ Quill Editor
-        var content = $(".ql-editor").html();
-        formData.append('description', content);
-        uppy.getFiles().forEach((file, index) => {
-            formData.append('path[' + index + ']', file.data);
-        });
+        if(validate('update')){
+            btnSubmit.attr('disabled', 'disabled');
+            btnSubmit.html('<div style="text-align: center"><div class="spinner-border spinner-border-sm text-primary" role="status"></div></div>');
+            var formData = new FormData($('#form-main')[0])
+            // Lấy nội dung từ Quill Editor
+            var content = $(".ql-editor").html();
+            formData.append('description', content);
+            uppy.getFiles().forEach((file, index) => {
+                formData.append('path[' + index + ']', file.data);
+            });
 
-        $.ajax({
-            url: baseUrl + '/update/' + idUpdate,
-            type: "POST",
-            data: formData,
-            processData: false, // Set false để ngăn jQuery xử lý dữ liệu FormData
-            contentType: false, // Set false để không thiết lập Header 'Content-Type'
-            success: function (data) {
-                console.log(data)
-                toggleModal();
-                Swal.fire({
-                    position: "top-center",
-                    icon: "success",
-                    title: "Cập nhật thành công",
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
-                loadData();
-            },
-            error: function (xhr, status, error) {
-                console.error("Error sending data:", error);
-            }
-        });
+            $.ajax({
+                url: baseUrl + '/update/' + idUpdate,
+                type: "POST",
+                data: formData,
+                processData: false, // Set false để ngăn jQuery xử lý dữ liệu FormData
+                contentType: false, // Set false để không thiết lập Header 'Content-Type'
+                success: function (data) {
+                    console.log(data)
+                    toggleModal();
+                    Swal.fire({
+                        position: "top-center",
+                        icon: "success",
+                        title: "Cập nhật thành công",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                    loadData();
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error sending data:", error);
+                }
+            });
+        }
     }
 
 
@@ -343,6 +359,76 @@ $(document).ready(function () {
     }
 
     deleteCar();
+
+    function validate(action){
+        var licensePlate = $('input[name="license_plate"]').val();
+        var price = $('input[name="price"]').val();
+        var capacity = $('select[name="capacity"]').val();
+        const files = uppy.getFiles();
+        var description = $('.ql-editor').html();
+        var isValid = true;
+        if(licensePlate == ''){
+            $('.license_plate').html('Vui lòng nhập biển số.');
+            isValid = false;
+        }else {
+            if(action == 'add'){
+                $.ajax({
+                    url:$('.route-action').data('action'),
+                    method:'POST',
+                    data:{
+                        license_plate:licensePlate,
+                        action:action
+                    },
+                    success:function (response) {
+                        if(response.isValid === false){
+                            $('.license_plate').html(response.message);
+                            isValid = false;
+                        }else{
+                            isValid = true;
+                            $('.license_plate').html('');
+                            console.log(isValid);
+                        }
+                        console.log(response);
+                    },
+                    error:function (error) {
+                        console.log(error);
+                    }
+                })
+            }else {
+                $('.license_plate').html('');
+            }
+        }
+        if(price == ''){
+            $('.price').html('Vui lòng nhập giá.');
+            isValid = false;
+        }else{
+            if(price < 50000){
+                $('.price').html('Giá không hợp lệ.');
+                isValid = false;
+            }else{
+                $('.price').html('');
+            }
+        }
+        if(capacity == ''){
+            $('.capacity').html('Vui lòng chọn loại xe.');
+            isValid = false;
+        }else{
+            $('.capacity').html('');
+        }
+        if(files.length == 0){
+            $('.images').html('Vui lòng chọn ảnh.');
+            isValid = false;
+        }else{
+            $('.images').html('');
+        }
+        if (description == '<p><br></p>'){
+            $('.description').html('Vui lòng nhập mô tả.');
+            isValid = false;
+        }else{
+            $('.description').html('');
+        }
+        return isValid;
+    }
 
 });
 

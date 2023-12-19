@@ -50,7 +50,7 @@ class PassengerCarController extends AdminBaseController
         $data = $this->model->orderBy('id', 'desc')->where('user_id', $userId)->paginate(10);
         $service = Service::all();
         $type = Vehicles::all();
-        return view($this->pathView . __FUNCTION__, compact('data', 'service','type'))
+        return view($this->pathView . __FUNCTION__, compact('data', 'service', 'type'))
             ->with('title', $this->titleIndex)
             ->with('colums', $this->colums)
             ->with('urlbase', $this->urlbase)
@@ -66,18 +66,22 @@ class PassengerCarController extends AdminBaseController
         $departureTime = $request->departure;
         $arrivalTime = $request->arrival;
         $albumData = [];
-        $arrService = $request->service;
+
 
         $car->fill($request->except([$this->fieldImage, 'arrival', 'departure', '_token']));
         $car->user_id = Auth::user()->id;
-        if($request->type == '0'){
+        if ($request->type == '0') {
             $car->vehicle_id = 0;
         }
         $car->save();
 
-        foreach ($arrService as $service) {
-            $car->services()->attach($service);
+        if (!empty($request->service)) {
+            $arrService = $request->service;
+            foreach ($arrService as $service) {
+                $car->services()->attach($service);
+            }
         }
+
 
         foreach ($images as $image) {
             $tmpPath = Storage::put($this->folderImage, $image);
@@ -136,13 +140,15 @@ class PassengerCarController extends AdminBaseController
             $departureTime = $request->departure;
             $arrivalTime = $request->arrival;
             $albumData = [];
-            $arrService = $request->service;
+
 
             $car->fill($request->except([$this->fieldImage, 'arrival', 'departure', '_token']));
             $car->user_id = Auth::user()->id;
             $car->save();
-
-            $car->services()->sync($arrService);
+            if (!empty($request->service)) {
+                $arrService = $request->service;
+                $car->services()->sync($arrService);
+            }
 
             foreach ($images as $image) {
                 $tmpPath = Storage::put($this->folderImage, $image);
@@ -191,9 +197,19 @@ class PassengerCarController extends AdminBaseController
                 Storage::delete($value->{$this->fieldImage});
             }
             return response()->json("Xóa thành công");
-        }else{
+        } else {
             return parent::destroy($id);
         }
+    }
+
+    public function checkLicense(Request $request)
+    {
+        $licensePlate = $request->input('license_plate');
+        $existingCar = PassengerCar::where('license_plate', $licensePlate)->first();
+        if ($existingCar) {
+            return response()->json(['message' => 'Biển số đã được sử dụng','isValid'=>false]);
+        }
+        return response()->json(['message' => 'done','isValid'=>true]);
     }
 
 

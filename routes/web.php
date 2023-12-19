@@ -108,6 +108,7 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
             Route::post('edit/{id}', [PassengerCarController::class, 'edit'])->name('edit');
             Route::post('update/{id}', [PassengerCarController::class, 'update'])->name('update');
             Route::delete('delete/{id}', [PassengerCarController::class, 'destroy'])->name('delete');
+            Route::post('check', [PassengerCarController::class, 'checkLicense'])->name('checkLicense');
         });
         Route::resource('/service', ServicesController::class);
         Route::resource('/stop', StopsController::class);

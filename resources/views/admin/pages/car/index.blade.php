@@ -18,6 +18,7 @@
                         <!-- /.modal -->
                         <div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog"
                              aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                            <div class="route-action" data-action="{{route('admin.car.checkLicense')}}"></div>
                             <form id="form-main" class="modal-dialog modal-dialog modal-lg modal-dialog-scrollable"
                                   method="POST"
                                   action="{{route('admin.car.store')}}" enctype="multipart/form-data">
@@ -36,6 +37,7 @@
                                                     <input type="text" name="license_plate" class="form-control"
                                                            id="field-1"
                                                            placeholder="B52-198">
+                                                    <span class="text-danger license_plate"></span>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -44,16 +46,19 @@
                                                     <input type="number" name="price" class="form-control"
                                                            id="example-number"
                                                            placeholder="350.000">
+                                                    <span class="text-danger price"></span>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="mb-3">
-                                                    <label for="field-2" class="form-label">Số chỗ ngồi *</label>
+                                                    <label for="field-2" class="form-label">Loại xe *</label>
                                                     <select class="form-select" name="capacity">
+                                                        <option value="">chọn</option>
                                                         @foreach($type as $key => $value)
                                                             <option id="{{$value->id}}" value="{{$value->type_name}}">{{$value->type_name}} chỗ</option>
                                                         @endforeach
                                                     </select>
+                                                    <span class="text-danger capacity"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -132,6 +137,7 @@
                                         <div class="row mb-4">
                                             <label for="field-1" class="form-label">Ảnh xe *</label>
                                             <div id="uppy"></div>
+                                            <span class="text-danger images"></span>
                                         </div>
 
                                         <div class="row mt-4">
@@ -140,8 +146,7 @@
                                                 <div id="snow-editor" style="height: 300px;"
                                                      class="ql-container ql-snow">
                                                     <div class="ql-editor" data-gramm="false"
-                                                         contenteditable="true">
-                                                        <!-- content Snow-editor--></div>
+                                                         contenteditable="true"><!-- content Snow-editor--></div>
                                                     <div class="ql-clipboard" contenteditable="true"
                                                          tabindex="-1"></div>
                                                     <div class="ql-tooltip ql-hidden"><a class="ql-preview"
@@ -153,6 +158,7 @@
                                                             data-video="Embed URL"><a
                                                             class="ql-action"></a><a class="ql-remove"></a></div>
                                                 </div> <!-- end Snow-editor-->
+                                                <span class="text-danger description"></span>
                                             </div>
                                         </div>
                                     </div>
