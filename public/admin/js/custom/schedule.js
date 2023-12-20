@@ -1,5 +1,10 @@
 $(document).ready(function () {
     // <div className="spinner-border text-primary m-2" role="status"></div>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     var urlUpdate = $('#action').data('action');
     $(document).on('click', '.btn-update', function () {
         $('#text-'+$(this).data('item')+'').html('<div style="text-align: center"><div class="spinner-border spinner-border-sm text-primary" role="status"></div></div>');

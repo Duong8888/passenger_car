@@ -17,7 +17,7 @@ class PassengerCar extends Model
         'capacity',
         'price',
         'description',
-        'transport_unit_id',
+        'user_id',
         'route_id',
         'vehicle_id'
     ];

@@ -60,7 +60,7 @@
                                 aria-expanded="false" data-dropdown-toggle="notification">
                                 <i class="text-2xl mdi mdi-bell"></i>
                             </button>
-                            <span
+                            <span hidden
                                 class="absolute text-xs px-1.5 bg-red-500 text-white font-medium rounded-full left-6 top-3 ring-2 ring-white count-btn"></span>
                         </div>
                         <!--end notification btn-->
@@ -165,6 +165,11 @@
                     <li class="relative dropdown">
                         <button href="#" class="py-5 text-gray-800 lg:px-4 dropdown-toggle lg:h-[70px] {{ request()->routeIs('contact.index') ? 'active' : '' }}" id="contact"
                             ><a href="{{route('contact.index')}}">Liên hệ </a></button>
+                    </li>
+
+                    <li class="relative dropdown">
+                        <button class="py-5 text-gray-800 lg:px-4 dropdown-toggle lg:h-[70px] {{ request()->routeIs('client.contact.search') ? 'active' : '' }}" id="contact"
+                            ><a href="{{route('client.contact.search')}}">Tra Cứu Vé </a></button>
                     </li>
 
                     <li class="relative dropdown">

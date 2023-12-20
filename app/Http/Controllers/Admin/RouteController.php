@@ -57,7 +57,6 @@ class RouteController extends AdminBaseController
     public function store(Request $request)
     {
         Log::info($request->all());
-        $carId = $request->input('car');
         $departure = $request->input('routeDeparture');
         $arrival = $request->input('routeArrival');
         $departureArr = $request->input('departure');
@@ -74,13 +73,17 @@ class RouteController extends AdminBaseController
                 'price' => '0',
             ]);
         }
-        foreach ($carId as $key => $id) {
-            $car = PassengerCar::query()->findOrFail($id);
-            if ($car) {
-                $car->route_id = $route->id;
-                $car->save();
+        if (!empty($request->input('car'))) {
+            $carId = $request->input('car');
+            foreach ($carId as $key => $id) {
+                $car = PassengerCar::query()->findOrFail($id);
+                if ($car) {
+                    $car->route_id = $route->id;
+                    $car->save();
+                }
             }
         }
+
 
         $user_id = Auth::id();
         foreach ($departureArr as $key => $departure) {
@@ -153,7 +156,6 @@ class RouteController extends AdminBaseController
     public function update(Request $request, string $id)
     {
 
-        $carId = $request->input('car');
         $departure = $request->input('route_departure');
         $arrival = $request->input('route_arrival');
         $departureArr = $request->input('departure');
@@ -167,10 +169,14 @@ class RouteController extends AdminBaseController
         ]);
 
         $route->passengerCars()->update(['route_id' => null]);
-        foreach ($carId as $carId) {
-            $car = PassengerCar::findOrFail($carId);
-            $car->update(['route_id' => $route->id]);
+        if(!empty($request->input('car'))){
+            $carId = $request->input('car');
+            foreach ($carId as $carId) {
+                $car = PassengerCar::findOrFail($carId);
+                $car->update(['route_id' => $route->id]);
+            }
         }
+
 
         Stops::where('route_id', $route->id)->delete();
 

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileAdminController extends Controller
 {
@@ -50,9 +52,28 @@ class ProfileAdminController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function changePassword(Request $request)
     {
-        //
+        $user = User::find(auth()->user()->id);
+        $request->validate([
+            'current_password' => 'required',
+            'password' => 'required|confirmed|min:8',
+        ]);
+
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'The current password is incorrect.']);
+        }
+
+        $user->update(['password' => Hash::make($request->password)]);
+        \Illuminate\Support\Facades\Session::flash('success', 'Đổi mật khẩu thành công.');
+        return back()->with(['' => '']);
+    }
+
+    public function showChangePasswordForm()
+    {
+        $user = User::find(auth()->user()->id);
+        return view('admin.pages.profile.repassword', ["user" => $user]);
     }
 
     /**

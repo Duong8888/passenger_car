@@ -31,7 +31,7 @@ $(document).ready(function () {
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                success: function (response) {
+                success: function () {
                     Swal.fire({
                         position: "top-end",
                         icon: "success",

@@ -40,7 +40,7 @@
                     @if ($message = Session::get('success'))
                         <div class="alert alert-success mt-1 mb-1" style="color: #004080; background-color: #cce5ff; font-size: 12px;">{{ $message }}</div>
                     @endif
-
+                        
                     <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap">
                         <thead>
                         <tr style="color: red">
