@@ -80,11 +80,13 @@
                                         </div>
 
                                         <div class="mb-3">
-                                            <label class="form-label">Hình thức thanh toán</label>
-                                            <select name="payment_method" class="form-control">
-                                                <option value="Đã Thanh toán VNPAY">Đã Thanh toán VNPAY</option>
-                                                <option value="thanh toán tại nhà xe">thanh toán tại nhà xe</option>
-                                            </select>
+                                            <label class="form-label">Giá vé</label>
+                                            <input value="" id="price-seat" class="form-control" type="number" disabled>
+                                            <input type="hidden" value="thanh toán tại nhà xe" name="payment_method">
+{{--                                            <select name="payment_method" class="form-control hidden">--}}
+{{--                                                <option value="Đã Thanh toán VNPAY">Đã Thanh toán VNPAY</option>--}}
+{{--                                                <option value="thanh toán tại nhà xe" selected >thanh toán tại nhà xe</option>--}}
+{{--                                            </select>--}}
                                         </div>
                                     </div>
 
@@ -129,18 +131,7 @@
                                     }
                                 });
 
-                                $('.PassengerCar').change(function () {
-                                    let it = $(this).val();
-                                    if (it !== "") {
-                                        $("#departure").prop('disabled', false);
-                                        $("#arrival").prop('disabled', false);
-                                        $("#quantity").prop('disabled', false);
-                                    } else {
-                                        $("#departure").prop('disabled', true);
-                                        $("#arrival").prop('disabled', true);
-                                        $("#quantity").prop('disabled', true);
-                                    }
-                                })
+
                                 $('#phone').mouseover(function () {
                                     var phone = $(this).val();
 
@@ -163,8 +154,10 @@
 
                                 $('select[name="passenger_car_id"]').on('change', function () {
                                     console.log($('select[name="passenger_car_id"]').attr('data-action'));
+                                    $('.showPassengerCar').html(`<img style="width: 100%;border-radius: 10px" src="{{asset('images/banner-11.jpg')}}">`);
                                     var selectedOption = $(this).find('option:selected');
                                     priceSeat = selectedOption.data('price');
+                                    $('#price-seat').val(priceSeat);
                                     $.ajax({
                                         url: $(this).data('action'),
                                         method: "POST",
@@ -191,7 +184,7 @@
                                         data: {
                                             id: $('select[name="passenger_car_id"]').val(),
                                             date: $('#date').val(),
-                                            time: $('select[name="time"]').val()
+                                            time_id: $('select[name="time"]').val()
                                         },
                                         success: function (data) {
                                             $('.showPassengerCar').html('');
@@ -294,7 +287,7 @@
 
                                 $(document).on('click', '.route', function () {
                                     let id = $(this).val();
-
+                                    $('.showPassengerCar').html(`<img style="width: 100%;border-radius: 10px" src="{{asset('images/banner-11.jpg')}}">`);
                                     $.ajax({
                                         url: '/admin/passgenerCar/' + id,
                                         method: 'POST',

@@ -79,7 +79,7 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
             Route::get('/', 'index')->name('index');
             Route::post('/', 'store')->name('store');
             Route::get('/create', 'create')->name('create');
-            Route::put('/{ticket}', 'update')->name('update');
+            Route::post('/{ticket}', 'update')->name('update');
             Route::delete('/{ticket}', 'destroy')->name('destroy');
             Route::get('/{ticket}/edit', 'edit')->name('edit');
             Route::post('/cancel', 'cancel')->name('cancel-vnp');

@@ -40,6 +40,13 @@ class TicketController extends AdminBaseController
         'describe' => 'Mô tả',
     ];
 
+    public function update(Request $request, string $id)
+    {
+
+        dd($request->all());
+
+    }
+
     public function validateStore($request)
     {
         $validator = Validator::make($request->all(), [
@@ -57,6 +64,7 @@ class TicketController extends AdminBaseController
         $data = Ticket::whereHas('passengerCar', function ($query) use ($transportUnitId) {
             $query->where('user_id', $transportUnitId);
         })
+            ->orderBy('id','desc')
             ->paginate(10, ['*'], 'page', $page);
         $passengerCar = PassengerCar::where('user_id', $transportUnitId)->get();
         return view('admin.pages.ticket.index', compact('data','passengerCar'))
@@ -90,17 +98,28 @@ class TicketController extends AdminBaseController
 
     public function edit(string $id)
     {
+        $layout = [];
+        $checkSlot = [];
+        $seat = [];
         $model = $this->model->findOrFail($id);
-        $user_relationship  = User::find($model->phone);
-
-        $passengerCar_relationship = PassengerCar::find($model->passenger_car_id);
-        $user = User::all();
-        $route = Routes::all();
-        $passengerCar = PassengerCar::all();
-
-
-        return view($this->pathView . __FUNCTION__, compact('model', 'user', 'user_relationship', 'passengerCar_relationship', 'passengerCar', 'route'))
-
+        $car_relationship = $model->passengerCar()->get();
+        if($car_relationship[0]->vehicle_id != 0){
+            $layout = SeatsLayout::query()->where('vehicle_id', $car_relationship[0]->vehicle->id)->get();
+            $checkSlot = SeatStatus::query()
+                ->where('passenger_car_id',$car_relationship[0]->id)
+                ->where('date',$model->date)
+                ->where('time_id',$model->time_id)
+                ->where('ticket_id','<>',$model->id)
+                ->get();
+            $seatData = SeatStatus::query()
+                ->where('ticket_id',$model->id)
+                ->get();
+            $seat = $seatData->toArray();
+        }
+        $route = $car_relationship[0]->route()->get();
+        $passengerCar = $route[0]->passengerCars()->get();
+        $time = $car_relationship[0]->workingTime()->get();
+        return view($this->pathView . __FUNCTION__, compact('model', 'layout', 'checkSlot', 'seat', 'car_relationship', 'passengerCar', 'route','time'))
             ->with('title', $this->titleEdit)
             ->with('colums', $this->colums)
             ->with('urlbase', $this->urlbase);
@@ -123,8 +142,8 @@ class TicketController extends AdminBaseController
     public function PassengerCar($id)
     {
         $PassengerCar = PassengerCar::where('route_id', $id)
+            ->where('user_id',Auth::user()->id)
             ->get();
-
         return response()->json($PassengerCar);
     }
 
@@ -137,7 +156,7 @@ class TicketController extends AdminBaseController
             $checkSlot = SeatStatus::query()
                 ->where('passenger_car_id',$passengerCars->id)
                 ->where('date',$request->date)
-                ->where('time_id',$request->time)
+                ->where('time_id',$request->time_id)
                 ->get();
         }else{
             $layout = [];
@@ -175,6 +194,7 @@ class TicketController extends AdminBaseController
         }
 
         $model->seat_id = json_encode($request->slot);
+        $model->time_id = $request->time;
         $model->save();
 
         foreach ($request->slot as $value) {
