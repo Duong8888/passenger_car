@@ -1,4 +1,9 @@
 $(document).ready(function () {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     const showDeparture = $('.col-departure');
     const showArrival = $('.col-arrival');
     const btnDeparture = $('.btn-departure');

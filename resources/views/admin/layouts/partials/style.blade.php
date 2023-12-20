@@ -9,4 +9,5 @@
 {{-- <link rel="stylesheet" href="{{ asset('admin/libs/chartist/chartist.min.css') }}"> --}}
 
 <link rel="stylesheet" href="{{ asset ('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css') }}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,100,1,0" />
 

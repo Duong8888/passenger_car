@@ -13,7 +13,7 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-<script>
+<script type="module">
     $( function() {
       $( "#datepicker" ).datepicker({
         prevText:"Tháng trước",
@@ -55,7 +55,7 @@
             behaveLikeLine: true,
             labels: ['Số lượng vé','Doanh thu']
             });
-            
+
         function chart30daysorder() {
             var _token = $('input[name="_token"]').val();
             $.ajax({
@@ -86,7 +86,7 @@
             }
         })
     })
-        // 
+        //
     $('#btn-dashboard-filter').click(function(){
         var _token = $('input[name="_token"]').val();
         var form_date = $('#datepicker').val();
@@ -117,15 +117,16 @@
                     @csrf
                     <div class="row align-items-end">
                         <div class="col-md-3">
-                            <p>Từ ngày: <input type="text" id="datepicker" class="form-control"></p>
+
+                            <p>Từ ngày: <input type="date" id="datepicker" class="form-control"></p>
                           
                         </div>
                         <div class="col-md-3">
-                            <p>Đến ngày: <input type="text" id="datepicker2" class="form-control"></p>
-                          
+                            <p>Đến ngày: <input type="date" id="datepicker2" class="form-control"></p>
+
                         </div>
                         <div class="col-md-3">
-                            <p>Lọc theo: 
+                            <p>Lọc theo:
                                 <select class="dashboard-filter form-control" data-url="{{route('admin.revenueStaff.filter_by_select')}}">
                                     <option>--Chọn--</option>
                                     <option value="7ngay">7 ngày qua</option>
