@@ -99,6 +99,7 @@
                                             <label for="arrival" class="form-label">Điểm trả</label>
                                             <input type="text" value="{{$model->arrival}}" id="arrival" name="arrival"
                                                    class="form-control arrival">
+                                            <input type="text" value="{{$model->id}}" id="id" name="id" hidden>
                                         </div>
 
                                         <div class="mb-3">

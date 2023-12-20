@@ -42,9 +42,38 @@ class TicketController extends AdminBaseController
 
     public function update(Request $request, string $id)
     {
+        $ticket = Ticket::query()->findOrFail($request->id);
+        $ticket->update([
+              "phone" => $request->phone,
+              "username" => $request->username,
+              "email" => $request->email,
+              "date" => $request->date,
+              "passenger_car_id" => $request->passenger_car_id,
+              "quantity" => $request->quantity,
+              "total_price" => $request->total_price,
+              "status" => "1",
+              "time" => $request->time,
+              "departure" => $request->departure,
+              "arrival" => $request->arrival,
+              "id" => $request->id,
+              "payment_method" => "thanh toán tại nhà xe",
+        ]);
+        $seatStatus = SeatStatus::query()->where('ticket_id', $request->id)->get();
+        foreach ($seatStatus as $value){
+            $value->delete();
+        }
 
-        dd($request->all());
-
+        foreach($request->slot as $value){
+            SeatStatus::create([
+                "passenger_car_id" => $request->passenger_car_id,
+                "date" => $request->date,
+                "time_id" => $request->time,
+                "seat_status" => "1",
+                "ticket_id"=>$ticket->id,
+                "seat_id" =>$value,
+            ]);
+        }
+        return redirect()->route($this->urlIndex)->with('success', 'Update Successfully');
     }
 
     public function validateStore($request)
