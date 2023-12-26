@@ -278,7 +278,7 @@ $(document).ready(function () {
                                             <div class="grid grid-cols-12 gap-5">
                                                 <div class="col-span-12 lg:col-span-3">
                                                     <div class="px-2 mb-4 text-center mb-md-0">
-                                                        <a href="company-details.html">
+                                                        <a href="">
                                                             <img src="${item.albums[0].path}" style="border-radius: 5px" alt="ảnh xe" class="mx-auto h-full object-cover rounded-3">
                                                         </a>
                                                     </div>
@@ -344,7 +344,7 @@ $(document).ready(function () {
                                             <div class="grid grid-cols-12 gap-5">
                                                 <div class="col-span-12 lg:col-span-3">
                                                     <div class="px-2 mb-4 text-center mb-md-0">
-                                                        <a href="company-details.html">
+                                                        <a>
                                                             <img src="${item.path}" style="border-radius: 5px" alt="ảnh xe" class="mx-auto h-full object-cover rounded-3">
                                                         </a>
                                                     </div>
