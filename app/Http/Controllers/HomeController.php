@@ -45,7 +45,7 @@ class HomeController extends Controller
         $routes = Routes::all();
 
         $users = User::where('user_type', 'staff')->orderBy('updated_at', 'DESC')->take(4)->get();
-        $passengerCars = PassengerCar::with('workingTime')->whereNotNull('route_id')->inRandomOrder()->get();
+        $passengerCars = PassengerCar::with('workingTime')->whereNotNull('route_id')->inRandomOrder()->take(5)->get();
 
         $posts = Posts::orderBy('created_at', 'desc')->take(3)->get();
         // return response()->json($routes, 200, [], JSON_PRETTY_PRINT);
