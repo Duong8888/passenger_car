@@ -84,8 +84,8 @@
                         </div>
                     </div>
                 </form>
-                <div class="text-center">
-                    <div class="p-10" >
+                <div>
+                    <div style="margin-top: -270px; margin-left: 88%;">  
                         <button style="padding: 10px 30px !important;border-radius: 5px !important;"
                             id="closePopupButton2"><i class="fa-solid fa-xmark"
                                 style="font-size: 30px;color:#023c7a;"></i></button>

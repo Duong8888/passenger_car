@@ -153,7 +153,7 @@
                                 });
 
                                 $('select[name="passenger_car_id"]').on('change', function () {
-                                    console.log($('select[name="passenger_car_id"]').attr('data-action'));
+                                    //console.log($('select[name="passenger_car_id"]').attr('data-action'));
                                     $('.showPassengerCar').html(`<img style="width: 100%;border-radius: 10px" src="{{asset('images/banner-11.jpg')}}">`);
                                     var selectedOption = $(this).find('option:selected');
                                     priceSeat = selectedOption.data('price');
