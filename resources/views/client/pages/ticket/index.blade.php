@@ -276,7 +276,7 @@
 
         function startCountdown(startTime) {
         var endTime = new Date(startTime);
-        var paymentTime = {{env('PAYMENT_TIME',3)}};
+        var paymentTime = {{env('PAYMENT_TIME',15)}};
 
         endTime.setMinutes(endTime.getMinutes() + paymentTime);
 
