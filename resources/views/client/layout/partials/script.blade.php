@@ -87,9 +87,9 @@
             'size': 'invisible',
             'callback': (response) => {
             }
-            }); 
+            });
         recaptchaVerifier.render();
-        
+
     }
 
     var coderesult;
@@ -173,7 +173,7 @@
     storedStartTime = localStorage.getItem("startTime");
     function createCountdown(startTime, elementId) {
         var endTime = new Date(startTime);
-        var paymentTime = {{env('PAYMENT_TIME', 3)}};
+        var paymentTime = {{env('PAYMENT_TIME', 15)}};
         endTime.setMinutes(endTime.getMinutes() + paymentTime);
 
         var x = setInterval(function () {

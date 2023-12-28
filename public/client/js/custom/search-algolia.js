@@ -272,7 +272,13 @@ $(document).ready(function () {
                 $.each(item.services, function (indexServices, itemServices) {
                     service += `<span class="bg-sky-500/20 text-sky-500 text-11 px-2 py-0.5 font-medium rounded">${itemServices.service_name}</span>`;
                 })
-                dataList.append(`
+                if(inputDate.val() == today){
+                    var now = new Date();
+                    var formattedTime = now.toTimeString().slice(0, 8);
+                    var date1 = new Date('1970-01-01T' + itemWorking.departure_time + 'Z');
+                    var date2 = new Date('1970-01-01T' + formattedTime + 'Z');
+                    if (date1 >= date2) {
+                        dataList.append(`
                                     <div class="relative overflow-hidden transition-all duration-500 ease-in-out bg-white border rounded-md border-gray-100/50 group/jobs group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:-translate-y-2 dark:bg-neutral-900 dark:border-neutral-600">
                                         <div class="p-6">
                                             <div class="grid grid-cols-12 gap-5">
@@ -319,6 +325,57 @@ $(document).ready(function () {
                                         </div>
                                     </div>
                     `);
+                    }
+                }else {
+                    dataList.append(`
+                                    <div class="relative overflow-hidden transition-all duration-500 ease-in-out bg-white border rounded-md border-gray-100/50 group/jobs group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:-translate-y-2 dark:bg-neutral-900 dark:border-neutral-600">
+                                        <div class="p-6">
+                                            <div class="grid grid-cols-12 gap-5">
+                                                <div class="col-span-12 lg:col-span-3">
+                                                    <div class="px-2 mb-4 text-center mb-md-0">
+                                                        <a href="company-details.html">
+                                                            <img src="${item.albums[0].path}" style="border-radius: 5px" alt="ảnh xe" class="mx-auto h-full object-cover rounded-3">
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                                <!--end col-->
+                                                <div class="col-span-12 lg:col-span-6">
+                                                    <h5 class="mb-1 fs-17"><a href="#" class="dark:text-gray-50">${item.user.name}</a>
+                                                        <small class="font-normal text-gray-500 dark:text-gray-300"></small>
+                                                    </h5>
+                                                    <ul class="mb-0 lg:gap-3 gap-y-3">
+                                                        <li>
+                                                            <p class="mb-0 mt-4 text-sm text-gray-500 dark:text-gray-300">${dataRoute.departure} (${(itemWorking.departure_time).slice(0, -3)}) - ${dataRoute.arrival} (${(itemWorking.arrival_time).slice(0, -3)})</p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="mb-0 text-sm text-gray-500 dark:text-gray-300">Gế ngồi ${item.capacity}</p>
+                                                        </li>
+                                                    </ul>
+                                                     <div class="mt-4">
+                                                            <div class="service flex flex-wrap gap-1.5">
+                                                                ${service}
+                                                            </div>
+                                                     </div>
+                                                </div>
+
+                                                 <div class="col-span-12 lg:col-span-3 lg:flex lg:flex-col lg:justify-between lg:items-end ">
+                                                    <div class="lg:flex lg:flex-col lg:items-end">
+                                                        <p class="mb-4 font-bold group-data-[theme-color=violet]:text-violet-600 group-data-[theme-color=sky]:text-sky-600 group-data-[theme-color=red]:text-red-600 group-data-[theme-color=green]:text-green-600 group-data-[theme-color=pink]:text-pink-600 group-data-[theme-color=blue]:text-blue-600">
+                                                            Giá vé: ${item.price.toLocaleString('en-US')}đ
+                                                        </p>
+                                                        <p>Còn ${slot} chỗ trống</p>
+                                                    </div>
+                                                    <a id="pasengerCarUrl" class="mt-2 border-transparent btn group-data-[theme-color=violet]:bg-violet-500/20 group-data-[theme-color=sky]:bg-sky-500/20 group-data-[theme-color=red]:bg-red-500/20 group-data-[theme-color=green]:bg-green-500/20 group-data-[theme-color=pink]:bg-pink-500/20 group-data-[theme-color=blue]:bg-blue-500/20 group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500 hover:-translate-y-1 group-data-[theme-color=violet]:hover:bg-violet-500 group-data-[theme-color=violet]:hover:text-white group-data-[theme-color=sky]:hover:bg-sky-500 group-data-[theme-color=sky]:hover:text-white group-data-[theme-color=red]:hover:bg-red-500 group-data-[theme-color=red]:hover:text-white group-data-[theme-color=green]:hover:bg-green-500 group-data-[theme-color=green]:hover:text-white group-data-[theme-color=pink]:hover:bg-pink-500 group-data-[theme-color=pink]:hover:text-white group-data-[theme-color=blue]:hover:bg-blue-500 group-data-[theme-color=blue]:hover:text-white hover:ring group-data-[theme-color=violet]:hover:ring-violet-500/20 group-data-[theme-color=sky]:hover:ring-sky-500/20 group-data-[theme-color=red]:hover:ring-red-500/20 group-data-[theme-color=green]:hover:ring-green-500/20 group-data-[theme-color=pink]:hover:ring-pink-500/20 group-data-[theme-color=blue]:hover:ring-blue-500/20" href="/car/${item.id}?time=${itemWorking.id}&date=${dateParam}" data-bs-toggle="modal">Chi tiết <i class="mdi mdi-chevron-double-right"></i></a>
+                                                </div>
+                                                <!--end col-->
+                                            </div>
+                                            <!--end row-->
+                                        </div>
+                                    </div>
+                    `);
+                }
+
             });
         });
 
@@ -338,7 +395,13 @@ $(document).ready(function () {
                     }
                 });
             })
-            dataList.append(`
+            if(inputDate.val() == today){
+                var now = new Date();
+                var formattedTime = now.toTimeString().slice(0, 8);
+                var date1 = new Date('1970-01-01T' + item.departure_time + 'Z');
+                var date2 = new Date('1970-01-01T' + formattedTime + 'Z');
+                if (date1 >= date2) {
+                    dataList.append(`
                                     <div class="relative overflow-hidden transition-all duration-500 ease-in-out bg-white border rounded-md border-gray-100/50 group/jobs group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:-translate-y-2 dark:bg-neutral-900 dark:border-neutral-600">
                                         <div class="p-6">
                                             <div class="grid grid-cols-12 gap-5">
@@ -384,6 +447,55 @@ $(document).ready(function () {
                                         </div>
                                     </div>
                     `);
+                }
+            }else {
+                dataList.append(`
+                                    <div class="relative overflow-hidden transition-all duration-500 ease-in-out bg-white border rounded-md border-gray-100/50 group/jobs group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:-translate-y-2 dark:bg-neutral-900 dark:border-neutral-600">
+                                        <div class="p-6">
+                                            <div class="grid grid-cols-12 gap-5">
+                                                <div class="col-span-12 lg:col-span-3">
+                                                    <div class="px-2 mb-4 text-center mb-md-0">
+                                                        <a href="company-details.html">
+                                                            <img src="${item.path}" style="border-radius: 5px" alt="ảnh xe" class="mx-auto h-full object-cover rounded-3">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!--end col-->
+                                                <div class="col-span-12 lg:col-span-6">
+                                                    <h5 class="mb-1 fs-17"><a href="job-details.html" class="dark:text-gray-50">${item.name}</a>
+                                                        <small class="font-normal text-gray-500 dark:text-gray-300"></small>
+                                                    </h5>
+                                                    <ul class="mb-0 lg:gap-3 gap-y-3">
+                                                        <li>
+                                                            <p class="mb-0 mt-4 text-sm text-gray-500 dark:text-gray-300">${item.departure} (${(item.departure_time).slice(0, -3)}) - ${item.arrival} (${(item.arrival_time).slice(0, -3)})</p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="mb-0 text-sm text-gray-500 dark:text-gray-300">Gế ngồi ${item.capacity}</p>
+                                                        </li>
+                                                    </ul>
+                                                     <div class="mt-4">
+                                                            <div class="service flex flex-wrap gap-1.5">
+                                                                ${serviceHtml}
+                                                            </div>
+                                                     </div>
+                                                </div>
+
+                                                <div class="col-span-12 lg:col-span-3 lg:flex lg:flex-col lg:justify-between lg:items-end ">
+                                                    <div class="lg:flex lg:flex-col lg:items-end">
+                                                        <p class="mb-4 font-bold group-data-[theme-color=violet]:text-violet-600 group-data-[theme-color=sky]:text-sky-600 group-data-[theme-color=red]:text-red-600 group-data-[theme-color=green]:text-green-600 group-data-[theme-color=pink]:text-pink-600 group-data-[theme-color=blue]:text-blue-600">
+                                                            Giá vé: ${item.price.toLocaleString('en-US')}đ
+                                                        </p>
+                                                        <p>Còn ${item.capacity - item.total_quantity} chỗ trống</p>
+                                                    </div>
+                                                    <a id="pasengerCarUrl" class="mt-2 border-transparent btn group-data-[theme-color=violet]:bg-violet-500/20 group-data-[theme-color=sky]:bg-sky-500/20 group-data-[theme-color=red]:bg-red-500/20 group-data-[theme-color=green]:bg-green-500/20 group-data-[theme-color=pink]:bg-pink-500/20 group-data-[theme-color=blue]:bg-blue-500/20 group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500 hover:-translate-y-1 group-data-[theme-color=violet]:hover:bg-violet-500 group-data-[theme-color=violet]:hover:text-white group-data-[theme-color=sky]:hover:bg-sky-500 group-data-[theme-color=sky]:hover:text-white group-data-[theme-color=red]:hover:bg-red-500 group-data-[theme-color=red]:hover:text-white group-data-[theme-color=green]:hover:bg-green-500 group-data-[theme-color=green]:hover:text-white group-data-[theme-color=pink]:hover:bg-pink-500 group-data-[theme-color=pink]:hover:text-white group-data-[theme-color=blue]:hover:bg-blue-500 group-data-[theme-color=blue]:hover:text-white hover:ring group-data-[theme-color=violet]:hover:ring-violet-500/20 group-data-[theme-color=sky]:hover:ring-sky-500/20 group-data-[theme-color=red]:hover:ring-red-500/20 group-data-[theme-color=green]:hover:ring-green-500/20 group-data-[theme-color=pink]:hover:ring-pink-500/20 group-data-[theme-color=blue]:hover:ring-blue-500/20" href="/car/${item.id}?time=${item.working_times_id}&date=${dateParam}" data-bs-toggle="modal">Chi tiết <i class="mdi mdi-chevron-double-right"></i></a>
+                                                </div>
+                                                <!--end col-->
+                                            </div>
+                                            <!--end row-->
+                                        </div>
+                                    </div>
+                    `);
+            }
         });
     }
 
