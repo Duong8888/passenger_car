@@ -46,12 +46,12 @@
                                     }
                                     ?>
                                     <form action="{{ route('admin.route_contact_edit', $item->id) }}" method="post"
-                                        class="js-update-contact" class="btn btn-primary ml-5 ">
+                                        class="js-update-contact" class="btn btn-primary ml-5 " style="">
                                         @csrf
-                                        <select id="confirmSubmit" class="js-select-status-contact status-ChuaXuLy" style="<?= $style ?>"
-                                            name="status" class="js-select-status-contact">
+                                        <select id="confirmSubmit" class="js-select-status-contact status-ChuaXuLy" style="border-radius: 5px;border: 2px;<?= $style ?>"
+                                            name="status" class="js-select-status-contact" >
                                                 <option class="form-control"
-                                                    style="background-color: #FF5733; color: #FFFFFF;" <?php if ($status == 'Chưa xử lý') {
+                                                    style="background-color: #FF5733; color: #FFFFFF; border-radius: 5px;border: 2px;" <?php if ($status == 'Chưa xử lý') {
                                                         echo $selected;
                                                     } ?>
                                                     <?php if ($disable) {
@@ -61,7 +61,7 @@
                                                     Chưa xử lý
                                                 </option>
                                                 <option class="form-control"
-                                                    style="background-color: #FFC300; color: #000000;" <?php if ($status == 'Đang xử lý') {
+                                                    style="background-color: #FFC300; color: #000000; border-radius: 5px;border: 2px;" <?php if ($status == 'Đang xử lý') {
                                                         echo $selected;
                                                     } ?>
                                                     <?php if ($disable) {
@@ -70,7 +70,7 @@
                                                     value="Đang xử lý">
                                                     Đang xử lý
                                                 </option>
-                                            <option class="form-control" style="background-color: #00FF40; color: #000000;"
+                                            <option class="form-control" style="background-color: #00FF40; color: #000000;border-radius: 5px;border: 2px;"
                                                 <?php if ($status == 'Đã xử lý') {
                                                     echo $selected;
                                                 } ?> value="Đã xử lý">
@@ -90,8 +90,7 @@
                                             <a href="detail/<?= $item->id ?>" class="dropdown-item">Xem chi tiết</a>
                                             <!-- item-->
                                             <a href="update/<?= $item->id ?>?type=edit" class="dropdown-item">Chỉnh sửa</a>
-                                            <!-- item-->
-                                            <a href="javascript:void(0);" class="dropdown-item">Hủy đăng kí</a>
+
                                         </div>
                                     </div>
                                 </td>
