@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Spatie\Permission\Models\Role;
 use PDF;
+
 class ContactController extends Controller
 {
     public function index(Request $request)
@@ -76,50 +77,36 @@ class ContactController extends Controller
         });
         return $messageStatus;
     }
-    public function edit(Request $request, $id)
+    public function appy(Request $request)
     {
-        $contact = Contact::query()->where('id', $id)->first();
-        if(!$request->type){
-            $status = $request->status;
-            $random_pass = $this->randomPassword();
-            $uniqueUser = User::query()->where('email', $contact->email)->first();
-            $roleUser = $uniqueUser;
-            if ($status === 'Đã xử lý') {
-                $data = [
-                    "fullName" => $contact->user_name,
-                    "email" => $contact->email,
-                    "hashPassword" => $random_pass,
-                    "phone" => $contact->phone,
-                    "password" => Hash::make($random_pass),
-                    'name' => $contact->user_name,
-                    'user_type' => 'staff',
-                ];
-                if (!$uniqueUser) {
-                    User::create($data);
-                } else {
-                    $user = $uniqueUser->update($data);
-                    $user = $roleUser;
-                }
-                $role = Role::where('name', 'Nhà xe')->first();
-                $user->assignRole($role);
-                $contact->update(['status' => $status]);
-                $data['title'] = "Đăng kí thành công đối tác CAR FINDER PRO";
-
-                Mail::send('mails.carRegisterSuccess', $data, function($message) use ($data){
-                    $message->to($data['email'], 'Visitor')->subject($data['title']);
-                });
-                return redirect()->back();
-            }else if($status === 'Đang xử lý'){
-                $contact->update(['status' => $status]);
-                $data['title'] = "Thông tin xác nhận đăng kí làm đối tác CAR FINDER PRO";
-                $this->handleCheckSuccess($data, $contact);
-                return redirect()->back();
-            }
-        }else{
-            return view('admin.pages.contact.edit', compact('contact'));
+        $contact = Contact::query()->where('id', $request->value['id'])->first();
+        $random_pass = $this->randomPassword();
+        $uniqueUser = User::query()->where('email', $contact->email)->first();
+        $roleUser = $uniqueUser;
+        $data = [
+            "fullName" => $contact->user_name,
+            "email" => $contact->email,
+            "hashPassword" => $random_pass,
+            "phone" => $contact->phone,
+            "password" => Hash::make($random_pass),
+            'name' => $contact->user_name,
+            'user_type' => 'staff',
+        ];
+        if (!$uniqueUser) {
+            User::create($data);
+        } else {
+            $user = $uniqueUser->update($data);
+            $user = $roleUser;
         }
+        $role = Role::where('name', 'Nhà xe')->first();
+        $user->assignRole($role);
+        $contact->update(['status' => "Đã xử lý"]);
+        $data['title'] = "Đăng kí thành công đối tác CAR FINDER PRO";
 
-
+        Mail::send('mails.carRegisterSuccess', $data, function ($message) use ($data) {
+            $message->to($data['email'], 'Visitor')->subject($data['title']);
+        });
+        return redirect()->back();
     }
 
     public function delete(Request $request, $id)
@@ -137,7 +124,7 @@ class ContactController extends Controller
 
     public function sendmail(Request $request)
     {
-        $contact = Contact::query()->where('id', $request->id)->first();
+        $contact = Contact::query()->where('id', $request->value['id'])->first();
         $contact->update(['status' => "Đang xử lý"]);
         $data["title"] = "Thông tin xác nhận đăng kí làm đối tác CAR FINDER PRO";
         $response = $this->handleCheckSuccess($data, $contact);
@@ -157,5 +144,25 @@ class ContactController extends Controller
         $text = trim($text, '-');
 
         return $text;
+    }
+
+    public function cancelRequest(Request $request)
+    {
+        $contact = Contact::query()->where('id', $request->value['id'])->first();
+        $contact->update(['status' => "Đã hủy"]);
+        $data = [
+            "title" => "Đơn đăng kí không đủ điều kiện",
+            "email" => $contact->email,
+            "content" => $request->value['content'],
+            "status" => "Không đủ điều kiện",
+            "fullName" => $contact->user_name,
+        ];
+        $result = Mail::send('mails.carCancel', $data, function ($message) use ($data) {
+            $message->to($data["email"], $data["email"])
+                ->subject($data["title"]);
+        });
+        if ($result) {
+            return Response($data);
+        }
     }
 }
