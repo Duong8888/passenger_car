@@ -180,7 +180,7 @@ $(document).ready(function () {
     // udate xe
     let licensePlate = $('input[name="license_plate"]');
     let price = $('input[name="price"]');
-    let capacity = $('input[name="capacity"]');
+    let capacity = $('select[name="capacity"]');
     let description = $('.ql-editor');
     let time = $('.show-item');
     let services = $('.service');
@@ -274,11 +274,11 @@ $(document).ready(function () {
                 `
                 <div class="row add-item mb-2">
                     <div class="col-md-5">
-                        <input class="form-control" name="departure[]" id=""
+                        <input class="form-control departure" name="departure[]" id=""
                                type="time" name="time" value="${response[0].working_time[j].departure_time}">
                     </div>
                     <div class="col-md-5">
-                        <input class="form-control" name="arrival[]" id=""
+                        <input class="form-control arrival" name="arrival[]" id=""
                                type="time" name="time" value="${response[0].working_time[j].arrival_time}">
                     </div>
                     <div class="col-md-2 d-flex justify-content-between">
