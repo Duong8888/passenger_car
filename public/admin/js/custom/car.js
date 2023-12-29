@@ -360,13 +360,72 @@ $(document).ready(function () {
 
     deleteCar();
 
+    function isDepartureBeforeArrival(departure, arrival) {
+        return departure < arrival;
+    }
+
+    function isTimeRangeOverlap(departure1, arrival1, departure2, arrival2) {
+        return arrival1 > departure2 && arrival2 > departure1;
+    }
+
+    function validateTimeRanges(departureArr, arrivalArr) {
+        var parsedDepartures = departureArr.map(item => new Date('1970-01-01T' + item + 'Z'));
+        var parsedArrivals = arrivalArr.map(item => new Date('1970-01-01T' + item + 'Z'));
+
+        for (var i = 0; i < parsedDepartures.length; i++) {
+            for (var j = i + 1; j < parsedDepartures.length; j++) {
+                if (
+                    !isDepartureBeforeArrival(parsedDepartures[i], parsedArrivals[i]) ||
+                    !isDepartureBeforeArrival(parsedDepartures[j], parsedArrivals[j]) ||
+                    isTimeRangeOverlap(
+                        parsedDepartures[i],
+                        parsedArrivals[i],
+                        parsedDepartures[j],
+                        parsedArrivals[j]
+                    )
+                ) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    function validateAndLogTimeRanges(departureArr, arrivalArr) {
+        var isValidTimeRange = validateTimeRanges(departureArr, arrivalArr);
+
+        if (isValidTimeRange) {
+            $('.time-car').text('');
+            return true;
+        } else {
+            $('.time-car').text('Xung đột giờ khởi hành và giờ đến.');
+            return false;
+        }
+    }
+
+
     function validate(action){
+        var departureArr = $('.departure');
+        var arrivalArr = $('.arrival');
+        var dataDepartureArr = [];
+        var dataArrivalArr = [];
+        $.each(departureArr,function (index,item){
+            dataDepartureArr.push($(item).val());
+        });
+
+        $.each(arrivalArr,function (index,item){
+            dataArrivalArr.push($(item).val());
+        });
+
+
+
         var licensePlate = $('input[name="license_plate"]').val();
         var price = $('input[name="price"]').val();
         var capacity = $('select[name="capacity"]').val();
         const files = uppy.getFiles();
         var description = $('.ql-editor').html();
         var isValid = true;
+        isValid = validateAndLogTimeRanges(dataDepartureArr, dataArrivalArr);
         if(licensePlate == ''){
             $('.license_plate').html('Vui lòng nhập biển số.');
             isValid = false;

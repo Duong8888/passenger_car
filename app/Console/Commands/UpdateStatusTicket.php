@@ -2,10 +2,11 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Ticket;
 use App\Models\WorkingTime;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-
+use Illuminate\Support\Facades\Log;
 class UpdateStatusTicket extends Command
 {
     /**
@@ -29,8 +30,8 @@ class UpdateStatusTicket extends Command
     {
         $currentTime = Carbon::now();
 
-        $workingTimes = WorkingTime::where('departure_time', '>', $currentTime)
-            ->where('arrival_time', '>', $currentTime)
+        $workingTimes = WorkingTime::where('departure_time', '>', $currentTime->toDateString())
+            ->where('arrival_time', '>', $currentTime->toDateString())
             ->get();
 
         foreach ($workingTimes as $workingTime) {
@@ -45,7 +46,7 @@ class UpdateStatusTicket extends Command
                 } elseif ($currentTime->lt($departureTime)) {
                     $ticket->status = 1;
                 } else {
-                    $ticket->status = 3;
+                    $ticket->status = 2;
                 }
 
                 $ticket->save();
