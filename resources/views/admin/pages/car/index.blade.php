@@ -113,11 +113,11 @@
                                         <div class="show-item">
                                             <div class="row add-item mb-2">
                                                 <div class="col-md-5">
-                                                    <input class="form-control" name="departure[]" id=""
+                                                    <input class="form-control departure" name="departure[]" id=""
                                                            type="time" name="time" value="01:00">
                                                 </div>
                                                 <div class="col-md-5">
-                                                    <input class="form-control" name="arrival[]" id=""
+                                                    <input class="form-control arrival" name="arrival[]" id=""
                                                            type="time" name="time" value="05:00">
                                                 </div>
                                                 <div class="col-md-2 d-flex justify-content-between">
@@ -130,8 +130,9 @@
                                                         <i class="fe-plus-circle"></i></button>
                                                 </div>
                                             </div>
-
                                         </div>
+                                        <span class="text-danger time-car"></span>
+
 
 
                                         <div class="row mb-4">

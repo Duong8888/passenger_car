@@ -88,9 +88,9 @@
             'size': 'invisible',
             'callback': (response) => {
             }
-            }); 
+            });
         recaptchaVerifier.render();
-        
+
     }
 
     var coderesult;
@@ -174,7 +174,7 @@
     storedStartTime = localStorage.getItem("startTime");
     function createCountdown(startTime, elementId) {
         var endTime = new Date(startTime);
-        var paymentTime = {{env('PAYMENT_TIME', 3)}};
+        var paymentTime = {{env('PAYMENT_TIME', 15)}};
         endTime.setMinutes(endTime.getMinutes() + paymentTime);
 
         var x = setInterval(function () {
@@ -216,7 +216,6 @@
                 _token:$('meta[name="csrf-token"]').attr('content'),
             },
             success:function (data){
-                console.log(data)
                 check = false;
                 $('#countdownDisplay').hide();
                 localStorage.removeItem("startTime");
@@ -228,7 +227,6 @@
     }
 
     if (storedStartTime) {
-        // Tạo bộ đếm ngược mới từ thời gian đã lưu trong LocalStorage
         createCountdown(parseInt(storedStartTime), "countdownDisplay");
     }
     function cancelPayment(){
@@ -247,5 +245,22 @@
         });
     }
 
+    function cancelPayment2(){
+        Swal.fire({
+            title: "Hủy vé đang chờ thanh toán?",
+            text: "Chúng tôi vẫn đang giữ vé cho bạn. Bạn có muốn hủy đơn hàng hiện tại",
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: "Hủy đơn hàng",
+            denyButtonText: `Đóng`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                refreshSession();
+                Swal.fire("Saved!", "", "success");
+                localStorage.removeItem("startTime");
+                window.history.back();
+            }
+        });
+    }
 </script>
 
