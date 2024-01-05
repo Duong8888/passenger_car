@@ -385,4 +385,21 @@ class TicketController extends AdminBaseController
         ->with('titleCreate', $this->titleCreate);
 
     }
+
+    public function checkSeat(Request $request){
+        Log::info($request);
+        $check = true;
+        foreach ($request['slot'] as $value){
+            $data = SeatStatus::query()->where([
+                ['date','=',$request['date']],
+                ['time_id','=',$request['time']],
+                ['seat_id','=',$value],
+                ['passenger_car_id','=',$request['passenger_car_id']],
+            ])->get();
+            if(count($data) != 0){
+                $check = false;
+            }
+        }
+        return \response()->json(['check'=>$check]);
+    }
 }
