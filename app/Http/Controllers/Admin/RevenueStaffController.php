@@ -19,6 +19,7 @@ class RevenueStaffController extends Controller
         return view('staff.revenue.index');
     }
 
+
     public function filter_by_date(Request $request){
         $userId = Auth::id();
         $passengerCar = PassengerCar::where('user_id', $userId)->get();
@@ -59,7 +60,7 @@ class RevenueStaffController extends Controller
     
         return response()->json($chart_data);
     }
-    
+
     public function filter_by_select(Request $request){
         $userId = Auth::id();
         $passengerCar = PassengerCar::where('user_id', $userId)->get();
