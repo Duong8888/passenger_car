@@ -78,6 +78,7 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         Route::prefix('ticket')->controller(TicketController::class)->name('ticket.')->group(function () {
             Route::get('/', 'index')->name('index');
             Route::post('/', 'store')->name('store');
+            Route::post('/checks-eat', 'checkSeat')->name('check');
             Route::get('/create', 'create')->name('create');
             Route::post('/{ticket}', 'update')->name('update');
             Route::delete('/{ticket}', 'destroy')->name('destroy');

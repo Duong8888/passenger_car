@@ -6,14 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\NotificationController;
 use App\Jobs\SendMail;
 use App\Models\PassengerCar;
+use App\Models\SeatsLayout;
 use App\Models\SeatStatus;
 use App\Models\Stops;
 use App\Models\Ticket;
 use App\Models\User;
+use App\Models\Vehicles;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 use App\Models\VnpayPayment;
+use Symfony\Component\Finder\Iterator\VcsIgnoredFilterIterator;
 
 class TicketController extends Controller
 {
@@ -125,9 +128,11 @@ class TicketController extends Controller
         $notification = new NotificationController();
         $notification->sendNotification($user_id, $message, 'ticket');
         $emailAdmin = User::query()->findOrFail($user_id);
-
-        SendMail::dispatch($emailAdmin, $ticket);
-        SendMail::dispatch($request->email, $ticket);
+        $car = PassengerCar::where('id',$ticket->passenger_car_id)->get();
+        $layout = SeatsLayout::where('vehicle_id',$car[0]->vehicle_id)->get();
+//        dd($layout);
+//        SendMail::dispatch($emailAdmin, $ticket);
+        SendMail::dispatch($request->email, $ticket,$layout);
         session()->put('checkSeat', 'false');
         return response()->json(['success' => 'Done'], Response::HTTP_OK);
     }
