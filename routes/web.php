@@ -175,8 +175,9 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         Route::get('/contact/index', [App\Http\Controllers\Admin\ContactController::class, 'index'])->name('route_contact_index');
         Route::get('/contact/detail/{id}', [App\Http\Controllers\Admin\ContactController::class, 'detail'])->name('route_contact_detail');
         Route::post('/contact/sendmail', [App\Http\Controllers\Admin\ContactController::class, 'sendmail'])->name('route_contact_sendmail');
+        Route::post('/contact/cancel-request', [App\Http\Controllers\Admin\ContactController::class, 'cancelRequest'])->name('route_contact_cancel');
         Route::match(['GET', 'POST'], '/contact/add', [App\Http\Controllers\Admin\ContactController::class, 'add'])->name('route_contact_add');
-        Route::match(['GET', 'POST'], '/contact/update/{id}', [App\Http\Controllers\Admin\ContactController::class, 'edit'])->name('route_contact_edit');
+        Route::match(['GET', 'POST'], '/contact/update', [App\Http\Controllers\Admin\ContactController::class, 'appy'])->name('route_contact_edit');
         // Quản lý nhà xe
         Route::get('/staff/index', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('route_staff_index');
         Route::get('/contact/detail/{id}', [App\Http\Controllers\Admin\ContactController::class, 'detail'])->name('route_contact_detail');

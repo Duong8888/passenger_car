@@ -31,15 +31,12 @@ class TicketController extends Controller
 
     public function clearSession(){
         $arraySeat = session('value')[0];
-        Log::info('Deleted seats:', $arraySeat['seat']);
         foreach($arraySeat['seat'] as $key => $value){
-            SeatStatus::query()
-                ->where('seat_id',$value)
+            SeatStatus::where ('seat_id',$value)
                 ->where('date',$arraySeat['date'])
                 ->where('passenger_car_id',$arraySeat['passenger_car_id'])
                 ->delete();
-        }
-
+        };
         session()->forget('value');
         session()->forget('checkSeat');
         return response()->json('done');

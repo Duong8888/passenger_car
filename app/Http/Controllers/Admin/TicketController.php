@@ -16,6 +16,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Ticket;
 use App\Models\User;
+use App\Models\WorkingTime;
+use Carbon\Carbon;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -179,7 +181,7 @@ class TicketController extends AdminBaseController
 
 
     public function getLayout(Request $request){
-        Log::info($request->all());
+        
         $passengerCars = PassengerCar::query()->where('id', $request->id)->first();
         if($passengerCars->vehicle_id != 0){
             $layout = SeatsLayout::query()->where('vehicle_id', $passengerCars->vehicle->id)->get();

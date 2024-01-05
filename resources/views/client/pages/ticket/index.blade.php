@@ -106,9 +106,9 @@
                 </div>
             </div>
         </div>
-        @php
-            \Log::info(session('value'));
-        @endphp
+        <div class="mt-4">
+            <button onclick="cancelPayment2()"  class="bg-red-500 text-white px-4 py-2 mr-2 rounded">Hủy hàng</button>
+        </div>
         <div class="fixed bottom-0 left-0 right-0 p-4 bg-white shadow-md flex justify-center offline-ticket hidden">
 
             <button data-action="{{ route('client.ticket.end-payment-ticket') }}"
