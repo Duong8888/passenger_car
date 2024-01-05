@@ -13,12 +13,27 @@ class UserController extends Controller
     public function index(Request $request){
         $users = DB::table('users')->select('id','name','email','phone')->get();
         return view('admin.layouts.User.index',compact('users'));
-    }   
+    }
+    public function searchstaff(Request $request)
+    {
+        $searchTerm = $request->input('search');
+
+        $users = DB::table('users')->where('role', 'staff')
+            ->where(function ($query) use ($searchTerm) {
+                $query->where('id', 'like', "%$searchTerm%")
+                    ->orWhere('email', 'like', "%$searchTerm%")
+                    ->orWhere('phone', 'like', "%$searchTerm%")
+                    ->orWhere('name', 'like', "%$searchTerm%");
+            })
+            ->get();
+
+        return view('admin.layouts.User.index', compact('users', 'searchTerm'));
+    }
     public function add(Request $request){
         if($request->post()){
             $params = $request->except('_token');
             $users = User::create($params);
-         
+
          if($users->id){
             Session::flash('success','thêm mới thành công');
             return redirect()->route('route_user_add');
@@ -43,5 +58,5 @@ class UserController extends Controller
         Session::flash('success','xóa thành công'.$id);
         return redirect()->route('route_user_index');
     }
-    
+
 }

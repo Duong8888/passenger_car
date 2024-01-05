@@ -22,7 +22,13 @@
 
 
             <div class="table-responsive">
-                <table class="table mb-0">
+            <form action="{{ route('admin.route_staff_searchstaff') }}" method="GET">
+            <div class="mb-3">
+            <input type="text" class="form-control" name="search" placeholder="Tìm kiếm nhà xe">
+            </div>
+            <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+            </form>
+            <table class="table mb-0">
                     <thead>
                        <tr>
                            <th>Id</th>
@@ -56,6 +62,4 @@
         </div>
 
     </div>
-
-
 @endsection

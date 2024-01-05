@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ContactStaffController extends Controller
 {
+    
     public function index(Request $request)
     {
         return view('admin.pages.revenue.contact');
@@ -26,7 +27,7 @@ class ContactStaffController extends Controller
         foreach ($tickets as $val) {
             $date = Carbon::parse($val->created_at)->toDateString();
             $status = $val->status;
-    
+
             if (!isset($chart_data[$date])) {
                 $chart_data[$date] = [
                     'created_at' => $date,
@@ -37,11 +38,11 @@ class ContactStaffController extends Controller
                     ],
                 ];
             }
-    
+
             $chart_data[$date]['count']++;
             $chart_data[$date]['status'][$status]++;
         }
-    
+
         $flattened_data = [];
         foreach ($chart_data as $date_data) {
             $flattened_data[] = [
@@ -51,10 +52,10 @@ class ContactStaffController extends Controller
                 'status_Đã_xử_lý' => $date_data['status']['Đã xử lý'],
             ];
         }
-    
+
         return response()->json($flattened_data);
     }
-    
+
     public function filter_by_select(Request $request){
        $data = $request->all();
     //    echo $today = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y H:i:s');
@@ -78,7 +79,7 @@ class ContactStaffController extends Controller
         foreach ($tickets as $val) {
             $date = Carbon::parse($val->created_at)->toDateString();
             $status = $val->status;
-    
+
             if (!isset($chart_data[$date])) {
                 $chart_data[$date] = [
                     'created_at' => $date,
@@ -89,11 +90,11 @@ class ContactStaffController extends Controller
                     ],
                 ];
             }
-    
+
             $chart_data[$date]['count']++;
             $chart_data[$date]['status'][$status]++;
         }
-    
+
         $flattened_data = [];
         foreach ($chart_data as $date_data) {
             $flattened_data[] = [
@@ -103,7 +104,7 @@ class ContactStaffController extends Controller
                 'status_Đã_xử_lý' => $date_data['status']['Đã xử lý'],
             ];
         }
-    
+
         return response()->json($flattened_data);
 
     }
@@ -116,7 +117,7 @@ class ContactStaffController extends Controller
         foreach ($tickets as $val) {
             $date = Carbon::parse($val->created_at)->toDateString();
             $status = $val->status;
-    
+
             if (!isset($chart_data[$date])) {
                 $chart_data[$date] = [
                     'created_at' => $date,
@@ -127,11 +128,11 @@ class ContactStaffController extends Controller
                     ],
                 ];
             }
-    
+
             $chart_data[$date]['count']++;
             $chart_data[$date]['status'][$status]++;
         }
-    
+
         $flattened_data = [];
         foreach ($chart_data as $date_data) {
             $flattened_data[] = [
@@ -141,7 +142,7 @@ class ContactStaffController extends Controller
                 'status_Đã_xử_lý' => $date_data['status']['Đã xử lý'],
             ];
         }
-    
+
         return response()->json($flattened_data);
     }
 }
