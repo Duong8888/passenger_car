@@ -11,6 +11,7 @@ use App\Models\SeatsLayout;
 use App\Models\SeatStatus;
 use App\Models\Stops;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Models\Ticket;
@@ -191,8 +192,12 @@ class TicketController extends AdminBaseController
             $layout = [];
             $checkSlot = [];
         }
-
+        $currentTime = Carbon::now()->toTimeString();
+        $day = Carbon::now()->toDateString();
         $times = $passengerCars->workingTime()->get();
+        if($day == $request->date){
+            $times = $passengerCars->workingTime()->where('departure_time', '>', $currentTime)->get();
+        }
         return \response()->json(['layout'=>$layout, 'checkSlot'=>$checkSlot,'times'=>$times]);
     }
     public function destroy(string $id)
