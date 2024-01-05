@@ -1,12 +1,25 @@
 @extends('admin.layouts.master')
 @section('title', 'Danh sách đăng kí nhà xe')
 @section('content')
+<style>
+    .form-control{
+        height: 45px;
+        width: 300px;
+        border-radius: 20px;
+    }
+    .btn{
+        height: 45px;
+        width: 100px;
+        line-height: 1.5; /* Điều chỉnh độ cao của văn bản trong button */
+    }
+</style>
 <div class="card">
     <div class="card-body">
 
-    <form action="{{ route('admin.textsearch') }}" method="GET">
+    <form action="{{ route('admin.textsearch') }}" method="GET" class="d-flex justify-content-end">
+
     <div class="mb-3">
-        <input type="text" class="form-control" name="search" placeholder="Tìm kiếm liên hệ nhà xe">
+    <input type="text" class="form-control flex-grow-1 me-2" name="search" placeholder="Tìm kiếm liên hệ nhà xe">
     </div>
     <button type="submit" class="btn btn-primary">Tìm kiếm</button>
     </form>
