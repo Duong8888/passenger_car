@@ -19,6 +19,16 @@
                     </thead>
                     <tbody>
                         @foreach ($users as $item)
+                            <?php 
+                                $color = "#6c757d";
+                                if($item->status === "Đang xử lý"){
+                                    $color = "#FF6633";
+                                }else if($item->status === "Đã xử lý"){
+                                    $color = "#00CC00";
+                                }else if($item->status === "Đã hủy"){
+                                    $color = "red";
+                                }
+                            ?>
                             <tr>
                                 <td>#{{ $item->id }}</td>
                                 <td>{{ $item->user_name }}</td>
@@ -26,58 +36,8 @@
                                 <td>{{ $item->phone }}</td>
                                 <td>{{ $item->passengerCar_name }}</td>
                                 <td>{{ $item->province }}</td>
-                                <td>
-                                    <?php
-                                    if ($item->status == 'Chưa xử lý') {
-                                        $status = 'Chưa xử lý';
-                                        $selected = 'selected';
-                                        $disable = "";
-                                        $style = 'background-color: #FF5733; color: #FFFFFF;';
-                                    } elseif ($item->status == 'Đang xử lý') {
-                                        $status = 'Đang xử lý';
-                                        $selected = 'selected';
-                                        $style = 'background-color: #FFC300; color: #000000;';
-                                        $disable = "";
-                                    } else {
-                                        $status = 'Đã xử lý';
-                                        $selected = 'selected';
-                                        $style = 'background-color: #00FF40; color: #000000;';
-                                        $disable = "disabled";
-                                    }
-                                    ?>
-                                    <form action="{{ route('admin.route_contact_edit', $item->id) }}" method="post"
-                                        class="js-update-contact" class="btn btn-primary ml-5 ">
-                                        @csrf
-                                        <select id="confirmSubmit" class="js-select-status-contact status-ChuaXuLy" style="<?= $style ?>"
-                                            name="status" class="js-select-status-contact">
-                                                <option class="form-control"
-                                                    style="background-color: #FF5733; color: #FFFFFF;" <?php if ($status == 'Chưa xử lý') {
-                                                        echo $selected;
-                                                    } ?>
-                                                    <?php if ($disable) {
-                                                        echo $disable;
-                                                    } ?>
-                                                    value="Chưa xử lý">
-                                                    Chưa xử lý
-                                                </option>
-                                                <option class="form-control"
-                                                    style="background-color: #FFC300; color: #000000;" <?php if ($status == 'Đang xử lý') {
-                                                        echo $selected;
-                                                    } ?>
-                                                    <?php if ($disable) {
-                                                        echo $disable;
-                                                    } ?>
-                                                    value="Đang xử lý">
-                                                    Đang xử lý
-                                                </option>
-                                            <option class="form-control" style="background-color: #00FF40; color: #000000;"
-                                                <?php if ($status == 'Đã xử lý') {
-                                                    echo $selected;
-                                                } ?> value="Đã xử lý">
-                                                Đã xử lý
-                                            </option>
-                                        </select>
-                                    </form>
+                                <td style="color: <?= $color;?>;">
+                                    {{ $item->status }}
                                 </td>
                                 <td>
                                     <div class="dropdown float-end">
@@ -90,8 +50,7 @@
                                             <a href="detail/<?= $item->id ?>" class="dropdown-item">Xem chi tiết</a>
                                             <!-- item-->
                                             <a href="update/<?= $item->id ?>?type=edit" class="dropdown-item">Chỉnh sửa</a>
-                                            <!-- item-->
-                                            <a href="javascript:void(0);" class="dropdown-item">Hủy đăng kí</a>
+
                                         </div>
                                     </div>
                                 </td>
