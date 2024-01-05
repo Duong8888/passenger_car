@@ -82,6 +82,8 @@
 
             success: function(data) {
                 console.log(data);
+                var originalData = JSON.parse(JSON.stringify(data));
+                console.log(originalData);
                 var ykeys = ['quantity', 'total_price'];
                 var labels = ['Số lượng vé', 'Doanh thu'];
                 chart.options.ykeys = ykeys;
@@ -113,6 +115,31 @@
                 $('#exportPDFButton').off('click').on('click', function() {
                     exportDataToPDF(data);
                 });
+                $('#groupButton').off('click').on('click', function() {
+                    var groupedData = groupByPlate(originalData);
+                    $('.time').hide();
+                    groupedData.sort(function(a, b) {
+                        return b.total_price - a.total_price;
+                    });
+                    var tableBody = $('#tableBody');
+                    tableBody.empty(); 
+                    var dateDisplayed = false;
+                    $.each(groupedData, function(index, item) {
+                        var row = `<tr>`;
+                        row += `
+                            <td>${item.license_plate}</td>
+                            <td>${item.quantity}</td>
+                            <td>${item.total_price.toLocaleString()} đ</td>
+                        `;
+                        if (!dateDisplayed) {
+                            dateDisplayed = true;
+                        }
+                        row += `</tr>`;
+                        tableBody.append(row);
+                    });
+                    tableBody.find('td:contains("Thời gian")').closest('tr').hide();
+                    console.log(groupedData);
+                });
             }
         });
     }
@@ -128,7 +155,8 @@
 
             success: function(data){
                 chart.setData(data);
-
+                var originalData = JSON.parse(JSON.stringify(data));
+                console.log(originalData);
                 var tableBody = $('#tableBody');
                 tableBody.empty(); 
                 var dateDisplayed = false;
@@ -154,6 +182,30 @@
                 });
                 $('#exportPDFButton').off('click').on('click', function() {
                     exportDataToPDF(data);
+                });
+                $('#groupButton').off('click').on('click', function() {
+                    var groupedData = groupByPlate(originalData);
+                    $('.time').hide();
+                    groupedData.sort(function(a, b) {
+                        return b.total_price - a.total_price;
+                    });
+                    var tableBody = $('#tableBody');
+                    tableBody.empty(); 
+                    var dateDisplayed = false;
+                    $.each(groupedData, function(index, item) {
+                        var row = `<tr>`;
+                        row += `
+                            <td>${item.license_plate}</td>
+                            <td>${item.quantity}</td>
+                            <td>${item.total_price.toLocaleString()} đ</td>
+                        `;
+                        if (!dateDisplayed) {
+                            dateDisplayed = true;
+                        }
+                        row += `</tr>`;
+                        tableBody.append(row);
+                    });
+                    tableBody.find('td:contains("Thời gian")').closest('tr').hide();
                 });
             }
         })
@@ -170,6 +222,8 @@
             data: { form_date: form_date, to_date: to_date, _token: _token },
             success: function(data){
                 chart.setData(data);
+                var originalData = JSON.parse(JSON.stringify(data));
+                console.log(originalData);
                 var tableBody = $('#tableBody');
                 tableBody.empty(); 
                 var dateDisplayed = false;
@@ -195,6 +249,30 @@
                 });
                 $('#exportPDFButton').off('click').on('click', function() {
                     exportDataToPDF(data);
+                });
+                $('#groupButton').off('click').on('click', function() {
+                    var groupedData = groupByPlate(originalData);
+                    $('.time').hide();
+                    groupedData.sort(function(a, b) {
+                        return b.total_price - a.total_price;
+                    });
+                    var tableBody = $('#tableBody');
+                    tableBody.empty(); 
+                    var dateDisplayed = false;
+                    $.each(groupedData, function(index, item) {
+                        var row = `<tr>`;
+                        row += `
+                            <td>${item.license_plate}</td>
+                            <td>${item.quantity}</td>
+                            <td>${item.total_price.toLocaleString()} đ</td>
+                        `;
+                        if (!dateDisplayed) {
+                            dateDisplayed = true;
+                        }
+                        row += `</tr>`;
+                        tableBody.append(row);
+                    });
+                    tableBody.find('td:contains("Thời gian")').closest('tr').hide();
                 });
             }
         });
@@ -238,6 +316,29 @@
             body: rows,
         });
         doc.save('Thống kê doanh thu.pdf');
+    }
+    function groupByPlate(data) {
+        var groupedData = {};
+        data.forEach(function(day) {
+            day.cars.forEach(function(car) {
+                var plate = car.license_plate;
+                var existingGroup = groupedData[plate];
+                if (!existingGroup) {
+                    groupedData[plate] = {
+                        license_plate: plate,
+                        quantity: car.quantity,
+                        total_price: car.total_price
+                    };
+                } else {
+                    existingGroup.quantity += car.quantity;
+                    existingGroup.total_price += car.total_price;
+                }
+            });
+        });
+
+        var result = Object.values(groupedData);
+
+        return result;
     }
 
 });
@@ -290,6 +391,9 @@
                     <button type="button" id="exportPDFButton" class="btn btn-danger waves-effect waves-light">
                         Xuất Pdf<span class="btn-label-right"><i class="fa-solid fa-file-pdf"></i></span>
                     </button>
+                    <button type="button" id="groupButton" class="btn btn-info waves-effect waves-light">
+                        Lọc theo xe<span class="btn-label-right"><i class="fa-solid fa-filter"></i></span>
+                    </button>
                 </div>
                 
                 <table class="table table-striped table-bordered dt-responsive nowrap mt-1" style="text-align: center;vertical-align: middle;">
@@ -298,7 +402,7 @@
                         <th>Biển số xe</th>
                         <th>Số lượng vé</th>
                         <th>Doanh thu</th>
-                        <th>Thời gian</th>
+                        <th class="time">Thời gian</th>
                     </tr>
                     </thead>
                     <tbody id="tableBody">
