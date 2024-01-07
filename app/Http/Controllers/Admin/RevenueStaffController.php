@@ -8,6 +8,7 @@ use App\Models\Ticket;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Psy\Readline\Hoa\Console;
 
 use function Laravel\Prompts\alert;
 
@@ -17,6 +18,7 @@ class RevenueStaffController extends Controller
     {
         return view('staff.revenue.index');
     }
+
 
     public function filter_by_date(Request $request){
         $userId = Auth::id();
@@ -29,17 +31,36 @@ class RevenueStaffController extends Controller
             $carTickets = $car->tickets()->whereBetween('date', [$form_date, $to_date])->orderBy('date', 'ASC')->get();
             $tickets = $tickets->merge($carTickets);
         }
-        $chart_data = [];
+        // $chart_data = [];
+        // $chart_data = $tickets->groupBy('date')->map(function ($items) {
+        //     return [
+        //         'date' => $items->first()->date,
+        //         'quantity' => $items->sum('quantity'),
+        //         'total_price' => $items->sum('total_price'),
+        //     ];
+        // })->values()->all();
+        // echo $data = json_encode($chart_data);
         $chart_data = $tickets->groupBy('date')->map(function ($items) {
-            return [
+            $carData = $items->groupBy('passengerCar.license_plate')->map(function ($carItems) {
+                return [
+                    'license_plate' => $carItems->first()->passengerCar->license_plate,
+                    'quantity' => $carItems->sum('quantity'),
+                    'total_price' => $carItems->sum('total_price'),
+                ];
+            });
+    
+            $otherFields = [
                 'date' => $items->first()->date,
                 'quantity' => $items->sum('quantity'),
                 'total_price' => $items->sum('total_price'),
             ];
-        })->values()->all();
-        echo $data = json_encode($chart_data);
-    }
     
+            return array_merge($otherFields, ['cars' => $carData->values()->all()]);
+        })->values()->all();
+    
+        return response()->json($chart_data);
+    }
+
     public function filter_by_select(Request $request){
         $userId = Auth::id();
         $passengerCar = PassengerCar::where('user_id', $userId)->get();
@@ -77,39 +98,97 @@ class RevenueStaffController extends Controller
             $tickets = $tickets->merge($carTickets);
         }
        }
-       $chart_data = [];
-       $chart_data = $tickets->groupBy('date')->map(function ($items) {
-           return [
-               'date' => $items->first()->date,
-               'quantity' => $items->sum('quantity'),
-               'total_price' => $items->sum('total_price'),
-           ];
-       })->values()->all();
-       echo $data = json_encode($chart_data);
+
+    //    $chart_data = [];
+    //    $chart_data = $tickets->groupBy('date')->map(function ($items) {
+    //        return [
+    //            'date' => $items->first()->date,
+    //            'quantity' => $items->sum('quantity'),
+    //            'total_price' => $items->sum('total_price'),
+    //        ];
+    //    })->values()->all();
+    //    echo $data = json_encode($chart_data);
+    $chart_data = $tickets->groupBy('date')->map(function ($items) {
+        $carData = $items->groupBy('passengerCar.license_plate')->map(function ($carItems) {
+            return [
+                'license_plate' => $carItems->first()->passengerCar->license_plate,
+                'quantity' => $carItems->sum('quantity'),
+                'total_price' => $carItems->sum('total_price'),
+            ];
+        });
+
+        $otherFields = [
+            'date' => $items->first()->date,
+            'quantity' => $items->sum('quantity'),
+            'total_price' => $items->sum('total_price'),
+        ];
+
+        return array_merge($otherFields, ['cars' => $carData->values()->all()]);
+    })->values()->all();
+
+    return response()->json($chart_data);
 
     }
 
+    // public function dayrevenue(Request $request){
+    //     $userId = Auth::id();
+    //     $passengerCar = PassengerCar::where('user_id', $userId)->get();
+    //     $tickets = collect();
+    //     $sub60days = Carbon::now('Asia/Ho_Chi_Minh')->subDays(30)->toDateString();
+    //     $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+    //     foreach ($passengerCar as $car) {
+    //         $carTickets = $car->tickets()->whereBetween('date', [$sub60days, $now])->orderBy('date','ASC')->get();
+    //         $tickets = $tickets->merge($carTickets);
+    //     }
+    //     $chart_data = [];
+    //     $chart_data = $tickets->groupBy('date')->map(function ($items) {
+    //         return [
+    //             'date' => $items->first()->date,
+    //             'quantity' => $items->sum('quantity'),
+    //             'total_price' => $items->sum('total_price'),
+    //         ];
+    //     })->values()->all();
+    //     return response()->json($chart_data);
+    //     echo $data = json_encode($chart_data);
+    // }
+
     public function dayrevenue(Request $request){
         $userId = Auth::id();
-        $passengerCar = PassengerCar::where('user_id', $userId)->get();
+        $passengerCars = PassengerCar::where('user_id', $userId)->get();
         $tickets = collect();
         $sub60days = Carbon::now('Asia/Ho_Chi_Minh')->subDays(30)->toDateString();
         $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
-        foreach ($passengerCar as $car) {
+    
+        foreach ($passengerCars as $car) {
             $carTickets = $car->tickets()->whereBetween('date', [$sub60days, $now])->orderBy('date','ASC')->get();
             $tickets = $tickets->merge($carTickets);
         }
-        $chart_data = [];
+    
         $chart_data = $tickets->groupBy('date')->map(function ($items) {
-            return [
+            $carData = $items->groupBy('passengerCar.license_plate')->map(function ($carItems) {
+                return [
+                    'license_plate' => $carItems->first()->passengerCar->license_plate,
+                    'quantity' => $carItems->sum('quantity'),
+                    'total_price' => $carItems->sum('total_price'),
+                ];
+            });
+    
+            $otherFields = [
                 'date' => $items->first()->date,
                 'quantity' => $items->sum('quantity'),
                 'total_price' => $items->sum('total_price'),
             ];
+    
+            return array_merge($otherFields, ['cars' => $carData->values()->all()]);
         })->values()->all();
-          return response()->json($chart_data);
-        echo $data = json_encode($chart_data);
+            return response()->json($chart_data);
+        // if ($request->ajax()) {
+        //     return response()->json($chart_data);
+        // }
+    
+        // return view('staff.revenue.index', compact('chart_data'));
 
     }
+    
 
 }

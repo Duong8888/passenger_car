@@ -395,7 +395,6 @@ class TicketController extends AdminBaseController
     public function checkSeat(Request $request){
         Log::info($request);
         $check = true;
-
         foreach ($request['slot'] as $value){
             if($request['slot_old']){
                 Log::info('ok');
@@ -414,6 +413,7 @@ class TicketController extends AdminBaseController
                     ['passenger_car_id','=',$request['passenger_car_id']],
                 ])->get();
             }
+
             if(count($data) != 0){
                 $check = false;
             }

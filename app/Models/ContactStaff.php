@@ -24,7 +24,7 @@ class ContactStaff extends Authenticatable
         'name',
         'email',
         'password',
-        'phone',
+        'phone', 
         'user_type',
     ];
     protected $attributes = [

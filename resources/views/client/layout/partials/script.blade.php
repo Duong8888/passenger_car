@@ -1,4 +1,3 @@
-@vite('resources/js/app.js')
 
 <script src="{{asset('client/libs/%40popperjs/core/umd/popper.min.js')}}"></script>
 <script src="{{asset('client/libs/simplebar/simplebar.min.js')}}"></script>

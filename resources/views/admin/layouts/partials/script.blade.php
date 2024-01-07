@@ -1,4 +1,4 @@
-@vite('resources/js/app.js')
+
 <!-- Vendor -->
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
 <script src="{{asset('admin/libs/jquery/jquery.min.js')}}"></script>
