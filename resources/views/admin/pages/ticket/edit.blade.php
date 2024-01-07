@@ -75,6 +75,9 @@
                                             <input type="number" name="quantity" value="" hidden>
                                             <input type="number" name="total_price" value="" hidden>
                                             <input type="number" name="status" value="1" hidden>
+                                            @foreach($seat as $value)
+                                                <input type="number" name="slot_old[]" value="{{$value['id']}}" hidden>
+                                            @endforeach
                                         </div>
 
                                         <div class="mb-3 form-label">

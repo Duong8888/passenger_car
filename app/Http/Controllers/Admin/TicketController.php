@@ -396,12 +396,24 @@ class TicketController extends AdminBaseController
         Log::info($request);
         $check = true;
         foreach ($request['slot'] as $value){
-            $data = SeatStatus::query()->where([
-                ['date','=',$request['date']],
-                ['time_id','=',$request['time']],
-                ['seat_id','=',$value],
-                ['passenger_car_id','=',$request['passenger_car_id']],
-            ])->get();
+            if($request['slot_old']){
+                Log::info('ok');
+                $data = SeatStatus::query()->where([
+                    ['date','=',$request['date']],
+                    ['time_id','=',$request['time']],
+                    ['seat_id','=',$value],
+                    ['passenger_car_id','=',$request['passenger_car_id']],
+                ])->whereNotIn('id', $request['slot_old'])
+                    ->get();
+            }else{
+                $data = SeatStatus::query()->where([
+                    ['date','=',$request['date']],
+                    ['time_id','=',$request['time']],
+                    ['seat_id','=',$value],
+                    ['passenger_car_id','=',$request['passenger_car_id']],
+                ])->get();
+            }
+
             if(count($data) != 0){
                 $check = false;
             }
