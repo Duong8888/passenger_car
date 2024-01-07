@@ -182,6 +182,7 @@
                                         url: $(this).data('action'),
                                         method: "POST",
                                         data: {
+                                            _token: $('meta[name="csrf-token"]').attr('content'),
                                             id: $(this).val(),
                                             date: $('#date').val(),
                                         },
@@ -202,6 +203,7 @@
                                         url: $('select[name="time"]').data('action'),
                                         method: "POST",
                                         data: {
+                                            _token: $('meta[name="csrf-token"]').attr('content'),
                                             id: $('select[name="passenger_car_id"]').val(),
                                             date: $('#date').val(),
                                             time_id: $('select[name="time"]').val()
