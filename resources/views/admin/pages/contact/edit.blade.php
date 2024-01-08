@@ -1,91 +1,82 @@
 @extends('admin.layouts.master')
-@section('title', 'Cập nhật thông tin nhà xe')
+@section('title', 'Sửa thông tin đăng kí nhà xe')
 @section('content')
-<div class="content">
 
-    <!-- Start Content-->
-    <div class="container-fluid">
+    <div class="content">
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 style=" font-size: 40px;font-weight: bolder " class="header-title">Sửa thông tin đăng kí nhà xe</h4>
+                            <form action="/contact/update-ting/{{ $users->id }}" method="POST"  enctype="multipart/form-data">
+                                @csrf
+                                <input type="hidden" name="id" value="{{ $users->id }}">
+                                <br>
+                                <div class="form-group">
+                                    <label for="user_name">Họ và Tên</label>
+                                    <br>
+                                    <input type="text" class="form-control" id="user_name" name="user_name" value="{{ $users->user_name }}">
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="province">Địa Chỉ</label>
+                                    <br>
+                                    <input type="text" class="form-control" id="province" name="province" value="{{ $users->province }}">
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="phone">Số Điện Thoại</label>
+                                    <br>
+                                    <input type="text" class="form-control" id="phone" name="phone" value="{{ $users->phone }}">
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <br>
+                                    <input type="email" class="form-control" id="email" name="email" value="{{ $users->email }}">
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="number_card">Số chứng minh nhân dân</label>
+                                    <br>
+                                    <input type="text" class="form-control" id="number_card" name="number_card" value="{{ $users->number_card }}">
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="rental_code">Mã số thuế</label>
+                                    <br>
+                                    <input type="text" class="form-control" id="rental_code" name="rental_code" value="{{ $users->rental_code }}">
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="rental_code">Tên hãng xe</label>
+                                    <br>
+                                    <input type="text" class="form-control" id="passengerCar_name" name="passengerCar_name" value="{{ $users->passengerCar_name }}">
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="images">Hình ảnh chứng thực</label>
+                                    <br>
+                                    @if($users->images)
+                                        @foreach(json_decode($users->images) as $image)
+                                            <img src="{{ $image->image }}" alt="Chứng thực">
+                                        @endforeach
+                                    @endif
+                                </div>
 
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="header-title">Thông tin </h4>
-                        <p class="sub-header">
-                            Most common form control, text-based input fields. Includes support for all HTML5 types: <code>text</code>, <code>password</code>, <code>datetime</code>, <code>datetime-local</code>, <code>date</code>, <code>month</code>, <code>time</code>, <code>week</code>, <code>number</code>, <code>email</code>, <code>url</code>, <code>search</code>, <code>tel</code>, and <code>color</code>.
-                        </p>
 
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <form>
-
-                                    <div class="mb-3">
-                                        <label for="simpleinput" class="form-label">Text</label>
-                                        <input type="text" id="simpleinput" class="form-control">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="example-email" class="form-label">Email</label>
-                                        <input type="email" id="example-email" name="example-email" class="form-control" placeholder="Email">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="example-password" class="form-label">Password</label>
-                                        <input type="password" id="example-password" class="form-control" value="password">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="password" class="form-label">Show/Hide Password</label>
-                                        <div class="input-group input-group-merge">
-                                            <input type="password" id="password" class="form-control" placeholder="Enter your password">
-                                            <div class="input-group-text" data-password="false">
-                                                <span class="password-eye"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="example-palaceholder" class="form-label">Placeholder</label>
-                                        <input type="text" id="example-palaceholder" class="form-control" placeholder="placeholder">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="example-textarea" class="form-label">Text area</label>
-                                        <textarea class="form-control" id="example-textarea" rows="5"></textarea>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="example-readonly" class="form-label">Readonly</label>
-                                        <input type="text" id="example-readonly" class="form-control" readonly="" value="Readonly value">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="example-disable" class="form-label">Disabled</label>
-                                        <input type="text" class="form-control" id="example-disable" disabled="" value="Disabled value">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="example-static" class="form-label">Static control</label>
-                                        <input type="text" readonly class="form-control-plaintext" id="example-static" value="email@example.com">
-                                    </div>
-
-                                    <div>
-                                        <label for="example-helping" class="form-label">Helping text</label>
-                                        <input type="text" id="example-helping" class="form-control" placeholder="Helping text">
-                                        <span class="help-block"><small>A block of help text that breaks onto a new line and may extend beyond one line.</small></span>
-                                    </div>
-
-                                </form>
-                            </div> <!-- end col -->
+                                <button type="submit" class="btn btn-primary">Cập nhật</button>
+                            </form>
                         </div>
-                        <!-- end row-->
-
-                    </div> <!-- end card-body -->
-                </div> <!-- end card -->
-            </div><!-- end col -->
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- end row -->
-    </div> <!-- container -->
-
-</div>
+    </div>
 @endsection

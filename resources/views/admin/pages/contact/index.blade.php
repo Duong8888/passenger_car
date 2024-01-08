@@ -72,7 +72,7 @@
                                         <!-- item-->
                                         <a href="detail/{{ $item->id }}" class="dropdown-item">Xem chi tiết</a>
                                         <!-- item-->
-                                        <a href="update/{{ $item->id }}?type=edit" class="dropdown-item">Chỉnh sửa</a>
+                                        <a href="update-form/{{ $item->id }}?type=edit" class="dropdown-item">Chỉnh sửa</a>
                                     </div>
                                 </div>
                             </td>
