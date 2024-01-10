@@ -16,7 +16,7 @@
     {
         public function index(Request $request)
         {
-            $users = Contact::all();
+            $users = Contact::latest()->get();
             return view('admin.pages.contact.index', compact('users'));
         }
 
@@ -32,19 +32,6 @@
 
             return view('admin.pages.contact.index', compact('users', 'searchTerm'));
         }
-        // public function search(Request $request)
-        // {
-        //     $search = $request->input('search');
-        //     $users = Contact::where(function ($query) use ($search) {
-        //         dd($users);
-        //         $query->where('user_name', 'like', "%$search%")
-        //             ->orWhere('phone', 'like', "%$search%")
-        //             ->orWhere('passengerCar_name', 'like', "%$search%")
-        //             ->orWhere('status', 'like', "%$search%");
-        //     })->get();
-
-        //      return view('admin.pages.contact.index', compact('users', 'search'));
-        // }
         function randomPassword()
         {
             $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
@@ -189,4 +176,82 @@
                 return Response($data);
             }
         }
+        public function successRequest(Request $request)
+        {
+            $contact = Contact::query()->where('id', $request->value['id'])->first();
+            $contact->update(['status' => "Đang xử lý"]);
+            $data = [
+                "title" => "Đơn đăng kí đủ đều kiện",
+                "email" => $contact->email,
+                "content" => $request->value['content'],
+                "status" => "Xác nhận đơn đăng ki đủ điều kiện",
+                "fullName" => $contact->user_name,
+            ];
+            $result = Mail::send('mails.carSuccess', $data, function ($message) use ($data) {
+                $message->to($data["email"], $data["email"])
+                    ->subject($data["title"]);
+            });
+            if ($result) {
+                return Response($data);
+            }
+        }
+
+//        public function editForm(Request $request)
+//        {
+//            $contact = Contact::query()->where('id', $request->value['id'])->first();
+//            $data = [
+//               "user_name" = $contact->user_name,
+//               "province"=$contact->province,
+//               "phone"= $contact->phone,
+//               "email" = $contact->email,
+//              "number_card" = $contact->number_card,
+//               "rental_code" = $contact->rental_code,
+//@if($user->images)
+//@foreach(json_decode($user->images) as $image)
+//<img src="{{ $image->image }}" alt="Chứng thực">
+//@endforeach
+//@endif
+//"passengerCar_name" =$contact->passengerCar_name,
+//
+//            ];
+//            if (!$uniqueUser) {
+//                User::create($data);
+//            } else {
+//                $user = $uniqueUser->update($data);
+//                $user = $roleUser;
+//            }
+//            $role = Role::where('name', 'Nhà xe')->first();
+//            $user->assignRole($role);
+//
+//            return redirect()->back();
+//        }
+        public function editForm($id)
+        {
+            $users = Contact::findOrFail($id);
+            return view('admin.pages.contact.edit', compact('users'));
+        }
+
+        public function updateForm(Request $request)
+        {
+            $contact = Contact::findOrFail($request->input('id'));
+            $data = [
+                "user_name" => $request->input('user_name'),
+                "province" => $request->input('province'),
+                "phone" => $request->input('phone'),
+                "email" => $request->input('email'),
+                "number_card" => $request->input('number_card'),
+                "rental_code" => $request->input('rental_code'),
+                "passengerCar_name" => $request->input('passengerCar_name'),
+            ];
+
+            if ($request->has('images')) {
+                $data['images'] = json_encode($request->input('images'));
+            }
+            $user = User::updateOrCreate(['id' => $contact->user_id], $data);
+
+            $role = Role::where('name', 'Nhà xe')->first();
+            $user->assignRole($role);
+            return redirect()->back()->with('success', 'Cập nhật thành công!');
+        }
+
     }
