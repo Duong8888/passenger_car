@@ -1,7 +1,6 @@
 @extends('admin.layouts.master')
 @section('title', 'Sửa thông tin đăng kí nhà xe')
 @section('content')
-
     <div class="content">
         @if(session('success'))
             <div class="alert alert-success">

@@ -69,9 +69,7 @@
                                         <i class="mdi mdi-dots-vertical"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end">
-                                        <!-- item-->
                                         <a href="detail/{{ $item->id }}" class="dropdown-item">Xem chi tiết</a>
-                                        <!-- item-->
                                         <a href="update-form/{{ $item->id }}?type=edit" class="dropdown-item">Chỉnh sửa</a>
                                     </div>
                                 </div>

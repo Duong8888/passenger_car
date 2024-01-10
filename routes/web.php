@@ -178,13 +178,12 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
         Route::get('/contact/detail/{id}', [App\Http\Controllers\Admin\ContactController::class, 'detail'])->name('route_contact_detail');
         Route::post('/contact/sendmail', [App\Http\Controllers\Admin\ContactController::class, 'sendmail'])->name('route_contact_sendmail');
         Route::post('/contact/cancel-request', [App\Http\Controllers\Admin\ContactController::class, 'cancelRequest'])->name('route_contact_cancel');
-        Route::post('/contact/success-request', [App\Http\Controllers\Admin\ContactController::class, 'successRequest'])->name('route_contact_success');
         Route::match(['GET', 'POST'], '/contact/add', [App\Http\Controllers\Admin\ContactController::class, 'add'])->name('route_contact_add');
         Route::match(['GET', 'POST'], '/contact/update', [App\Http\Controllers\Admin\ContactController::class, 'appy'])->name('route_contact_edit');
-        Route::get('/contact/update-form/{id}', [App\Http\Controllers\Admin\ContactController::class, 'editForm'])->name('route_contact_editForm');
-        Route::post('/contact/update-ting/{id}', [App\Http\Controllers\Admin\ContactController::class, 'updateForm'])->name('route_contact_update');
         Route::get('/textsearch', [App\Http\Controllers\Admin\ContactController::class, 'textsearch'])->name('textsearch');
-
+        Route::post('/contact/success-request', [App\Http\Controllers\Admin\ContactController::class, 'successRequest'])->name('route_contact_success');
+        Route::post('/contact/update-ting/{id}', [App\Http\Controllers\Admin\ContactController::class, 'updateForm'])->name('route_contact_update');
+        Route::get('/contact/update-form/{id}', [App\Http\Controllers\Admin\ContactController::class, 'editForm'])->name('route_contact_editForm');
         // Quản lý nhà xe
         Route::get('/staff/index', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('route_staff_index');
         Route::get('/contact/detail/{id}', [App\Http\Controllers\Admin\ContactController::class, 'detail'])->name('route_contact_detail');

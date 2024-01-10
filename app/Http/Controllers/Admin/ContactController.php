@@ -156,26 +156,6 @@
 
             return $text;
         }
-
-        public function cancelRequest(Request $request)
-        {
-            $contact = Contact::query()->where('id', $request->value['id'])->first();
-            $contact->update(['status' => "Đã hủy"]);
-            $data = [
-                "title" => "Đơn đăng kí không đủ điều kiện",
-                "email" => $contact->email,
-                "content" => $request->value['content'],
-                "status" => "Không đủ điều kiện",
-                "fullName" => $contact->user_name,
-            ];
-            $result = Mail::send('mails.carCancel', $data, function ($message) use ($data) {
-                $message->to($data["email"], $data["email"])
-                    ->subject($data["title"]);
-            });
-            if ($result) {
-                return Response($data);
-            }
-        }
         public function successRequest(Request $request)
         {
             $contact = Contact::query()->where('id', $request->value['id'])->first();
@@ -196,35 +176,6 @@
             }
         }
 
-//        public function editForm(Request $request)
-//        {
-//            $contact = Contact::query()->where('id', $request->value['id'])->first();
-//            $data = [
-//               "user_name" = $contact->user_name,
-//               "province"=$contact->province,
-//               "phone"= $contact->phone,
-//               "email" = $contact->email,
-//              "number_card" = $contact->number_card,
-//               "rental_code" = $contact->rental_code,
-//@if($user->images)
-//@foreach(json_decode($user->images) as $image)
-//<img src="{{ $image->image }}" alt="Chứng thực">
-//@endforeach
-//@endif
-//"passengerCar_name" =$contact->passengerCar_name,
-//
-//            ];
-//            if (!$uniqueUser) {
-//                User::create($data);
-//            } else {
-//                $user = $uniqueUser->update($data);
-//                $user = $roleUser;
-//            }
-//            $role = Role::where('name', 'Nhà xe')->first();
-//            $user->assignRole($role);
-//
-//            return redirect()->back();
-//        }
         public function editForm($id)
         {
             $users = Contact::findOrFail($id);
@@ -253,5 +204,23 @@
             $user->assignRole($role);
             return redirect()->back()->with('success', 'Cập nhật thành công!');
         }
-
+        public function cancelRequest(Request $request)
+        {
+            $contact = Contact::query()->where('id', $request->value['id'])->first();
+            $contact->update(['status' => "Đã hủy"]);
+            $data = [
+                "title" => "Đơn đăng kí không đủ điều kiện",
+                "email" => $contact->email,
+                "content" => $request->value['content'],
+                "status" => "Không đủ điều kiện",
+                "fullName" => $contact->user_name,
+            ];
+            $result = Mail::send('mails.carCancel', $data, function ($message) use ($data) {
+                $message->to($data["email"], $data["email"])
+                    ->subject($data["title"]);
+            });
+            if ($result) {
+                return Response($data);
+            }
+        }
     }

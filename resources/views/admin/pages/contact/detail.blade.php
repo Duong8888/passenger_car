@@ -7,14 +7,13 @@
             <a href="{{ url('/admin/contact/index') }}">Quay lại</a>
             <div class="head-container">
                 <div class="mt-2 mb-2">
-                    <button <?= $user->status == 'Đã xử lý' ? 'disabled' : '' ?> id="<?= $user->id ?>" type="submit" class="success-contact btn btn-primary">Xác thực đơn đăng kí</button>
                     <button <?= $user->status == 'Đã xử lý' ? 'disabled' : '' ?> id="<?= $user->id ?>" type="submit"
                         class="send-email btn btn-secondary">Gửi hợp đồng</button>
                     <button <?= $user->status == 'Đã xử lý' ? 'disabled' : '' ?> id="<?= $user->id ?>" type="submit"
                         class="send-apply btn btn-success">Đơn đăng kí thành công</button>
                     <button <?= $user->status == 'Đã hủy' ? 'disabled' : '' ?> id="<?= $user->id ?>" type="submit" class="cancel-contact btn btn-danger">Hủy đơn đăng
                         kí</button>
-
+                    <button <?= $user->status == 'Đã xử lý' ? 'disabled' : '' ?> id="<?= $user->id ?>" type="submit" class="success-contact btn btn-primary">Xác thực đơn đăng kí</button>
                     <h4>Trạng thái: <?= $user->status; ?></h4>
                 </div>
             </div>
@@ -58,18 +57,18 @@
                         <p><strong>Email:</strong> <?= $user->email ?></p>
                         <p><strong>Số chứng minh nhân dân:</strong> <?= $user->number_card ?></p>
                         <p><strong>Mã số thuế:</strong> <?= $user->rental_code ?></p>
-                        <p><strong>Hình ảnh chứng thực:</strong> </p>
-                        @if($user->images)
-                            @foreach(json_decode($user->images) as $image)
-                                <img src="{{ $image->image }}" alt="Chứng thực">
-                            @endforeach
-                        @endif
                     </div>
                 </div>
 
                 <div class="mb-4">
                     <h2 class="text-2xl font-bold mb-2">Chi tiết thông tin Xe</h2>
                     <p><strong>Loại Xe:</strong> <?= $user->passengerCar_name ?></p>
+                    <p><strong>Hình ảnh chứng thực:</strong> </p>
+                    @if($user->images)
+                        @foreach(json_decode($user->images) as $image)
+                            <img src="{{ $image->image }}" alt="Chứng thực">
+                        @endforeach
+                    @endif
                 </div>
 
                 <div class="mb-4">
@@ -377,31 +376,6 @@
                 });
 
             })
-
-            $('.cancel-contact').on('click', function() {
-                $value = $(this).attr("id");
-                Swal.fire({
-                    title: "Vui lòng điền lý do hủy đơn đăng kí!",
-                    input: "textarea",
-                    inputAttributes: {
-                        autocapitalize: "off"
-                    },
-                    showCancelButton: true,
-                    confirmButtonText: "Đồng ý",
-                    showLoaderOnConfirm: true,
-                    allowOutsideClick: () => !Swal.isLoading()
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        url = '{{ URL::to('admin/contact/cancel-request') }}';
-                        data = {
-                            id: $value,
-                            content: result.value,
-                            text: 'Gửi email hủy đơn đăng kí thành công!'
-                        }
-                        sendAjax(url, data)
-                    }
-                });
-            });
             $('.success-contact').on('click', function() {
                 $value = $(this).attr("id");
                 Swal.fire({
@@ -421,6 +395,30 @@
                             id: $value,
                             content: result.value,
                             text: 'Gửi email xác thực đơn đăng kí xe thành công!'
+                        }
+                        sendAjax(url, data)
+                    }
+                });
+            });
+            $('.cancel-contact').on('click', function() {
+                $value = $(this).attr("id");
+                Swal.fire({
+                    title: "Vui lòng điền lý do hủy đơn đăng kí!",
+                    input: "textarea",
+                    inputAttributes: {
+                        autocapitalize: "off"
+                    },
+                    showCancelButton: true,
+                    confirmButtonText: "Đồng ý",
+                    showLoaderOnConfirm: true,
+                    allowOutsideClick: () => !Swal.isLoading()
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        url = '{{ URL::to('admin/contact/cancel-request') }}';
+                        data = {
+                            id: $value,
+                            content: result.value,
+                            text: 'Gửi email hủy đơn đăng kí thành công!'
                         }
                         sendAjax(url, data)
                     }
