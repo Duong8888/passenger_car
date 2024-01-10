@@ -136,7 +136,7 @@
         public function sendmail(Request $request)
         {
             $contact = Contact::query()->where('id', $request->value['id'])->first();
-            $contact->update(['status' => "Đang xử lý"]);
+            $contact->update(['status' => "Đã xử lý"]);
             $data["title"] = "Thông tin xác nhận đăng kí làm đối tác CAR FINDER PRO";
             $response = $this->handleCheckSuccess($data, $contact);
             return Response($response);
@@ -231,9 +231,10 @@
             return view('admin.pages.contact.edit', compact('users'));
         }
 
-        public function updateForm(Request $request)
+        public function updateForm(Request $request, $id)
         {
-            $contact = Contact::findOrFail($request->input('id'));
+            $contact = Contact::findOrFail($id);
+//            dd($contact);
             $data = [
                 "user_name" => $request->input('user_name'),
                 "province" => $request->input('province'),
@@ -247,10 +248,10 @@
             if ($request->has('images')) {
                 $data['images'] = json_encode($request->input('images'));
             }
-            $user = User::updateOrCreate(['id' => $contact->user_id], $data);
+            $user = User::updated(['id' => $contact->user_id], $data);
 
-            $role = Role::where('name', 'Nhà xe')->first();
-            $user->assignRole($role);
+//            $role = Role::where('name', 'Nhà xe')->first();
+//            $user->assignRole($role);
             return redirect()->back()->with('success', 'Cập nhật thành công!');
         }
 

@@ -7,13 +7,38 @@
             <a href="{{ url('/admin/contact/index') }}">Quay lại</a>
             <div class="head-container">
                 <div class="mt-2 mb-2">
-                    <button <?= $user->status == 'Đã xử lý' ? 'disabled' : '' ?> id="<?= $user->id ?>" type="submit" class="success-contact btn btn-primary">Xác thực đơn đăng kí</button>
-                    <button <?= $user->status == 'Đã xử lý' ? 'disabled' : '' ?> id="<?= $user->id ?>" type="submit"
+
+                    <?php
+                    if($user->status == "Đang xử lý" )
+                    {?>
+                    <button  id="<?= $user->id ?>" type="submit"
                         class="send-email btn btn-secondary">Gửi hợp đồng</button>
-                    <button <?= $user->status == 'Đã xử lý' ? 'disabled' : '' ?> id="<?= $user->id ?>" type="submit"
-                        class="send-apply btn btn-success">Đơn đăng kí thành công</button>
-                    <button <?= $user->status == 'Đã hủy' ? 'disabled' : '' ?> id="<?= $user->id ?>" type="submit" class="cancel-contact btn btn-danger">Hủy đơn đăng
+                    <button  id="<?= $user->id ?>" type="submit" class="cancel-contact btn btn-danger">Hủy đơn đăng
                         kí</button>
+
+                        <?php
+                    }elseif ($user->status == "Đã xử lý"){
+
+                    ?>
+                    <button  id="<?= $user->id ?>" type="submit"
+                            class="send-apply btn btn-success">Đơn đăng kí thành công</button>
+                    <?php
+                    }elseif ($user->status == "Đã hủy"){
+                    ?>
+                    <button  id="<?= $user->id ?>" type="submit"
+                            class="send-email btn btn-secondary">Gửi hợp đồng</button>
+                    <?php
+                    }elseif($user->status == "Chưa xử lý"){
+
+                    ?>
+                    <button  id="<?= $user->id ?>" type="submit" class="success-contact btn btn-primary">Xác thực đơn đăng kí</button>
+                    <button  id="<?= $user->id ?>" type="submit"
+                            class="send-email btn btn-secondary">Gửi hợp đồng</button>
+                    <button  id="<?= $user->id ?>" type="submit"
+                            class="send-apply btn btn-success">Đơn đăng kí thành công</button>
+                    <button  id="<?= $user->id ?>" type="submit" class="cancel-contact btn btn-danger">Hủy đơn đăng
+                        kí</button>
+                    <?php }?>
 
                     <h4>Trạng thái: <?= $user->status; ?></h4>
                 </div>
