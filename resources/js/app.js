@@ -1,3 +1,5 @@
+console.log('cccccccccccccccccccccc');
+
 import './bootstrap';
 import Swal from 'sweetalert2';
 import './notification';
@@ -8,3 +10,4 @@ import './uppy';
 window.Alpine = Alpine;
 
 Alpine.start();
+
