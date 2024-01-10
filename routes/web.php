@@ -84,6 +84,7 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
             Route::get('/{ticket}/edit', 'edit')->name('edit');
             Route::post('/cancel', 'cancel')->name('cancel-vnp');
             Route::get('/search', 'search')->name('search');
+            
         });
         Route::post('/trip', [TicketController::class, 'Trip']);
         Route::post('/phone', [TicketController::class, 'CheckPhone']);

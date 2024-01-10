@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\Admin\TicketController as AdminTicketController;
 use App\Http\Controllers\Client\SearchController;
 use App\Http\Controllers\Client\Ticket\TicketController;
 use App\Http\Controllers\NotificationController;
@@ -105,7 +105,7 @@ Route::post('/car-register', [CarRegisterController::class, 'post'])->name('car-
 Route::get('/about_us',[App\Http\Controllers\Client\AboutController::class,'index'])->name('about_us.index');
 Route::get('/vision',[App\Http\Controllers\Client\AboutController::class,'vision'])->name('about_us.vision');
 Route::get('/mission',[App\Http\Controllers\Client\AboutController::class,'mission'])->name('about_us.mission');
-
+Route::get('/searchAdmin/{query}', [AdminTicketController::class, 'searchAdmin']);
 Route::post('clear-session',[TicketController::class, 'clearSession'])->name('clear');
 
 

@@ -1,75 +1,83 @@
 @extends('admin.layouts.master')
-@section("title", "Quản lí  vé")
+@section("title", "Quản lí vé")
 @section('content')
-    <div class="content">
-        <!-- Start Content-->
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="header-title mt-0 mb-3">Tickets List</h4>
-                            <div style="display: flex; justify-content: space-between">
-                                <a href="{{ route('admin.ticket.create') }}">
-                                    <button type="button" class="btn btn-success waves-effect waves-light mb-4">Create New
-                                        Ticket
-                                    </button>
-                                </a>
-                                <form action="{{ route('admin.ticket.search') }}" method="get" class="form-inline">
-                                    @csrf
-                                    <div class="form-group row">
-                                        <div class="col-auto">
-                                            <select name="license_plate" class="form-control">
-                                                @foreach ($passengerCar as $value)
-                                                    <option value="{{ $value->license_plate }}">{{ $value->license_plate }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-auto">
-                                            <button type="submit" class="btn btn-primary">Search</button>
-                                        </div>
+<div class="content" id="app">
+    <!-- Start Content-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title mt-0 mb-3">Tickets List</h4>
+                        <div style="display: flex; justify-content: space-between">
+                            <a href="{{ route('admin.ticket.create') }}">
+                                <button type="button" class="btn btn-success waves-effect waves-light mb-4">Create New
+                                    Ticket
+                                </button>
+                            </a>
+                            <form>
+                            </form>
+                            <form action="{{ route('admin.ticket.search') }}" method="get" class="form-inline">
+                                @csrf
+                                <div class="form-group row">
+                                    <div class="col-auto">
+                                        <input type="date" name="date" class="form-control" value="{{ date('Y-m-d') }}"  >
                                     </div>
-                                </form>
-
-                            </div>
-
-                            @if ($message = Session::get('success'))
-                                <div>
-                                    <ul>
-                                        <li>{{ $message }}</li>
-                                    </ul>
+                                    <div class="col-auto">
+                                        <select name="license_plate" class="form-control">
+                                            @foreach ($passengerCar as $value)
+                                            <option value="{{ $value->license_plate }}">{{ $value->license_plate }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="col-auto">
+                                        <button type="submit" class="btn btn-primary">Search</button>
+                                    </div>
                                 </div>
-                            @endif
+                            </form>
 
-                            <div class="table overflow-auto">
-                                <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap">
-                                    <thead>
+                        </div>
+
+                        @if ($message = Session::get('success'))
+                        <div>
+                            <ul>
+                                <li>{{ $message }}</li>
+                            </ul>
+                        </div>
+                        @endif
+
+                        <div class="table overflow-auto">
+                            <table id="datatable-buttons"
+                                class="table table-striped table-bordered dt-responsive nowrap">
+                                <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Username</th>
-                                        <th>PassengerCar</th>
-                                        <th>Phone</th>
+                                        <th>Tên</th>
+                                        <th>Xe</th>
+                                        <th>Số Điện Thoại</th>
                                         <th>Email</th>
                                         <th>Thanh toán</th>
-                                        <th>Departure</th>
-                                        <th>Arrival</th>
-                                        <th>Date</th>
-                                        <th>Quantity</th>
-                                        <th>Status</th>
-                                        <th>Price</th>
-                                        <th>Action</th>
+                                        <th>Điểm đón</th>
+                                        <th>Điểm trả</th>
+                                        <th>Ngày</th>
+                                        <th>Số lượng</th>
+                                        <th>Trạng thái</th>
+                                        <th>Giá</th>
+                                        <th>Thao tác</th>
                                     </tr>
-                                    </thead>
+                                </thead>
                                     @foreach ($data as $ticket)
-                                        <tbody>
+                                    <tbody>
                                         <tr>
                                             <td>#{{ $ticket->id }}</td>
                                             <td>{{ $ticket->username }}</td>
                                             <td>
                                                 @foreach ($passengerCar as $value)
-                                                    @if ($ticket->passenger_car_id == $value->id)
-                                                     {{ $value->license_plate }}
-                                                    @endif
+                                                @if ($ticket->passenger_car_id == $value->id)
+                                                {{ $value->license_plate }}
+                                                @endif
                                                 @endforeach
                                             </td>
                                             <td>{{ $ticket->phone }}</td>
@@ -81,13 +89,13 @@
                                             <td>{{ $ticket->quantity }}</td>
                                             <td>
                                                 @if ($ticket->status == 1 )
-                                                    <span class="badge bg-warning">Pending</span>
+                                                <span class="badge bg-warning">Xe chưa đi</span>
                                                 @elseif($ticket->status == 2)
-                                                    <span class="badge bg-success">Success</span>
+                                                <span class="badge bg-success">Xe đã đi</span>
                                                 @elseif($ticket->status == 0)
-                                                    <span class="badge bg-danger">Cancel</span>
+                                                <span class="badge bg-danger">Vé đã hủy</span>
                                                 @elseif($ticket->status == 3)
-                                                    <span class="badge bg-info">Confirmed</span>
+                                                <span class="badge bg-info">Confirmed</span>
                                                 @endif
                                             </td>
                                             <td>{{ number_format($ticket->total_price, 0, '', ',') }}</td>
@@ -103,42 +111,52 @@
                                                         <a class="dropdown-item"
                                                             href="{{ route('admin.ticket.edit', $ticket->id) }}">Sửa
                                                         </a>
-                                                        <a class="dropdown-item confirm" data-id="{{ $ticket->id }}">
+                                                        {{-- <a class="dropdown-item confirm" data-id="{{ $ticket->id }}">
                                                             Xác nhận
-                                                        </a>
+                                                        </a> --}}
                                                         <!-- item-->
-                                                        @if ($ticket->status == 1 && $ticket->payment_method === "Đã Thanh toán VNPAY" )
-                                                            <a  data-id="<?= $ticket->id; ?>" href="javascript:void(0);" class="dropdown-item vnpay-cancel">Hủy vé</a>
+                                                        @if ($ticket->status == 1 && $ticket->payment_method === "Đã
+                                                        Thanh toán VNPAY" )
+                                                        <a data-id="<?= $ticket->id; ?>" href="javascript:void(0);"
+                                                            class="dropdown-item vnpay-cancel">Hủy vé</a>
                                                         @endif
                                                     </div>
                                                 </div>
                                             </td>
 
                                         </tr>
-                                        </tbody>
+                                    </tbody>
                                     @endforeach
+                            </table>
 
-                                </table>
-
-                            </div>
-                            <div class="float-end mt-2">
-                                {{ $data->links() }}
-                            </div>
+                        </div>
+                        <div class="float-end mt-2">
+                            {{ $data->links() }}
                         </div>
                     </div>
+                </div>
 
-                </div><!-- end col -->
+            </div><!-- end col -->
 
-            </div>
-            <!-- end row -->
+        </div>
+        <!-- end row -->
 
-        </div> <!-- container -->
+    </div> <!-- container -->
 
-    </div> <!-- content -->
+</div> <!-- content -->
 @endsection
 @section('page-script')
-    <script>
-        $(document).ready(function(){
+<script>
+    function checkDate(event) {
+      var inputDate = new Date(event.target.value);
+      var currentDate = new Date();
+      if (inputDate < currentDate) {
+        event.target.value = '{{ date('Y-m-d') }}';
+      }
+    }
+  </script>
+<script>
+    $(document).ready(function(){
             $(document).on('click','.confirm', function(){
                 let id = $(this).data('id');
                $.ajax({
@@ -201,12 +219,12 @@
             });
             })
         })
-    </script>
+</script>
 
-    <!--Morris Chart-->
-    <script src="admin/libs/morris.js06/morris.min.js"></script>
-    <script src="admin/libs/raphael/raphael.min.js"></script>
+<!--Morris Chart-->
+<script src="admin/libs/morris.js06/morris.min.js"></script>
+<script src="admin/libs/raphael/raphael.min.js"></script>
 
-    <!-- Dashboar init js-->
-    <script src="admin/js/pages/dashboard.init.js"></script>
+<!-- Dashboar init js-->
+<script src="admin/js/pages/dashboard.init.js"></script>
 @endsection

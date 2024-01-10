@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Ticket extends Model
 {
-    use HasFactory;
+    use HasFactory, Searchable;
 
     protected $fillable = [
         'id',
@@ -29,15 +30,16 @@ class Ticket extends Model
         'reason',
         'seat_id'
     ];
-    protected $attributes =[
+    protected $attributes = [
         'email' => NULL,
     ];
-    public function user():BelongsTo{
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(User::class);
     }
-    public function passengerCar():BelongsTo{
-        return $this->belongsTo(PassengerCar::class,'passenger_car_id','id')
+    public function passengerCar(): BelongsTo
+    {
+        return $this->belongsTo(PassengerCar::class, 'passenger_car_id', 'id')
             ->where('user_id', auth()->id());
     }
-
 }

@@ -1,5 +1,7 @@
 @vite('resources/js/app.js')
 <!-- Vendor -->
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
 <script src="{{asset('admin/libs/jquery/jquery.min.js')}}"></script>
 <script>

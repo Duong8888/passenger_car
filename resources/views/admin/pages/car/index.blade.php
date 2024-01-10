@@ -9,12 +9,24 @@
                         <div class="d-flex mb-4 justify-content-between">
                             <h4 class="mt-0 header-title">{{$title}}</h4>
                         </div>
-
-                        <button id="modal-btn" type="button" class="btn mb-2 btn-success waves-effect waves-light"
+                        <div class="d-flex mb-4 justify-content-between">
+                            <button id="modal-btn" type="button" class="btn mb-2 btn-success waves-effect waves-light"
                                 data-bs-toggle="modal"
                                 data-bs-target="#con-close-modal">Thêm mới xe
-                        </button>
-
+                            </button>
+                            <form action="{{ route('admin.ticket.search') }}" method="get" class="form-inline">
+                                @csrf
+                                <div class="form-group row">
+                                    <div class="col-auto">
+                                        <input type="date" name="date" class="form-control" value="{{ date('Y-m-d') }}" >
+                                    </div>
+                                    <div class="col-auto">
+                                        <button type="submit" class="btn btn-primary">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        
                         <!-- /.modal -->
                         <div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog"
                              aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">

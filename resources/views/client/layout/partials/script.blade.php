@@ -258,7 +258,7 @@
                 refreshSession();
                 Swal.fire("Saved!", "", "success");
                 localStorage.removeItem("startTime");
-                window.history.back();
+                window.location.href ='/';
             }
         });
     }

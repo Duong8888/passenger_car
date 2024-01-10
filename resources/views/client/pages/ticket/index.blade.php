@@ -41,6 +41,9 @@
     {{--        <div id="countdown" class="countdown">Loading...</div>--}}
     {{--    </div>--}}
     <section class="py-20 bg-gray-50 dark:bg-neutral-700">
+        <div class="mt-4">
+            <button onclick="cancelPayment2()"  class="bg-red-500 text-white px-4 py-2 mr-2 rounded">Hủy hàng</button>
+        </div>  
         <div class="container mx-auto">
             <div class="mb-5">
                 <h4 class="mb-3 text-lg text-gray-900 dark:text-gray-50">Chọn phương thức thanh toán</h4>
@@ -52,7 +55,7 @@
                         <h5 class="mb-3 text-1 text-gray-900 dark:text-gray-50">Phương thức thanh toán</h5>
 
                         <div class=" mb-5">
-                            <input type="radio" id="option1" name="options" class="form-radio h-5 w-5 text-blue-600">
+                            <input type="radio" id="option1" name="options" class="form-radio h-5 w-5 text-blue-600" checked>
                             <label for="option1" class="ml-2 mb-3">Thanh toán bằng VNPAY</label>
                             <p class="mb-5">Tiện ích và nhanh chóng</p>
                             <div class="mb-5 show-infomation1"></div>
@@ -106,9 +109,7 @@
                 </div>
             </div>
         </div>
-        <div class="mt-4">
-            <button onclick="cancelPayment2()"  class="bg-red-500 text-white px-4 py-2 mr-2 rounded">Hủy hàng</button>
-        </div>
+       
         <div class="fixed bottom-0 left-0 right-0 p-4 bg-white shadow-md flex justify-center offline-ticket hidden">
 
             <button data-action="{{ route('client.ticket.end-payment-ticket') }}"
