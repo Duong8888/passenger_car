@@ -58,7 +58,7 @@
                             <div class="mb-5 show-infomation1"></div>
                         </div>
                         <div class=" mb-5">
-                            <input type="radio" id="option2" name="options" class="form-radio h-5 w-5 text-blue-600">
+                            <input type="radio" checked id="option2" name="options" class="form-radio h-5 w-5 text-blue-600">
                             <label for="option2" class="ml-2">Thanh toán tại nhà xe</label>
                             <p class="mb-5">Vui lòng đến văn phòng xe buýt và trả tiền cho nhân viên tại quầy để lấy vé
                             </p>
@@ -107,25 +107,25 @@
             </div>
         </div>
         <div class="mt-4">
-            <button onclick="cancelPayment2()"  class="bg-red-500 text-white px-4 py-2 mr-2 rounded">Hủy hàng</button>
+
         </div>
         <div class="fixed bottom-0 left-0 right-0 p-4 bg-white shadow-md flex justify-center offline-ticket hidden">
-
             <button data-action="{{ route('client.ticket.end-payment-ticket') }}"
                     data-session="{{ json_encode(session('value')) }}"
 
-                    class="bg-yellow-500 w-1/2 p-2 m-2 finish-ticket-offline">Thanh toán tại
+                    class="bg-yellow-500 w-1/2 p-2 m-2 finish-ticket-offline rounded text-white">Thanh toán tại
                 nhà xe
             </button>
+            <button type="button" onclick="cancelPayment2()"  class="bg-red-500 text-white px-4 py-2 ml-2 rounded">Hủy hàng</button>
         </div>
         <form action="{{ route('client.ticket.vnpay-method') }}" method="POST"
               class="fixed bottom-0 left-0 right-0 p-4 bg-white shadow-md flex justify-center vnpay-ticket hidden">
             @csrf
-            <button name="redirect" class="bg-yellow-500 w-1/2 p-2 m-2" id="payment-vnp" type="submit">Thanh toán
+            <button name="redirect" class="bg-yellow-500 w-1/2 p-2 m-2 rounded text-white" id="payment-vnp" type="submit">Thanh toán
                 VNPay
             </button>
             <input type="hidden" value="{{ json_encode(session('value')) }}" name="session">
-
+            <button type="button" onclick="cancelPayment2()"  class="bg-red-500 text-white px-4 py-2 ml-2 rounded">Hủy hàng</button>
         </form>
 
         <div id="popup"
