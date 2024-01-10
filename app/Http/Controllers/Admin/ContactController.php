@@ -231,10 +231,10 @@
             return view('admin.pages.contact.edit', compact('users'));
         }
 
+
         public function updateForm(Request $request, $id)
         {
             $contact = Contact::findOrFail($id);
-//            dd($contact);
             $data = [
                 "user_name" => $request->input('user_name'),
                 "province" => $request->input('province'),
@@ -248,10 +248,12 @@
             if ($request->has('images')) {
                 $data['images'] = json_encode($request->input('images'));
             }
+
             $user = User::updated(['id' => $contact->user_id], $data);
 
 //            $role = Role::where('name', 'Nhà xe')->first();
 //            $user->assignRole($role);
+
             return redirect()->back()->with('success', 'Cập nhật thành công!');
         }
 
