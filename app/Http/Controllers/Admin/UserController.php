@@ -14,6 +14,15 @@ class UserController extends Controller
         $users = User::all();
         return view('admin.pages.Staff.index',compact('users'));
     }
+    public function searchStaff(Request $request){
+        $keyword = $request->input('search');
+        $users = User::where('name','like','%'.$keyword.'%')
+        ->orWhere('email','like','%'.$keyword.'%')
+        ->orWhere('phone','like','%'.$keyword.'%')
+        ->orWhere('id','like','%'.$keyword.'%')
+        ->get();
+        return view('admin.pages.Staff.index',compact('users'));
+    }
     public function add(Request $request){
         if($request->post()){
             $params = $request->except('_token');

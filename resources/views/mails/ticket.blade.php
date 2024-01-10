@@ -1,10 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hóa Đơn</title>
+
+    <style>
+        .car {
+            display: inline-block;
+            border: 1px solid #cccc;
+            border-radius: 4px;
+        }
+
+        .row {
+            display: flex;
+        }
+
+        .item {
+            border: 1px solid #cccc;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            margin: 15px;
+            background-color: #cccc;
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .icon::after{
+            content: "";
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            background-color: #ffff;
+            border-radius: 50%;
+        }
+
+        .chair {
+            width: 30px;
+            height: 30px;
+            margin: 10px;
+            background-color: #cccc;
+        }
+        .active {
+            background-color: green;
+        }
+    </style>
 </head>
+
 <body style="font-family: Arial, sans-serif;">
 
 <div>
@@ -31,10 +86,36 @@
         <tfoot>
         <tr>
             <td colspan="3" style="border: 1px solid #ddd; padding: 10px;">Tổng Cộng:</td>
-            <td style="border: 1px solid #ddd; padding: 10px;">{{number_format($data->total_price, 0, '.', '.')}} VND</td>
+            <td style="border: 1px solid #ddd; padding: 10px;">{{number_format($data->total_price, 0, '.',
+                        '.')}} VND</td>
         </tr>
         </tfoot>
     </table>
+
+    <p>Vị trí ngồi của bạn</p>
+    <div class="car">
+        @foreach($car as $value)
+            <div class="row">
+                @php
+                    $arrayData = json_decode($value->seat, true);
+                    $arraySeat = json_decode($data->seat_id, true);
+                @endphp
+                @foreach($arrayData as $value2)
+                    @php
+                        $active = '';
+                    @endphp
+                    @foreach($arraySeat as $value3)
+                        @if($value2 == $value3)
+                            @php
+                                $active = 'active';
+                            @endphp
+                        @endif
+                    @endforeach
+                    <div class="item"><span class="{{$active}} @if($value2 == 'icon') icon @elseif($value2 != '') chair @endif"></span></div>
+                @endforeach
+            </div>
+        @endforeach
+    </div>
 
     <p style="margin-top: 20px;">Cảm ơn bạn đã mua hàng!</p>
 
@@ -45,4 +126,5 @@
 </div>
 
 </body>
+
 </html>

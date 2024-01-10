@@ -56,7 +56,7 @@ class PassengerCarController extends AdminBaseController
             ->with('urlbase', $this->urlbase)
             ->with('titleCreate', $this->titleCreate);
     }
-
+    
     public function store(Request $request)
     {
         Log::info($request->all());

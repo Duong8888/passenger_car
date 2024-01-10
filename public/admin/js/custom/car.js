@@ -180,7 +180,7 @@ $(document).ready(function () {
     // udate xe
     let licensePlate = $('input[name="license_plate"]');
     let price = $('input[name="price"]');
-    let capacity = $('input[name="capacity"]');
+    let capacity = $('select[name="capacity"]');
     let description = $('.ql-editor');
     let time = $('.show-item');
     let services = $('.service');
@@ -274,11 +274,11 @@ $(document).ready(function () {
                 `
                 <div class="row add-item mb-2">
                     <div class="col-md-5">
-                        <input class="form-control" name="departure[]" id=""
+                        <input class="form-control departure" name="departure[]" id=""
                                type="time" name="time" value="${response[0].working_time[j].departure_time}">
                     </div>
                     <div class="col-md-5">
-                        <input class="form-control" name="arrival[]" id=""
+                        <input class="form-control arrival" name="arrival[]" id=""
                                type="time" name="time" value="${response[0].working_time[j].arrival_time}">
                     </div>
                     <div class="col-md-2 d-flex justify-content-between">
@@ -360,13 +360,72 @@ $(document).ready(function () {
 
     deleteCar();
 
+    function isDepartureBeforeArrival(departure, arrival) {
+        return departure < arrival;
+    }
+
+    function isTimeRangeOverlap(departure1, arrival1, departure2, arrival2) {
+        return arrival1 > departure2 && arrival2 > departure1;
+    }
+
+    function validateTimeRanges(departureArr, arrivalArr) {
+        var parsedDepartures = departureArr.map(item => new Date('1970-01-01T' + item + 'Z'));
+        var parsedArrivals = arrivalArr.map(item => new Date('1970-01-01T' + item + 'Z'));
+
+        for (var i = 0; i < parsedDepartures.length; i++) {
+            for (var j = i + 1; j < parsedDepartures.length; j++) {
+                if (
+                    !isDepartureBeforeArrival(parsedDepartures[i], parsedArrivals[i]) ||
+                    !isDepartureBeforeArrival(parsedDepartures[j], parsedArrivals[j]) ||
+                    isTimeRangeOverlap(
+                        parsedDepartures[i],
+                        parsedArrivals[i],
+                        parsedDepartures[j],
+                        parsedArrivals[j]
+                    )
+                ) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    function validateAndLogTimeRanges(departureArr, arrivalArr) {
+        var isValidTimeRange = validateTimeRanges(departureArr, arrivalArr);
+
+        if (isValidTimeRange) {
+            $('.time-car').text('');
+            return true;
+        } else {
+            $('.time-car').text('Xung đột giờ khởi hành và giờ đến.');
+            return false;
+        }
+    }
+
+
     function validate(action){
+        var departureArr = $('.departure');
+        var arrivalArr = $('.arrival');
+        var dataDepartureArr = [];
+        var dataArrivalArr = [];
+        $.each(departureArr,function (index,item){
+            dataDepartureArr.push($(item).val());
+        });
+
+        $.each(arrivalArr,function (index,item){
+            dataArrivalArr.push($(item).val());
+        });
+
+
+
         var licensePlate = $('input[name="license_plate"]').val();
         var price = $('input[name="price"]').val();
         var capacity = $('select[name="capacity"]').val();
         const files = uppy.getFiles();
         var description = $('.ql-editor').html();
         var isValid = true;
+        isValid = validateAndLogTimeRanges(dataDepartureArr, dataArrivalArr);
         if(licensePlate == ''){
             $('.license_plate').html('Vui lòng nhập biển số.');
             isValid = false;

@@ -47,7 +47,7 @@
                                         <div class="mb-3">
                                             <label for="date" class="form-label">Ngày đi</label>
                                             <input type="date" id="date" name="date" min="<?php echo date('Y-m-d' ); ?>"
-                                                   class="form-control" value="<?php echo date('Y-m-d'); ?>">
+                                                   class="form-control" value="{{$model->date}}">
                                         </div>
 
                                     </div>
@@ -75,6 +75,9 @@
                                             <input type="number" name="quantity" value="" hidden>
                                             <input type="number" name="total_price" value="" hidden>
                                             <input type="number" name="status" value="1" hidden>
+                                            @foreach($seat as $value)
+                                                <input type="number" name="slot_old[]" value="{{$value['id']}}" hidden>
+                                            @endforeach
                                         </div>
 
                                         <div class="mb-3 form-label">
@@ -133,19 +136,19 @@
                                                             @else
 
                                                                 @php
-                                                                    $html = '<label for="{{$value}}" class="border">
+                                                                    $html = '<label for="'.$value.'" class="border">
                                                                     <span class="material-symbols-outlined d-inline-block"
                                                                           style="font-size: 40px;">weekend</span>
                                                                 </label>
                                                                 <input style="display: none;" class="slot" type="checkbox"
-                                                                       name="slot[]" id="{{$value}}" value="{{$value}}">';
+                                                                       name="slot[]" id="'.$value.'" value="'.$value.'">';
                                                                 @endphp
 
                                                                 @foreach($checkSlot as $slot)
 
                                                                     @if($slot['seat_id'] == $value)
                                                                         @php
-                                                                            $html = '<label for="{{$value}}" class="border">
+                                                                            $html = '<label for="'.$value.'" class="border">
                                                                                 <span class="material-symbols-outlined d-inline-block"
                                                                               style="font-size: 40px;color: red">weekend</span>
                                                                             </label>';
@@ -156,12 +159,12 @@
                                                                 @foreach($seat as $seatValue)
                                                                     @if($seatValue['seat_id'] == $value)
                                                                         @php
-                                                                            $html = '<label for="{{$value}}" class="border">
+                                                                            $html = '<label for="'.$value.'" class="border">
                                                                                 <span class="material-symbols-outlined d-inline-block"
                                                                                       style="font-size: 40px;color: green">weekend</span>
                                                                             </label>
                                                                             <input style="display: none;" class="slot" type="checkbox"
-                                                                                   name="slot[]" id="{{$value}}" value="{{$value}}">';
+                                                                                   name="slot[]" id="'.$value.'" value="'.$value.'">';
                                                                         @endphp
                                                                     @endif
                                                                 @endforeach
@@ -180,7 +183,7 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <button type="submit" class="btn btn-primary float-end">Update</button>
+                                        <button type="button" class="btn-submit btn btn-primary float-end">Update</button>
                                     </div>
 
                                 </form>
@@ -231,6 +234,29 @@
                                         }
                                     });
                                 });
+
+                                $('.btn-submit').on('click',function (){
+                                    var formData = $('#create_ticket').serialize();
+                                    $.ajax({
+                                        url:'{{route('admin.ticket.check')}}',
+                                        method:"POST",
+                                        data:formData,
+                                        success: function(response) {
+                                            if(response.check){
+                                                $('#create_ticket').submit();
+                                            }else {
+                                                load();
+                                                $('.totalPrice').html(`<span style="color:red;">Ghế của bạn đã có người đặt.</span>`);
+                                            }
+                                        },
+                                        error: function(error) {
+                                            console.log("Lỗi:", error);
+                                        }
+                                    });
+                                });
+
+
+
 
                                 function load() {
                                     $.ajax({
