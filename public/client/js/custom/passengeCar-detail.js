@@ -182,6 +182,8 @@ $(document).ready(function () {
                                         if (response.success) {
                                             Swal.fire("Saved!", "", "success");
                                             window.location.href = '/payment-method';
+                                        }else {
+                                            console.log(response);
                                         }
                                     }
                                 }, TIME_TO_UPDATE);
@@ -205,6 +207,9 @@ $(document).ready(function () {
                     success: function (response) {
                         if (response.success) {
                             window.location.href = '/payment-method';
+                        }else {
+                            console.log(response.error);
+                            location.reload();
                         }
                     }
                 }, TIME_TO_UPDATE);
