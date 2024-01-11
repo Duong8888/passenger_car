@@ -25,11 +25,11 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="name" class="form-label">Tên khách hàng</label>
-                                            <input type="text" class="form-control" id="name" name="username" disabled>
+                                            <input type="text" class="form-control" id="name" name="username">
                                         </div>
                                         <div class="mb-3">
                                             <label for="email" class="form-label">Email</label>
-                                            <input type="email" class="form-control" id="email" name="email" disabled>
+                                            <input type="email" class="form-control" id="email" name="email">
                                         </div>
 
                                         <div class="mb-3">
@@ -101,7 +101,7 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <button type="submit" class="btn btn-primary float-end">Create</button>
+                                        <button type="button" class="btn btn-submit btn-primary float-end">Create</button>
                                     </div>
 
                                 </form>
@@ -152,6 +152,26 @@
                                     })
                                 });
 
+                                $('.btn-submit').on('click',function (){
+                                    var formData = $('#create_ticket').serialize();
+                                    $.ajax({
+                                        url:'{{route('admin.ticket.check')}}',
+                                        method:"POST",
+                                        data:formData,
+                                        success: function(response) {
+                                            if(response.check){
+                                                $('#create_ticket').submit();
+                                            }else {
+                                                showLayout();
+                                                $('.totalPrice').html(`<span style="color:red;">Ghế của bạn đã có người đặt.</span>`);
+                                            }
+                                        },
+                                        error: function(error) {
+                                            console.log("Lỗi:", error);
+                                        }
+                                    });
+                                });
+
                                 $('select[name="passenger_car_id"]').on('change', function () {
                                     //console.log($('select[name="passenger_car_id"]').attr('data-action'));
                                     $('.showPassengerCar').html(`<img style="width: 100%;border-radius: 10px" src="{{asset('images/banner-11.jpg')}}">`);
@@ -162,6 +182,7 @@
                                         url: $(this).data('action'),
                                         method: "POST",
                                         data: {
+                                            _token: $('meta[name="csrf-token"]').attr('content'),
                                             id: $(this).val(),
                                             date: $('#date').val(),
                                         },
@@ -177,11 +198,12 @@
                                     });
                                 });
 
-                                $('select[name="time"], input[type="date"]').on('change', function () {
+                                function showLayout(){
                                     $.ajax({
                                         url: $('select[name="time"]').data('action'),
                                         method: "POST",
                                         data: {
+                                            _token: $('meta[name="csrf-token"]').attr('content'),
                                             id: $('select[name="passenger_car_id"]').val(),
                                             date: $('#date').val(),
                                             time_id: $('select[name="time"]').val()
@@ -251,7 +273,9 @@
                                             console.log(error)
                                         }
                                     });
-                                });
+                                }
+
+                                $('select[name="time"], input[type="date"]').on('change',showLayout);
 
 
 
@@ -339,7 +363,7 @@
                                         error: function (error) {
                                         }
                                     })
-                                })
+                                });
 
                             })
                         </script>

@@ -20,10 +20,12 @@ class SendMail implements ShouldQueue
      */
     protected $email;
     protected $data;
-    public function __construct($email, $data)
+    protected $car;
+    public function __construct($email, $data, $car)
     {
        $this->email = $email;
        $this->data = $data;
+       $this->car = $car;
     }
 
     /**
@@ -31,8 +33,8 @@ class SendMail implements ShouldQueue
      */
     public function handle(): void
     {
-        Mail::to($this->email)->send(new TiketMail($this->data));
+        Mail::to($this->email)->send(new TiketMail($this->data,$this->car));
     }
 
-    
+
 }

@@ -11,12 +11,12 @@ use App\Models\SeatsLayout;
 use App\Models\SeatStatus;
 use App\Models\Stops;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Models\Ticket;
 use App\Models\User;
 use App\Models\WorkingTime;
-use Carbon\Carbon;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -180,7 +180,7 @@ class TicketController extends AdminBaseController
 
 
     public function getLayout(Request $request){
-        
+
         $passengerCars = PassengerCar::query()->where('id', $request->id)->first();
         if($passengerCars->vehicle_id != 0){
             $layout = SeatsLayout::query()->where('vehicle_id', $passengerCars->vehicle->id)->get();
@@ -394,5 +394,35 @@ class TicketController extends AdminBaseController
             ->with('urlbase', $this->urlbase)
             ->with('titleCreate', $this->titleCreate);
     }
-    
+
+
+    public function checkSeat(Request $request){
+        Log::info($request);
+        $check = true;
+        foreach ($request['slot'] as $value){
+            if($request['slot_old']){
+                Log::info('ok');
+                $data = SeatStatus::query()->where([
+                    ['date','=',$request['date']],
+                    ['time_id','=',$request['time']],
+                    ['seat_id','=',$value],
+                    ['passenger_car_id','=',$request['passenger_car_id']],
+                ])->whereNotIn('id', $request['slot_old'])
+                    ->get();
+            }else{
+                $data = SeatStatus::query()->where([
+                    ['date','=',$request['date']],
+                    ['time_id','=',$request['time']],
+                    ['seat_id','=',$value],
+                    ['passenger_car_id','=',$request['passenger_car_id']],
+                ])->get();
+            }
+
+            if(count($data) != 0){
+                $check = false;
+            }
+        }
+        return \response()->json(['check'=>$check]);
+    }
+
 }

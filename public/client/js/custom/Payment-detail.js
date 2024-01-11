@@ -1,7 +1,8 @@
 $(document).ready(function () {
     var showInformation = '';
 
-    $('#option2').click(function () {
+    $('#option2').click(show);
+    function show() {
         showInformation = `
         <h4 class="mb-3 text-lg text-gray-900 dark:text-gray-50">Cách thanh toán</h4>
             <p class="mb-5">
@@ -15,7 +16,8 @@ $(document).ready(function () {
         $('.offline-ticket').removeClass('hidden').show();
         $('.vnpay-ticket').addClass('hidden');
 
-    })
+    }
+    show();
 
     $('#option1').click(function () {
         showInformation = `

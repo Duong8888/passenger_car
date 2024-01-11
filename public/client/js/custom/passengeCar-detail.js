@@ -96,7 +96,7 @@ $(document).ready(function () {
         var time_id = $('input[name="time_id"]').val();
         var lmao = $('input[name="other"]').val();
         var lmao1 = $('input[name="other1"]').val();
-        
+
         var email = $('input[name="email"]').val();
         var route_departure = $('input[name="route-departure"]').val();
         var route_arrival = $('input[name="route-arrival"]').val();
@@ -182,6 +182,8 @@ $(document).ready(function () {
                                         if (response.success) {
                                             Swal.fire("Saved!", "", "success");
                                             window.location.href = '/payment-method';
+                                        }else {
+                                            console.log(response);
                                         }
                                     }
                                 }, TIME_TO_UPDATE);
@@ -205,6 +207,9 @@ $(document).ready(function () {
                     success: function (response) {
                         if (response.success) {
                             window.location.href = '/payment-method';
+                        }else {
+                            console.log(response.error);
+                            location.reload();
                         }
                     }
                 }, TIME_TO_UPDATE);
@@ -312,9 +317,15 @@ $(document).ready(function () {
         }
 
         let formattedMoney = formatCurrency(y);
-        totalTicket = `
-        <span>Tổng cộng: <span style="color: rgb(0, 96, 196);font-weight: bold;">${formattedMoney}</span></span>
-    `
+        if(y != 0){
+            totalTicket = `
+                <p>Gế: <span style="color: rgb(0, 96, 196);font-weight: bold;">${checkedValues}</span></p>
+                <span>Tổng cộng: <span style="color: rgb(0, 96, 196);font-weight: bold;">${formattedMoney}</span></span>
+            `;
+        }else {
+            totalTicket = '';
+        }
+
         $('.show-total').html(totalTicket);
     });
 

@@ -1,4 +1,3 @@
-@vite('resources/js/app.js')
 
 <script src="{{asset('client/libs/%40popperjs/core/umd/popper.min.js')}}"></script>
 <script src="{{asset('client/libs/simplebar/simplebar.min.js')}}"></script>
@@ -88,9 +87,9 @@
             'size': 'invisible',
             'callback': (response) => {
             }
-            }); 
+            });
         recaptchaVerifier.render();
-        
+
     }
 
     var coderesult;
@@ -174,7 +173,7 @@
     storedStartTime = localStorage.getItem("startTime");
     function createCountdown(startTime, elementId) {
         var endTime = new Date(startTime);
-        var paymentTime = {{env('PAYMENT_TIME', 3)}};
+        var paymentTime = {{env('PAYMENT_TIME', 15)}};
         endTime.setMinutes(endTime.getMinutes() + paymentTime);
 
         var x = setInterval(function () {
@@ -258,7 +257,9 @@
                 refreshSession();
                 Swal.fire("Saved!", "", "success");
                 localStorage.removeItem("startTime");
-                window.location.href ='/';
+                window.location.href = '{{route('home')}}';
+                {{--window.location.href={{route('home')}};--}}
+
             }
         });
     }

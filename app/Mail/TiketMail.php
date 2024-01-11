@@ -14,10 +14,12 @@ class TiketMail extends Mailable
     use Queueable, SerializesModels;
 
     protected $data;
+    protected $car;
 
-    public function __construct($data)
+    public function __construct($data,$car)
     {
         $this->data = $data;
+        $this->car = $car;
     }
 
     /**
@@ -29,6 +31,7 @@ class TiketMail extends Mailable
             ->subject('Thông báo đặt vé xe')
             ->with([
                 'data' => $this->data,
+                'car' => $this->car,
             ]);
     }
 }
