@@ -156,10 +156,10 @@
     }
   </script>
 <script>
-    $(document).ready(function(){
+        $(document).ready(function(){
             $(document).on('click','.confirm', function(){
                 let id = $(this).data('id');
-               $.ajax({
+                $.ajax({
                 url : '/admin/confirm',
                 method: 'POST',
                 headers: {
@@ -179,7 +179,7 @@
                         });
                         window.location.href = '/admin/ticket';
                     }
-               })
+                })
             })
 
             $('.vnpay-cancel').on('click', function(){

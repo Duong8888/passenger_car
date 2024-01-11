@@ -333,7 +333,7 @@
                                                 showTrip += '<option class="trip" data-id="' + trip.id +
                                                     '" value="' + trip.id + '">' + trip.slug + '</option>';
                                             });
-
+                                            
                                             $('.route').html(showTrip);
                                         },
                                         error: function (error) {
