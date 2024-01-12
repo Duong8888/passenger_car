@@ -14,7 +14,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 style=" font-size: 40px;font-weight: bolder " class="header-title">Sửa thông tin đăng kí nhà xe</h4>
-                            <form action="/contact/update-ting/{{ $users->id }}" method="POST"  enctype="multipart/form-data">
+                            <form action="{{url('admin/contact/update-ting',[$users->id]) }}" method="POST"  enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $users->id }}">
                                 <br>
