@@ -73,6 +73,7 @@ class TicketController extends Controller
                 $seat = SeatStatus::query()
                     ->where('date', $a['date'])
                     ->where('time_id', $a['time_id'])
+                    ->where('passenger_car_id', $a['passenger_car_id'])
                     ->whereIn('seat_id', $a['seat'])
                     ->get();
                 if (count($seat) == 0) {

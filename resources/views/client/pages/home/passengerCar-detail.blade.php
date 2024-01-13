@@ -608,7 +608,7 @@
                                                             <label for="{{$item}}"
                                                                    class="choices-slot cursor-pointer w-12 border border-gray-400 h-12 flex justify-center items-center lg:w-12"
                                                                    style="width: 10px;height: 10px">{!! $item=="icon"?'<span class="material-symbols-outlined" style="font-size: 40px;color: #74788d">search_hands_free</span>':($item!=""?(in_array($item,$span)?'<span class="material-symbols-outlined" style="font-size: 40px;color: red">weekend</span>':'<span class="material-symbols-outlined" style="font-size: 40px;color: #74788d">weekend</span>'):'') !!}</label>
-                                                            @if($item != "" && $item != "icon")
+                                                            @if($item != "" && $item != "icon" && !in_array($item,$span))
                                                                 <input style="display: none;" class="slot"
                                                                        type="checkbox"
                                                                        name="slot[]" id="{{$item}}"
