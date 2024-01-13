@@ -28,12 +28,12 @@
                            @foreach ($data as $value)
                         <td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">Xe {{
                             $value->license_plate }}</td>
-                        @endforeach  
+                        @endforeach
                         @else
                         <td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">Xe {{
                             $data }}</td>
                         @endif
-                       
+
                         <td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">{{
                            $route_departure}}-{{ $route_arrival}}</td>
 
@@ -55,7 +55,7 @@
                 @if ($id !== '')
                 <button  id="cancel-ticket" style="display: block; margin: 0 auto; background-color: red; color: white; width: 100% ; margin-top: 50px; padding: 10px ">Hủy Vé</button>
                 @endif
-              
+
             </div>
 
             <div style="width: 30%">
@@ -81,7 +81,7 @@
                         <p style="margin: 0; font-size: 14px;">Hình thức thanh toán: thanh toán tại nhà xe</p>
                     </div>
                     <div style="margin-bottom: 30px;">
-                        <p style="margin: 0; font-size: 14px;">Trạng thái: Trong Chờ Đợi</p>
+                        <p style="margin: 0; font-size: 14px;">Trạng thái: Chưa thanh toán</p>
 
                     </div>
 
@@ -131,7 +131,7 @@
             </div>
         </div>
     </div>
-    
+
 </section>
 <script>
     localStorage.removeItem("startTime");

@@ -68,6 +68,7 @@
     <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
         <thead>
         <tr>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">Mã vé</th>
             <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">Điểm đón</th>
             <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">Điểm trả</th>
             <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">Số lượng vé</th>
@@ -77,6 +78,7 @@
         <tbody>
 
         <tr>
+            <td style="border: 1px solid #ddd; padding: 10px;">{{ $data->id }}</td>
             <td style="border: 1px solid #ddd; padding: 10px;">{{ $data->departure }}</td>
             <td style="border: 1px solid #ddd; padding: 10px;">{{ $data->arrival }}</td>
             <td style="border: 1px solid #ddd; padding: 10px;">{{ $data->quantity }}</td>
