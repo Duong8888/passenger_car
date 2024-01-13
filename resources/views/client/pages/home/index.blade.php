@@ -306,7 +306,7 @@
                             class="job-categorie h-16 w-16 group-data-[theme-color=violet]:bg-violet-500/20 group-data-[theme-color=sky]:bg-sky-500/20 group-data-[theme-color=red]:bg-red-500/20 group-data-[theme-color=green]:bg-green-500/20 group-data-[theme-color=pink]:bg-pink-500/20 group-data-[theme-color=blue]:bg-blue-500/20 rounded-lg text-center leading-[4.4] mx-auto dark:bg-violet-900">
                             {{-- <i class="uim uim-layers-alt"></i> --}}
                             <img src="https://xekhachhao.com/wp-content/uploads/2022/10/xe-phong-hao1.jpg" alt="nhaxe"
-                                style="height: 100%;width: 100%;">
+                                style="height: 100%;width: 100%; border-radius: 4px">
                         </div>
                         <div class="mt-4 text-center">
                             <a href="job-categories.html" class="text-gray-900">
