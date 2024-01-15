@@ -178,7 +178,7 @@
                     <li>
                         <a href="{{ route('admin.route_contact_index') }}">
                             <i class="mdi mdi-table"></i>
-                            <span> Quản lý liên hệ nhà xe </span>
+                            <span>Đăng ký nhà xe </span>
                         </a>
                     </li>
                     <li>
