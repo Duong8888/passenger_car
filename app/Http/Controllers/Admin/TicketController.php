@@ -379,17 +379,35 @@ class TicketController extends AdminBaseController
 
     }
     public function search(Request $request){
-        $passengerCars = PassengerCar::where('license_plate', $request->license_plate)->get();
+        $passengerCars = PassengerCar::when($request->filled('license_plate'), function($query) use ($request) {
+            return $query->where('id', $request->license_plate);
+        })->get();
 
-        $data = Ticket::where('passenger_car_id', $passengerCars[0]->id)->orderBy('id','desc')->paginate(10);
+        $data = Ticket::when($passengerCars->isNotEmpty(), function ($query) use ($passengerCars) {
+            return $query->where('passenger_car_id', $passengerCars[0]->id);
+        })
+            ->when($request->filled('date'), function($query) use ($request) {
+                return $query->whereDate('date', $request->date);
+            })
+            ->when($request->filled('time_select'), function($query) use ($request) {
+                return $query->where('time_id', $request->time_select);
+            })
+            ->orderBy('id', 'desc')
+            ->paginate(10);
 
         $passengerCar = PassengerCar::get();
-        return view('admin.pages.ticket.index', compact('data', 'passengerCar'))
-        ->with('title', $this->titleIndex)
-        ->with('colums', $this->colums)
-        ->with('urlbase', $this->urlbase)
-        ->with('titleCreate', $this->titleCreate);
 
+        return view('admin.pages.ticket.index', compact('data', 'passengerCar'))
+            ->with('title', $this->titleIndex)
+            ->with('colums', $this->colums)
+            ->with('urlbase', $this->urlbase)
+            ->with('titleCreate', $this->titleCreate);
+    }
+
+    public function searchTime(Request $request){
+        $data = PassengerCar::query()->where('id', $request->id)->with('workingTime')->get();
+        $workingTime = $data->pluck('workingTime');
+        return \response()->json($workingTime);
     }
 
     public function checkSeat(Request $request){

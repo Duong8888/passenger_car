@@ -87,7 +87,7 @@
         </tbody>
         <tfoot>
         <tr>
-            <td colspan="3" style="border: 1px solid #ddd; padding: 10px;">Tổng Cộng:</td>
+            <td colspan="4" style="border: 1px solid #ddd; padding: 10px;">Tổng Cộng:</td>
             <td style="border: 1px solid #ddd; padding: 10px;">{{number_format($data->total_price, 0, '.',
                         '.')}} VND</td>
         </tr>
