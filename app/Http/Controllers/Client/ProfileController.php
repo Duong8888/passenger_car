@@ -94,7 +94,7 @@ class ProfileController extends Controller
         $tickets = Ticket::find($id);
         $time_id = $tickets->time_id;
         $working_time = WorkingTime::where('id', $time_id)->get();
-      
+
         //  return response()->json($tickets->passengerCar, 200, [], JSON_PRETTY_PRINT);
         return view('client.pages.profile.ticketDetail',compact('user','tickets','working_time'));
     }

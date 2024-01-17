@@ -379,23 +379,27 @@ class TicketController extends AdminBaseController
 
     }
     public function search(Request $request){
-        $passengerCars = PassengerCar::when($request->filled('license_plate'), function($query) use ($request) {
-            return $query->where('id', $request->license_plate);
-        })->get();
+        $data = Ticket::query();
 
-        $data = Ticket::when($passengerCars->isNotEmpty(), function ($query) use ($passengerCars) {
-            return $query->where('passenger_car_id', $passengerCars[0]->id);
-        })
-            ->when($request->filled('date'), function($query) use ($request) {
-                return $query->whereDate('date', $request->date);
-            })
-            ->when($request->filled('time_select'), function($query) use ($request) {
-                return $query->where('time_id', $request->time_select);
-            })
-            ->orderBy('id', 'desc')
-            ->paginate(10);
+        if ($request->filled('date')) {
+            $data->whereDate('date', $request->date);
+        }
 
-        $passengerCar = PassengerCar::get();
+        if ($request->filled('license_plate')) {
+            $passengerCar = PassengerCar::where('id', $request->license_plate)->first();
+            if ($passengerCar) {
+                $data->where('passenger_car_id', $passengerCar->id);
+            }
+        }
+
+        if ($request->filled('time_select')) {
+            $data->where('time_id', $request->time_select);
+        }
+
+        $data->orderBy('id', 'desc');
+        $data = $data->paginate(10);
+
+        $passengerCar = PassengerCar::query()->where('user_id', Auth::user()->id)->get();
 
         return view('admin.pages.ticket.index', compact('data', 'passengerCar'))
             ->with('title', $this->titleIndex)
@@ -403,6 +407,8 @@ class TicketController extends AdminBaseController
             ->with('urlbase', $this->urlbase)
             ->with('titleCreate', $this->titleCreate);
     }
+
+
 
     public function searchTime(Request $request){
         $data = PassengerCar::query()->where('id', $request->id)->with('workingTime')->get();

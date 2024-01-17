@@ -277,6 +277,21 @@ class TicketController extends Controller
                     $vnpay_item->update(['other_field' => json_encode($data_vnp)]);
                 }
 
+                foreach ($data as $a) {
+                    if (isset($a['seat'])) {
+                        foreach ($a['seat'] as $value) {
+                            $data = SeatStatus::query()
+                                ->where([
+                                    'passenger_car_id' => $a['passenger_car_id'],
+                                    'date' => $a['date'],
+                                    'time_id' => $a['time_id'],
+                                    'seat_id' => $value,
+                                ])
+                                ->update(['seat_status' => 1, 'ticket_id' => $ticket->id]);
+                        }
+                    }
+                }
+
                 $user_id = session('value')[0]['passenger_car_user'];
                 $message = session('value')[0]['username'] . ' đã đặt vé thành công';
                 $notification = new NotificationController();

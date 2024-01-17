@@ -111,7 +111,7 @@
                                             <td>{{ number_format($ticket->total_price, 0, '', ',') }}</td>
 
                                             <td>
-                                                <div class="dropdown float-end">
+                                                <div class="dropdown float-end" @if($ticket->status == 2) style="display: none" @endif>
                                                     <a href="#" class="dropdown-toggle arrow-none card-drop"
                                                        data-bs-toggle="dropdown" aria-expanded="false">
                                                         <i class="mdi mdi-dots-vertical"></i>

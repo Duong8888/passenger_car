@@ -36,8 +36,8 @@ class Ticket extends Model
         return $this->belongsTo(User::class);
     }
     public function passengerCar():BelongsTo{
-        return $this->belongsTo(PassengerCar::class,'passenger_car_id','id')
-            ->where('user_id', auth()->id());
+        return $this->belongsTo(PassengerCar::class,'passenger_car_id','id');
+//            ->where('user_id', auth()->id());
     }
 
 }
