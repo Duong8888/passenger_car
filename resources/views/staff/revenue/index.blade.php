@@ -90,7 +90,7 @@
                 chart.options.labels = labels;
                 chart.setData(data);
                 var tableBody = $('#tableBody');
-                tableBody.empty(); 
+                tableBody.empty();
                 var dateDisplayed = false;
                 $.each(data, function(index, day) {
                     $.each(day.cars, function(index, car) {
@@ -122,7 +122,7 @@
                         return b.total_price - a.total_price;
                     });
                     var tableBody = $('#tableBody');
-                    tableBody.empty(); 
+                    tableBody.empty();
                     var dateDisplayed = false;
                     $.each(groupedData, function(index, item) {
                         var row = `<tr>`;
@@ -158,7 +158,7 @@
                 var originalData = JSON.parse(JSON.stringify(data));
                 console.log(originalData);
                 var tableBody = $('#tableBody');
-                tableBody.empty(); 
+                tableBody.empty();
                 var dateDisplayed = false;
                 $.each(data, function(index, day) {
                     $.each(day.cars, function(index, car) {
@@ -190,7 +190,7 @@
                         return b.total_price - a.total_price;
                     });
                     var tableBody = $('#tableBody');
-                    tableBody.empty(); 
+                    tableBody.empty();
                     var dateDisplayed = false;
                     $.each(groupedData, function(index, item) {
                         var row = `<tr>`;
@@ -225,7 +225,7 @@
                 var originalData = JSON.parse(JSON.stringify(data));
                 console.log(originalData);
                 var tableBody = $('#tableBody');
-                tableBody.empty(); 
+                tableBody.empty();
                 var dateDisplayed = false;
                 $.each(data, function(index, day) {
                     $.each(day.cars, function(index, car) {
@@ -257,7 +257,7 @@
                         return b.total_price - a.total_price;
                     });
                     var tableBody = $('#tableBody');
-                    tableBody.empty(); 
+                    tableBody.empty();
                     var dateDisplayed = false;
                     $.each(groupedData, function(index, item) {
                         var row = `<tr>`;
@@ -356,7 +356,7 @@
                     <div class="row align-items-end">
                         <div class="col-md-3">
                             <p>Từ ngày: <input type="date" id="datepicker" class="form-control"></p>
-                          
+
                         </div>
                         <div class="col-md-3">
                             <p>Đến ngày: <input type="date" id="datepicker2" class="form-control"></p>
@@ -392,10 +392,10 @@
                         Xuất Pdf<span class="btn-label-right"><i class="fa-solid fa-file-pdf"></i></span>
                     </button>
                     <button type="button" id="groupButton" class="btn btn-info waves-effect waves-light">
-                        Lọc theo xe<span class="btn-label-right"><i class="fa-solid fa-filter"></i></span>
+                        Doanh thu theo xe<span class="btn-label-right"><i class="fa-solid fa-filter"></i></span>
                     </button>
                 </div>
-                
+
                 <table class="table table-striped table-bordered dt-responsive nowrap mt-1" style="text-align: center;vertical-align: middle;">
                     <thead>
                     <tr style="color: red">
@@ -410,7 +410,7 @@
                 </table>
             </div>
         </div>
-        
+
     </div>
 </div>
 @endsection

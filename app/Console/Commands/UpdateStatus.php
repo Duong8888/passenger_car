@@ -16,7 +16,7 @@ class UpdateStatus extends Command
      * @var string
      */
     protected $signature = 'status:update';
-    
+
     /**
      * The console command description.
      *
@@ -24,14 +24,9 @@ class UpdateStatus extends Command
      */
     protected $description = 'Command description';
 
-    /**
-     * Execute the console command.
-     */
     public function handle()
     {
         $currentTime = Carbon::now();
-        
-        // Lấy danh sách các bản ghi cần cập nhật status dựa trên thời gian hiện tại và điều kiện của bạn
         $workingTimes = WorkingTime::where('departure_time', '>', $currentTime)
             ->where('arrival_time', '>', $currentTime)
             ->get();
@@ -42,8 +37,6 @@ class UpdateStatus extends Command
             $departureTime = Carbon::parse($workingTime->departure_time);
             $arrivalTime = Carbon::parse($workingTime->arrival_time);
             foreach ($passengerCars as $passengerCar) {
-               
-                // Cập nhật trạng thái của từng xe theo logic của bạn
                 if ($departureTime->gt($currentTime)) {
                     $passengerCar->pivot->status = 0;
                 } elseif ($arrivalTime->gt($currentTime)) {
@@ -51,11 +44,9 @@ class UpdateStatus extends Command
                 } else {
                     $passengerCar->pivot->status = 2;
                 }
-
                 $passengerCar->pivot->save();
             }
         }
-
         $this->info('Status updated successfully!');
     }
 }
