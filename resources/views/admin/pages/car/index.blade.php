@@ -63,7 +63,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="row">
+                                        <div class="row" style="display: none">
                                             <div>
                                                 <label class="form-label">Loại vé *</label>
                                             </div>
