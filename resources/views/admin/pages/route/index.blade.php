@@ -179,8 +179,8 @@
                                                         Action <i class="mdi mdi-chevron-down"></i>
                                                     </button>
                                                     <div class="dropdown-menu" style="">
-                                                        <a class="dropdown-item btn-update" data-id="{{$route->id}}" href="#">Thông
-                                                            tin</a>
+{{--                                                        <a class="dropdown-item btn-update" data-id="{{$route->id}}" href="#">Thông--}}
+{{--                                                            tin</a>--}}
                                                         <a class="dropdown-item btn-update" data-id="{{$route->id}}"  href="#">Sửa</a>
                                                         <a class="dropdown-item delete" data-id="{{$route->id}}"
                                                            data-action="delete/{{$route->id}}"
